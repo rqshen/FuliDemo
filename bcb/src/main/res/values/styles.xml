@@ -1,0 +1,170 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="AppBaseTheme" parent="android:Theme.DeviceDefault.Light">
+    </style>
+
+    <!-- Application theme. -->
+    <style name="AppTheme" parent="AppBaseTheme">
+    </style>
+
+    <style name="layout_main_bottom">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:paddingTop">3dip</item>
+        <item name="android:paddingBottom">3dip</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="txt_main_bottom">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:textSize">@dimen/main_text_rather_small</item>
+        <item name="android:textColor">@color/txt_gray</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="txt_mainpage_bottom">
+        <item name="android:layout_width">20dip</item>
+        <item name="android:layout_height">20dip</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_alignParentTop">true</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_marginTop">2dp</item>
+    </style>
+
+    <style name="btn_back">
+        <item name="android:layout_width">50dip</item>
+        <item name="android:layout_height">50dip</item>
+        <item name="android:padding">15dip</item>
+        <item name="android:src">@drawable/return_delault</item>
+    </style>
+
+    <declare-styleable name="TapBar">
+        <attr name="selected_btn" format="dimension" />
+    </declare-styleable>
+
+    <style name="txt_xfb_desp">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/txt_black</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="txt_xfb_value">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:paddingTop">5dip</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="txt_bazxx">
+        <item name="android:layout_width">56dip</item>
+        <item name="android:layout_height">56dip</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">8dip</item>
+        <item name="android:lines">2</item>
+        <item name="android:background">@color/txt_green</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="txt_buy_title">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/main_text_default</item>
+        <item name="android:gravity">left|center_vertical</item>
+        <item name="android:textColor">@color/txt_gray</item>
+    </style>
+
+    <style name="txt_buy_value">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/main_text_default</item>
+        <item name="android:gravity">left|center_vertical</item>
+        <item name="android:textColor">@color/txt_black</item>
+    </style>
+
+    <style name="txt_buy_name">
+        <item name="android:layout_width">@dimen/project_layout_width</item>
+        <item name="android:layout_height">52dip</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:gravity">left|center_vertical</item>
+        <item name="android:textColor">@color/txt_black</item>
+    </style>
+
+    <style name="img_ind">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">18dip</item>
+        <item name="android:src">@drawable/ind</item>
+    </style>
+
+    <style name="image_indicator">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingRight">17dp</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingTop">17dp</item>
+        <item name="android:paddingBottom">17dp</item>
+        <item name="android:src">@drawable/ind</item>
+    </style>
+
+    <style name="forward_default">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">18dip</item>
+        <item name="android:src">@drawable/forward_default</item>
+    </style>
+
+    <!-- spinner -->
+    <style name="spinner_style">
+        <item name="android:background">@drawable/spinner_selector</item>
+        <item name="android:paddingLeft">0dip</item>
+    </style>
+
+
+    <style name="PasswdDialog" parent="android:style/Theme.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:background">#00000000</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+    <!-- 交易密码输入框 -->
+    <style name="InputTextView">
+        <item name="android:textColor">#000000</item>
+        <item name="android:gravity">center</item>
+        <item name="android:inputType">textPassword</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <!-- 仿iOSAlertView风格 -->
+    <style name="alertviewstyle" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@drawable/dialog_background</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+    <!-- 标的简介页面-->
+    <!-- 整数 -->
+    <style name="integerstyle">
+        <item name="android:textSize">30sp</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+    <!-- 小数-->
+    <style name="decimalstyle">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+</resources>

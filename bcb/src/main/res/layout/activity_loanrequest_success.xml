@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <!-- 正文 -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dip"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/recharge_success"
+                    android:gravity="center" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:text="借款申请提交成功"
+                    android:textColor="@color/txt_black"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:text="下一步：补充材料，提交风控中心审核"
+                    android:textColor="@color/txt_black"
+                    android:textSize="@dimen/main_text_default" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:text="请将以下材料在提交借款申请当日"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/main_text_default" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="0dip"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center"
+                    android:gravity="center">
+                    <TextView
+                        android:id="@+id/textView1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dip"
+                        android:layout_alignParentBottom="true"
+                        android:text="发送至"
+                        android:textColor="@color/red"
+                        android:textSize="@dimen/main_text_default"/>
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/textView1"
+                        android:layout_marginTop="5dip"
+                        android:text="fksh@100cb.cn"
+                        android:textColor="@color/blue"
+                        android:textSize="@dimen/main_text_default"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_toRightOf="@id/textView2"
+                        android:layout_marginLeft="5dip"
+                        android:text="提交审核"
+                        android:textColor="@color/red"
+                        android:textSize="@dimen/main_text_default"/>
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dip"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:layout_width="3dip"
+                    android:layout_height="14dip"
+                    android:layout_marginLeft="15dip"
+                    android:background="@drawable/line_red" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dip"
+                    android:paddingBottom="1dip"
+                    android:text="借款申请人本人证明"
+                    android:textColor="@color/txt_black"
+                    android:textSize="@dimen/main_text_default" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dip"
+                    android:layout_marginLeft="50dip"
+                    android:layout_marginRight="20dip"
+                    android:text="身份证正面、反面照，手持身份证照"
+                    android:textColor="@color/txt_black"
+                    android:textSize="@dimen/main_text_default"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dip"
+                    android:layout_marginLeft="50dip"
+                    android:layout_marginRight="20dip"
+                    android:text="最近一年流水证明"
+                    android:textColor="@color/txt_black"
+                    android:textSize="@dimen/main_text_default"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dip"
+                    android:layout_marginLeft="50dip"
+                    android:layout_marginRight="20dip"
+                    android:text="中国人民银行征信报告:"
+                    android:textColor="@color/txt_black"
+                    android:textSize="@dimen/main_text_default"/>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dip"
+                        android:layout_marginLeft="50dip"
+                        android:layout_marginRight="20dip"
+                        android:text="http://www.pbccrc.org.cn/"
+                        android:textColor="@color/blue"
+                        android:textSize="@dimen/main_text_default"/>
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dip"
+                        android:layout_marginLeft="50dip"
+                        android:layout_marginRight="20dip"
+                        android:background="@color/blue"/>
+                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dip"
+                    android:layout_marginLeft="50dip"
+                    android:layout_marginRight="20dip"
+                    android:text="资产证明"
+                    android:textColor="@color/txt_black"
+                    android:textSize="@dimen/main_text_default"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dip"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:layout_width="3dip"
+                    android:layout_height="14dip"
+                    android:layout_marginLeft="15dip"
+                    android:background="@drawable/line_red" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dip"
+                    android:paddingBottom="1dip"
+                    android:text="借款担保人证明"
+                    android:textColor="@color/txt_black"
+                    android:textSize="@dimen/main_text_default" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dip"
+                    android:layout_marginLeft="50dip"
+                    android:layout_marginRight="20dip"
+                    android:text="身份证正面、最近一年银行流水证明、征信报告"
+                    android:textColor="@color/txt_black"
+                    android:textSize="@dimen/main_text_default"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dip"
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/apply_workflow_01"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="27dip"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="33dp"
+                    android:layout_marginTop="25dp"
+                    android:text="@string/borrow_success_tips"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/main_text_default" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="33dp"
+                        android:layout_marginTop="10dp"
+                        android:text="1、"
+                        android:textColor="@color/txt_gray"
+                        android:textSize="@dimen/main_text_default" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/borrow_success_tips1"
+                        android:textColor="@color/txt_gray"
+                        android:textSize="@dimen/main_text_default" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dip"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="33dp"
+                        android:layout_marginTop="10dp"
+                        android:text="2、"
+                        android:textColor="@color/txt_gray"
+                        android:textSize="@dimen/main_text_default" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/borrow_success_tips2"
+                        android:textColor="@color/txt_gray"
+                        android:textSize="@dimen/main_text_default" />
+                </LinearLayout>
+            </LinearLayout>
+            <ImageView
+                android:id="@+id/image_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/investment_detail_image"/>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

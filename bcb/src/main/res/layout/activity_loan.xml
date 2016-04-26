@@ -1,0 +1,602 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="7.5dip"
+            android:layout_marginRight="7.5dip"
+            android:orientation="vertical" >
+            <!-- 人人买房福利 -->
+            <LinearLayout
+                android:id="@+id/house_request"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dip"
+                android:padding="3dip"
+                android:background="@drawable/white_bg"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dip"
+                    android:layout_marginBottom="10dip"
+                    android:paddingBottom="0dip"
+                    android:orientation="horizontal">
+                    <!-- 图标 -->
+                    <LinearLayout
+                        android:layout_width="@dimen/loan_introduction_value"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center">
+                        <ImageView
+                            android:layout_width="50dip"
+                            android:layout_height="50dip"
+                            android:background="@drawable/loan_ico_house"/>
+                    </LinearLayout>
+                    <!-- 文字 -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/loan_house_titleview"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="人人买房福利"
+                            android:textColor="@color/txt_black"
+                            android:textSize="@dimen/main_text_large"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="仅限购房借款"
+                            android:textColor="@color/txt_gray"
+                            android:textSize="@dimen/main_text_small"/>
+                    </LinearLayout>
+                </LinearLayout>
+                <!-- 横线 -->
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:layout_marginLeft="18dip"
+                    android:layout_marginRight="18dip"
+                    android:background="@color/linegray"/>
+                <!-- 简介 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dip"
+                    android:layout_marginBottom="15dip"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dip"
+                        android:orientation="horizontal">
+                        <!-- 图标 -->
+                        <LinearLayout
+                            android:layout_width="@dimen/loan_introduction_value"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center">
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/loan_ico_tlimit"/>
+                        </LinearLayout>
+                        <!-- 文字 -->
+                        <LinearLayout
+                            android:layout_width="85dip"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="借款期限"
+                                android:textColor="@color/txt_gray"
+                                android:textSize="@dimen/main_text_small"/>
+                        </LinearLayout>
+                        <!-- 文字 -->
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="3-36"
+                                android:textSize="@dimen/main_text_default"
+                                android:textColor="@color/red"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dip"
+                                android:text="个月"
+                                android:textSize="@dimen/main_text_default"
+                                android:textColor="@color/txt_gray"/>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dip"
+                        android:orientation="horizontal">
+                        <!-- 图标 -->
+                        <LinearLayout
+                            android:layout_width="@dimen/loan_introduction_value"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center">
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/loan_ico_rate"/>
+                        </LinearLayout>
+                        <!-- 文字 -->
+                        <LinearLayout
+                            android:layout_width="85dip"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="年利率"
+                                android:textColor="@color/txt_gray"
+                                android:textSize="@dimen/main_text_small"/>
+                        </LinearLayout>
+                        <!-- 文字 -->
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="月费低至0.53%"
+                                android:textSize="@dimen/main_text_default"
+                                android:textColor="@color/red"/>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <!-- 图标 -->
+                        <LinearLayout
+                            android:layout_width="@dimen/loan_introduction_value"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center">
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/loan_ico_money"/>
+                        </LinearLayout>
+                        <!-- 文字 -->
+                        <LinearLayout
+                            android:layout_width="85dip"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="最高可借款"
+                                android:textColor="@color/txt_gray"
+                                android:textSize="@dimen/main_text_small"/>
+                        </LinearLayout>
+                        <!-- 文字 -->
+                        <LinearLayout
+                            android:layout_width="50dip"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="50万"
+                                android:textSize="@dimen/main_text_default"
+                                android:textColor="@color/red"/>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <!-- 乐享生活福利 -->
+            <LinearLayout
+                android:id="@+id/live_request"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dip"
+                android:padding="3dip"
+                android:background="@drawable/white_bg"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dip"
+                    android:layout_marginBottom="10dip"
+                    android:orientation="horizontal">
+                    <!-- 图标 -->
+                    <LinearLayout
+                        android:layout_width="@dimen/loan_introduction_value"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center">
+                        <ImageView
+                            android:layout_width="50dip"
+                            android:layout_height="50dip"
+                            android:background="@drawable/loan_ico_life"/>
+                    </LinearLayout>
+                    <!-- 文字 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/loan_live_titleview"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="乐享生活福利"
+                            android:textColor="@color/txt_black"
+                            android:textSize="@dimen/main_text_large"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="日常消费、装修、教育支出等"
+                            android:textColor="@color/txt_gray"
+                            android:textSize="@dimen/main_text_small"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:layout_marginLeft="18dip"
+                    android:layout_marginRight="18dip"
+                    android:background="@color/linegray"/>
+                <!-- 简介 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dip"
+                        android:layout_marginBottom="10dip"
+                        android:orientation="horizontal">
+                        <!-- 图标 -->
+                        <LinearLayout
+                            android:layout_width="@dimen/loan_introduction_value"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center">
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/loan_ico_tlimit"/>
+                        </LinearLayout>
+                        <!-- 文字 -->
+                        <LinearLayout
+                            android:layout_width="85dip"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="借款期限"
+                                android:textColor="@color/txt_gray"
+                                android:textSize="@dimen/main_text_small"/>
+                        </LinearLayout>
+                        <!-- 文字 -->
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="3-36"
+                                android:textSize="@dimen/main_text_default"
+                                android:textColor="@color/red"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dip"
+                                android:text="个月"
+                                android:textSize="@dimen/main_text_default"
+                                android:textColor="@color/txt_gray"/>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dip"
+                        android:orientation="horizontal">
+                        <!-- 图标 -->
+                        <LinearLayout
+                            android:layout_width="@dimen/loan_introduction_value"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center">
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/loan_ico_rate"/>
+                        </LinearLayout>
+                        <!-- 文字 -->
+                        <LinearLayout
+                            android:layout_width="85dip"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="年利率"
+                                android:textColor="@color/txt_gray"
+                                android:textSize="@dimen/main_text_small"/>
+                        </LinearLayout>
+                        <!-- 文字 -->
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="月费低至0.53%"
+                                android:textSize="@dimen/main_text_default"
+                                android:textColor="@color/red"/>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dip"
+                        android:orientation="horizontal">
+                        <!-- 图标 -->
+                        <LinearLayout
+                            android:layout_width="@dimen/loan_introduction_value"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center">
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/loan_ico_money"/>
+                        </LinearLayout>
+                        <!-- 文字 -->
+                        <LinearLayout
+                            android:layout_width="85dip"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="最高可借款"
+                                android:textColor="@color/txt_gray"
+                                android:textSize="@dimen/main_text_small"/>
+                        </LinearLayout>
+                        <!-- 文字 -->
+                        <LinearLayout
+                            android:layout_width="50dip"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="50万"
+                                android:textSize="@dimen/main_text_default"
+                                android:textColor="@color/red"/>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <!-- 及时雨福利 -->
+            <LinearLayout
+                android:id="@+id/time_request"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dip"
+                android:padding="3dip"
+                android:layout_marginBottom="5dip"
+                android:background="@drawable/white_bg"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dip"
+                    android:layout_marginBottom="10dip"
+                    android:orientation="horizontal">
+                    <!-- 图标 -->
+                    <LinearLayout
+                        android:layout_width="@dimen/loan_introduction_value"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center">
+                        <ImageView
+                            android:layout_width="50dip"
+                            android:layout_height="50dip"
+                            android:background="@drawable/loan_ico_capital"/>
+                    </LinearLayout>
+                    <!-- 文字 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/loan_time_titleview"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="及时雨福利"
+                            android:textColor="@color/txt_black"
+                            android:textSize="@dimen/main_text_large"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="还信用卡、临时缴费等短期资金周转"
+                            android:textColor="@color/txt_gray"
+                            android:textSize="@dimen/main_text_small"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- 横线 -->
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dip"
+                    android:layout_marginLeft="18dip"
+                    android:layout_marginRight="18dip"
+                    android:background="@color/linegray"/>
+                <!-- 简介 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dip"
+                        android:layout_marginBottom="10dip"
+                        android:orientation="horizontal">
+                        <!-- 图标 -->
+                        <LinearLayout
+                            android:layout_width="@dimen/loan_introduction_value"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center">
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/loan_ico_tlimit"/>
+                        </LinearLayout>
+                        <!-- 文字 -->
+                        <LinearLayout
+                            android:layout_width="85dip"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="借款期限"
+                                android:textColor="@color/txt_gray"
+                                android:textSize="@dimen/main_text_small"/>
+                        </LinearLayout>
+                        <!-- 文字 -->
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="1"
+                                android:textSize="@dimen/main_text_default"
+                                android:textColor="@color/red"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dip"
+                                android:text="个月"
+                                android:textSize="@dimen/main_text_default"
+                                android:textColor="@color/txt_gray"/>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dip"
+                        android:orientation="horizontal">
+                        <!-- 图标 -->
+                        <LinearLayout
+                            android:layout_width="@dimen/loan_introduction_value"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center">
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/loan_ico_rate"/>
+                        </LinearLayout>
+                        <!-- 文字 -->
+                        <LinearLayout
+                            android:layout_width="85dip"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="年利率"
+                                android:textColor="@color/txt_gray"
+                                android:textSize="@dimen/main_text_small"/>
+                        </LinearLayout>
+                        <!-- 文字 -->
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="月费低至0.53%"
+                                android:textSize="@dimen/main_text_default"
+                                android:textColor="@color/red"/>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="12dip"
+                        android:orientation="horizontal">
+                        <!-- 图标 -->
+                        <LinearLayout
+                            android:layout_width="@dimen/loan_introduction_value"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center">
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/loan_ico_money"/>
+                        </LinearLayout>
+                        <!-- 文字 -->
+                        <LinearLayout
+                            android:layout_width="85dip"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="最高可借款"
+                                android:textColor="@color/txt_gray"
+                                android:textSize="@dimen/main_text_small"/>
+                        </LinearLayout>
+                        <!-- 文字 -->
+                        <LinearLayout
+                            android:layout_width="50dip"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="5万"
+                                android:textSize="@dimen/main_text_default"
+                                android:textColor="@color/red"/>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

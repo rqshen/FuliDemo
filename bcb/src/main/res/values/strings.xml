@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">福利金融</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="buy">立即购买</string>
+    <!-- 刷新控件描述 -->
+    <string name="pull_to_refresh">下拉刷新</string>
+    <string name="release_to_refresh">释放立即刷新</string>
+    <string name="refreshing">正在刷新...</string>
+    <string name="refresh_succeed">刷新成功</string>
+    <string name="refresh_fail">刷新失败</string>
+    <string name="refresh_nomore">没有更多数据</string>
+    <string name="pullup_to_load">上拉加载更多</string>
+    <string name="release_to_load">释放立即加载</string>
+    <string name="loading">正在加载...</string>
+    <string name="load_succeed">加载成功</string>
+    <string name="load_fail">加载失败</string>
+
+
+    <!-- alertview对话框文字 -->
+    <string name="prompt">提示</string>
+    <string name="exit_app">你确定要退出应用吗?</string>
+    <string name="confirm">确定</string>
+    <string name="cancel">取消</string>
+    <string name="dismiss">隐藏</string>
+
+    <!-- 登录页面 -->
+    <string name="register_present">注册即送1000元体验券</string>
+
+    <!-- 升级提示 -->
+    <string name="update_tips">已经检测到新版本，是否前往下载升级？</string>
+    <string name="update_go">前往升级</string>
+    <string name="update_cancel">取消升级</string>
+    <!-- 我的页面中的值 -->
+    <string name="value_zero">0.00</string>
+    <string name="value_earn">总资产(元)</string>
+    <string name="value_balance">账户余额(元)</string>
+    <string name="value_back">待收本息(元)</string>
+    <string name="value_total">冻结金额(元)</string>
+    <string name="recharge_btn">充值</string>
+    <string name="withdraw_btn">提现</string>
+    <string name="trading_record">投资记录</string>
+    <string name="money_flow_water">交易明细</string>
+    <string name="borrow_money">借款</string>
+    <string name="coupons">优惠券</string>
+    <string name="invitation_award">邀请奖励</string>
+    <string name="account_setting">帐号设置</string>
+    <string name="customer_service">专属客服</string>
+    <string name="value_qqvip">闪电回复</string>
+    <string name="wechat">客服微信</string>
+    <string name="value_wechat">福利金融 (fulijinrong)</string>
+    <string name="hotline">客服热线</string>
+    <string name="value_hotline">020-38476886</string>
+
+    <!-- 优惠券 -->
+    <string name="tv_unused">未使用</string>
+    <string name="tv_used">已使用</string>
+    <string name="tv_expired">已过期</string>
+
+    <!-- 买标页面 -->
+    <string name="annualized_yield_title">年化利率</string>
+    <string name="financial_period_title">理财期限</string>
+    <string name="investment_amount_title">可投金额</string>
+    <string name="borrow_source_title">借款来源</string>
+    <string name="financial_amount">理财金额</string>
+    <string name="pay_title">支付</string>
+    <string name="coupon_title">优惠</string>
+    <!--<string name="txt_hin_coupon">您当前有(0)张优惠劵</string>-->
+    <string name="txt_hin_coupon">"暂无优惠券信息"</string>
+    <string name="profit_title">收益</string>
+    <string name="error_tips">当前输入小于起投金额</string>
+
+    <!-- 新房宝  -->
+    <string name="dist_bzxx">保障信息</string>
+    <string name="xfb_syms"> 新房宝本金，收益将在新房预售前返还</string>
+    <string name="xfb_yh">购房优惠</string>
+    <string name="xfb_ys">新房预售</string>
+    <string name="xfb_yhr">已优惠人数</string>
+    <string name="dist_yhxx">存新房宝，立享优惠</string>
+    <string name="xfb_buy">立即购买</string>
+    <string name="xfb_text1">地产\n合作</string>
+    <string name="xfb_text2">专款\n专用</string>
+    <string name="xfb_text3">合法\n合规</string>
+    <string name="xfb_text4">约房\n优惠</string>
+
+    <!-- 账户设置 -->
+    <string name="setting_name">用户姓名</string>
+    <string name="setting_uncert">未认证</string>
+    <string name="setting_idcard">身份证号</string>
+    <string name="setting_bankcard">银行卡号</string>
+    <string name="setting_unbound">未绑定</string>
+    <string name="setting_phonenum">手机号码</string>
+    <string name="setting_modify">修改</string>
+    <string name="setting_passwd">交易密码</string>
+    <string name="setting_login_passwd">登录密码</string>
+    <string name="setting_pwd_status">已设置</string>
+    <string name="setting_login">登录状态</string>
+    <string name="setting_login_status">已登录</string>
+    <string name="setting_logout">退出登录</string>
+    <string name="setting_update">检查升级</string>
+    <string name="setting_aboutus">关于福利金融</string>
+
+    <!-- 认证界面activity_authentication -->
+    <string name="authentication_button">立即认证</string>
+
+    <!-- 充值页面activity_recharge_first -->
+    <string name="recharge_text1">请输入持卡人信息</string>
+    <string name="recharge_text2">输入姓名</string>
+    <string name="recharge_text3">输入你的姓名</string>
+    <string name="recharge_text4">身份证号</string>
+    <string name="recharge_text5">输入你的身份证号</string>
+    <string name="recharge_text6">请输入银行信息</string>
+    <string name="recharge_text7">选择银行</string>
+    <string name="recharge_text8">点击选择银行</string>
+    <string name="recharge_text9">银行卡号</string>
+    <string name="recharge_text10">输入银行卡号</string>
+    <string name="recharge_text11">手机号码</string>
+    <string name="recharge_text12">输入银行预留手机号</string>
+    <string name="recharge_text13">充值金额</string>
+    <string name="recharge_text14">输入充值金额</string>
+    <string name="recharge_text15">充值说明</string>
+    <string name="recharge_button_title">确认充值</string>
+
+    <!-- 充值页面 activity_recharge_confirm -->
+    <string name="recharge_next_text1">账户余额:</string>
+    <string name="recharge_next_text2">银行卡号:</string>
+    <string name="recharge_next_text3">充值金额:</string>
+    <string name="recharge_next_text4">输入数字</string>
+    <string name="recharge_next_text5">充值说明</string>
+    <string name="recharge_next_text6">验证码</string>
+    <string name="recharge_next_text7">请输入验证码</string>
+    <string name="recharge_next_sendbutton_title">发送</string>
+    <string name="recharge_next_button_title">下一步</string>
+
+
+    <!-- 充值页面 actvity_recharge_second -->
+    <string name="recharge_second_text1">充值金额</string>
+    <string name="recharge_second_text2">银行卡号</string>
+    <string name="recharge_second_text3">请输入验证码</string>
+    <string name="recharge_second_text4">获取验证码</string>
+    <string name="recharge_second_text5">立即充值</string>
+    <string name="recharge_second_text6">充值说明</string>
+
+    <!-- 充值成功页面activity_recharge_success -->
+    <string name="recharge_success_text1">充值成功</string>
+    <string name="recharge_success_text2">返回我的账户</string>
+
+    <!-- 提现页面withdraw -->
+    <string name="withdraw_instruction">
+        为确保您的提现能及时到账，我们将在1至2个工作日(周末及国家节假日除外)之内处理您提交的提现申请：\n
+        ① 每个工作日（周一至周五）的15:30之前提交的提现申请当天会处理（除特殊情况之外）一般在下个工作日即可到账；\n
+        ② 每个工作日（周一至周五）15:30之后提交的提现申请在下一个工作日处理，到账时间顺延；\n
+        ③ 周末及国家节假日不处理提现业务；
+    </string>
+
+    <!-- 借款首页 -->
+    <string name="loan_mainpage_buttontext">立即申请</string>
+
+    <!-- 人人买房福利 -->
+    <string name="loan_mainpage_text1" formatted="false">
+        1. 借款费率：月费低至 0.53%
+        \n
+        2. 借款时间：3-36个月
+        \n
+        3. 申请条件
+        \n
+        &#160;&#160;&#160;&#160;在职需要6个月，打卡工资大于5000
+        \n
+        &#160;&#160;&#160;&#160;申请额度一般不超过首付50%且一般不超过50万人民币
+        \n
+        &#160;&#160;&#160;&#160;申请人名下有福利金融借款未还清的暂不受理
+        \n
+        &#160;&#160;&#160;&#160;申请人信用空白暂不受理(征信报告无信用卡和贷款记录)
+        \n
+        4. 申请材料
+        \n
+        &#160;&#160;&#160;&#160;身份证明(身份证正面、背面、手持身份证照片)
+        \n
+        &#160;&#160;&#160;&#160;征信证明
+        \n
+        &#160;&#160;&#160;&#160;需提供中国人民银行征信中心网站帐户密码，供福利金融查询征信报告
+        \n
+        &#160;&#160;&#160;&#160;保证人证明
+        \n
+        &#160;&#160;&#160;&#160;*借款金额超过本人6倍月薪需提交保证人证明
+        \n
+        &#160;&#160;&#160;&#160;*借款时间超过6个月需提交保证人说明
+    </string>
+
+    <!-- 乐享生活福利 -->
+    <string name="loan_mainpage_text2">
+        \n
+        1. 借款费率：月费低至 0.53%
+        \n
+        2. 借款时间：3-36个月
+        \n
+        3. 申请条件
+        \n
+        &#160;&#160;&#160;&#160;在职需要6个月，打卡工资大于5000
+        \n
+        &#160;&#160;&#160;&#160;申请额度一般不超过50万人民币
+        \n
+        &#160;&#160;&#160;&#160;申请人名下有福利借款未还清的暂不受理
+        \n
+        &#160;&#160;&#160;&#160;申请人信用空白暂不受理(征信报告无信用卡和贷款记录)
+        \n
+        4. 申请材料
+        \n
+        &#160;&#160;&#160;&#160;与“人人买房福利”申请材料相同
+    </string>
+
+    <!-- 及时雨福利 -->
+    <string name="loan_mainpage_text3">
+        \n
+        1. 借款费率：月费低至 0.53%
+        \n
+        2. 借款时间：一般不超过1个月
+        \n
+        3. 申请条件
+        \n
+        &#160;&#160;&#160;&#160;在职需要6个月，打卡工资大于3000元人民币
+        \n
+        &#160;&#160;&#160;&#160;申请额度一般不超过5万人民币
+        \n
+        &#160;&#160;&#160;&#160;申请人名下有福利借款未还清的暂不受理
+        \n
+        &#160;&#160;&#160;&#160;申请人信用空白暂不受理(征信报告无信用卡和贷款记录)
+        \n
+        4. 申请材料
+        \n
+        &#160;&#160;&#160;&#160;与“人人买房福利”申请材料相同
+    </string>
+
+
+    <!-- 描述页面 -->
+    <string name="loan_introduction">
+    </string>
+
+
+    <!-- 借款申请提交成功页面Activity_borrow_request_success -->
+    <string name="borrow_success_text">借款申请提交成功</string>
+    <string name="borrow_success_text1">提交申请</string>
+    <string name="borrow_success_text2">HR初步审核</string>
+    <string name="borrow_success_text3">专业风控二次审核</string>
+    <string name="borrow_success_text4">筹集借款</string>
+    <string name="borrow_success_text5">借款到账最快1天到账</string>
+    <string name="borrow_success_tips">温馨提示</string>
+    <string name="borrow_success_tips1">福利金融不会以任何名义向借款人提前收取任何费用，请勿相信任何相关来电或短信</string>
+    <string name="borrow_success_tips2">借款审核需要2-3个工作日，福利金融风控中心或给您致电确认相关信息，请留意相关来电</string>
+
+    <!-- 标的简介页面 -->
+    <string name="project_other_description">该项目受福利金融风险保证金保障</string>
+
+</resources>

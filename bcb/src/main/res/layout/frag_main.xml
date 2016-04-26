@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:descendantFocusability="blocksDescendants"
+    android:orientation="vertical" >
+    <include
+        android:id="@+id/layout_navigation"
+        layout="@layout/frag_base"/>
+
+    <FrameLayout
+        android:id="@+id/layout_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout
+            android:id="@+id/refresh_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <!-- 下拉刷新控件-->
+            <include layout="@layout/refresh_head" />
+            <com.bcb.presentation.view.custom.PullableView.PullableScrollView
+                android:id="@+id/layout_scrollview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="none">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="vertical" >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical" >
+
+                        <com.bcb.presentation.view.custom.ImageCycleView.ImageCycleView
+                            android:id="@+id/ad_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="150dip" />
+                    </LinearLayout>
+                    <!-- 一分钟了解福利金融 -->
+                    <LinearLayout
+                        android:id="@+id/tips_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_size_large"
+                        android:background="@android:color/white"
+                        android:orientation="vertical" >
+
+                        <TableLayout
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content" >
+
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingTop="15dip" >
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="center_horizontal"
+                                    android:orientation="horizontal" >
+
+                                    <LinearLayout
+                                        android:id="@+id/Search_food"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center_horizontal"
+                                        android:orientation="vertical" >
+
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:src="@drawable/high_yield" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="@dimen/margin_size_large"
+                                            android:text="超高收益"
+                                            android:textColor="@color/txt_gray"
+                                            android:textSize="@dimen/main_text_default" />
+                                    </LinearLayout>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="center_horizontal"
+                                    android:orientation="horizontal" >
+
+                                    <LinearLayout
+                                        android:id="@+id/Search_outing"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center_horizontal"
+                                        android:orientation="vertical" >
+
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:src="@drawable/dependable" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="@dimen/margin_size_large"
+                                            android:text="安全可信"
+                                            android:textColor="@color/txt_gray"
+                                            android:textSize="@dimen/main_text_default" />
+                                    </LinearLayout>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="center_horizontal"
+                                    android:orientation="horizontal" >
+
+                                    <LinearLayout
+                                        android:id="@+id/Search_hotel"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center_horizontal"
+                                        android:orientation="vertical" >
+
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:src="@drawable/assume" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="@dimen/margin_size_large"
+                                            android:text="资金安全"
+                                            android:textColor="@color/txt_gray"
+                                            android:textSize="@dimen/main_text_default" />
+                                    </LinearLayout>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="center_horizontal"
+                                    android:orientation="horizontal" >
+
+                                    <LinearLayout
+                                        android:id="@+id/Search_chinsesnack"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center_horizontal"
+                                        android:orientation="vertical" >
+
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:src="@drawable/breakeven" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="@dimen/margin_size_large"
+                                            android:text="本息保障"
+                                            android:textColor="@color/txt_gray"
+                                            android:textSize="@dimen/main_text_default" />
+                                    </LinearLayout>
+                                </LinearLayout>
+                            </TableRow>
+                        </TableLayout>
+
+                        <FrameLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginBottom="15dp"
+                            android:layout_gravity="center_horizontal">
+                            <ImageView
+                                android:layout_width="10dip"
+                                android:layout_height="10dip"
+                                android:background="@drawable/circle_red"
+                                android:layout_marginLeft="167dip"/>
+                            <Button
+                                android:id="@+id/button_introduction"
+                                android:layout_width="180dip"
+                                android:layout_height="40dip"
+                                android:paddingLeft="20dip"
+                                android:paddingRight="20dip"
+                                android:background="@drawable/button_stroke_red_main"
+                                android:gravity="center"
+                                android:text="一分钟了解福利金融"
+                                android:textColor="@color/red"
+                                android:textSize="@dimen/main_text_default" />
+                        </FrameLayout>
+                    </LinearLayout>
+
+                    <!-- 精品项目标题 -->
+                    <LinearLayout
+                        android:id="@+id/boutique_layout"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="14dp"
+                        android:layout_marginBottom="11dp"
+                        android:gravity="center_vertical" >
+                        <ImageView
+                            android:layout_width="2dip"
+                            android:layout_height="@dimen/margin_size_large"
+                            android:layout_marginLeft="@dimen/margin_size_large"
+                            android:background="@drawable/line_red" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/margin_size_small"
+                            android:paddingBottom="1dip"
+                            android:text="精品项目"
+                            android:textColor="@color/txt_black"
+                            android:textSize="@dimen/main_text_small" />
+
+                        <TextView
+                            android:id="@+id/JXPackageAdWord"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dip"
+                            android:text=""
+                            android:textColor="@color/txt_gray"
+                            android:textSize="@dimen/main_text_small"/>
+                    </LinearLayout>
+                    <!-- 体验标 -->
+                    <com.bcb.data.util.MyListView
+                        android:id="@+id/expired_listview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:cacheColorHint="@android:color/black"
+                        android:divider="@color/background"
+                        android:dividerHeight="10dp"
+                        android:fastScrollEnabled="false"
+                        android:listSelector="@drawable/list_selector"
+                        android:scrollbars="none"
+                        android:visibility="visible"/>
+                    <!-- 新手标 -->
+                    <com.bcb.data.util.MyListView
+                        android:id="@+id/new_listview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:cacheColorHint="@android:color/black"
+                        android:divider="@color/background"
+                        android:dividerHeight="10dp"
+                        android:fastScrollEnabled="false"
+                        android:listSelector="@drawable/list_selector"
+                        android:scrollbars="none"
+                        android:visibility="visible"/>
+                    <!-- 精品标 -->
+                    <com.bcb.data.util.MyListView
+                        android:id="@+id/boutique_listview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:cacheColorHint="@android:color/black"
+                        android:divider="@color/background"
+                        android:dividerHeight="10dp"
+                        android:fastScrollEnabled="false"
+                        android:listSelector="@drawable/list_selector"
+                        android:scrollbars="none"
+                        android:visibility="visible"/>
+                    <!-- 新标预告 -->
+                    <com.bcb.data.util.MyListView
+                        android:id="@+id/announce_listView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:cacheColorHint="@android:color/black"
+                        android:divider="@color/background"
+                        android:dividerHeight="10dp"
+                        android:fastScrollEnabled="false"
+                        android:listSelector="@drawable/list_selector"
+                        android:scrollbars="none" />
+                </LinearLayout>
+            </com.bcb.presentation.view.custom.PullableView.PullableScrollView>
+            <!-- 上拉加载更多 -->
+            <include layout="@layout/load_more" />
+        </com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout>
+        <Button
+            android:id="@+id/button_floating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/floating_introduction_image_margin_top"
+            android:background="@drawable/floating_button"/>
+    </FrameLayout>
+</LinearLayout>

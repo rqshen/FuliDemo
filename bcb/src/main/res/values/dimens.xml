@@ -1,0 +1,72 @@
+<resources>
+    <!-- 状态栏高度 -->
+    <dimen name="status_hight">24dp</dimen>
+    <!-- 导航栏高度 -->
+    <dimen name="navigation_height">48dp</dimen>
+    <!-- 底部TabBar高度 -->
+    <dimen name="tabbar_height">44dp</dimen>
+    <!-- 边界距离 -->
+    <dimen name="margin_size_small">5dp</dimen>
+    <dimen name="margin_size_default">10dp</dimen>
+    <dimen name="margin_size_large">15dp</dimen>
+    <dimen name="margin_size_rather_large">25dp</dimen>
+    <!-- 整体文字 -->
+    <dimen name="main_text_rather_small">10sp</dimen>
+    <dimen name="main_text_small">13sp</dimen>
+    <dimen name="main_text_default">15sp</dimen>
+    <dimen name="main_text_large">17sp</dimen>
+    <!-- 按钮的宽高 -->
+    <dimen name="button_width">200dp</dimen>
+    <dimen name="button_height">42dp</dimen>
+    <dimen name="button_height_small">37dp</dimen>
+    <dimen name="button_titlesize">@dimen/main_text_default</dimen>
+    <!-- 标的大文字 -->
+    <dimen name="item_text_large">30sp</dimen>
+    <dimen name="item_text_default">@dimen/main_text_default</dimen>
+    <dimen name="item_text_small">@dimen/main_text_small</dimen>
+    <!-- 设置界面activity_account_setting -->
+    <dimen name="account_setting_margin_right">43dp</dimen>
+    <!-- 充值界面activity_recharge_first -->
+    <dimen name="recharge_margin_left">15dp</dimen>
+    <dimen name="recharge_margin_right">15dp</dimen>
+    <dimen name="recharge_button_width">@dimen/button_width</dimen>
+    <dimen name="recharge_buttonsize">16sp</dimen>
+    <dimen name="recharge_title_textsize">16sp</dimen>
+    <dimen name="recharge_subtitle_textsize">16sp</dimen>
+    <dimen name="recharge_instruction">15sp</dimen>
+
+    <!-- 充值界面 activity_recharge_confirm -->
+    <dimen name="recharge_next_titlesize">16sp</dimen>
+    <dimen name="recharge_next_buttonsize">16sp</dimen>
+    <dimen name="recharge_next_button_width">@dimen/button_width</dimen>
+
+    <!-- 充值界面 activity_recharge_second -->
+    <dimen name="recharge_second_button_width">@dimen/button_width</dimen>
+
+    <!-- 充值成功 activity_recharge_success -->
+    <dimen name="recharge_success_button_width">@dimen/button_width</dimen>
+
+    <!-- 借款简介页面 -->
+    <dimen name="loan_introduction_value">80dp</dimen>
+
+    <!-- 借款详情页面 -->
+    <dimen name="loan_item_margin_right">45dp</dimen>
+    <dimen name="loan_item_margin_top">45dp</dimen>
+
+    <!-- 新标预告 -->
+    <dimen name="herald_font_size">16sp</dimen>
+
+    <!-- 标的简介页面 -->
+    <dimen name="project_font_size">@dimen/main_text_default</dimen>
+    <dimen name="project_layout_width">70dp</dimen>
+
+    <!-- 浮标按钮 -->
+    <dimen name="floating_introduction_image_margin_top">340dp</dimen>
+    <!-- 标的标题最大宽度 -->
+    <dimen name="item_text_max_width">210dp</dimen>
+    <!-- 登陆介绍页面ViewPager最大宽度 -->
+    <dimen name="login_introduction_viewpager_maxwidth">320dp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+</resources>

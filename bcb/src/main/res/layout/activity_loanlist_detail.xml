@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+    <!-- Tab标签 -->
+    <LinearLayout
+        android:id="@+id/ll_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="50dip"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="5dip"
+        android:paddingTop="10dip"
+        android:background="@color/red">
+
+        <TextView
+            android:id="@+id/detail_TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:text="借款详情"
+            android:textColor="@color/white"
+            android:textSize="@dimen/main_text_large" />
+
+        <TextView
+            android:id="@+id/payment_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:gravity="center"
+            android:text="还款计划"
+            android:textColor="@color/txt_gray"
+            android:textSize="@dimen/main_text_large" />
+    </LinearLayout>
+    <!-- 标签底部指示图片 -->
+
+    <LinearLayout
+        android:id="@+id/ll_cursor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ll_viewpager"
+        android:background="@color/red">
+
+        <ImageView
+            android:id="@+id/coupons_cursor"
+            android:layout_width="160dip"
+            android:layout_height="3dip"
+            android:scaleType="matrix"
+            android:src="#FFFFFF" />
+    </LinearLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/loan_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/ll_cursor"
+        android:background="@color/background"/>
+
+</LinearLayout>

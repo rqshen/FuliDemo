@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 标的标题最大宽度 -->
+    <dimen name="item_text_max_width">280dp</dimen>
+    <!-- 登陆介绍页面ViewPager最大宽度 -->
+    <dimen name="login_introduction_viewpager_maxwidth">380dp</dimen>
+</resources>

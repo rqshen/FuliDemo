@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 文本绿 -->
+    <color name="txt_green">#93c52e</color>
+    <!-- 背景色 -->
+    <color name="background">#F0F0F0</color>
+    <!-- 文本黑色 -->
+    <color name="txt_black">#262626</color>
+    <!-- 文本灰色 -->
+    <color name="txt_gray">#95959D</color>
+    <!-- 白色 -->
+    <color name="white">#FFFFFF</color>
+    <!-- 黑色 -->
+    <color name="black">#000000</color>
+    <!-- 蓝色 -->
+    <color name="blue">#445CFB</color>
+    <!-- 绿色-->
+    <color name="green">#00B700</color>
+    <!-- 灰色 -->
+    <color name="gray">#ffaaaaaa</color>
+    <!-- 横线灰色 -->
+    <color name="linegray">#E0E0E0</color>
+    <!-- 公司名称黄色 -->
+    <color name="company_name">#FF8E3A</color>
+    <!-- 整体的红色值 -->
+    <color name="red">#DB3838</color>
+    <!-- 买标简介页面的绿色 -->
+    <color name="project_green">#00B700</color>
+    <color name="project_button_gray">#888888</color>
+    <color name="project_purple">#9C56FC</color>
+    <!-- 买标简介页面的年华利率黄色 -->
+    <color name="project_yellow">#EC9D9F</color>
+    <!-- 首页新表预告的绿色 -->
+    <color name="main_bespoke_green">#17B20B</color>
+    <!-- 项目进度颜色 -->
+    <color name="item_color">#f46548</color>
+    <color name="item_text_color">#506083</color>
+    <color name="item_blue">#769FF6</color>
+    <!-- alertview按钮字体颜色 -->
+    <color name="btntextcolor">#ff1E90FF</color>
+</resources>
