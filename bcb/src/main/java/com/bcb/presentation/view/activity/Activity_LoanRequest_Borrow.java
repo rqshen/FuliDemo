@@ -275,7 +275,6 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
 
             @Override
             public void onErrorResponse(Exception error) {
-                LogUtil.e(TAG, "买标页面优惠券出错信息：" + error.getMessage());
             }
         });
         jsonRequest.setTag(BcbRequestTag.BCB_SELECT_COUPON_REQUEST);
@@ -426,23 +425,22 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
         if (durationStatus == periodStatus && durationStatus != -1) {
             //如果是一个月的时候，就是"到期还款XXX元"
             if (durationStatus == 1) {
-                float amount = getLoanAmount() + getLoanAmount() * ((LoanPeriodWithRateBean) loan_period.getSelectedItem()).Rate / 12;
+                float amount = (float) (getLoanAmount() + getLoanAmount() * 0.01 *  ((LoanPeriodWithRateBean) loan_period.getSelectedItem()).Rate / 12);
                 repayProgramme = "到期还款" + String.format("%.2f", amount) + "元";
             } else {
-                float amount = (getLoanAmount() * (1 + (float)durationStatus/12 *
-                        ((LoanPeriodWithRateBean) loan_period.getSelectedItem()).Rate)) / periodStatus;
+                float amount = (float) ((getLoanAmount() * (1 + (float)durationStatus/12 * 0.01 *
+                                        ((LoanPeriodWithRateBean) loan_period.getSelectedItem()).Rate)) / periodStatus);
                 repayProgramme = "每月还款" +
                         String.format("%.2f", amount) + "元";
             }
         } else if (periodStatus == 2) {
-            float amount = (getLoanAmount() * (float)durationStatus/12 *
-                    ((LoanPeriodWithRateBean) loan_period.getSelectedItem()).Rate)/durationStatus;
-
+            float amount = (float) ((getLoanAmount() * (float)durationStatus/12 * 0.01 *
+                                ((LoanPeriodWithRateBean) loan_period.getSelectedItem()).Rate)/durationStatus);
             repayProgramme = "每月还利息" + String.format("%.2f", amount) + "元"
                     + "每12个月还本金" + String.format("%.2f", getLoanAmount()/periodStatus) + "元";
         } else if (periodStatus == 3) {
-            float amount = (getLoanAmount() * (float)durationStatus/12 *
-                    ((LoanPeriodWithRateBean) loan_period.getSelectedItem()).Rate)/durationStatus;
+            float amount = (float) ((getLoanAmount() * (float)durationStatus/12 * 0.01 *
+                                ((LoanPeriodWithRateBean) loan_period.getSelectedItem()).Rate)/durationStatus);
             repayProgramme = "每月还利息" + String.format("%.2f", amount) + "每12个月还本金("
                     + String.format("%.2f", getLoanAmount() * 0.3) +"元,"
                     + String.format("%.2f", getLoanAmount() * 0.3) + "元,"
@@ -489,15 +487,16 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
                 ToastUtil.alert(this, "获得补贴");
                 break;
 
-            //利息抵扣券
+            //点击利息抵扣券
             case R.id.layout_interest:
-                //已经申请过福利补贴
-                if (loanRequestInfo.UseSubsidy) {
-                    ToastUtil.alert(Activity_LoanRequest_Borrow.this, "你已经申请过福利补贴，不能修改");
-                }
-                //已经使用过利息抵扣券
-                else if (loanRequestInfo.UseCoupon) {
-                    ToastUtil.alert(Activity_LoanRequest_Borrow.this, "你已经使用过利息抵扣券，不能再修改");
+                //已经提交过申请，并且使用过利息抵扣券
+                if (loanRequestInfo.UseCoupon) {
+                    showAlertView("温馨提示", "你已经使用过利息抵扣券，是否使用新的利息抵扣券？使用新的利息抵扣券，旧券将作废", "立即使用", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            selectInterestCoupon();
+                        }
+                    });
                 }
                 //如果已经选择了福利补贴，则弹Toast提示不能同时福利补贴和利息抵扣券不能同时使用
                 else if (statusSubsidy) {
@@ -511,16 +510,8 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
 
             //申请福利补贴
             case R.id.layout_coupon_select:
-                //已经提交申请过福利补贴
-                if (loanRequestInfo.UseSubsidy) {
-                    ToastUtil.alert(Activity_LoanRequest_Borrow.this, "你已经申请过福利补贴，不能修改");
-                }
-                //已经提交使用过利息抵扣券
-                else if (loanRequestInfo.UseCoupon) {
-                    ToastUtil.alert(Activity_LoanRequest_Borrow.this, "你已经使用过利息抵扣券，不能再修改");
-                }
                 //已经选择了利息抵扣券，则弹框提示是否仅申请福利补贴
-                else if (statusSelectCoupon) {
+                 if (statusSelectCoupon) {
                     showAlertView();
                 }
                 //如果没选过利息抵扣券，则正常申请福利补贴
@@ -560,6 +551,16 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
                 requestSubsidy();
             }
         });
+        ibuilder.setNegativeButton("取消", null);
+        alertView = ibuilder.create();
+        alertView.show();
+    }
+
+    private void showAlertView(String title, String message,  String  positiveButtonTitle, DialogInterface.OnClickListener onClickListener) {
+        AlertView.Builder ibuilder = new AlertView.Builder(this);
+        ibuilder.setTitle(title);
+        ibuilder.setMessage(message);
+        ibuilder.setPositiveButton(positiveButtonTitle, onClickListener);
         ibuilder.setNegativeButton("取消", null);
         alertView = ibuilder.create();
         alertView.show();
@@ -693,7 +694,6 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
                 @Override
                 public void onErrorResponse(Exception error) {
                     hideProgressBar();
-                    LogUtil.e(TAG, "提交借款申请信息出错:" + error.getMessage());
                 }
             });
             jsonRequest.setTag(BcbRequestTag.BCB_CREATE_LOAN_REQUEST_MESSAGE_REQUEST);
@@ -707,30 +707,6 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
      * 提示提交成功是否去填写个人借款信息
      */
     private void gotoRequestSuccessPage() {
-//        AlertView.Builder ibuilder = new AlertView.Builder(this);
-//        ibuilder.setTitle("借款申请成功");
-//        ibuilder.setMessage("是否去完善详细个人信息？\n完善信息能帮助您获取更多的借款优惠!");
-//        ibuilder.setPositiveButton("立即完善", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                //销毁弹框
-//                alertView.dismiss();
-//                alertView = null;
-//                //跳转至填写借款信息页面
-//                Intent intent = new Intent(Activity_LoanRequest_Borrow.this, Activity_LoanRequest_Person.class);
-//                startActivity(intent);
-//                finish();
-//            }
-//        });
-//        ibuilder.setNegativeButton("暂不完善", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                //销毁所有页面，回到首页
-//                MyActivityManager.getInstance().finishAllActivity();
-//            }
-//        });
-//        alertView = ibuilder.create();
-//        alertView.show();
         //跳转至填写借款信息页面
         Intent intent = new Intent(Activity_LoanRequest_Borrow.this, Activity_LoanRequest_Person.class);
         startActivity(intent);

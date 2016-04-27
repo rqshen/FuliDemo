@@ -381,7 +381,6 @@ public class Activity_LoanRequest_Asset extends Activity_Base {
                 @Override
                 public void onErrorResponse(Exception error) {
                     hideProgressBar();
-                    LogUtil.e(TAG, "提交数据出错:" + error.getMessage());
                 }
             });
             jsonRequest.setTag(BcbRequestTag.BCB_POST_LOAN_PERSONAL_MESSAGE_REQUEST);

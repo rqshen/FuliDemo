@@ -94,17 +94,33 @@ public class Activity_Project_Investment_Details extends Activity_Base {
 		textView4 = (TextView) findViewById(R.id.textView4);
 		textView5 = (TextView) findViewById(R.id.textView5);
 		textView6 = (TextView) findViewById(R.id.textView6);
+        setupImageView();
+		loadData();
+	}
+
+    /**
+     *  回款第一时间通知
+     */
+    private void setupImageView() {
         //底部Banner图片要根据屏幕分辨率调整宽高比
         image_view = (ImageView) findViewById(R.id.image_view);
+        image_view.setVisibility(View.VISIBLE);
+        image_view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //点击图片，跳转至微信
+                Activity_WebView.launche(Activity_Project_Investment_Details.this, "回款第一时间通知", "http://wap.flh001.com/account/wxbindindex");
+            }
+        });
         //根据Banner的宽高比进行等比缩放
         ViewGroup.LayoutParams params = image_view.getLayoutParams();
         int width = ScreenUtils.getScreenDispaly(this)[0];
         params.height= width * 316 / 1280;
         params.width = width;
         image_view.setLayoutParams(params);
-		loadData();
-	}
-	
+    }
+
+
 	private void loadData() {
 		JSONObject obj = new JSONObject();
 		try {

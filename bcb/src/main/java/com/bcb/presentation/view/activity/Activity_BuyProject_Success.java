@@ -4,17 +4,21 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.bcb.R;
 import com.bcb.data.bean.BuyProjectSuccess;
 import com.bcb.data.util.MyActivityManager;
+import com.bcb.data.util.ScreenUtils;
 import com.bcb.presentation.presenter.IPresenter_Base;
 import com.bcb.presentation.presenter.IPresenter_UpdateUserInfoImpl;
 import com.bcb.presentation.view.activity_interface.Interface_Base;
 
 public class Activity_BuyProject_Success extends Activity_Base implements Interface_Base {
 	private TextView OrderAmount, Duration, InterestAmount, RewardRateDescn_content, RewardRateDescn_tips;
+	private ImageView image_view;
 	private BuyProjectSuccess successInfo;
 	private LinearLayout RewardRateDescn_layout;
     private IPresenter_Base iPresenterUpdateUserInfo;
@@ -46,7 +50,10 @@ public class Activity_BuyProject_Success extends Activity_Base implements Interf
         iPresenterUpdateUserInfo = new IPresenter_UpdateUserInfoImpl(this, this);
         //刷新用户数据
         iPresenterUpdateUserInfo.onRequest(1, "刷新用户数据");
-        init();
+        //初始化界面元素
+		init();
+		//初始化微信助手
+		setupImageView();
 	}
 
 	private void init() {
@@ -95,6 +102,30 @@ public class Activity_BuyProject_Success extends Activity_Base implements Interf
 		}
 
 	}
+
+
+	/**
+	 *  起息第一时间通知
+	 */
+	private void setupImageView() {
+		//底部Banner图片要根据屏幕分辨率调整宽高比
+		image_view = (ImageView) findViewById(R.id.image_view);
+		image_view.setVisibility(View.VISIBLE);
+		image_view.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				//点击图片，跳转至微信
+				Activity_WebView.launche(Activity_BuyProject_Success.this, "起息第一时间通知", "http://wap.flh001.com/account/wxbindindex");
+			}
+		});
+		//根据Banner的宽高比进行等比缩放
+		ViewGroup.LayoutParams params = image_view.getLayoutParams();
+		int width = ScreenUtils.getScreenDispaly(this)[0];
+		params.height= width * 316 / 1280;
+		params.width = width;
+		image_view.setLayoutParams(params);
+	}
+
 
 	//重写点击返回按钮，发送广播并销毁Activity对象
 	@Override

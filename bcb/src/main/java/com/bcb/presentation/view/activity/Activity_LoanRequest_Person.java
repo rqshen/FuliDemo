@@ -185,13 +185,6 @@ public class Activity_LoanRequest_Person extends Activity_Base {
                             PersonInfo = mGson.fromJson(result, PersonInfoBean.class);
                         } else {
                             PersonInfo = mGson.fromJson(new LoanPersonalConfigUtil(Activity_LoanRequest_Person.this).getLoanPersonalMessage(), PersonInfoBean.class);
-//                            //更新列表数据，可能之前填写的数据已经跟现在的列表数据不一样了
-//                            PersonInfoBean personInfoBean =mGson.fromJson(result, PersonInfoBean.class);
-//                            PersonInfo.MaritalStatusList = personInfoBean.MaritalStatusList;
-//                            PersonInfo.EducationLevelList = personInfoBean.EducationLevelList;
-//                            PersonInfo.HousingStatusList = personInfoBean.HousingStatusList;
-//                            PersonInfo.RelationshipList = personInfoBean.RelationshipList;
-//                            PersonInfo.ChildrenStatusList = personInfoBean.ChildrenStatusList;
                         }
 
                         //设置婚姻状况
@@ -221,7 +214,6 @@ public class Activity_LoanRequest_Person extends Activity_Base {
             @Override
             public void onErrorResponse(Exception error) {
                 hideProgressBar();
-                LogUtil.d("请求个人信息出错:", error.getMessage());
             }
         });
         jsonRequest.setTag(BcbRequestTag.BCB_GET_LOAN_PERSONAL_MESSAGE_REQUEST);
