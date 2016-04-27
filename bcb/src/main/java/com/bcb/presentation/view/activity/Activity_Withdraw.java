@@ -509,7 +509,9 @@ public class Activity_Withdraw extends Activity_Base implements View.OnClickList
 		finish();
 	}
 
-    //显示手续费
+	/**
+	 * 显示手续费
+	 */
     private void setupCouponTips() {
         if (couponStatus) {
             coupon_select_image.setBackgroundResource(R.drawable.withdraw_hook);
@@ -533,7 +535,9 @@ public class Activity_Withdraw extends Activity_Base implements View.OnClickList
         }
     }
 
-    //显示冻结金额对话框
+	/**
+	 * 显示冻结金额对话框
+	 */
     private void showGetCouponDialog() {
         dialogWidget = new DialogWidget(Activity_Withdraw.this, getCouponView(), true);
         dialogWidget.show();

@@ -5,12 +5,10 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
-import android.util.LruCache;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -25,11 +23,9 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.Volley;
 import com.bcb.common.net.BcbJsonRequest;
 import com.bcb.common.net.BcbNetworkManager;
+import com.bcb.common.net.BcbRemoteImage;
 import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
@@ -159,6 +155,7 @@ public class Frag_Main extends Frag_Base {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.frag_main, container, false);
 	}
+
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -418,7 +415,9 @@ public class Frag_Main extends Frag_Base {
         v.startAnimation(animation);
     }
 
-    /****************************** 文案配置 **********************************/
+    /**
+     * 文案配置
+     */
 	private void loadCopyWriter() {
         //只需要第一次加载的时候获取一次数据就行，获取了数据之后会写入到静态数据区中，不用每次都请求
         if (firstLoadCopyWriter) {
@@ -464,7 +463,9 @@ public class Frag_Main extends Frag_Base {
 	}
 
 
-    /**************************** 首页Banner **********************************/
+    /**
+     * 首页Banner
+     */
     private void loadBanner() {
         //Banner只需要第一次创建的时候加载一次，不用每次都请求服务器
         if (firstLoadBanner) {
@@ -530,39 +531,10 @@ public class Frag_Main extends Frag_Base {
 
 		@Override
 		public void displayImage(String imageURL, ImageView imageView) {
-            loadImageByVolley(imageView, imageURL);
+            //异步加载网络图片
+            BcbRemoteImage.getInstance(ctx).loadRemoteImage(imageView, imageURL, R.drawable.banner_placeholder, R.drawable.banner_placeholder);
     	}
 	};
-
-
-    /**
-     * 利用Volley异步加载图片
-     *
-     * 注意方法参数:
-     * getImageListener(ImageView view, int defaultImageResId, int errorImageResId)
-     * 第一个参数:显示图片的ImageView
-     * 第二个参数:默认显示的图片资源
-     * 第三个参数:加载错误时显示的图片资源
-     */
-    private void loadImageByVolley(ImageView mImageView, String imageUrl) {
-        RequestQueue requestQueue = Volley.newRequestQueue(ctx);
-        final LruCache<String, Bitmap> lruCache = new LruCache<String, Bitmap>(20);
-        ImageLoader.ImageCache imageCache = new ImageLoader.ImageCache() {
-            @Override
-            public void putBitmap(String key, Bitmap value) {
-                lruCache.put(key, value);
-            }
-
-            @Override
-            public Bitmap getBitmap(String key) {
-                return lruCache.get(key);
-            }
-        };
-        ImageLoader imageLoader = new ImageLoader(requestQueue, imageCache);
-        //默认图片是没有的
-        ImageLoader.ImageListener listener = ImageLoader.getImageListener(mImageView, R.drawable.banner_placeholder, R.drawable.banner_placeholder);
-        imageLoader.get(imageUrl, listener);
-    }
 
     /**
      * 新接口同意获取新手推荐、新标预告、精品项目

@@ -291,11 +291,6 @@
                         android:textSize="@dimen/main_text_default" />
                 </LinearLayout>
             </LinearLayout>
-            <ImageView
-                android:id="@+id/image_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/investment_detail_image"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
