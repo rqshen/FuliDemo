@@ -16,14 +16,13 @@ public class PackageInstallReceiver extends BroadcastReceiver {
 
 		if (intent.getDataString().substring(8).equals("com.bcb")) {
 			
-			if (intent.getAction().equals("android.intent.action.PACKAGE_ADDED")) {
-				String packageName = intent.getDataString().substring(8);
-				LogUtil.d(TAG, "安装:" + packageName + "包名的程序");
-			}
+//			if (intent.getAction().equals("android.intent.action.PACKAGE_ADDED")) {
+//				String packageName = intent.getDataString().substring(8);
+//				LogUtil.d(TAG, "安装:" + packageName + "包名的程序");
+//			}
 			// 接收卸载广播
 			if (intent.getAction().equals("android.intent.action.PACKAGE_REMOVED")) {
 				String packageName = intent.getDataString().substring(8);
-				LogUtil.d(TAG, "卸载:" + packageName + "包名的程序");
                 Intent newIntent = new Intent();
 				newIntent.setClassName(packageName, "com.bcb.presentation.view.activity.Activity_Start_Up");
 				newIntent.setAction("android.intent.action.MAIN");

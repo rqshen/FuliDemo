@@ -65,15 +65,14 @@
             </LinearLayout>
         </RelativeLayout>
 
-
         <!-- 成功的状态 -->
         <RelativeLayout
             android:id="@+id/layout_success"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:gravity="center"
-            android:visibility="gone">
+            android:visibility="visible">
             <LinearLayout
                 android:id="@+id/layout_text"
                 android:layout_width="match_parent"
@@ -134,6 +133,13 @@
                     android:textColor="@color/txt_black"
                     android:textSize="@dimen/button_titlesize" />
             </LinearLayout>
+            <ImageView
+                android:id="@+id/image_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/investment_detail_image"
+                android:visibility="gone"/>
         </RelativeLayout>
 
         <!-- 充值失败 -->

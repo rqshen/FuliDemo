@@ -1,19 +1,14 @@
 package com.bcb.presentation.adapter;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.util.LruCache;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.Volley;
-import com.bcb.common.app.App;
 import com.bcb.R;
+import com.bcb.common.net.BcbRemoteImage;
 import com.bcb.data.bean.BankItem;
 import com.bcb.data.util.LogUtil;
 
@@ -62,8 +57,8 @@ public class BankListAdapter extends BaseAdapter {
 		}
 
 		if (data.get(pos).getLogo() != null) {
-//			App.mFinalBitmap.display(mHolder.bank_icon, data.get(pos).getLogo());
-            loadImageByVolley(mHolder.bank_icon, data.get(pos).getLogo());
+			//异步加载网络图片
+           BcbRemoteImage.getInstance(ctx).loadRemoteImage(mHolder.bank_icon, data.get(pos).getLogo());
 		}
 
 		if (data.get(pos).getBankName() != null) {
@@ -81,32 +76,4 @@ public class BankListAdapter extends BaseAdapter {
 		TextView bank_rule;
 	}
 
-    /**
-     * 利用Volley异步加载图片
-     *
-     * 注意方法参数:
-     * getImageListener(ImageView view, int defaultImageResId, int errorImageResId)
-     * 第一个参数:显示图片的ImageView
-     * 第二个参数:默认显示的图片资源
-     * 第三个参数:加载错误时显示的图片资源
-     */
-    private void loadImageByVolley(ImageView mImageView, String imageUrl) {
-        RequestQueue requestQueue = Volley.newRequestQueue(ctx);
-        final LruCache<String, Bitmap> lruCache = new LruCache<String, Bitmap>(20);
-        ImageLoader.ImageCache imageCache = new ImageLoader.ImageCache() {
-            @Override
-            public void putBitmap(String key, Bitmap value) {
-                lruCache.put(key, value);
-            }
-
-            @Override
-            public Bitmap getBitmap(String key) {
-                return lruCache.get(key);
-            }
-        };
-        ImageLoader imageLoader = new ImageLoader(requestQueue, imageCache);
-        //默认图片是没有的
-        ImageLoader.ImageListener listener = ImageLoader.getImageListener(mImageView, R.drawable.edittext_none_background, R.drawable.edittext_none_background);
-        imageLoader.get(imageUrl, listener);
-    }
 }

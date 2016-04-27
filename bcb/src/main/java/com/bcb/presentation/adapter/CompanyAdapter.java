@@ -4,18 +4,14 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.text.TextUtils;
-import android.util.LruCache;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.Volley;
-import com.bcb.common.app.App;
 import com.bcb.R;
+import com.bcb.common.net.BcbRemoteImage;
 import com.bcb.data.bean.CompanyBean;
 import com.bcb.data.util.LogUtil;
 
@@ -66,7 +62,7 @@ public class CompanyAdapter extends BaseAdapter {
         //设置公司图标
         Bitmap bitmap = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.icon_company_default);
         if (!TextUtils.isEmpty(data.get(pos).getLogo())) {
-            loadImageByVolley(viewHolder.companyIcon, data.get(pos).getLogo());
+            BcbRemoteImage.getInstance(ctx).loadRemoteImage(viewHolder.companyIcon, data.get(pos).getLogo());
         } else {
             viewHolder.companyIcon.setImageBitmap(bitmap);
         }
@@ -93,33 +89,5 @@ public class CompanyAdapter extends BaseAdapter {
         TextView companyFullName;
     }
 
-    /**
-     * 利用Volley异步加载图片
-     *
-     * 注意方法参数:
-     * getImageListener(ImageView view, int defaultImageResId, int errorImageResId)
-     * 第一个参数:显示图片的ImageView
-     * 第二个参数:默认显示的图片资源
-     * 第三个参数:加载错误时显示的图片资源
-     */
-    private void loadImageByVolley(ImageView mImageView, String imageUrl) {
-        RequestQueue requestQueue = Volley.newRequestQueue(ctx);
-        final LruCache<String, Bitmap> lruCache = new LruCache<String, Bitmap>(20);
-        ImageLoader.ImageCache imageCache = new ImageLoader.ImageCache() {
-            @Override
-            public void putBitmap(String key, Bitmap value) {
-                lruCache.put(key, value);
-            }
-
-            @Override
-            public Bitmap getBitmap(String key) {
-                return lruCache.get(key);
-            }
-        };
-        ImageLoader imageLoader = new ImageLoader(requestQueue, imageCache);
-        //默认图片是没有的
-        ImageLoader.ImageListener listener = ImageLoader.getImageListener(mImageView, R.drawable.edittext_none_background, R.drawable.edittext_none_background);
-        imageLoader.get(imageUrl, listener);
-    }
 
 }

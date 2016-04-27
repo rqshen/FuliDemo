@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -24,6 +26,7 @@ import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MQCustomerManager;
 import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.PackageUtil;
+import com.bcb.data.util.ScreenUtils;
 import com.bcb.data.util.ToastUtil;
 import com.bcb.data.util.TokenUtil;
 
@@ -83,6 +86,8 @@ public class Activity_ChangeMoney_Success extends Activity_Base implements View.
 
     private BcbRequestQueue requestQueue;
 
+	private ImageView image_view;
+
 	//提现构造函数
 	public static void launche(Context ctx, String action) {
 		Intent intent = new Intent();
@@ -134,7 +139,9 @@ public class Activity_ChangeMoney_Success extends Activity_Base implements View.
 		init();
 	}
 
-	//初始化
+	/**
+	 * 初始化界面
+	 */
 	private void init() {
 		//充值成功
 		layout_success = (RelativeLayout) findViewById(R.id.layout_success);
@@ -205,7 +212,30 @@ public class Activity_ChangeMoney_Success extends Activity_Base implements View.
 			setTitleValue("提现成功");
 			txt_status.setText("当前账户余额为：" + String.format("%.2f", App.mUserWallet.getBalanceAmount()) + "元");
 			layout_success.setVisibility(View.VISIBLE);
+			setupImageView();
 		}
+	}
+
+	/**
+	 *  提现结果早知道
+	 */
+	private void setupImageView() {
+		//底部Banner图片要根据屏幕分辨率调整宽高比
+		image_view = (ImageView) findViewById(R.id.image_view);
+		image_view.setVisibility(View.VISIBLE);
+		image_view.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				//点击图片，跳转至微信
+
+			}
+		});
+		//根据Banner的宽高比进行等比缩放
+		ViewGroup.LayoutParams params = image_view.getLayoutParams();
+		int width = ScreenUtils.getScreenDispaly(this)[0];
+		params.height= width * 316 / 1280;
+		params.width = width;
+		image_view.setLayoutParams(params);
 	}
 
 	//定时器
@@ -274,7 +304,9 @@ public class Activity_ChangeMoney_Success extends Activity_Base implements View.
 	};
 
 
-	//请求订单详情
+	/**
+	 * 请求订单详情
+	 */
 	private void requestOrderStatus() {
         JSONObject jsonObject = new JSONObject();
 		try{
@@ -316,7 +348,10 @@ public class Activity_ChangeMoney_Success extends Activity_Base implements View.
         requestQueue.add(jsonRequest);
 	}
 
-	//判断状态码
+	/**
+	 * 判断状态码
+	 * @param status 状态码
+     */
 	private void judgeStatus(int status) {
 		switch (status) {
 			//充值中
@@ -409,7 +444,9 @@ public class Activity_ChangeMoney_Success extends Activity_Base implements View.
         requestQueue.add(jsonRequest);
 	}
 
-	//重写点击返回按钮，发送广播并销毁Activity对象
+	/**
+	 * 重写点击返回按钮，发送广播并销毁Activity对象
+	 */
 	@Override
 	public void onBackPressed() {
 		//如果充值成功，则发送广播
