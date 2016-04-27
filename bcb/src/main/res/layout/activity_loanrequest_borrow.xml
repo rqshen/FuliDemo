@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/background"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -423,14 +424,11 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="25dp"
                 android:orientation="vertical">
-                <TextView
+                <com.dg.spinnerwheel.WheelVerticalView
                     android:id="@+id/value_rotate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:textSize="@dimen/main_text_default"
-                    android:textColor="@color/txt_gray"
-                    android:text="张XX成功借款300000元"/>
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    app:itemsPadding="10dp"/>
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="1dp"

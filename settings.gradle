@@ -1,2 +1,2 @@
-include ':meiqiasdk', ':volley'
+include ':meiqiasdk', ':volley', ':spinnerwheel'
 include ':bcb'

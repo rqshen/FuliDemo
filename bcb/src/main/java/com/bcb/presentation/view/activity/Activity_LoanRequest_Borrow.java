@@ -3,10 +3,14 @@ package com.bcb.presentation.view.activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -38,16 +42,26 @@ import com.bcb.data.util.ScreenUtils;
 import com.bcb.data.util.ToastUtil;
 import com.bcb.data.util.TokenUtil;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
+import com.dg.spinnerwheel.AbstractWheel;
+import com.dg.spinnerwheel.OnWheelClickedListener;
+import com.dg.spinnerwheel.OnWheelScrollListener;
+import com.dg.spinnerwheel.WheelVerticalView;
+import com.dg.spinnerwheel.adapters.ArrayWheelAdapter;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by cain on 15/12/24.
  */
 public class Activity_LoanRequest_Borrow extends Activity_Base implements View.OnClickListener {
     private static final String TAG = "Activity_LoanRequest_Borrow";
+
+    private static final int SCROLL = 100;//滚屏文字
 
     private static final int couponType = 16;
     //利息抵扣券的ID
@@ -103,7 +117,13 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
     private TextView loan_gain;
 
     //滚屏文字
-    private TextView value_rotate;
+    private WheelVerticalView value_rotate;
+    //滚屏计时器
+    private Timer adTimer;
+    private TimerTask adTimerTask;
+    //是否停止滚动
+    private boolean isPause;
+    private ArrayWheelAdapter<String> adapter;
 
     //客服
     private LinearLayout layout_customer_service;
@@ -118,6 +138,18 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
 
     //网络请求队列
     private BcbRequestQueue requestQueue;
+
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what){
+                case SCROLL:
+                    value_rotate.scroll(1, 1000);
+                    break;
+            }
+        }
+    };
 
 
     @Override
@@ -211,13 +243,78 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
         loan_gain = (TextView) findViewById(R.id.loan_gain);
         loan_gain.setOnClickListener(this);
         //滚屏
-        value_rotate  = (TextView) findViewById(R.id.value_rotate);
+        value_rotate  = (WheelVerticalView) findViewById(R.id.value_rotate);
+        isPause = false;
+        startRotate();
+
         //客服
         layout_customer_service = (LinearLayout) findViewById(R.id.layout_customer_service);
         layout_customer_service.setOnClickListener(this);
         //按钮
         bottoButton = (Button) findViewById(R.id.borrow_button);
         bottoButton.setOnClickListener(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //恢复滚屏
+        if (isPause){
+            if (null == adTimer){
+                adTimer = new Timer();
+                adTimerTask = new TimerTask() {
+                    @Override
+                    public void run() {
+                        handler.sendEmptyMessage(SCROLL);
+                    }
+                };
+                adTimer.schedule(adTimerTask, 1000, 5000);
+            }
+            isPause = false;
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        //关闭滚屏定时器
+        if (adTimerTask != null)
+            adTimerTask.cancel();
+        if (adTimer != null){
+            adTimer.cancel();
+            adTimer.purge();
+            adTimer = null;
+            isPause = true;
+        }
+    }
+
+    /**
+     * 初始化并开始滚动文字
+     */
+    private void startRotate(){
+        String[] rotateValues = getResources().getStringArray(R.array.rotateValues);
+        if (null != this && !this.isFinishing()){
+            adapter = new ArrayWheelAdapter<>(this, rotateValues);
+            adapter.setTextGravity(Gravity.CENTER);
+            adapter.setTextSize(18);
+            adapter.setTextTypeface(Typeface.DEFAULT);
+            value_rotate.setVisibleItems(1);
+            value_rotate.setViewAdapter(adapter);
+            value_rotate.setCurrentItem(0);
+            value_rotate.setCyclic(true);
+            value_rotate.setEnabled(false);
+
+            if (null == adTimer){
+                adTimer = new Timer();
+                adTimerTask = new TimerTask() {
+                    @Override
+                    public void run() {
+                        handler.sendEmptyMessage(SCROLL);
+                    }
+                };
+                adTimer.schedule(adTimerTask, 1000, 5000);
+            }
+        }
     }
 
     /**
@@ -299,7 +396,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
         }
         //设置适配器
         purposesAdapter = new ArrayAdapter<LoanTypeListBean>(Activity_LoanRequest_Borrow.this, R.layout.simple_spinner_item_borrow, purposesList);
-        purposesAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
+        purposesAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item_right);
         //绑定适配器
         loan_purposes.setAdapter(purposesAdapter);
         loan_purposes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -346,7 +443,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
 
         //设置适配器
         durationAdapter = new ArrayAdapter<LoanDurationListBean>(Activity_LoanRequest_Borrow.this, R.layout.simple_spinner_item_borrow, durationList);
-        durationAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
+        durationAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item_right);
         //绑定适配器
         loan_duration.setAdapter(durationAdapter);
         loan_duration.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -392,7 +489,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
         }
         //设置适配器
         periodAdapter = new ArrayAdapter<LoanPeriodWithRateBean>(Activity_LoanRequest_Borrow.this, R.layout.simple_spinner_item_borrow, periodList);
-        periodAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
+        periodAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item_right);
         //绑定适配器
         loan_period.setAdapter(periodAdapter);
         loan_period.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

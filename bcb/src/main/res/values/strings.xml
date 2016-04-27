@@ -253,4 +253,14 @@
     <!-- 标的简介页面 -->
     <string name="project_other_description">该项目受福利金融风险保证金保障</string>
 
+    <!--借款信息-->
+    <string name="rotate_value_one">杜小姐 成功借款15w</string>
+    <string name="rotate_value_two">沈先生 成功借款15w</string>
+    <string name="rotate_value_three">赵先生 成功借款30w</string>
+    <string name="rotate_value_four">陈先生 成功借款8w</string>
+    <string name="rotate_value_five">苏先生 成功借款3w</string>
+    <string name="rotate_value_six">袁先生 成功借款20w</string>
+    <string name="rotate_value_seven">植先生 成功借款5w</string>
+    <string name="rotate_value_eight">张小姐 成功借款12w</string>
+
 </resources>

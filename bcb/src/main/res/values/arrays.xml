@@ -1,3 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <array name="rotateValues">
+        <item>@string/rotate_value_one</item>
+        <item>@string/rotate_value_two</item>
+        <item>@string/rotate_value_three</item>
+        <item>@string/rotate_value_four</item>
+        <item>@string/rotate_value_five</item>
+        <item>@string/rotate_value_six</item>
+        <item>@string/rotate_value_seven</item>
+        <item>@string/rotate_value_eight</item>
+    </array>
+
 </resources>
