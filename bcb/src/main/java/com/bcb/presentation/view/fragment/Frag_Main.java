@@ -41,6 +41,7 @@ import com.bcb.data.bean.ExpiredRecordsBean;
 import com.bcb.data.bean.MainListBean;
 import com.bcb.data.bean.ProductRecordsBean;
 import com.bcb.common.net.UrlsOne;
+import com.bcb.presentation.view.activity.Activity_Browser;
 import com.bcb.presentation.view.activity.Activity_ExpiredProject_Introduction;
 import com.bcb.presentation.view.activity.Activity_Login;
 import com.bcb.presentation.view.activity.Activity_NormalProject_Introduction;
@@ -374,7 +375,7 @@ public class Frag_Main extends Frag_Base {
             @Override
             public void onClick(View v) {
                 UmengUtil.eventById(ctx, R.string.self_about);
-                Activity_WebView.launche(ctx, "一分钟了解福利金融", "http://wap.flh001.com/static/1minute/index.html");
+                Activity_Browser.launche(ctx, "一分钟了解福利金融", "http://wap.flh001.com/static/1minute/index.html");
             }
         });
 

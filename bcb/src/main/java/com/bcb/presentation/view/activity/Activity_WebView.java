@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -253,7 +252,7 @@ public class Activity_WebView extends Activity_Base {
 
         WebSettings webSetting = webView.getSettings();
         webSetting.setAllowFileAccess(true);
-        webSetting.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
+        webSetting.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         webSetting.setSupportZoom(true);
         webSetting.setBuiltInZoomControls(true);
         webSetting.setUseWideViewPort(true);
