@@ -248,6 +248,7 @@ public class Activity_Loan_Introduction extends Activity_Base implements View.On
                         //跳转借款页面
                         Intent intent = new Intent(Activity_Loan_Introduction.this, Activity_LoanRequest_Borrow.class);
                         intent.putExtra("loanRequestInfoBean", loanRequestInfoBean);
+                        intent.putExtra("loanRequestInfoString", response.getString("result"));
                         startActivity(intent);
                         finish();
                     }
