@@ -177,6 +177,8 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
         //借款金额大于0 时，要设置上一次的借款金额, 需要初始化借款页面的所有元素才可以换算金额
         if (loanRequestInfo.Amount > 0) {
             loan_amount.setText(loanRequestInfo.Amount + "");
+        } else {
+            loan_amount.setText("3000");
         }
     }
 
@@ -206,7 +208,6 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
                 setupRepayProgramme();
             }
         });
-
         //借款banner
         banner_image = (ImageView) findViewById(R.id.banner_image);
         //根据Banner的宽高比进行等比缩放
@@ -346,6 +347,11 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
      * 获取优惠券张数
      */
     private void getCouponCount() {
+        //如果使用过券，则设置为券的描述
+        if (loanRequestInfo.UseCoupon) {
+            value_interest.setText(loanRequestInfo.CouponDescn);
+            return;
+        }
         JSONObject obj = new JSONObject();
         try {
             obj.put("PageNow", 1);
@@ -600,17 +606,8 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
 
             //点击利息抵扣券
             case R.id.layout_interest:
-                //已经提交过申请，并且使用过利息抵扣券
-                if (loanRequestInfo.UseCoupon) {
-                    showAlertView("温馨提示", "你已经使用过利息抵扣券，是否使用新的利息抵扣券？使用新的利息抵扣券，旧券将作废", "立即使用", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            selectInterestCoupon();
-                        }
-                    });
-                }
                 //如果已经选择了福利补贴，则弹Toast提示不能同时福利补贴和利息抵扣券不能同时使用
-                else if (statusSubsidy) {
+                if (statusSubsidy) {
                     ToastUtil.alert(Activity_LoanRequest_Borrow.this, "福利补贴和利息抵扣券不能同时使用");
                 }
                 //选择福利补贴
