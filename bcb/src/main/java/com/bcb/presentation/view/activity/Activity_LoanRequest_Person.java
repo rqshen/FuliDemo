@@ -42,6 +42,13 @@ public class Activity_LoanRequest_Person extends Activity_Base {
     private List<String> maritalList;
     private ArrayAdapter<String> maritalAdapter;
     private int maritalStatus = 1;
+
+    //孩子情况，从0开始算起的
+    private Spinner loan_children;
+    private List<String> childrenList;
+    private ArrayAdapter<String> childrenAdapter;
+    private int childrenStatus = 0;
+
     //住房状况
     private Spinner loan_house_situation;
     private List<String> houseList;
@@ -117,6 +124,8 @@ public class Activity_LoanRequest_Person extends Activity_Base {
     private void setupPersonalView() {
         //婚姻状况
         loan_marital_status = (Spinner) findViewById(R.id.loan_marital_status);
+        //孩子情况
+        loan_children = (Spinner) findViewById(R.id.loan_children);
         //住房状况
         loan_house_situation = (Spinner) findViewById(R.id.loan_house_situation);
         //文化程度
@@ -189,6 +198,8 @@ public class Activity_LoanRequest_Person extends Activity_Base {
 
                         //设置婚姻状况
                         changeMaritalStatusList(PersonInfo);
+                        //设置孩子状况
+                        changeChildrenStatusList(PersonInfo);
                         //设置住房状况
                         changeHousingStatusList(PersonInfo);
                         //设置文化程度
@@ -272,6 +283,33 @@ public class Activity_LoanRequest_Person extends Activity_Base {
         });
     }
 
+    /**
+     * 设置孩子情况列表
+     */
+    private void changeChildrenStatusList(PersonInfoBean personInfoBean) {
+        childrenList = new ArrayList<String>();
+        for (int i = 0; i < personInfoBean.ChildrenStatusList.size(); i++) {
+            childrenList.add(i, personInfoBean.ChildrenStatusList.get(i).Name);
+        }
+        //适配器
+        childrenAdapter = new ArrayAdapter<String>(this, R.layout.simple_spinner_item, childrenList);
+        //设置下拉列表
+        childrenAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
+        //绑定适配器
+        loan_children.setAdapter(childrenAdapter);
+        //设置点击事件
+        loan_children.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                childrenStatus = position;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
     /**
      * 设置住房状况列表
      */
@@ -371,6 +409,8 @@ public class Activity_LoanRequest_Person extends Activity_Base {
         } else {
             loan_marital_status.setSelection(0);
         }
+        //孩子情况
+        loan_children.setSelection(PersonInfo.ChildrenStatus);
         //住房状况
         if (PersonInfo.HousingStatus > 0){
             loan_house_situation.setSelection(PersonInfo.HousingStatus - 1);
@@ -492,6 +532,8 @@ public class Activity_LoanRequest_Person extends Activity_Base {
     private void saveDataAndGotoJobPage() {
         //婚姻状况
         PersonInfo.MaritalStatus = maritalStatus;
+        //孩子情况
+        PersonInfo.ChildrenStatus = childrenStatus;
         //住房状况
         PersonInfo.HousingStatus = houseStatus;
         //文化程度

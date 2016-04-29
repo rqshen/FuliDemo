@@ -581,7 +581,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
 
             //如何获得补贴？
             case R.id.loan_gain:
-                ToastUtil.alert(this, "获得补贴");
+                Activity_Browser.launche(Activity_LoanRequest_Borrow.this, "如何获得补贴?", "http://192.168.1.111:7073/loan/couponactivity/index");
                 break;
 
             //点击利息抵扣券

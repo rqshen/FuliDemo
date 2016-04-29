@@ -95,7 +95,7 @@ public class BcbJsonRequest extends BcbRequest<JSONObject> {
             byte[] keybyte = key.getBytes();
             byte[] decodeByte_ECB = DESUtil.ees3DecodeECB(keybyte, baseDecodeResult);
             String decodeJsonString = new String(decodeByte_ECB, PROTOCOL_CHARSET);
-            LogUtil.d("解密后的对象", decodeJsonString);
+            LogUtil.d("解密后的JSON串", decodeJsonString);
             //返回解密后的对象
             return Response.success(new JSONObject(decodeJsonString), HttpHeaderParser.parseCacheHeaders(response));
         } catch (UnsupportedEncodingException e) {
