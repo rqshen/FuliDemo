@@ -1,4 +1,4 @@
-package com.bcb.presentation.view.custom.custom_webview;
+package com.bcb.presentation.view.custom.Browser;
 
 import android.content.Context;
 import android.os.Bundle;

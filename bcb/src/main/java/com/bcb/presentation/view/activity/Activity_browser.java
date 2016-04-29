@@ -29,7 +29,7 @@ import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.MyConstants;
 import com.bcb.presentation.view.custom.CustomDialog.DialogWidget;
 import com.bcb.presentation.view.custom.CustomDialog.IdentifyAlertView;
-import com.bcb.presentation.view.custom.custom_webview.X5WebView;
+import com.bcb.presentation.view.custom.Browser.X5WebView;
 import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
 import com.tencent.mm.sdk.modelmsg.WXMediaMessage;
 import com.tencent.mm.sdk.modelmsg.WXWebpageObject;

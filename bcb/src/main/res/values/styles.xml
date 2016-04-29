@@ -167,4 +167,20 @@
         <item name="android:textSize">15sp</item>
         <item name="android:textColor">@android:color/white</item>
     </style>
+
+    <!-- action-sheet 底部弹出菜单的样式 -->
+    <style name="action_sheet" parent="@style/float_base"></style>
+    <!-- 对话框的样式 -->
+    <style name="float_base">
+        <item name="android:windowBackground">@android:color/darker_gray</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowIsFloating">true</item>
+    </style>
+    <style name="action_sheet_animation" parent="@android:style/Animation">
+        <item name="android:windowEnterAnimation">@anim/action_sheet_enter</item>
+        <item name="android:windowExitAnimation">@anim/action_sheet_exit</item>
+    </style>
 </resources>

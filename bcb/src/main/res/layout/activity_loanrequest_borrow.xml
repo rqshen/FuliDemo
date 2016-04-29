@@ -135,6 +135,7 @@
 
                 <!-- 借款用途 -->
                 <RelativeLayout
+                    android:id="@+id/rl_purposes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:minHeight="47dp"
@@ -159,15 +160,15 @@
                         android:layout_centerVertical="true"
                         android:layout_alignParentRight="true"
                         android:background="@drawable/loan_request_arrow"/>
-                    <Spinner
+
+                    <TextView
                         android:id="@+id/loan_purposes"
                         android:layout_width="match_parent"
-                        android:layout_height="47dp"
+                        android:layout_height="match_parent"
                         android:layout_toRightOf="@id/title_purposes"
                         android:layout_centerVertical="true"
                         android:layout_gravity="center_vertical"
-                        android:gravity="center_vertical"
-                        style="@style/spinner_style"
+                        android:gravity="center_vertical|right"
                         android:layout_marginLeft="35dp"
                         android:layout_marginRight="40dp"
                         android:singleLine="true"
@@ -185,6 +186,7 @@
 
                 <!-- 借款期限 -->
                 <RelativeLayout
+                    android:id="@+id/rl_duration"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:minHeight="47dp"
@@ -206,13 +208,13 @@
                         android:layout_centerVertical="true"
                         android:layout_alignParentRight="true"
                         android:background="@drawable/loan_request_arrow"/>
-                    <Spinner
+                    <TextView
                         android:id="@+id/loan_duration"
                         android:layout_width="match_parent"
-                        android:layout_height="47dp"
+                        android:layout_height="match_parent"
                         android:layout_toRightOf="@id/title_duration"
                         android:layout_centerVertical="true"
-                        style="@style/spinner_style"
+                        android:gravity="center_vertical|right"
                         android:padding="0dip"
                         android:layout_marginRight="40dp"
                         android:layout_marginLeft="35dp"
@@ -228,6 +230,7 @@
 
                 <!-- 还款期数 -->
                 <RelativeLayout
+                    android:id="@+id/rl_period"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:minHeight="47dp"
@@ -249,13 +252,13 @@
                         android:layout_centerVertical="true"
                         android:layout_alignParentRight="true"
                         android:background="@drawable/loan_request_arrow"/>
-                    <Spinner
+                    <TextView
                         android:id="@+id/loan_period"
                         android:layout_width="match_parent"
-                        android:layout_height="47dp"
+                        android:layout_height="match_parent"
                         android:layout_toRightOf="@id/title_period"
                         android:layout_centerVertical="true"
-                        style="@style/spinner_style"
+                        android:gravity="center_vertical|right"
                         android:padding="0dip"
                         android:layout_marginRight="40dp"
                         android:layout_marginLeft="35dp"

@@ -13,43 +13,39 @@ import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
-import com.bcb.common.app.App;
+
 import com.bcb.R;
+import com.bcb.common.app.App;
 import com.bcb.common.net.BcbJsonRequest;
 import com.bcb.common.net.BcbNetworkManager;
 import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
+import com.bcb.common.net.UrlsOne;
 import com.bcb.data.bean.loan.LoanDurationListBean;
 import com.bcb.data.bean.loan.LoanPeriodWithRateBean;
 import com.bcb.data.bean.loan.LoanRequestInfoBean;
-import com.bcb.data.bean.loan.LoanTypeListBean;
-import com.bcb.common.net.UrlsOne;
 import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MQCustomerManager;
 import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.PackageUtil;
 import com.bcb.data.util.ScreenUtils;
+import com.bcb.data.util.SpinnerWheelUtil;
 import com.bcb.data.util.ToastUtil;
 import com.bcb.data.util.TokenUtil;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
-import com.dg.spinnerwheel.AbstractWheel;
-import com.dg.spinnerwheel.OnWheelClickedListener;
-import com.dg.spinnerwheel.OnWheelScrollListener;
 import com.dg.spinnerwheel.WheelVerticalView;
 import com.dg.spinnerwheel.adapters.ArrayWheelAdapter;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -81,21 +77,21 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
     private EditText loan_amount;
 
     //借款用途
-    private Spinner loan_purposes;
-    private List<LoanTypeListBean> purposesList;
-    private ArrayAdapter<LoanTypeListBean> purposesAdapter;
+    private TextView loan_purposes;
+    private List<String> purposes_types;
     private int purposeStatus = 1;//默认借款期限为置业首付，对应值为1
 
     //借款期限
-    private Spinner loan_duration;
+    private TextView loan_duration;
+    private List<String> duration_types;
     private List<LoanDurationListBean> durationList;
-    private ArrayAdapter<LoanDurationListBean> durationAdapter;
     private int durationStatus = 1;//默认借款期限为1个月，借款期限为 1
 
     //还款期数
-    private Spinner loan_period;
+    private TextView loan_period;
+    private List<String> period_types;
     List<LoanPeriodWithRateBean> periodList;
-    private ArrayAdapter<LoanPeriodWithRateBean> periodAdapter;
+    private int loanIndex = 0;//还款位置
     private int periodStatus = 1;//默认还款期数为1
 
     //还款方案
@@ -185,7 +181,8 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
      */
     private void initLoanMessage() {
         //借款用途
-        loan_purposes = (Spinner) findViewById(R.id.loan_purposes);
+        findViewById(R.id.rl_purposes).setOnClickListener(this);
+        loan_purposes = (TextView) findViewById(R.id.loan_purposes);
         //借款金额
         loan_amount = (EditText) findViewById(R.id.loan_amount);
         loan_amount.addTextChangedListener(new TextWatcher() {
@@ -215,9 +212,11 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
         params.width = width;
         banner_image.setLayoutParams(params);
         //借款期限
-        loan_duration = (Spinner) findViewById(R.id.loan_duration);
+        findViewById(R.id.rl_duration).setOnClickListener(this);
+        loan_duration = (TextView) findViewById(R.id.loan_duration);
         //还款期数
-        loan_period = (Spinner) findViewById(R.id.loan_period);
+        findViewById(R.id.rl_period).setOnClickListener(this);
+        loan_period = (TextView) findViewById(R.id.loan_period);
         //还款方案
         loan_programme = (TextView) findViewById(R.id.loan_programme);
         //申请福利补贴
@@ -384,34 +383,20 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
      */
     private void setupLoanUsage() {
         //将元素添加到数组中
-        purposesList = new ArrayList<LoanTypeListBean>();
-        int loanIndex = 0;
+        purposes_types = new ArrayList<>();
         for (int i = 0; i <loanRequestInfo.LoanTypeTable.size(); i++) {
-            LoanTypeListBean loanTypeList = new LoanTypeListBean(loanRequestInfo.LoanTypeTable.get(i).Name, loanRequestInfo.LoanTypeTable.get(i).Value);
-            purposesList.add(loanTypeList);
+            purposes_types.add(loanRequestInfo.LoanTypeTable.get(i).Name);
+        }
+        int index = 0;
+        for (int i = 0; i <loanRequestInfo.LoanTypeTable.size(); i++) {
             //获取默认选中的借款用途
             if (loanRequestInfo.LoanType == loanRequestInfo.LoanTypeTable.get(i).Value) {
-                loanIndex = i;
+                index = i;
+                break;
             }
         }
-        //设置适配器
-        purposesAdapter = new ArrayAdapter<LoanTypeListBean>(Activity_LoanRequest_Borrow.this, R.layout.simple_spinner_item_borrow, purposesList);
-        purposesAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item_right);
-        //绑定适配器
-        loan_purposes.setAdapter(purposesAdapter);
-        loan_purposes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                //获取到选中项的类型
-                purposeStatus = ((LoanTypeListBean) loan_purposes.getSelectedItem()).getValue();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-            }
-        });
         //设置默认选中的位置
-        loan_purposes.setSelection(loanIndex);
+        loan_purposes.setText(purposes_types.get(index));
     }
 
     /**
@@ -419,8 +404,8 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
      */
     private void setupLoanDuration() {
         //将元素添加到数组中
+        duration_types = new ArrayList<>();
         durationList = new ArrayList<LoanDurationListBean>();
-        int loanIndex = 0;
         for (int i = 0; i < loanRequestInfo.RateTable.size(); i++) {
             //用于判断数组中是否存在对应的借款期限
             boolean duration = false;
@@ -429,47 +414,44 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
                     duration = true;
                     break;
                 }
-                //设置默认选中的借款期限位置
-                if (durationList.get(j).Value == loanRequestInfo.LoanTimeType) {
-                    loanIndex = j;
-                }
             }
             //如果数组中没有该借款期限值，则需要添加该值
             if (!duration) {
                 LoanDurationListBean loanDurationList = new LoanDurationListBean(loanRequestInfo.RateTable.get(i).Duration + "个月", loanRequestInfo.RateTable.get(i).Duration);
                 durationList.add(loanDurationList);
+                duration_types.add(loanRequestInfo.RateTable.get(i).Duration + "个月");
             }
         }
 
-        //设置适配器
-        durationAdapter = new ArrayAdapter<LoanDurationListBean>(Activity_LoanRequest_Borrow.this, R.layout.simple_spinner_item_borrow, durationList);
-        durationAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item_right);
-        //绑定适配器
-        loan_duration.setAdapter(durationAdapter);
-        loan_duration.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                //获取选中项的期限值
-                durationStatus = ((LoanDurationListBean) loan_duration.getSelectedItem()).getValue();
-                //选中某期限的时候，设置还款期数
-                setupLoanPeriod();
-                setupRepayProgramme();
-            }
+//        //设置适配器
+//        durationAdapter = new ArrayAdapter<LoanDurationListBean>(Activity_LoanRequest_Borrow.this, R.layout.simple_spinner_item_borrow, durationList);
+//        durationAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item_right);
+//        //绑定适配器
+//        loan_duration.setAdapter(durationAdapter);
+//        loan_duration.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+//                //获取选中项的期限值
+//                durationStatus = ((LoanDurationListBean) loan_duration.getSelectedItem()).getValue();
+//                //选中某期限的时候，设置还款期数
+//                setupLoanPeriod();
+//                setupRepayProgramme();
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> adapterView) {
+//                setupRepayProgramme();
+//            }
+//        });
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-                setupRepayProgramme();
-            }
-        });
-
-        //设置借款期限
-        loan_duration.setSelection(loanIndex);
+        loan_duration.setText(duration_types.get(0));
     }
 
     /**
      * 初始化还款期数
      */
     private void setupLoanPeriod() {
+        period_types = new ArrayList<>();
         //还款期数要从利率表里面查找，这尼玛简直就是坑爹
         periodList = new ArrayList<LoanPeriodWithRateBean>();
         for (int i = 0; i < loanRequestInfo.RateTable.size(); i++) {
@@ -477,35 +459,38 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
             if (loanRequestInfo.RateTable.get(i).getDuration() == durationStatus) {
                 LoanPeriodWithRateBean periodWithRate = new LoanPeriodWithRateBean(loanRequestInfo.RateTable.get(i).getPeriod(), loanRequestInfo.RateTable.get(i).getRate());
                 periodList.add(periodWithRate);
+                period_types.add("" + periodWithRate.Period);
             }
         }
         //设置还款位置
-        int loanIndex = 0;
         for (int i= 0; i < periodList.size(); i++) {
             if (loanRequestInfo.Period == periodList.get(i).Period) {
                 loanIndex = i;
                 break;
             }
         }
-        //设置适配器
-        periodAdapter = new ArrayAdapter<LoanPeriodWithRateBean>(Activity_LoanRequest_Borrow.this, R.layout.simple_spinner_item_borrow, periodList);
-        periodAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item_right);
-        //绑定适配器
-        loan_period.setAdapter(periodAdapter);
-        loan_period.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                periodStatus = ((LoanPeriodWithRateBean) loan_period.getSelectedItem()).Period;
-                setupRepayProgramme();
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-                setupRepayProgramme();
-            }
-        });
+        //设置适配器
+//        periodAdapter = new ArrayAdapter<LoanPeriodWithRateBean>(Activity_LoanRequest_Borrow.this, R.layout.simple_spinner_item_borrow, periodList);
+//        periodAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item_right);
+//        //绑定适配器
+//        loan_period.setAdapter(periodAdapter);
+//        loan_period.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+//                periodStatus = ((LoanPeriodWithRateBean) loan_period.getSelectedItem()).Period;
+//                setupRepayProgramme();
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> adapterView) {
+//                setupRepayProgramme();
+//            }
+//        });
+
         //设置还款期数位置
-        loan_period.setSelection(loanIndex);
+        loan_period.setText(period_types.get(loanIndex));
+
         //设置完还款期数之后，就要开始算还款方案
         setupRepayProgramme();
     }
@@ -514,30 +499,39 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
      * 计算还款方案
      */
     private void setupRepayProgramme() {
+        float rate = 0;
+        //根据表查找利率
+        for (int i = 0; i < loanRequestInfo.RateTable.size();  i ++) {
+            if (durationStatus == loanRequestInfo.RateTable.get(i).getDuration() && periodStatus == loanRequestInfo.RateTable.get(i).getPeriod()) {
+                rate = loanRequestInfo.RateTable.get(i).Rate / 100;
+                break;
+            }
+        }
+
         String repayProgramme = "";
         if (getLoanAmount() <= 0) {
             repayProgramme = "0元";
         }
         //借款月数等于还款期数
-        if (durationStatus == periodStatus && durationStatus != -1) {
+        else if (durationStatus == periodStatus && durationStatus != -1) {
+            float amount = (getLoanAmount() + getLoanAmount() * durationStatus/12 * rate) / periodStatus;
             //如果是一个月的时候，就是"到期还款XXX元"
             if (durationStatus == 1) {
-                float amount = (float) (getLoanAmount() + getLoanAmount() * 0.01 *  ((LoanPeriodWithRateBean) loan_period.getSelectedItem()).Rate / 12);
                 repayProgramme = "到期还款" + String.format("%.2f", amount) + "元";
             } else {
-                float amount = (float) ((getLoanAmount() * (1 + (float)durationStatus/12 * 0.01 *
-                                        ((LoanPeriodWithRateBean) loan_period.getSelectedItem()).Rate)) / periodStatus);
                 repayProgramme = "每月还款" +
                         String.format("%.2f", amount) + "元";
             }
-        } else if (periodStatus == 2) {
-            float amount = (float) ((getLoanAmount() * (float)durationStatus/12 * 0.01 *
-                                ((LoanPeriodWithRateBean) loan_period.getSelectedItem()).Rate)/durationStatus);
+        }
+        //还款期数为2时
+        else if (periodStatus == 2) {
+            float amount = getLoanAmount() * (float) durationStatus / 12 * rate /durationStatus;
             repayProgramme = "每月还利息" + String.format("%.2f", amount) + "元"
                     + "每12个月还本金" + String.format("%.2f", getLoanAmount()/periodStatus) + "元";
-        } else if (periodStatus == 3) {
-            float amount = (float) ((getLoanAmount() * (float)durationStatus/12 * 0.01 *
-                                ((LoanPeriodWithRateBean) loan_period.getSelectedItem()).Rate)/durationStatus);
+        }
+        //划款期数为3时
+        else if (periodStatus == 3) {
+            float amount = getLoanAmount() * (float)durationStatus/12 * rate/durationStatus;
             repayProgramme = "每月还利息" + String.format("%.2f", amount) + "每12个月还本金("
                     + String.format("%.2f", getLoanAmount() * 0.3) +"元,"
                     + String.format("%.2f", getLoanAmount() * 0.3) + "元,"
@@ -574,6 +568,43 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            //点击借款用途
+            case R.id.rl_purposes:
+                String[] ar = purposes_types.toArray(new String[purposes_types.size()]);
+                SpinnerWheelUtil.getInstance().initSpinnerWheelDialog(this, ar, purposeStatus - 1, new SpinnerWheelUtil.OnDoneClickListener() {
+                    @Override
+                    public void onClick(int currentItem) {
+                        purposeStatus = currentItem + 1;
+                        loan_purposes.setText(purposes_types.get(currentItem));
+                    }
+                });
+                break;
+            //点击借款期限
+            case R.id.rl_duration:
+                String[] arr = duration_types.toArray(new String[duration_types.size()]);
+                SpinnerWheelUtil.getInstance().initSpinnerWheelDialog(this, arr, durationStatus - 1, new SpinnerWheelUtil.OnDoneClickListener() {
+                    @Override
+                    public void onClick(int currentItem) {
+                        durationStatus = currentItem + 1;
+                        loan_duration.setText(duration_types.get(currentItem));//设置借款期限
+                        //选中某期限的时候，设置还款期数
+                        setupLoanPeriod();
+                        setupRepayProgramme();
+                    }
+                });
+                break;
+            case R.id.rl_period:
+                String[] array = period_types.toArray(new String[period_types.size()]);
+                SpinnerWheelUtil.getInstance().initSpinnerWheelDialog(this, array, loanIndex, new SpinnerWheelUtil.OnDoneClickListener() {
+                    @Override
+                    public void onClick(int currentItem) {
+                        periodStatus = periodList.get(currentItem).Period;
+                        loan_period.setText(period_types.get(currentItem));//设置还款期数
+                        setupRepayProgramme();
+                    }
+                });
+                break;
+
             //点击立即申请按钮
             case  R.id.borrow_button:
                 borrowButtonClick();
