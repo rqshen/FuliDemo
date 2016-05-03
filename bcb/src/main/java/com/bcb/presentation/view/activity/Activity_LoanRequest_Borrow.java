@@ -39,6 +39,7 @@ import com.bcb.data.util.ScreenUtils;
 import com.bcb.data.util.SpinnerWheelUtil;
 import com.bcb.data.util.ToastUtil;
 import com.bcb.data.util.TokenUtil;
+import com.bcb.data.util.UmengUtil;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
 import com.dg.spinnerwheel.WheelVerticalView;
 import com.dg.spinnerwheel.adapters.ArrayWheelAdapter;
@@ -159,12 +160,23 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
         setBaseContentView(R.layout.activity_loanrequest_borrow);
         setLeftTitleVisible(true);
         setTitleValue("借款信息");
-        //获取从上一个页面传递过来的数据
-        loanRequestInfo = (new Gson()).fromJson(getIntent().getStringExtra("loanRequestInfoString"), LoanRequestInfoBean.class);
-        durationStatus = loanRequestInfo.LoanTimeType;
-        periodStatus = loanRequestInfo.Period;
+
         //创建请求队列
         requestQueue = BcbNetworkManager.newRequestQueue(this);
+
+        getLoanCertification();
+
+    }
+
+    /**
+     * 初始化
+     */
+    private void init(String loanRequestInfoString){
+        //获取从上一个页面传递过来的数据
+        loanRequestInfo = (new Gson()).fromJson(loanRequestInfoString, LoanRequestInfoBean.class);
+        durationStatus = loanRequestInfo.LoanTimeType;
+        periodStatus = loanRequestInfo.Period;
+
         initLoanMessage();
         //请求获取优惠券张数
         getCouponCount();
@@ -181,6 +193,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
             loan_amount.setText("3000");
         }
     }
+
 
     /**
      * 初始化页面元素
@@ -860,5 +873,51 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
         super.onDestroy();
         requestQueue.cancelAll(BcbRequestTag.BCB_SELECT_COUPON_REQUEST);
         requestQueue.cancelAll(BcbRequestTag.BCB_CREATE_LOAN_REQUEST_MESSAGE_REQUEST);
+    }
+
+    /****************************** 获取借款验证 ************************************/
+    private void getLoanCertification() {
+        showProgressBar();
+        BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.LoanCertification, null, TokenUtil.getEncodeToken(this), new BcbRequest.BcbCallBack<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                hideProgressBar();
+                try {
+                    if(null == response) {
+                        ToastUtil.alert(Activity_LoanRequest_Borrow.this, "服务器返回数据为空，无法验证");
+                        return;
+                    }
+                    if (response.getInt("status") != 1) {
+                        String message = response.getString("message");
+                        //出错信息不为空时，将出错信息打印出来，否则将出错信息设置为"未知错误"
+                        if (message != null && !message.equalsIgnoreCase("null") && !message.equalsIgnoreCase("")) {
+                            ToastUtil.alert(Activity_LoanRequest_Borrow.this, message);
+                            //判断是否Token过期，如果过期则跳转至登陆界面
+                            if (response.getInt("status") == -5) {
+                                Activity_Login.launche(Activity_LoanRequest_Borrow.this);
+                                finish();
+                            }
+                        } else {
+                            ToastUtil.alert(Activity_LoanRequest_Borrow.this, "未知错误，请与工作人员联系");
+                        }
+                    } else {
+                        LoanRequestInfoBean loanRequestInfoBean = App.mGson.fromJson(response.getString("result"), LoanRequestInfoBean.class);
+                        UmengUtil.eventById(Activity_LoanRequest_Borrow.this, R.string.loan_blank);
+                        init(response.getString("result"));
+                    }
+                }catch(Exception e){
+                    e.printStackTrace();
+                    ToastUtil.alert(Activity_LoanRequest_Borrow.this, "解析数据出错");
+                }
+            }
+
+            @Override
+            public void onErrorResponse(Exception error) {
+                hideProgressBar();
+                ToastUtil.alert(Activity_LoanRequest_Borrow.this, "网络异常，请稍后重试");
+            }
+        });
+        jsonRequest.setTag(BcbRequestTag.BCB_LOAN_CERTIFICATION_REQUEST);
+        requestQueue.add(jsonRequest);
     }
 }
