@@ -180,7 +180,7 @@
                         android:layout_marginRight="40dp"
                         android:singleLine="true"
                         android:padding="0dip"
-                        android:textColor="@color/txt_gray"
+                        android:textColor="@color/txt_black"
                         android:textSize="@dimen/main_text_default"
                         android:background="@drawable/edittext_none_background"/>
 
@@ -225,7 +225,7 @@
                         android:padding="0dip"
                         android:layout_marginRight="40dp"
                         android:layout_marginLeft="35dp"
-                        android:textColor="@color/txt_gray"
+                        android:textColor="@color/txt_black"
                         android:textSize="@dimen/main_text_default"
                         android:singleLine="true"
                         android:background="@drawable/edittext_none_background"/>
@@ -269,7 +269,7 @@
                         android:padding="0dip"
                         android:layout_marginRight="40dp"
                         android:layout_marginLeft="35dp"
-                        android:textColor="@color/txt_gray"
+                        android:textColor="@color/txt_black"
                         android:textSize="@dimen/main_text_default"
                         android:singleLine="true"
                         android:background="@drawable/edittext_none_background"/>
@@ -329,6 +329,45 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="@color/linegray"/>
+                <!-- 利息抵扣券 -->
+                <RelativeLayout
+                    android:id="@+id/layout_interest"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="47dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="18dp"
+                        android:layout_centerVertical="true"
+                        android:text="利息抵扣券"
+                        android:textSize="@dimen/main_text_default"
+                        android:textColor="@color/txt_gray"/>
+                    <TextView
+                        android:id="@+id/value_interest"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="40dp"
+                        android:layout_marginLeft="18dp"
+                        android:textColor="@color/txt_black"
+                        android:textSize="@dimen/main_text_default"
+                        android:text="你有0张利息抵扣券"/>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/margin_size_large"
+                        android:layout_marginLeft="20dp"
+                        android:gravity="center_vertical"
+                        android:background="@drawable/ind" />
+                </RelativeLayout>
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/linegray"/>
                 <RelativeLayout
                     android:id="@+id/layout_coupon_select"
                     android:layout_width="match_parent"
@@ -356,7 +395,7 @@
                             android:padding="0dip"
                             android:layout_marginLeft="18dp"
                             android:layout_centerVertical="true"
-                            android:textColor="@color/txt_gray"
+                            android:textColor="@color/txt_black"
                             android:textSize="@dimen/main_text_default"
                             android:text="补贴后低至0.5%/月"/>
                         <ImageView
@@ -365,47 +404,8 @@
                             android:layout_height="15dp"
                             android:layout_marginLeft="12.5dip"
                             android:gravity="center_vertical"
-                            android:background="@drawable/withdraw_rect" />
+                            android:background="@drawable/loan_rect" />
                     </LinearLayout>
-                </RelativeLayout>
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/linegray"/>
-                <!-- 利息抵扣券 -->
-                <RelativeLayout
-                    android:id="@+id/layout_interest"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:minHeight="47dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="18dp"
-                        android:layout_centerVertical="true"
-                        android:text="利息抵扣券"
-                        android:textSize="@dimen/main_text_default"
-                        android:textColor="@color/txt_gray"/>
-                    <TextView
-                        android:id="@+id/value_interest"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="40dp"
-                        android:layout_marginLeft="18dp"
-                        android:textColor="@color/txt_gray"
-                        android:textSize="@dimen/main_text_default"
-                        android:text="你有2张利息抵扣券"/>
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="@dimen/margin_size_large"
-                        android:layout_marginLeft="20dp"
-                        android:gravity="center_vertical"
-                        android:background="@drawable/ind" />
                 </RelativeLayout>
                 <ImageView
                     android:layout_width="match_parent"
@@ -477,7 +477,7 @@
                             android:layout_marginTop="@dimen/margin_size_default"
                             android:textSize="@dimen/main_text_rather_small"
                             android:textColor="#666666"
-                            android:text="已放款\n最高额度"/>
+                            android:text="最高额度"/>
                     </LinearLayout>
                 </LinearLayout>
                 <!-- 已放款最高期限 -->
@@ -507,7 +507,7 @@
                             android:layout_marginTop="@dimen/margin_size_default"
                             android:textSize="@dimen/main_text_rather_small"
                             android:textColor="#666666"
-                            android:text="已放款\n最高期限"/>
+                            android:text="最长期限"/>
                     </LinearLayout>
                 </LinearLayout>
                 <!-- 已经申请借款个数 -->
@@ -537,7 +537,7 @@
                             android:layout_marginTop="@dimen/margin_size_default"
                             android:textSize="@dimen/main_text_rather_small"
                             android:textColor="#666666"
-                            android:text="已经申请\n借款数量"/>
+                            android:text="放款数量"/>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>

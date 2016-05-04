@@ -50,6 +50,7 @@ import com.google.gson.Gson;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -229,7 +230,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
         if (loanRequestInfo.Amount > 0) {
             loan_amount.setText(loanRequestInfo.Amount + "");
         } else {
-            loan_amount.setText("3000");
+            loan_amount.setText("5000");
         }
     }
 
@@ -324,7 +325,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
                         handler.sendEmptyMessage(SCROLL);
                     }
                 };
-                adTimer.schedule(adTimerTask, 1000, 5000);
+                adTimer.schedule(adTimerTask, 1000, 2000);
             }
             isPause = false;
         }
@@ -349,10 +350,10 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
      */
     private void startRotate(){
         String[] rotateValues = getResources().getStringArray(R.array.rotateValues);
-        if (null != this && !this.isFinishing()){
+        if (!this.isFinishing()){
             adapter = new ArrayWheelAdapter<>(this, rotateValues);
             adapter.setTextGravity(Gravity.CENTER);
-            adapter.setTextSize(18);
+            adapter.setTextSize(15);
             adapter.setTextTypeface(Typeface.DEFAULT);
             value_rotate.setVisibleItems(1);
             value_rotate.setViewAdapter(adapter);
@@ -368,7 +369,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
                         handler.sendEmptyMessage(SCROLL);
                     }
                 };
-                adTimer.schedule(adTimerTask, 1000, 5000);
+                adTimer.schedule(adTimerTask, 1000, 2000);
             }
         }
     }
@@ -522,7 +523,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
         periodStatus = Integer.valueOf(period_types.get(loanIndex));
         LogUtil.d("初始化的还款期数", periodStatus + "");
         //设置还款期数位置
-        loan_period.setText(period_types.get(loanIndex));
+        loan_period.setText(period_types.get(loanIndex) + "期");
 
         //设置完还款期数之后，就要开始算还款方案
         setupRepayProgramme();
@@ -548,27 +549,28 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
         //借款月数等于还款期数
         else if (durationStatus == periodStatus && durationStatus != -1) {
             float amount = (getLoanAmount() + getLoanAmount() * durationStatus/12 * rate) / periodStatus;
+            String value = new DecimalFormat("######0.##").format(amount);
             //如果是一个月的时候，就是"到期还款XXX元"
             if (durationStatus == 1) {
-                repayProgramme = "到期还款" + String.format("%.2f", amount) + "元";
+                repayProgramme = "到期还款" + value + "元";
             } else {
-                repayProgramme = "每月还款" +
-                        String.format("%.2f", amount) + "元";
+                repayProgramme = "每月还款" + value + "元";
             }
         }
         //还款期数为2时
         else if (periodStatus == 2) {
             float amount = getLoanAmount() * (float) durationStatus / 12 * rate /durationStatus;
-            repayProgramme = "每月还利息" + String.format("%.2f", amount) + "元"
-                    + "每12个月还本金" + String.format("%.2f", getLoanAmount()/periodStatus) + "元";
+            String value = new DecimalFormat("######0.##").format(amount);
+            String val = new DecimalFormat("######0.##").format(getLoanAmount()/periodStatus);
+            repayProgramme = "每月还利息" + value + "元" + "每12个月还本金" + val + "元";
         }
         //划款期数为3时
         else if (periodStatus == 3) {
             float amount = getLoanAmount() * (float)durationStatus/12 * rate/durationStatus;
-            repayProgramme = "每月还利息" + String.format("%.2f", amount) + "每12个月还本金("
-                    + String.format("%.2f", getLoanAmount() * 0.3) +"元,"
-                    + String.format("%.2f", getLoanAmount() * 0.3) + "元,"
-                    + String.format("%.2f", getLoanAmount() * 0.4) + "元)";
+            String value = new DecimalFormat("######0.##").format(amount);
+            String val1 = new DecimalFormat("######0.##").format(getLoanAmount() * 0.3);
+            String val2 = new DecimalFormat("######0.##").format(getLoanAmount() * 0.4);
+            repayProgramme = "每月还利息" + value + "每12个月还本金(" + val1 + "元," + val1 + "元," + val2 + "元)";
         } else {
             repayProgramme = "暂不支持该方案";
         }
@@ -591,11 +593,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
      * 显示利息抵扣券张数
      */
     private void ShowCouponCount(int TotalCount) {
-        if (TotalCount == 0) {
-            value_interest.setText("暂无利息抵扣券，请先兑换优惠券");
-        } else {
-            value_interest.setText("你有"+ TotalCount +"张利息抵扣券");
-        }
+        value_interest.setText("你有"+ TotalCount +"张利息抵扣券");
     }
 
     @Override
@@ -640,7 +638,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
                     public void onClick(int currentItem) {
                         periodStatus = periodList.get(currentItem).Period;
                         LogUtil.d("选中的还款期数", periodStatus + "");
-                        loan_period.setText(period_types.get(currentItem));//设置还款期数
+                        loan_period.setText(period_types.get(currentItem) + "期");//设置还款期数
                         setupRepayProgramme();
                     }
                 });
@@ -716,16 +714,6 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
         alertView.show();
     }
 
-//    private void showAlertView(String title, String message,  String  positiveButtonTitle, DialogInterface.OnClickListener onClickListener) {
-//        AlertView.Builder ibuilder = new AlertView.Builder(this);
-//        ibuilder.setTitle(title);
-//        ibuilder.setMessage(message);
-//        ibuilder.setPositiveButton(positiveButtonTitle, onClickListener);
-//        ibuilder.setNegativeButton("取消", null);
-//        alertView = ibuilder.create();
-//        alertView.show();
-//    }
-
     /**
      * 申请福利补贴
      */
@@ -734,7 +722,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
         if (statusSubsidy) {
             coupon_select_image.setBackgroundResource(R.drawable.loan_request_select);
         } else {
-            coupon_select_image.setBackgroundResource(R.drawable.withdraw_rect);
+            coupon_select_image.setBackgroundResource(R.drawable.loan_rect);
         }
     }
     /**
@@ -769,9 +757,9 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
             return;
         }
 
-        //借款金额小于2000元，提示不能小于2000元
-        if (getLoanAmount() < 2000) {
-            ToastUtil.alert(Activity_LoanRequest_Borrow.this, "借款金额必须大于2000元");
+        //借款金额小于5000元，提示不能小于5000元
+        if (getLoanAmount() < 5000) {
+            ToastUtil.alert(Activity_LoanRequest_Borrow.this, "借款金额必须大于5000元");
             return;
         }
         LogUtil.d("借款", loanRequestInfo.toString());
