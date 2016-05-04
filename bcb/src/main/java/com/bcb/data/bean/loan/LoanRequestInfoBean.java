@@ -19,4 +19,43 @@ public class LoanRequestInfoBean implements Serializable {
     public int LoanTimeType;    //借款时间
     public List<LoanTypeListBean> LoanTypeTable;//借款用途
     public List<RateTableBean> RateTable;//借款利率表
+
+    private String Status;//是否可以申请借款
+    private String message;//不可申请时的状态信息
+
+    public String getStatus() {
+        return Status;
+    }
+
+    public void setStatus(String status) {
+        Status = status;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    @Override
+    public String toString() {
+        return "LoanRequestInfoBean{" +
+                "AggregateId='" + AggregateId + '\'' +
+                ", Amount=" + Amount +
+                ", CouponId='" + CouponId + '\'' +
+                ", CouponAmount=" + CouponAmount +
+                ", CouponDescn='" + CouponDescn + '\'' +
+                ", Period=" + Period +
+                ", UseSubsidy=" + UseSubsidy +
+                ", UseCoupon=" + UseCoupon +
+                ", LoanType=" + LoanType +
+                ", LoanTimeType=" + LoanTimeType +
+                ", LoanTypeTable=" + LoanTypeTable +
+                ", RateTable=" + RateTable +
+                ", Status=" + Status +
+                ", message='" + message + '\'' +
+                '}';
+    }
 }

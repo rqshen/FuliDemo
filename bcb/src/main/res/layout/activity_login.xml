@@ -32,6 +32,7 @@
                 android:maxLength="11"
                 android:paddingLeft="35dip"
                 android:singleLine="true"
+                android:inputType="phone"
                 android:textColorHint="@color/txt_gray"
                 android:textSize="@dimen/main_text_default"/>
 

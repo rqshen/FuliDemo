@@ -31,6 +31,7 @@ import com.bcb.data.bean.UserWallet;
 import com.bcb.data.util.MQCustomerManager;
 import com.bcb.presentation.view.activity.Activity_Join_Company;
 import com.bcb.presentation.view.activity.Activity_Loan;
+import com.bcb.presentation.view.activity.Activity_LoanRequest_Borrow;
 import com.bcb.presentation.view.activity.Activity_Login;
 import com.bcb.presentation.view.activity.Activity_Money_Flowing_Water;
 import com.bcb.presentation.view.activity.Activity_Account_Setting;
@@ -228,7 +229,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
             }
         });
         //刷新
-        ((RelativeLayout)view.findViewById(R.id.loadmore_view)).setVisibility(View.GONE);
+        (view.findViewById(R.id.loadmore_view)).setVisibility(View.GONE);
         refreshLayout = (PullToRefreshLayout) view.findViewById(R.id.refresh_view);
         refreshLayout.setRefreshResultView(false);
         refreshLayout.setOnRefreshListener(new PullToRefreshLayout.OnRefreshListener() {
@@ -626,8 +627,30 @@ public class Frag_User extends Frag_Base implements OnClickListener {
             }
             return;
         }
-        Intent newIntent = new Intent(ctx, Activity_Loan.class);
-        startActivity(newIntent);
+
+        //存在用户信息
+        if(null != mUserDetailInfo){
+            //用户还没认证时，先去认证
+            if(!App.mUserDetailInfo.HasCert || App.mUserDetailInfo.BankCard == null){
+                showAlertView("提示", "您仍未认证，请先认证", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        startActivity(new Intent(ctx, Activity_Authentication.class));
+                        alertView.dismiss();
+                        alertView = null;
+                    }
+                });
+            } else {
+                //        Intent newIntent = new Intent(ctx, Activity_Loan.class);
+                Intent newIntent = new Intent(ctx, Activity_LoanRequest_Borrow.class);
+                startActivity(newIntent);
+            }
+        }
+        //不存在用户信息时，先去认证
+        else {
+            startActivity(new Intent(ctx, Activity_Authentication.class));
+        }
+
     }
 
     //充值
@@ -671,7 +694,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
         //存在用户信息
         if(null != mUserDetailInfo){
             //用户还没认证时，先去认证
-            if(App.mUserDetailInfo.HasCert == false || App.mUserDetailInfo.BankCard == null){
+            if(!App.mUserDetailInfo.HasCert || App.mUserDetailInfo.BankCard == null){
                 showAlertView("提示", "您仍未认证，请先认证", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -680,10 +703,9 @@ public class Frag_User extends Frag_Base implements OnClickListener {
                         alertView = null;
                     }
                 });
-                return;
             }
             //未设置交易密码，先去设置密码
-            else if (App.mUserDetailInfo.HasTradePassword == false) {
+            else if (!App.mUserDetailInfo.HasTradePassword) {
                 startActivity(new Intent(ctx, Activity_Setting_Pay_Pwd.class));
             }
             //去提现

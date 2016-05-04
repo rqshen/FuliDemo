@@ -56,10 +56,17 @@
     </LinearLayout>
 
     <!-- 借款内容 -->
-    <ScrollView
+    <com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout
+        android:id="@+id/refresh_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/layout_button"
+        android:layout_above="@id/layout_button">
+    <!-- 下拉刷新控件-->
+    <include layout="@layout/refresh_head" />
+    <com.bcb.presentation.view.custom.PullableView.PullableScrollView
+        android:id="@+id/layout_scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:scrollbars="none">
         <LinearLayout
             android:layout_width="match_parent"
@@ -535,5 +542,8 @@
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-    </ScrollView>
+    </com.bcb.presentation.view.custom.PullableView.PullableScrollView>
+        <!-- 上拉加载更多 -->
+        <include layout="@layout/load_more" />
+    </com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout>
 </RelativeLayout>

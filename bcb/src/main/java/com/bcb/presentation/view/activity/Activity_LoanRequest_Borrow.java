@@ -31,6 +31,7 @@ import com.bcb.common.net.UrlsOne;
 import com.bcb.data.bean.loan.LoanDurationListBean;
 import com.bcb.data.bean.loan.LoanPeriodWithRateBean;
 import com.bcb.data.bean.loan.LoanRequestInfoBean;
+import com.bcb.data.util.HttpUtils;
 import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MQCustomerManager;
 import com.bcb.data.util.MyActivityManager;
@@ -41,6 +42,7 @@ import com.bcb.data.util.ToastUtil;
 import com.bcb.data.util.TokenUtil;
 import com.bcb.data.util.UmengUtil;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
+import com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout;
 import com.dg.spinnerwheel.WheelVerticalView;
 import com.dg.spinnerwheel.adapters.ArrayWheelAdapter;
 import com.google.gson.Gson;
@@ -138,6 +140,9 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
     //网络请求队列
     private BcbRequestQueue requestQueue;
 
+    //刷新
+    private PullToRefreshLayout refreshLayout;
+
     private Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -164,8 +169,42 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
         //创建请求队列
         requestQueue = BcbNetworkManager.newRequestQueue(this);
 
-        getLoanCertification();
+        setRightTitleValue("我的借款", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gotoListPage();
+                finish();
+            }
+        });
 
+        getLoanCertification();
+        (findViewById(R.id.loadmore_view)).setVisibility(View.GONE);
+        refreshLayout = (PullToRefreshLayout) findViewById(R.id.refresh_view);
+        refreshLayout.setRefreshResultView(false);
+        refreshLayout.setOnRefreshListener(new PullToRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh(PullToRefreshLayout pullToRefreshLayout) {
+                if (HttpUtils.isNetworkConnected(Activity_LoanRequest_Borrow.this)) {
+                    getLoanCertification();
+                } else {
+                    ToastUtil.alert(Activity_LoanRequest_Borrow.this, "网络异常，请稍后重试");
+                    refreshLayout.refreshFinish(PullToRefreshLayout.FAIL);
+                }
+            }
+
+            @Override
+            public void onLoadMore(PullToRefreshLayout pullToRefreshLayout) {
+                refreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
+            }
+        });
+
+    }
+
+    //借款列表页
+    private void gotoListPage() {
+        UmengUtil.eventById(Activity_LoanRequest_Borrow.this, R.string.loan_my);
+        Intent listIntent = new Intent(Activity_LoanRequest_Borrow.this, Activity_LoanList.class);
+        startActivity(listIntent);
     }
 
     /**
@@ -677,15 +716,15 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
         alertView.show();
     }
 
-    private void showAlertView(String title, String message,  String  positiveButtonTitle, DialogInterface.OnClickListener onClickListener) {
-        AlertView.Builder ibuilder = new AlertView.Builder(this);
-        ibuilder.setTitle(title);
-        ibuilder.setMessage(message);
-        ibuilder.setPositiveButton(positiveButtonTitle, onClickListener);
-        ibuilder.setNegativeButton("取消", null);
-        alertView = ibuilder.create();
-        alertView.show();
-    }
+//    private void showAlertView(String title, String message,  String  positiveButtonTitle, DialogInterface.OnClickListener onClickListener) {
+//        AlertView.Builder ibuilder = new AlertView.Builder(this);
+//        ibuilder.setTitle(title);
+//        ibuilder.setMessage(message);
+//        ibuilder.setPositiveButton(positiveButtonTitle, onClickListener);
+//        ibuilder.setNegativeButton("取消", null);
+//        alertView = ibuilder.create();
+//        alertView.show();
+//    }
 
     /**
      * 申请福利补贴
@@ -735,12 +774,18 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
             ToastUtil.alert(Activity_LoanRequest_Borrow.this, "借款金额必须大于2000元");
             return;
         }
-        //判断是否跟原来的数据一样，如果跟原来申请的借款一样没有变化，直接提示完善个人信息
-        if (isNeedToPostData()) {
-            pushLoanMessageToService();
-        } else {
-            gotoRequestSuccessPage();
+        LogUtil.d("借款", loanRequestInfo.toString());
+        if (loanRequestInfo.getStatus().equals("0")){//可以申请借款
+            //判断是否跟原来的数据一样，如果跟原来申请的借款一样没有变化，直接提示完善个人信息
+            if (isNeedToPostData()) {
+                pushLoanMessageToService();
+            } else {
+                gotoRequestSuccessPage();
+            }
+        }else{//存在已审核通过的借款
+            ToastUtil.alert(Activity_LoanRequest_Borrow.this, loanRequestInfo.getMessage());
         }
+
     }
 
     /**
@@ -882,6 +927,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
             @Override
             public void onResponse(JSONObject response) {
                 hideProgressBar();
+                refreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
                 try {
                     if(null == response) {
                         ToastUtil.alert(Activity_LoanRequest_Borrow.this, "服务器返回数据为空，无法验证");
@@ -891,17 +937,18 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
                         String message = response.getString("message");
                         //出错信息不为空时，将出错信息打印出来，否则将出错信息设置为"未知错误"
                         if (message != null && !message.equalsIgnoreCase("null") && !message.equalsIgnoreCase("")) {
-                            ToastUtil.alert(Activity_LoanRequest_Borrow.this, message);
+//                            ToastUtil.alert(Activity_LoanRequest_Borrow.this, message);
                             //判断是否Token过期，如果过期则跳转至登陆界面
                             if (response.getInt("status") == -5) {
                                 Activity_Login.launche(Activity_LoanRequest_Borrow.this);
                                 finish();
                             }
+                            init(response.getString("result"));
+                            loanRequestInfo.setMessage(message);
                         } else {
                             ToastUtil.alert(Activity_LoanRequest_Borrow.this, "未知错误，请与工作人员联系");
                         }
                     } else {
-                        LoanRequestInfoBean loanRequestInfoBean = App.mGson.fromJson(response.getString("result"), LoanRequestInfoBean.class);
                         UmengUtil.eventById(Activity_LoanRequest_Borrow.this, R.string.loan_blank);
                         init(response.getString("result"));
                     }
