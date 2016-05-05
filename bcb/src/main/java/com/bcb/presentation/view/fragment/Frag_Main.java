@@ -1,6 +1,7 @@
 package com.bcb.presentation.view.fragment;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -8,20 +9,14 @@ import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.bcb.R;
 import com.bcb.common.app.App;
 import com.bcb.common.net.BcbJsonRequest;
@@ -48,22 +43,21 @@ import com.bcb.presentation.adapter.AnnounceAdapter;
 import com.bcb.presentation.adapter.ExpiredAdapter;
 import com.bcb.presentation.adapter.ProductAdapter;
 import com.bcb.presentation.view.activity.Activity_ExpiredProject_Introduction;
-import com.bcb.presentation.view.activity.Activity_Login_Introduction;
-import com.bcb.presentation.view.activity.Activity_Main;
 import com.bcb.presentation.view.activity.Activity_NormalProject_Introduction;
 import com.bcb.presentation.view.activity.Activity_WebView;
 import com.bcb.presentation.view.custom.CustomDialog.DialogWidget;
 import com.bcb.presentation.view.custom.CustomDialog.RegisterSuccessDialogView;
-import com.bcb.presentation.view.custom.ImageCycleView.ImageCycleView;
-import com.bcb.presentation.view.custom.ImageCycleView.ImageCycleView.ImageCycleViewListener;
+import com.bcb.presentation.view.custom.PagerIndicator.AutoLoopViewPager;
+import com.bcb.presentation.view.custom.PagerIndicator.CirclePageIndicator;
 import com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout;
 import com.bcb.presentation.view.custom.PullableView.PullableScrollView;
-
+import android.support.v4.view.PagerAdapter;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class Frag_Main extends Frag_Base implements View.OnClickListener{
 	private static final String TAG = "Frag_Main";
@@ -94,8 +88,7 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener{
     //Banner
 	private AdPhotoListBean mAdPhotoListBean;
     private ArrayList<BannerInfo> listBanner;
-    private ImageCycleView mImageCycleView;
-
+    private AutoLoopViewPager loopViewPager;
     //标识
 	private boolean canReFresh = true;
 	private boolean firstLoadCopyWriter = true;
@@ -104,17 +97,7 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener{
 	private TextView JXPackageAdWord;
     private int successConnectCount = 0;
 
-	private Context ctx;
-	
-    //浮标按钮
-    private int screenWidth;
-    private int screenHeight;
-    private int bottomHeight;
-    private float startX;
-    private float startY;
-    private int lastX;
-    private int lastY;
-    private Button button_floating;
+	private Activity ctx;
 
     //广播
     private Receiver mReceiver;
@@ -138,22 +121,18 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener{
         super.onHiddenChanged(hidden);
         if (!hidden && announceAdapter != null) {
             announceAdapter.notifyDataSetChanged();
-            if (App.saveUserInfo.getAccess_Token() == null && button_floating != null) {
-                button_floating.setVisibility(View.VISIBLE);
-            }
         }
     }
 
-	@Override
+    @Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.frag_main, container, false);
 	}
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        this.ctx = view.getContext();
+        this.ctx =(Activity) view.getContext();
         requestQueue = BcbNetworkManager.newRequestQueue(ctx);
-        bottomHeight = ((Activity_Main)getActivity()).getBottomHeight();
         //仅保留下拉刷新，隐藏上拉加载更多
         //隐藏加载更多
         (view.findViewById(R.id.loadmore_view)).setVisibility(View.GONE);
@@ -165,6 +144,7 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener{
             @Override
             public void onRefresh(PullToRefreshLayout pullToRefreshLayout) {
                 if (HttpUtils.isNetworkConnected(ctx)) {
+                    loadBanner();
                     loadMainListViewData();
                 } else {
                     ToastUtil.alert(ctx, "网络异常，请稍后再试");
@@ -188,23 +168,6 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener{
             }
 
         }
-
-        //banner
-        mImageCycleView = (ImageCycleView) view.findViewById(R.id.ad_view);
-        mAdPhotoListBean = new AdPhotoListBean();
-        mAdPhotoListBean.result = new ArrayList<BannerInfo>();
-        //根据宽度设置高度
-        DisplayMetrics dm = new DisplayMetrics();
-        getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
-        int mScreenWidth = dm.widthPixels;// 获取屏幕分辨率宽度
-        int mScreenHeight = mScreenWidth * 360 / 640;
-        ViewGroup.LayoutParams lp = mImageCycleView.getLayoutParams();
-        lp.width = mScreenWidth;
-        lp.height = mScreenHeight;
-        mImageCycleView.requestLayout();
-
-        //设置banner的placeholder图片
-        mImageCycleView.setBackgroundResource(R.drawable.banner_placeholder);
 
         //三个按钮:每日福利、理财学院、安全保障
         view.findViewById(R.id.ll_daily_welfare).setOnClickListener(this);
@@ -241,8 +204,6 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener{
 
         //文案配置
         loadCopyWriter();
-        //banner
-        loadBanner();
         //更新
         UmengUtil.update(this.ctx);
 
@@ -276,126 +237,8 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener{
             }
         });
 
-        //浮标按钮
-        screenWidth = dm.widthPixels;
-        //屏幕高度要去掉虚拟按钮的高度
-        screenHeight = getActivity().getWindowManager().getDefaultDisplay().getHeight();
-        button_floating = (Button)view.findViewById(R.id.button_floating);
-        if (App.saveUserInfo.getAccess_Token() != null) {
-            button_floating.setVisibility(View.GONE);
-        }
-
-        button_floating.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                int action = event.getAction();
-                switch (action) {
-                    //按下时获取位置
-                    case MotionEvent.ACTION_DOWN:
-                        //需要判断是否属于该控件
-                        lastX = (int) event.getRawX();
-                        lastY = (int) event.getRawY();
-                        startX = lastX;
-                        startY = lastY;
-                        break;
-
-                    //移动手势
-                    case MotionEvent.ACTION_MOVE:
-                        int dx = (int) event.getRawX() - lastX;
-                        int dy = (int) event.getRawY() - lastY;
-                        int left = v.getLeft() + dx;
-                        int top = v.getTop() + dy;
-                        int right = v.getRight() + dx;
-                        int bottom = v.getBottom() + dy;
-                        if (left < 0) {
-                            left = 0;
-                            right = left + v.getWidth();
-                        }
-                        if (right > screenWidth) {
-                            right = screenWidth;
-                            left = right - v.getWidth();
-                        }
-                        if (top < 0) {
-                            top = 0;
-                            bottom = top + v.getHeight();
-                        }
-                        if (event.getRawY() > screenHeight - bottomHeight - v.getHeight()) {
-                            bottom = screenHeight - bottomHeight - v.getHeight();
-                            top = bottom - v.getHeight();
-                        }
-                        v.layout(left, top, right, bottom);
-                        lastX = (int) event.getRawX();
-                        lastY = (int) event.getRawY();
-                        break;
-
-                    //离开屏幕
-                    case MotionEvent.ACTION_UP:
-                        lastX = (int) event.getRawX();
-                        lastY = (int) event.getRawY();
-                        //当移动距离比较小时，视为点击事件
-                        //不用setOnClickListener 是因为setOnClickListener跟setOnTouchListener有冲突，并且只监听到ACTION_DOWN
-                        if (Math.abs(lastX - startX) < 5 || Math.abs(lastY - startY) < 5) {
-                            Intent intent = new Intent(ctx, Activity_Login_Introduction.class);
-                            startActivity(intent);
-                        }
-                        if (event.getRawY() > screenHeight - bottomHeight - v.getHeight()) {
-                            v.setBottom(screenHeight - bottomHeight - v.getHeight());
-                            v.setTop(v.getBottom() - v.getHeight());
-                            v.layout(v.getLeft(), v.getTop(), v.getRight(), v.getBottom());
-                        }
-                        movingAnimation(v, (int) event.getRawX());
-                        break;
-                }
-                return true;
-            }
-        });
-
-        // 一分钟了解福利金融
-//        button_introduction = (Button) view.findViewById(R.id.button_introduction);
-//        button_introduction.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                UmengUtil.eventById(ctx, R.string.self_about);
-//                Activity_Browser.launche(ctx, "一分钟了解福利金融", "http://wap.flh001.com/static/1minute/index.html");
-//            }
-//        });
-
     }
 
-    //按钮移动动画
-    private void movingAnimation(final View v, int currentX) {
-        final int left;
-        final int top = v.getTop();
-        TranslateAnimation animation = null;
-        if (currentX > screenWidth/2) {
-            animation = new TranslateAnimation(0, screenWidth - v.getRight(), 0, 0);
-            left = screenWidth - v.getWidth();
-        } else {
-            animation = new TranslateAnimation(0, - v.getLeft(), 0, 0);
-            left = 0;
-        }
-        animation.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                FrameLayout.LayoutParams ll = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
-                ll.setMargins(left, top, 0, 0);
-                v.setLayoutParams(ll);
-                v.clearAnimation();
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-
-            }
-        });
-        animation.setDuration(100 * 2 * currentX / screenWidth);
-        v.startAnimation(animation);
-    }
 
     /**
      * 文案配置
@@ -446,7 +289,7 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener{
 
 
     /**
-     * 首页Banner
+     * 获取首页Banner
      */
     private void loadBanner() {
         //Banner只需要第一次创建的时候加载一次，不用每次都请求服务器
@@ -498,25 +341,72 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener{
 			item.PageUrl = mAdPhotoListBean.result.get(i).PageUrl;
 			listBanner.add(item);
 		}
-		mImageCycleView.setImageResources(listBanner, mAdCycleViewListener);
+        //Banner
+        loopViewPager = (AutoLoopViewPager) ctx.findViewById(R.id.autoLoop);
+        loopViewPager.setBoundaryCaching(true);
+        loopViewPager.setClipChildren(false);
+        loopViewPager.setAutoScrollDurationFactor(10d);
+        loopViewPager.setInterval(6000);
+        loopViewPager.startAutoScroll();
+        loopViewPager.setAdapter(new LoopImageAdapter(ctx, listBanner));
+        CirclePageIndicator indy = (CirclePageIndicator) ctx.findViewById(R.id.indy);
+        indy.setViewPager(loopViewPager);
 	}
+    //Banner适配器
+    private class LoopImageAdapter extends PagerAdapter {
+        private int count = 100;
+        private Queue<View> views;
+        private List<BannerInfo> data;
+        private LayoutInflater lay;
+        private Activity context;
 
-	private ImageCycleViewListener mAdCycleViewListener = new ImageCycleViewListener() {
+        LoopImageAdapter(Activity ct, List<BannerInfo> listNews) {
+            views = new LinkedList<>();
+            data = listNews;
+            lay = LayoutInflater.from(ct);
+            context = ct;
+        }
+
         @Override
-		public void onImageClick(BannerInfo info, int position, View imageView) {
-			UmengUtil.eventById(ctx, R.string.banner_c);
-			if (!TextUtils.isEmpty(info.PageUrl)) {
-                LogUtil.d("图片地址", info.PageUrl);
-				Activity_WebView.launche(ctx, info.Title, info.PageUrl, true);
-			}
-		}
+        public int getCount() {
+            return data.size();
+        }
 
-		@Override
-		public void displayImage(String imageURL, ImageView imageView) {
+        @Override
+        public boolean isViewFromObject(View arg0, Object arg1) {
+            return arg0 == arg1;
+        }
+
+        @Override
+        public Object instantiateItem(ViewGroup container, final int position) {
+            View mage = views.poll();
+
+            if (mage == null) {
+                mage = lay.inflate(R.layout.news_gallery_page, null);
+                mage.setId(count++);
+            }
+            ImageView iv = (ImageView) mage.findViewById(R.id.mage);
+            iv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(!TextUtils.isEmpty(data.get(position).PageUrl)) {
+                        Activity_WebView.launche(context, data.get(position).Title, data.get(position).PageUrl, true);
+                    }
+                }
+            });
             //异步加载网络图片
-            BcbRemoteImage.getInstance(ctx).loadRemoteImage(imageView, imageURL, R.drawable.banner_placeholder, R.drawable.banner_placeholder);
-    	}
-	};
+            BcbRemoteImage.getInstance(context).loadRemoteImage(iv, data.get(position).ImageUrl, R.drawable.banner_placeholder, R.drawable.banner_placeholder);
+            container.addView(mage);
+            return mage;
+        }
+
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+            View mage = (View) object;
+            views.add(mage);
+            container.removeView(mage);
+        }
+    }
 
     /**
      * 新接口同意获取新手推荐、新标预告、精品项目
@@ -731,8 +621,6 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener{
                 if (announceAdapter != null) {
                     announceAdapter.notifyDataSetChanged();
                 }
-                //隐藏注册有礼
-                button_floating.setVisibility(View.GONE);
                 showItemVisible();
             } else if (intent.getAction().equals("com.bcb.register.success")) {
                 showRegisterSuccessTips();
@@ -763,25 +651,20 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener{
 	@Override
 	public void onResume() {
 		super.onResume();
-		mImageCycleView.startImageCycle();
-        if (App.saveUserInfo.getAccess_Token() == null ) {
-            if (button_floating != null) {
-                button_floating.setVisibility(View.VISIBLE);
-            }
-        }
+//		mImageCycleView.startImageCycle();
         showItemVisible();
 	}
 
 	@Override
     public void onPause() {
 		super.onPause();
-		mImageCycleView.pushImageCycle();
+//		mImageCycleView.pushImageCycle();
 	}
 
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		mImageCycleView.pushImageCycle();
+//		mImageCycleView.pushImageCycle();
         ctx.unregisterReceiver(mReceiver);
 	}
 

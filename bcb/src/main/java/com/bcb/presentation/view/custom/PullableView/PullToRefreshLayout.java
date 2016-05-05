@@ -5,7 +5,6 @@ import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bcb.R;
+import com.bcb.data.util.LogUtil;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -50,7 +50,10 @@ public class PullToRefreshLayout extends RelativeLayout {
     public static final int NOMORE = 2;
 
     // 按下Y坐标，上一个事件点Y坐标
-    private float downY, lastY;
+    private float downY, yLast;
+    private float xDistance;
+    private float yDistance;
+    private float xLast;
 
     // 下拉的距离。注意：pullDownY和pullUpY不可能同时不为0
     public float pullDownY = 0;
@@ -378,8 +381,7 @@ public class PullToRefreshLayout extends RelativeLayout {
     /**
      * 不限制上拉或下拉
      */
-    private void releasePull()
-    {
+    private void releasePull() {
         canPullDown = true;
         canPullUp = true;
     }
@@ -393,8 +395,11 @@ public class PullToRefreshLayout extends RelativeLayout {
     public boolean dispatchTouchEvent(MotionEvent ev) {
         switch (ev.getActionMasked()) {
             case MotionEvent.ACTION_DOWN:
+                xDistance = 0;
+                yDistance = 0;
+                xLast = ev.getX();
                 downY = ev.getY();
-                lastY = downY;
+                yLast = downY;
                 timer.cancel();
                 mEvents = 0;
                 releasePull();
@@ -405,6 +410,13 @@ public class PullToRefreshLayout extends RelativeLayout {
                 mEvents = -1;
                 break;
             case MotionEvent.ACTION_MOVE:
+                float curX = ev.getX();
+                float curY = ev.getY();
+                xDistance += Math.abs(curX - xLast);
+                yDistance += Math.abs(curY - yLast);
+                if (xDistance > yDistance) {
+                    break;
+                }
                 if (mEvents == 0)
                 {
                     if (pullDownY > 0
@@ -413,7 +425,7 @@ public class PullToRefreshLayout extends RelativeLayout {
                     {
                         // 可以下拉，正在加载时不能下拉
                         // 对实际滑动距离做缩小，造成用力拉的感觉
-                        pullDownY = pullDownY + (ev.getY() - lastY) / radio;
+                        pullDownY = pullDownY + (curY - yLast) / radio;
                         if (pullDownY < 0)
                         {
                             pullDownY = 0;
@@ -431,7 +443,7 @@ public class PullToRefreshLayout extends RelativeLayout {
                             || (((Pullable) pullableView).canPullUp() && canPullUp && state != REFRESHING))
                     {
                         // 可以上拉，正在刷新时不能上拉
-                        pullUpY = pullUpY + (ev.getY() - lastY) / radio;
+                        pullUpY = pullUpY + (curY - yLast) / radio;
                         if (pullUpY > 0)
                         {
                             pullUpY = 0;
@@ -449,7 +461,8 @@ public class PullToRefreshLayout extends RelativeLayout {
                         releasePull();
                 } else
                     mEvents = 0;
-                lastY = ev.getY();
+                xLast = curX;
+                yLast = curY;
                 // 根据下拉距离改变比例
                 radio = (float) (2 + 2 * Math.tan(Math.PI / 2 / getMeasuredHeight()
                         * (pullDownY + Math.abs(pullUpY))));

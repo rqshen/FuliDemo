@@ -70,9 +70,20 @@
         android:background="@color/linegray" />
 
     <FrameLayout
-        android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/line"
-        android:background="@color/white" />
+        android:background="@color/white">
+        <FrameLayout
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white" />
+        <Button
+            android:id="@+id/button_floating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/floating_introduction_image_margin_top"
+            android:background="@drawable/floating_button"/>
+    </FrameLayout>
 </RelativeLayout>
