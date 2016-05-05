@@ -299,7 +299,8 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
         //如何获得补贴？
         loan_gain = (TextView) findViewById(R.id.loan_gain);
         loan_gain.setOnClickListener(this);
-        //滚屏
+
+        //文字滚动
         value_rotate  = (WheelVerticalView) findViewById(R.id.value_rotate);
         isPause = false;
         startRotate();
@@ -533,6 +534,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
      * 计算还款方案
      */
     private void setupRepayProgramme() {
+        DecimalFormat df = new DecimalFormat("######0.##");
         float rate = 0;
         //根据表查找利率
         for (int i = 0; i < loanRequestInfo.RateTable.size();  i ++) {
@@ -549,7 +551,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
         //借款月数等于还款期数
         else if (durationStatus == periodStatus && durationStatus != -1) {
             float amount = (getLoanAmount() + getLoanAmount() * durationStatus/12 * rate) / periodStatus;
-            String value = new DecimalFormat("######0.##").format(amount);
+            String value = df.format(amount);
             //如果是一个月的时候，就是"到期还款XXX元"
             if (durationStatus == 1) {
                 repayProgramme = "到期还款" + value + "元";
@@ -560,16 +562,16 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
         //还款期数为2时
         else if (periodStatus == 2) {
             float amount = getLoanAmount() * (float) durationStatus / 12 * rate /durationStatus;
-            String value = new DecimalFormat("######0.##").format(amount);
-            String val = new DecimalFormat("######0.##").format(getLoanAmount()/periodStatus);
+            String value = df.format(amount);
+            String val = df.format(getLoanAmount()/periodStatus);
             repayProgramme = "每月还利息" + value + "元" + "每12个月还本金" + val + "元";
         }
         //划款期数为3时
         else if (periodStatus == 3) {
             float amount = getLoanAmount() * (float)durationStatus/12 * rate/durationStatus;
-            String value = new DecimalFormat("######0.##").format(amount);
-            String val1 = new DecimalFormat("######0.##").format(getLoanAmount() * 0.3);
-            String val2 = new DecimalFormat("######0.##").format(getLoanAmount() * 0.4);
+            String value = df.format(amount);
+            String val1 = df.format(getLoanAmount() * 0.3);
+            String val2 = df.format(getLoanAmount() * 0.4);
             repayProgramme = "每月还利息" + value + "每12个月还本金(" + val1 + "元," + val1 + "元," + val2 + "元)";
         } else {
             repayProgramme = "暂不支持该方案";

@@ -62,6 +62,7 @@
 
                 <!-- 婚姻状况 -->
                 <LinearLayout
+                    android:id="@+id/ll_marital"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dip"
@@ -75,14 +76,15 @@
                         android:gravity="center_vertical"
                         android:text="婚姻状况"
                         android:textSize="@dimen/main_text_default"/>
-                    <Spinner
+                    <TextView
                         android:id="@+id/loan_marital_status"
                         style="@style/spinner_style"
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
+                        android:gravity="center_vertical"
                         android:layout_marginRight="15dip"
-                        android:singleLine="true"
-                        android:background="@drawable/edittext_none_background"/>
+                        android:padding="5dip"
+                        android:singleLine="true" />
                 </LinearLayout>
                 <ImageView
                     android:layout_width="match_parent"
@@ -91,8 +93,9 @@
                     android:layout_height="1dip"
                     android:background="@color/linegray"/>
 
-                <!-- 家庭状况 -->
+                <!-- 孩子情况 -->
                 <LinearLayout
+                    android:id="@+id/ll_children"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dip"
@@ -106,14 +109,15 @@
                         android:gravity="center_vertical"
                         android:text="孩子情况"
                         android:textSize="@dimen/main_text_default"/>
-                    <Spinner
+                    <TextView
                         android:id="@+id/loan_children"
                         style="@style/spinner_style"
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
+                        android:gravity="center_vertical"
                         android:layout_marginRight="15dip"
-                        android:singleLine="true"
-                        android:background="@drawable/edittext_none_background"/>
+                        android:padding="5dip"
+                        android:singleLine="true" />
                 </LinearLayout>
                 <ImageView
                     android:layout_width="match_parent"
@@ -124,6 +128,7 @@
 
                 <!-- 住房状况 -->
                 <LinearLayout
+                    android:id="@+id/ll_house"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dip"
@@ -137,14 +142,15 @@
                         android:gravity="center_vertical"
                         android:text="住房状况"
                         android:textSize="@dimen/main_text_default"/>
-                    <Spinner
+                    <TextView
                         android:id="@+id/loan_house_situation"
                         style="@style/spinner_style"
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
+                        android:gravity="center_vertical"
                         android:layout_marginRight="15dip"
-                        android:singleLine="true"
-                        android:background="@drawable/edittext_none_background"/>
+                        android:padding="5dip"
+                        android:singleLine="true" />
                 </LinearLayout>
                 <ImageView
                     android:layout_width="match_parent"
@@ -155,6 +161,7 @@
 
                 <!-- 文化程度 -->
                 <LinearLayout
+                    android:id="@+id/ll_literacy"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dip"
@@ -168,14 +175,15 @@
                         android:gravity="center_vertical"
                         android:text="文化程度"
                         android:textSize="@dimen/main_text_default"/>
-                    <Spinner
+                    <TextView
                         android:id="@+id/loan_literacy_level"
                         style="@style/spinner_style"
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
+                        android:gravity="center_vertical"
                         android:layout_marginRight="15dip"
-                        android:singleLine="true"
-                        android:background="@drawable/edittext_none_background"/>
+                        android:padding="5dip"
+                        android:singleLine="true" />
                 </LinearLayout>
                 <ImageView
                     android:layout_width="match_parent"
@@ -393,6 +401,7 @@
 
                 <!-- 关系 -->
                 <LinearLayout
+                    android:id="@+id/ll_relationship"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dip"
@@ -406,17 +415,17 @@
                         android:gravity="center_vertical"
                         android:text="关系"
                         android:textSize="@dimen/main_text_default"/>
-                    <Spinner
+                    <TextView
                         android:id="@+id/loan_relationship"
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
                         android:layout_marginRight="15dip"
                         android:hint="与紧急联系人的关系"
                         android:textSize="@dimen/main_text_default"
+                        android:padding="5dip"
                         android:textColorHint="@color/txt_gray"
-                        android:padding="0dip"
-                        android:singleLine="true"
-                        android:background="@drawable/edittext_none_background"/>
+                        android:gravity="center_vertical"
+                        android:singleLine="true" />
                 </LinearLayout>
                 <ImageView
                     android:layout_width="match_parent"
@@ -496,6 +505,7 @@
 
                 <!-- 关系 -->
                 <LinearLayout
+                    android:id="@+id/ll_relationship_second"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dip"
@@ -509,17 +519,17 @@
                         android:gravity="center_vertical"
                         android:text="关系"
                         android:textSize="@dimen/main_text_default"/>
-                    <Spinner
+                    <TextView
                         android:id="@+id/loan_relationship_second"
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
                         android:layout_marginRight="15dip"
                         android:hint="与紧急联系人的关系"
                         android:textSize="@dimen/main_text_default"
+                        android:gravity="center_vertical"
                         android:textColorHint="@color/txt_gray"
-                        android:padding="0dip"
                         android:singleLine="true"
-                        android:background="@drawable/edittext_none_background"/>
+                        android:padding="5dip" />
                 </LinearLayout>
                 <ImageView
                     android:layout_width="match_parent"
