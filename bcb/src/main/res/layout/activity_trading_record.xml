@@ -1,36 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
+    android:background="@color/background_gray"
     android:orientation="vertical" >
-    <!-- 投资总额 -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/red"
-        android:orientation="vertical" >
-        <TextView
-            android:id="@+id/TotalAmount"
-            android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="30dp"
+        android:background="@color/red">
+        <!-- 投资总额 -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="15dp"
-            android:text="0 元"
-            android:textColor="@color/white"
-            android:textSize="30sp" />
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="累计总额(元)"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/TotalAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:text="0.00"
+                android:textColor="@color/white"
+                android:textSize="25sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="@color/white"/>
+
+        <!-- 累计收益 -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="20dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="7dp"
-            android:layout_marginBottom="10dip"
-            android:text="累计投资总额"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="累计收益(元)"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/income"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0.00"
+                android:paddingTop="10dp"
+                android:textColor="@color/white"
+                android:textSize="25sp" />
+        </LinearLayout>
+
     </LinearLayout>
+
+
 
     <com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout
         android:id="@+id/refresh_view"
@@ -53,10 +93,9 @@
                     android:layout_height="wrap_content"
                     android:cacheColorHint="@android:color/black"
                     android:divider="@color/background"
-                    android:dividerHeight="5dp"
+                    android:dividerHeight="1dp"
                     android:fastScrollEnabled="false"
                     android:listSelector="@drawable/list_selector"
-                    android:padding="10dp"
                     android:scrollbars="none"
                     android:visibility="gone"/>
                 <LinearLayout

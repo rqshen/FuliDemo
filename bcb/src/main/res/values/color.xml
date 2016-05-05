@@ -4,10 +4,14 @@
     <color name="txt_green">#93c52e</color>
     <!-- 背景色 -->
     <color name="background">#F0F0F0</color>
+    <!-- 背景灰 -->
+    <color name="background_gray">#EFEFEF</color>
     <!-- 文本黑色 -->
     <color name="txt_black">#262626</color>
     <!-- 文本灰色 -->
     <color name="txt_gray">#95959D</color>
+    <!-- 时间文本灰色 -->
+    <color name="date_txt_gray">#989898</color>
     <!-- 白色 -->
     <color name="white">#FFFFFF</color>
     <!-- 黑色 -->

@@ -138,7 +138,7 @@ public class Activity_Trading_Record extends Activity_Base {
                         JSONObject obj = PackageUtil.getResultObject(response);
                         String totlaAmount = obj.getString("TotalAmount");
                         if (!TextUtils.isEmpty(totlaAmount)) {
-                            TotalAmount.setText(totlaAmount + " 元");
+                            TotalAmount.setText(totlaAmount);
                         }
                         TradingRecordListBean mTradingRecordList = null;
                         //判断JSON对象是否为空

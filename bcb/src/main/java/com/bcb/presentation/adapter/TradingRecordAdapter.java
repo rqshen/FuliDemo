@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bcb.R;
@@ -46,14 +47,24 @@ public class TradingRecordAdapter extends BaseAdapter {
 		if (null == view) {
 			view = View.inflate(ctx, R.layout.item_trading_record, null);
 			mHolder = new Holder();
+			mHolder.layout_date = (LinearLayout) view.findViewById(R.id.layout_date);
+			mHolder.value_date = (TextView) view.findViewById(R.id.value_date);
 			mHolder.name = (TextView) view.findViewById(R.id.name);
 			mHolder.status = (TextView) view.findViewById(R.id.status);
 			mHolder.amount = (TextView) view.findViewById(R.id.amount);
-			mHolder.time = (TextView) view.findViewById(R.id.time);		
 			view.setTag(mHolder);
 		} else {
 			mHolder = (Holder) view.getTag();
 		}
+		//设置时间
+		mHolder.value_date.setText(data.get(pos).getPayTime().substring(0,10));
+		//如果时间相同则隐藏掉时间，否则显示时间
+		if (pos > 0 && data.get(pos).getPayTime().substring(0,10).equals(data.get(pos - 1).getPayTime().substring(0,10))) {
+			mHolder.layout_date.setVisibility(View.GONE);
+		} else {
+			mHolder.layout_date.setVisibility(View.VISIBLE);
+		}
+
 		//判断是否为空，包括 null 、"null"、""
 		if (data.get(pos).getPackageName() != null) {
 			mHolder.name.setText((data.get(pos).getPackageName().equalsIgnoreCase("null") || data.get(pos).getPackageName().equalsIgnoreCase(""))
@@ -72,20 +83,15 @@ public class TradingRecordAdapter extends BaseAdapter {
 
 		mHolder.amount.setText(String.format("%.2f", data.get(pos).getOrderAmount()) + "元");
 
-		//判断是否为空，包括 null 、"null"、""
-		if (data.get(pos).getPayTime() != null) {
-			mHolder.time.setText((data.get(pos).getPayTime().equalsIgnoreCase("null") || data.get(pos).getPayTime().equalsIgnoreCase(""))
-					? "" : data.get(pos).getPayTime());
-		}
-
 		return view;
 	}
 
-	class Holder {				
+	class Holder {
+		LinearLayout layout_date;   //时间分组
+		TextView value_date;    //时间
 		TextView name;
 		TextView status;
 		TextView amount;
-		TextView time;	
 	}
 
 }
