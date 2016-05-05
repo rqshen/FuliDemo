@@ -6,9 +6,6 @@
     android:background="@color/background"
     android:descendantFocusability="blocksDescendants"
     android:orientation="vertical" >
-    <include
-        android:id="@+id/layout_navigation"
-        layout="@layout/frag_base"/>
 
     <FrameLayout
         android:id="@+id/layout_frame"
@@ -38,167 +35,98 @@
                         <com.bcb.presentation.view.custom.ImageCycleView.ImageCycleView
                             android:id="@+id/ad_view"
                             android:layout_width="match_parent"
-                            android:layout_height="150dip" />
+                            android:layout_height="180dip" />
                     </LinearLayout>
-                    <!-- 一分钟了解福利金融 -->
+                    <!-- 三个按钮 -->
                     <LinearLayout
                         android:id="@+id/tips_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_size_large"
+                        android:paddingTop="15dp"
+                        android:paddingBottom="15dp"
                         android:background="@android:color/white"
-                        android:orientation="vertical" >
+                        android:orientation="horizontal" >
 
-                        <TableLayout
-                            android:layout_width="fill_parent"
-                            android:layout_height="wrap_content" >
-
-                            <TableRow
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:paddingTop="15dip" >
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:gravity="center_horizontal"
-                                    android:orientation="horizontal" >
-
-                                    <LinearLayout
-                                        android:id="@+id/Search_food"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:gravity="center_horizontal"
-                                        android:orientation="vertical" >
-
-                                        <ImageView
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:src="@drawable/high_yield" />
-
-                                        <TextView
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_marginTop="@dimen/margin_size_large"
-                                            android:text="超高收益"
-                                            android:textColor="@color/txt_gray"
-                                            android:textSize="@dimen/main_text_default" />
-                                    </LinearLayout>
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:gravity="center_horizontal"
-                                    android:orientation="horizontal" >
-
-                                    <LinearLayout
-                                        android:id="@+id/Search_outing"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:gravity="center_horizontal"
-                                        android:orientation="vertical" >
-
-                                        <ImageView
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:src="@drawable/dependable" />
-
-                                        <TextView
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_marginTop="@dimen/margin_size_large"
-                                            android:text="安全可信"
-                                            android:textColor="@color/txt_gray"
-                                            android:textSize="@dimen/main_text_default" />
-                                    </LinearLayout>
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:gravity="center_horizontal"
-                                    android:orientation="horizontal" >
-
-                                    <LinearLayout
-                                        android:id="@+id/Search_hotel"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:gravity="center_horizontal"
-                                        android:orientation="vertical" >
-
-                                        <ImageView
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:src="@drawable/assume" />
-
-                                        <TextView
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_marginTop="@dimen/margin_size_large"
-                                            android:text="资金安全"
-                                            android:textColor="@color/txt_gray"
-                                            android:textSize="@dimen/main_text_default" />
-                                    </LinearLayout>
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:gravity="center_horizontal"
-                                    android:orientation="horizontal" >
-
-                                    <LinearLayout
-                                        android:id="@+id/Search_chinsesnack"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:gravity="center_horizontal"
-                                        android:orientation="vertical" >
-
-                                        <ImageView
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:src="@drawable/breakeven" />
-
-                                        <TextView
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_marginTop="@dimen/margin_size_large"
-                                            android:text="本息保障"
-                                            android:textColor="@color/txt_gray"
-                                            android:textSize="@dimen/main_text_default" />
-                                    </LinearLayout>
-                                </LinearLayout>
-                            </TableRow>
-                        </TableLayout>
-
-                        <FrameLayout
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:id="@+id/ll_daily_welfare"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="15dp"
-                            android:layout_marginBottom="15dp"
-                            android:layout_gravity="center_horizontal">
+                            android:gravity="center"
+                            android:orientation="vertical">
+
                             <ImageView
-                                android:layout_width="10dip"
-                                android:layout_height="10dip"
-                                android:background="@drawable/circle_red"
-                                android:layout_marginLeft="167dip"/>
-                            <Button
-                                android:id="@+id/button_introduction"
-                                android:layout_width="180dip"
-                                android:layout_height="40dip"
-                                android:paddingLeft="20dip"
-                                android:paddingRight="20dip"
-                                android:background="@drawable/button_stroke_red_main"
-                                android:gravity="center"
-                                android:text="一分钟了解福利金融"
-                                android:textColor="@color/red"
+                                android:layout_width="60dp"
+                                android:layout_height="60dp"
+                                android:src="@drawable/ico_welfare" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/margin_size_default"
+                                android:text="每日福利"
+                                android:textColor="@color/txt_gray"
                                 android:textSize="@dimen/main_text_default" />
-                        </FrameLayout>
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/divider"/>
+
+                        <LinearLayout
+                            android:id="@+id/ll_wealth_college"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="60dp"
+                                android:layout_height="60dp"
+                                android:src="@drawable/ico_college" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/margin_size_default"
+                                android:text="理财学院"
+                                android:textColor="@color/txt_gray"
+                                android:textSize="@dimen/main_text_default" />
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/divider"/>
+
+                        <LinearLayout
+                            android:id="@+id/ll_security"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="60dp"
+                                android:layout_height="60dp"
+                                android:src="@drawable/ico_safe" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/margin_size_default"
+                                android:text="安全保障"
+                                android:textColor="@color/txt_gray"
+                                android:textSize="@dimen/main_text_default" />
+
+                        </LinearLayout>
+
                     </LinearLayout>
 
                     <!-- 精品项目标题 -->

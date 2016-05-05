@@ -20,34 +20,23 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bcb.R;
+import com.bcb.common.app.App;
 import com.bcb.common.net.BcbJsonRequest;
 import com.bcb.common.net.BcbNetworkManager;
 import com.bcb.common.net.BcbRemoteImage;
 import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
-import com.bcb.presentation.adapter.AnnounceAdapter;
-import com.bcb.presentation.adapter.ExpiredAdapter;
-import com.bcb.presentation.adapter.ProductAdapter;
-import com.bcb.common.app.App;
-import com.bcb.R;
+import com.bcb.common.net.UrlsOne;
 import com.bcb.data.bean.AdPhotoListBean;
 import com.bcb.data.bean.AnnounceRecordsBean;
 import com.bcb.data.bean.BannerInfo;
 import com.bcb.data.bean.ExpiredRecordsBean;
 import com.bcb.data.bean.MainListBean;
 import com.bcb.data.bean.ProductRecordsBean;
-import com.bcb.common.net.UrlsOne;
-import com.bcb.presentation.view.activity.Activity_Browser;
-import com.bcb.presentation.view.activity.Activity_ExpiredProject_Introduction;
-import com.bcb.presentation.view.activity.Activity_Login;
-import com.bcb.presentation.view.activity.Activity_NormalProject_Introduction;
-import com.bcb.presentation.view.activity.Activity_Login_Introduction;
-import com.bcb.presentation.view.activity.Activity_Main;
-import com.bcb.presentation.view.activity.Activity_WebView;
 import com.bcb.data.util.HttpUtils;
 import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MyListView;
@@ -55,6 +44,14 @@ import com.bcb.data.util.PackageUtil;
 import com.bcb.data.util.ToastUtil;
 import com.bcb.data.util.TokenUtil;
 import com.bcb.data.util.UmengUtil;
+import com.bcb.presentation.adapter.AnnounceAdapter;
+import com.bcb.presentation.adapter.ExpiredAdapter;
+import com.bcb.presentation.adapter.ProductAdapter;
+import com.bcb.presentation.view.activity.Activity_ExpiredProject_Introduction;
+import com.bcb.presentation.view.activity.Activity_Login_Introduction;
+import com.bcb.presentation.view.activity.Activity_Main;
+import com.bcb.presentation.view.activity.Activity_NormalProject_Introduction;
+import com.bcb.presentation.view.activity.Activity_WebView;
 import com.bcb.presentation.view.custom.CustomDialog.DialogWidget;
 import com.bcb.presentation.view.custom.CustomDialog.RegisterSuccessDialogView;
 import com.bcb.presentation.view.custom.ImageCycleView.ImageCycleView;
@@ -64,14 +61,14 @@ import com.bcb.presentation.view.custom.PullableView.PullableScrollView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Frag_Main extends Frag_Base {
+public class Frag_Main extends Frag_Base implements View.OnClickListener{
 	private static final String TAG = "Frag_Main";
 
-    //标题和刷新控件
-	private TextView title_text, right_text;
+    //刷新控件
     private PullToRefreshLayout refreshLayout;
     private PullableScrollView layout_scrollview;
 
@@ -109,8 +106,6 @@ public class Frag_Main extends Frag_Base {
 
 	private Context ctx;
 	
-	private String titleName;
-
     //浮标按钮
     private int screenWidth;
     private int screenHeight;
@@ -120,9 +115,6 @@ public class Frag_Main extends Frag_Base {
     private int lastX;
     private int lastY;
     private Button button_floating;
-
-    //一分钟了解福利金融
-    private Button button_introduction;
 
     //广播
     private Receiver mReceiver;
@@ -157,7 +149,6 @@ public class Frag_Main extends Frag_Base {
         return inflater.inflate(R.layout.frag_main, container, false);
 	}
 
-
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         this.ctx = view.getContext();
@@ -165,7 +156,7 @@ public class Frag_Main extends Frag_Base {
         bottomHeight = ((Activity_Main)getActivity()).getBottomHeight();
         //仅保留下拉刷新，隐藏上拉加载更多
         //隐藏加载更多
-        ((RelativeLayout)view.findViewById(R.id.loadmore_view)).setVisibility(View.GONE);
+        (view.findViewById(R.id.loadmore_view)).setVisibility(View.GONE);
         refreshLayout = ((PullToRefreshLayout) view.findViewById(R.id.refresh_view));
         //不显示刷新结果
         refreshLayout.setRefreshResultView(false);
@@ -191,28 +182,13 @@ public class Frag_Main extends Frag_Base {
 
         //判断设备是否Android4.4以上，如果是，则表示使用了浸入式状态栏，需要设置状态栏的位置
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            ((LinearLayout) view.findViewById(R.id.layout_topbar)).setVisibility(View.VISIBLE);
+            LinearLayout layout_topbar = (LinearLayout) view.findViewById(R.id.layout_topbar);
+            if (null != layout_topbar){
+                layout_topbar.setVisibility(View.VISIBLE);
+            }
+
         }
 
-        //设置标题
-        titleName = "福利金融";
-        title_text = (TextView) view.findViewById(R.id.title_text);
-        title_text.setText(titleName);
-        //右标题
-        right_text = (TextView) view.findViewById(R.id.right_text);
-        right_text.setText("登录");
-        right_text.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Activity_Login.launche(ctx);
-            }
-        });
-        //如果已经登陆则显示否则隐藏
-        if (App.saveUserInfo.getAccess_Token() != null) {
-            right_text.setVisibility(View.GONE);
-        } else {
-            right_text.setVisibility(View.VISIBLE);
-        }
         //banner
         mImageCycleView = (ImageCycleView) view.findViewById(R.id.ad_view);
         mAdPhotoListBean = new AdPhotoListBean();
@@ -221,7 +197,7 @@ public class Frag_Main extends Frag_Base {
         DisplayMetrics dm = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(dm);
         int mScreenWidth = dm.widthPixels;// 获取屏幕分辨率宽度
-        int mScreenHeight = mScreenWidth * 232 / 640;
+        int mScreenHeight = mScreenWidth * 360 / 640;
         ViewGroup.LayoutParams lp = mImageCycleView.getLayoutParams();
         lp.width = mScreenWidth;
         lp.height = mScreenHeight;
@@ -229,6 +205,11 @@ public class Frag_Main extends Frag_Base {
 
         //设置banner的placeholder图片
         mImageCycleView.setBackgroundResource(R.drawable.banner_placeholder);
+
+        //三个按钮:每日福利、理财学院、安全保障
+        view.findViewById(R.id.ll_daily_welfare).setOnClickListener(this);
+        view.findViewById(R.id.ll_wealth_college).setOnClickListener(this);
+        view.findViewById(R.id.ll_security).setOnClickListener(this);
 
         //体验标
         expiredRecordsBeans = new ArrayList<>();
@@ -370,14 +351,14 @@ public class Frag_Main extends Frag_Base {
         });
 
         // 一分钟了解福利金融
-        button_introduction = (Button) view.findViewById(R.id.button_introduction);
-        button_introduction.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                UmengUtil.eventById(ctx, R.string.self_about);
-                Activity_Browser.launche(ctx, "一分钟了解福利金融", "http://wap.flh001.com/static/1minute/index.html");
-            }
-        });
+//        button_introduction = (Button) view.findViewById(R.id.button_introduction);
+//        button_introduction.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                UmengUtil.eventById(ctx, R.string.self_about);
+//                Activity_Browser.launche(ctx, "一分钟了解福利金融", "http://wap.flh001.com/static/1minute/index.html");
+//            }
+//        });
 
     }
 
@@ -591,7 +572,6 @@ public class Frag_Main extends Frag_Base {
         requestQueue.add(jsonRequest);
     }
 
-
     //设置体验标数据
     private void setupExpiredView(MainListBean mainListBean) {
         //清空原来的数据
@@ -687,6 +667,19 @@ public class Frag_Main extends Frag_Base {
         boutiqueListview.setVisibility(visible);
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.ll_daily_welfare://每日福利
+                break;
+            case R.id.ll_wealth_college://理财学院
+                break;
+            case R.id.ll_security://安全保障
+                Activity_WebView.launche(ctx,"安全保障",UrlsOne.SecureWebView);
+                break;
+        }
+    }
+
     //体验标的点击事件
     class expiredItemClickListener implements AdapterView.OnItemClickListener {
         public void onItemClick(AdapterView<?> arg0, View view, int position,long arg3) {
@@ -740,7 +733,6 @@ public class Frag_Main extends Frag_Base {
                 }
                 //隐藏注册有礼
                 button_floating.setVisibility(View.GONE);
-                right_text.setVisibility(View.GONE);
                 showItemVisible();
             } else if (intent.getAction().equals("com.bcb.register.success")) {
                 showRegisterSuccessTips();
@@ -775,9 +767,6 @@ public class Frag_Main extends Frag_Base {
         if (App.saveUserInfo.getAccess_Token() == null ) {
             if (button_floating != null) {
                 button_floating.setVisibility(View.VISIBLE);
-            }
-            if (right_text != null) {
-                right_text.setVisibility(View.VISIBLE);
             }
         }
         showItemVisible();

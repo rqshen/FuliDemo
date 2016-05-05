@@ -41,24 +41,7 @@
             <TextView
                 android:id="@+id/txt_product"
                 style="@style/txt_main_bottom"
-                android:text="产品列表" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/layout_secure"
-            style="@style/layout_main_bottom"
-            android:layout_gravity="center"
-            android:onClick="onClick" >
-
-            <ImageView
-                android:id="@+id/img_secure"
-                style="@style/txt_mainpage_bottom"
-                android:src="@drawable/main_secure_default" />
-
-            <TextView
-                android:id="@+id/txt_secure"
-                style="@style/txt_main_bottom"
-                android:text="安全保障" />
+                android:text="产品" />
         </RelativeLayout>
 
         <RelativeLayout

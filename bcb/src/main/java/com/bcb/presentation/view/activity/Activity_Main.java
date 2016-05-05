@@ -13,35 +13,29 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.bcb.common.app.App;
 import com.bcb.R;
-import com.bcb.common.net.UrlsOne;
+import com.bcb.common.app.App;
+import com.bcb.data.util.UmengUtil;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
 import com.bcb.presentation.view.fragment.Frag_Main;
 import com.bcb.presentation.view.fragment.Frag_Product;
-import com.bcb.presentation.view.fragment.Frag_Secure;
 import com.bcb.presentation.view.fragment.Frag_User;
-import com.bcb.data.util.ToastUtil;
-import com.bcb.data.util.UmengUtil;
 
 public class Activity_Main extends Activity_Base_Fragment {
 
     //fragment管理器
 	private FragmentManager fragmentManager;
 	private Fragment fragCurrent;
-    //4个Fragment页面
+    //3个Fragment页面
 	private Frag_Main fragMain;
 	private Frag_Product fragProduct;
-	private Frag_Secure fragSecure;
 	private Frag_User fragUser;
     //4个按钮
 	private ImageView img_mainpage;
 	private ImageView img_product;
-	private ImageView img_secure;
 	private ImageView img_user;
 	private TextView txt_mainpage;
 	private TextView txt_product;
-	private TextView txt_secure;
 	private TextView txt_user;
 
 	private Receiver mReceiver;
@@ -63,11 +57,9 @@ public class Activity_Main extends Activity_Base_Fragment {
 	private void init() {
 		img_mainpage = (ImageView) findViewById(R.id.img_mainpage);	
 		img_product = (ImageView) findViewById(R.id.img_product);
-		img_secure = (ImageView) findViewById(R.id.img_secure);
 		img_user = (ImageView) findViewById(R.id.img_user);
 		txt_mainpage = (TextView) findViewById(R.id.txt_mainpage);
 		txt_product = (TextView) findViewById(R.id.txt_product);
-		txt_secure = (TextView) findViewById(R.id.txt_secure);
 		txt_user = (TextView) findViewById(R.id.txt_user);
         bottom = (LinearLayout) findViewById(R.id.bottom);
 		addFirstFragment();
@@ -85,11 +77,6 @@ public class Activity_Main extends Activity_Base_Fragment {
 			setFragProduct();
 			break;
 			
-		case R.id.layout_secure:
-			UmengUtil.eventById(Activity_Main.this, R.string.safe_c);
-			setFragSecure();
-			break;
-
 		case R.id.layout_user:
 			UmengUtil.eventById(Activity_Main.this,R.string.self_c);
 			setFragUser();
@@ -138,16 +125,6 @@ public class Activity_Main extends Activity_Base_Fragment {
 		}
 		switchFragment(fragCurrent, fragProduct);
 	}
-	
-	private void setFragSecure() {
-		resetstatus(txt_secure);
-		img_secure.setImageResource(R.drawable.main_secure_select);
-		//判断是否为空或者是否已经添加
-		if (fragSecure == null || !fragSecure.isAdded()) {
-			fragSecure = new Frag_Secure(Activity_Main.this, true, "安全保障", UrlsOne.SecureWebView);
-		}
-		switchFragment(fragCurrent, fragSecure);
-	}
 
 	private void setFragUser() {
         resetstatus(txt_user);
@@ -175,11 +152,9 @@ public class Activity_Main extends Activity_Base_Fragment {
 	private void resetstatus(TextView select) {
 		img_mainpage.setImageResource(R.drawable.main_home_page_default);
 		img_product.setImageResource(R.drawable.main_product_default);
-		img_secure.setImageResource(R.drawable.main_secure_default);
 		img_user.setImageResource(R.drawable.main_my_default);
 		txt_mainpage.setTextColor(getResources().getColor(R.color.txt_gray));
 		txt_product.setTextColor(getResources().getColor(R.color.txt_gray));
-		txt_secure.setTextColor(getResources().getColor(R.color.txt_gray));
 		txt_user.setTextColor(getResources().getColor(R.color.txt_gray));
 		select.setTextColor(getResources().getColor(R.color.red));
 	}

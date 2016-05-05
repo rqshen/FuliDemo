@@ -14,15 +14,15 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp"
+            android:paddingBottom="12dp"
+            android:paddingTop="12dp"
             android:gravity="center_vertical">
             <TextView
                 android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="15dp"
                 android:maxWidth="@dimen/item_text_max_width"
                 android:singleLine="true"
                 android:text="涨薪宝201510121028-第3期"
@@ -41,6 +41,8 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/margin_size_default"
                     android:background="@drawable/main_item_stroke_green"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="15dp"
                     android:padding="3dp"
                     android:singleLine="true"
                     android:text="本息保障"
@@ -71,47 +73,83 @@
             <LinearLayout
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
-                android:layout_weight="1.7"
+                android:layout_weight="1"
                 android:orientation="horizontal">
 
                 <LinearLayout
-                    android:layout_width="0dip"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1.3"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:id="@+id/rate"
+                    android:layout_marginLeft="20dip"
+                    android:orientation="vertical">
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dip"
-                        android:textStyle="normal"
-                        android:text="8"
-                        android:textColor="@color/item_color"
-                        android:textSize="@dimen/item_text_large" />
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/rate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textStyle="normal"
+                            android:text="8.0"
+                            android:textColor="@color/item_color"
+                            android:textSize="@dimen/item_text_xlarge" />
+                        <TextView
+                            android:id="@+id/add"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/item_color"
+                            android:layout_marginLeft="5dp"
+                            android:text="+0.0"
+                            android:textSize="@dimen/item_text_small"/>
+                    </LinearLayout>
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:textColor="@color/item_color"
+                        android:textColor="@color/txt_gray"
                         android:textSize="@dimen/item_text_small"
-                        android:text="%"/>
+                        android:text="年化收益率(%)"/>
                 </LinearLayout>
 
+            </LinearLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/linegray" />
+
+            <LinearLayout
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="left"
+                android:layout_marginLeft="15dp"
+                android:orientation="vertical">
+
                 <LinearLayout
-                    android:layout_width="0dip"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:orientation="horizontal"
                     android:layout_gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/txt_gray"
+                        android:textSize="@dimen/item_text_small"
+                        android:textStyle="normal"
+                        android:text="期限"/>
 
                     <TextView
                         android:id="@+id/duration"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textStyle="normal"
-                        android:text="90"
+                        android:layout_marginLeft="12dp"
+                        android:text="00"
                         android:textColor="@color/item_text_color"
-                        android:textSize="@dimen/item_text_large" />
+                        android:textSize="@dimen/item_text_small" />
+
                     <TextView
                         android:id="@+id/duration_description"
                         android:layout_width="wrap_content"
@@ -121,14 +159,7 @@
                         android:textStyle="normal"
                         android:text="天"/>
                 </LinearLayout>
-            </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="0dip"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.3"
-                android:gravity="left"
-                android:orientation="vertical">
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
