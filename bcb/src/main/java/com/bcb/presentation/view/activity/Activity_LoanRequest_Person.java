@@ -1,6 +1,5 @@
 package com.bcb.presentation.view.activity;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,54 +9,54 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
-import com.bcb.common.app.App;
+import android.widget.TextView;
+
 import com.bcb.R;
+import com.bcb.common.app.App;
 import com.bcb.common.net.BcbJsonRequest;
 import com.bcb.common.net.BcbNetworkManager;
 import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
-import com.bcb.data.bean.loan.MaritalStatusListbean;
-import com.bcb.data.bean.loan.PersonInfoBean;
 import com.bcb.common.net.UrlsOne;
+import com.bcb.data.bean.loan.PersonInfoBean;
 import com.bcb.data.util.LoanPersonalConfigUtil;
-import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.RegexManager;
+import com.bcb.data.util.SpinnerWheelUtil;
 import com.bcb.data.util.ToastUtil;
 import com.bcb.data.util.TokenUtil;
 import com.google.gson.Gson;
+
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by cain on 16/1/5.
  */
-public class Activity_LoanRequest_Person extends Activity_Base {
+public class Activity_LoanRequest_Person extends Activity_Base implements View.OnClickListener{
 
     //婚姻状况
-    private Spinner loan_marital_status;
+    private TextView loan_marital_status;
     private List<String> maritalList;
-    private ArrayAdapter<String> maritalAdapter;
     private int maritalStatus = 1;
 
     //孩子情况，从0开始算起的
-    private Spinner loan_children;
+    private TextView loan_children;
     private List<String> childrenList;
-    private ArrayAdapter<String> childrenAdapter;
     private int childrenStatus = 0;
 
     //住房状况
-    private Spinner loan_house_situation;
+    private TextView loan_house_situation;
     private List<String> houseList;
-    private ArrayAdapter<String> houseAdapter;
     private int houseStatus = 1;
     //文化程度
-    private Spinner loan_literacy_level;
+    private TextView loan_literacy_level;
     private List<String> literacyList;
-    private ArrayAdapter<String> literacyAdapter;
     private int literacyStatus = 1;
     //毕业院校
     private EditText loan_graduating_academy;
@@ -81,22 +80,22 @@ public class Activity_LoanRequest_Person extends Activity_Base {
     private List<String> relationList;
     //紧急联系人1
     private EditText loan_emergency_case;
-    //紧急联系人1 适配器
-    private Spinner loan_relationship;
+    //紧急联系人1
+    private TextView loan_relationship;
     //紧急联系人1电话
     private EditText loan_emergency_phone;
     ///紧急联系人1 关系
     private String relationStatus1 = "";
-    private ArrayAdapter<String> relationAdapter1;
+    private int relStatus1;
     //紧急联系人2
     private EditText loan_emergency_case_second;
     //紧急联系人2 适配器
-    private Spinner loan_relationship_second;
+    private TextView loan_relationship_second;
     //紧急联系人2电话
     private EditText loan_emergency_phone_second;
     //紧急联系人2 关系
     private String relationStatus2 = "";
-    private ArrayAdapter<String> relationAdapter2;
+    private int relStatus2;
     //转圈提示
     ProgressDialog progressDialog;
     //个人信息
@@ -122,14 +121,24 @@ public class Activity_LoanRequest_Person extends Activity_Base {
      * 初始化个人信息
      */
     private void setupPersonalView() {
+
+        //婚姻/孩子/住房/文化程度点击绑定
+        findViewById(R.id.ll_marital).setOnClickListener(this);
+        findViewById(R.id.ll_children).setOnClickListener(this);
+        findViewById(R.id.ll_house).setOnClickListener(this);
+        findViewById(R.id.ll_literacy).setOnClickListener(this);
+        //紧急联系人1/2点击绑定
+        findViewById(R.id.ll_relationship).setOnClickListener(this);
+        findViewById(R.id.ll_relationship_second).setOnClickListener(this);
+
         //婚姻状况
-        loan_marital_status = (Spinner) findViewById(R.id.loan_marital_status);
+        loan_marital_status = (TextView) findViewById(R.id.loan_marital_status);
         //孩子情况
-        loan_children = (Spinner) findViewById(R.id.loan_children);
+        loan_children = (TextView) findViewById(R.id.loan_children);
         //住房状况
-        loan_house_situation = (Spinner) findViewById(R.id.loan_house_situation);
+        loan_house_situation = (TextView) findViewById(R.id.loan_house_situation);
         //文化程度
-        loan_literacy_level = (Spinner) findViewById(R.id.loan_literacy_level);
+        loan_literacy_level = (TextView) findViewById(R.id.loan_literacy_level);
         //毕业院校
         loan_graduating_academy = (EditText) findViewById(R.id.loan_graduating_academy);
         //身份证地址
@@ -142,14 +151,14 @@ public class Activity_LoanRequest_Person extends Activity_Base {
         //紧急联系人1
         loan_emergency_case = (EditText) findViewById(R.id.loan_emergency_case);
         //紧急联系人1关系
-        loan_relationship = (Spinner) findViewById(R.id.loan_relationship);
+        loan_relationship = (TextView) findViewById(R.id.loan_relationship);
         //紧急联系人1电话
         loan_emergency_phone = (EditText) findViewById(R.id.loan_emergency_phone);
 
         //紧急联系人2
         loan_emergency_case_second = (EditText) findViewById(R.id.loan_emergency_case_second);
         //紧急联系人2关系
-        loan_relationship_second = (Spinner) findViewById(R.id.loan_relationship_second);
+        loan_relationship_second = (TextView) findViewById(R.id.loan_relationship_second);
         //紧急联系人2电话
         loan_emergency_phone_second = (EditText) findViewById(R.id.loan_emergency_phone_second);
 
@@ -263,24 +272,7 @@ public class Activity_LoanRequest_Person extends Activity_Base {
         for (int i = 0; i < personInfoBean.MaritalStatusList.size(); i++) {
             maritalList.add(i, personInfoBean.MaritalStatusList.get(i).Name);
         }
-        //适配器
-        maritalAdapter = new ArrayAdapter<String>(this, R.layout.simple_spinner_item, maritalList);
-        //设置下拉列表
-        maritalAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
-        //绑定适配器
-        loan_marital_status.setAdapter(maritalAdapter);
-        //设置点击Item事件
-        loan_marital_status.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                maritalStatus = i + 1;
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
     }
 
     /**
@@ -291,24 +283,6 @@ public class Activity_LoanRequest_Person extends Activity_Base {
         for (int i = 0; i < personInfoBean.ChildrenStatusList.size(); i++) {
             childrenList.add(i, personInfoBean.ChildrenStatusList.get(i).Name);
         }
-        //适配器
-        childrenAdapter = new ArrayAdapter<String>(this, R.layout.simple_spinner_item, childrenList);
-        //设置下拉列表
-        childrenAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
-        //绑定适配器
-        loan_children.setAdapter(childrenAdapter);
-        //设置点击事件
-        loan_children.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                childrenStatus = position;
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
     }
     /**
      * 设置住房状况列表
@@ -318,20 +292,6 @@ public class Activity_LoanRequest_Person extends Activity_Base {
         for (int i = 0; i < personInfoBean.HousingStatusList.size(); i++) {
             houseList.add(i, personInfoBean.HousingStatusList.get(i).Name);
         }
-        houseAdapter = new ArrayAdapter<String>(this, R.layout.simple_spinner_item, houseList);
-        houseAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
-        loan_house_situation.setAdapter(houseAdapter);
-        //设置点击Item事件
-        loan_house_situation.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                houseStatus = i + 1;
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-            }
-        });
     }
 
     /**
@@ -342,20 +302,7 @@ public class Activity_LoanRequest_Person extends Activity_Base {
         for (int i = 0; i < personInfoBean.EducationLevelList.size(); i++) {
             literacyList.add(i, personInfoBean.EducationLevelList.get(i).Name);
         }
-        literacyAdapter = new ArrayAdapter<String>(this, R.layout.simple_spinner_item, literacyList);
-        literacyAdapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
-        loan_literacy_level.setAdapter(literacyAdapter);
-        loan_literacy_level.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                literacyStatus = i + 1;
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
     }
 
     /**
@@ -367,36 +314,7 @@ public class Activity_LoanRequest_Person extends Activity_Base {
             relationList.add(i, personInfoBean.RelationshipList.get(i).Name);
         }
         relationStatus1 = relationList.get(0);
-        relationAdapter1 = new ArrayAdapter<String>(this, R.layout.simple_spinner_item, relationList);
-        relationAdapter1.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
-        loan_relationship.setAdapter(relationAdapter1);
-        loan_relationship.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                relationStatus1 = relationList.get(i).toString();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-            }
-        });
-
         relationStatus2 = relationList.get(0);
-        relationAdapter2 = new ArrayAdapter<String>(this, R.layout.simple_spinner_item, relationList);
-        relationAdapter2.setDropDownViewResource(R.layout.simple_spinner_dropdown_item);
-        loan_relationship_second.setAdapter(relationAdapter2);
-        loan_relationship_second.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                relationStatus2 = relationList.get(i).toString();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
     }
 
     /**
@@ -405,24 +323,24 @@ public class Activity_LoanRequest_Person extends Activity_Base {
     private void  setupPersonalData() {
         //婚姻状况
         if (PersonInfo.MaritalStatus > 0) {
-            loan_marital_status.setSelection(PersonInfo.MaritalStatus - 1);
+            loan_marital_status.setText(maritalList.get(PersonInfo.MaritalStatus - 1));
         } else {
-            loan_marital_status.setSelection(0);
+            loan_marital_status.setText(maritalList.get(0));
         }
         //孩子情况
-        loan_children.setSelection(PersonInfo.ChildrenStatus);
+        loan_children.setText(childrenList.get(PersonInfo.ChildrenStatus));
         //住房状况
         if (PersonInfo.HousingStatus > 0){
-            loan_house_situation.setSelection(PersonInfo.HousingStatus - 1);
+            loan_house_situation.setText(houseList.get(PersonInfo.HousingStatus - 1));
         } else {
-            loan_house_situation.setSelection(0);
+            loan_house_situation.setText(houseList.get(0));
         }
 
         //文化程度
         if (PersonInfo.EducationLevel > 0) {
-            loan_literacy_level.setSelection(PersonInfo.EducationLevel - 1);
+            loan_literacy_level.setText(literacyList.get(PersonInfo.EducationLevel - 1));
         } else {
-            loan_literacy_level.setSelection(0);
+            loan_literacy_level.setText(literacyList.get(0));
         }
         //毕业院校
         if (PersonInfo.GraduateSchool != null && !PersonInfo.GraduateSchool.equalsIgnoreCase("null") && !PersonInfo.GraduateSchool.equalsIgnoreCase("")) {
@@ -447,7 +365,8 @@ public class Activity_LoanRequest_Person extends Activity_Base {
         if (PersonInfo.Relationship1 != null && !PersonInfo.Relationship1.equalsIgnoreCase("null") && !PersonInfo.Relationship1.equalsIgnoreCase("")) {
             for (int i = 0; i < relationList.size(); i++) {
                 if (relationList.get(i).equalsIgnoreCase(PersonInfo.Relationship1)) {
-                    loan_relationship.setSelection(i);
+                    loan_relationship.setText(relationList.get(i));
+                    relStatus1 = i;
                     break;
                 }
             }
@@ -467,7 +386,8 @@ public class Activity_LoanRequest_Person extends Activity_Base {
         if (PersonInfo.Relationship2 != null && !PersonInfo.Relationship2.equalsIgnoreCase("null") && !PersonInfo.Relationship2.equalsIgnoreCase("")) {
             for (int i = 0; i < relationList.size(); i++) {
                 if (relationList.get(i).equalsIgnoreCase(PersonInfo.Relationship2)) {
-                    loan_relationship_second.setSelection(i);
+                    loan_relationship_second.setText(relationList.get(i));
+                    relStatus2 = i;
                     break;
                 }
             }
@@ -575,4 +495,71 @@ public class Activity_LoanRequest_Person extends Activity_Base {
         requestQueue.cancelAll(BcbRequestTag.BCB_GET_LOAN_PERSONAL_MESSAGE_REQUEST);
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.ll_children://孩子情况
+                String[] arr1 = childrenList.toArray(new String[childrenList.size()]);
+                SpinnerWheelUtil.getInstance().initSpinnerWheelDialog(this, arr1, childrenStatus, new SpinnerWheelUtil.OnDoneClickListener() {
+                    @Override
+                    public void onClick(int currentItem) {
+                        childrenStatus = currentItem;
+                        loan_children.setText(childrenList.get(currentItem));
+                    }
+                });
+                break;
+            case R.id.ll_house://住房情况
+                String[] arr2 = houseList.toArray(new String[houseList.size()]);
+                SpinnerWheelUtil.getInstance().initSpinnerWheelDialog(this, arr2, houseStatus - 1, new SpinnerWheelUtil.OnDoneClickListener() {
+                    @Override
+                    public void onClick(int currentItem) {
+                        houseStatus = currentItem + 1;
+                        loan_house_situation.setText(houseList.get(currentItem));
+                    }
+                });
+                break;
+            case R.id.ll_marital://婚姻状况
+                String[] arr3 = maritalList.toArray(new String[maritalList.size()]);
+                SpinnerWheelUtil.getInstance().initSpinnerWheelDialog(this, arr3, maritalStatus - 1, new SpinnerWheelUtil.OnDoneClickListener() {
+                    @Override
+                    public void onClick(int currentItem) {
+                        maritalStatus = currentItem + 1;
+                        loan_marital_status.setText(maritalList.get(currentItem));
+                    }
+                });
+                break;
+            case R.id.ll_literacy://文化程度
+                String[] arr4 = literacyList.toArray(new String[literacyList.size()]);
+                SpinnerWheelUtil.getInstance().initSpinnerWheelDialog(this, arr4, literacyStatus - 1, new SpinnerWheelUtil.OnDoneClickListener() {
+                    @Override
+                    public void onClick(int currentItem) {
+                        literacyStatus = currentItem + 1;
+                        loan_literacy_level.setText(literacyList.get(currentItem));
+                    }
+                });
+                break;
+            case R.id.ll_relationship://紧急联系人1
+                String[] arr5 = relationList.toArray(new String[relationList.size()]);
+                SpinnerWheelUtil.getInstance().initSpinnerWheelDialog(this, arr5, relStatus1, new SpinnerWheelUtil.OnDoneClickListener() {
+                    @Override
+                    public void onClick(int currentItem) {
+                        relStatus1 = currentItem;
+                        relationStatus1 = relationList.get(currentItem);
+                        loan_relationship.setText(relationList.get(currentItem));
+                    }
+                });
+                break;
+            case R.id.ll_relationship_second://紧急联系人2
+                String[] arr6 = relationList.toArray(new String[relationList.size()]);
+                SpinnerWheelUtil.getInstance().initSpinnerWheelDialog(this, arr6, relStatus2, new SpinnerWheelUtil.OnDoneClickListener() {
+                    @Override
+                    public void onClick(int currentItem) {
+                        relStatus2 = currentItem;
+                        relationStatus2 = relationList.get(currentItem);
+                        loan_relationship_second.setText(relationList.get(currentItem));
+                    }
+                });
+                break;
+        }
+    }
 }
