@@ -11,8 +11,8 @@
         android:orientation="horizontal"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
-        android:paddingTop="20dp"
-        android:paddingBottom="30dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="20dp"
         android:background="@color/red">
         <!-- 投资总额 -->
         <LinearLayout
@@ -26,16 +26,18 @@
                 android:layout_height="wrap_content"
                 android:text="累计总额(元)"
                 android:textColor="@color/white"
-                android:textSize="20sp" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/TotalAmount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="10dp"
-                android:text="0.00"
+                android:text="00.00"
+                android:singleLine="true"
                 android:textColor="@color/white"
-                android:textSize="25sp" />
+                android:paddingRight="20dp"
+                android:textSize="22sp" />
         </LinearLayout>
 
         <View
@@ -56,21 +58,20 @@
                 android:layout_height="wrap_content"
                 android:text="累计收益(元)"
                 android:textColor="@color/white"
-                android:textSize="20sp" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/income"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0.00"
+                android:text="00.00"
                 android:paddingTop="10dp"
                 android:textColor="@color/white"
-                android:textSize="25sp" />
+                android:singleLine="true"
+                android:textSize="22sp" />
         </LinearLayout>
 
     </LinearLayout>
-
-
 
     <com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout
         android:id="@+id/refresh_view"
@@ -93,7 +94,7 @@
                     android:layout_height="wrap_content"
                     android:cacheColorHint="@android:color/black"
                     android:divider="@color/background"
-                    android:dividerHeight="1dp"
+                    android:dividerHeight="1px"
                     android:fastScrollEnabled="false"
                     android:listSelector="@drawable/list_selector"
                     android:scrollbars="none"
