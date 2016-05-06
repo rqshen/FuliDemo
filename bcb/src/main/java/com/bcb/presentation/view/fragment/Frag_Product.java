@@ -115,7 +115,6 @@ public class Frag_Product extends Frag_Base implements OnClickListener {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             ((LinearLayout) view.findViewById(R.id.layout_topbar)).setVisibility(View.VISIBLE);
         }
-
         //切换公司
         left_text = (TextView) view.findViewById(R.id.left_text);
         left_text.setText("全部公司");

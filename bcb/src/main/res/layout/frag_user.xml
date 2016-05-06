@@ -6,60 +6,7 @@
     android:descendantFocusability="blocksDescendants"
     android:orientation="vertical" >
     <!-- 标题 -->
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/red"
-        android:orientation="vertical">
-        <!-- 填充状态栏的高度 -->
-        <LinearLayout
-            android:id="@+id/layout_topbar"
-            android:layout_width="match_parent"
-            android:layout_height="24dp"
-            android:orientation="horizontal"
-            android:visibility="gone"/>
-        <!-- 标题栏 -->
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/navigation_height">
-            <ImageView
-                android:id="@+id/back_img"
-                style="@style/btn_back"
-                android:visibility="gone"
-                android:layout_alignParentLeft="true" />
-
-            <!-- 标题 -->
-            <TextView
-                android:id="@+id/title_text"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_centerInParent="true"
-                android:gravity="center"
-                android:textColor="@color/white"
-                android:textSize="@dimen/main_text_default"
-                android:text="我"/>
-
-            <!-- 右边的标题 -->
-            <LinearLayout
-                android:id="@+id/layout_right"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginRight="10dip"
-                android:layout_alignParentRight="true"
-                android:gravity="center"
-                android:visibility="visible">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentRight="true"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:text=""
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/main_text_default" />
-            </LinearLayout>
-        </RelativeLayout>
-    </LinearLayout>
+    <include layout="@layout/frag_base" />
     <com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout
         android:id="@+id/refresh_view"
         android:layout_width="match_parent"
