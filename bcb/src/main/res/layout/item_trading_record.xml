@@ -43,7 +43,7 @@
                 android:layout_marginRight="10dip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="物业宝"
+                android:text="XXX"
                 android:textColor="@color/txt_black"
                 android:textSize="@dimen/main_text_default" />
 
@@ -51,8 +51,8 @@
                 android:id="@+id/amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="3000000.00元"
+                android:layout_marginTop="6dp"
+                android:text="0000000.00元"
                 android:textColor="@color/red"
                 android:textSize="@dimen/main_text_xlarge"/>
         </LinearLayout>
@@ -63,13 +63,11 @@
             android:singleLine="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="投标成功"
+            android:text="XXXX"
             android:layout_gravity="center_vertical"
             android:textColor="@color/txt_black"
             android:textSize="@dimen/main_text_large"/>
 
     </LinearLayout>
-
-
 
 </LinearLayout>
