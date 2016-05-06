@@ -6,14 +6,21 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -43,6 +50,8 @@ import com.bcb.presentation.adapter.AnnounceAdapter;
 import com.bcb.presentation.adapter.ExpiredAdapter;
 import com.bcb.presentation.adapter.ProductAdapter;
 import com.bcb.presentation.view.activity.Activity_ExpiredProject_Introduction;
+import com.bcb.presentation.view.activity.Activity_Login_Introduction;
+import com.bcb.presentation.view.activity.Activity_Main;
 import com.bcb.presentation.view.activity.Activity_NormalProject_Introduction;
 import com.bcb.presentation.view.activity.Activity_WebView;
 import com.bcb.presentation.view.custom.CustomDialog.DialogWidget;
@@ -54,6 +63,8 @@ import com.bcb.presentation.view.custom.PullableView.PullableScrollView;
 import android.support.v4.view.PagerAdapter;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -106,6 +117,18 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener{
 
     private BcbRequestQueue requestQueue;
 
+
+    private int screenHeight;
+    private int screenWidth;
+    private int floatButtonBitmapWdith;
+    private int floatButtonBitmapHeight;
+    private int bottomHeight;
+    private float startX;
+    private float startY;
+    private int lastX;
+    private int lastY;
+    private Button button_floating;
+
     public Frag_Main(){
         super();
     }
@@ -121,6 +144,9 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener{
         super.onHiddenChanged(hidden);
         if (!hidden && announceAdapter != null) {
             announceAdapter.notifyDataSetChanged();
+            if (App.saveUserInfo.getAccess_Token() == null && button_floating != null) {
+                button_floating.setVisibility(View.VISIBLE);
+            }
         }
     }
 
@@ -168,7 +194,6 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener{
             }
 
         }
-
         //三个按钮:每日福利、理财学院、安全保障
         view.findViewById(R.id.ll_daily_welfare).setOnClickListener(this);
         view.findViewById(R.id.ll_wealth_college).setOnClickListener(this);
@@ -181,9 +206,9 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener{
         expiredListview.setOnItemClickListener(new expiredItemClickListener());
         expiredListview.setAdapter(expiredAdapter);
 
-        //新手标(数据格式跟精品项目的一样)
+        //新手标(数据格式跟精品项目的一样，只是多了一个新手专享的图片)
         newRecordsBeans = new ArrayList<>();
-        newAdapter = new ProductAdapter(ctx, newRecordsBeans);
+        newAdapter = new ProductAdapter(ctx, newRecordsBeans, true);
         newListView = (MyListView) view.findViewById(R.id.new_listview);
         newListView.setOnItemClickListener(new newItemClickListener());
         newListView.setAdapter(newAdapter);
@@ -237,8 +262,154 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener{
             }
         });
 
+        //浮标按钮
+        button_floating = (Button)view.findViewById(R.id.button_floating);
+        initFloatingButton();
     }
 
+    private void initFloatingButton() {
+        //获取屏幕宽度
+        DisplayMetrics dm = new DisplayMetrics();
+        ctx.getWindowManager().getDefaultDisplay().getMetrics(dm);
+        screenWidth = dm.widthPixels;
+        bottomHeight =((Activity_Main)getActivity()).getBottomHeight();
+        screenHeight = ctx.getWindowManager().getDefaultDisplay().getHeight();
+        //获取图标的宽高
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.floating_button);
+        floatButtonBitmapWdith = bitmap.getWidth();
+        floatButtonBitmapHeight = bitmap.getHeight();
+        bitmap.recycle();
+        //浮标按钮
+        if (App.saveUserInfo.getAccess_Token() != null) {
+            button_floating.setVisibility(View.GONE);
+        }
+        button_floating.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                int action = event.getAction();
+                switch (action) {
+                    //按下时获取位置
+                    case MotionEvent.ACTION_DOWN:
+                        //需要判断是否属于该控件
+                        lastX = (int) event.getRawX();
+                        lastY = (int) event.getRawY();
+                        startX = lastX;
+                        startY = lastY;
+                        break;
+
+                    //移动手势
+                    case MotionEvent.ACTION_MOVE:
+                        int dx = (int) event.getRawX() - lastX;
+                        int dy = (int) event.getRawY() - lastY;
+                        int left = v.getLeft() + dx;
+                        int top = v.getTop() + dy;
+                        int right = v.getRight() + dx;
+                        int bottom = v.getBottom() + dy;
+                        if (left < 0) {
+                            left = 0;
+                            right = left + floatButtonBitmapWdith;
+                        }
+                        if (right > screenWidth) {
+                            right = screenWidth;
+                            left = right - floatButtonBitmapWdith;
+                        }
+                        //状态条的高度
+                        if (top <= getStatusBarHeight()) {
+                            top = getStatusBarHeight();
+                            bottom = top + floatButtonBitmapHeight;
+                        }
+                        if (event.getRawY() > screenHeight - bottomHeight ) {
+                            bottom = screenHeight - bottomHeight;
+                            top = bottom - floatButtonBitmapHeight;
+                        }
+                        v.layout(left, top, right, bottom);
+                        lastX = (int) event.getRawX();
+                        lastY = (int) event.getRawY();
+                        break;
+
+                    //离开屏幕
+                    case MotionEvent.ACTION_UP:
+                        lastX = (int) event.getRawX();
+                        lastY = (int) event.getRawY();
+                        //当移动距离比较小时，视为点击事件
+                        //不用setOnClickListener 是因为setOnClickListener跟setOnTouchListener有冲突，并且只监听到ACTION_DOWN
+                        if (Math.abs(lastX - startX) < 5 || Math.abs(lastY - startY) < 5) {
+                            Intent intent = new Intent(ctx, Activity_Login_Introduction.class);
+                            startActivity(intent);
+                        }
+                        //判断是否位置是否超出底部状态栏
+                        if (event.getRawY() > screenHeight - bottomHeight - v.getHeight()) {
+                            bottom = screenHeight - bottomHeight;
+                            left = v.getLeft();
+                            right = left + floatButtonBitmapWdith;
+                            top = bottom - floatButtonBitmapHeight;
+                            v.layout(left,top,right,bottom);
+                        }
+                        //动画
+                        movingAnimation(v, (int) event.getRawX());
+                        break;
+                }
+                return true;
+            }
+        });
+    }
+
+    /**
+     * 获取状态条的高度
+     * @return 状态条高度
+     */
+    public int getStatusBarHeight() {
+        Class<?> c = null;
+        Object obj = null;
+        Field field = null;
+        int x = 0, sbar = 38;//默认为38，貌似大部分是这样的
+        try {
+            c = Class.forName("com.android.internal.R$dimen");
+            obj = c.newInstance();
+            field = c.getField("status_bar_height");
+            x = Integer.parseInt(field.get(obj).toString());
+            sbar = getResources().getDimensionPixelSize(x);
+
+        } catch (Exception e1) {
+            e1.printStackTrace();
+        }
+        return sbar;
+    }
+
+    //按钮移动动画
+    private void movingAnimation(final View v, int currentX) {
+        final int left;
+        final int top = v.getTop();
+        TranslateAnimation animation = null;
+        if (currentX > screenWidth/2) {
+            animation = new TranslateAnimation(0, screenWidth - v.getRight(), 0, 0);
+            left = screenWidth - v.getWidth();
+        } else {
+            animation = new TranslateAnimation(0, - v.getLeft(), 0, 0);
+            left = 0;
+        }
+        animation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                FrameLayout.LayoutParams ll = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
+                ll.setMargins(left, top, 0, 0);
+                v.setLayoutParams(ll);
+                v.clearAnimation();
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        animation.setDuration(100 * 2 * currentX / screenWidth);
+        v.startAnimation(animation);
+    }
 
     /**
      * 文案配置

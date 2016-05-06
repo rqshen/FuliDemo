@@ -18,13 +18,26 @@ public class ExpiredAdapter extends BaseAdapter {
 
     private Context context;
     private List<ExpiredRecordsBean> data;
-
+    //福袋金额
+    private double fukubukuro;
     //构造函数
     public ExpiredAdapter(Context context, List<ExpiredRecordsBean> data) {
         if (data != null) {
             this.context = context;
             this.data = data;
         }
+    }
+
+    public void setFukubukuro(double fukubukuro) {
+        this.fukubukuro = fukubukuro;
+        this.notifyDataSetChanged();
+    }
+
+    private String getFukubukuro() {
+        if (fukubukuro <= 0) {
+            return "";
+        }
+        return String.format("+%.2f", fukubukuro);
     }
 
     @Override
@@ -64,6 +77,7 @@ public class ExpiredAdapter extends BaseAdapter {
     private void setupViewholder(ViewHolder viewHolder, View view) {
         viewHolder.name = (TextView) view.findViewById(R.id.name);
         viewHolder.rate = (TextView) view.findViewById(R.id.rate);
+        viewHolder.fukubukuro_rate = (TextView) view.findViewById(R.id.fukubukuro_rate);
         viewHolder.duration = (TextView) view.findViewById(R.id.duration);
         viewHolder.duration_description = (TextView) view.findViewById(R.id.duration_description);
         viewHolder.amountBalance = (TextView) view.findViewById(R.id.amountBalance);
@@ -80,6 +94,9 @@ public class ExpiredAdapter extends BaseAdapter {
 
         //借款利率
         viewHolder.rate.setText(data.get(pos).getRate() + data.get(pos).getRewardRate() + "");
+
+        //福袋利率
+        viewHolder.fukubukuro_rate.setText(getFukubukuro());
 
         //借款期限
         viewHolder.duration.setText(data.get(pos).getDuration() + "");
@@ -100,13 +117,19 @@ public class ExpiredAdapter extends BaseAdapter {
         viewHolder.amountBalance.setText((int) data.get(pos).getAmountBalance() + " 元");
         //百分比
         float percent = ((100 - 100 * (data.get(pos).getAmountBalance()/data.get(pos).getAmountTotal())));
-        viewHolder.valuePercent.setText(String.format("%.1f", percent) + "%");
+        //如果标的卖完，则显示售罄字样
+        if (data.get(pos).getAmountBalance() <=0) {
+            viewHolder.valuePercent.setText("售罄");
+        } else {
+            viewHolder.valuePercent.setText(String.format("%.1f", percent) + "%");
+        }
         viewHolder.progressPercent.setProgress((int) percent);
     }
 
     class ViewHolder {
         TextView name;
         TextView rate;
+        TextView fukubukuro_rate;
         TextView duration;
         TextView duration_description;
         TextView amountBalance;

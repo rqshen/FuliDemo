@@ -18,6 +18,9 @@ public class ProductAdapter extends BaseAdapter {
 	private List<ProductRecordsBean> data;
     //判断是否新手标
     private boolean isNewProduct;
+	//福袋金额
+	private double fukubukuro;
+
 	//默认标的构造方法
     public ProductAdapter(Context ctx, List<ProductRecordsBean> data) {
         if (data != null) {
@@ -33,6 +36,18 @@ public class ProductAdapter extends BaseAdapter {
             this.isNewProduct = isNewProduct;
         }
     }
+
+	public void setFukubukuro(double fukubukuro) {
+		this.fukubukuro = fukubukuro;
+		this.notifyDataSetChanged();
+	}
+
+	private String getFukubukuro() {
+		if (fukubukuro <= 0) {
+			return "";
+		}
+		return String.format("+%.2f", fukubukuro);
+	}
 
 	@Override
 	public int getCount() {
@@ -69,25 +84,25 @@ public class ProductAdapter extends BaseAdapter {
 	private void setupViewholder(ViewHolder viewHolder, View view) {
 		viewHolder.name = (TextView) view.findViewById(R.id.name);
 		viewHolder.rate = (TextView) view.findViewById(R.id.rate);
+		viewHolder.fukubukuro_rate = (TextView) view.findViewById(R.id.fukubukuro_rate);
 		viewHolder.duration = (TextView) view.findViewById(R.id.duration);
         viewHolder.duration_description = (TextView) view.findViewById(R.id.duration_description);
 		viewHolder.amountBalance = (TextView) view.findViewById(R.id.amountBalance);
         viewHolder.valuePercent = (TextView) view.findViewById(R.id.value_percent);
         viewHolder.progressPercent = (ProgressBar) view.findViewById(R.id.progress_percent);
         viewHolder.progressPercent.setMax(100);
-        viewHolder.newProductIndicator = (ImageView) view.findViewById(R.id.new_product_image);
-        if (isNewProduct) {
-            viewHolder.newProductIndicator.setVisibility(View.VISIBLE);
-        } else {
-            viewHolder.newProductIndicator.setVisibility(View.GONE);
+		if (isNewProduct) {
+			viewHolder.newProductIndicator = (ImageView) view.findViewById(R.id.new_product_image);
+			viewHolder.newProductIndicator.setBackgroundResource(R.drawable.item_new_product_background);
         }
 	}
 
 	//设置ViewHolder数据
 	private void setDataWithViewHolder(ViewHolder viewHolder, int pos) {
 		viewHolder.name.setText(data.get(pos).getName());
-
 		viewHolder.rate.setText(data.get(pos).getRate() + data.get(pos).getRewardRate() + "");
+		//福袋利率
+		viewHolder.fukubukuro_rate.setText(getFukubukuro());
         viewHolder.duration.setText(data.get(pos).getDuration() + "");
 		//天标月标
 		switch (data.get(pos).getDurationExchangeType()) {
@@ -104,13 +119,18 @@ public class ProductAdapter extends BaseAdapter {
 		viewHolder.amountBalance.setText((int)data.get(pos).getAmountBalance() + " 元" );
         //百分比
         float percent = (100 - 100 * (data.get(pos).getAmountBalance()/data.get(pos).getAmountTotal()));
-        viewHolder.valuePercent.setText(String.format("%.1f", percent) + "%");
+		if (data.get(pos).getAmountBalance() <= 0) {
+			viewHolder.valuePercent.setText("售罄");
+		} else {
+			viewHolder.valuePercent.setText(String.format("%.1f", percent) + "%");
+		}
         viewHolder.progressPercent.setProgress((int) percent);
 	}
 
 	class ViewHolder {
 		TextView name;
         TextView rate;
+		TextView fukubukuro_rate;
 		TextView duration;
         TextView duration_description;
 		TextView amountBalance;

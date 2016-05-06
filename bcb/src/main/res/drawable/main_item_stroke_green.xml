@@ -10,6 +10,6 @@
         android:color="@color/item_color" />
     <!-- 设置按钮的四个角为弧形 -->
     <!-- android:radius 弧形的半径 -->
-    <corners android:radius="2dip" />
+    <corners android:radius="2dp" />
 
 </shape>

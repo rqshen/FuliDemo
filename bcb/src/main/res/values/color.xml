@@ -7,9 +7,11 @@
     <!-- 背景灰 -->
     <color name="background_gray">#EFEFEF</color>
     <!-- 文本黑色 -->
-    <color name="txt_black">#262626</color>
-    <!-- 文本灰色 -->
-    <color name="txt_gray">#95959D</color>
+    <color name="txt_black">#333333</color>
+    <!--文本中灰色-->
+    <color name="txt_middle_gray">#666666</color>
+    <!-- 文本浅灰色 -->
+    <color name="txt_gray">#999999</color>
     <!-- 时间文本灰色 -->
     <color name="date_txt_gray">#989898</color>
     <!-- 白色 -->
@@ -36,10 +38,12 @@
     <color name="project_yellow">#EC9D9F</color>
     <!-- 首页新表预告的绿色 -->
     <color name="main_bespoke_green">#17B20B</color>
-    <!-- 项目进度颜色 -->
+    <!-- 列表颜色 -->
     <color name="item_color">#f46548</color>
-    <color name="item_text_color">#506083</color>
+    <color name="item_text_color">@color/txt_middle_gray</color>
     <color name="item_blue">#769FF6</color>
+    <!--列表选中的灰色-->
+    <color name="item_selected_gray">#F7F7F7</color>
     <!-- alertview按钮字体颜色 -->
     <color name="btntextcolor">#ff1E90FF</color>
     <!--分割线-->
