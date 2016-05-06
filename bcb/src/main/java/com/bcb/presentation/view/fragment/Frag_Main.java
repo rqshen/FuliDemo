@@ -147,6 +147,7 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener{
             if (App.saveUserInfo.getAccess_Token() == null && button_floating != null) {
                 button_floating.setVisibility(View.VISIBLE);
             }
+            showItemVisible();
         }
     }
 
@@ -656,7 +657,9 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener{
     }
     //设置体验标显示状态
     private void setupExpiredVisible(int visible) {
-        expiredListview.setVisibility(visible);
+        if (expiredListview != null) {
+            expiredListview.setVisibility(visible);
+        }
     }
 
     //设置新手标
@@ -681,7 +684,9 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener{
     }
     //设置新手标的显示状态
     private void setupNewVisible(int visible) {
-        newListView.setVisibility(visible);
+        if (newListView != null) {
+            newListView.setVisibility(visible);
+        }
     }
 
     //设置新标预告
@@ -701,7 +706,9 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener{
     }
     //设置新标预告的显示状态
     private void setupAnnounceVisible(int visible) {
-        announceListView.setVisibility(visible);
+        if (announceListView != null) {
+            announceListView.setVisibility(visible);
+        }
     }
 
     //设置精品项目
@@ -725,7 +732,9 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener{
     }
     //设置精品项目显示状态
     private void setupBoutiqueVisible(int visible) {
-        boutiqueListview.setVisibility(visible);
+        if (boutiqueListview != null) {
+            boutiqueListview.setVisibility(visible);
+        }
     }
 
     @Override
@@ -822,20 +831,17 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener{
 	@Override
 	public void onResume() {
 		super.onResume();
-//		mImageCycleView.startImageCycle();
         showItemVisible();
 	}
 
 	@Override
     public void onPause() {
 		super.onPause();
-//		mImageCycleView.pushImageCycle();
 	}
 
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-//		mImageCycleView.pushImageCycle();
         ctx.unregisterReceiver(mReceiver);
 	}
 

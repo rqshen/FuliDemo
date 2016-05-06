@@ -1,6 +1,10 @@
 package com.bcb.presentation.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ClipDrawable;
+import android.graphics.drawable.ColorDrawable;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -17,7 +21,7 @@ public class ProductAdapter extends BaseAdapter {
 	private Context ctx;
 	private List<ProductRecordsBean> data;
     //判断是否新手标
-    private boolean isNewProduct;
+    private boolean isNewProduct = false;
 	//福袋金额
 	private double fukubukuro;
 
@@ -91,10 +95,7 @@ public class ProductAdapter extends BaseAdapter {
         viewHolder.valuePercent = (TextView) view.findViewById(R.id.value_percent);
         viewHolder.progressPercent = (ProgressBar) view.findViewById(R.id.progress_percent);
         viewHolder.progressPercent.setMax(100);
-		if (isNewProduct) {
-			viewHolder.newProductIndicator = (ImageView) view.findViewById(R.id.new_product_image);
-			viewHolder.newProductIndicator.setBackgroundResource(R.drawable.item_new_product_background);
-        }
+		viewHolder.newProductIndicator = (ImageView) view.findViewById(R.id.new_product_image);
 	}
 
 	//设置ViewHolder数据
@@ -117,10 +118,19 @@ public class ProductAdapter extends BaseAdapter {
 				break;
 		}
 		viewHolder.amountBalance.setText((int)data.get(pos).getAmountBalance() + " 元" );
+		//是否显示新标预告
+		if (isNewProduct) {
+			viewHolder.newProductIndicator.setVisibility(View.VISIBLE);
+			viewHolder.newProductIndicator.setBackgroundResource(R.drawable.item_new_product_background);
+		} else {
+			viewHolder.newProductIndicator.setVisibility(View.GONE);
+		}
         //百分比
         float percent = (100 - 100 * (data.get(pos).getAmountBalance()/data.get(pos).getAmountTotal()));
 		if (data.get(pos).getAmountBalance() <= 0) {
 			viewHolder.valuePercent.setText("售罄");
+//			ClipDrawable d = new ClipDrawable(new ColorDrawable(Color.argb(255, 153, 153, 153)), Gravity.LEFT, ClipDrawable.HORIZONTAL);
+			viewHolder.progressPercent.setProgressDrawable(ctx.getResources().getDrawable(R.drawable.item_progress_gray));
 		} else {
 			viewHolder.valuePercent.setText(String.format("%.1f", percent) + "%");
 		}

@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="12dp"
@@ -19,37 +19,28 @@
             android:gravity="center_vertical">
             <TextView
                 android:id="@+id/name"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="15dp"
-                android:maxWidth="@dimen/item_text_max_width"
                 android:singleLine="true"
                 android:text="涨薪宝201510121028-第3期"
                 android:textColor="@color/item_text_color"
                 android:textSize="@dimen/item_text_default" />
-            <RelativeLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="70dp"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/name"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
-                <TextView
-                    android:layout_width="70dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/margin_size_default"
-                    android:background="@drawable/main_item_stroke_green"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="15dp"
-                    android:padding="3dp"
-                    android:singleLine="true"
-                    android:text="本息保障"
-                    android:textColor="@color/item_color"
-                    android:textSize="@dimen/item_text_small"/>
-            </RelativeLayout>
-        </RelativeLayout>
+                android:gravity="center_horizontal"
+                android:layout_marginLeft="@dimen/margin_size_default"
+                android:background="@drawable/main_item_stroke_green"
+                android:layout_marginRight="@dimen/margin_size_large"
+                android:padding="3dp"
+                android:singleLine="true"
+                android:text="本息保障"
+                android:textColor="@color/item_color"
+                android:textSize="@dimen/item_text_small"/>
+        </LinearLayout>
 
         <View
             android:layout_width="wrap_content"
