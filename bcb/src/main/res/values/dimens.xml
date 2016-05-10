@@ -25,7 +25,8 @@
     <dimen name="item_text_large">30sp</dimen>
     <dimen name="item_text_xlarge">35sp</dimen>
     <dimen name="item_text_default">@dimen/main_text_default</dimen>
-    <dimen name="item_text_small">@dimen/main_text_small</dimen>
+    <dimen name="item_text_small">12sp</dimen>
+    <dimen name="item_text_xsmall">10sp</dimen>
     <!-- 设置界面activity_account_setting -->
     <dimen name="account_setting_margin_right">43dp</dimen>
     <!-- 充值界面activity_recharge_first -->

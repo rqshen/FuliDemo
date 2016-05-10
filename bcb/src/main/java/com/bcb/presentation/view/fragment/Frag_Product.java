@@ -11,6 +11,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
+import android.view.animation.LayoutAnimationController;
+import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
@@ -90,10 +95,6 @@ public class Frag_Product extends Frag_Base implements OnClickListener {
 		this.CompanyId = CompanyId;
 	}
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-	}
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -133,7 +134,6 @@ public class Frag_Product extends Frag_Base implements OnClickListener {
         mListView = (MyListView) view.findViewById(R.id.listview_data_layout);
         mListView.setOnItemClickListener(new onClickViewProduct());
         mListView.setAdapter(mProductAdapter);
-
         //刷新
         loadmore_view = (RelativeLayout)view.findViewById(R.id.loadmore_view);
         refreshLayout = ((PullToRefreshLayout) view.findViewById(R.id.refresh_view));
@@ -299,10 +299,16 @@ public class Frag_Product extends Frag_Base implements OnClickListener {
 		}
 	}
 
-	@Override
+    @Override
 	public void onDestroy() {
 		super.onDestroy();
 		ctx.unregisterReceiver(receiver);
 	}
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+    }
+
 
 }

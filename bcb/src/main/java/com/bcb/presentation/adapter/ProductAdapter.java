@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -129,13 +130,14 @@ public class ProductAdapter extends BaseAdapter {
         float percent = (100 - 100 * (data.get(pos).getAmountBalance()/data.get(pos).getAmountTotal()));
 		if (data.get(pos).getAmountBalance() <= 0) {
 			viewHolder.valuePercent.setText("售罄");
-//			ClipDrawable d = new ClipDrawable(new ColorDrawable(Color.argb(255, 153, 153, 153)), Gravity.LEFT, ClipDrawable.HORIZONTAL);
 			viewHolder.progressPercent.setProgressDrawable(ctx.getResources().getDrawable(R.drawable.item_progress_gray));
 		} else {
 			viewHolder.valuePercent.setText(String.format("%.1f", percent) + "%");
 		}
         viewHolder.progressPercent.setProgress((int) percent);
 	}
+
+
 
 	class ViewHolder {
 		TextView name;

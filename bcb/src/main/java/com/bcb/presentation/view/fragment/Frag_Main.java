@@ -187,14 +187,14 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener{
         //自动刷新
         refreshLayout.autoRefresh();
 
-        //判断设备是否Android4.4以上，如果是，则表示使用了浸入式状态栏，需要设置状态栏的位置
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            LinearLayout layout_topbar = (LinearLayout) view.findViewById(R.id.layout_topbar);
-            if (null != layout_topbar){
-                layout_topbar.setVisibility(View.VISIBLE);
-            }
-
-        }
+//        //判断设备是否Android4.4以上，如果是，则表示使用了浸入式状态栏，需要设置状态栏的位置
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+//            LinearLayout layout_topbar = (LinearLayout) view.findViewById(R.id.layout_topbar);
+//            if (null != layout_topbar){
+//                layout_topbar.setVisibility(View.VISIBLE);
+//            }
+//
+//        }
         //三个按钮:每日福利、理财学院、安全保障
         view.findViewById(R.id.ll_daily_welfare).setOnClickListener(this);
         view.findViewById(R.id.ll_wealth_college).setOnClickListener(this);

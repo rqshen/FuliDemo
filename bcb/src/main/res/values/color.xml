@@ -25,7 +25,7 @@
     <!-- 灰色 -->
     <color name="gray">#ffaaaaaa</color>
     <!-- 横线灰色 -->
-    <color name="linegray">#E0E0E0</color>
+    <color name="linegray">#EEEEEE</color>
     <!-- 公司名称黄色 -->
     <color name="company_name">#FF8E3A</color>
     <!-- 整体的红色值 -->
@@ -41,7 +41,8 @@
     <!-- 列表颜色 -->
     <color name="item_color">#f46548</color>
     <color name="item_text_color">@color/txt_middle_gray</color>
-    <color name="item_blue">#769FF6</color>
+    <!--<color name="item_blue">#487FF8</color>-->
+    <color name="item_blue">#487FF8</color>
     <!--列表选中的灰色-->
     <color name="item_selected_gray">#F7F7F7</color>
     <!-- alertview按钮字体颜色 -->

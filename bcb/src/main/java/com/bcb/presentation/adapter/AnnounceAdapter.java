@@ -80,8 +80,6 @@ public class AnnounceAdapter extends BaseAdapter {
     private void setupViewholder(ViewHolder viewHolder, View view) {
         viewHolder.announce_name = (TextView) view.findViewById(R.id.announce_name);
         viewHolder.announce_rate = (TextView) view.findViewById(R.id.announce_rate);
-        viewHolder.announce_duration = (TextView) view.findViewById(R.id.announce_duration);
-        viewHolder.duration_description = (TextView) view.findViewById(R.id.duration_description);
         viewHolder.announce_text = (TextView) view.findViewById(R.id.announce_text);
         viewHolder.announce_predict = (TextView) view.findViewById(R.id.announce_predict);
     }
@@ -116,21 +114,6 @@ public class AnnounceAdapter extends BaseAdapter {
         viewHolder.announce_name.setText(data.get(pos).getName());
         //年化收益
         viewHolder.announce_rate.setText(data.get(pos).getRate() + "");
-        viewHolder.announce_duration.setText(data.get(pos).getDuration() + "");
-        //借款期限
-        switch (data.get(pos).getDurationExchangeType()) {
-            case 1:
-                viewHolder.duration_description.setText("天");
-                break;
-
-            case 2:
-                viewHolder.duration_description.setText("个月");
-                break;
-
-            default:
-                viewHolder.announce_duration.setText("");
-                break;
-        }
 
         //设置预约成功人数
         viewHolder.announce_predict.setText("已有" + data.get(pos).getPredictCount() + "人预约");
@@ -146,15 +129,17 @@ public class AnnounceAdapter extends BaseAdapter {
                 }
             }
         });
-        viewHolder.announce_text.setBackgroundResource(R.drawable.button_stroke_blue);
+        viewHolder.announce_text.setBackgroundResource(R.drawable.announce_button_background);
         viewHolder.announce_text.setText("立即预约");
-        viewHolder.announce_text.setTextColor(Color.argb(255, 120, 158, 246));
+//        viewHolder.announce_text.setTextColor(Color.argb(255, 120, 158, 246));
+        viewHolder.announce_text.setTextColor(Color.argb(221, 72, 127, 248));
         //判断是否预约
         if (TokenUtil.getEncodeToken(context)!= null && data.get(pos).loadStatus) {
-            viewHolder.announce_text.setBackgroundResource(R.drawable.button_solid_gray);
+            viewHolder.announce_text.setBackgroundResource(R.drawable.announce_button_gray);
             viewHolder.announce_text.setOnClickListener(null);
             viewHolder.announce_text.setText("已预约");
-            viewHolder.announce_text.setTextColor(Color.argb(255, 136, 143, 155));
+//            viewHolder.announce_text.setTextColor(Color.argb(255, 136, 143, 155));
+            viewHolder.announce_text.setTextColor(Color.rgb(153, 153, 153));
         }
     }
 
@@ -256,8 +241,6 @@ public class AnnounceAdapter extends BaseAdapter {
     class ViewHolder {
         TextView    announce_name;      //名称
         TextView    announce_rate;      //年化利率
-        TextView    announce_duration;  //借款期限
-        TextView    duration_description; //天标月标
         TextView    announce_text;  //立即预约、已预约字样
         TextView    announce_predict;   //预约人数
     }

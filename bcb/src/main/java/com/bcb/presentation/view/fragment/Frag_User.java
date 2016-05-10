@@ -266,14 +266,13 @@ public class Frag_User extends Frag_Base implements OnClickListener {
             public void onClick(DialogInterface dialog, int which) {
                 Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:020-38476886"));
                 ctx.startActivity(intent);
+                alertView.dismiss();
             }
         });
         ibuilder.setNegativeButton("取消", null);
         alertView = ibuilder.create();
         alertView.show();
     }
-
-
 
 	@Override
 	public void onStart()  {

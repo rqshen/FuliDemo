@@ -5,33 +5,24 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.text.TextUtils;
-import android.util.DisplayMetrics;
-import android.view.MotionEvent;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.TranslateAnimation;
-import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bcb.R;
 import com.bcb.common.app.App;
-import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.UmengUtil;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
 import com.bcb.presentation.view.fragment.Frag_Main;
 import com.bcb.presentation.view.fragment.Frag_Product;
 import com.bcb.presentation.view.fragment.Frag_User;
-
-import java.lang.reflect.Field;
 
 public class Activity_Main extends Activity_Base_Fragment {
 
@@ -202,6 +193,16 @@ public class Activity_Main extends Activity_Base_Fragment {
 	protected void onDestroy() {
         super.onDestroy();
         unregisterReceiver(mReceiver);
+	}
+
+	@Override
+	public Resources getResources() {
+		Resources res = super.getResources();
+		Configuration config=new Configuration();
+		config.setToDefaults();
+		config.fontScale =1f;
+		res.updateConfiguration(config, res.getDisplayMetrics());
+		return res;
 	}
 
 	@Override
