@@ -58,7 +58,9 @@ public class Frag_Product extends Frag_Base implements OnClickListener {
 	private MyListView mListView;
 	private List<ProductRecordsBean> recordsBeans;
 	private ProductAdapter mProductAdapter;
-	
+
+    private boolean isFirstLoad = true;
+
 	private boolean canLoadMore = false;
 	private int PageNow;
     private int PageSize = 10;
@@ -112,10 +114,6 @@ public class Frag_Product extends Frag_Base implements OnClickListener {
         //标题
         title_text = (TextView) view.findViewById(R.id.title_text);
         title_text.setText("产品列表");
-        //判断设备是否Android4.4以上，如果是，则表示使用了浸入式状态栏，需要设置状态栏的位置
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            ((LinearLayout) view.findViewById(R.id.layout_topbar)).setVisibility(View.VISIBLE);
-        }
         //切换公司
         left_text = (TextView) view.findViewById(R.id.left_text);
         left_text.setText("全部公司");
@@ -265,12 +263,14 @@ public class Frag_Product extends Frag_Base implements OnClickListener {
     }
 
     private void setupListViewVisible(boolean status) {
+        // 如果存在数据的时候，显示
         if (status) {
             null_data_layout.setVisibility(View.GONE);
         } else {
             null_data_layout.setVisibility(View.VISIBLE);
         }
     }
+
 
 	@Override
 	public void onClick(View v) {
@@ -311,4 +311,10 @@ public class Frag_Product extends Frag_Base implements OnClickListener {
     }
 
 
+    public ProductRecordsBean getFirstItemData() {
+        if (recordsBeans != null && recordsBeans.size() > 0) {
+            return recordsBeans.get(0);
+        }
+        return null;
+    }
 }

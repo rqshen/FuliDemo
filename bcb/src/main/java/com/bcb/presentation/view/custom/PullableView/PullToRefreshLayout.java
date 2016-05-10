@@ -353,9 +353,11 @@ public class PullToRefreshLayout extends RelativeLayout {
                     pullView.clearAnimation();
                     pullView.setVisibility(View.INVISIBLE);
                 }
-                refreshingView.setVisibility(View.VISIBLE);
-                refreshingView.startAnimation(refreshingAnimation);
-                refreshStateTextView.setText(R.string.refreshing);
+                if (refreshingView != null) {
+                    refreshingView.setVisibility(View.VISIBLE);
+                    refreshingView.startAnimation(refreshingAnimation);
+                    refreshStateTextView.setText(R.string.refreshing);
+                }
                 break;
 
             case RELEASE_TO_LOAD:

@@ -112,8 +112,18 @@ public class Activity_Main extends Activity_Base_Fragment {
 		if (fragMain == null || !fragMain.isAdded()) {
 			fragMain = new Frag_Main(Activity_Main.this);
 		}
-		fragCurrent = fragMain;
+		if (fragProduct == null || !fragProduct.isAdded()) {
+			fragProduct = new Frag_Product(Activity_Main.this, App.saveUserInfo.getCurrentCompanyId());
+		}
+		if (fragUser == null || !fragUser.isAdded()) {
+			fragUser = new Frag_User(Activity_Main.this);
+		}
+
+		fragmentManager.beginTransaction().add(R.id.content, fragUser).commitAllowingStateLoss();
+		fragmentManager.beginTransaction().add(R.id.content, fragProduct).commitAllowingStateLoss();
 		fragmentManager.beginTransaction().add(R.id.content, fragMain).commitAllowingStateLoss();
+
+		fragCurrent = fragMain;
 	}
 
 	private void setFragMain() {
@@ -123,7 +133,7 @@ public class Activity_Main extends Activity_Base_Fragment {
 		if (fragMain == null || !fragMain.isAdded()) {
 			fragMain = new Frag_Main(Activity_Main.this);
 		}
-		switchFragment(fragCurrent, fragMain);
+		switchFragment(fragMain);
 	}
 
 	private void setFragProduct() {
@@ -133,7 +143,7 @@ public class Activity_Main extends Activity_Base_Fragment {
 		if (fragProduct == null || !fragProduct.isAdded()) {
 			fragProduct = new Frag_Product(Activity_Main.this, App.saveUserInfo.getCurrentCompanyId());
 		}
-		switchFragment(fragCurrent, fragProduct);
+		switchFragment(fragProduct);
 	}
 
 	private void setFragUser() {
@@ -143,18 +153,29 @@ public class Activity_Main extends Activity_Base_Fragment {
         if (fragUser == null || !fragUser.isAdded()) {
             fragUser = new Frag_User(Activity_Main.this);
         }
-        switchFragment(fragCurrent, fragUser);
+        switchFragment(fragUser);
 	}
 
-	private void switchFragment(Fragment from, Fragment to) {
+	private void switchFragment(Fragment to) {
 		android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
 		// 先判断是否被add过
 		if (!to.isAdded()) {
-			// 隐藏当前的fragment，add下一个到Activity中
-			transaction.hide(from).add(R.id.content, to).commitAllowingStateLoss();
+			if (to instanceof Frag_Main) {
+				transaction.hide(fragProduct).hide(fragUser).add(R.id.content, fragMain).commitAllowingStateLoss();
+			} else if (to instanceof  Frag_Product) {
+				transaction.hide(fragMain).hide(fragUser).add(R.id.content, fragProduct).commitAllowingStateLoss();
+			} else if (to instanceof  Frag_User) {
+				transaction.hide(fragMain).hide(fragProduct).add(R.id.content, fragUser).commitAllowingStateLoss();
+			}
 		} else {
 			// 隐藏当前的fragment，显示下一个
-			transaction.hide(from).show(to).commitAllowingStateLoss();
+			if (to instanceof  Frag_Main) {
+				transaction.hide(fragProduct).hide(fragUser).show(fragMain).commitAllowingStateLoss();
+			} else if (to instanceof  Frag_Product) {
+				transaction.hide(fragMain).hide(fragUser).show(fragProduct).commitAllowingStateLoss();
+			} else if (to instanceof  Frag_User) {
+				transaction.hide(fragMain).hide(fragProduct).show(fragUser).commitAllowingStateLoss();
+			}
 		}
 		fragCurrent = to;
 	}
@@ -238,4 +259,9 @@ public class Activity_Main extends Activity_Base_Fragment {
         alertView = ibuilder.create();
         alertView.show();
     }
+
+
+	public Frag_Product getFragProduct() {
+		return fragProduct;
+	}
 }

@@ -429,14 +429,14 @@ public class Activity_Withdraw extends Activity_Base implements View.OnClickList
 
 		// 提现金额不能大于账户余额
 		String money = editext_money.getText().toString();
-		float floatMoney = Float.parseFloat(money);
-		if (mUserWallet.BalanceAmount < floatMoney) {
+		double doubleMoney = Double.parseDouble(money);
+		if (mUserWallet.BalanceAmount < doubleMoney) {
 			ToastUtil.alert(Activity_Withdraw.this, "提现金额不能大于账户余额");
 			return;
 		}
 
 		//判断金额是否大于50000元
-		if (floatMoney > 50000) {
+		if (doubleMoney > 50000) {
 			ToastUtil.alert(Activity_Withdraw.this, "单笔提现金额不能超过50000元");
 			return;
 		}
@@ -450,7 +450,7 @@ public class Activity_Withdraw extends Activity_Base implements View.OnClickList
 			return;
 		}
 		//判断余额是否大于手续费
-		if (floatMoney <= 2) {
+		if (doubleMoney <= 2) {
 			ToastUtil.alert(Activity_Withdraw.this, "提现金额必须大于手续费");
 			return;
 		}

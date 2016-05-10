@@ -138,11 +138,6 @@ public class Frag_User extends Frag_Base implements OnClickListener {
         title_text = (TextView) view.findViewById(R.id.title_text);
         title_text.setText("我");
 
-        //判断设备是否Android4.4以上，如果是，则表示使用了浸入式状态栏，需要设置状态栏的位置
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            ((LinearLayout) view.findViewById(R.id.layout_topbar)).setVisibility(View.VISIBLE);
-        }
-
         //加入公司
         joinCompany = (ImageView) view.findViewById(R.id.join_company);
         joinCompany.setVisibility(View.GONE);
@@ -365,7 +360,11 @@ public class Frag_User extends Frag_Base implements OnClickListener {
         //总资产
 		value_earn.setText("" + String.format("%.2f", App.mUserWallet.getTotalAsset()));
         //账户余额
-		value_balance.setText("" + String.format("%.2f", App.mUserWallet.getBalanceAmount()));
+        if (App.mUserWallet.getBalanceAmount() <= 0) {
+            value_balance.setText("0.00");
+        } else {
+            value_balance.setText("" + String.format("%.2f", App.mUserWallet.getBalanceAmount()));
+        }
         //待收本息
         value_back.setText("" + String.format("%.2f", App.mUserWallet.getIncomingMoney()));
         //冻结金额

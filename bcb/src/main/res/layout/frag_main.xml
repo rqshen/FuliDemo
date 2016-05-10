@@ -220,6 +220,19 @@
                         android:fastScrollEnabled="false"
                         android:listSelector="@drawable/list_selector"
                         android:scrollbars="none" />
+
+                    <!-- 如果新标预告不存在的时候才初始化该列表 -->
+                    <com.bcb.data.util.MyListView
+                        android:id="@+id/addition_listView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:cacheColorHint="@android:color/black"
+                        android:divider="@color/background"
+                        android:dividerHeight="10dp"
+                        android:fastScrollEnabled="false"
+                        android:listSelector="@drawable/list_selector"
+                        android:scrollbars="none"/>
                 </LinearLayout>
             </com.bcb.presentation.view.custom.PullableView.PullableScrollView>
             <!-- 上拉加载更多 -->

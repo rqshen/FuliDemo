@@ -210,7 +210,7 @@ public class Activity_ChangeMoney_Success extends Activity_Base implements View.
 		//提现
 		else if (action.equals(ACTION_Withdrawals)) {
 			setTitleValue("提现成功");
-			txt_status.setText("当前账户余额为：" + String.format("%.2f", App.mUserWallet.getBalanceAmount()) + "元");
+			txt_status.setText("当前账户余额为：" + (App.mUserWallet.getBalanceAmount() <= 0 ? "0.00" : String.format("%.2f", App.mUserWallet.getBalanceAmount())) + "元");
 			layout_success.setVisibility(View.VISIBLE);
 			setupImageView();
 		}

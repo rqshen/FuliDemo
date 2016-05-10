@@ -2,6 +2,7 @@ package com.bcb.presentation.view.fragment;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -38,6 +39,7 @@ import com.bcb.data.bean.AnnounceRecordsBean;
 import com.bcb.data.bean.BannerInfo;
 import com.bcb.data.bean.ExpiredRecordsBean;
 import com.bcb.data.bean.MainListBean;
+import com.bcb.data.bean.ProductListBean;
 import com.bcb.data.bean.ProductRecordsBean;
 import com.bcb.data.util.HttpUtils;
 import com.bcb.data.util.LogUtil;
@@ -96,6 +98,12 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener{
     private MyListView boutiqueListview;
     private ProductAdapter mBoutiqueAdapter;
     private List<ProductRecordsBean> boutqueRecordsBeans;
+
+    //从产品列表中获取数据
+    private MyListView additionListview;
+    private ProductAdapter mAdditionAdapter;
+    private List<ProductRecordsBean> additionRecordsBeans;
+
     //Banner
 	private AdPhotoListBean mAdPhotoListBean;
     private ArrayList<BannerInfo> listBanner;
@@ -184,17 +192,7 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener{
                 refreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
             }
         });
-        //自动刷新
-        refreshLayout.autoRefresh();
 
-//        //判断设备是否Android4.4以上，如果是，则表示使用了浸入式状态栏，需要设置状态栏的位置
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-//            LinearLayout layout_topbar = (LinearLayout) view.findViewById(R.id.layout_topbar);
-//            if (null != layout_topbar){
-//                layout_topbar.setVisibility(View.VISIBLE);
-//            }
-//
-//        }
         //三个按钮:每日福利、理财学院、安全保障
         view.findViewById(R.id.ll_daily_welfare).setOnClickListener(this);
         view.findViewById(R.id.ll_wealth_college).setOnClickListener(this);
@@ -227,6 +225,13 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener{
         boutiqueListview = (MyListView) view.findViewById(R.id.boutique_listview);
         boutiqueListview.setOnItemClickListener(new boutiqueItemClickListener());
         boutiqueListview.setAdapter(mBoutiqueAdapter);
+
+        //从产品列表中获取回来的列表
+        additionListview = (MyListView) view.findViewById(R.id.addition_listView);
+        additionListview.setOnItemClickListener(new boutiqueItemClickListener());
+        additionRecordsBeans = new ArrayList<ProductRecordsBean>();
+        mAdditionAdapter = new ProductAdapter(ctx, additionRecordsBeans);
+        additionListview.setAdapter(mAdditionAdapter);
 
         //文案配置
         loadCopyWriter();
@@ -266,6 +271,7 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener{
         //浮标按钮
         button_floating = (Button)view.findViewById(R.id.button_floating);
         initFloatingButton();
+        refreshLayout.autoRefresh();
     }
 
     private void initFloatingButton() {
@@ -354,6 +360,8 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener{
             }
         });
     }
+
+
 
     /**
      * 获取状态条的高度
@@ -628,6 +636,7 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener{
                 setupExpiredVisible(View.GONE);
                 setupAnnounceVisible(View.GONE);
                 setupBoutiqueVisible(View.GONE);
+                setupAdditionVisible(View.GONE);
             }
         });
         jsonRequest.setTag(BcbRequestTag.MainFragmentListDataTag);
@@ -737,6 +746,13 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener{
         }
     }
 
+    //从产品列表获取过来的数据
+    private void setupAdditionVisible(int visible) {
+        if (additionListview != null) {
+            additionListview.setVisibility(visible);
+        }
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -814,6 +830,7 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener{
         newRecordsBeans.clear();
         boutqueRecordsBeans.clear();
         announceRecordsBeans.clear();
+        additionRecordsBeans.clear();
         if (expiredAdapter != null) {
             expiredAdapter.notifyDataSetChanged();
         }
@@ -825,6 +842,9 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener{
         }
         if (announceAdapter != null) {
             announceAdapter.notifyDataSetChanged();
+        }
+        if (mAdditionAdapter != null) {
+            mAdditionAdapter.notifyDataSetChanged();
         }
     }
 
@@ -845,15 +865,35 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener{
         ctx.unregisterReceiver(mReceiver);
 	}
 
-    //判断是否显示数据
+    /**
+     * 判断是否显示列表数据
+     */
     private void showItemVisible() {
-        //如果没有登录或者是没有用银行卡信息
-        if ((App.saveUserInfo == null || App.saveUserInfo.getAccess_Token() == null) || (App.mUserDetailInfo == null || !App.mUserDetailInfo.HasInvest)) {
+        //如果没有登录或者没有投资过的
+        if ((App.saveUserInfo == null ||  TextUtils.isEmpty(App.saveUserInfo.getAccess_Token()))
+                || App.mUserDetailInfo == null || !App.mUserDetailInfo.HasInvest) {
             setupBoutiqueVisible(View.GONE);
             setupNewVisible(View.VISIBLE);
         } else {
             setupBoutiqueVisible(View.VISIBLE);
             setupNewVisible(View.GONE);
+        }
+        //如果新标预告或者新手标为空的时候就显示列表
+        if (announceRecordsBeans == null || announceRecordsBeans.size() <= 0 || newRecordsBeans == null || newRecordsBeans.size() <= 0) {
+            if (additionListview != null && ((Activity_Main)ctx).getFragProduct().getFirstItemData() != null) {
+                additionRecordsBeans.clear();
+                additionRecordsBeans.add((ProductRecordsBean) ((Activity_Main)ctx).getFragProduct().getFirstItemData());
+                if (mAdditionAdapter != null) {
+                    mAdditionAdapter.notifyDataSetChanged();
+                    setupAdditionVisible(View.VISIBLE);
+                }
+            }
+        } else  {
+            additionRecordsBeans.clear();
+            if (mAdditionAdapter != null) {
+                mAdditionAdapter.notifyDataSetChanged();
+                setupAdditionVisible(View.GONE);
+            }
         }
     }
 

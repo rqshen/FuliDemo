@@ -40,13 +40,13 @@ public class Activity_Base_Fragment extends FragmentActivity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_base);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            Window window = this.getWindow();
-            //顶部状态栏
-            window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            //显示顶部状态栏填充颜色，防止界面整体往上移
-            ((LinearLayout)findViewById(R.id.layout_topbar)).setVisibility(View.VISIBLE);
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+//            Window window = this.getWindow();
+//            //顶部状态栏
+//            window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+//            //显示顶部状态栏填充颜色，防止界面整体往上移
+//            ((LinearLayout)findViewById(R.id.layout_topbar)).setVisibility(View.VISIBLE);
+//        }
         //创建的时候判断是否要设置手势密码
         if (isLongerThanOneMinute() && App.saveUserInfo.getAccess_Token() != null && App.saveUserInfo.isFirstLogin()) {
             showSettingGestureAlertView();
