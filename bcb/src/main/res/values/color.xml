@@ -24,6 +24,8 @@
     <color name="green">#00B700</color>
     <!-- 灰色 -->
     <color name="gray">#ffaaaaaa</color>
+    <!--金色-->
+    <color name="gold">#FBBB34</color>
     <!-- 横线灰色 -->
     <color name="linegray">#EEEEEE</color>
     <!-- 公司名称黄色 -->

@@ -74,6 +74,7 @@
     <string name="auth_y">auth_y</string>
     <string name="auth_n">auth_n</string>
     <string name="autu_back">autu_back</string>
+    <string name="welfare_back">welfare_back</string>
     <string name="set_f_key">set_f_key</string>
     <string name="set_f_key_y">set_f_key_y</string>
     <string name="captcha_sent">captcha_sent</string>
