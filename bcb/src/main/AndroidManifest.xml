@@ -322,6 +322,11 @@
             android:name=".presentation.view.activity.Activity_Daily_Welfare"
             android:label="@string/app_name"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name=".presentation.view.activity.Activity_Daily_Welfare_Result"
+            android:label="@string/app_name"
+            android:theme="@style/Dialog_Fullscreen"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

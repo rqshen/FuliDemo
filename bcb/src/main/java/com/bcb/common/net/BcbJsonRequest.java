@@ -44,6 +44,19 @@ public class BcbJsonRequest extends BcbRequest<JSONObject> {
 
     /**
      * 构造函数
+     * @param url           请求接口
+     * @param jsonObject    JSONObject对象
+     * @param encodeToken   Token
+     * @param isAddDevInfo  是否添加设备信息
+     * @param callBack      请求回调
+     */
+    public BcbJsonRequest(String url, JSONObject jsonObject, String encodeToken, boolean isAddDevInfo, BcbCallBack<JSONObject> callBack) {
+        super(Method.POST, url, jsonObject == null ? "" : jsonObject.toString(), encodeToken, isAddDevInfo, callBack);
+        mEncodeToken = encodeToken;
+    }
+
+    /**
+     * 构造函数
      * @param method        请求方式，GET ？ POST 还是其他
      * @param url           请求接口
      * @param jsonObject    JSONObject对象
@@ -54,7 +67,6 @@ public class BcbJsonRequest extends BcbRequest<JSONObject> {
         super(method, url, jsonObject == null ? "" : jsonObject.toString(), encodeToken, callBack);
         mEncodeToken = encodeToken;
     }
-
 
     /**
      * 构造函数

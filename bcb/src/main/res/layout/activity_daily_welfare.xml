@@ -3,9 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    android:clipToPadding="true">
+    android:layout_height="match_parent">
     <!-- 标题 -->
     <RelativeLayout
         android:id="@+id/layout_topbar"
@@ -36,9 +34,16 @@
             android:id="@+id/img_background"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop"/>
+            android:scaleType="fitXY"/>
+
+        <View
+            android:id="@+id/null_view"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_above="@+id/text_count"/>
 
         <LinearLayout
+            android:id="@+id/text_count"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -58,11 +63,12 @@
                     android:text="今日已有"
                     android:textSize="@dimen/main_text_default"/>
                 <TextView
+                    android:id="@+id/join_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
                     android:textColor="@color/red"
-                    android:text="0000"
+                    android:text="5"
                     android:textSize="@dimen/main_text_large"/>
                 <TextView
                     android:layout_width="wrap_content"
@@ -84,6 +90,7 @@
                 app:isItemsDimmedAlphaAnimator="false"/>
 
             <TextView
+                android:id="@+id/btn_welfare_rule"
                 android:layout_width="180dp"
                 android:layout_height="46dp"
                 android:layout_marginTop="10dp"
@@ -97,7 +104,5 @@
         </LinearLayout>
 
     </RelativeLayout>
-
-
 
 </LinearLayout>

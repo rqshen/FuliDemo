@@ -1,0 +1,123 @@
+package com.bcb.presentation.view.activity;
+
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.bcb.R;
+import com.bcb.data.util.UmengUtil;
+import com.bcb.presentation.view.custom.Animation.BounceInterpolator;
+
+/**
+ * Created by Ray on 2016/5/11.
+ *
+ * @desc
+ */
+public class Activity_Daily_Welfare_Result extends Activity_Base implements View.OnClickListener{
+
+    private LinearLayout coin;//弹跳金币
+    private LinearLayout ll_text;//按钮下面文本
+    private TextView btn_welfare_check;//立即查看
+    private ImageView activity_close;//关闭按钮
+
+    private Activity ctx;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        //去掉状态栏
+        WindowManager.LayoutParams attrs = getWindow().getAttributes();
+        attrs.flags &= ~WindowManager.LayoutParams.FLAG_FULLSCREEN;
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        getWindow().setAttributes(attrs);
+
+        setContentView(R.layout.activity_daily_welfare_result);
+        ctx = this;
+
+        coin = (LinearLayout) findViewById(R.id.coin);
+
+//        PropertyValuesHolder pvhY = PropertyValuesHolder.ofFloat("scaleX", 1f, 0, 1f);
+//        PropertyValuesHolder pvhZ = PropertyValuesHolder.ofFloat("scaleY", 1f, 0, 1f);
+//        ObjectAnimator.ofPropertyValuesHolder(view, pvhY,pvhZ).setDuration(1000).start();
+
+        ll_text = (LinearLayout) findViewById(R.id.ll_text);
+        ll_text.setVisibility(View.GONE);
+        ll_text.setOnClickListener(this);
+        btn_welfare_check = (TextView) findViewById(R.id.btn_welfare_check);
+        btn_welfare_check.setVisibility(View.GONE);
+        btn_welfare_check.setOnClickListener(this);
+
+        activity_close = (ImageView) findViewById(R.id.activity_close);
+        activity_close.setOnClickListener(this);
+
+        WindowManager wm = (WindowManager)getSystemService(Context.WINDOW_SERVICE);
+        int height = wm.getDefaultDisplay().getHeight();
+        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(coin, "translationY", 0, -height/5);
+        objectAnimator.setDuration(1200);
+        objectAnimator.setInterpolator(new BounceInterpolator());
+        objectAnimator.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                ll_text.setVisibility(View.VISIBLE);
+                btn_welfare_check.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+        objectAnimator.start();
+    }
+
+    /**
+     * 启动
+     * @param ctx
+     */
+    public static void launche(Context ctx){
+        Intent intent = new Intent(ctx, Activity_Daily_Welfare_Result.class);
+        ctx.startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(0, 0);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.ll_text://跳转到投资记录
+                UmengUtil.eventById(ctx, R.string.self_tzjl);
+                Activity_Trading_Record.launche(ctx);
+                finish();
+                break;
+            case R.id.btn_welfare_check://跳转到首页产品列表
+                finish();
+                break;
+            case R.id.activity_close:
+                finish();
+                break;
+        }
+    }
+}

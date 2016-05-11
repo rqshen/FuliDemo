@@ -6,6 +6,8 @@
     <color name="background">#F0F0F0</color>
     <!-- 背景灰 -->
     <color name="background_gray">#EFEFEF</color>
+    <!--半透明背景-->
+    <color name="transparent_background">#50000000</color>
     <!-- 文本黑色 -->
     <color name="txt_black">#333333</color>
     <!--文本中灰色-->
@@ -25,7 +27,11 @@
     <!-- 灰色 -->
     <color name="gray">#ffaaaaaa</color>
     <!--金色-->
-    <color name="gold">#FBBB34</color>
+    <color name="gold">#FDFD98</color>
+    <!--金色2-->
+    <color name="gold2">#F7E253</color>
+    <!--橘黄色-->
+    <color name="orange">#DD8C00</color>
     <!-- 横线灰色 -->
     <color name="linegray">#EEEEEE</color>
     <!-- 公司名称黄色 -->

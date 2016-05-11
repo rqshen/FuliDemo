@@ -26,6 +26,15 @@
     <string name="cancel">取消</string>
     <string name="dismiss">隐藏</string>
 
+    <!--每日福利活动规则对话框文字-->
+    <string name="rule_title">活动规则</string>
+    <string name="rule_one">1.所有福利金融用户登录后可领福利</string>
+    <string name="rule_two">2.领福利时间为每日06:00 ~ 22:00</string>
+    <string name="rule_three">3.加息券可用于所有可投标，有效期为1天</string>
+    <string name="rule_four">4.用户每天有一次机会参与活动</string>
+    <string name="rule_tip">*本次活动最终解释权归福利金融所有</string>
+
+
     <!-- 登录页面 -->
     <string name="register_present">注册即送1000元体验券</string>
 
@@ -262,5 +271,11 @@
     <string name="rotate_value_six">袁先生 成功借款20w</string>
     <string name="rotate_value_seven">植先生 成功借款5w</string>
     <string name="rotate_value_eight">张小姐 成功借款12w</string>
+    <!--每日福利-->
+    <string name="scroll_value_one">刘小姐 刚刚领取了+0.5%</string>
+    <string name="scroll_value_two">沈先生 刚刚领取了+0.2%</string>
+    <string name="scroll_value_three">赵先生 刚刚领取了+0.3%</string>
+    <string name="scroll_value_four">陈先生 刚刚领取了+0.1%</string>
+    <string name="scroll_value_five">苏先生 刚刚领取了+0.3%</string>
 
 </resources>
