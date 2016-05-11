@@ -35,6 +35,7 @@ dependencies {
     compile 'org.apache:apache:17'
     compile 'com.google.code.gson:gson:2.2.4'
     compile 'com.android.support:support-v13:23.2.0'
+    compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
     //美洽SDK
     // 兼容Android6.0动态权限
     compile 'pub.devrel:easypermissions:0.1.5'

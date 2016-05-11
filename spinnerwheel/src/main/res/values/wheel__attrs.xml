@@ -10,6 +10,7 @@
         <attr name="selectionDivider" format="reference"/>
         <attr name="itemsDimmedAlpha" format="integer"/>
         <attr name="isCyclic" format="boolean"/>
+        <attr name="isItemsDimmedAlphaAnimator" format="boolean"/>
     </declare-styleable>
     <declare-styleable name="WheelVerticalView">
         <attr name="selectionDividerHeight" format="dimension"/>

@@ -51,6 +51,7 @@ import com.bcb.data.util.UmengUtil;
 import com.bcb.presentation.adapter.AnnounceAdapter;
 import com.bcb.presentation.adapter.ExpiredAdapter;
 import com.bcb.presentation.adapter.ProductAdapter;
+import com.bcb.presentation.view.activity.Activity_Daily_Welfare;
 import com.bcb.presentation.view.activity.Activity_ExpiredProject_Introduction;
 import com.bcb.presentation.view.activity.Activity_Login_Introduction;
 import com.bcb.presentation.view.activity.Activity_Main;
@@ -757,8 +758,10 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.ll_daily_welfare://每日福利
+                Activity_Daily_Welfare.launche(ctx);
                 break;
             case R.id.ll_wealth_college://理财学院
+
                 break;
             case R.id.ll_security://安全保障
                 Activity_WebView.launche(ctx,"安全保障",UrlsOne.SecureWebView);

@@ -64,6 +64,8 @@ public abstract class AbstractWheelView extends AbstractWheel {
     
     protected static final int DEF_SELECTION_DIVIDER_SIZE = 2;
 
+    protected static final boolean DEF_ITEMS_DIMMED_ALPHA_ANIMATOR = true;
+
     //----------------------------------
     //  Class properties
     //----------------------------------
@@ -109,6 +111,10 @@ public abstract class AbstractWheelView extends AbstractWheel {
      * {@link com.nineoldandroids.animation.Animator} for dimming the selector spinnerwheel.
      */
     protected Animator mDimSeparatorsAnimator;
+    /**
+     * {@link com.nineoldandroids.animation.Animator} for dimming the selector spinnerwheel.
+     */
+    protected boolean isItemsDimmedAlphaAnimator;
 
     /**
      * The property for setting the selector paint.
@@ -146,6 +152,7 @@ public abstract class AbstractWheelView extends AbstractWheel {
         super.initAttributes(attrs, defStyle);
         
         TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.AbstractWheelView, defStyle, 0);
+        isItemsDimmedAlphaAnimator = a.getBoolean(R.styleable.AbstractWheelView_isItemsDimmedAlphaAnimator, DEF_ITEMS_DIMMED_ALPHA_ANIMATOR);
         mItemsDimmedAlpha = a.getInt(R.styleable.AbstractWheelView_itemsDimmedAlpha, DEF_ITEMS_DIMMED_ALPHA);
         mSelectionDividerActiveAlpha = a.getInt(R.styleable.AbstractWheelView_selectionDividerActiveAlpha, DEF_SELECTION_DIVIDER_ACTIVE_ALPHA);
         mSelectionDividerDimmedAlpha = a.getInt(R.styleable.AbstractWheelView_selectionDividerDimmedAlpha, DEF_SELECTION_DIVIDER_DIMMED_ALPHA);
@@ -160,16 +167,20 @@ public abstract class AbstractWheelView extends AbstractWheel {
         super.initData(context);
 
         // creating animators
-        mDimSelectorWheelAnimator = ObjectAnimator.ofFloat(this, PROPERTY_SELECTOR_PAINT_COEFF, 1, 0);
+        if (isItemsDimmedAlphaAnimator){
+            mDimSelectorWheelAnimator = ObjectAnimator.ofFloat(this, PROPERTY_SELECTOR_PAINT_COEFF, 1, 0);
 
-        mDimSeparatorsAnimator = ObjectAnimator.ofInt(this, PROPERTY_SEPARATORS_PAINT_ALPHA,
-                mSelectionDividerActiveAlpha, mSelectionDividerDimmedAlpha
-        );
+            mDimSeparatorsAnimator = ObjectAnimator.ofInt(this, PROPERTY_SEPARATORS_PAINT_ALPHA,
+                    mSelectionDividerActiveAlpha, mSelectionDividerDimmedAlpha
+            );
+        }
 
         // creating paints
         mSeparatorsPaint = new Paint();
         mSeparatorsPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_IN));
-        mSeparatorsPaint.setAlpha(mSelectionDividerDimmedAlpha);
+        if (isItemsDimmedAlphaAnimator){
+            mSeparatorsPaint.setAlpha(mSelectionDividerDimmedAlpha);
+        }
 
         mSelectorWheelPaint = new Paint();
         mSelectorWheelPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_IN));
@@ -219,10 +230,14 @@ public abstract class AbstractWheelView extends AbstractWheel {
 
     @Override
     protected void onScrollTouched() {
-        mDimSelectorWheelAnimator.cancel();
-        mDimSeparatorsAnimator.cancel();
+        if (isItemsDimmedAlphaAnimator){
+            mDimSelectorWheelAnimator.cancel();
+            mDimSeparatorsAnimator.cancel();
+        }
         setSelectorPaintCoeff(1);
-        setSeparatorsPaintAlpha(mSelectionDividerActiveAlpha);
+        if (isItemsDimmedAlphaAnimator){
+            setSeparatorsPaintAlpha(mSelectionDividerActiveAlpha);
+        }
     }
 
     @Override
@@ -248,8 +263,10 @@ public abstract class AbstractWheelView extends AbstractWheel {
      * @param animationDuration The duration of the animation.
      */
     private void fadeSelectorWheel(long animationDuration) {
-        mDimSelectorWheelAnimator.setDuration(animationDuration);
-        mDimSelectorWheelAnimator.start();
+        if (isItemsDimmedAlphaAnimator){
+            mDimSelectorWheelAnimator.setDuration(animationDuration);
+            mDimSelectorWheelAnimator.start();
+        }
     }
 
     /**
@@ -258,8 +275,10 @@ public abstract class AbstractWheelView extends AbstractWheel {
      * @param animationDuration The duration of the animation.
      */
     private void lightSeparators(long animationDuration) {
-        mDimSeparatorsAnimator.setDuration(animationDuration);
-        mDimSeparatorsAnimator.start();
+        if (isItemsDimmedAlphaAnimator){
+            mDimSeparatorsAnimator.setDuration(animationDuration);
+            mDimSeparatorsAnimator.start();
+        }
     }
 
 
