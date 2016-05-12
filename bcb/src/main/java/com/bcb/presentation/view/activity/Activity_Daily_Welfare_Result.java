@@ -6,6 +6,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -83,6 +85,21 @@ public class Activity_Daily_Welfare_Result extends Activity_Base implements View
         overridePendingTransition(0, 0);
     }
 
+    //仅用于界面延迟销毁
+    private final int destroy = 100;
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what){
+                case destroy:
+                    MyActivityManager.getInstance().finishAllActivity();
+                    overridePendingTransition(0, 0);
+                    break;
+            }
+        }
+    };
+
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -95,7 +112,7 @@ public class Activity_Daily_Welfare_Result extends Activity_Base implements View
                 EventBus.getDefault().post(new MainActivityEvent(MainActivityEvent.PRODUCT));
                 finish();
                 overridePendingTransition(0, 0);
-                MyActivityManager.getInstance().finishAllActivity();
+                handler.sendEmptyMessageDelayed(destroy, 50);
                 break;
             case R.id.activity_close:
                 finish();
