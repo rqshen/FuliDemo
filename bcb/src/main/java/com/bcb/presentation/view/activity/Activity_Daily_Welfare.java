@@ -1,6 +1,7 @@
 package com.bcb.presentation.view.activity;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -23,6 +24,7 @@ import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
 import com.bcb.common.net.UrlsOne;
 import com.bcb.data.util.LogUtil;
+import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.TokenUtil;
 import com.bcb.data.util.UmengUtil;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
@@ -76,7 +78,7 @@ public class Activity_Daily_Welfare extends Activity_Base implements View.OnClic
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        MyActivityManager.getInstance().pushOneActivity(this);
         setContentView(R.layout.activity_daily_welfare);
         context = this;
         setTitleValue("每日福利");
