@@ -166,10 +166,6 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
         setBaseContentView(R.layout.activity_loanrequest_borrow);
         setLeftTitleVisible(true);
         setTitleValue("借款信息");
-
-        //创建请求队列
-        requestQueue = BcbNetworkManager.newRequestQueue(this);
-
         setRightTitleValue("我的借款", new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -177,8 +173,38 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
                 finish();
             }
         });
-
+        //创建请求队列
+        requestQueue = BcbNetworkManager.newRequestQueue(this);
+        //初始化Banner
+        setupBanner();
+        //初始化刷新控件
+        setupRefreshLayout();
+        //获取验证信息
         getLoanCertification();
+    }
+
+    //初始化Banner
+    private void setupBanner() {
+        //借款banner
+        banner_image = (ImageView) findViewById(R.id.banner_image);
+        //根据Banner的宽高比进行等比缩放
+        ViewGroup.LayoutParams params = banner_image.getLayoutParams();
+        int width = ScreenUtils.getScreenDispaly(Activity_LoanRequest_Borrow.this)[0];
+        params.height= width * 608 / 1440;
+        params.width = width;
+        banner_image.setLayoutParams(params);
+    }
+
+    //借款列表页
+    private void gotoListPage() {
+        UmengUtil.eventById(Activity_LoanRequest_Borrow.this, R.string.loan_my);
+        Intent listIntent = new Intent(Activity_LoanRequest_Borrow.this, Activity_LoanList.class);
+        startActivity(listIntent);
+    }
+
+    //初始化刷新控件
+    private void setupRefreshLayout() {
+        //刷新
         (findViewById(R.id.loadmore_view)).setVisibility(View.GONE);
         refreshLayout = (PullToRefreshLayout) findViewById(R.id.refresh_view);
         refreshLayout.setRefreshResultView(false);
@@ -198,14 +224,6 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
                 refreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
             }
         });
-
-    }
-
-    //借款列表页
-    private void gotoListPage() {
-        UmengUtil.eventById(Activity_LoanRequest_Borrow.this, R.string.loan_my);
-        Intent listIntent = new Intent(Activity_LoanRequest_Borrow.this, Activity_LoanList.class);
-        startActivity(listIntent);
     }
 
     /**
@@ -216,7 +234,6 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
         loanRequestInfo = (new Gson()).fromJson(loanRequestInfoString, LoanRequestInfoBean.class);
         durationStatus = loanRequestInfo.LoanTimeType;
         periodStatus = loanRequestInfo.Period;
-
         initLoanMessage();
         //请求获取优惠券张数
         getCouponCount();
@@ -261,14 +278,6 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
                 setupRepayProgramme();
             }
         });
-        //借款banner
-        banner_image = (ImageView) findViewById(R.id.banner_image);
-        //根据Banner的宽高比进行等比缩放
-        ViewGroup.LayoutParams params = banner_image.getLayoutParams();
-        int width = ScreenUtils.getScreenDispaly(Activity_LoanRequest_Borrow.this)[0];
-        params.height= width * 608 / 1440;
-        params.width = width;
-        banner_image.setLayoutParams(params);
         //借款期限
         findViewById(R.id.rl_duration).setOnClickListener(this);
         loan_duration = (TextView) findViewById(R.id.loan_duration);

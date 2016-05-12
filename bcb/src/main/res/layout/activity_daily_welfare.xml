@@ -8,26 +8,26 @@
     android:clipToPadding="true">
     <!-- 标题 -->
     <RelativeLayout
-        android:id="@+id/layout_topbar"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/red">
-        <ImageView
-            android:id="@+id/back_img"
-            style="@style/btn_back"
-            android:layout_alignParentLeft="true" />
+    android:id="@+id/layout_topbar"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="@color/red">
+    <ImageView
+        android:id="@+id/back_img"
+        style="@style/btn_back"
+        android:layout_alignParentLeft="true" />
 
-        <!-- 标题 -->
-        <TextView
-            android:id="@+id/title_text"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_centerInParent="true"
-            android:gravity="center"
-            android:textColor="@color/white"
-            android:textSize="@dimen/main_text_large" />
+    <!-- 标题 -->
+    <TextView
+        android:id="@+id/title_text"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/main_text_large" />
 
-    </RelativeLayout>
+</RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -36,7 +36,7 @@
             android:id="@+id/img_background"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop"/>
+            android:scaleType="fitXY"/>
 
         <LinearLayout
             android:layout_width="match_parent"

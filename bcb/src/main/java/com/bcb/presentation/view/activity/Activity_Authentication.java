@@ -17,6 +17,7 @@ import com.bcb.common.app.App;
 import com.bcb.R;
 import com.bcb.common.net.BcbRemoteImage;
 import com.bcb.data.bean.BankItem;
+import com.bcb.data.util.BankLogo;
 import com.bcb.data.util.MQCustomerManager;
 import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.ToastUtil;
@@ -196,7 +197,8 @@ public class Activity_Authentication extends Activity_Base implements Interface_
         //设置银行logo和名称
         ImageView bank_icon = (ImageView) findViewById(R.id.bank_icon);
         TextView bank_name = (TextView) findViewById(R.id.bank_name);
-        BcbRemoteImage.getInstance(this).loadRemoteImage(bank_icon, mBankItem.getLogo());
+        BankLogo bankLogo = new BankLogo();
+        bank_icon.setBackgroundResource(bankLogo.getDrawableBankLogo(mBankItem.getBankCode()));
         bank_name.setText(mBankItem.getBankName());
     }
 

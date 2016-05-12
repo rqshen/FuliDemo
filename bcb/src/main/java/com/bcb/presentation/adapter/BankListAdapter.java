@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.bcb.R;
 import com.bcb.common.net.BcbRemoteImage;
 import com.bcb.data.bean.BankItem;
+import com.bcb.data.util.BankLogo;
 import com.bcb.data.util.LogUtil;
 
 import java.util.List;
@@ -56,17 +57,19 @@ public class BankListAdapter extends BaseAdapter {
 			mHolder = (Holder) view.getTag();
 		}
 
-		if (data.get(pos).getLogo() != null) {
-			//异步加载网络图片
-           BcbRemoteImage.getInstance(ctx).loadRemoteImage(mHolder.bank_icon, data.get(pos).getLogo());
-		}
+		BankLogo bankLogo = new BankLogo();
+		mHolder.bank_icon.setBackgroundResource(bankLogo.getDrawableBankLogo(data.get(pos).getBankCode()));
 
 		if (data.get(pos).getBankName() != null) {
 			mHolder.bank_name.setText(data.get(pos).getBankName());
 		}
         //如果单笔限额和每日限额都大于0.0万时才显示
-		mHolder.bank_rule.setText("单笔限额"+ data.get(pos).getMaxSingle() + "万，每日限额" + data.get(pos).getMaxDay() + "万");
-
+		if (data.get(pos).getMaxSingle() > 0 && data.get(pos).getMaxDay() > 0) {
+			mHolder.bank_rule.setVisibility(View.VISIBLE);
+			mHolder.bank_rule.setText("单笔限额"+ data.get(pos).getMaxSingle() + "万，每日限额" + data.get(pos).getMaxDay() + "万");
+		} else {
+			mHolder.bank_rule.setVisibility(View.GONE);
+		}
 		return view;
 	}
 
