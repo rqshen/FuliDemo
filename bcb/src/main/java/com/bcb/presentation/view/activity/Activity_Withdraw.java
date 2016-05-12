@@ -28,6 +28,7 @@ import com.bcb.data.bean.UserDetailInfo;
 import com.bcb.data.bean.UserWallet;
 import com.bcb.common.net.UrlsOne;
 import com.bcb.common.net.UrlsTwo;
+import com.bcb.data.util.BankLogo;
 import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.PackageUtil;
@@ -49,6 +50,7 @@ public class Activity_Withdraw extends Activity_Base implements View.OnClickList
 	private TextView username_balance;
 	private TextView bank_name_text;
 	private TextView bank_card_text;
+	private ImageView bank_icon;
 	private LinearLayout forgetPayPassWord;
 	private EditText editext_money;
 
@@ -109,6 +111,7 @@ public class Activity_Withdraw extends Activity_Base implements View.OnClickList
 	private void init() {
 		bank_name_text = (TextView) findViewById(R.id.bank_name_text);
 		bank_card_text = (TextView) findViewById(R.id.bank_card_text);
+		bank_icon = (ImageView) findViewById(R.id.bank_icon);
         username_balance = (TextView) findViewById(R.id.username_balance);
 		userpwd = (PasswordEditText) findViewById(R.id.userpwd);
 		userpwd.setInputType(InputType.TYPE_CLASS_NUMBER);
@@ -153,12 +156,14 @@ public class Activity_Withdraw extends Activity_Base implements View.OnClickList
         //设置银行卡账号，有账号信息则不用从服务器中加载数据，直接在本地静态数据区中取得
 		if (App.mUserDetailInfo.BankCard != null) {
             bank_card_text.setText(TextUtil.delBankNum(App.mUserDetailInfo.BankCard.getCardNumber()));
+			BankLogo bankLogo = new BankLogo();
+			bank_icon.setBackgroundResource(bankLogo.getDrawableBankLogo(App.mUserDetailInfo.BankCard.getBankCode()));
             mUserBankInfo = App.mUserDetailInfo;
             hideProgressBar();
         } else {
             loadBankInfo();
         }
-		
+
 		IntentFilter intentFilter = new IntentFilter("com.bcb.bank.area.complete"); 	
 		mReceiver = new Receiver();
 		registerReceiver(mReceiver, intentFilter);

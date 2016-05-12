@@ -155,6 +155,8 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener{
             announceAdapter.notifyDataSetChanged();
             if (App.saveUserInfo.getAccess_Token() == null && button_floating != null) {
                 button_floating.setVisibility(View.VISIBLE);
+            } else {
+                button_floating.setVisibility(View.GONE);
             }
             showItemVisible();
         }

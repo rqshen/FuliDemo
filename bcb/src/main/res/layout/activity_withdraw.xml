@@ -105,6 +105,13 @@
                         android:text=""
                         android:textColor="@color/txt_black"
                         android:textSize="@dimen/main_text_default" />
+                    <ImageView
+                        android:id="@+id/bank_icon"
+                        android:layout_width="33dp"
+                        android:layout_height="33dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/margin_size_default"/>
                 </RelativeLayout>
             </LinearLayout>
 
