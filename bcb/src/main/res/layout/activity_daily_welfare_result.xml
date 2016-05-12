@@ -38,9 +38,10 @@
                 android:textColor="@color/orange"
                 android:textSize="20sp"/>
             <TextView
+                android:id="@+id/welfare_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0.4%"
+                android:text="0.0%"
                 android:textColor="@color/orange"
                 android:textSize="34sp"/>
         </LinearLayout>
@@ -79,13 +80,21 @@
                 android:text="在投资金额已加息，活动累计收益"/>
 
             <TextView
-                android:id="@+id/tv_amount"
+                android:id="@+id/welfare_totalInterest"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="3.0 >"
+                android:text="3.0"
                 android:textColor="@color/gold2"
                 android:layout_gravity="bottom"
                 android:textSize="@dimen/main_text_large"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/gold2"
+                android:layout_gravity="bottom"
+                android:textSize="@dimen/main_text_large"
+                android:text=" >"/>
 
         </LinearLayout>
 

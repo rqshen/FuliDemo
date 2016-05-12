@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -33,6 +34,8 @@ public class Activity_Daily_Welfare_Result extends Activity_Base implements View
     private LinearLayout ll_text;//按钮下面文本
     private TextView btn_welfare_check;//立即查看
     private ImageView activity_close;//关闭按钮
+    private TextView welfare_value;//增加的收益
+    private TextView welfare_totalInterest;//累计收益
 
     private Activity ctx;
 
@@ -54,6 +57,16 @@ public class Activity_Daily_Welfare_Result extends Activity_Base implements View
         ll_text.setOnClickListener(this);
         btn_welfare_check = (TextView) findViewById(R.id.btn_welfare_check);
         btn_welfare_check.setOnClickListener(this);
+        welfare_value = (TextView) findViewById(R.id.welfare_value);
+        String value = getIntent().getStringExtra("welfare_value");
+        if(!TextUtils.isEmpty(value)){
+            welfare_value.setText(value);
+        }
+        welfare_totalInterest = (TextView) findViewById(R.id.welfare_totalInterest);
+        String totalInterest = getIntent().getStringExtra("totalInterest");
+        if(!TextUtils.isEmpty(totalInterest)){
+            welfare_totalInterest.setText(totalInterest);
+        }
 
         activity_close = (ImageView) findViewById(R.id.activity_close);
         activity_close.setOnClickListener(this);
@@ -73,9 +86,13 @@ public class Activity_Daily_Welfare_Result extends Activity_Base implements View
     /**
      * 启动
      * @param ctx
+     * @param value 福利值
+     * @param totalInterest 累计收益
      */
-    public static void launche(Context ctx){
+    public static void launche(Context ctx, String value, String totalInterest){
         Intent intent = new Intent(ctx, Activity_Daily_Welfare_Result.class);
+        intent.putExtra("welfare_value", value);
+        intent.putExtra("totalInterest", totalInterest);
         ctx.startActivity(intent);
     }
 

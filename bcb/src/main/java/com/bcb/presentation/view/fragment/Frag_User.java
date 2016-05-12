@@ -639,7 +639,6 @@ public class Frag_User extends Frag_Base implements OnClickListener {
                     }
                 });
             } else {
-                //        Intent newIntent = new Intent(ctx, Activity_Loan.class);
                 Intent newIntent = new Intent(ctx, Activity_LoanRequest_Borrow.class);
                 startActivity(newIntent);
             }

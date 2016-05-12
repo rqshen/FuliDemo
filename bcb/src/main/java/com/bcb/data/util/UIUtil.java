@@ -2,6 +2,7 @@ package com.bcb.data.util;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.os.Build;
 import android.view.Window;
 import android.view.WindowManager;
@@ -41,5 +42,25 @@ public class UIUtil {
             winParams.flags &= ~bits;
         }
         win.setAttributes(winParams);
+    }
+
+
+    private static ProgressDialog progressDialog;
+
+    //显示转圈提示
+    public static void showProgressBar(Activity context) {
+        if (!context.isFinishing()){
+            if(null == progressDialog) progressDialog = new ProgressDialog(context, ProgressDialog.THEME_HOLO_LIGHT);
+            progressDialog.setMessage("正在加载数据....");
+            progressDialog.setCanceledOnTouchOutside(false);
+            progressDialog.setCancelable(true);
+            progressDialog.show();
+        }
+    }
+    //隐藏转圈提示
+    public static void hideProgressBar() {
+        if(null != progressDialog && progressDialog.isShowing()){
+            progressDialog.dismiss();
+        }
     }
 }

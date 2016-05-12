@@ -8,6 +8,7 @@ import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +25,7 @@ import com.bcb.common.net.BcbRequestTag;
 import com.bcb.common.net.UrlsOne;
 import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MyActivityManager;
+import com.bcb.data.util.ToastUtil;
 import com.bcb.data.util.TokenUtil;
 import com.bcb.data.util.UmengUtil;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
@@ -33,6 +35,7 @@ import com.dg.spinnerwheel.adapters.ArrayWheelAdapter;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -58,6 +61,7 @@ public class Activity_Daily_Welfare extends Activity_Base implements View.OnClic
 
     private TextView join_count;//参与人数
     private String[] rotateValues;//滚动内容
+    private String totalInterest;//累计收益
 
     private Activity context;
     private BcbRequestQueue requestQueue;
@@ -122,8 +126,9 @@ public class Activity_Daily_Welfare extends Activity_Base implements View.OnClic
             public void onResponse(JSONObject response) {
                 try {
                     if (response.getInt("status") == 1) {
+                        JSONObject resultObject = response.getJSONObject("result");
                         //设置对应位置的数据
-                        JSONArray jsonArray = response.getJSONObject("result").getJSONArray("JoinList");
+                        JSONArray jsonArray = resultObject.getJSONArray("JoinList");
                         if (null != jsonArray) {
                             //更新UI
                             LogUtil.d("统计数据", jsonArray.toString());
@@ -134,6 +139,13 @@ public class Activity_Daily_Welfare extends Activity_Base implements View.OnClic
                             }
                             startRotate();
                         }
+                        //参与人数
+                        String totalPopulation = resultObject.getString("TotalPopulation");
+                        if(!TextUtils.isEmpty(totalPopulation)){
+                            join_count.setText(totalPopulation);
+                        }
+                        //累计收益
+                        totalInterest = resultObject.getString("TotalInterest");
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -224,6 +236,7 @@ public class Activity_Daily_Welfare extends Activity_Base implements View.OnClic
     protected void onDestroy() {
         super.onDestroy();
         requestQueue.cancelAll(BcbRequestTag.UrlWelfareStatisticsTag);
+        requestQueue.cancelAll(BcbRequestTag.UrlJoinWelfareTag);
     }
 
     /**
@@ -252,15 +265,59 @@ public class Activity_Daily_Welfare extends Activity_Base implements View.OnClic
         dialog.show();
     }
 
+    /**
+     * 请求福袋
+     */
+    private void getPackageData(){
+//        UIUtil.showProgressBar(context);
+        JSONObject obj = new JSONObject();
+        BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.JoinDailyWelfare, obj, TokenUtil.getEncodeToken(context), true, new BcbRequest.BcbCallBack<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+//                UIUtil.hideProgressBar();
+                try {
+                    if (response.getInt("status") == 1) {
+                        //设置对应位置的数据
+                        String value = response.getString("result");
+                        LogUtil.d("福袋数据", value);
+                        if (!TextUtils.isEmpty(value)){
+                            UmengUtil.eventById(context, R.string.self_mrfl);
+                            Activity_Daily_Welfare_Result.launche(context, value, totalInterest);
+                        }
+                    }else{
+                        ToastUtil.alert(context, response.getString("message"));
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onErrorResponse(Exception error) {
+
+            }
+        });
+        jsonRequest.setTag(BcbRequestTag.UrlJoinWelfareTag);
+        requestQueue.add(jsonRequest);
+    }
+
+
+    private long lastClickTime;//上次点击时间
+    private final long MIN_CLICK_DELAY_TIME = 500;//最小时间间隔
+
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.btn_welfare_rule:
+            case R.id.btn_welfare_rule://活动规则
                 showRuleDialog();
                 break;
-            case R.id.null_view:
-                UmengUtil.eventById(context, R.string.self_mrfl);
-                Activity_Daily_Welfare_Result.launche(context);
+            case R.id.null_view://打开福袋
+                //防止按钮多次点击
+                long currentTime = Calendar.getInstance().getTimeInMillis();
+                if (currentTime - lastClickTime > MIN_CLICK_DELAY_TIME) {
+                    lastClickTime = currentTime;
+                    getPackageData();
+                }
                 break;
         }
     }

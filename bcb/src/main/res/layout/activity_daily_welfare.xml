@@ -39,7 +39,7 @@
         <View
             android:id="@+id/null_view"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="210dp"
             android:layout_above="@+id/text_count"/>
 
         <LinearLayout
