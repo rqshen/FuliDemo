@@ -38,6 +38,9 @@ public abstract class BcbRequest<T> extends Request<T> {
     //位置参数，默认为 -1，表示不使用位置参数回调
     private int index = -1;
 
+    //是否添加设备信息
+    private boolean isAddDevInfo = false;
+
     /**
      * 构造函数
      *
@@ -74,6 +77,34 @@ public abstract class BcbRequest<T> extends Request<T> {
             mRequestBody = requestBody;
         }
         mEncodeToken = encodeToken;
+    }
+
+    /**
+     * 构造函数
+     *
+     * @param method        请求方式
+     * @param url           请求接口
+     * @param requestBody   请求实体
+     * @param encodeToken   已加密的token，没有就传null
+     * @param isAddDevInfo  是否添加设备信息
+     * @param bcbCallBack   请求结果回调
+     */
+    public BcbRequest(int method, String url, String requestBody, String encodeToken, boolean isAddDevInfo, final BcbCallBack bcbCallBack) {
+        //将出错信息用接口保存起来
+        super(method, url, new ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                bcbCallBack.onErrorResponse(error);
+            }
+        });
+        mBcbCallBack = bcbCallBack;
+        if (TextUtils.isEmpty(requestBody)) {
+            mRequestBody = null;
+        } else  {
+            mRequestBody = requestBody;
+        }
+        mEncodeToken = encodeToken;
+        this.isAddDevInfo = isAddDevInfo;
     }
 
     /**
@@ -148,6 +179,10 @@ public abstract class BcbRequest<T> extends Request<T> {
         if (mEncodeToken != null) {
             Map<String, String> headers = new HashMap<String, String>();
             headers.put("access-token",mEncodeToken);
+            if (isAddDevInfo){
+                headers.put("version", android.os.Build.VERSION.RELEASE);
+                headers.put("platform", "android");
+            }
             return headers;
         } else {
             return super.getHeaders();
@@ -184,12 +219,12 @@ public abstract class BcbRequest<T> extends Request<T> {
     }
 
     public interface BcbCallBack<T> {
-        public void onResponse(T response);
-        public void onErrorResponse(Exception error);
+        void onResponse(T response);
+        void onErrorResponse(Exception error);
     }
 
     public interface BcbIndexCallBack<T> {
-        public void onResponse(T response, int index);
-        public void onErrorResponse(Exception error);
+        void onResponse(T response, int index);
+        void onErrorResponse(Exception error);
     }
 }

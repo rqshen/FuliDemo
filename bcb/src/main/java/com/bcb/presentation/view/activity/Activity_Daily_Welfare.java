@@ -1,5 +1,6 @@
 package com.bcb.presentation.view.activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -8,14 +9,28 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bcb.R;
-import com.bcb.data.util.UIUtil;
+import com.bcb.common.net.BcbJsonRequest;
+import com.bcb.common.net.BcbNetworkManager;
+import com.bcb.common.net.BcbRequest;
+import com.bcb.common.net.BcbRequestQueue;
+import com.bcb.common.net.BcbRequestTag;
+import com.bcb.common.net.UrlsOne;
+import com.bcb.data.util.LogUtil;
+import com.bcb.data.util.TokenUtil;
 import com.bcb.data.util.UmengUtil;
+import com.bcb.presentation.view.custom.AlertView.AlertView;
 import com.dg.spinnerwheel.WheelVerticalView;
 import com.dg.spinnerwheel.adapters.ArrayWheelAdapter;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -25,7 +40,7 @@ import java.util.TimerTask;
  *
  * @desc 每日福利
  */
-public class Activity_Daily_Welfare extends Activity_Base {
+public class Activity_Daily_Welfare extends Activity_Base implements View.OnClickListener{
     private ImageView img_background;//整个动画加背景
     private AnimationDrawable welfare_animationDrawable;//动画图片
 
@@ -39,6 +54,12 @@ public class Activity_Daily_Welfare extends Activity_Base {
     private ArrayWheelAdapter<String> adapter;
 
     private static final int SCROLL = 100;//滚屏文字
+
+    private TextView join_count;//参与人数
+    private String[] rotateValues;//滚动内容
+
+    private Activity context;
+    private BcbRequestQueue requestQueue;
 
     private Handler handler = new Handler(){
         @Override
@@ -57,10 +78,7 @@ public class Activity_Daily_Welfare extends Activity_Base {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_daily_welfare);
-
-        //设置系统状态栏背景色
-        UIUtil.initSystemBar(this, R.color.red);
-
+        context = this;
         setTitleValue("每日福利");
 
         setLeftTitleListener(new View.OnClickListener() {
@@ -76,18 +94,64 @@ public class Activity_Daily_Welfare extends Activity_Base {
         img_background.setImageResource(R.drawable.daily_welfare_frame);
         welfare_animationDrawable = (AnimationDrawable) img_background.getDrawable();
 
+        //初始化滚动文字
+        rotateValues = getResources().getStringArray(R.array.scrollValues);
         //文字滚动
         value_scroll  = (WheelVerticalView) findViewById(R.id.value_scroll);
         isPause = false;
         startRotate();
 
+        //活动规则按钮
+        findViewById(R.id.btn_welfare_rule).setOnClickListener(this);
+        //动画按钮点击
+        findViewById(R.id.null_view).setOnClickListener(this);
+
+        join_count = (TextView) findViewById(R.id.join_count);
+
+        requestQueue = BcbNetworkManager.newRequestQueue(context);
+    }
+
+    /**
+     * 请求统计数据
+     */
+    private void getStatisticsData(){
+        JSONObject obj = new JSONObject();
+        BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.DailyWelfareData, obj, TokenUtil.getEncodeToken(context), true, new BcbRequest.BcbCallBack<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    if (response.getInt("status") == 1) {
+                        //设置对应位置的数据
+                        JSONArray jsonArray = response.getJSONObject("result").getJSONArray("JoinList");
+                        if (null != jsonArray) {
+                            //更新UI
+                            LogUtil.d("统计数据", jsonArray.toString());
+                            rotateValues = new String[jsonArray.length()];
+                            for (int i=0;i<jsonArray.length();i++){
+                                JSONObject jsonObj = (JSONObject)jsonArray.get(i);
+                                rotateValues[i] = jsonObj.getString("Title");
+                            }
+                            startRotate();
+                        }
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onErrorResponse(Exception error) {
+
+            }
+        });
+        jsonRequest.setTag(BcbRequestTag.UrlWelfareStatisticsTag);
+        requestQueue.add(jsonRequest);
     }
 
     /**
      * 初始化并开始滚动文字
      */
     private void startRotate(){
-        String[] rotateValues = getResources().getStringArray(R.array.rotateValues);
         if (!this.isFinishing()){
             adapter = new ArrayWheelAdapter<>(this, rotateValues);
             adapter.setTextGravity(Gravity.CENTER);
@@ -133,6 +197,9 @@ public class Activity_Daily_Welfare extends Activity_Base {
             }
             isPause = false;
         }
+
+        //请求统计数据
+        getStatisticsData();
     }
 
     @Override
@@ -152,11 +219,48 @@ public class Activity_Daily_Welfare extends Activity_Base {
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        requestQueue.cancelAll(BcbRequestTag.UrlWelfareStatisticsTag);
+    }
+
     /**
+     * 启动
      * @param ctx
      */
     public static void launche(Context ctx){
         Intent intent = new Intent(ctx, Activity_Daily_Welfare.class);
         ctx.startActivity(intent);
+    }
+
+    /**
+     *显示活动规则对话框
+     */
+    private void showRuleDialog(){
+        final AlertView dialog = new AlertView(this, R.style.alertviewstyle);
+        LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View layout = inflater.inflate(R.layout.dialog_welfare_rule, null);
+        layout.findViewById(R.id.dialog_close).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.addContentView(layout, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        dialog.show();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.btn_welfare_rule:
+                showRuleDialog();
+                break;
+            case R.id.null_view:
+                UmengUtil.eventById(context, R.string.self_mrfl);
+                Activity_Daily_Welfare_Result.launche(context);
+                break;
+        }
     }
 }

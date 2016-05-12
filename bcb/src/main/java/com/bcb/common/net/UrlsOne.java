@@ -157,4 +157,9 @@ public class UrlsOne {
     // 用户钱包信息
     public static String UserWalletMessage = host + "/api/v1.0/e7401af956b5";
 
+    //参加每日福利
+    public static final String JoinDailyWelfare = host + "/api/v1.3.4/a60100aabccb";
+	//每日福利统计的数据
+    public static final String DailyWelfareData = host + "/api/v1.3.4/a60100b02646";
+
 }
