@@ -229,22 +229,28 @@ public class PullToRefreshLayout extends RelativeLayout {
      *            PullToRefreshLayout.SUCCEED代表成功，PullToRefreshLayout.FAIL代表失败
      */
     public void refreshFinish(int refreshResult) {
-        refreshingView.clearAnimation();
-        refreshingView.setVisibility(View.GONE);
+        if (null != refreshingView){
+            refreshingView.clearAnimation();
+            refreshingView.setVisibility(View.GONE);
+        }
         switch (refreshResult) {
             case SUCCEED:
                 // 刷新成功
-                refreshStateImageView.setVisibility(View.VISIBLE);
-                refreshStateTextView.setText(R.string.refresh_succeed);
-                refreshStateImageView.setBackgroundResource(R.drawable.refresh_succeed);
+                if (null != refreshStateImageView){
+                    refreshStateImageView.setVisibility(View.VISIBLE);
+                    refreshStateTextView.setText(R.string.refresh_succeed);
+                    refreshStateImageView.setBackgroundResource(R.drawable.refresh_succeed);
+                }
                 break;
 
             case FAIL:
             default:
                 // 刷新失败
-                refreshStateImageView.setVisibility(View.VISIBLE);
-                refreshStateTextView.setText(R.string.refresh_fail);
-                refreshStateImageView.setBackgroundResource(R.drawable.refresh_failed);
+                if (null != refreshStateImageView) {
+                    refreshStateImageView.setVisibility(View.VISIBLE);
+                    refreshStateTextView.setText(R.string.refresh_fail);
+                    refreshStateImageView.setBackgroundResource(R.drawable.refresh_failed);
+                }
                 break;
         }
         if (pullDownY > 0)
@@ -278,28 +284,35 @@ public class PullToRefreshLayout extends RelativeLayout {
      * @param refreshResult
      *            PullToRefreshLayout.SUCCEED代表成功，PullToRefreshLayout.FAIL代表失败
      */
-    public void loadmoreFinish(int refreshResult)
-    {
-        loadingView.clearAnimation();
-        loadingView.setVisibility(View.GONE);
+    public void loadmoreFinish(int refreshResult) {
+        if (null != loadingView) {
+            loadingView.clearAnimation();
+            loadingView.setVisibility(View.GONE);
+        }
         switch (refreshResult) {
             case SUCCEED:
                 // 加载成功
-                loadStateImageView.setVisibility(View.VISIBLE);
-                loadStateTextView.setText(R.string.load_succeed);
-                loadStateImageView.setBackgroundResource(R.drawable.load_succeed);
+                if (null != loadStateImageView) {
+                    loadStateImageView.setVisibility(View.VISIBLE);
+                    loadStateTextView.setText(R.string.load_succeed);
+                    loadStateImageView.setBackgroundResource(R.drawable.load_succeed);
+                }
                 break;
 
             case NOMORE:
-                refreshStateTextView.setText(R.string.refresh_nomore);
+                if (null != refreshStateTextView) {
+                    refreshStateTextView.setText(R.string.refresh_nomore);
+                }
                 break;
 
             case FAIL:
             default:
                 // 加载失败
-                loadStateImageView.setVisibility(View.VISIBLE);
-                loadStateTextView.setText(R.string.load_fail);
-                loadStateImageView.setBackgroundResource(R.drawable.load_failed);
+                if (null != loadStateImageView) {
+                    loadStateImageView.setVisibility(View.VISIBLE);
+                    loadStateTextView.setText(R.string.load_fail);
+                    loadStateImageView.setBackgroundResource(R.drawable.load_failed);
+                }
                 break;
         }
         if (pullUpY < 0) {

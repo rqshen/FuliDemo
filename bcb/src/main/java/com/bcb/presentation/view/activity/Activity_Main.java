@@ -10,6 +10,7 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -17,11 +18,15 @@ import android.widget.TextView;
 
 import com.bcb.R;
 import com.bcb.common.app.App;
+import com.bcb.common.event.MainActivityEvent;
+import com.bcb.common.event.ProductFragEvent;
 import com.bcb.data.util.UmengUtil;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
 import com.bcb.presentation.view.fragment.Frag_Main;
 import com.bcb.presentation.view.fragment.Frag_Product;
 import com.bcb.presentation.view.fragment.Frag_User;
+
+import de.greenrobot.event.EventBus;
 
 public class Activity_Main extends Activity_Base_Fragment {
 
@@ -47,6 +52,7 @@ public class Activity_Main extends Activity_Base_Fragment {
     private LinearLayout bottom;
     AlertView alertView = null;
 
+
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
@@ -55,12 +61,7 @@ public class Activity_Main extends Activity_Base_Fragment {
         registerBroadcast();
 		init();
 		UmengUtil.update(Activity_Main.this);
-	}
-
-	@Override
-	public void onWindowFocusChanged(boolean hasFocus) {
-		super.onWindowFocusChanged(hasFocus);
-
+		EventBus.getDefault().register(this);
 	}
 
 	private void init() {
@@ -72,6 +73,7 @@ public class Activity_Main extends Activity_Base_Fragment {
 		txt_user = (TextView) findViewById(R.id.txt_user);
         bottom = (LinearLayout) findViewById(R.id.bottom);
 		addFirstFragment();
+
 	}
 
 	public void onClick(View view) {
@@ -213,6 +215,30 @@ public class Activity_Main extends Activity_Base_Fragment {
 	protected void onDestroy() {
         super.onDestroy();
         unregisterReceiver(mReceiver);
+		EventBus.getDefault().unregister(this);
+	}
+
+	//接收事件
+	public void onEventMainThread(MainActivityEvent event) {
+		//判断要显示的fragment
+		String flag = event.getFlag();
+		if (!TextUtils.isEmpty(flag)){
+			switch(flag){
+				case MainActivityEvent.HOME:
+					UmengUtil.eventById(Activity_Main.this, R.string.home);
+					setFragMain();
+					break;
+				case MainActivityEvent.PRODUCT:
+					UmengUtil.eventById(Activity_Main.this, R.string.main_product_list);
+					setFragProduct();
+					EventBus.getDefault().post(new ProductFragEvent(ProductFragEvent.REFRESH));
+					break;
+				case MainActivityEvent.USER:
+					UmengUtil.eventById(Activity_Main.this,R.string.self_c);
+					setFragUser();
+					break;
+			}
+		}
 	}
 
 	@Override

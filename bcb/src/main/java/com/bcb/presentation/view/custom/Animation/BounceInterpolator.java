@@ -5,9 +5,8 @@ import android.util.AttributeSet;
 import android.view.animation.Interpolator;
 
 /**
- * Created by Ray on 2016/5/11.
  * 这个插值器的插值在后面呈弹跳状态。
- * @desc An interpolator where the change bounces at the end.
+ * An interpolator where the change bounces at the end.
  */
 public class BounceInterpolator implements Interpolator {
     public BounceInterpolator() {

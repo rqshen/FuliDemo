@@ -1,7 +1,7 @@
 package com.bcb.presentation.view.activity;
 
-import android.animation.Animator;
 import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -13,8 +13,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bcb.R;
+import com.bcb.common.event.MainActivityEvent;
+import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.UmengUtil;
 import com.bcb.presentation.view.custom.Animation.BounceInterpolator;
+
+import de.greenrobot.event.EventBus;
 
 /**
  * Created by Ray on 2016/5/11.
@@ -42,18 +46,11 @@ public class Activity_Daily_Welfare_Result extends Activity_Base implements View
 
         setContentView(R.layout.activity_daily_welfare_result);
         ctx = this;
-
         coin = (LinearLayout) findViewById(R.id.coin);
 
-//        PropertyValuesHolder pvhY = PropertyValuesHolder.ofFloat("scaleX", 1f, 0, 1f);
-//        PropertyValuesHolder pvhZ = PropertyValuesHolder.ofFloat("scaleY", 1f, 0, 1f);
-//        ObjectAnimator.ofPropertyValuesHolder(view, pvhY,pvhZ).setDuration(1000).start();
-
         ll_text = (LinearLayout) findViewById(R.id.ll_text);
-        ll_text.setVisibility(View.GONE);
         ll_text.setOnClickListener(this);
         btn_welfare_check = (TextView) findViewById(R.id.btn_welfare_check);
-        btn_welfare_check.setVisibility(View.GONE);
         btn_welfare_check.setOnClickListener(this);
 
         activity_close = (ImageView) findViewById(R.id.activity_close);
@@ -61,31 +58,13 @@ public class Activity_Daily_Welfare_Result extends Activity_Base implements View
 
         WindowManager wm = (WindowManager)getSystemService(Context.WINDOW_SERVICE);
         int height = wm.getDefaultDisplay().getHeight();
-        ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(coin, "translationY", 0, -height/5);
-        objectAnimator.setDuration(1200);
+
+        PropertyValuesHolder scaleX = PropertyValuesHolder.ofFloat("scaleX", 0.5f, 0.5f, 1f);
+        PropertyValuesHolder scaleY = PropertyValuesHolder.ofFloat("scaleY", 0.5f, 0.5f, 1f);
+        PropertyValuesHolder translationY = PropertyValuesHolder.ofFloat("translationY", 0, -height/5);
+        ObjectAnimator objectAnimator = ObjectAnimator.ofPropertyValuesHolder(coin, scaleX,scaleY,translationY);
         objectAnimator.setInterpolator(new BounceInterpolator());
-        objectAnimator.addListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animation) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                ll_text.setVisibility(View.VISIBLE);
-                btn_welfare_check.setVisibility(View.VISIBLE);
-            }
-
-            @Override
-            public void onAnimationCancel(Animator animation) {
-
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator animation) {
-
-            }
-        });
+        objectAnimator.setDuration(1200);
         objectAnimator.start();
     }
 
@@ -113,10 +92,14 @@ public class Activity_Daily_Welfare_Result extends Activity_Base implements View
                 finish();
                 break;
             case R.id.btn_welfare_check://跳转到首页产品列表
+                EventBus.getDefault().post(new MainActivityEvent(MainActivityEvent.PRODUCT));
                 finish();
+                overridePendingTransition(0, 0);
+                MyActivityManager.getInstance().finishAllActivity();
                 break;
             case R.id.activity_close:
                 finish();
+                overridePendingTransition(0, 0);
                 break;
         }
     }

@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -23,6 +24,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bcb.common.event.MainActivityEvent;
+import com.bcb.common.event.ProductFragEvent;
 import com.bcb.common.net.BcbJsonRequest;
 import com.bcb.common.net.BcbNetworkManager;
 import com.bcb.common.net.BcbRequest;
@@ -50,6 +53,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import de.greenrobot.event.EventBus;
 
 public class Frag_Product extends Frag_Base implements OnClickListener {
 	
@@ -91,6 +96,7 @@ public class Frag_Product extends Frag_Base implements OnClickListener {
 		super();
 		this.ctx = ctx;
 		this.CompanyId = CompanyId;
+        EventBus.getDefault().register(this);
 	}
 	
 	public void UpdateCompanyId(String CompanyId) {
@@ -299,10 +305,23 @@ public class Frag_Product extends Frag_Base implements OnClickListener {
 		}
 	}
 
+    //接收事件
+    public void onEventMainThread(ProductFragEvent event) {
+        String flag = event.getFlag();
+        if (!TextUtils.isEmpty(flag)){
+            switch(flag){
+                case ProductFragEvent.REFRESH:
+                    refreshLayout.autoRefresh();
+                    break;
+            }
+        }
+    }
+
     @Override
 	public void onDestroy() {
 		super.onDestroy();
 		ctx.unregisterReceiver(receiver);
+        EventBus.getDefault().unregister(this);
 	}
 
     @Override
