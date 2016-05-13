@@ -9,6 +9,8 @@ import com.google.gson.Gson;
 import com.bcb.data.util.SaveConfigUtil;
 import com.bcb.data.util.SaveUserInfoUtils;
 
+import org.litepal.LitePalApplication;
+
 public class App extends Application {
 	
 	public static final String TAG = "App";
@@ -27,6 +29,8 @@ public class App extends Application {
 	@Override
 	public void onCreate() {
 		super.onCreate();
+
+		LitePalApplication.initialize(this);
 
 		if (saveUserInfo == null) {
 			saveUserInfo = new SaveUserInfoUtils(this);

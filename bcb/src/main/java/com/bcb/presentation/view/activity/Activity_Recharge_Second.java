@@ -57,8 +57,13 @@ public class Activity_Recharge_Second extends Activity_Base implements View.OnCl
 	private UserWallet mUserWallet;
 	private UserDetailInfo mUserDetailInfo;
 
+	//错误提示
     private RelativeLayout error_layout;
     private TextView error_tips;
+
+	//充值提示
+	private LinearLayout tip_layout;
+	private TextView recharge_tips;
 
     private ProgressDialog progressDialog;
 	//弹框
@@ -98,6 +103,10 @@ public class Activity_Recharge_Second extends Activity_Base implements View.OnCl
         //出错提示
         error_layout = (RelativeLayout) findViewById(R.id.error_layout);
         error_tips = (TextView) findViewById(R.id.error_tips);
+
+		//充值提示
+		tip_layout = (LinearLayout) findViewById(R.id.tip_layout);
+		recharge_tips = (TextView) findViewById(R.id.recharge_tips);
 
 		user_balauce = (TextView) findViewById(R.id.user_balauce);
 		bank_card_text = (TextView) findViewById(R.id.bank_card_text);
@@ -235,7 +244,7 @@ public class Activity_Recharge_Second extends Activity_Base implements View.OnCl
 		}
 
 		//没有输入金额
-		if(ToastUtil.checkInputParam(Activity_Recharge_Second.this, editext_money, "请输入充值金额")==false){
+		if(!ToastUtil.checkInputParam(Activity_Recharge_Second.this, editext_money, "请输入充值金额")){
 			return;
 		}
 

@@ -327,6 +327,10 @@
             android:label="@string/app_name"
             android:theme="@style/Dialog_Fullscreen"
             android:screenOrientation="portrait"/>
+        <activity
+            android:name=".presentation.view.activity.Activity_Daily_Welfare_Tip"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

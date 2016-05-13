@@ -1,19 +1,18 @@
 package com.bcb.presentation.adapter;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.ClipDrawable;
-import android.graphics.drawable.ColorDrawable;
-import android.view.Gravity;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
 import com.bcb.R;
 import com.bcb.data.bean.ProductRecordsBean;
+import com.bcb.data.bean.WelfareBean;
+import com.bcb.data.util.DbUtil;
 
 import java.util.List;
 
@@ -23,14 +22,21 @@ public class ProductAdapter extends BaseAdapter {
 	private List<ProductRecordsBean> data;
     //判断是否新手标
     private boolean isNewProduct = false;
-	//福袋金额
-	private double fukubukuro;
+	//福袋加息
+	private String fukubukuro;
 
 	//默认标的构造方法
     public ProductAdapter(Context ctx, List<ProductRecordsBean> data) {
         if (data != null) {
             this.ctx = ctx;
             this.data = data;
+			//福袋数据
+			WelfareBean bean = DbUtil.getWelfare();
+			if (null != bean && !TextUtils.isEmpty(bean.getValue())){
+				fukubukuro = "+" + bean.getValue() + "%";
+			}else{
+				fukubukuro = "";
+			}
         }
     }
 
@@ -39,20 +45,15 @@ public class ProductAdapter extends BaseAdapter {
             this.ctx = ctx;
             this.data = data;
             this.isNewProduct = isNewProduct;
+			//福袋数据
+			WelfareBean bean = DbUtil.getWelfare();
+			if (null != bean && !TextUtils.isEmpty(bean.getValue())){
+				fukubukuro = "+" + bean.getValue() + "%";
+			}else{
+				fukubukuro = "";
+			}
         }
     }
-
-	public void setFukubukuro(double fukubukuro) {
-		this.fukubukuro = fukubukuro;
-		this.notifyDataSetChanged();
-	}
-
-	private String getFukubukuro() {
-		if (fukubukuro <= 0) {
-			return "";
-		}
-		return String.format("+%.2f", fukubukuro);
-	}
 
 	@Override
 	public int getCount() {
@@ -104,7 +105,7 @@ public class ProductAdapter extends BaseAdapter {
 		viewHolder.name.setText(data.get(pos).getName());
 		viewHolder.rate.setText(data.get(pos).getRate() + data.get(pos).getRewardRate() + "");
 		//福袋利率
-		viewHolder.fukubukuro_rate.setText(getFukubukuro());
+		viewHolder.fukubukuro_rate.setText(fukubukuro);
         viewHolder.duration.setText(data.get(pos).getDuration() + "");
 		//天标月标
 		switch (data.get(pos).getDurationExchangeType()) {

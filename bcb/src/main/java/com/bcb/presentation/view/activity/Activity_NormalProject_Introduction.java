@@ -19,11 +19,12 @@ import com.bcb.common.net.BcbNetworkManager;
 import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
-import com.bcb.data.bean.project.SimpleProjectDetail;
-import com.bcb.data.bean.UserDetailInfo;
 import com.bcb.common.net.UrlsOne;
 import com.bcb.common.net.UrlsTwo;
-import com.bcb.data.util.LogUtil;
+import com.bcb.data.bean.UserDetailInfo;
+import com.bcb.data.bean.WelfareBean;
+import com.bcb.data.bean.project.SimpleProjectDetail;
+import com.bcb.data.util.DbUtil;
 import com.bcb.data.util.MQCustomerManager;
 import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.PackageUtil;
@@ -59,6 +60,7 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
     private TextView value_lilv;
     private TextView text_description;
     //加息利率
+    private LinearLayout add_rate;
     private TextView value_reward;
     //可投金额
     private TextView total_money;
@@ -181,7 +183,18 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
         text_description = (TextView) findViewById(R.id.text_description);
         text_description.setVisibility(View.GONE);
         //加息利率
+        add_rate = (LinearLayout) findViewById(R.id.add_rate);
         value_reward = (TextView) findViewById(R.id.value_reward);
+
+        //福袋数据
+        WelfareBean bean = DbUtil.getWelfare();
+        if (null != bean && !TextUtils.isEmpty(bean.getValue())){
+            add_rate.setVisibility(View.VISIBLE);
+            value_reward.setText("+" + bean.getValue());
+        }else{
+            add_rate.setVisibility(View.GONE);
+        }
+
         //可投金额
         total_money = (TextView) findViewById(R.id.value_total);
         // 理财期限
@@ -310,12 +323,6 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
         // 年化利率
         value_lilv.setText(mSimpleProjectDetail.Rate+"");
         text_description.setVisibility(View.VISIBLE);
-        //加息利率
-        if(mSimpleProjectDetail.RewardRate > 0) {
-            value_reward.setText("+" + String.format("%.2f", mSimpleProjectDetail.RewardRate) + "%");
-        } else {
-            value_reward.setText("");
-        }
 
         //奖励描述
         if (mSimpleProjectDetail.RewardRateDescn != null

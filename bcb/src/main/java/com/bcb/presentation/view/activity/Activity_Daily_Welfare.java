@@ -23,6 +23,8 @@ import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
 import com.bcb.common.net.UrlsOne;
+import com.bcb.data.bean.WelfareBean;
+import com.bcb.data.util.DbUtil;
 import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.ToastUtil;
@@ -283,6 +285,21 @@ public class Activity_Daily_Welfare extends Activity_Base implements View.OnClic
                         if (!TextUtils.isEmpty(value)){
                             UmengUtil.eventById(context, R.string.self_mrfl);
                             Activity_Daily_Welfare_Result.launche(context, value, totalInterest);
+
+                            //保存到数据库
+                            DbUtil.saveWelfare(value);
+                        }
+                    }else if(response.getInt("status") == -2){//领福利时间为每日 06：00-22：00
+                        Activity_Daily_Welfare_Tip.launche(context);
+                        finish();
+                    }else if(response.getInt("status") == -3){//今天已经参与过福利活动了
+                        //获取数据库缓存数据,若有数据就显示已经缓存的数据
+                        WelfareBean welfareBean = DbUtil.getWelfare();
+                        if (null != welfareBean && !TextUtils.isEmpty(welfareBean.getValue())){
+                            UmengUtil.eventById(context, R.string.self_mrfl);
+                            Activity_Daily_Welfare_Result.launche(context, welfareBean.getValue(), totalInterest);
+                        }else{//没有就直接提示今天已经参与过福利活动了
+                            ToastUtil.alert(context, response.getString("message"));
                         }
                     }else{
                         ToastUtil.alert(context, response.getString("message"));
@@ -321,4 +338,6 @@ public class Activity_Daily_Welfare extends Activity_Base implements View.OnClic
                 break;
         }
     }
+
+
 }

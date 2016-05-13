@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -18,10 +19,11 @@ import com.bcb.common.net.BcbNetworkManager;
 import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
-import com.bcb.data.bean.UserDetailInfo;
-import com.bcb.data.bean.project.ExpiredProjectDetail;
 import com.bcb.common.net.UrlsTwo;
-import com.bcb.data.util.LogUtil;
+import com.bcb.data.bean.UserDetailInfo;
+import com.bcb.data.bean.WelfareBean;
+import com.bcb.data.bean.project.ExpiredProjectDetail;
+import com.bcb.data.util.DbUtil;
 import com.bcb.data.util.MQCustomerManager;
 import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.PackageUtil;
@@ -37,7 +39,6 @@ import org.json.JSONObject;
 /**
  * Created by cain on 16/1/30.
  */
-
 public class Activity_ExpiredProject_Introduction extends Activity_Base implements View.OnClickListener {
 
     private static final String TAG = "Activity_ExpiredProject_Introduction";
@@ -46,8 +47,9 @@ public class Activity_ExpiredProject_Introduction extends Activity_Base implemen
     private String title;
     //年化利率
     private TextView value_lilv;
-    //奖励利率
-    private TextView value_reward;
+    //加息利率
+    private LinearLayout add_rate;
+    private TextView expire_value_reward;
     //体验标名额
     private TextView value_total;
     //投资期限
@@ -126,8 +128,17 @@ public class Activity_ExpiredProject_Introduction extends Activity_Base implemen
     private void setupView() {
         //年化利率
         value_lilv = (TextView) findViewById(R.id.value_lilv);
-        //奖励利率
-        value_reward = (TextView) findViewById(R.id.value_reward);
+        //加息利率
+        add_rate = (LinearLayout) findViewById(R.id.add_rate);
+        expire_value_reward = (TextView) findViewById(R.id.expire_value_reward);
+        //福袋数据
+        WelfareBean bean = DbUtil.getWelfare();
+        if (null != bean && !TextUtils.isEmpty(bean.getValue())){
+            add_rate.setVisibility(View.VISIBLE);
+            expire_value_reward.setText("+" + bean.getValue());
+        }else{
+            add_rate.setVisibility(View.GONE);
+        }
         //可投金额
         value_total = (TextView) findViewById(R.id.value_total);
         //投资期限
@@ -201,12 +212,6 @@ public class Activity_ExpiredProject_Introduction extends Activity_Base implemen
     private void showExpiredData() {
         //年化利率
         value_lilv.setText(String.format("%.2f", expiredProjectDetail.Rate));
-        //奖励利率
-        if (expiredProjectDetail.RewardRate > 0) {
-            value_reward.setText("+" + String.format("%.2f", expiredProjectDetail.RewardRate) + "%");
-        } else {
-            value_reward.setText("");
-        }
         //可投金额
         value_total.setText(String.format("%.2f", expiredProjectDetail.AmountBalance) + "元");
 

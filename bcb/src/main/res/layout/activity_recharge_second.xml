@@ -207,6 +207,30 @@
                     android:textColor="@color/red"
                     android:text="错误信息"/>
             </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/tip_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="5dp"
+                    android:src="@drawable/ico_withdraw_tip"/>
+
+                <TextView
+                    android:id="@+id/recharge_tips"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/main_text_small"
+                    android:text="该卡本次最多可充值4999元，每日最多15000元"/>
+            </LinearLayout>
+
             <Button
                 android:id="@+id/recharge_button"
                 android:layout_width="match_parent"

@@ -932,20 +932,18 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
                         ToastUtil.alert(Activity_LoanRequest_Borrow.this, "服务器返回数据为空，无法验证");
                         return;
                     }
+                    //初始化数据，因为不管状态是不是-1或者1，这里面都要返回列表数据
+                    init(response.getString("result"));
                     if (response.getInt("status") != 1) {
                         String message = response.getString("message");
                         //出错信息不为空时，将出错信息打印出来，否则将出错信息设置为"未知错误"
                         if (message != null && !message.equalsIgnoreCase("null") && !message.equalsIgnoreCase("")) {
-//                            ToastUtil.alert(Activity_LoanRequest_Borrow.this, message);
                             //判断是否Token过期，如果过期则跳转至登陆界面
                             if (response.getInt("status") == -5) {
                                 Activity_Login.launche(Activity_LoanRequest_Borrow.this);
                                 finish();
                             }
-                            init(response.getString("result"));
                             loanRequestInfo.setMessage(message);
-                        } else {
-                            ToastUtil.alert(Activity_LoanRequest_Borrow.this, "未知错误，请与工作人员联系");
                         }
                     } else {
                         UmengUtil.eventById(Activity_LoanRequest_Borrow.this, R.string.loan_blank);

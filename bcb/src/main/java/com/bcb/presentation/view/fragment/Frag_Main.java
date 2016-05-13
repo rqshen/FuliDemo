@@ -828,6 +828,11 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener{
                     announceAdapter.notifyDataSetChanged();
                 }
                 showItemVisible();
+                if (App.saveUserInfo.getAccess_Token() == null && button_floating != null) {
+                    button_floating.setVisibility(View.VISIBLE);
+                } else {
+                    button_floating.setVisibility(View.GONE);
+                }
             } else if (intent.getAction().equals("com.bcb.register.success")) {
                 showRegisterSuccessTips();
             }
@@ -890,21 +895,23 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener{
         }
         //如果新标预告或者新手标为空的时候就显示列表
         if (announceRecordsBeans == null || announceRecordsBeans.size() <= 0 || newRecordsBeans == null || newRecordsBeans.size() <= 0) {
-            if (additionListview != null && ((Activity_Main)ctx).getFragProduct().getFirstItemData() != null) {
-                additionRecordsBeans.clear();
-                additionRecordsBeans.add((ProductRecordsBean) ((Activity_Main)ctx).getFragProduct().getFirstItemData());
-                if (mAdditionAdapter != null) {
-                    mAdditionAdapter.notifyDataSetChanged();
-                    setupAdditionVisible(View.VISIBLE);
-                }
-            }
-        } else  {
-            additionRecordsBeans.clear();
-            if (mAdditionAdapter != null) {
-                mAdditionAdapter.notifyDataSetChanged();
-                setupAdditionVisible(View.GONE);
-            }
+            setupBoutiqueVisible(View.VISIBLE);
+//            if (additionListview != null && ((Activity_Main)ctx).getFragProduct().getFirstItemData() != null) {
+//                additionRecordsBeans.clear();
+//                additionRecordsBeans.add((ProductRecordsBean) ((Activity_Main)ctx).getFragProduct().getFirstItemData());
+//                if (mAdditionAdapter != null) {
+//                    mAdditionAdapter.notifyDataSetChanged();
+//                    setupAdditionVisible(View.VISIBLE);
+//                }
+//            }
         }
+//        else  {
+//            additionRecordsBeans.clear();
+//            if (mAdditionAdapter != null) {
+//                mAdditionAdapter.notifyDataSetChanged();
+//                setupAdditionVisible(View.GONE);
+//            }
+//        }
     }
 
     //显示送体验金对话框
