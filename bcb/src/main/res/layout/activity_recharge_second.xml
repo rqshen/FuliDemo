@@ -228,7 +228,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/main_text_small"
-                    android:text="该卡本次最多可充值4999元，每日最多15000元"/>
+                    android:text="该卡本次最多可充值xxx元，每日最多xxx元"/>
             </LinearLayout>
 
             <Button

@@ -16,18 +16,17 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bcb.common.app.App;
 import com.bcb.R;
+import com.bcb.common.app.App;
 import com.bcb.common.net.BcbJsonRequest;
 import com.bcb.common.net.BcbNetworkManager;
 import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
 import com.bcb.common.net.UrlsOne;
+import com.bcb.common.net.UrlsTwo;
 import com.bcb.data.bean.UserDetailInfo;
 import com.bcb.data.bean.UserWallet;
-import com.bcb.common.net.UrlsTwo;
-import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.MyConstants;
 import com.bcb.data.util.PackageUtil;
@@ -124,6 +123,8 @@ public class Activity_Recharge_Second extends Activity_Base implements View.OnCl
                 && App.mUserDetailInfo.BankCard.getCardNumber() != null) {
             mUserDetailInfo = App.mUserDetailInfo;
             bank_card_text.setText(TextUtil.delBankNum(mUserDetailInfo.BankCard.CardNumber));
+			//设置银行卡充值提示
+			setBankCardTip(mUserDetailInfo.BankCard.BankName);
             hideProgressBar();
         } else {
             loadUserBankData();
@@ -227,6 +228,8 @@ public class Activity_Recharge_Second extends Activity_Base implements View.OnCl
     //显示账号信息
 	private void showData(){
 		bank_card_text.setText(TextUtil.delBankNum(mUserDetailInfo.BankCard.CardNumber));
+		//设置银行卡充值提示
+		setBankCardTip(mUserDetailInfo.BankCard.BankName);
 	}
 
     //记录充值数据
@@ -337,6 +340,46 @@ public class Activity_Recharge_Second extends Activity_Base implements View.OnCl
 		super.onDestroy();
 		unregisterReceiver(receiver);
 	}
+
+
+	/**
+	 * 设置银行卡充值提示
+	 * @param bankName 银行名称
+     */
+	private void setBankCardTip(String bankName){
+		String tip;
+		switch (bankName){
+			case "兴业银行":
+				tip = "该卡本次最多可充值300元，每日最多15000元";
+				break;
+			case "华夏银行":
+				tip = "该卡本次最多可充值4999元，每日最多15000元";
+				break;
+			case "中国银行":
+				tip = "该卡本次最多可充值1000元，每日最多15000元";
+				break;
+			case "中国工商银行":
+				tip = "该卡本次最多可充值7999元，每日最多15000元";
+				break;
+			case "中信银行":
+				tip = "该卡本次最多可充值8000元，每日最多15000元";
+				break;
+			case "光大银行":
+				tip = "该卡本次最多可充值8000元，每日最多15000元";
+				break;
+			case "中国农业银行":
+				tip = "该卡本次最多可充值1000元，每日最多15000元";
+				break;
+			case "平安银行":
+				tip = "该卡本次最多可充值8000元，每日最多15000元";
+				break;
+			default:
+				tip = bankName + "渠道维护中，建议您到pc端充值";
+				break;
+		}
+		recharge_tips.setText(tip);
+	}
+
 
 	/********************* 转圈提示 **************************/
 	//显示转圈提示
