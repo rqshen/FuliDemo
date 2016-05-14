@@ -132,10 +132,9 @@ public class Activity_ExpiredProject_Introduction extends Activity_Base implemen
         add_rate = (LinearLayout) findViewById(R.id.add_rate);
         expire_value_reward = (TextView) findViewById(R.id.expire_value_reward);
         //福袋数据
-        WelfareBean bean = DbUtil.getWelfare();
-        if (null != bean && !TextUtils.isEmpty(bean.getValue())){
+        if (!TextUtils.isEmpty(App.getInstance().getWelfare())){
             add_rate.setVisibility(View.VISIBLE);
-            expire_value_reward.setText("+" + bean.getValue());
+            expire_value_reward.setText("+" + App.getInstance().getWelfare() + "%");
         }else{
             add_rate.setVisibility(View.GONE);
         }

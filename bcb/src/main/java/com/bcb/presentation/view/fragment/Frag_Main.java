@@ -2,15 +2,14 @@ package com.bcb.presentation.view.fragment;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.view.PagerAdapter;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
@@ -23,10 +22,11 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.bcb.R;
 import com.bcb.common.app.App;
+import com.bcb.common.event.BroadcastEvent;
 import com.bcb.common.net.BcbJsonRequest;
 import com.bcb.common.net.BcbNetworkManager;
 import com.bcb.common.net.BcbRemoteImage;
@@ -39,7 +39,6 @@ import com.bcb.data.bean.AnnounceRecordsBean;
 import com.bcb.data.bean.BannerInfo;
 import com.bcb.data.bean.ExpiredRecordsBean;
 import com.bcb.data.bean.MainListBean;
-import com.bcb.data.bean.ProductListBean;
 import com.bcb.data.bean.ProductRecordsBean;
 import com.bcb.data.util.HttpUtils;
 import com.bcb.data.util.LogUtil;
@@ -64,7 +63,7 @@ import com.bcb.presentation.view.custom.PagerIndicator.AutoLoopViewPager;
 import com.bcb.presentation.view.custom.PagerIndicator.CirclePageIndicator;
 import com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout;
 import com.bcb.presentation.view.custom.PullableView.PullableScrollView;
-import android.support.v4.view.PagerAdapter;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -73,6 +72,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+
+import de.greenrobot.event.EventBus;
 
 public class Frag_Main extends Frag_Base implements View.OnClickListener{
 	private static final String TAG = "Frag_Main";
@@ -146,6 +147,7 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener{
     @SuppressLint("ValidFragment")
     public Frag_Main(Context context) {
         super();
+
     }
 
     //每次显示的时候都刷新一次
@@ -171,6 +173,7 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener{
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         this.ctx =(Activity) view.getContext();
+        EventBus.getDefault().register(this);
         requestQueue = BcbNetworkManager.newRequestQueue(ctx);
         //仅保留下拉刷新，隐藏上拉加载更多
         //隐藏加载更多
@@ -878,6 +881,7 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener{
 	public void onDestroy() {
 		super.onDestroy();
         ctx.unregisterReceiver(mReceiver);
+        EventBus.getDefault().unregister(this);
 	}
 
     /**
@@ -939,5 +943,18 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener{
             }).getView());
         }
         dialogWidget.show();
+    }
+
+    //接收事件
+    public void onEventMainThread(BroadcastEvent event) {
+        String flag = event.getFlag();
+        if (!TextUtils.isEmpty(flag)){
+            switch(flag){
+                case BroadcastEvent.LOGOUT:
+                case BroadcastEvent.LOGIN:
+                    refreshLayout.autoRefresh();
+                    break;
+            }
+        }
     }
 }

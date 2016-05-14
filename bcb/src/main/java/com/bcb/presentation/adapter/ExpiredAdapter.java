@@ -9,9 +9,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bcb.R;
+import com.bcb.common.app.App;
 import com.bcb.data.bean.ExpiredRecordsBean;
-import com.bcb.data.bean.WelfareBean;
-import com.bcb.data.util.DbUtil;
 
 import java.util.List;
 
@@ -23,20 +22,11 @@ public class ExpiredAdapter extends BaseAdapter {
 
     private Context context;
     private List<ExpiredRecordsBean> data;
-    //福袋加息
-    private String fukubukuro;
     //构造函数
     public ExpiredAdapter(Context context, List<ExpiredRecordsBean> data) {
         if (data != null) {
             this.context = context;
             this.data = data;
-            //福袋数据
-            WelfareBean bean = DbUtil.getWelfare();
-            if (null != bean && !TextUtils.isEmpty(bean.getValue())){
-                fukubukuro = "+" + bean.getValue() + "%";
-            }else{
-                fukubukuro = "";
-            }
         }
     }
 
@@ -96,7 +86,8 @@ public class ExpiredAdapter extends BaseAdapter {
         viewHolder.rate.setText(data.get(pos).getRate() + data.get(pos).getRewardRate() + "");
 
         //福袋利率
-        viewHolder.fukubukuro_rate.setText(fukubukuro);
+        String welfareRate = TextUtils.isEmpty(App.getInstance().getWelfare()) ? "" : "+" + App.getInstance().getWelfare() + "%";
+        viewHolder.fukubukuro_rate.setText(welfareRate);
 
         //借款期限
         viewHolder.duration.setText(data.get(pos).getDuration() + "");

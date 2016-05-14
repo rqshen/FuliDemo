@@ -16,7 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bcb.R;
-import com.bcb.common.event.MainActivityEvent;
+import com.bcb.common.event.BroadcastEvent;
 import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.UmengUtil;
 import com.bcb.presentation.view.custom.Animation.BounceInterpolator;
@@ -126,7 +126,7 @@ public class Activity_Daily_Welfare_Result extends Activity_Base implements View
                 finish();
                 break;
             case R.id.btn_welfare_check://跳转到首页产品列表
-                EventBus.getDefault().post(new MainActivityEvent(MainActivityEvent.PRODUCT));
+                EventBus.getDefault().post(new BroadcastEvent(BroadcastEvent.PRODUCT));
                 finish();
                 overridePendingTransition(0, 0);
                 handler.sendEmptyMessageDelayed(destroy, 50);

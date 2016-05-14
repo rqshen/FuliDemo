@@ -18,8 +18,7 @@ import android.widget.TextView;
 
 import com.bcb.R;
 import com.bcb.common.app.App;
-import com.bcb.common.event.MainActivityEvent;
-import com.bcb.common.event.ProductFragEvent;
+import com.bcb.common.event.BroadcastEvent;
 import com.bcb.data.util.UmengUtil;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
 import com.bcb.presentation.view.fragment.Frag_Main;
@@ -219,21 +218,21 @@ public class Activity_Main extends Activity_Base_Fragment {
 	}
 
 	//接收事件
-	public void onEventMainThread(MainActivityEvent event) {
+	public void onEventMainThread(BroadcastEvent event) {
 		//判断要显示的fragment
 		String flag = event.getFlag();
 		if (!TextUtils.isEmpty(flag)){
 			switch(flag){
-				case MainActivityEvent.HOME:
+				case BroadcastEvent.HOME:
 					UmengUtil.eventById(Activity_Main.this, R.string.home);
 					setFragMain();
 					break;
-				case MainActivityEvent.PRODUCT:
+				case BroadcastEvent.PRODUCT:
 					UmengUtil.eventById(Activity_Main.this, R.string.main_product_list);
 					setFragProduct();
-					EventBus.getDefault().post(new ProductFragEvent(ProductFragEvent.REFRESH));
+					EventBus.getDefault().post(new BroadcastEvent(BroadcastEvent.REFRESH));
 					break;
-				case MainActivityEvent.USER:
+				case BroadcastEvent.USER:
 					UmengUtil.eventById(Activity_Main.this,R.string.self_c);
 					setFragUser();
 					break;

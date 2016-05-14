@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bcb.R;
+import com.bcb.common.app.App;
 import com.bcb.common.net.BcbJsonRequest;
 import com.bcb.common.net.BcbNetworkManager;
 import com.bcb.common.net.BcbRequest;
@@ -288,11 +289,12 @@ public class Activity_Daily_Welfare extends Activity_Base implements View.OnClic
 
                             //保存到数据库
                             DbUtil.saveWelfare(value);
+                            App.getInstance().setWelfare(value);
                         }
                     }else if(response.getInt("status") == -2){//领福利时间为每日 06：00-22：00
                         Activity_Daily_Welfare_Tip.launche(context);
                         finish();
-                    }else if(response.getInt("status") == -3){//今天已经参与过福利活动了
+                    }else{
                         //获取数据库缓存数据,若有数据就显示已经缓存的数据
                         WelfareBean welfareBean = DbUtil.getWelfare();
                         if (null != welfareBean && !TextUtils.isEmpty(welfareBean.getValue())){
@@ -301,8 +303,6 @@ public class Activity_Daily_Welfare extends Activity_Base implements View.OnClic
                         }else{//没有就直接提示今天已经参与过福利活动了
                             ToastUtil.alert(context, response.getString("message"));
                         }
-                    }else{
-                        ToastUtil.alert(context, response.getString("message"));
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

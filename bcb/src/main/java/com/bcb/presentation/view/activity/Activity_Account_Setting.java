@@ -19,6 +19,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import com.bcb.common.app.App;
 import com.bcb.R;
+import com.bcb.common.event.BroadcastEvent;
 import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.TextUtil;
 import com.bcb.data.util.ToastUtil;
@@ -31,6 +32,8 @@ import com.bcb.presentation.view.activity_interface.Interface_AccountSetting;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
 import com.bcb.presentation.view.custom.CustomDialog.DialogWidget;
 import com.bcb.presentation.view.custom.CustomDialog.IdentifyAlertView;
+
+import de.greenrobot.event.EventBus;
 
 public class Activity_Account_Setting extends Activity_Base implements OnClickListener, Interface_AccountSetting {
 	private RelativeLayout layout_username, layout_id_card, layout_bank_card, layout_phone;
@@ -401,6 +404,8 @@ public class Activity_Account_Setting extends Activity_Base implements OnClickLi
                 showProgressBar();
                 //退出登录
                 iPresenterAccountSetting.updateUserInfo(2);
+                App.getInstance().setWelfare("");
+                EventBus.getDefault().post(new BroadcastEvent(BroadcastEvent.LOGOUT));
             }
         });
     }

@@ -5,18 +5,12 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
-import android.view.animation.LayoutAnimationController;
-import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageView;
@@ -24,8 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bcb.common.event.MainActivityEvent;
-import com.bcb.common.event.ProductFragEvent;
+import com.bcb.common.event.BroadcastEvent;
 import com.bcb.common.net.BcbJsonRequest;
 import com.bcb.common.net.BcbNetworkManager;
 import com.bcb.common.net.BcbRequest;
@@ -306,11 +299,13 @@ public class Frag_Product extends Frag_Base implements OnClickListener {
 	}
 
     //接收事件
-    public void onEventMainThread(ProductFragEvent event) {
+    public void onEventMainThread(BroadcastEvent event) {
         String flag = event.getFlag();
         if (!TextUtils.isEmpty(flag)){
             switch(flag){
-                case ProductFragEvent.REFRESH:
+                case BroadcastEvent.REFRESH:
+                case BroadcastEvent.LOGOUT:
+                case BroadcastEvent.LOGIN:
                     refreshLayout.autoRefresh();
                     break;
             }

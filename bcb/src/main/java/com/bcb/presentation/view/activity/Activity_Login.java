@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -15,16 +16,22 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bcb.R;
+import com.bcb.common.app.App;
+import com.bcb.common.event.BroadcastEvent;
+import com.bcb.data.bean.WelfareBean;
+import com.bcb.data.util.DbUtil;
 import com.bcb.data.util.LoanPersonalConfigUtil;
 import com.bcb.data.util.MQCustomerManager;
-import com.bcb.presentation.presenter.IPresenter_Login;
-import com.bcb.presentation.presenter.IPresenter_LoginImpl;
-import com.bcb.R;
-import com.bcb.presentation.view.activity_interface.Interface_Base;
 import com.bcb.data.util.RegexManager;
 import com.bcb.data.util.ToastUtil;
 import com.bcb.data.util.UmengUtil;
 import com.bcb.data.util.VerificationCode;
+import com.bcb.presentation.presenter.IPresenter_Login;
+import com.bcb.presentation.presenter.IPresenter_LoginImpl;
+import com.bcb.presentation.view.activity_interface.Interface_Base;
+
+import de.greenrobot.event.EventBus;
 
 public class Activity_Login extends Activity_Base implements Interface_Base, OnClickListener {
 
@@ -148,6 +155,17 @@ public class Activity_Login extends Activity_Base implements Interface_Base, OnC
         Intent intent = new Intent();
         intent.setAction("com.bcb.login.success");
         sendBroadcast(intent);
+
+        EventBus.getDefault().post(new BroadcastEvent(BroadcastEvent.LOGIN));
+
+        //获取数据库缓存数据,若有数据就显示已经缓存的数据,则不去请求
+        WelfareBean welfareBean = DbUtil.getWelfare();
+        if (null != welfareBean && !TextUtils.isEmpty(welfareBean.getValue())){
+            App.getInstance().setWelfare(welfareBean.getValue());
+        }else{
+            App.getInstance().requestWelfare();
+        }
+
     }
 
     @Override

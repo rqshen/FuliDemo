@@ -88,7 +88,7 @@ public class Activity_Base extends Activity {
 //            //顶部状态栏
 //            window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 //            //显示顶部状态栏填充颜色，防止界面整体往上移
-//            ((LinearLayout)findViewById(R.id.layout_topbar)).setVisibility(View.VISIBLE);
+//            (findViewById(R.id.layout_topbar)).setVisibility(View.VISIBLE);
 //        }
 	}
 
@@ -103,36 +103,36 @@ public class Activity_Base extends Activity {
     @SuppressLint("NewApi")
     public void setLeftTitleVisible(boolean visible) {
         if (visible) {
-            ((ImageView) findViewById(R.id.back_img)).setVisibility(View.VISIBLE);
-            ((ImageView) findViewById(R.id.back_img)).setOnClickListener(new View.OnClickListener() {
+            (findViewById(R.id.back_img)).setVisibility(View.VISIBLE);
+            (findViewById(R.id.back_img)).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     finish();
                 }
             });
         } else {
-            ((ImageView) findViewById(R.id.back_img)).setVisibility(View.GONE);
+            (findViewById(R.id.back_img)).setVisibility(View.GONE);
         }
     }
 
     @SuppressLint("NewApi")
     public void setLeftTitleListener(View.OnClickListener onClickListener) {
-        ((ImageView) findViewById(R.id.back_img)).setVisibility(View.VISIBLE);
-        ((ImageView) findViewById(R.id.back_img)).setOnClickListener(onClickListener);
+        (findViewById(R.id.back_img)).setVisibility(View.VISIBLE);
+        (findViewById(R.id.back_img)).setOnClickListener(onClickListener);
     }
 
     @SuppressLint("NewApi")
     public void setLeftTitleValue(String leftTitle, boolean dropdownVisible, View.OnClickListener onClickListener) {
         if (leftTitle.isEmpty()) {
             setLeftTitleVisible(true);
-            ((ImageView) findViewById(R.id.dropdown)).setVisibility(View.GONE);
+            (findViewById(R.id.dropdown)).setVisibility(View.GONE);
         } else {
             ((TextView) findViewById(R.id.left_text)).setText(leftTitle);
-            ((TextView) findViewById(R.id.left_text)).setOnClickListener(onClickListener);
+            (findViewById(R.id.left_text)).setOnClickListener(onClickListener);
             if (dropdownVisible) {
-                ((ImageView) findViewById(R.id.dropdown)).setVisibility(View.VISIBLE);
+                (findViewById(R.id.dropdown)).setVisibility(View.VISIBLE);
             } else {
-                ((ImageView) findViewById(R.id.dropdown)).setVisibility(View.GONE);
+                (findViewById(R.id.dropdown)).setVisibility(View.GONE);
             }
         }
     }
@@ -145,7 +145,7 @@ public class Activity_Base extends Activity {
     @SuppressLint("NewApi")
     public void setRightTitleValue(String rightTitle, View.OnClickListener onClickListener) {
         ((TextView) findViewById(R.id.right_text)).setText(rightTitle);
-        ((TextView) findViewById(R.id.right_text)).setOnClickListener(onClickListener);
+        (findViewById(R.id.right_text)).setOnClickListener(onClickListener);
     }
 
     @Override

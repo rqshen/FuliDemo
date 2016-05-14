@@ -23,9 +23,10 @@ public class DbUtil {
      */
     public static void saveWelfare(String value){
         WelfareBean bean;
-        List<WelfareBean> beanList = DataSupport.where("username like ?", App.saveUserInfo.getLocalPhone() + "%").find(WelfareBean.class);
+        List<WelfareBean> beanList = DataSupport.where("username like ?", App.saveUserInfo.getLocalPhone()).find(WelfareBean.class);
         if (null != beanList && beanList.size() > 0){
             bean =  beanList.get(0);
+            bean.setOpenDate(new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()));
             bean.setValue(value);
             bean.updateAll();
         }else{
@@ -43,8 +44,8 @@ public class DbUtil {
      * @return
      */
     public static WelfareBean getWelfare(){
-        List<WelfareBean> beanList = DataSupport.where("username like ? and openDate like ?", App.saveUserInfo.getLocalPhone() + "%",
-                new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()) + "%").find(WelfareBean.class);
+        List<WelfareBean> beanList = DataSupport.where("username like ? and openDate like ?", App.saveUserInfo.getLocalPhone(),
+                new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime())).find(WelfareBean.class);
         if (null != beanList && beanList.size() > 0){
             return beanList.get(0);
         }else{

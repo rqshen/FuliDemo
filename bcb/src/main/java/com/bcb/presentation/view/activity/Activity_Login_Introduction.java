@@ -1,20 +1,17 @@
 package com.bcb.presentation.view.activity;
 
 import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import com.bcb.R;
-import com.bcb.presentation.adapter.MyPagerAdapter;
 import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.UmengUtil;
+import com.bcb.presentation.adapter.MyPagerAdapter;
 
 import java.util.ArrayList;
 
@@ -39,7 +36,7 @@ public class Activity_Login_Introduction extends Activity_Base implements View.O
         super.onCreate(savedInstanceState);
         MyActivityManager myActivityManager = MyActivityManager.getInstance();
         myActivityManager.pushOneActivity(Activity_Login_Introduction.this);
-        setBaseContentView(R.layout.activity_login_introduction);
+        setContentView(R.layout.activity_login_introduction);
         setLeftTitleVisible(true);
         setTitleValue("注册");
         setupView();
@@ -56,10 +53,6 @@ public class Activity_Login_Introduction extends Activity_Base implements View.O
         imageView1 = (ImageView) findViewById(R.id.imageView1);
         imageView2 = (ImageView) findViewById(R.id.imageView2);
 
-        //判断设备是否Android4.4以上，如果是，则表示使用了浸入式状态栏，需要设置状态栏的位置
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            ((LinearLayout)findViewById(R.id.layout_topbar)).setVisibility(View.VISIBLE);
-        }
     }
 
     //初始化ViewPager
