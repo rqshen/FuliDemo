@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -82,14 +83,15 @@ public class Frag_Product extends Frag_Base implements OnClickListener {
 
     public Frag_Product(){
         super();
+        EventBus.getDefault().register(this);
     }
+
 
     @SuppressLint("ValidFragment")
 	public Frag_Product(Context ctx, String CompanyId) {
 		super();
 		this.ctx = ctx;
 		this.CompanyId = CompanyId;
-        EventBus.getDefault().register(this);
 	}
 	
 	public void UpdateCompanyId(String CompanyId) {
@@ -307,6 +309,7 @@ public class Frag_Product extends Frag_Base implements OnClickListener {
                 case BroadcastEvent.LOGOUT:
                 case BroadcastEvent.LOGIN:
                     refreshLayout.autoRefresh();
+//                    Log.d("1234", "Frag_product refresh");
                     break;
             }
         }

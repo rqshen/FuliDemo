@@ -129,8 +129,8 @@ public class Activity_Recharge_Second extends Activity_Base implements View.OnCl
         } else {
             loadUserBankData();
         }
-		
-		editext_money.addTextChangedListener(new TextWatcher() {           
+
+		editext_money.addTextChangedListener(new TextWatcher() {
 	           
 			@Override  
 	         public void onTextChanged(CharSequence s, int start, int before, int count) {  
@@ -216,6 +216,41 @@ public class Activity_Recharge_Second extends Activity_Base implements View.OnCl
         jsonRequest.setTag(BcbRequestTag.UserBankMessageTag);
         requestQueue.add(jsonRequest);
     }
+
+//    //获取用户银行卡限额信息
+//    private void loadBankLimitData(final String bankName){
+//        BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.SupportBank, null, TokenUtil.getEncodeToken(this), new BcbRequest.BcbCallBack<JSONObject>() {
+//            @Override
+//            public void onResponse(JSONObject response) {
+//				List<BankItem> mBanklist = null;
+//				try {
+//					JSONArray result = response.getJSONArray("result");
+//					if (result != null) {
+//						mBanklist = App.mGson.fromJson(result.toString(), new TypeToken<List<BankItem>>(){}.getType());
+//					}
+//
+//				} catch (Exception e) {
+//					LogUtil.d(TAG, "" + e.getMessage());
+//				}
+//				if(null != mBanklist && mBanklist.size() > 0){
+//					for(BankItem bankItem : mBanklist){
+//						if (bankName.equals(bankItem.getBankName())){
+//							//设置银行卡充值提示
+//							setBankCardTip(bankName, bankItem.getMaxSingle(), bankItem.getMaxDay());
+//						}
+//					}
+//				}
+//
+//            }
+//
+//            @Override
+//            public void onErrorResponse(Exception error) {
+//
+//            }
+//        });
+//        jsonRequest.setTag(BcbRequestTag.SupportBankTag);
+//        requestQueue.add(jsonRequest);
+//    }
 
     //显示用户余额
 	private void showUserWallet(){
@@ -346,7 +381,8 @@ public class Activity_Recharge_Second extends Activity_Base implements View.OnCl
 	 * 设置银行卡充值提示
 	 * @param bankName 银行名称
      */
-	private void setBankCardTip(String bankName){
+	private void setBankCardTip(String bankName){//, Float maxSingle, Float maxDay
+//		String tip = "该卡本次最多可充值"+ maxSingle +"元，每日最多"+ maxDay +"元";
 		String tip;
 		switch (bankName){
 			case "兴业银行":

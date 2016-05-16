@@ -1,13 +1,25 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@color/white" >
+
+    <com.bcb.presentation.view.custom.CustomViewPager
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <ImageView
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/linegray" />
 
     <LinearLayout
         android:id="@+id/bottom"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/tabbar_height"
-        android:layout_alignParentBottom="true"
         android:orientation="horizontal"
         android:background="#f7f7f7">
 
@@ -62,16 +74,11 @@
         </RelativeLayout>
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/line"
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:layout_above="@id/bottom"
-        android:background="@color/linegray" />
-    <FrameLayout
-        android:id="@+id/content"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/line"
-        android:background="@color/white" />
-</RelativeLayout>
+
+    <!--<FrameLayout-->
+        <!--android:id="@+id/content"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_above="@id/line"-->
+        <!--android:background="@color/white" />-->
+</LinearLayout>

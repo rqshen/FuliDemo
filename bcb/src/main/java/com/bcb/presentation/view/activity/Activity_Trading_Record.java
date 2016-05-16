@@ -39,8 +39,10 @@ public class Activity_Trading_Record extends Activity_Base {
 
 	private static final String TAG = "Activity_Trading_Record";
 	 
-
+	//累计总额
 	private TextView TotalAmount;
+	//累计收益
+	private TextView income;
 
 	private MyListView mTradingRecordListView;
 	
@@ -79,6 +81,7 @@ public class Activity_Trading_Record extends Activity_Base {
 
 	private void init() {
 		TotalAmount = (TextView) findViewById(R.id.TotalAmount);
+		income = (TextView) findViewById(R.id.income);
 		null_data_layout = (LinearLayout) findViewById(R.id.null_data_layout);
 		recordsBeans = new ArrayList<>();
 		mTradingRecordAdapter = new TradingRecordAdapter(Activity_Trading_Record.this, recordsBeans);
@@ -140,6 +143,12 @@ public class Activity_Trading_Record extends Activity_Base {
 						String amount = String.format("%.2f", totlaAmount);
                         if (!TextUtils.isEmpty(amount)) {
                             TotalAmount.setText(amount);
+                        }
+
+                        double totalInterestAmount = obj.getDouble("TotalInterestAmount");
+						String totalIncome = String.format("%.2f", totalInterestAmount);
+                        if (!TextUtils.isEmpty(totalIncome)) {
+                            income.setText(totalIncome);
                         }
                         TradingRecordListBean mTradingRecordList = null;
                         //判断JSON对象是否为空

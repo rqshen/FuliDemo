@@ -28,7 +28,7 @@ public class DbUtil {
             bean =  beanList.get(0);
             bean.setOpenDate(new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()));
             bean.setValue(value);
-            bean.updateAll();
+            bean.update(1);
         }else{
             bean = new WelfareBean();
             bean.setUsername(App.saveUserInfo.getLocalPhone());

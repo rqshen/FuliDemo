@@ -10,6 +10,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
@@ -75,7 +76,7 @@ import java.util.Queue;
 
 import de.greenrobot.event.EventBus;
 
-public class Frag_Main extends Frag_Base implements View.OnClickListener{
+public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPager.OnPageChangeListener{
 	private static final String TAG = "Frag_Main";
 
     //刷新控件
@@ -128,7 +129,7 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener{
 
     private BcbRequestQueue requestQueue;
 
-
+    //悬浮按钮
     private int screenHeight;
     private int screenWidth;
     private int floatButtonBitmapWdith;
@@ -148,21 +149,6 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener{
     public Frag_Main(Context context) {
         super();
 
-    }
-
-    //每次显示的时候都刷新一次
-    @Override
-    public void onHiddenChanged(boolean hidden) {
-        super.onHiddenChanged(hidden);
-        if (!hidden && announceAdapter != null) {
-            announceAdapter.notifyDataSetChanged();
-            if (App.saveUserInfo.getAccess_Token() == null && button_floating != null) {
-                button_floating.setVisibility(View.VISIBLE);
-            } else {
-                button_floating.setVisibility(View.GONE);
-            }
-            showItemVisible();
-        }
     }
 
     @Override
@@ -352,15 +338,17 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener{
                             startActivity(intent);
                         }
                         //判断是否位置是否超出底部状态栏
+                        top = v.getTop();
                         if (event.getRawY() > screenHeight - bottomHeight - v.getHeight()) {
                             bottom = screenHeight - bottomHeight;
                             left = v.getLeft();
                             right = left + floatButtonBitmapWdith;
                             top = bottom - floatButtonBitmapHeight;
                             v.layout(left,top,right,bottom);
+//                            Log.d("1234", "left = " + left + "  top = " + top + "  right = " + right + "  bottom = " + bottom);
                         }
                         //动画
-                        movingAnimation(v, (int) event.getRawX());
+                        movingAnimation(v, top, (int) event.getRawX());
                         break;
                 }
                 return true;
@@ -393,9 +381,8 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener{
     }
 
     //按钮移动动画
-    private void movingAnimation(final View v, int currentX) {
+    private void movingAnimation(final View v,final int top, int currentX) {
         final int left;
-        final int top = v.getTop();
         TranslateAnimation animation = null;
         if (currentX > screenWidth/2) {
             animation = new TranslateAnimation(0, screenWidth - v.getRight(), 0, 0);
@@ -413,7 +400,16 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener{
             @Override
             public void onAnimationEnd(Animation animation) {
                 FrameLayout.LayoutParams ll = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
-                ll.setMargins(left, top, 0, 0);
+//                Log.d("1234", "left = " + left + "  top = " + top);
+//                Log.d("1234", "floatButtonBitmapHeight = " + floatButtonBitmapHeight);
+//                Log.d("1234", "screenHeight = " + screenHeight);
+//                Log.d("1234", "bottomHeight = " + bottomHeight);
+                //注：有BUG，拉到底部会出现压扁情况，暂时这样处理
+                int mtop = top;
+                if (screenHeight == (top + bottomHeight + floatButtonBitmapHeight)){
+                    mtop -= 45;
+                }
+                ll.setMargins(left, mtop, 0, 0);
                 v.setLayoutParams(ll);
                 v.clearAnimation();
             }
@@ -539,6 +535,28 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener{
         CirclePageIndicator indy = (CirclePageIndicator) ctx.findViewById(R.id.indy);
         indy.setViewPager(loopViewPager);
 	}
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        if (0 == position && button_floating != null){
+            if (App.saveUserInfo.getAccess_Token() == null ) {
+                button_floating.setVisibility(View.VISIBLE);
+            } else {
+                button_floating.setVisibility(View.GONE);
+            }
+        }
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
+    }
+
     //Banner适配器
     private class LoopImageAdapter extends PagerAdapter {
         private int count = 100;
@@ -831,10 +849,12 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener{
                     announceAdapter.notifyDataSetChanged();
                 }
                 showItemVisible();
-                if (App.saveUserInfo.getAccess_Token() == null && button_floating != null) {
-                    button_floating.setVisibility(View.VISIBLE);
-                } else {
-                    button_floating.setVisibility(View.GONE);
+                if (button_floating != null){
+                    if (App.saveUserInfo.getAccess_Token() == null) {
+                        button_floating.setVisibility(View.VISIBLE);
+                    } else {
+                        button_floating.setVisibility(View.GONE);
+                    }
                 }
             } else if (intent.getAction().equals("com.bcb.register.success")) {
                 showRegisterSuccessTips();
@@ -952,6 +972,7 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener{
             switch(flag){
                 case BroadcastEvent.LOGOUT:
                 case BroadcastEvent.LOGIN:
+                case BroadcastEvent.REFRESH:
                     refreshLayout.autoRefresh();
                     break;
             }

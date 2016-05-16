@@ -10,8 +10,11 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -21,21 +24,23 @@ import com.bcb.common.app.App;
 import com.bcb.common.event.BroadcastEvent;
 import com.bcb.data.util.UmengUtil;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
+import com.bcb.presentation.view.custom.CustomViewPager;
 import com.bcb.presentation.view.fragment.Frag_Main;
 import com.bcb.presentation.view.fragment.Frag_Product;
 import com.bcb.presentation.view.fragment.Frag_User;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import de.greenrobot.event.EventBus;
 
 public class Activity_Main extends Activity_Base_Fragment {
 
-    //fragment管理器
-	private FragmentManager fragmentManager;
-	private Fragment fragCurrent;
-    //3个Fragment页面
-	private Frag_Main fragMain;
-	private Frag_Product fragProduct;
-	private Frag_User fragUser;
+	//viewpager
+	private CustomViewPager content;
+	private List<Fragment> mFragments;
+	private MyFragmentPagerAdapter myFragmentPagerAdapter;
+
     //3个按钮
 	private ImageView img_mainpage;
 	private ImageView img_product;
@@ -51,16 +56,17 @@ public class Activity_Main extends Activity_Base_Fragment {
     private LinearLayout bottom;
     AlertView alertView = null;
 
-
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		fragmentManager = getSupportFragmentManager();
+		content = (CustomViewPager) findViewById(R.id.content);
+
         //注册广播
         registerBroadcast();
 		init();
 		UmengUtil.update(Activity_Main.this);
 		EventBus.getDefault().register(this);
+
 	}
 
 	private void init() {
@@ -71,6 +77,18 @@ public class Activity_Main extends Activity_Base_Fragment {
 		txt_product = (TextView) findViewById(R.id.txt_product);
 		txt_user = (TextView) findViewById(R.id.txt_user);
         bottom = (LinearLayout) findViewById(R.id.bottom);
+
+		// 初始化主界面的3个Fragment
+        Frag_Main frag_main = new Frag_Main();
+		mFragments = new ArrayList<>();
+		mFragments.add(frag_main);
+		mFragments.add(new Frag_Product());
+		mFragments.add(new Frag_User());
+		myFragmentPagerAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager(), mFragments);
+		content.setAdapter(myFragmentPagerAdapter);
+		content.setPagingEnabled(false);
+		content.setOffscreenPageLimit(3);
+        content.addOnPageChangeListener(frag_main);
 		addFirstFragment();
 
 	}
@@ -108,76 +126,25 @@ public class Activity_Main extends Activity_Base_Fragment {
 	private void addFirstFragment() {
 		resetstatus(txt_mainpage);
 		img_mainpage.setImageResource(R.drawable.main_home_page_select);
-		//判断是否为空或者是否已经添加
-		if (fragMain == null || !fragMain.isAdded()) {
-			fragMain = new Frag_Main(Activity_Main.this);
-		}
-		if (fragProduct == null || !fragProduct.isAdded()) {
-			fragProduct = new Frag_Product(Activity_Main.this, App.saveUserInfo.getCurrentCompanyId());
-		}
-		if (fragUser == null || !fragUser.isAdded()) {
-			fragUser = new Frag_User(Activity_Main.this);
-		}
-
-		fragmentManager.beginTransaction().add(R.id.content, fragUser).commitAllowingStateLoss();
-		fragmentManager.beginTransaction().add(R.id.content, fragProduct).commitAllowingStateLoss();
-		fragmentManager.beginTransaction().add(R.id.content, fragMain).commitAllowingStateLoss();
-
-		fragCurrent = fragMain;
+		content.setCurrentItem(0, false);
 	}
 
 	private void setFragMain() {
 		resetstatus(txt_mainpage);
 		img_mainpage.setImageResource(R.drawable.main_home_page_select);
-		//判断是否为空或者是否还没有添加
-		if (fragMain == null || !fragMain.isAdded()) {
-			fragMain = new Frag_Main(Activity_Main.this);
-		}
-		switchFragment(fragMain);
+		content.setCurrentItem(0, false);
 	}
 
 	private void setFragProduct() {
 		resetstatus(txt_product);
 		img_product.setImageResource(R.drawable.main_product_select);
-		//判断是否为空或者是否已经添加
-		if (fragProduct == null || !fragProduct.isAdded()) {
-			fragProduct = new Frag_Product(Activity_Main.this, App.saveUserInfo.getCurrentCompanyId());
-		}
-		switchFragment(fragProduct);
+		content.setCurrentItem(1, false);
 	}
 
 	private void setFragUser() {
         resetstatus(txt_user);
         img_user.setImageResource(R.drawable.main_my_select);
-        //判断是否为空或者是否已经添加
-        if (fragUser == null || !fragUser.isAdded()) {
-            fragUser = new Frag_User(Activity_Main.this);
-        }
-        switchFragment(fragUser);
-	}
-
-	private void switchFragment(Fragment to) {
-		android.support.v4.app.FragmentTransaction transaction = fragmentManager.beginTransaction();
-		// 先判断是否被add过
-		if (!to.isAdded()) {
-			if (to instanceof Frag_Main) {
-				transaction.hide(fragProduct).hide(fragUser).add(R.id.content, fragMain).commitAllowingStateLoss();
-			} else if (to instanceof  Frag_Product) {
-				transaction.hide(fragMain).hide(fragUser).add(R.id.content, fragProduct).commitAllowingStateLoss();
-			} else if (to instanceof  Frag_User) {
-				transaction.hide(fragMain).hide(fragProduct).add(R.id.content, fragUser).commitAllowingStateLoss();
-			}
-		} else {
-			// 隐藏当前的fragment，显示下一个
-			if (to instanceof  Frag_Main) {
-				transaction.hide(fragProduct).hide(fragUser).show(fragMain).commitAllowingStateLoss();
-			} else if (to instanceof  Frag_Product) {
-				transaction.hide(fragMain).hide(fragUser).show(fragProduct).commitAllowingStateLoss();
-			} else if (to instanceof  Frag_User) {
-				transaction.hide(fragMain).hide(fragProduct).show(fragUser).commitAllowingStateLoss();
-			}
-		}
-		fragCurrent = to;
+		content.setCurrentItem(2, false);
 	}
 
 	private void resetstatus(TextView select) {
@@ -285,7 +252,42 @@ public class Activity_Main extends Activity_Base_Fragment {
     }
 
 
-	public Frag_Product getFragProduct() {
-		return fragProduct;
+	/**
+	 * viewpager适配器
+	 */
+	private class MyFragmentPagerAdapter extends FragmentPagerAdapter {
+
+		private List<Fragment> tabs = null;
+
+		public MyFragmentPagerAdapter(FragmentManager fm, List<Fragment> tabs) {
+			super(fm);
+			this.tabs = tabs;
+		}
+
+		@Override
+		public Fragment getItem(int pos) {
+			Fragment fragment = null;
+			if (tabs != null && pos < tabs.size()) {
+				fragment = tabs.get(pos);
+			}
+			return fragment;
+		}
+
+		@Override
+		public int getItemPosition(Object object) {
+			return POSITION_NONE;
+		}
+
+		@Override
+		public int getCount() {
+			if (tabs != null && tabs.size() > 0)
+				return tabs.size();
+			return 0;
+		}
+
+		@Override
+		public Object instantiateItem(ViewGroup container, int position) {
+			return super.instantiateItem(container, position);
+		}
 	}
 }
