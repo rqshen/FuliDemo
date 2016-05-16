@@ -284,6 +284,10 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
                         //先转义
                         String resultString = response.getString("result").replace("\\", "").replace("\"[", "[").replace("]\"", "]");
                         JSONObject resultObject = new JSONObject(resultString);
+                        //注意：不去掉会出现json解析语法错误
+                        if (TextUtils.isEmpty(resultObject.getString("AssetAuditContent"))){
+                            resultObject.remove("AssetAuditContent");
+                        }
                         //判断JSON对象是否为空
                         if (resultObject != null) {
                             mSimpleProjectDetail = App.mGson.fromJson(resultObject.toString(), SimpleProjectDetail.class);
