@@ -143,6 +143,11 @@ public class Activity_Base extends Activity {
     }
 
     @SuppressLint("NewApi")
+    public void setTitleVisiable(int visibility) {
+        findViewById(R.id.layout_title).setVisibility(visibility);
+    }
+
+    @SuppressLint("NewApi")
     public void setRightTitleValue(String rightTitle, View.OnClickListener onClickListener) {
         ((TextView) findViewById(R.id.right_text)).setText(rightTitle);
         (findViewById(R.id.right_text)).setOnClickListener(onClickListener);

@@ -28,13 +28,13 @@ import com.bcb.common.net.BcbNetworkManager;
 import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
-import com.bcb.data.bean.BuyProjectSuccess;
-import com.bcb.data.bean.project.ExpiredProjectDetail;
-import com.bcb.data.bean.project.SimpleProjectDetail;
-import com.bcb.data.bean.UserDetailInfo;
-import com.bcb.data.bean.UserWallet;
 import com.bcb.common.net.UrlsOne;
 import com.bcb.common.net.UrlsTwo;
+import com.bcb.data.bean.BuyProjectSuccess;
+import com.bcb.data.bean.UserDetailInfo;
+import com.bcb.data.bean.UserWallet;
+import com.bcb.data.bean.project.ExpiredProjectDetail;
+import com.bcb.data.bean.project.SimpleProjectDetail;
 import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MoneyTextUtil;
 import com.bcb.data.util.MyActivityManager;
@@ -51,6 +51,8 @@ import com.bcb.presentation.view.custom.PayPasswordView.PayPasswordView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.text.DecimalFormat;
 
 /**
  * Created by cain on 16/1/28.
@@ -973,7 +975,9 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
         }
 
         //对话框
-        certDialog = new DialogWidget(Activity_Project_Buy.this, getServiceFeeView("该标收取投资金额的" + String.format("%.4f", fee) + "% 作为信息服务费"), true);
+        DecimalFormat df = new DecimalFormat("######0.####");
+        String value = df.format(fee);
+        certDialog = new DialogWidget(Activity_Project_Buy.this, getServiceFeeView("该标收取投资金额的" + value + "% 作为信息服务费"), true);
         certDialog.show();
     }
 

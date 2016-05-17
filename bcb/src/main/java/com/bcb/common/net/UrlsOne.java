@@ -44,7 +44,9 @@ public class UrlsOne {
 	
 	// 安全保障WebView
 	public static final String SecureWebView = "http://wap.100cb.cn/static/security.html";
-		
+	// 理财学院WebView
+	public static final String CollegeWebView = "http://fulijinrong.kuaizhan.com/58/36/p32451810370302";
+
 	// 资金流水
 	public static final String MoneyFlowingWater = host + "/api/v1.0/a5330105d6c3";
 
@@ -113,7 +115,7 @@ public class UrlsOne {
 	public static final String CompanyList = host + "/api/v1.0/04c177d3d36d";
 
 	//加入公司
-	public static final String JoinCompany = host + "/api/v1.2/372bd4be30ad";
+	public static final String JoinCompany = host + "/api/v1.3.4/372bd4be30ad";
 
 	//借款验证信息
 	public static final String LoanCertification = host + "/api/v1.3.4/6b6e9b7ce261";

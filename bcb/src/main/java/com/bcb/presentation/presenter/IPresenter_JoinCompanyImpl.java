@@ -10,11 +10,11 @@ import com.bcb.common.net.BcbNetworkManager;
 import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
+import com.bcb.common.net.UrlsOne;
 import com.bcb.data.util.TokenUtil;
 import com.bcb.presentation.model.IModel_UserAccount;
 import com.bcb.presentation.model.IModel_UserAccountImpl;
 import com.bcb.presentation.view.activity_interface.Interface_Base;
-import com.bcb.common.net.UrlsOne;
 
 import org.json.JSONException;
 import org.json.JSONObject;

@@ -773,6 +773,13 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
             ToastUtil.alert(Activity_LoanRequest_Borrow.this, "借款金额必须大于5000元");
             return;
         }
+
+        //借款金额大于30W元，提示不能大于30W元
+        if (getLoanAmount() > 300000) {
+            ToastUtil.alert(Activity_LoanRequest_Borrow.this, "借款金额不能大于300000元");
+            return;
+        }
+
         LogUtil.d("借款", loanRequestInfo.toString());
         if (loanRequestInfo.getStatus().equals("0")){//可以申请借款
             //判断是否跟原来的数据一样，如果跟原来申请的借款一样没有变化，直接提示完善个人信息

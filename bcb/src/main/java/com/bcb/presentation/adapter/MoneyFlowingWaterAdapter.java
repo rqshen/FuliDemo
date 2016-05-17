@@ -83,25 +83,25 @@ public class MoneyFlowingWaterAdapter extends BaseAdapter {
         //根据交易类型和状态来判断是否更改图片
         mViewHolder.image_status.setVisibility(View.VISIBLE);
         //成功状态
-        if (data.get(pos).getStatusGroup() == 3) {
-            mViewHolder.image_status.setBackgroundResource(R.drawable.ind);
-        }
-        //退回状态
-        else if (data.get(pos).getStatusGroup() == 2) {
-            mViewHolder.image_status.setBackgroundResource(R.drawable.money_status_back);
-        }
-        //失败状态
-        else if (data.get(pos).getStatusGroup() == 1) {
-            mViewHolder.image_status.setBackgroundResource(R.drawable.money_status_failed);
-        }
-        //审核中状态
-        else if (data.get(pos).getStatusGroup() == 0) {
-            mViewHolder.image_status.setBackgroundResource(R.drawable.money_status_doing);
-        }
-        //不是以上几个则隐藏
-        else {
-            mViewHolder.image_status.setVisibility(View.GONE);
-        }
+//        if (data.get(pos).getStatusGroup() == 3) {
+//            mViewHolder.image_status.setBackgroundResource(R.drawable.ind);
+//        }
+//        //退回状态
+//        else if (data.get(pos).getStatusGroup() == 2) {
+//            mViewHolder.image_status.setBackgroundResource(R.drawable.money_status_back);
+//        }
+//        //失败状态
+//        else if (data.get(pos).getStatusGroup() == 1) {
+//            mViewHolder.image_status.setBackgroundResource(R.drawable.money_status_failed);
+//        }
+//        //审核中状态
+//        else if (data.get(pos).getStatusGroup() == 0) {
+//            mViewHolder.image_status.setBackgroundResource(R.drawable.money_status_doing);
+//        }
+//        //不是以上几个则隐藏
+//        else {
+//            mViewHolder.image_status.setVisibility(View.GONE);
+//        }
 		return view;
 	}
 

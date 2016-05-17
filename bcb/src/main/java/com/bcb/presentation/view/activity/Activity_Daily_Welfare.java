@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.bcb.R;
 import com.bcb.common.app.App;
+import com.bcb.common.event.BroadcastEvent;
 import com.bcb.common.net.BcbJsonRequest;
 import com.bcb.common.net.BcbNetworkManager;
 import com.bcb.common.net.BcbRequest;
@@ -41,6 +42,8 @@ import org.json.JSONObject;
 import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import de.greenrobot.event.EventBus;
 
 /**
  * Created by Ray on 2016/5/10.
@@ -272,12 +275,10 @@ public class Activity_Daily_Welfare extends Activity_Base implements View.OnClic
      * 请求福袋
      */
     private void getPackageData(){
-//        UIUtil.showProgressBar(context);
         JSONObject obj = new JSONObject();
         BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.JoinDailyWelfare, obj, TokenUtil.getEncodeToken(context), true, new BcbRequest.BcbCallBack<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-//                UIUtil.hideProgressBar();
                 try {
                     if (response.getInt("status") == 1) {
                         //设置对应位置的数据
@@ -290,18 +291,23 @@ public class Activity_Daily_Welfare extends Activity_Base implements View.OnClic
                             //保存到数据库
                             DbUtil.saveWelfare(value);
                             App.getInstance().setWelfare(value);
+
+                            //通知刷新
+                            EventBus.getDefault().post(new BroadcastEvent(BroadcastEvent.REFRESH));
                         }
                     }else if(response.getInt("status") == -2){//领福利时间为每日 06：00-22：00
                         Activity_Daily_Welfare_Tip.launche(context);
                         finish();
                     }else{
                         //获取数据库缓存数据,若有数据就显示已经缓存的数据
-                        WelfareBean welfareBean = DbUtil.getWelfare();
-                        if (null != welfareBean && !TextUtils.isEmpty(welfareBean.getValue())){
-                            UmengUtil.eventById(context, R.string.self_mrfl);
-                            Activity_Daily_Welfare_Result.launche(context, welfareBean.getValue(), totalInterest);
-                        }else{//没有就直接提示今天已经参与过福利活动了
+                        if (TextUtils.isEmpty(App.getInstance().getWelfare())){
                             ToastUtil.alert(context, response.getString("message"));
+                            App.getInstance().requestWelfare();
+                        }else{
+                            //通知刷新
+                            EventBus.getDefault().post(new BroadcastEvent(BroadcastEvent.REFRESH));
+                            UmengUtil.eventById(context, R.string.self_mrfl);
+                            Activity_Daily_Welfare_Result.launche(context, App.getInstance().getWelfare(), totalInterest);
                         }
                     }
                 } catch (Exception e) {

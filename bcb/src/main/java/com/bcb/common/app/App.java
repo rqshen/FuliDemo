@@ -5,6 +5,7 @@ import android.content.Context;
 import android.text.TextUtils;
 
 import com.bcb.R;
+import com.bcb.common.event.BroadcastEvent;
 import com.bcb.common.net.BcbJsonRequest;
 import com.bcb.common.net.BcbNetworkManager;
 import com.bcb.common.net.BcbRequest;
@@ -27,6 +28,8 @@ import com.bcb.data.util.SaveUserInfoUtils;
 
 import org.json.JSONObject;
 import org.litepal.LitePalApplication;
+
+import de.greenrobot.event.EventBus;
 
 public class App extends Application {
 	
@@ -102,10 +105,12 @@ public class App extends Application {
 						//设置对应位置的数据
 						String value = response.getJSONObject("result").getString("Rate");
 						LogUtil.d("福袋数据", value);
-						if (!TextUtils.isEmpty(value)){
+						if (!TextUtils.isEmpty(value) && Float.valueOf(value) > 0){
 							//保存到数据库
 							DbUtil.saveWelfare(value);
 							setWelfare(value);
+							//通知刷新
+							EventBus.getDefault().post(new BroadcastEvent(BroadcastEvent.REFRESH));
 						}
 					}
 				} catch (Exception e) {

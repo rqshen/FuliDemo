@@ -8,10 +8,12 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -25,8 +27,11 @@ import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
 import com.bcb.common.net.UrlsOne;
 import com.bcb.common.net.UrlsTwo;
+import com.bcb.data.bean.BankItem;
 import com.bcb.data.bean.UserDetailInfo;
 import com.bcb.data.bean.UserWallet;
+import com.bcb.data.util.BankLogo;
+import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.MyConstants;
 import com.bcb.data.util.PackageUtil;
@@ -34,8 +39,12 @@ import com.bcb.data.util.TextUtil;
 import com.bcb.data.util.ToastUtil;
 import com.bcb.data.util.TokenUtil;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
+import com.google.gson.reflect.TypeToken;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.util.List;
 
 public class Activity_Recharge_Second extends Activity_Base implements View.OnClickListener{
 
@@ -47,6 +56,7 @@ public class Activity_Recharge_Second extends Activity_Base implements View.OnCl
 	private TextView bank_card_text;
 	private EditText editext_money;
 	private Button recharge_button;
+	private ImageView bank_icon;
 
 	//充值说明
 	private LinearLayout recharge_description;
@@ -107,6 +117,9 @@ public class Activity_Recharge_Second extends Activity_Base implements View.OnCl
 		tip_layout = (LinearLayout) findViewById(R.id.tip_layout);
 		recharge_tips = (TextView) findViewById(R.id.recharge_tips);
 
+		//银行logo
+		bank_icon = (ImageView) findViewById(R.id.bank_icon);
+
 		user_balauce = (TextView) findViewById(R.id.user_balauce);
 		bank_card_text = (TextView) findViewById(R.id.bank_card_text);
 		editext_money = (EditText) findViewById(R.id.editext_money);
@@ -123,8 +136,11 @@ public class Activity_Recharge_Second extends Activity_Base implements View.OnCl
                 && App.mUserDetailInfo.BankCard.getCardNumber() != null) {
             mUserDetailInfo = App.mUserDetailInfo;
             bank_card_text.setText(TextUtil.delBankNum(mUserDetailInfo.BankCard.CardNumber));
-			//设置银行卡充值提示
-			setBankCardTip(mUserDetailInfo.BankCard.BankName);
+			//加载银行卡限额数据
+			loadBankLimitData(mUserDetailInfo.BankCard.BankName);
+			//设置银行卡logo
+			BankLogo bankLogo = new BankLogo();
+			bank_icon.setBackgroundResource(bankLogo.getDrawableBankLogo(App.mUserDetailInfo.BankCard.getBankCode()));
             hideProgressBar();
         } else {
             loadUserBankData();
@@ -144,16 +160,16 @@ public class Activity_Recharge_Second extends Activity_Base implements View.OnCl
 	           
 			 @Override
 			 public void afterTextChanged(Editable s) {
-				// 先判断输入框的数字是否正常，不允许输入两个小数点
-				String temp = editext_money.getText().toString();
-				int inputcount = 0, inputstart = 0;
-				while ((inputstart = temp.indexOf(".", inputstart)) >= 0) {
-					inputstart += ".".length();
-					inputcount++;
-				}
-				if (temp.indexOf(".") == 0 || inputcount > 1) {
-					s.delete(temp.indexOf("."), temp.length());
-				}
+				 // 先判断输入框的数字是否正常，不允许输入两个小数点
+				 String temp = editext_money.getText().toString();
+				 int inputcount = 0, inputstart = 0;
+				 while ((inputstart = temp.indexOf(".", inputstart)) >= 0) {
+				 	inputstart += ".".length();
+				 	inputcount++;
+				 }
+				 if (temp.indexOf(".") == 0 || inputcount > 1) {
+				 	s.delete(temp.indexOf("."), temp.length());
+				 }
 						 		
 			 }  
        });  		
@@ -201,6 +217,9 @@ public class Activity_Recharge_Second extends Activity_Base implements View.OnCl
                     }
                     if (null != mUserDetailInfo) {
                         App.mUserDetailInfo = mUserDetailInfo;
+						//设置银行卡logo
+						BankLogo bankLogo = new BankLogo();
+						bank_icon.setBackgroundResource(bankLogo.getDrawableBankLogo(App.mUserDetailInfo.BankCard.getBankCode()));
                         showData();
                     }
                 }
@@ -217,40 +236,42 @@ public class Activity_Recharge_Second extends Activity_Base implements View.OnCl
         requestQueue.add(jsonRequest);
     }
 
-//    //获取用户银行卡限额信息
-//    private void loadBankLimitData(final String bankName){
-//        BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.SupportBank, null, TokenUtil.getEncodeToken(this), new BcbRequest.BcbCallBack<JSONObject>() {
-//            @Override
-//            public void onResponse(JSONObject response) {
-//				List<BankItem> mBanklist = null;
-//				try {
-//					JSONArray result = response.getJSONArray("result");
-//					if (result != null) {
-//						mBanklist = App.mGson.fromJson(result.toString(), new TypeToken<List<BankItem>>(){}.getType());
-//					}
-//
-//				} catch (Exception e) {
-//					LogUtil.d(TAG, "" + e.getMessage());
-//				}
-//				if(null != mBanklist && mBanklist.size() > 0){
-//					for(BankItem bankItem : mBanklist){
-//						if (bankName.equals(bankItem.getBankName())){
-//							//设置银行卡充值提示
-//							setBankCardTip(bankName, bankItem.getMaxSingle(), bankItem.getMaxDay());
-//						}
-//					}
-//				}
-//
-//            }
-//
-//            @Override
-//            public void onErrorResponse(Exception error) {
-//
-//            }
-//        });
-//        jsonRequest.setTag(BcbRequestTag.SupportBankTag);
-//        requestQueue.add(jsonRequest);
-//    }
+    //获取用户银行卡限额信息
+    private void loadBankLimitData(final String bankName){
+        BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.SupportBank, null, TokenUtil.getEncodeToken(this), new BcbRequest.BcbCallBack<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+				List<BankItem> mBanklist = null;
+				try {
+					JSONArray result = response.getJSONArray("result");
+					if (result != null) {
+						mBanklist = App.mGson.fromJson(result.toString(), new TypeToken<List<BankItem>>(){}.getType());
+					}
+
+				} catch (Exception e) {
+					LogUtil.d(TAG, "" + e.getMessage());
+				}
+
+				String tip = "";
+				if(null != mBanklist && mBanklist.size() > 0){
+					for(BankItem bankItem : mBanklist){
+						if (bankName.equals(bankItem.getBankName())){
+							tip = "该卡本次最多可充值"+ bankItem.getMaxSingle() +"元，每日最多"+ bankItem.getMaxDay() +"元";
+						}
+					}
+				}
+				//设置银行卡充值提示
+				setBankCardTip(tip);
+            }
+
+            @Override
+            public void onErrorResponse(Exception error) {
+
+            }
+        });
+        jsonRequest.setTag(BcbRequestTag.SupportBankTag);
+        requestQueue.add(jsonRequest);
+    }
 
     //显示用户余额
 	private void showUserWallet(){
@@ -263,8 +284,8 @@ public class Activity_Recharge_Second extends Activity_Base implements View.OnCl
     //显示账号信息
 	private void showData(){
 		bank_card_text.setText(TextUtil.delBankNum(mUserDetailInfo.BankCard.CardNumber));
-		//设置银行卡充值提示
-		setBankCardTip(mUserDetailInfo.BankCard.BankName);
+		//加载银行卡限额数据
+		loadBankLimitData(mUserDetailInfo.BankCard.BankName);
 	}
 
     //记录充值数据
@@ -379,41 +400,15 @@ public class Activity_Recharge_Second extends Activity_Base implements View.OnCl
 
 	/**
 	 * 设置银行卡充值提示
-	 * @param bankName 银行名称
+	 * @param tip 提示
      */
-	private void setBankCardTip(String bankName){//, Float maxSingle, Float maxDay
-//		String tip = "该卡本次最多可充值"+ maxSingle +"元，每日最多"+ maxDay +"元";
-		String tip;
-		switch (bankName){
-			case "兴业银行":
-				tip = "该卡本次最多可充值300元，每日最多15000元";
-				break;
-			case "华夏银行":
-				tip = "该卡本次最多可充值4999元，每日最多15000元";
-				break;
-			case "中国银行":
-				tip = "该卡本次最多可充值1000元，每日最多15000元";
-				break;
-			case "中国工商银行":
-				tip = "该卡本次最多可充值7999元，每日最多15000元";
-				break;
-			case "中信银行":
-				tip = "该卡本次最多可充值8000元，每日最多15000元";
-				break;
-			case "光大银行":
-				tip = "该卡本次最多可充值8000元，每日最多15000元";
-				break;
-			case "中国农业银行":
-				tip = "该卡本次最多可充值1000元，每日最多15000元";
-				break;
-			case "平安银行":
-				tip = "该卡本次最多可充值8000元，每日最多15000元";
-				break;
-			default:
-				tip = bankName + "渠道维护中，建议您到pc端充值";
-				break;
+	private void setBankCardTip(String tip){
+		if (TextUtils.isEmpty(tip)){
+			tip_layout.setVisibility(View.GONE);
+		} else {
+			tip_layout.setVisibility(View.VISIBLE);
+			recharge_tips.setText(tip);
 		}
-		recharge_tips.setText(tip);
 	}
 
 

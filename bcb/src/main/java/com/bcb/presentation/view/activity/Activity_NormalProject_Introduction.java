@@ -22,9 +22,7 @@ import com.bcb.common.net.BcbRequestTag;
 import com.bcb.common.net.UrlsOne;
 import com.bcb.common.net.UrlsTwo;
 import com.bcb.data.bean.UserDetailInfo;
-import com.bcb.data.bean.WelfareBean;
 import com.bcb.data.bean.project.SimpleProjectDetail;
-import com.bcb.data.util.DbUtil;
 import com.bcb.data.util.MQCustomerManager;
 import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.PackageUtil;
@@ -288,10 +286,7 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
                         if (TextUtils.isEmpty(resultObject.getString("AssetAuditContent"))){
                             resultObject.remove("AssetAuditContent");
                         }
-                        //判断JSON对象是否为空
-                        if (resultObject != null) {
-                            mSimpleProjectDetail = App.mGson.fromJson(resultObject.toString(), SimpleProjectDetail.class);
-                        }
+                        mSimpleProjectDetail = App.mGson.fromJson(resultObject.toString(), SimpleProjectDetail.class);
                         if(null != mSimpleProjectDetail){
                             //暂存数据
                             durationExchangeType = mSimpleProjectDetail.DurationExchangeType;
@@ -422,6 +417,7 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
         //还没有登陆时，跳转至登陆页面
         if (App.saveUserInfo.getAccess_Token() == null) {
             startActivity(new Intent(Activity_NormalProject_Introduction.this, Activity_Login_Introduction.class));
+            finish();
             return;
         }
         //如果没有认证则跳转至认证界面

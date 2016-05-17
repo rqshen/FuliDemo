@@ -407,7 +407,7 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPa
                 //注：有BUG，拉到底部会出现压扁情况，暂时这样处理
                 int mtop = top;
                 if (screenHeight == (top + bottomHeight + floatButtonBitmapHeight)){
-                    mtop -= 45;
+                    mtop -= 50;
                 }
                 ll.setMargins(left, mtop, 0, 0);
                 v.setLayoutParams(ll);
@@ -789,7 +789,8 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPa
                 Activity_Daily_Welfare.launche(ctx);
                 break;
             case R.id.ll_wealth_college://理财学院
-
+                Activity_WebView.launche(ctx,"理财学院",UrlsOne.CollegeWebView);
+//                Activity_WebView.launche(ctx,false,UrlsOne.CollegeWebView);
                 break;
             case R.id.ll_security://安全保障
                 Activity_WebView.launche(ctx,"安全保障",UrlsOne.SecureWebView);

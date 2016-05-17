@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.view.View;
 import android.view.Window;
@@ -44,6 +45,7 @@ public class Activity_WebView extends Activity_Base {
 
     private String tittle;
     private String url;
+    private boolean isNeedTitle;
 
     private WebView webView;
     //加载刷新工具
@@ -58,6 +60,20 @@ public class Activity_WebView extends Activity_Base {
 
     //对话框
     private DialogWidget certDialog;
+
+    /**
+     * 启动WebView，默认表示不带token的状态
+     * @param ctx
+     * @param isNeedTitle 是否需要title
+     * @param url
+     */
+    public static void launche(Context ctx, boolean isNeedTitle, String url){
+		Intent intent = new Intent();
+		intent.setClass(ctx, Activity_WebView.class);
+		intent.putExtra("isNeedTitle", isNeedTitle);
+		intent.putExtra("url", url);
+		ctx.startActivity(intent);
+	}
 
     /**
      * 启动WebView，默认表示不带token的状态
@@ -95,11 +111,16 @@ public class Activity_WebView extends Activity_Base {
         //管理Activity栈，用于忘记密码的时候，跳转至登陆界面之前销毁栈中所有的Activity
         MyActivityManager myActivityManager = MyActivityManager.getInstance();
         myActivityManager.pushOneActivity(Activity_WebView.this);
-		tittle = getIntent().getStringExtra("tittle");
+        isNeedTitle = getIntent().getBooleanExtra("isNeedTitle", true);
+        if (!isNeedTitle){
+            setTitleVisiable(View.GONE);
+        }else{
+            tittle = getIntent().getStringExtra("tittle");
+            setLeftTitleVisible(true);
+            setTitleValue(tittle);
+        }
 		url = getIntent().getStringExtra("url");
         setBaseContentView(R.layout.activity_webview);
-        setLeftTitleVisible(true);
-        setTitleValue(tittle);
         //判断是否需要在链接后面添加加token
         if (getIntent().getBooleanExtra("hasToken", false)) {
             url =  getUrlStrWithDES();

@@ -35,7 +35,7 @@
                 android:layout_marginRight="@dimen/margin_size_rather_large"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:text="2015-11-28过期"
+                android:text="xxxxx过期"
                 android:textColor="@color/white"
                 android:textSize="@dimen/main_text_default" />
         </RelativeLayout>
@@ -51,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_alignParentLeft="true"
-                android:text="1000"
+                android:text="0000"
                 android:textColor="@color/red"
                 android:textSize="@dimen/main_text_large" />
             <TextView
@@ -59,9 +59,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/coupon_amount"
+                android:layout_centerInParent="true"
                 android:layout_marginLeft="2dip"
                 android:layout_marginTop="2dip"
-                android:gravity="top"
                 android:text="元"
                 android:textColor="@color/txt_black"
                 android:textSize="@dimen/main_text_small" />
@@ -92,7 +92,7 @@
                 android:layout_marginTop="5dip"
                 android:layout_marginBottom="5dip"
                 android:layout_marginLeft="@dimen/margin_size_rather_large"
-                android:text="投资10000元可用"
+                android:text="投资xxxx元可用"
                 android:textColor="@color/txt_gray"
                 android:textSize="@dimen/main_text_default" />
         </LinearLayout>

@@ -197,7 +197,6 @@ public class Activity_Main extends Activity_Base_Fragment {
 				case BroadcastEvent.PRODUCT:
 					UmengUtil.eventById(Activity_Main.this, R.string.main_product_list);
 					setFragProduct();
-					EventBus.getDefault().post(new BroadcastEvent(BroadcastEvent.REFRESH));
 					break;
 				case BroadcastEvent.USER:
 					UmengUtil.eventById(Activity_Main.this,R.string.self_c);

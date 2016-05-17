@@ -16,20 +16,19 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.bcb.common.app.App;
 import com.bcb.R;
+import com.bcb.common.app.App;
 import com.bcb.common.net.BcbJsonRequest;
 import com.bcb.common.net.BcbNetworkManager;
 import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
+import com.bcb.common.net.UrlsOne;
+import com.bcb.common.net.UrlsTwo;
 import com.bcb.data.bean.AreaBean;
 import com.bcb.data.bean.UserDetailInfo;
 import com.bcb.data.bean.UserWallet;
-import com.bcb.common.net.UrlsOne;
-import com.bcb.common.net.UrlsTwo;
 import com.bcb.data.util.BankLogo;
-import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.PackageUtil;
 import com.bcb.data.util.PasswordEditText;
@@ -156,6 +155,7 @@ public class Activity_Withdraw extends Activity_Base implements View.OnClickList
         //设置银行卡账号，有账号信息则不用从服务器中加载数据，直接在本地静态数据区中取得
 		if (App.mUserDetailInfo.BankCard != null) {
             bank_card_text.setText(TextUtil.delBankNum(App.mUserDetailInfo.BankCard.getCardNumber()));
+			//设置银行卡logo
 			BankLogo bankLogo = new BankLogo();
 			bank_icon.setBackgroundResource(bankLogo.getDrawableBankLogo(App.mUserDetailInfo.BankCard.getBankCode()));
             mUserBankInfo = App.mUserDetailInfo;
@@ -356,6 +356,9 @@ public class Activity_Withdraw extends Activity_Base implements View.OnClickList
                     }
                     if (null != mUserBankInfo) {
                         App.mUserDetailInfo = mUserBankInfo;
+						//设置银行卡logo
+						BankLogo bankLogo = new BankLogo();
+						bank_icon.setBackgroundResource(bankLogo.getDrawableBankLogo(App.mUserDetailInfo.BankCard.getBankCode()));
                         showBankInfo();
                     }
                 }
@@ -428,7 +431,7 @@ public class Activity_Withdraw extends Activity_Base implements View.OnClickList
     //提现
 	private void onWithdraw(){
 		// 没有输入提现金额
-		if (ToastUtil.checkInputParam(Activity_Withdraw.this, editext_money, "请输入提现金额") == false) {
+		if (!ToastUtil.checkInputParam(Activity_Withdraw.this, editext_money, "请输入提现金额")) {
 			return;
 		}
 
@@ -446,7 +449,7 @@ public class Activity_Withdraw extends Activity_Base implements View.OnClickList
 			return;
 		}
 		// 是否输入了交易密码
-		if (ToastUtil.checkInputParam(Activity_Withdraw.this, userpwd, "请输入提现密码") == false) {
+		if (!ToastUtil.checkInputParam(Activity_Withdraw.this, userpwd, "请输入提现密码")) {
 			return;
 		}
 		// 输入交易密码位数不对
