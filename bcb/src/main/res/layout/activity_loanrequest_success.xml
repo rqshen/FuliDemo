@@ -285,6 +285,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="20dp"
                         android:layout_marginTop="10dp"
+                        android:layout_marginBottom="20dp"
                         android:text="@string/borrow_success_tips2"
                         android:textColor="@color/txt_gray"
                         android:textSize="@dimen/main_text_default" />

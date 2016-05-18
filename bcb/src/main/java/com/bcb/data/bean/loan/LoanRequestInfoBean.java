@@ -21,7 +21,6 @@ public class LoanRequestInfoBean implements Serializable {
     public List<RateTableBean> RateTable;//借款利率表
 
     private String Status;//是否可以申请借款
-    private String message;//不可申请时的状态信息
 
     public String getStatus() {
         return Status;
@@ -29,14 +28,6 @@ public class LoanRequestInfoBean implements Serializable {
 
     public void setStatus(String status) {
         Status = status;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
     }
 
     @Override
@@ -55,7 +46,6 @@ public class LoanRequestInfoBean implements Serializable {
                 ", LoanTypeTable=" + LoanTypeTable +
                 ", RateTable=" + RateTable +
                 ", Status=" + Status +
-                ", message='" + message + '\'' +
                 '}';
     }
 }

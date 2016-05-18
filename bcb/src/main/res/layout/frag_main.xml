@@ -34,7 +34,7 @@
                             android:id="@+id/autoLoop"
                             android:layout_width="match_parent"
                             android:layout_height="180dp"
-                            android:background="@drawable/banner_placeholder" />
+                            android:background="@drawable/banner01" />
 
                         <com.bcb.presentation.view.custom.PagerIndicator.CirclePageIndicator
                             android:id="@+id/indy"

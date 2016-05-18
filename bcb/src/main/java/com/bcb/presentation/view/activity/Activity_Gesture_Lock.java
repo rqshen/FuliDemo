@@ -144,6 +144,7 @@ public class Activity_Gesture_Lock extends Activity_Base {
 
     @Override
     public void onBackPressed() {
+        finish();
     }
 
     //退出登录

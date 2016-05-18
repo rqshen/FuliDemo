@@ -1,14 +1,11 @@
 package com.bcb.presentation.view.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bcb.R;
 import com.bcb.data.util.MyActivityManager;
-import com.bcb.data.util.ScreenUtils;
 
 /**
  * Created by cain on 16/1/8.

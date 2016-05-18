@@ -1,5 +1,6 @@
 package com.bcb.presentation.view.activity;
 
+import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.app.Activity;
@@ -10,14 +11,17 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bcb.R;
 import com.bcb.common.event.BroadcastEvent;
 import com.bcb.data.util.MyActivityManager;
+import com.bcb.data.util.ScreenUtils;
 import com.bcb.data.util.UmengUtil;
 import com.bcb.presentation.view.custom.Animation.BounceInterpolator;
 
@@ -30,7 +34,8 @@ import de.greenrobot.event.EventBus;
  */
 public class Activity_Daily_Welfare_Result extends Activity_Base implements View.OnClickListener{
 
-    private LinearLayout coin;//弹跳金币
+    private RelativeLayout coin;//弹跳金币
+//    private ImageView coin_bg;//金币背景光环
     private LinearLayout ll_text;//按钮下面文本
     private TextView btn_welfare_check;//立即查看
     private ImageView activity_close;//关闭按钮
@@ -51,7 +56,8 @@ public class Activity_Daily_Welfare_Result extends Activity_Base implements View
 
         setContentView(R.layout.activity_daily_welfare_result);
         ctx = this;
-        coin = (LinearLayout) findViewById(R.id.coin);
+        coin = (RelativeLayout) findViewById(R.id.coin);
+//        coin_bg = (ImageView) findViewById(R.id.coin_bg);
 
         ll_text = (LinearLayout) findViewById(R.id.ll_text);
         ll_text.setOnClickListener(this);
@@ -60,7 +66,7 @@ public class Activity_Daily_Welfare_Result extends Activity_Base implements View
         welfare_value = (TextView) findViewById(R.id.welfare_value);
         String value = getIntent().getStringExtra("welfare_value");
         if(!TextUtils.isEmpty(value)){
-            welfare_value.setText(value);
+            welfare_value.setText(value + "%");
         }
         welfare_totalInterest = (TextView) findViewById(R.id.welfare_totalInterest);
         String totalInterest = getIntent().getStringExtra("totalInterest");
@@ -80,6 +86,27 @@ public class Activity_Daily_Welfare_Result extends Activity_Base implements View
         ObjectAnimator objectAnimator = ObjectAnimator.ofPropertyValuesHolder(coin, scaleX,scaleY,translationY);
         objectAnimator.setInterpolator(new BounceInterpolator());
         objectAnimator.setDuration(1200);
+//        objectAnimator.addListener(new Animator.AnimatorListener() {
+//            @Override
+//            public void onAnimationStart(Animator animation) {
+//
+//            }
+//
+//            @Override
+//            public void onAnimationEnd(Animator animation) {
+//                coin_bg.setVisibility(View.VISIBLE);
+//            }
+//
+//            @Override
+//            public void onAnimationCancel(Animator animation) {
+//
+//            }
+//
+//            @Override
+//            public void onAnimationRepeat(Animator animation) {
+//
+//            }
+//        });
         objectAnimator.start();
     }
 

@@ -600,7 +600,7 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPa
                 }
             });
             //异步加载网络图片
-            BcbRemoteImage.getInstance(context).loadRemoteImage(iv, data.get(position).ImageUrl, R.drawable.banner_placeholder, R.drawable.banner_placeholder);
+            BcbRemoteImage.getInstance(context).loadRemoteImage(iv, data.get(position).ImageUrl, R.drawable.banner01, R.drawable.banner01);
             container.addView(mage);
             return mage;
         }

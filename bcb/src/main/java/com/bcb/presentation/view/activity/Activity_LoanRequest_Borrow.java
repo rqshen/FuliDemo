@@ -133,6 +133,8 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
     private Button bottoButton;
     //借款申请信息
     private LoanRequestInfoBean loanRequestInfo;
+    //不可申请时的状态信息
+    private String message;
 
     //转圈提示
     ProgressDialog progressDialog;
@@ -789,7 +791,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
                 gotoRequestSuccessPage();
             }
         }else{//存在已审核通过的借款
-            ToastUtil.alert(Activity_LoanRequest_Borrow.this, loanRequestInfo.getMessage());
+            ToastUtil.alert(Activity_LoanRequest_Borrow.this, message);
         }
 
     }
@@ -941,8 +943,8 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
                     }
                     //初始化数据，因为不管状态是不是-1或者1，这里面都要返回列表数据
                     init(response.getString("result"));
+                    message = response.getString("message");
                     if (response.getInt("status") != 1) {
-                        String message = response.getString("message");
                         //出错信息不为空时，将出错信息打印出来，否则将出错信息设置为"未知错误"
                         if (message != null && !message.equalsIgnoreCase("null") && !message.equalsIgnoreCase("")) {
                             //判断是否Token过期，如果过期则跳转至登陆界面
@@ -950,7 +952,6 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
                                 Activity_Login.launche(Activity_LoanRequest_Borrow.this);
                                 finish();
                             }
-                            loanRequestInfo.setMessage(message);
                         }
                     } else {
                         UmengUtil.eventById(Activity_LoanRequest_Borrow.this, R.string.loan_blank);
