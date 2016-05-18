@@ -149,7 +149,7 @@ public class Activity_Daily_Welfare_Result extends Activity_Base implements View
         switch (v.getId()){
             case R.id.ll_text://跳转到投资记录
                 UmengUtil.eventById(ctx, R.string.self_tzjl);
-                Activity_Trading_Record.launche(ctx);
+                Activity_Money_Flowing_Water.launche(ctx);
                 finish();
                 break;
             case R.id.btn_welfare_check://跳转到首页产品列表

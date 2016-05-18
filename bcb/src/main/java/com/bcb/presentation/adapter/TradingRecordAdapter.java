@@ -1,6 +1,7 @@
 package com.bcb.presentation.adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -57,31 +58,35 @@ public class TradingRecordAdapter extends BaseAdapter {
 			mHolder = (Holder) view.getTag();
 		}
 		//设置时间
-		mHolder.value_date.setText(data.get(pos).getPayTime().substring(0,10));
-		//如果时间相同则隐藏掉时间，否则显示时间
-		if (pos > 0 && data.get(pos).getPayTime().substring(0,10).equals(data.get(pos - 1).getPayTime().substring(0,10))) {
-			mHolder.layout_date.setVisibility(View.GONE);
-		} else {
-			mHolder.layout_date.setVisibility(View.VISIBLE);
-		}
+		if (null != data.get(pos)){
+			if (!TextUtils.isEmpty(data.get(pos).getPayTime())){
+				mHolder.value_date.setText(data.get(pos).getPayTime().substring(0,10));
+				//如果时间相同则隐藏掉时间，否则显示时间
+				if (pos > 0 && !TextUtils.isEmpty(data.get(pos - 1).getPayTime()) && data.get(pos).getPayTime().substring(0,10).equals(data.get(pos - 1).getPayTime().substring(0,10))) {
+					mHolder.layout_date.setVisibility(View.GONE);
+				} else {
+					mHolder.layout_date.setVisibility(View.VISIBLE);
+				}
+			}
 
-		//判断是否为空，包括 null 、"null"、""
-		if (data.get(pos).getPackageName() != null) {
-			mHolder.name.setText((data.get(pos).getPackageName().equalsIgnoreCase("null") || data.get(pos).getPackageName().equalsIgnoreCase(""))
-					? "" : data.get(pos).getPackageName());
-		} else {
-			mHolder.name.setText("");
-		}
+			//判断是否为空，包括 null 、"null"、""
+			if (data.get(pos).getPackageName() != null) {
+				mHolder.name.setText((data.get(pos).getPackageName().equalsIgnoreCase("null") || data.get(pos).getPackageName().equalsIgnoreCase(""))
+						? "" : data.get(pos).getPackageName());
+			} else {
+				mHolder.name.setText("");
+			}
 
-		//判断是否为空，包括 null 、"null"、""
-		if (data.get(pos).getOrderStatus() != null) {
-			mHolder.status.setText((data.get(pos).getOrderStatus().equalsIgnoreCase("null") || data.get(pos).getOrderStatus().equalsIgnoreCase(""))
-					? "" : data.get(pos).getOrderStatus());
-		} else {
-			mHolder.status.setText("");
-		}
+			//判断是否为空，包括 null 、"null"、""
+			if (data.get(pos).getOrderStatus() != null) {
+				mHolder.status.setText((data.get(pos).getOrderStatus().equalsIgnoreCase("null") || data.get(pos).getOrderStatus().equalsIgnoreCase(""))
+						? "" : data.get(pos).getOrderStatus());
+			} else {
+				mHolder.status.setText("");
+			}
 
-		mHolder.amount.setText(String.format("%.2f", data.get(pos).getOrderAmount()) + "元");
+			mHolder.amount.setText(String.format("%.2f", data.get(pos).getOrderAmount()) + "元");
+		}
 
 		return view;
 	}

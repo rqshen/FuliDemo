@@ -126,9 +126,7 @@ public class Activity_Transaction_Detail extends Activity_Base {
                     if(status == 1) {
                         TransactionListBean transactionListBean = null;
                         //判断JSON对象是否为空
-                        if (response != null) {
-                            transactionListBean = App.mGson.fromJson(response.getString("result"), TransactionListBean.class);
-                        }
+                        transactionListBean = App.mGson.fromJson(response.getString("result"), TransactionListBean.class);
                         //如果存在记录
                         if (null != transactionListBean && null != transactionListBean.Records && transactionListBean.Records.size() > 0) {
                             canLoadmore = true;
