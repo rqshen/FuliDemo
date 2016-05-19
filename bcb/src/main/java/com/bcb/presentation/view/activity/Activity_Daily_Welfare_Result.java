@@ -1,6 +1,5 @@
 package com.bcb.presentation.view.activity;
 
-import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.app.Activity;
@@ -11,7 +10,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -21,7 +19,6 @@ import android.widget.TextView;
 import com.bcb.R;
 import com.bcb.common.event.BroadcastEvent;
 import com.bcb.data.util.MyActivityManager;
-import com.bcb.data.util.ScreenUtils;
 import com.bcb.data.util.UmengUtil;
 import com.bcb.presentation.view.custom.Animation.BounceInterpolator;
 
@@ -57,7 +54,6 @@ public class Activity_Daily_Welfare_Result extends Activity_Base implements View
         setContentView(R.layout.activity_daily_welfare_result);
         ctx = this;
         coin = (RelativeLayout) findViewById(R.id.coin);
-//        coin_bg = (ImageView) findViewById(R.id.coin_bg);
 
         ll_text = (LinearLayout) findViewById(R.id.ll_text);
         ll_text.setOnClickListener(this);
@@ -86,27 +82,6 @@ public class Activity_Daily_Welfare_Result extends Activity_Base implements View
         ObjectAnimator objectAnimator = ObjectAnimator.ofPropertyValuesHolder(coin, scaleX,scaleY,translationY);
         objectAnimator.setInterpolator(new BounceInterpolator());
         objectAnimator.setDuration(1200);
-//        objectAnimator.addListener(new Animator.AnimatorListener() {
-//            @Override
-//            public void onAnimationStart(Animator animation) {
-//
-//            }
-//
-//            @Override
-//            public void onAnimationEnd(Animator animation) {
-//                coin_bg.setVisibility(View.VISIBLE);
-//            }
-//
-//            @Override
-//            public void onAnimationCancel(Animator animation) {
-//
-//            }
-//
-//            @Override
-//            public void onAnimationRepeat(Animator animation) {
-//
-//            }
-//        });
         objectAnimator.start();
     }
 

@@ -2,6 +2,7 @@ package com.bcb.common.net;
 
 import android.text.TextUtils;
 import android.util.Base64;
+import android.util.Log;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
@@ -70,6 +71,7 @@ public abstract class BcbRequest<T> extends Request<T> {
                 bcbCallBack.onErrorResponse(error);
             }
         });
+        Log.d("url",url);
         mBcbCallBack = bcbCallBack;
         if (TextUtils.isEmpty(requestBody)) {
             mRequestBody = null;
@@ -97,6 +99,7 @@ public abstract class BcbRequest<T> extends Request<T> {
                 bcbCallBack.onErrorResponse(error);
             }
         });
+        Log.d("url",url);
         mBcbCallBack = bcbCallBack;
         if (TextUtils.isEmpty(requestBody)) {
             mRequestBody = null;
@@ -124,6 +127,7 @@ public abstract class BcbRequest<T> extends Request<T> {
                 bcbCallBack.onErrorResponse(error);
             }
         });
+        Log.d("url",url);
         this.index = index;
         mBcbIndexCallBack = bcbCallBack;
         if (TextUtils.isEmpty(requestBody)) {

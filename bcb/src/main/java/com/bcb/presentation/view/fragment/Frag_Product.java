@@ -198,7 +198,7 @@ public class Frag_Product extends Frag_Base implements OnClickListener {
                             productListBean = App.mGson.fromJson(obj.toString(), ProductListBean.class);
                         }
                         //存在产品列表
-                        if (null != productListBean.Records && productListBean.Records.size() > 0) {
+                        if (null != productListBean && null != productListBean.Records && productListBean.Records.size() > 0) {
                             canLoadMore = true;
                             PageNow++;
                             setupListViewVisible(true);
@@ -220,14 +220,30 @@ public class Frag_Product extends Frag_Base implements OnClickListener {
                             }
                         }
                     } else {
-                        canLoadMore = false;
-                        if (recordsBeans == null || recordsBeans.size() <= 0) {
-                            setupListViewVisible(false);
-                        } else {
-                            setupListViewVisible(true);
+                        JSONObject obj = PackageUtil.getResultObject(response);
+                        if (null == obj){
+                            //刷新适配器，如果存在适配器，则刷新；没有则新建并绑定适配器
+                            if (null != recordsBeans && null != mProductAdapter) {
+                                recordsBeans.clear();
+                                mProductAdapter.notifyDataSetChanged();
+                            }
+                        }else{
+                            canLoadMore = false;
+                            if (recordsBeans == null || recordsBeans.size() <= 0) {
+                                setupListViewVisible(false);
+                            } else {
+                                setupListViewVisible(true);
+                            }
                         }
                     }
-                } finally {
+                }catch (Exception e) {
+                    //刷新适配器，如果存在适配器，则刷新；没有则新建并绑定适配器
+                    if (null != recordsBeans && null != mProductAdapter) {
+                        recordsBeans.clear();
+                        mProductAdapter.notifyDataSetChanged();
+                    }
+                    e.printStackTrace();
+                }finally {
                     refreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
                     refreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
                 }

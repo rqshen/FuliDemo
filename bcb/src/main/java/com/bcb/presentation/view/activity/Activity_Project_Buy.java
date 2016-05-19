@@ -367,7 +367,7 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
             public void onResponse(JSONObject response) {
                 try {
                     boolean flag = PackageUtil.getRequestStatus(response, Activity_Project_Buy.this);
-                    if(true == flag){
+                    if(flag){
                         JSONObject obj = PackageUtil.getResultObject(response);
                         //显示优惠券数量
                         //判断JSON对象是否为空
@@ -975,7 +975,7 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
         }
 
         //对话框
-        DecimalFormat df = new DecimalFormat("######0.####");
+        DecimalFormat df = new DecimalFormat("######0.##");
         String value = df.format(fee);
         certDialog = new DialogWidget(Activity_Project_Buy.this, getServiceFeeView("该标收取投资金额的" + value + "% 作为信息服务费"), true);
         certDialog.show();

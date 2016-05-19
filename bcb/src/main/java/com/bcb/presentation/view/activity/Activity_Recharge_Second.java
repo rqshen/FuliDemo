@@ -137,7 +137,7 @@ public class Activity_Recharge_Second extends Activity_Base implements View.OnCl
             mUserDetailInfo = App.mUserDetailInfo;
             bank_card_text.setText(TextUtil.delBankNum(mUserDetailInfo.BankCard.CardNumber));
 			//加载银行卡限额数据
-			loadBankLimitData(mUserDetailInfo.BankCard.BankName);
+			loadBankLimitData(mUserDetailInfo.BankCard.BankCode);
 			//设置银行卡logo
 			BankLogo bankLogo = new BankLogo();
 			bank_icon.setBackgroundResource(bankLogo.getDrawableBankLogo(App.mUserDetailInfo.BankCard.getBankCode()));
@@ -237,7 +237,7 @@ public class Activity_Recharge_Second extends Activity_Base implements View.OnCl
     }
 
     //获取用户银行卡限额信息
-    private void loadBankLimitData(final String bankName){
+    private void loadBankLimitData(final String bankCode){
         BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.SupportBank, null, TokenUtil.getEncodeToken(this), new BcbRequest.BcbCallBack<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -255,7 +255,7 @@ public class Activity_Recharge_Second extends Activity_Base implements View.OnCl
 				String tip = "";
 				if(null != mBanklist && mBanklist.size() > 0){
 					for(BankItem bankItem : mBanklist){
-						if (bankName.equals(bankItem.getBankName())){
+						if (bankCode.equalsIgnoreCase(bankItem.getBankCode())){
 							tip = "该卡本次最多可充值"+ bankItem.getMaxSingle() +"元，每日最多"+ bankItem.getMaxDay() +"元";
 						}
 					}
@@ -285,7 +285,7 @@ public class Activity_Recharge_Second extends Activity_Base implements View.OnCl
 	private void showData(){
 		bank_card_text.setText(TextUtil.delBankNum(mUserDetailInfo.BankCard.CardNumber));
 		//加载银行卡限额数据
-		loadBankLimitData(mUserDetailInfo.BankCard.BankName);
+		loadBankLimitData(mUserDetailInfo.BankCard.BankCode);
 	}
 
     //记录充值数据
