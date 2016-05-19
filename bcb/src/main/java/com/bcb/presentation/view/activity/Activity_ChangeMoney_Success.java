@@ -356,7 +356,8 @@ public class Activity_ChangeMoney_Success extends Activity_Base implements View.
 		switch (status) {
 			//充值中
 			case 10:
-				secondText.setText(time + "");
+				//FIXME 暂时不能测试
+//				secondText.setText(time + "");
 				break;
 
 			//充值成功

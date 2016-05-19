@@ -214,9 +214,10 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 
     /******************* 初始化页面 ***************************/
     private void setupView() {
-        //体验标隐藏账户余额
+        //体验标隐藏账户余额，投资金额
         if (isExpired) {
-            ((RelativeLayout)findViewById(R.id.layout_money)).setVisibility(View.GONE);
+            findViewById(R.id.layout_money).setVisibility(View.GONE);
+            findViewById(R.id.ll_investment_amount).setVisibility(View.GONE);
         }
         //投资金额
         invest_money = (EditText) findViewById(R.id.invest_money);
