@@ -25,4 +25,6 @@ public class MyConstants {
 	// 微信分享需要的注册APPID
 	public static final String APP_ID = "wx2a098a76630fc98f";
 
+
+
 }
