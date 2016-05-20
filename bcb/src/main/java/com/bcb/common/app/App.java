@@ -3,32 +3,31 @@ package com.bcb.common.app;
 import android.app.Application;
 import android.content.Context;
 import android.text.TextUtils;
+import android.util.Log;
 
-import com.bcb.R;
 import com.bcb.common.event.BroadcastEvent;
 import com.bcb.common.net.BcbJsonRequest;
 import com.bcb.common.net.BcbNetworkManager;
 import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
-import com.bcb.common.net.BcbRequestTag;
 import com.bcb.common.net.UrlsOne;
 import com.bcb.data.bean.UserDetailInfo;
 import com.bcb.data.bean.UserWallet;
-import com.bcb.data.bean.WelfareBean;
 import com.bcb.data.util.DbUtil;
 import com.bcb.data.util.LogUtil;
-import com.bcb.data.util.ToastUtil;
-import com.bcb.data.util.TokenUtil;
-import com.bcb.data.util.UmengUtil;
-import com.bcb.presentation.view.activity.Activity_Daily_Welfare_Result;
-import com.bcb.presentation.view.activity.Activity_Daily_Welfare_Tip;
-import com.google.gson.Gson;
 import com.bcb.data.util.SaveConfigUtil;
 import com.bcb.data.util.SaveUserInfoUtils;
+import com.bcb.data.util.TokenUtil;
+import com.google.gson.Gson;
 
 import org.json.JSONObject;
 import org.litepal.LitePalApplication;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.TagAliasCallback;
 import de.greenrobot.event.EventBus;
 
 public class App extends Application {
@@ -54,7 +53,11 @@ public class App extends Application {
 	public void onCreate() {
 		super.onCreate();
 
+		//数据库初始化
 		LitePalApplication.initialize(this);
+		//极光推送初始化
+		JPushInterface.setDebugMode(true); 	// 设置开启日志,发布时请关闭日志
+		JPushInterface.init(this);     		// 初始化 JPush
 
 		if (saveUserInfo == null) {
 			saveUserInfo = new SaveUserInfoUtils(this);

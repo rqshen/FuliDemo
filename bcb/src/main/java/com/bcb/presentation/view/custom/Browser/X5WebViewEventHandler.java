@@ -37,135 +37,114 @@ public class X5WebViewEventHandler extends ProxyWebViewClientExtension implement
 
 	@Override
 	public void acquireWakeLock() {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void addFlashView(View arg0, LayoutParams arg1) {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void exitFullScreenFlash() {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public Context getApplicationContex() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public View getVideoLoadingProgressView() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public Object getX5WebChromeClientInstance() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public void h5videoExitFullScreen(String arg0) {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void h5videoRequestFullScreen(String arg0) {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public boolean onAddFavorite(IX5WebViewExtension arg0, String arg1,
 								 String arg2, JsResult arg3) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public void onAllMetaDataFinished(IX5WebViewExtension arg0,
 			HashMap<String, String> arg1) {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onBackforwardFinished(int arg0) {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onHitTestResultFinished(IX5WebViewExtension arg0,
 			HitTestResult arg1) {
-		// TODO Auto-generated method stub
 		Log.i("yuanhaizhou", "onHitTestResultFinished");
 	}
 
 	@Override
 	public void onHitTestResultForPluginFinished(IX5WebViewExtension arg0,
 												 HitTestResult arg1, Bundle arg2) {
-		// TODO Auto-generated method stub
 		arg1.getData();
 		Log.i("yuanhaizhou", "onHitTestResultForPluginFinished");
 	}
 
 	@Override
 	public boolean onPageNotResponding(Runnable arg0) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public void onPrepareX5ReadPageDataFinished(IX5WebViewExtension arg0,
 			HashMap<String, String> arg1) {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onPromptNotScalable(IX5WebViewExtension arg0) {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void onPromptScaleSaved(IX5WebViewExtension arg0) {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public boolean onSavePassword(String arg0, String arg1, String arg2,
 			boolean arg3, Message arg4) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public void onX5ReadModeAvailableChecked(HashMap<String, String> arg0) {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void releaseWakeLock() {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void requestFullScreenFlash() {
-		// TODO Auto-generated method stub
-		
+
 	}
 	
 	

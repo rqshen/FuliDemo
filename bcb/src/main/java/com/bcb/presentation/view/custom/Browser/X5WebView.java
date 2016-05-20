@@ -98,7 +98,6 @@ public class X5WebView extends WebView {
 		 */
 		@Override
 		public boolean onCreateWindow(WebView arg0, boolean arg1, boolean arg2, Message msg) {
-			// TODO Auto-generated method stub
 			if (X5WebView.isSmallWebViewDisplayed == true) {
 
 				WebView.WebViewTransport webViewTransport = (WebView.WebViewTransport) msg.obj;
@@ -139,7 +138,6 @@ public class X5WebView extends WebView {
 			//
 			// @Override
 			// public void onClick(DialogInterface dialog, int which) {
-			// // TODO Auto-generated method stub
 			// dialog.dismiss();
 			// }
 			// });

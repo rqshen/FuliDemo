@@ -127,13 +127,11 @@ public class PayPasswordView {
 
     @OnLongClick(R.id.pay_keyboard_del)
     public boolean onLongClick(View v) {
-        // TODO Auto-generated method stub
         parseActionType(KeyboardEnum.longdel);
         return false;
     }
 
     private void parseActionType(KeyboardEnum type) {
-        // TODO Auto-generated method stub
         if (type.getType() == KeyboardEnum.ActionEnum.add) {
             if(mList.size() < 6) {
                 mList.add(type.getValue());
@@ -166,7 +164,6 @@ public class PayPasswordView {
         }
     }
     private void updateUi() {
-        // TODO Auto-generated method stub
         if (mList.size()==0) {
             box1.setText("");
             box2.setText("");

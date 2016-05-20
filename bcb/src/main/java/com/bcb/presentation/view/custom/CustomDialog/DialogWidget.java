@@ -37,11 +37,9 @@ public class DialogWidget extends Dialog {
 
     public DialogWidget(Context context, int theme) {
         super(context, theme);
-        // TODO Auto-generated constructor stub
     }
     public DialogWidget(Context context) {
         this(context, 0);
-        // TODO Auto-generated constructor stub
     }
     public DialogWidget(Context activity, View view) {
         super(activity, R.style.PasswdDialog);
@@ -67,7 +65,6 @@ public class DialogWidget extends Dialog {
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         setContentView(view);
         setCanceledOnTouchOutside(isOutSideTouch);

@@ -14,13 +14,11 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bcb.R;
-import com.bcb.common.app.App;
 import com.bcb.common.event.BroadcastEvent;
 import com.bcb.data.util.UmengUtil;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
@@ -66,6 +64,12 @@ public class Activity_Main extends Activity_Base_Fragment {
 		init();
 		UmengUtil.update(Activity_Main.this);
 		EventBus.getDefault().register(this);
+
+//		//仅用于JPush测试用的 tag ： 1234
+//		Set<String> tagSet = new LinkedHashSet<String>();
+//		tagSet.add("1234");
+//		LogUtil.d("1234", tagSet.toString());
+//		JPushInterface.setAliasAndTags(getApplicationContext(), null, tagSet, mTagsCallback);
 
 	}
 
@@ -289,4 +293,29 @@ public class Activity_Main extends Activity_Base_Fragment {
 			return super.instantiateItem(container, position);
 		}
 	}
+
+//	//仅用于JPush测试
+//	private final TagAliasCallback mTagsCallback = new TagAliasCallback() {
+//
+//		@Override
+//		public void gotResult(int code, String alias, Set<String> tags) {
+//			String logs ;
+//			switch (code) {
+//				case 0:
+//					logs = "Set tag and alias success";
+//					LogUtil.i("1234", logs);
+//					break;
+//
+//				case 6002:
+//					logs = "Failed to set alias and tags due to timeout. Try again after 60s.";
+//					LogUtil.i("1234", logs);
+//					break;
+//
+//				default:
+//					logs = "Failed with errorCode = " + code;
+//					LogUtil.e("1234", logs);
+//			}
+//		}
+//
+//	};
 }
