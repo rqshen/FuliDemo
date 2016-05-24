@@ -3,8 +3,9 @@ package com.bcb.common.app;
 import android.app.Application;
 import android.content.Context;
 import android.text.TextUtils;
-import android.util.Log;
 
+import com.amap.api.location.AMapLocation;
+import com.amap.api.location.AMapLocationListener;
 import com.bcb.common.event.BroadcastEvent;
 import com.bcb.common.net.BcbJsonRequest;
 import com.bcb.common.net.BcbNetworkManager;
@@ -15,22 +16,20 @@ import com.bcb.data.bean.UserDetailInfo;
 import com.bcb.data.bean.UserWallet;
 import com.bcb.data.util.DbUtil;
 import com.bcb.data.util.LogUtil;
+import com.bcb.data.util.MapUtil;
 import com.bcb.data.util.SaveConfigUtil;
 import com.bcb.data.util.SaveUserInfoUtils;
+import com.bcb.data.util.SystemUtil;
 import com.bcb.data.util.TokenUtil;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
 import org.litepal.LitePalApplication;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
-
 import cn.jpush.android.api.JPushInterface;
-import cn.jpush.android.api.TagAliasCallback;
 import de.greenrobot.event.EventBus;
 
-public class App extends Application {
+public class App extends Application implements AMapLocationListener{
 	
 	public static final String TAG = "App";
 	public static SaveUserInfoUtils saveUserInfo;
@@ -48,6 +47,9 @@ public class App extends Application {
 	//每日福利加息数据
 	private String welfare;
 	private BcbRequestQueue requestQueue;
+
+	//位置信息工具
+	private MapUtil mapUtil;
 
 	@Override
 	public void onCreate() {
@@ -77,6 +79,9 @@ public class App extends Application {
 		instance = this;
 		welfare = "";
 		requestQueue = BcbNetworkManager.newRequestQueue(instance);
+
+		mapUtil = new MapUtil(this,this);
+		doLocation();
 	}
 	
 	public static App getInstance() {
@@ -128,4 +133,23 @@ public class App extends Application {
 		requestQueue.add(jsonRequest);
 	}
 
+
+	public void doLocation(){
+		mapUtil.start();
+	}
+
+	@Override
+	public void onLocationChanged(AMapLocation aMapLocation) {
+		//在保存地理位置的时候顺便保存一下其他额外信息(网络环境、手机型号、imei)
+		String address = "";
+		if (null != aMapLocation) {
+//			LogUtil.d("位置信息", mapUtil.getLocationStr(aMapLocation));
+			address = aMapLocation.getAddress();
+		}
+		String imei = SystemUtil.getImei(this);
+		String model = android.os.Build.MODEL;
+		String network = SystemUtil.getNetworkType(this);
+		LogUtil.d("1234", "imei = " + imei + " model = " + model + " network = " + network + " address = " + address);
+		DbUtil.saveUserExtra(imei,model,network,address);
+	}
 }

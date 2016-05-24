@@ -5,12 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.bcb.R;
@@ -77,7 +73,8 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
     private Button person_button;
 
     //关系
-    private List<String> relationList;
+    private List<String> relationList1;
+    private List<String> relationList2;
     //紧急联系人1
     private EditText loan_emergency_case;
     //紧急联系人1
@@ -199,12 +196,18 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
                         String result = response.getString("result").replace("\\", "").replace("\"[", "[").replace("]\"", "]");
                         //将JSON转成PersonInfoBean对象，要先判断是否存在这样的数据
                         Gson mGson = new Gson();
-                        if (TextUtils.isEmpty(new LoanPersonalConfigUtil(Activity_LoanRequest_Person.this).getLoanPersonalMessage())) {
+                        String localLoanPersonal = new LoanPersonalConfigUtil(Activity_LoanRequest_Person.this).getLoanPersonalMessage();
+                        if (!TextUtils.isEmpty(localLoanPersonal)){
+                            PersonInfo = mGson.fromJson(localLoanPersonal, PersonInfoBean.class);
+                        }else {
                             PersonInfo = mGson.fromJson(result, PersonInfoBean.class);
-                        } else {
-                            PersonInfo = mGson.fromJson(new LoanPersonalConfigUtil(Activity_LoanRequest_Person.this).getLoanPersonalMessage(), PersonInfoBean.class);
                         }
-
+                        /////////////此处代码是为了兼容旧版本，否则会出现空指针异常
+                        if (null == PersonInfo.Relationship2){
+                            PersonInfoBean temp = mGson.fromJson(result, PersonInfoBean.class);
+                            PersonInfo.Relationship2 = temp.Relationship2;
+                        }
+                        /////////////
                         //设置婚姻状况
                         changeMaritalStatusList(PersonInfo);
                         //设置孩子状况
@@ -309,12 +312,16 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
      * 设置关系列表
      */
     private void changeRelationshipList(PersonInfoBean personInfoBean) {
-        relationList = new ArrayList<String>();
+        relationList1 = new ArrayList<>();
         for (int i = 0; i < personInfoBean.RelationshipList.size(); i++) {
-            relationList.add(i, personInfoBean.RelationshipList.get(i).Name);
+            relationList1.add(i, personInfoBean.RelationshipList.get(i).Name);
         }
-        relationStatus1 = relationList.get(0);
-        relationStatus2 = relationList.get(0);
+        relationStatus1 = relationList1.get(0);
+        relationList2 = new ArrayList<>();
+        for (int i = 0; i < personInfoBean.RelationshipList2.size(); i++) {
+            relationList2.add(i, personInfoBean.RelationshipList2.get(i).Name);
+        }
+        relationStatus2 = relationList2.get(0);
     }
 
     /**
@@ -363,9 +370,9 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
         }
         //紧急联系人1，判断是否存在
         if (PersonInfo.Relationship1 != null && !PersonInfo.Relationship1.equalsIgnoreCase("null") && !PersonInfo.Relationship1.equalsIgnoreCase("")) {
-            for (int i = 0; i < relationList.size(); i++) {
-                if (relationList.get(i).equalsIgnoreCase(PersonInfo.Relationship1)) {
-                    loan_relationship.setText(relationList.get(i));
+            for (int i = 0; i < relationList1.size(); i++) {
+                if (relationList1.get(i).equalsIgnoreCase(PersonInfo.Relationship1)) {
+                    loan_relationship.setText(relationList1.get(i));
                     relStatus1 = i;
                     break;
                 }
@@ -384,9 +391,9 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
 
         //紧急联系人2， 判断关系是否存在
         if (PersonInfo.Relationship2 != null && !PersonInfo.Relationship2.equalsIgnoreCase("null") && !PersonInfo.Relationship2.equalsIgnoreCase("")) {
-            for (int i = 0; i < relationList.size(); i++) {
-                if (relationList.get(i).equalsIgnoreCase(PersonInfo.Relationship2)) {
-                    loan_relationship_second.setText(relationList.get(i));
+            for (int i = 0; i < relationList2.size(); i++) {
+                if (relationList2.get(i).equalsIgnoreCase(PersonInfo.Relationship2)) {
+                    loan_relationship_second.setText(relationList2.get(i));
                     relStatus2 = i;
                     break;
                 }
@@ -404,8 +411,7 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
      */
     private void personButtonClick() {
         //判断是否都填写了信息
-        if (loan_graduating_academy.getText().toString().equalsIgnoreCase("")
-                || loan_identity_address.getText().toString().equalsIgnoreCase("")
+        if (loan_identity_address.getText().toString().equalsIgnoreCase("")
                 || loan_live_address.getText().toString().equalsIgnoreCase("")
                 || loan_emergency_case.getText().toString().equalsIgnoreCase("")
                 || loan_emergency_phone.getText().toString().equalsIgnoreCase("")) {
@@ -480,10 +486,10 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
         PersonInfo.ContactPhone2 = loan_emergency_phone_second.getText().toString();
         //将个人信息缓存在本地
         Gson mGson = new Gson();
-        (new LoanPersonalConfigUtil(this)).saveLoanPersonalMessage(mGson.toJson(PersonInfo).toString());
+        (new LoanPersonalConfigUtil(this)).saveLoanPersonalMessage(mGson.toJson(PersonInfo));
         //跳转至工作信息页面
         Intent intent = new Intent(Activity_LoanRequest_Person.this, Activity_LoanRequest_Job.class);
-        intent.putExtra("personInfoBean", mGson.toJson(PersonInfo).toString());
+        intent.putExtra("personInfoBean", mGson.toJson(PersonInfo));
         startActivity(intent);
     }
 
@@ -539,24 +545,24 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
                 });
                 break;
             case R.id.ll_relationship://紧急联系人1
-                String[] arr5 = relationList.toArray(new String[relationList.size()]);
+                String[] arr5 = relationList1.toArray(new String[relationList1.size()]);
                 SpinnerWheelUtil.getInstance().initSpinnerWheelDialog(this, arr5, relStatus1, new SpinnerWheelUtil.OnDoneClickListener() {
                     @Override
                     public void onClick(int currentItem) {
                         relStatus1 = currentItem;
-                        relationStatus1 = relationList.get(currentItem);
-                        loan_relationship.setText(relationList.get(currentItem));
+                        relationStatus1 = relationList1.get(currentItem);
+                        loan_relationship.setText(relationList1.get(currentItem));
                     }
                 });
                 break;
             case R.id.ll_relationship_second://紧急联系人2
-                String[] arr6 = relationList.toArray(new String[relationList.size()]);
+                String[] arr6 = relationList2.toArray(new String[relationList2.size()]);
                 SpinnerWheelUtil.getInstance().initSpinnerWheelDialog(this, arr6, relStatus2, new SpinnerWheelUtil.OnDoneClickListener() {
                     @Override
                     public void onClick(int currentItem) {
                         relStatus2 = currentItem;
-                        relationStatus2 = relationList.get(currentItem);
-                        loan_relationship_second.setText(relationList.get(currentItem));
+                        relationStatus2 = relationList2.get(currentItem);
+                        loan_relationship_second.setText(relationList2.get(currentItem));
                     }
                 });
                 break;

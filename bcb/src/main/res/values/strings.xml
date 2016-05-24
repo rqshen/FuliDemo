@@ -278,4 +278,7 @@
     <string name="scroll_value_four">陈先生 刚刚领取了+0.1%</string>
     <string name="scroll_value_five">苏先生 刚刚领取了+0.3%</string>
 
+
+    <string name="default_notice_text">苏**投资了1000元，黄**投资了200元，李**投资了500元</string>
+
 </resources>

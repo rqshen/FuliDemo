@@ -33,5 +33,6 @@
     -->
     <list>
         <mapping class="com.bcb.data.bean.WelfareBean"></mapping>
+        <mapping class="com.bcb.data.bean.UserExtraInfo"></mapping>
     </list>
 </litepal>

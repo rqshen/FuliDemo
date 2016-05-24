@@ -16,17 +16,17 @@
             android:layout_marginBottom="20dip"
             android:paddingBottom="20dp"
             android:orientation="vertical">
-            <!-- 显示栏 -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/apply_form_03"/>
-            </LinearLayout>
+            <!--&lt;!&ndash; 显示栏 &ndash;&gt;-->
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:gravity="center">-->
+                <!--<ImageView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:background="@drawable/apply_form_03"/>-->
+            <!--</LinearLayout>-->
             <!-- 资产信息 -->
             <LinearLayout
                 android:layout_width="match_parent"

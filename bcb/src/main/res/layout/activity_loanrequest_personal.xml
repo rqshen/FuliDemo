@@ -19,17 +19,17 @@
             android:padding="0dip"
             android:orientation="vertical">
 
-            <!-- 显示栏 -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/apply_form_01"/>
-            </LinearLayout>
+            <!--&lt;!&ndash; 显示栏 &ndash;&gt;-->
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:gravity="center">-->
+                <!--<ImageView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:background="@drawable/apply_form_01"/>-->
+            <!--</LinearLayout>-->
 
             <!-- 个人信息 -->
             <LinearLayout
@@ -67,6 +67,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dip"
                     android:layout_marginBottom="10dip"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal">
                     <TextView
                         android:layout_width="100dip"
@@ -79,12 +80,21 @@
                     <TextView
                         android:id="@+id/loan_marital_status"
                         style="@style/spinner_style"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:layout_height="30dp"
-                        android:gravity="center_vertical"
+                        android:gravity="center_vertical|right"
+                        android:hint="请选择婚姻状况"
+                        android:textColorHint="@color/txt_gray"
                         android:layout_marginRight="15dip"
                         android:padding="5dip"
                         android:singleLine="true" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="16dp"
+                        android:background="@drawable/loan_request_arrow"/>
                 </LinearLayout>
                 <ImageView
                     android:layout_width="match_parent"
@@ -100,6 +110,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dip"
                     android:layout_marginBottom="10dip"
+                    android:visibility="gone"
                     android:orientation="horizontal">
                     <TextView
                         android:layout_width="100dip"
@@ -124,6 +135,7 @@
                     android:layout_marginLeft="15dip"
                     android:layout_marginRight="15dip"
                     android:layout_height="1dip"
+                    android:visibility="gone"
                     android:background="@color/linegray"/>
 
                 <!-- 住房状况 -->
@@ -133,6 +145,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dip"
                     android:layout_marginBottom="10dip"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal">
                     <TextView
                         android:layout_width="100dip"
@@ -145,12 +158,21 @@
                     <TextView
                         android:id="@+id/loan_house_situation"
                         style="@style/spinner_style"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:layout_height="30dp"
-                        android:gravity="center_vertical"
+                        android:textColorHint="@color/txt_gray"
+                        android:gravity="center_vertical|right"
+                        android:hint="请选择住房状况"
                         android:layout_marginRight="15dip"
                         android:padding="5dip"
                         android:singleLine="true" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="16dp"
+                        android:background="@drawable/loan_request_arrow"/>
                 </LinearLayout>
                 <ImageView
                     android:layout_width="match_parent"
@@ -166,6 +188,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dip"
                     android:layout_marginBottom="10dip"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal">
                     <TextView
                         android:layout_width="100dip"
@@ -178,12 +201,21 @@
                     <TextView
                         android:id="@+id/loan_literacy_level"
                         style="@style/spinner_style"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:layout_height="30dp"
-                        android:gravity="center_vertical"
+                        android:textColorHint="@color/txt_gray"
+                        android:gravity="center_vertical|right"
+                        android:hint="请选择文化程度"
                         android:layout_marginRight="15dip"
                         android:padding="5dip"
                         android:singleLine="true" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="16dp"
+                        android:background="@drawable/loan_request_arrow"/>
                 </LinearLayout>
                 <ImageView
                     android:layout_width="match_parent"
@@ -198,6 +230,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dip"
                     android:layout_marginBottom="10dip"
+                    android:visibility="gone"
                     android:orientation="horizontal">
                     <TextView
                         android:layout_width="100dip"
@@ -224,6 +257,7 @@
                     android:layout_marginLeft="15dip"
                     android:layout_marginRight="15dip"
                     android:layout_height="1dip"
+                    android:visibility="gone"
                     android:background="@color/linegray"/>
 
                 <!-- 身份证地址 -->
@@ -249,6 +283,7 @@
                         android:hint="请填写身份证地址"
                         android:textSize="@dimen/main_text_default"
                         android:textColorHint="@color/txt_gray"
+                        android:gravity="center_vertical|right"
                         android:padding="5dip"
                         android:singleLine="true"
                         android:background="@drawable/edittext_none_background"/>
@@ -283,6 +318,7 @@
                         android:hint="请填写现居住地址"
                         android:textSize="@dimen/main_text_default"
                         android:textColorHint="@color/txt_gray"
+                        android:gravity="center_vertical|right"
                         android:padding="5dip"
                         android:singleLine="true"
                         android:background="@drawable/edittext_none_background"/>
@@ -300,6 +336,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dip"
                     android:layout_marginBottom="10dip"
+                    android:visibility="gone"
                     android:orientation="horizontal">
                     <TextView
                         android:id="@+id/sesame_description"
@@ -327,7 +364,8 @@
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:visibility="gone">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -388,6 +426,7 @@
                         android:hint="请填写紧急联系人"
                         android:textSize="@dimen/main_text_default"
                         android:textColorHint="@color/txt_gray"
+                        android:gravity="center_vertical|right"
                         android:padding="5dip"
                         android:singleLine="true"
                         android:background="@drawable/edittext_none_background"/>
@@ -406,6 +445,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dip"
                     android:layout_marginBottom="10dip"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal">
                     <TextView
                         android:layout_width="100dip"
@@ -417,15 +457,21 @@
                         android:textSize="@dimen/main_text_default"/>
                     <TextView
                         android:id="@+id/loan_relationship"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:layout_height="30dp"
                         android:layout_marginRight="15dip"
                         android:hint="与紧急联系人的关系"
                         android:textSize="@dimen/main_text_default"
                         android:padding="5dip"
                         android:textColorHint="@color/txt_gray"
-                        android:gravity="center_vertical"
+                        android:gravity="center_vertical|right"
                         android:singleLine="true" />
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="16dp"
+                        android:background="@drawable/loan_request_arrow"/>
                 </LinearLayout>
                 <ImageView
                     android:layout_width="match_parent"
@@ -457,6 +503,7 @@
                         android:hint="请填写紧急联系人电话"
                         android:textSize="@dimen/main_text_default"
                         android:textColorHint="@color/txt_gray"
+                        android:gravity="center_vertical|right"
                         android:padding="5dip"
                         android:inputType="phone"
                         android:singleLine="true"
@@ -492,6 +539,7 @@
                         android:hint="请填写紧急联系人"
                         android:textSize="@dimen/main_text_default"
                         android:textColorHint="@color/txt_gray"
+                        android:gravity="center_vertical|right"
                         android:padding="5dip"
                         android:singleLine="true"
                         android:background="@drawable/edittext_none_background"/>
@@ -510,6 +558,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dip"
                     android:layout_marginBottom="10dip"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal">
                     <TextView
                         android:layout_width="100dip"
@@ -521,15 +570,22 @@
                         android:textSize="@dimen/main_text_default"/>
                     <TextView
                         android:id="@+id/loan_relationship_second"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:layout_height="30dp"
                         android:layout_marginRight="15dip"
                         android:hint="与紧急联系人的关系"
                         android:textSize="@dimen/main_text_default"
-                        android:gravity="center_vertical"
+                        android:gravity="center_vertical|right"
                         android:textColorHint="@color/txt_gray"
                         android:singleLine="true"
                         android:padding="5dip" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="16dp"
+                        android:background="@drawable/loan_request_arrow"/>
                 </LinearLayout>
                 <ImageView
                     android:layout_width="match_parent"
@@ -561,6 +617,7 @@
                         android:inputType="phone"
                         android:textSize="@dimen/main_text_default"
                         android:textColorHint="@color/txt_gray"
+                        android:gravity="center_vertical|right"
                         android:padding="5dip"
                         android:singleLine="true"
                         android:background="@drawable/edittext_none_background"/>
@@ -596,8 +653,6 @@
                     android:textColor="@color/white"
                     android:textSize="@dimen/main_text_default" />
             </LinearLayout>
-
-
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

@@ -23,6 +23,7 @@ import android.widget.LinearLayout;
 
 import com.bcb.R;
 import com.bcb.common.app.App;
+import com.bcb.common.net.UrlsOne;
 import com.bcb.data.util.BitmapUtil;
 import com.bcb.data.util.DESUtil;
 import com.bcb.data.util.MyActivityManager;
@@ -52,8 +53,6 @@ public class Activity_Browser extends Activity_Base {
 
 	private X5WebView mWebView;
 	private ViewGroup mViewParent;
-	//一分钟了解福利金融
-	private static final String mHomeUrl =  "http://wap.flh001.com/static/1minute/index.html";
 	//加密的key
 	private static final String key = "9e469d566f5d41j1a83b9rf4";
 	private String mIntentUrl;
@@ -225,7 +224,7 @@ public class Activity_Browser extends Activity_Base {
 		webSetting.setPluginState(WebSettings.PluginState.ON_DEMAND);
 		webSetting.setRenderPriority(WebSettings.RenderPriority.HIGH);
 		if (TextUtils.isEmpty(mIntentUrl)) {
-			mWebView.loadUrl(mHomeUrl);
+			mWebView.loadUrl(UrlsOne.AboutFuliJingRong);//一分钟了解福利金融
 		} else {
 			mWebView.loadUrl(mIntentUrl);
 		}

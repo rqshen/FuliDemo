@@ -1,20 +1,30 @@
 package com.bcb.presentation.view.activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
+
 import com.bcb.R;
+import com.bcb.common.net.BcbJsonRequest;
+import com.bcb.common.net.BcbNetworkManager;
+import com.bcb.common.net.BcbRequest;
+import com.bcb.common.net.BcbRequestQueue;
+import com.bcb.common.net.BcbRequestTag;
+import com.bcb.common.net.UrlsOne;
 import com.bcb.data.bean.loan.PersonInfoBean;
 import com.bcb.data.util.LoanPersonalConfigUtil;
 import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.RegexManager;
 import com.bcb.data.util.ToastUtil;
+import com.bcb.data.util.TokenUtil;
 import com.bcb.presentation.view.custom.EditTextWithDate.EditTextWithDate;
 import com.google.gson.Gson;
+
+import org.json.JSONObject;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -28,14 +38,10 @@ public class Activity_LoanRequest_Job extends Activity_Base {
     private EditText loan_office;
     //工作职位
     private EditText loan_jobs;
-    //是否管理岗
-    private RadioGroup loan_management;
-    private RadioButton radioFalse, radioTrue;
-    private boolean managementStatus = false;
-    //所在事业部
+    //所在部门
     private EditText loan_department;
-    //入职时间
-    private EditTextWithDate loan_entry_date;
+    //工作时间
+    private EditTextWithDate loan_work_experience;
     //办公地点
     private EditText loan_office_address;
     //月均收入
@@ -50,6 +56,10 @@ public class Activity_LoanRequest_Job extends Activity_Base {
     private PersonInfoBean personInfoBean;
     //下一步按钮
     private Button job_button;
+    //请求队列
+    private BcbRequestQueue requestQueue;
+    //转圈提示
+    private ProgressDialog progressDialog;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -66,6 +76,15 @@ public class Activity_LoanRequest_Job extends Activity_Base {
         setupObjectData();
         //设置工作信息
         setupJobMessage();
+        //初始化队列
+        setupQueue();
+    }
+
+    /**
+     * 初始化队列
+     */
+    private void setupQueue() {
+        requestQueue = BcbNetworkManager.newRequestQueue(this);
     }
 
     /**
@@ -76,25 +95,10 @@ public class Activity_LoanRequest_Job extends Activity_Base {
         loan_office = (EditText) findViewById(R.id.loan_office);
         //工作职位
         loan_jobs = (EditText) findViewById(R.id.loan_jobs);
-        //是否管理岗位
-        loan_management = (RadioGroup) findViewById(R.id.loan_management);
-        radioFalse = (RadioButton) findViewById(R.id.radio_false);
-        radioTrue = (RadioButton) findViewById(R.id.radio_true);
-        loan_management.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                int radioButtonId = radioGroup.getCheckedRadioButtonId();
-                if (radioButtonId == R.id.radio_false) {
-                    managementStatus = false;
-                } else {
-                    managementStatus = true;
-                }
-            }
-        });
-        //所在事业部
+        //所在部门
         loan_department = (EditText) findViewById(R.id.loan_department);
-        //入职时间
-        loan_entry_date = (EditTextWithDate) findViewById(R.id.loan_entry_date);
+        //工作时间
+        loan_work_experience = (EditTextWithDate) findViewById(R.id.loan_work_experience);
         //办公地点
         loan_office_address = (EditText) findViewById(R.id.loan_office_address);
         //月均收入
@@ -137,18 +141,13 @@ public class Activity_LoanRequest_Job extends Activity_Base {
         if (personInfoBean.Position != null && !personInfoBean.Position.equalsIgnoreCase("null") && !personInfoBean.Position.equalsIgnoreCase("")) {
             loan_jobs.setText(personInfoBean.Position);
         }
-        //是否管理岗位
-        managementStatus = personInfoBean.IsManagePost;
-        if (personInfoBean.IsManagePost) {
-            radioFalse.setChecked(false);
-            radioTrue.setChecked(true);
-        } else {
-            radioFalse.setChecked(true);
-            radioTrue.setChecked(false);
-        }
         //所在事业部
         if (personInfoBean.Department != null && !personInfoBean.Department.equalsIgnoreCase("null") && !personInfoBean.Department.equalsIgnoreCase("")) {
             loan_department.setText(personInfoBean.Department);
+        }
+        //工作时间
+        if (personInfoBean.EntryDate != null && !personInfoBean.EntryDate.equalsIgnoreCase("null") && !personInfoBean.EntryDate.equalsIgnoreCase("")) {
+            loan_work_experience.setText(personInfoBean.EntryDate);
         }
         //入职时间
         SimpleDateFormat dateFormater = new SimpleDateFormat("yyyy-MM-dd");//将dateString格式化成 XXX-XX-XX 的形式
@@ -159,11 +158,11 @@ public class Activity_LoanRequest_Job extends Activity_Base {
                 date = dateFormater.parse(personInfoBean.EntryDate);
                 String dateStr = dateFormater.format(date);
                 if (!dateStr.isEmpty()){
-                    loan_entry_date.setText(dateStr);
+                    loan_work_experience.setText(dateStr);
                 }
             }
         } catch (ParseException e) {
-
+            e.printStackTrace();
         }
         //办公地点
         if (personInfoBean.WorkAddress != null && !personInfoBean.WorkAddress.equalsIgnoreCase("null") && !personInfoBean.WorkAddress.equalsIgnoreCase("")) {
@@ -197,7 +196,7 @@ public class Activity_LoanRequest_Job extends Activity_Base {
         if (loan_office.getText().toString().isEmpty()  //工作单位全称
                 || loan_jobs.getText().toString().isEmpty() //工作职位
                 || loan_department.getText().toString().isEmpty()   //工作部门
-                || loan_entry_date.getText().toString().isEmpty()   //入职时间
+                || loan_work_experience.getText().toString().isEmpty()   //工作时间
                 || loan_office_address.getText().toString().isEmpty()   //办公地址
                 || loan_earn.getText().toString().isEmpty() //月收入
                 || Float.parseFloat(loan_earn.getText().toString()) <= 0
@@ -215,6 +214,8 @@ public class Activity_LoanRequest_Job extends Activity_Base {
         }
         //暂存数据并跳转至填写资产信息页面
         saveDateAndGotoAssetPage();
+        //提交到服务器
+        postDatatoService();
     }
 
 
@@ -227,12 +228,10 @@ public class Activity_LoanRequest_Job extends Activity_Base {
         personInfoBean.WorkUnit = loan_office.getText().toString();
         //工作职位
         personInfoBean.Position = loan_jobs.getText().toString();
-        //管理岗位
-        personInfoBean.IsManagePost = managementStatus;
         //所在部门
         personInfoBean.Department = loan_department.getText().toString();
-        //入职时间
-        personInfoBean.EntryDate = loan_entry_date.getText().toString();
+        //工作时间
+        personInfoBean.EntryDate = loan_work_experience.getText().toString();
         //工作地点
         personInfoBean.WorkAddress = loan_office_address.getText().toString();
         //月收入
@@ -243,12 +242,86 @@ public class Activity_LoanRequest_Job extends Activity_Base {
         personInfoBean.Email = loan_email.getText().toString();
         //公积金
         personInfoBean.FundLimit = Integer.parseInt(loan_accumulation_fund.getText().toString().equalsIgnoreCase("") ? "0" : loan_accumulation_fund.getText().toString());
-        //暂存数据到本地
+//        //暂存数据到本地
+//        Gson mGson = new Gson();
+//        (new LoanPersonalConfigUtil(this)).saveLoanPersonalMessage(mGson.toJson(personInfoBean));
+//        //跳转至资产页面
+//        Intent intent = new Intent(Activity_LoanRequest_Job.this, Activity_LoanRequest_Asset.class);
+//        intent.putExtra("personInfoBean", mGson.toJson(personInfoBean));
+//        startActivity(intent);
+    }
+
+    /**
+     * 将个人信息提交给服务器
+     */
+    private void postDatatoService() {
+        //使用Gson将对象转成JSOnObject对象
         Gson mGson = new Gson();
         (new LoanPersonalConfigUtil(this)).saveLoanPersonalMessage(mGson.toJson(personInfoBean));
-        //跳转至资产页面
-        Intent intent = new Intent(Activity_LoanRequest_Job.this, Activity_LoanRequest_Asset.class);
-        intent.putExtra("personInfoBean", mGson.toJson(personInfoBean).toString());
-        startActivity(intent);
+        try {
+            JSONObject jsonObject = new JSONObject(mGson.toJson(personInfoBean));
+            BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.PostLoanPersonalMessage, jsonObject, TokenUtil.getEncodeToken(this), new BcbRequest.BcbCallBack<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    hideProgressBar();
+                    try {
+                        if (response.getInt("status") == 1) {
+                            //跳转至借款申请成功页面
+                            Intent intent = new Intent(Activity_LoanRequest_Job.this, Activity_LoanRequest_Success.class);
+                            startActivity(intent);
+                            finish();
+                            //清空暂存在本地的数据
+                            (new LoanPersonalConfigUtil(Activity_LoanRequest_Job.this)).clear();
+                        } else {
+                            ToastUtil.alert(Activity_LoanRequest_Job.this, response.getString("message").equalsIgnoreCase("") ? "服务器繁忙，请稍候再试" : response.getString("message"));
+                            //判断是否是Token过期，如果过期则跳转至登陆界面
+                            if (response.getInt("status") == -5) {
+                                Activity_Login.launche(Activity_LoanRequest_Job.this);
+                            }
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onErrorResponse(Exception error) {
+                    hideProgressBar();
+                }
+            });
+            jsonRequest.setTag(BcbRequestTag.BCB_POST_LOAN_PERSONAL_MESSAGE_REQUEST);
+            requestQueue.add(jsonRequest);
+            showProgressBar();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 转圈提示
+     */
+    private void showProgressBar() {
+        if(null == progressDialog) {
+            progressDialog = new ProgressDialog(this,ProgressDialog.THEME_HOLO_LIGHT);
+        }
+        progressDialog.setMessage("正在验证借款信息....");
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.setCancelable(true);
+        progressDialog.show();
+    }
+
+    /**
+     * 隐藏转圈提示
+     */
+    private void hideProgressBar() {
+        if(null != progressDialog && progressDialog.isShowing()){
+            progressDialog.dismiss();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        requestQueue.cancelAll(BcbRequestTag.BCB_POST_LOAN_PERSONAL_MESSAGE_REQUEST);
     }
 }

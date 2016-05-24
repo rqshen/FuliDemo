@@ -66,7 +66,7 @@ public class BankListAdapter extends BaseAdapter {
         //如果单笔限额和每日限额都大于0.0万时才显示
 		if (data.get(pos).getMaxSingle() > 0 && data.get(pos).getMaxDay() > 0) {
 			mHolder.bank_rule.setVisibility(View.VISIBLE);
-			mHolder.bank_rule.setText("单笔限额"+ data.get(pos).getMaxSingle() + "万，每日限额" + data.get(pos).getMaxDay() + "万");
+			mHolder.bank_rule.setText("单笔限额"+ data.get(pos).getMaxSingle() + "，每日限额" + data.get(pos).getMaxDay());
 		} else {
 			mHolder.bank_rule.setVisibility(View.GONE);
 		}

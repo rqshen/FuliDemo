@@ -25,6 +25,7 @@ public class PersonInfoBean implements Serializable {
     public List<EducationLevelListBean> EducationLevelList; //文化程度
     public List<HousingStatusListBean> HousingStatusList;   //住房状况
     public List<RelationshipListBean> RelationshipList;     //紧急联系人关系
+    public List<RelationshipListBean> RelationshipList2;     //紧急联系人关系2
     public List<ChildrenStatusListBean> ChildrenStatusList; //子女个数
 
 

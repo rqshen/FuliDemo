@@ -51,6 +51,7 @@ import com.bcb.data.util.UmengUtil;
 import com.bcb.presentation.adapter.AnnounceAdapter;
 import com.bcb.presentation.adapter.ExpiredAdapter;
 import com.bcb.presentation.adapter.ProductAdapter;
+import com.bcb.presentation.view.activity.Activity_Browser;
 import com.bcb.presentation.view.activity.Activity_Daily_Welfare;
 import com.bcb.presentation.view.activity.Activity_ExpiredProject_Introduction;
 import com.bcb.presentation.view.activity.Activity_Login;
@@ -793,7 +794,7 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPa
 //                Activity_WebView.launche(ctx,false,UrlsOne.CollegeWebView);
                 break;
             case R.id.ll_security://安全保障
-                Activity_WebView.launche(ctx,"安全保障",UrlsOne.SecureWebView);
+                Activity_Browser.launche(ctx,"安全保障",UrlsOne.SecureWebView);
                 break;
         }
     }

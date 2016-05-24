@@ -30,7 +30,7 @@ public class PackageUtil {
 			if(status != 1) {
 				if(status == -5){
 					// token过期或者用户已经被踢出，要删除本地数据库，并跳转到登录界面
-					if (ctx instanceof Activity_NormalProject_Introduction == false || ctx instanceof Activity_ExpiredProject_Introduction == false) {
+					if (!(ctx instanceof Activity_NormalProject_Introduction) || !(ctx instanceof Activity_ExpiredProject_Introduction)) {
 						onUserKickOut(ctx);
 					}				
 				}			

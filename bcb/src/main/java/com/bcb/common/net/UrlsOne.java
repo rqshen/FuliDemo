@@ -43,9 +43,11 @@ public class UrlsOne {
 	public static final String MainpageCityStation = host + "/api/v1.0/7469e8252732";
 	
 	// 安全保障WebView
-	public static final String SecureWebView = "http://wap.100cb.cn/static/security.html";
+	public static final String SecureWebView = "http://192.168.1.123/Static/security.html";//http://wap.100cb.cn/static/security.html
 	// 理财学院WebView
 	public static final String CollegeWebView = "http://fulijinrong.kuaizhan.com/58/36/p32451810370302";
+	//一分钟了解福利金融
+	public static final String AboutFuliJingRong = "http://wap.flh001.com/static/1minute/index.html";
 
 	// 资金流水
 	public static final String MoneyFlowingWater = host + "/api/v1.0/a5330105d6c3";
@@ -165,6 +167,5 @@ public class UrlsOne {
     public static final String DailyWelfareData = host + "/api/v1.3.4/a60100b02646";
 	//查询今日拆得利率
 	public static final String SearchWelfareData = host + "/api/v1.3.4/a60600ef9560";
-
 
 }

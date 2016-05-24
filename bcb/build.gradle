@@ -52,5 +52,6 @@ dependencies {
     compile project(':spinnerwheel')
     compile files('libs/tbs_sdk_v1.5.1.1057_25436_obfs_20160331_144900.jar')
     compile files('libs/jpush-android-2.1.5.jar')
+    compile files('libs/AMap_Location_V2.4.1_20160414.jar')
 }
 

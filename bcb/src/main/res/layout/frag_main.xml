@@ -137,6 +137,40 @@
 
                     </LinearLayout>
 
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:background="@color/divider"/>
+
+                    <!--滚动广告文字-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="37dp"
+                        android:paddingLeft="13dp"
+                        android:paddingRight="13dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:background="@android:color/white">
+
+                        <ImageView
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:src="@drawable/ico_notice"/>
+
+                        <com.bcb.presentation.view.custom.MarqueeText
+                            android:id="@+id/notice_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:singleLine="true"
+                            android:ellipsize="marquee"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:textColor="@color/txt_gray"
+                            android:text="@string/default_notice_text"
+                            android:gravity="center_vertical"/>
+
+                    </LinearLayout>
+
                     <!-- 精品项目标题 -->
                     <LinearLayout
                         android:id="@+id/boutique_layout"
