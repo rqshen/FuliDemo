@@ -20,6 +20,7 @@ public class Activity_Daily_Welfare_Tip extends Activity_Base implements View.On
         setContentView(R.layout.activity_daily_welfare_tip);
         setLeftTitleVisible(true);
         setLeftTitleListener(this);
+        setTitleValue("每日福利");
     }
 
     /**

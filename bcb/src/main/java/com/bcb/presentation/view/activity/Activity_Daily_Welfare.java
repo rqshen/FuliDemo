@@ -280,11 +280,12 @@ public class Activity_Daily_Welfare extends Activity_Base implements View.OnClic
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    if (response.getInt("status") == 1) {
+                    int status = response.getInt("status");
+                    if (1 == status || -3 == status) {
                         //设置对应位置的数据
                         String value = response.getString("result");
                         LogUtil.d("福袋数据", value);
-                        if (!TextUtils.isEmpty(value)){
+                        if (!TextUtils.isEmpty(value) && !value.equals("null")){
                             UmengUtil.eventById(context, R.string.self_mrfl);
                             Activity_Daily_Welfare_Result.launche(context, value, totalInterest);
 
@@ -295,7 +296,7 @@ public class Activity_Daily_Welfare extends Activity_Base implements View.OnClic
                             //通知刷新
                             EventBus.getDefault().post(new BroadcastEvent(BroadcastEvent.REFRESH));
                         }
-                    }else if(response.getInt("status") == -2){//领福利时间为每日 06：00-22：00
+                    }else if(-2 == status){//领福利时间为每日 06：00-22：00
                         Activity_Daily_Welfare_Tip.launche(context);
                         finish();
                     }else{

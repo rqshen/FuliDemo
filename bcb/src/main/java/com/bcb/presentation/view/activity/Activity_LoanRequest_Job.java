@@ -327,7 +327,7 @@ public class Activity_LoanRequest_Job extends Activity_Base {
         if(null == progressDialog) {
             progressDialog = new ProgressDialog(this,ProgressDialog.THEME_HOLO_LIGHT);
         }
-        progressDialog.setMessage("正在验证借款信息....");
+        progressDialog.setMessage("正在验证借款信息...");
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.setCancelable(true);
         progressDialog.show();

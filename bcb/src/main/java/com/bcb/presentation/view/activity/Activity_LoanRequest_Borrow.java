@@ -117,6 +117,8 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
     private TextView value_interest;
     //如何获得补贴？
     private TextView loan_gain;
+    //借款服务协议
+    private TextView loan_protocol;
 
     //滚屏文字
     private WheelVerticalView value_rotate;
@@ -310,6 +312,9 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
         //如何获得补贴？
         loan_gain = (TextView) findViewById(R.id.loan_gain);
         loan_gain.setOnClickListener(this);
+        //借款服务协议
+        loan_protocol = (TextView) findViewById(R.id.loan_protocol);
+        loan_protocol.setOnClickListener(this);
 
         //文字滚动
         value_rotate  = (WheelVerticalView) findViewById(R.id.value_rotate);
@@ -664,7 +669,12 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
 
             //如何获得补贴？
             case R.id.loan_gain:
-                Activity_Browser.launche(Activity_LoanRequest_Borrow.this, "如何获得补贴?", "http://192.168.1.111:7073/loan/couponactivity/index");
+                Activity_Browser.launche(Activity_LoanRequest_Borrow.this, "如何获得补贴?", UrlsOne.How2GetSubsidy);
+                break;
+            //借款服务协议
+            case R.id.loan_protocol:
+                //TODO
+
                 break;
 
             //点击利息抵扣券

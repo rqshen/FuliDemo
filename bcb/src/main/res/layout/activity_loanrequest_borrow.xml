@@ -419,6 +419,16 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true">
                 <TextView
+                    android:id="@+id/loan_protocol"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_size_large"
+                    android:paddingTop="@dimen/margin_size_large"
+                    android:textColor="@color/blue"
+                    android:textSize="@dimen/main_text_default"
+                    android:text="《借款服务协议》"/>
+
+                <TextView
                     android:id="@+id/loan_gain"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

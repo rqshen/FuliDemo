@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.bcb.R;
+import com.bcb.common.net.UrlsOne;
 import com.bcb.data.bean.BuyProjectSuccess;
 import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.ScreenUtils;
@@ -115,7 +116,7 @@ public class Activity_BuyProject_Success extends Activity_Base implements Interf
 			@Override
 			public void onClick(View v) {
 				//点击图片，跳转至微信
-				Activity_WebView.launche(Activity_BuyProject_Success.this, "起息第一时间通知", "http://wap.flh001.com/account/wxbindindex");
+				Activity_WebView.launche(Activity_BuyProject_Success.this, "起息第一时间通知", UrlsOne.WxBindIndex);
 			}
 		});
 		//根据Banner的宽高比进行等比缩放

@@ -92,7 +92,7 @@ public class Activity_Project_Investment_Details extends Activity_Base {
             @Override
             public void onClick(View v) {
                 //点击图片，跳转至微信
-                Activity_WebView.launche(Activity_Project_Investment_Details.this, "回款第一时间通知", "http://wap.flh001.com/account/wxbindindex");
+                Activity_WebView.launche(Activity_Project_Investment_Details.this, "回款第一时间通知", UrlsOne.WxBindIndex);
             }
         });
         //根据Banner的宽高比进行等比缩放

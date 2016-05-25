@@ -13,43 +13,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dip"
-            android:layout_marginRight="5dip"
             android:padding="0dip"
             android:orientation="vertical">
-
-            <!--&lt;!&ndash; 显示栏 &ndash;&gt;-->
-            <!--<LinearLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_gravity="center"-->
-                <!--android:gravity="center">-->
-                <!--<ImageView-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:background="@drawable/apply_form_02"/>-->
-            <!--</LinearLayout>-->
 
             <!-- 工作信息 -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="0dip"
-                android:background="@drawable/white_bg"
+                android:background="@android:color/white"
                 android:orientation="vertical">
-                <TextView
-                    android:layout_width="100dip"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="30dip"
-                    android:layout_marginTop="17dip"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginBottom="10dip"
-                    android:layout_gravity="center_vertical"
-                    android:gravity="left"
-                    android:padding="0dip"
-                    android:text="工作信息"
-                    android:textSize="@dimen/main_text_default"
-                    android:textColor="@color/txt_black"/>
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_marginLeft="3dip"
@@ -70,7 +43,7 @@
                         android:layout_gravity="center_vertical"
                         android:gravity="center_vertical"
                         android:text="工作单位全称"
-                        android:textSize="@dimen/main_text_small"/>
+                        android:textSize="@dimen/main_text_default"/>
                     <EditText
                         android:id="@+id/loan_office"
                         android:layout_width="match_parent"
@@ -86,8 +59,6 @@
                 </LinearLayout>
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_marginLeft="15dip"
-                    android:layout_marginRight="15dip"
                     android:layout_height="1dip"
                     android:background="@color/linegray"/>
                 <!-- 工作职位 -->
@@ -104,7 +75,7 @@
                         android:layout_gravity="center_vertical"
                         android:gravity="center_vertical"
                         android:text="工作职位"
-                        android:textSize="@dimen/main_text_small"/>
+                        android:textSize="@dimen/main_text_default"/>
                     <EditText
                         android:id="@+id/loan_jobs"
                         android:layout_width="match_parent"
@@ -120,8 +91,6 @@
                 </LinearLayout>
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_marginLeft="15dip"
-                    android:layout_marginRight="15dip"
                     android:layout_height="1dip"
                     android:background="@color/linegray"/>
 
@@ -219,7 +188,7 @@
                         android:layout_gravity="center_vertical"
                         android:gravity="center_vertical"
                         android:text="所在部门"
-                        android:textSize="@dimen/main_text_small"/>
+                        android:textSize="@dimen/main_text_default"/>
                     <EditText
                         android:id="@+id/loan_department"
                         android:layout_width="match_parent"
@@ -235,8 +204,6 @@
                 </LinearLayout>
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_marginLeft="15dip"
-                    android:layout_marginRight="15dip"
                     android:layout_height="1dip"
                     android:background="@color/linegray"/>
 
@@ -255,7 +222,7 @@
                         android:layout_gravity="center_vertical"
                         android:gravity="center_vertical"
                         android:text="入职时间"
-                        android:textSize="@dimen/main_text_small"/>
+                        android:textSize="@dimen/main_text_default"/>
                     <com.bcb.presentation.view.custom.EditTextWithDate.EditTextWithDate
                         android:id="@+id/loan_work_experience"
                         android:layout_width="0dp"
@@ -279,8 +246,6 @@
                 </LinearLayout>
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_marginLeft="15dip"
-                    android:layout_marginRight="15dip"
                     android:layout_height="1dip"
                     android:background="@color/linegray"/>
 
@@ -313,8 +278,6 @@
                 </LinearLayout>
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_marginLeft="15dip"
-                    android:layout_marginRight="15dip"
                     android:layout_height="1dip"
                     android:visibility="gone"
                     android:background="@color/linegray"/>
@@ -333,7 +296,7 @@
                         android:layout_gravity="center_vertical"
                         android:gravity="center_vertical"
                         android:text="办公地点"
-                        android:textSize="@dimen/main_text_small"/>
+                        android:textSize="@dimen/main_text_default"/>
                     <EditText
                         android:id="@+id/loan_office_address"
                         android:layout_width="match_parent"
@@ -349,8 +312,6 @@
                 </LinearLayout>
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_marginLeft="15dip"
-                    android:layout_marginRight="15dip"
                     android:layout_height="1dip"
                     android:background="@color/linegray"/>
 
@@ -370,7 +331,7 @@
                         android:layout_gravity="center_vertical"
                         android:gravity="center_vertical"
                         android:text="月总收入(税后)"
-                        android:textSize="@dimen/main_text_small"/>
+                        android:textSize="@dimen/main_text_default"/>
                     <!--<TextView-->
                         <!--android:id="@+id/earn_yuan"-->
                         <!--android:layout_width="wrap_content"-->
@@ -398,8 +359,6 @@
                 </RelativeLayout>
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_marginLeft="15dip"
-                    android:layout_marginRight="15dip"
                     android:layout_height="1dip"
                     android:background="@color/linegray"/>
 
@@ -419,7 +378,7 @@
                         android:layout_gravity="center_vertical"
                         android:gravity="center_vertical"
                         android:text="年总收入(税后)"
-                        android:textSize="@dimen/main_text_small"/>
+                        android:textSize="@dimen/main_text_default"/>
                     <!--<TextView-->
                         <!--android:id="@+id/total_yuan"-->
                         <!--android:layout_width="wrap_content"-->
@@ -447,8 +406,6 @@
                 </RelativeLayout>
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_marginLeft="15dip"
-                    android:layout_marginRight="15dip"
                     android:layout_height="1dip"
                     android:background="@color/linegray"/>
 
@@ -466,7 +423,7 @@
                         android:layout_gravity="center_vertical"
                         android:gravity="center_vertical"
                         android:text="常用邮箱"
-                        android:textSize="@dimen/main_text_small"/>
+                        android:textSize="@dimen/main_text_default"/>
                     <EditText
                         android:id="@+id/loan_email"
                         android:layout_width="match_parent"
@@ -483,8 +440,6 @@
                 </LinearLayout>
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_marginLeft="15dip"
-                    android:layout_marginRight="15dip"
                     android:layout_height="1dip"
                     android:background="@color/linegray"/>
 
@@ -534,6 +489,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dip"
+                    android:visibility="gone"
                     android:orientation="vertical">
 
                     <LinearLayout

@@ -149,7 +149,7 @@ public class App extends Application implements AMapLocationListener{
 		String imei = SystemUtil.getImei(this);
 		String model = android.os.Build.MODEL;
 		String network = SystemUtil.getNetworkType(this);
-		LogUtil.d("1234", "imei = " + imei + " model = " + model + " network = " + network + " address = " + address);
+		LogUtil.d("位置信息", "imei = " + imei + " model = " + model + " network = " + network + " address = " + address);
 		DbUtil.saveUserExtra(imei,model,network,address);
 	}
 }

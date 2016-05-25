@@ -290,7 +290,7 @@ public class Activity_Base extends Activity {
     private String getAppOnBackgroundTIme() {
         SharedPreferences sp = this.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
-        return  sp.getString(ENTER_BACKGROUND_KEY, "");
+        return sp.getString(ENTER_BACKGROUND_KEY, "");
     }
 
     /**
