@@ -7,7 +7,7 @@ public class MyConstants {
 	public static final String HOST_DEV = "http://192.168.1.111:7071";
 	public static final String HOST_RELEASE = "http://app.100cb.cn";
 
-	public static boolean TESTMODE = true;// true为测试环境，false为发布环境
+	public static boolean TESTMODE = false;// true为测试环境，false为发布环境
 
 	public static final String HOST = getHost();
 

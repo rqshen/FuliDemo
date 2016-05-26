@@ -426,6 +426,7 @@
                     android:paddingTop="@dimen/margin_size_large"
                     android:textColor="@color/blue"
                     android:textSize="@dimen/main_text_default"
+                    android:visibility="gone"
                     android:text="《借款服务协议》"/>
 
                 <TextView
