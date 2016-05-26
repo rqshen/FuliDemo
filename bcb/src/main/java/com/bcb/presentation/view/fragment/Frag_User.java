@@ -7,7 +7,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,25 +17,31 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import com.bcb.common.app.App;
+
 import com.bcb.R;
+import com.bcb.common.app.App;
 import com.bcb.common.net.BcbJsonRequest;
 import com.bcb.common.net.BcbNetworkManager;
 import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
 import com.bcb.common.net.UrlsOne;
+import com.bcb.common.net.UrlsTwo;
 import com.bcb.data.bean.UserDetailInfo;
 import com.bcb.data.bean.UserWallet;
+import com.bcb.data.util.HttpUtils;
 import com.bcb.data.util.MQCustomerManager;
-import com.bcb.presentation.view.activity.Activity_Join_Company;
-import com.bcb.presentation.view.activity.Activity_Loan;
-import com.bcb.presentation.view.activity.Activity_LoanRequest_Borrow;
-import com.bcb.presentation.view.activity.Activity_Login;
-import com.bcb.presentation.view.activity.Activity_Money_Flowing_Water;
+import com.bcb.data.util.PackageUtil;
+import com.bcb.data.util.ToastUtil;
+import com.bcb.data.util.TokenUtil;
+import com.bcb.data.util.UmengUtil;
 import com.bcb.presentation.view.activity.Activity_Account_Setting;
 import com.bcb.presentation.view.activity.Activity_Authentication;
 import com.bcb.presentation.view.activity.Activity_Coupons;
+import com.bcb.presentation.view.activity.Activity_Join_Company;
+import com.bcb.presentation.view.activity.Activity_LoanRequest_Borrow;
+import com.bcb.presentation.view.activity.Activity_Login;
+import com.bcb.presentation.view.activity.Activity_Money_Flowing_Water;
 import com.bcb.presentation.view.activity.Activity_Recharge_Second;
 import com.bcb.presentation.view.activity.Activity_Setting_Pay_Pwd;
 import com.bcb.presentation.view.activity.Activity_Trading_Record;
@@ -45,12 +50,6 @@ import com.bcb.presentation.view.custom.AlertView.AlertView;
 import com.bcb.presentation.view.custom.CustomDialog.DialogWidget;
 import com.bcb.presentation.view.custom.CustomDialog.IdentifyAlertView;
 import com.bcb.presentation.view.custom.CustomDialog.MyMaskFullScreenView;
-import com.bcb.common.net.UrlsTwo;
-import com.bcb.data.util.HttpUtils;
-import com.bcb.data.util.PackageUtil;
-import com.bcb.data.util.ToastUtil;
-import com.bcb.data.util.TokenUtil;
-import com.bcb.data.util.UmengUtil;
 import com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout;
 
 import org.json.JSONObject;
@@ -639,8 +638,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
                     }
                 });
             } else {
-                Intent newIntent = new Intent(ctx, Activity_LoanRequest_Borrow.class);
-                startActivity(newIntent);
+                Activity_LoanRequest_Borrow.launche(ctx);
             }
         }
         //不存在用户信息时，先去认证

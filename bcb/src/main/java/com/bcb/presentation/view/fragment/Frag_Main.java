@@ -783,10 +783,6 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPa
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.ll_daily_welfare://每日福利
-                if (App.saveUserInfo.getAccess_Token() == null) {
-                    Activity_Login.launche(ctx);
-                    break;
-                }
                 Activity_Daily_Welfare.launche(ctx);
                 break;
             case R.id.ll_wealth_college://理财学院

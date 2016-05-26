@@ -14,6 +14,7 @@ import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.UrlsOne;
 import com.bcb.data.bean.UserDetailInfo;
 import com.bcb.data.bean.UserWallet;
+import com.bcb.data.bean.WelfareBean;
 import com.bcb.data.util.DbUtil;
 import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MapUtil;
@@ -77,11 +78,18 @@ public class App extends Application implements AMapLocationListener{
             mUserDetailInfo = new UserDetailInfo();
         }
 		instance = this;
-		welfare = "";
+
 		requestQueue = BcbNetworkManager.newRequestQueue(instance);
 
 		mapUtil = new MapUtil(this,this);
+		//获取定位数据
 		doLocation();
+		//获取福利数据
+		if (null != saveUserInfo.getAccess_Token()){
+			WelfareBean welfareBean = DbUtil.getWelfare();
+			welfare = null == welfareBean ? "" : welfareBean.getValue();
+		}
+
 	}
 	
 	public static App getInstance() {

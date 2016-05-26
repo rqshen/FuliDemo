@@ -272,11 +272,11 @@
     <string name="rotate_value_seven">植先生 成功借款5w</string>
     <string name="rotate_value_eight">张小姐 成功借款12w</string>
     <!--每日福利-->
-    <string name="scroll_value_one">刘小姐 刚刚领取了+0.5%</string>
-    <string name="scroll_value_two">沈先生 刚刚领取了+0.2%</string>
-    <string name="scroll_value_three">赵先生 刚刚领取了+0.3%</string>
-    <string name="scroll_value_four">陈先生 刚刚领取了+0.1%</string>
-    <string name="scroll_value_five">苏先生 刚刚领取了+0.3%</string>
+    <string name="scroll_value_one">刘** 刚刚领取了+0.5%</string>
+    <string name="scroll_value_two">沈** 刚刚领取了+0.2%</string>
+    <string name="scroll_value_three">赵** 刚刚领取了+0.3%</string>
+    <string name="scroll_value_four">陈** 刚刚领取了+0.1%</string>
+    <string name="scroll_value_five">苏** 刚刚领取了+0.3%</string>
 
 
     <string name="default_notice_text">苏**投资了1000元，黄**投资了200元，李**投资了500元</string>

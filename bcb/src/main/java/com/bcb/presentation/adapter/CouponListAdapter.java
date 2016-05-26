@@ -2,6 +2,7 @@ package com.bcb.presentation.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -12,14 +13,24 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bcb.R;
-import com.bcb.presentation.view.activity.Activity_Withdraw;
+import com.bcb.common.app.App;
+import com.bcb.common.event.BroadcastEvent;
 import com.bcb.data.bean.CouponRecordsBean;
 import com.bcb.data.util.LogUtil;
+import com.bcb.data.util.MyConstants;
+import com.bcb.presentation.view.activity.Activity_Authentication;
+import com.bcb.presentation.view.activity.Activity_LoanRequest_Borrow;
+import com.bcb.presentation.view.activity.Activity_Withdraw;
+import com.bcb.presentation.view.custom.AlertView.AlertView;
 
 import java.util.List;
 
+import de.greenrobot.event.EventBus;
+
 public class CouponListAdapter extends BaseAdapter {
-	
+
+	//对话框
+	private AlertView alertView;
 	private Context ctx;
 	private List<CouponRecordsBean> data;
 	private float investAmount;
@@ -80,26 +91,26 @@ public class CouponListAdapter extends BaseAdapter {
         //设置名称
         mHolder.coupon_icon.setText(data.get(pos).getName());
 
-		//根据CouponType设置优惠券类型，然后进行券的背景
-		switch (data.get(pos).getCouponType()) {
-			//体验券
-            case 1:
-            //免息券
-            case 4:
-            case 1048576:
-				mHolder.layout_view.setBackgroundResource(R.color.red);
-				break;
-
-            //现金券
-			case 2:
-				mHolder.layout_view.setBackgroundResource(R.color.company_name);
-				break;
-
-            //提现券
-			case 8:
-				mHolder.layout_view.setBackgroundResource(R.color.green);
-				break;
-		}
+//		//根据CouponType设置优惠券类型，然后进行券的背景
+//		switch (data.get(pos).getCouponType()) {
+//			//体验券
+//            case 1:
+//            //免息券
+//            case 4:
+//            case 1048576:
+//				mHolder.layout_view.setBackgroundResource(R.color.red);
+//				break;
+//
+//            //现金券
+//			case 2:
+//				mHolder.layout_view.setBackgroundResource(R.color.company_name);
+//				break;
+//
+//            //提现券
+//			case 8:
+//				mHolder.layout_view.setBackgroundResource(R.color.green);
+//				break;
+//		}
 
 		mHolder.amount.setText(String.format("%.2f", data.get(pos).getAmount()));
 		if (data.get(pos).getExpireDate() != null) {
@@ -123,8 +134,7 @@ public class CouponListAdapter extends BaseAdapter {
 				mHolder.item_bg_layout.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View v) {
-                        //提现券时，点击则跳转至提现界面
-						if (data.get(pos).getCouponType() == 8) {
+						if (MyConstants.WITHDRAW == data.get(pos).getCouponType()) {//提现券时，点击则跳转至提现界面
                             gotoNewPage(Activity_Withdraw.class);
                         } else {
                             Intent intent = new Intent();
@@ -153,10 +163,27 @@ public class CouponListAdapter extends BaseAdapter {
             mHolder.item_bg_layout.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //提现券时，点击则跳转至提现界面
-                    if (data.get(pos).getCouponType() == 8) {
+//					LogUtil.d("1234", "type = " + data.get(pos).getCouponType());
+                    if (MyConstants.WITHDRAW == data.get(pos).getCouponType()) {//提现券时，点击则跳转至提现界面
                         gotoNewPage(Activity_Withdraw.class);
-                    } else {
+                    }else if (MyConstants.LOAN_SUBSIDIES == data.get(pos).getCouponType()){//借款补贴券时，点击则跳转至借款界面
+						//用户还没认证时，先去认证
+						if(!App.mUserDetailInfo.HasCert || App.mUserDetailInfo.BankCard == null){
+							showAlertView("提示", "您仍未认证，请先认证", new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									ctx.startActivity(new Intent(ctx, Activity_Authentication.class));
+									alertView.dismiss();
+									alertView = null;
+								}
+							});
+						} else {
+							Activity_LoanRequest_Borrow.launche(ctx);
+						}
+            		} else if (MyConstants.CASH == data.get(pos).getCouponType()){//现金券时，点击则跳转至产品列表界面
+						EventBus.getDefault().post(new BroadcastEvent(BroadcastEvent.PRODUCT));
+						((Activity) ctx).finish();
+					} else {
                         Intent intent = new Intent();
                         intent.putExtra("selectCoupon", true);
                         ((Activity) ctx).setResult(1, intent);
@@ -202,5 +229,16 @@ public class CouponListAdapter extends BaseAdapter {
 		TextView select;
 		LinearLayout item_bg_layout;
 		RelativeLayout layout_view;
+	}
+
+	//提示对话框
+	private void showAlertView(String titleName, String contentMessage, DialogInterface.OnClickListener onClickListener) {
+		AlertView.Builder ibuilder = new AlertView.Builder(ctx);
+		ibuilder.setTitle(titleName);
+		ibuilder.setMessage(contentMessage);
+		ibuilder.setPositiveButton("立即设置", onClickListener);
+		ibuilder.setNegativeButton("取消", null);
+		alertView = ibuilder.create();
+		alertView.show();
 	}
 }

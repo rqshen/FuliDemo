@@ -20,6 +20,8 @@ import com.bcb.common.net.BcbNetworkManager;
 import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
+import com.bcb.data.util.LogUtil;
+import com.bcb.data.util.MyConstants;
 import com.bcb.presentation.adapter.CouponListAdapter;
 import com.bcb.common.app.App;
 import com.bcb.R;
@@ -31,6 +33,7 @@ import com.bcb.data.util.MyListView;
 import com.bcb.data.util.PackageUtil;
 import com.bcb.data.util.ToastUtil;
 import com.bcb.data.util.TokenUtil;
+import com.bcb.presentation.view.activity.Activity_LoanRequest_Borrow;
 import com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout;
 
 import org.json.JSONException;
@@ -231,7 +234,8 @@ public class Frag_UnusedCoupon extends Frag_Base {
 		
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-			Intent intent = new Intent();
+//            LogUtil.d("1234", "type = " + recordsBeans.get(position).getCouponType());
+            Intent intent = new Intent();
 			intent.putExtra("selectCoupon", true);
 			((Activity)ctx).setResult(1, intent);
 			((Activity)ctx).finish();

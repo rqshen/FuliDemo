@@ -1,6 +1,7 @@
 package com.bcb.presentation.view.activity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -35,6 +36,7 @@ import com.bcb.data.util.HttpUtils;
 import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MQCustomerManager;
 import com.bcb.data.util.MyActivityManager;
+import com.bcb.data.util.MyConstants;
 import com.bcb.data.util.PackageUtil;
 import com.bcb.data.util.ScreenUtils;
 import com.bcb.data.util.SpinnerWheelUtil;
@@ -64,7 +66,6 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
 
     private static final int SCROLL = 100;//滚屏文字
 
-    private static final int couponType = 16;
     //利息抵扣券的ID
     private String CouponId;
     //利息抵扣券金额
@@ -159,6 +160,15 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
             }
         }
     };
+
+    /**
+     * 启动
+     * @param ctx
+     */
+    public static void launche(Context ctx){
+        Intent intent = new Intent(ctx, Activity_LoanRequest_Borrow.class);
+        ctx.startActivity(intent);
+    }
 
 
     @Override
@@ -427,7 +437,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
             obj.put("PageNow", 1);
             obj.put("PageSize", 10);
             obj.put("Status", 1);
-            obj.put("CouponType", couponType);
+            obj.put("CouponType", MyConstants.LOAN_SUBSIDIES);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -754,7 +764,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
     private void selectInterestCoupon() {
         Intent newIntent = new Intent(this, Activity_Select_Coupon.class);
         newIntent.putExtra("investAmount", getLoanAmount());
-        newIntent.putExtra("CouponType", couponType);
+        newIntent.putExtra("CouponType", MyConstants.LOAN_SUBSIDIES);
         startActivityForResult(newIntent, 1);
     }
 

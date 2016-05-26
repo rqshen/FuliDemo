@@ -25,7 +25,6 @@ import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
 import com.bcb.common.net.UrlsOne;
-import com.bcb.data.bean.WelfareBean;
 import com.bcb.data.util.DbUtil;
 import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MyActivityManager;
@@ -336,6 +335,10 @@ public class Activity_Daily_Welfare extends Activity_Base implements View.OnClic
                 showRuleDialog();
                 break;
             case R.id.null_view://打开福袋
+                if (App.saveUserInfo.getAccess_Token() == null) {
+                    Activity_Login.launche(context);
+                    break;
+                }
                 //防止按钮多次点击
                 long currentTime = Calendar.getInstance().getTimeInMillis();
                 if (currentTime - lastClickTime > MIN_CLICK_DELAY_TIME) {
