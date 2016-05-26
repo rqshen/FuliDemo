@@ -285,7 +285,6 @@ public class Activity_Daily_Welfare extends Activity_Base implements View.OnClic
                         String value = response.getString("result");
                         LogUtil.d("福袋数据", value);
                         if (!TextUtils.isEmpty(value) && !value.equals("null")){
-                            UmengUtil.eventById(context, R.string.self_mrfl);
                             Activity_Daily_Welfare_Result.launche(context, value, totalInterest);
 
                             //保存到数据库
@@ -306,7 +305,6 @@ public class Activity_Daily_Welfare extends Activity_Base implements View.OnClic
                         }else{
                             //通知刷新
                             EventBus.getDefault().post(new BroadcastEvent(BroadcastEvent.REFRESH));
-                            UmengUtil.eventById(context, R.string.self_mrfl);
                             Activity_Daily_Welfare_Result.launche(context, App.getInstance().getWelfare(), totalInterest);
                         }
                     }
@@ -335,6 +333,7 @@ public class Activity_Daily_Welfare extends Activity_Base implements View.OnClic
                 showRuleDialog();
                 break;
             case R.id.null_view://打开福袋
+                UmengUtil.eventById(context, R.string.fuli_c2);
                 if (App.saveUserInfo.getAccess_Token() == null) {
                     Activity_Login.launche(context);
                     break;

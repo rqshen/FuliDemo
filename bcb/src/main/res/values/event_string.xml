@@ -6,6 +6,9 @@
     <string name="self_c">self_c</string>
     <string name="banner_c">banner_c</string>
     <string name="book">book</string>
+    <string name="fuli_c">fuli_c</string>
+    <string name="fuli_c2">fuli_c2</string>
+    <string name="college_c">college_c</string>
     <string name="bid_avi">bid_avi</string>
     <string name="bid_unavi">bid_unavi</string>
     <string name="home_s_bottom">home_s_bottom</string>
@@ -44,7 +47,6 @@
     <string name="self_crash">self_crash</string>
     <string name="self_zjls">self_zjls</string>
     <string name="self_tzjl">self_tzjl</string>
-    <string name="self_mrfl">self_tzjl</string>
     <string name="self_borrow">self_borrow</string>
     <string name="self_coupon">self_coupon</string>
     <string name="self_invate">self_invate</string>
@@ -62,7 +64,9 @@
     <string name="loan_info2">loan_info2</string>
     <string name="loan_info3">loan_info3</string>
     <string name="loan_info4">loan_info4</string>
+    <string name="bid_buy_kefu">bid_buy_kefu</string>
     <string name="loan_act">loan_act</string>
+    <string name="loan_kefu">loan_kefu</string>
     <string name="loan_blank">loan_blank</string>
     <string name="reg">reg</string>
     <string name="reg2">reg2</string>

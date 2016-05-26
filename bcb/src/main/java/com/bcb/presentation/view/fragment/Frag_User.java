@@ -512,7 +512,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 
             //借款
             case R.id.borrow_money:
-                UmengUtil.eventById(ctx, R.string.self_borrow);
+                UmengUtil.eventById(ctx, R.string.loan_blank);
                 loanMainPage();
                 break;
 

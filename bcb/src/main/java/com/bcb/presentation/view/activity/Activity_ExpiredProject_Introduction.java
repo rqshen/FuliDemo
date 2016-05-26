@@ -342,6 +342,7 @@ public class Activity_ExpiredProject_Introduction extends Activity_Base implemen
 
             //专属客服
             case R.id.layout_customer_service:
+                UmengUtil.eventById(Activity_ExpiredProject_Introduction.this, R.string.bid_buy_kefu);
                 //如果ID存在
                 String userId = null;
                 if (App.mUserDetailInfo != null) {

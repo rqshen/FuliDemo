@@ -394,6 +394,7 @@ public class Activity_Modify_Pwd extends Activity_Base {
                     if (PackageUtil.getRequestStatus(response.toString(), Activity_Modify_Pwd.this)) {
                         ToastUtil.alert(Activity_Modify_Pwd.this, "密码修改成功");
                         Activity_ChangePwd_Success.launche(Activity_Modify_Pwd.this, isLoginPwd, false);
+						finish();
                     } else {
                         ToastUtil.alert(Activity_Modify_Pwd.this, message);
                     }

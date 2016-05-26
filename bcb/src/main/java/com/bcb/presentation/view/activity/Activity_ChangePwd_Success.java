@@ -9,7 +9,10 @@ import android.widget.Button;
 
 import com.bcb.R;
 import com.bcb.common.app.App;
+import com.bcb.common.event.BroadcastEvent;
 import com.bcb.data.util.MyActivityManager;
+
+import de.greenrobot.event.EventBus;
 
 public class Activity_ChangePwd_Success extends Activity_Base {
 
@@ -109,6 +112,8 @@ public class Activity_ChangePwd_Success extends Activity_Base {
 		intent.setAction("com.bcb.logout");
 		sendBroadcast(intent);
 		Activity_Login.launche(Activity_ChangePwd_Success.this);
+		//通知切换到首页
+		EventBus.getDefault().post(new BroadcastEvent(BroadcastEvent.HOME));
 		finish();
 	}
 

@@ -674,6 +674,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
 
             //点击立即申请按钮
             case  R.id.borrow_button:
+                UmengUtil.eventById(Activity_LoanRequest_Borrow.this, R.string.loan_act);
                 borrowButtonClick();
                 break;
 
@@ -713,6 +714,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
 
             //客服
             case R.id.layout_customer_service:
+                UmengUtil.eventById(Activity_LoanRequest_Borrow.this, R.string.loan_kefu);
                 customerService();
                 break;
         }
@@ -932,7 +934,8 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
                     //利息抵扣券使用条件描述
                     InterestDescn = data.getStringExtra("InterestDescn");
                     //设置利息抵扣券的描述
-                    value_interest.setText(InterestDescn);
+                    value_interest.setText("已勾选利息抵扣券");
+//                    value_interest.setText(InterestDescn);
                     //已经选择了利息抵扣券
                     statusSelectCoupon = true;
                 } else {

@@ -118,11 +118,10 @@ public class ProductAdapter extends BaseAdapter {
 			viewHolder.progressPercent.setProgressDrawable(ctx.getResources().getDrawable(R.drawable.item_progress_gray));
 		} else {
 			viewHolder.valuePercent.setText(String.format("%.1f", percent) + "%");
+			viewHolder.progressPercent.setProgressDrawable(ctx.getResources().getDrawable(R.drawable.item_progress_orange));
 		}
         viewHolder.progressPercent.setProgress((int) percent);
 	}
-
-
 
 	class ViewHolder {
 		TextView name;

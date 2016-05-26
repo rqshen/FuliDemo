@@ -783,13 +783,15 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPa
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.ll_daily_welfare://每日福利
+                UmengUtil.eventById(ctx, R.string.fuli_c);
                 Activity_Daily_Welfare.launche(ctx);
                 break;
             case R.id.ll_wealth_college://理财学院
+                UmengUtil.eventById(ctx, R.string.college_c);
                 Activity_WebView.launche(ctx,"理财学院",UrlsOne.CollegeWebView);
-//                Activity_WebView.launche(ctx,false,UrlsOne.CollegeWebView);
                 break;
             case R.id.ll_security://安全保障
+                UmengUtil.eventById(ctx, R.string.safe_c);
                 Activity_Browser.launche(ctx,"安全保障",UrlsOne.SecureWebView);
                 break;
         }
