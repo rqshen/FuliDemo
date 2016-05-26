@@ -1,11 +1,5 @@
 package com.bcb.presentation.view.activity;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -32,13 +26,18 @@ import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
 import com.bcb.common.net.UrlsOne;
-import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.PackageUtil;
 import com.bcb.data.util.RegexManager;
 import com.bcb.data.util.ToastUtil;
 import com.bcb.data.util.TokenUtil;
 import com.bcb.data.util.UmengUtil;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 //忘记密码
 public class Activity_Forget_Pwd extends Activity_Base {
@@ -538,6 +537,8 @@ public class Activity_Forget_Pwd extends Activity_Base {
                 hideProgressBar();
             }
         });
+		jsonRequest.setTag(BcbRequestTag.FogetPasswordCodeTag);
+		requestQueue.add(jsonRequest);
 
 	}
 
