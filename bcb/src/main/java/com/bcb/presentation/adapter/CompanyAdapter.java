@@ -11,9 +11,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bcb.R;
-import com.bcb.common.net.BcbRemoteImage;
 import com.bcb.data.bean.CompanyBean;
 import com.bcb.data.util.LogUtil;
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -62,7 +62,7 @@ public class CompanyAdapter extends BaseAdapter {
         //设置公司图标
         Bitmap bitmap = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.icon_company_default);
         if (!TextUtils.isEmpty(data.get(pos).getLogo())) {
-            BcbRemoteImage.getInstance(ctx).loadRemoteImage(viewHolder.companyIcon, data.get(pos).getLogo());
+            Glide.with(ctx).load(data.get(pos).getLogo()).into(viewHolder.companyIcon);
         } else {
             viewHolder.companyIcon.setImageBitmap(bitmap);
         }

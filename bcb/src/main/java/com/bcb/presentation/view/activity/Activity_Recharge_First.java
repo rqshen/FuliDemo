@@ -16,12 +16,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bcb.R;
-import com.bcb.common.net.BcbRemoteImage;
 import com.bcb.data.bean.BankItem;
 import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.MyConstants;
 import com.bcb.data.util.ToastUtil;
 import com.bcb.data.util.UmengUtil;
+import com.bumptech.glide.Glide;
 
 import org.json.JSONObject;
 
@@ -202,7 +202,7 @@ public class Activity_Recharge_First extends Activity_Base implements View.OnCli
 		ImageView bank_icon = (ImageView) findViewById(R.id.bank_icon); 
 		TextView bank_name = (TextView) findViewById(R.id.bank_name); 
 		TextView bank_rule = (TextView) findViewById(R.id.bank_rule);
-        BcbRemoteImage.getInstance(this).loadRemoteImage(bank_icon, mBankItem.getLogo());
+		Glide.with(this).load(mBankItem.getLogo()).into(bank_icon);
 		bank_name.setText(mBankItem.getBankName());
 		bank_rule.setText("每笔限额" + mBankItem.getMaxSingle() + "万，每日限" + mBankItem.getMaxDay() + "万");
 	}

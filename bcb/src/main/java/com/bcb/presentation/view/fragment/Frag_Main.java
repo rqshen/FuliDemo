@@ -29,7 +29,6 @@ import com.bcb.common.app.App;
 import com.bcb.common.event.BroadcastEvent;
 import com.bcb.common.net.BcbJsonRequest;
 import com.bcb.common.net.BcbNetworkManager;
-import com.bcb.common.net.BcbRemoteImage;
 import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
@@ -63,6 +62,7 @@ import com.bcb.presentation.view.custom.PagerIndicator.AutoLoopViewPager;
 import com.bcb.presentation.view.custom.PagerIndicator.CirclePageIndicator;
 import com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout;
 import com.bcb.presentation.view.custom.PullableView.PullableScrollView;
+import com.bumptech.glide.Glide;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -593,7 +593,7 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPa
                 }
             });
             //异步加载网络图片
-            BcbRemoteImage.getInstance(context).loadRemoteImage(iv, data.get(position).ImageUrl, R.drawable.banner01, R.drawable.banner01);
+            Glide.with(context).load(data.get(position).ImageUrl).into(iv);
             container.addView(mage);
             return mage;
         }

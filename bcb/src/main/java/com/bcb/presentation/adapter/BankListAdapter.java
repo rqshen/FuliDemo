@@ -8,7 +8,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bcb.R;
-import com.bcb.common.net.BcbRemoteImage;
 import com.bcb.data.bean.BankItem;
 import com.bcb.data.util.BankLogo;
 import com.bcb.data.util.LogUtil;
