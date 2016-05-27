@@ -35,6 +35,8 @@ public interface BcbRequestTag {
     String SetPayPasswordTag = "BcbSetPayPasswordRequest";
     //找回交易密码
     String FogetPasswordTag = "BcbFogetPayPasswordRequest";
+    //找回登录密码验证码
+    String FogetPasswordCodeTag = "BcbFogetLoginCodePasswordRequest";
     //获取会员信息
     String BCB_GET_USER_INFORMATION_REQUEST = "BcbGetUserInformationRequest";
     //获取省份
