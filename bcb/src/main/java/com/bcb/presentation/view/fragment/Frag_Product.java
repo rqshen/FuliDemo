@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -119,9 +118,8 @@ public class Frag_Product extends Frag_Base implements OnClickListener {
         left_text = (TextView) view.findViewById(R.id.left_text);
         left_text.setText("全部公司");
         left_text.setOnClickListener(this);
-        left_text.setVisibility(View.GONE);
         dropdown = (ImageView) view.findViewById(R.id.dropdown);
-        dropdown.setVisibility(View.GONE);
+        dropdown.setVisibility(View.VISIBLE);
         dropdown.setOnClickListener(this);
 
         CompanyId = "";
