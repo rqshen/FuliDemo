@@ -538,7 +538,8 @@ public class Activity_Forget_Pwd extends Activity_Base {
                 hideProgressBar();
             }
         });
-
+		jsonRequest.setTag(BcbRequestTag.FogetPasswordTag);
+		requestQueue.add(jsonRequest);
 	}
 
 	//完成找回密码
@@ -618,5 +619,11 @@ public class Activity_Forget_Pwd extends Activity_Base {
 		if(null != progressDialog && progressDialog.isShowing()){
 			progressDialog.dismiss();
 		}
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		requestQueue.cancelAll(BcbRequestTag.FogetPasswordTag);
 	}
 }

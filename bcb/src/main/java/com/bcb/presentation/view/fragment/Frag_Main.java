@@ -1,6 +1,5 @@
 package com.bcb.presentation.view.fragment;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -54,7 +53,6 @@ import com.bcb.presentation.adapter.ProductAdapter;
 import com.bcb.presentation.view.activity.Activity_Browser;
 import com.bcb.presentation.view.activity.Activity_Daily_Welfare;
 import com.bcb.presentation.view.activity.Activity_ExpiredProject_Introduction;
-import com.bcb.presentation.view.activity.Activity_Login;
 import com.bcb.presentation.view.activity.Activity_Login_Introduction;
 import com.bcb.presentation.view.activity.Activity_Main;
 import com.bcb.presentation.view.activity.Activity_NormalProject_Introduction;
@@ -144,12 +142,6 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPa
 
     public Frag_Main(){
         super();
-    }
-
-    @SuppressLint("ValidFragment")
-    public Frag_Main(Context context) {
-        super();
-
     }
 
     @Override
