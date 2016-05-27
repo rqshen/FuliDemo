@@ -34,7 +34,7 @@ public class RegexManager {
 
 	// 判断是否为手机号码
 	public static boolean isPhoneNum(String mobiles) {
-		String telRegex = "[1][3578]\\d{9}";
+		String telRegex = "[1][34578]\\d{9}";
 		if (TextUtils.isEmpty(mobiles))
 			return false;
 		else
