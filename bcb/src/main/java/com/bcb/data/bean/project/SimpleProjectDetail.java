@@ -47,5 +47,6 @@ public class SimpleProjectDetail implements Serializable {
 	public int CouponType;
     public String CompanyName;
     public String CompanyUrl;
+	public String InvestLeader;
 	public List<AssetAuditContentBean> AssetAuditContent;
 }

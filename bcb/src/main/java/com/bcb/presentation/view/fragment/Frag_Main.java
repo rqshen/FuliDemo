@@ -111,6 +111,10 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPa
 	private AdPhotoListBean mAdPhotoListBean;
     private ArrayList<BannerInfo> listBanner;
     private AutoLoopViewPager loopViewPager;
+
+    //滚动广告
+    private TextView notice_text;
+
     //标识
 	private boolean canReFresh = true;
 	private boolean firstLoadCopyWriter = true;
@@ -183,6 +187,9 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPa
         view.findViewById(R.id.ll_daily_welfare).setOnClickListener(this);
         view.findViewById(R.id.ll_wealth_college).setOnClickListener(this);
         view.findViewById(R.id.ll_security).setOnClickListener(this);
+
+        //滚动广告
+        notice_text = (TextView) view.findViewById(R.id.notice_text);
 
         //体验标
         expiredRecordsBeans = new ArrayList<>();
@@ -478,11 +485,14 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPa
                     try {
                         if (PackageUtil.getRequestStatus(response, ctx)) {
                             synchronized (this) {
-                                mAdPhotoListBean = App.mGson.fromJson(response.toString(), AdPhotoListBean.class);
+                                JSONObject obj = PackageUtil.getResultObject(response);
+                                if (null != obj){
+                                    mAdPhotoListBean = App.mGson.fromJson(obj.toString(), AdPhotoListBean.class);
+                                }
                             }
                         }
                         initBanner();
-
+                        initScrollText();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -501,20 +511,16 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPa
     //初始化Banner
 	private void initBanner(){
         //如果为空，直接返回
-        if (mAdPhotoListBean == null) {
-            return;
-        }
-        //如果结果为空，直接返回
-		if (mAdPhotoListBean.result.isEmpty()) {
+        if (null == mAdPhotoListBean || null == mAdPhotoListBean.BannerList || 0 == mAdPhotoListBean.BannerList.size()) {
             return;
         }
         //创建新的列表数据
 		listBanner = new ArrayList<BannerInfo>();	
-		for (int i = 0; i < mAdPhotoListBean.result.size(); i++) {
+		for (int i = 0; i < mAdPhotoListBean.BannerList.size(); i++) {
 			BannerInfo  item = new BannerInfo();
-			item.Title = mAdPhotoListBean.result.get(i).Title;
-			item.ImageUrl = mAdPhotoListBean.result.get(i).ImageUrl;
-			item.PageUrl = mAdPhotoListBean.result.get(i).PageUrl;
+			item.Title = mAdPhotoListBean.BannerList.get(i).Title;
+			item.ImageUrl = mAdPhotoListBean.BannerList.get(i).ImageUrl;
+			item.PageUrl = mAdPhotoListBean.BannerList.get(i).PageUrl;
 			listBanner.add(item);
 		}
         //Banner
@@ -528,6 +534,23 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPa
         CirclePageIndicator indy = (CirclePageIndicator) ctx.findViewById(R.id.indy);
         indy.setViewPager(loopViewPager);
 	}
+
+    //初始化滚动广告
+    private void initScrollText(){
+        //如果为空，直接返回
+        if (null == mAdPhotoListBean || null == mAdPhotoListBean.InvestList || 0 == mAdPhotoListBean.InvestList.size()) {
+            return;
+        }
+        StringBuilder stringBuilder = new StringBuilder();
+        for(int i=0;i<mAdPhotoListBean.InvestList.size();i++){
+            if ((mAdPhotoListBean.InvestList.size()-1) == i){
+                stringBuilder.append(mAdPhotoListBean.InvestList.get(i));
+            }else{
+                stringBuilder.append(mAdPhotoListBean.InvestList.get(i)).append("，");
+            }
+        }
+        notice_text.setText(stringBuilder.toString());
+    }
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

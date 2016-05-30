@@ -784,13 +784,27 @@
                             android:textColor="@color/txt_gray"
                             android:text="投资列表"/>
                     </LinearLayout>
+
                     <ImageView
+                        android:id="@+id/arrow_right"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="18dp"
                         android:background="@drawable/forward_default"
                         android:layout_centerVertical="true"
                         android:layout_alignParentRight="true"/>
+
+                    <!--领投人-->
+                    <TextView
+                        android:id="@+id/investLeader"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@id/arrow_right"
+                        android:textColor="@color/red"
+                        android:layout_marginRight="5dp"
+                        android:textSize="@dimen/main_text_default"
+                        android:text=""/>
                 </RelativeLayout>
                 <ImageView
                     android:layout_width="match_parent"

@@ -19,7 +19,7 @@ public class UrlsOne {
 	public static final String UserDoRegister = host + "/api/v1.0/e81bf6e10a18";
 	
 	// 首页广告轮播
-	public static final String MainpageAdRotator = host + "/api/v1.0/0c152821a400";
+	public static final String MainpageAdRotator = host + "/api/v1.5.2/01170ac7916f";
 
 	//首页新手体验标
 	public static final String MainpageExpired = host + "/api/v1.0/bd5f57bdbc8b";

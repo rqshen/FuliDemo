@@ -111,6 +111,8 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
     private RelativeLayout layout_identify;
     //投资列表
     private RelativeLayout layout_invest_list;
+    //领投人
+    private TextView investLeader;
 
     //提示对话框
     private DialogWidget dialogWidget;
@@ -260,6 +262,8 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
         //投资列表
         layout_invest_list = (RelativeLayout) findViewById(R.id.layout_invest_list);
         layout_invest_list.setOnClickListener(this);
+        //领投人
+        investLeader = (TextView) findViewById(R.id.investLeader);
 
         //专属客服
         layout_customer_service = (LinearLayout) findViewById(R.id.layout_customer_service);
@@ -320,6 +324,11 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
         // 年化利率
         value_lilv.setText(mSimpleProjectDetail.Rate+"");
         text_description.setVisibility(View.VISIBLE);
+
+        //领投人
+        if (!TextUtils.isEmpty(mSimpleProjectDetail.InvestLeader) && !mSimpleProjectDetail.InvestLeader.equalsIgnoreCase("null")) {
+            investLeader.setText(mSimpleProjectDetail.InvestLeader);
+        }
 
         //奖励描述
         if (mSimpleProjectDetail.RewardRateDescn != null
@@ -688,31 +697,39 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
 
             //项目详情
             case R.id.layout_project_detail:
-                if (mSimpleProjectDetail != null &&mSimpleProjectDetail.Status != 20) {
+                if (mSimpleProjectDetail != null && mSimpleProjectDetail.Status != 20) {
                     UmengUtil.eventById(Activity_NormalProject_Introduction.this, R.string.bid_buy_detail1);
                 }
-                Activity_WebView.launche(Activity_NormalProject_Introduction.this, title, mSimpleProjectDetail.PageUrl + "&tab=1");
+                if (null != mSimpleProjectDetail && !TextUtils.isEmpty(mSimpleProjectDetail.PageUrl)){
+                    Activity_WebView.launche(Activity_NormalProject_Introduction.this, title, mSimpleProjectDetail.PageUrl + "&tab=1");
+                }
                 break;
             //保障信息
             case R.id.layout_security:
-                if (mSimpleProjectDetail != null &&mSimpleProjectDetail.Status != 20) {
+                if (mSimpleProjectDetail != null && mSimpleProjectDetail.Status != 20) {
                     UmengUtil.eventById(Activity_NormalProject_Introduction.this, R.string.bid_buy_detail2);
                 }
-                Activity_WebView.launche(Activity_NormalProject_Introduction.this, title, mSimpleProjectDetail.PageUrl+"&tab=2");
+                if (null != mSimpleProjectDetail && !TextUtils.isEmpty(mSimpleProjectDetail.PageUrl)){
+                    Activity_WebView.launche(Activity_NormalProject_Introduction.this, title, mSimpleProjectDetail.PageUrl+"&tab=2");
+                }
                 break;
             //证明文件
             case R.id.layout_identify:
-                if (mSimpleProjectDetail != null &&mSimpleProjectDetail.Status != 20) {
+                if (mSimpleProjectDetail != null && mSimpleProjectDetail.Status != 20) {
                     UmengUtil.eventById(Activity_NormalProject_Introduction.this, R.string.bid_buy_detail3);
                 }
-                Activity_WebView.launche(Activity_NormalProject_Introduction.this, title, mSimpleProjectDetail.PageUrl+"&tab=3");
+                if (null != mSimpleProjectDetail && !TextUtils.isEmpty(mSimpleProjectDetail.PageUrl)){
+                    Activity_WebView.launche(Activity_NormalProject_Introduction.this, title, mSimpleProjectDetail.PageUrl+"&tab=3");
+                }
                 break;
             //投资列表
             case R.id.layout_invest_list:
-                if (mSimpleProjectDetail != null &&mSimpleProjectDetail.Status != 20) {
+                if (mSimpleProjectDetail != null && mSimpleProjectDetail.Status != 20) {
                     UmengUtil.eventById(Activity_NormalProject_Introduction.this, R.string.bid_buy_detail4);
                 }
-                Activity_WebView.launche(Activity_NormalProject_Introduction.this, title, mSimpleProjectDetail.PageUrl+"&tab=4");
+                if (null != mSimpleProjectDetail && !TextUtils.isEmpty(mSimpleProjectDetail.PageUrl)){
+                    Activity_WebView.launche(Activity_NormalProject_Introduction.this, title, mSimpleProjectDetail.PageUrl+"&tab=4");
+                }
                 break;
         }
     }

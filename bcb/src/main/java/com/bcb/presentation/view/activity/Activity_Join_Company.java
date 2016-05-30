@@ -18,12 +18,12 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.bcb.R;
-import com.bcb.presentation.presenter.IPresenter_JoinCompany;
-import com.bcb.presentation.presenter.IPresenter_JoinCompanyImpl;
-import com.bcb.presentation.view.activity_interface.Interface_Base;
 import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.ToastUtil;
 import com.bcb.data.util.UmengUtil;
+import com.bcb.presentation.presenter.IPresenter_JoinCompany;
+import com.bcb.presentation.presenter.IPresenter_JoinCompanyImpl;
+import com.bcb.presentation.view.activity_interface.Interface_Base;
 
 /**
  * Created by cain on 15/12/28.
@@ -220,7 +220,6 @@ public class Activity_Join_Company extends Activity_Base implements Interface_Ba
                 if (bitmap != null && !bitmap.isRecycled()) {
                     ((ImageView) view).setImageBitmap(null);
                     bitmap.recycle();
-                    bitmap  = null;
                 }
             }
         }
