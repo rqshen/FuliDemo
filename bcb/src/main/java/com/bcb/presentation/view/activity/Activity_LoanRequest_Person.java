@@ -327,7 +327,7 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
     /**
      * 设置个人信息，需要前面三个列表初始化之后才能调用
      */
-    private void  setupPersonalData() {
+    private void setupPersonalData() {
         //婚姻状况
         if (PersonInfo.MaritalStatus > 0) {
             loan_marital_status.setText(maritalList.get(PersonInfo.MaritalStatus - 1));

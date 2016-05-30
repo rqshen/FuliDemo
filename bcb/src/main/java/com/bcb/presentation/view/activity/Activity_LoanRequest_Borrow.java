@@ -29,9 +29,11 @@ import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
 import com.bcb.common.net.UrlsOne;
+import com.bcb.data.bean.UserExtraInfo;
 import com.bcb.data.bean.loan.LoanDurationListBean;
 import com.bcb.data.bean.loan.LoanPeriodWithRateBean;
 import com.bcb.data.bean.loan.LoanRequestInfoBean;
+import com.bcb.data.util.DbUtil;
 import com.bcb.data.util.HttpUtils;
 import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MQCustomerManager;
@@ -803,6 +805,9 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
             ToastUtil.alert(Activity_LoanRequest_Borrow.this, "借款金额不能大于300000元");
             return;
         }
+
+        //点击借款请求一次定位
+        App.getInstance().doLocation();
 
         LogUtil.d("借款", loanRequestInfo.toString());
         if (loanRequestInfo.getStatus().equals("0")){//可以申请借款

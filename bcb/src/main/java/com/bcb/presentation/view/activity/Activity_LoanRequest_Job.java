@@ -18,8 +18,11 @@ import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
 import com.bcb.common.net.UrlsOne;
+import com.bcb.data.bean.UserExtraInfo;
 import com.bcb.data.bean.loan.PersonInfoBean;
+import com.bcb.data.util.DbUtil;
 import com.bcb.data.util.LoanPersonalConfigUtil;
+import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.RegexManager;
 import com.bcb.data.util.ToastUtil;
@@ -278,6 +281,14 @@ public class Activity_LoanRequest_Job extends Activity_Base {
      * 将个人信息提交给服务器
      */
     private void postDatatoService() {
+
+        //提交数据时候上传用户定位数据
+        UserExtraInfo userExtraInfo = DbUtil.getUserExtra();
+        if (null != userExtraInfo){
+            LogUtil.d("借款", "imei = " + userExtraInfo.getImei() + " model = " + userExtraInfo.getModel()
+                    + " network = " + userExtraInfo.getNetwork() + " address = " + userExtraInfo.getLocation());
+        }
+
         //使用Gson将对象转成JSOnObject对象
         Gson mGson = new Gson();
         (new LoanPersonalConfigUtil(this)).saveLoanPersonalMessage(mGson.toJson(personInfoBean));

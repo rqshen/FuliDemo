@@ -16,8 +16,8 @@ public class MyConstants {
 			return HOST_DEV;
 		} else {
 			return HOST_RELEASE;
-		}
 	}
+}
 
 	// 没有token时的默认key
 	public static String KEY ="1e469f986f5d4991a83b95d4";

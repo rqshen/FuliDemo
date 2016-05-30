@@ -71,7 +71,7 @@ public abstract class BcbRequest<T> extends Request<T> {
                 bcbCallBack.onErrorResponse(error);
             }
         });
-        Log.d("url",url);
+        Log.d("url","url = " + url + " requestBody = " + requestBody);
         mBcbCallBack = bcbCallBack;
         if (TextUtils.isEmpty(requestBody)) {
             mRequestBody = null;
@@ -99,7 +99,7 @@ public abstract class BcbRequest<T> extends Request<T> {
                 bcbCallBack.onErrorResponse(error);
             }
         });
-        Log.d("url",url);
+        Log.d("url","url = " + url + " requestBody = " + requestBody);
         mBcbCallBack = bcbCallBack;
         if (TextUtils.isEmpty(requestBody)) {
             mRequestBody = null;
@@ -127,7 +127,7 @@ public abstract class BcbRequest<T> extends Request<T> {
                 bcbCallBack.onErrorResponse(error);
             }
         });
-        Log.d("url",url);
+        Log.d("url","url = " + url + " requestBody = " + requestBody);
         this.index = index;
         mBcbIndexCallBack = bcbCallBack;
         if (TextUtils.isEmpty(requestBody)) {

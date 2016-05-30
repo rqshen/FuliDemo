@@ -26,10 +26,10 @@ public class DbUtil {
         WelfareBean bean;
         List<WelfareBean> beanList = DataSupport.where("username like ?", App.saveUserInfo.getLocalPhone()).find(WelfareBean.class);
         if (null != beanList && beanList.size() > 0){
-            bean =  beanList.get(0);
+            bean = beanList.get(0);
             bean.setOpenDate(new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime()));
             bean.setValue(value);
-            bean.update(1);
+            bean.updateAll("username like ?", App.saveUserInfo.getLocalPhone());
         }else{
             bean = new WelfareBean();
             bean.setUsername(App.saveUserInfo.getLocalPhone());
@@ -65,12 +65,12 @@ public class DbUtil {
         UserExtraInfo bean;
         List<UserExtraInfo> beanList = DataSupport.where("username like ?", App.saveUserInfo.getLocalPhone()).find(UserExtraInfo.class);
         if (null != beanList && beanList.size() > 0){
-            bean =  beanList.get(0);
+            bean = beanList.get(0);
             bean.setImei(imei);
             bean.setModel(model);
             bean.setNetwork(network);
             bean.setLocation(location);
-            bean.update(1);
+            bean.updateAll("username like ?", App.saveUserInfo.getLocalPhone());
         }else{
             bean = new UserExtraInfo();
             bean.setUsername(App.saveUserInfo.getLocalPhone());
