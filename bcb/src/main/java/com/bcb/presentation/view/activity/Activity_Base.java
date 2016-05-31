@@ -51,9 +51,13 @@ public class Activity_Base extends Activity {
 			}
 			return super.dispatchTouchEvent(ev);
 		}
-		// 必不可少，否则所有的组件都不会有TouchEvent了
-        if (getWindow().superDispatchTouchEvent(ev)) {
-            return true;
+        try {
+            // 必不可少，否则所有的组件都不会有TouchEvent了
+            if (getWindow().superDispatchTouchEvent(ev)) {
+                return true;
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
 		return onTouchEvent(ev);
 	}

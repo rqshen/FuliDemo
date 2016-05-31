@@ -48,12 +48,12 @@ public class UIUtil {
     private static ProgressDialog progressDialog;
 
     //显示转圈提示
-    public static void showProgressBar(Activity context) {
+    public static void showProgressBar(Activity context, String msg) {
+        if(null == progressDialog) progressDialog = new ProgressDialog(context, ProgressDialog.THEME_HOLO_LIGHT);
+        progressDialog.setMessage(msg);
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.setCancelable(true);
         if (!context.isFinishing()){
-            if(null == progressDialog) progressDialog = new ProgressDialog(context, ProgressDialog.THEME_HOLO_LIGHT);
-            progressDialog.setMessage("正在加载数据....");
-            progressDialog.setCanceledOnTouchOutside(false);
-            progressDialog.setCancelable(true);
             progressDialog.show();
         }
     }

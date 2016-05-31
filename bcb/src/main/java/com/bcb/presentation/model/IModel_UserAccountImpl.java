@@ -4,6 +4,9 @@ import android.content.Context;
 
 import com.bcb.common.app.App;
 import com.bcb.data.bean.UserDetailInfo;
+import com.bcb.data.util.DESUtil;
+import com.bcb.data.util.LogUtil;
+import com.bcb.data.util.MyConstants;
 
 /**
  * Created by cain on 16/3/18.

@@ -355,7 +355,11 @@
             android:name=".presentation.view.activity.Activity_Daily_Welfare_Tip"
             android:label="@string/app_name"
             android:screenOrientation="portrait"/>
-
+        <!--图片浏览-->
+        <activity
+            android:name=".presentation.view.activity.Activity_Image_Display"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"/>
         <!-- ***********以下是极光推送相关配置************ -->
         <!-- Required SDK核心功能-->
         <activity

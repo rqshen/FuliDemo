@@ -219,8 +219,7 @@ public class Activity_Browser extends Activity_Base {
 		webSetting.setAppCacheMaxSize(Long.MAX_VALUE);
 		webSetting.setAppCachePath(this.getDir("appcache", 0).getPath());
 		webSetting.setDatabasePath(this.getDir("databases", 0).getPath());
-		webSetting.setGeolocationDatabasePath(this.getDir("geolocation", 0)
-				.getPath());
+		webSetting.setGeolocationDatabasePath(this.getDir("geolocation", 0).getPath());
 		webSetting.setPluginState(WebSettings.PluginState.ON_DEMAND);
 		webSetting.setRenderPriority(WebSettings.RenderPriority.HIGH);
 		if (TextUtils.isEmpty(mIntentUrl)) {

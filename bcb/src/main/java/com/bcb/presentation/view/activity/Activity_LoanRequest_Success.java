@@ -38,7 +38,8 @@ public class Activity_LoanRequest_Success extends Activity_Base implements View.
 
         //个人信用报告
         personal_credit_report = (TextView) findViewById(R.id.personal_credit_report);
-        personal_credit_report.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
+        personal_credit_report.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);//下划线
+        personal_credit_report.getPaint().setAntiAlias(true);//抗锯齿
         personal_credit_report.setOnClickListener(this);
     }
 

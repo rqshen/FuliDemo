@@ -2,14 +2,10 @@ package com.bcb.presentation.view.activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.GridView;
 
 import com.bcb.R;
 import com.bcb.common.net.BcbJsonRequest;
@@ -27,7 +23,6 @@ import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.RegexManager;
 import com.bcb.data.util.ToastUtil;
 import com.bcb.data.util.TokenUtil;
-import com.bcb.presentation.adapter.GridAdapter;
 import com.bcb.presentation.view.custom.EditTextWithDate.EditTextWithDate;
 import com.google.gson.Gson;
 
@@ -35,9 +30,7 @@ import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by cain on 16/1/5.
@@ -70,10 +63,6 @@ public class Activity_LoanRequest_Job extends Activity_Base {
     private BcbRequestQueue requestQueue;
     //转圈提示
     private ProgressDialog progressDialog;
-    //上传图片
-    private GridView noScrollgridview;
-    private GridAdapter adapter;
-    private List<String> pics;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -123,18 +112,6 @@ public class Activity_LoanRequest_Job extends Activity_Base {
         loan_email = (EditText) findViewById(R.id.loan_email);
         //公积金月缴存额度
         loan_accumulation_fund = (EditText) findViewById(R.id.loan_accumulation_fund);
-        //上传图片
-        noScrollgridview = (GridView) findViewById(R.id.noScrollgridview);
-
-        noScrollgridview.setSelector(new ColorDrawable(Color.TRANSPARENT));
-        pics = new ArrayList<>();
-        adapter = new GridAdapter(this, pics);
-        noScrollgridview.setAdapter(adapter);
-        noScrollgridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
-            }
-        });
 
         //下一步按钮
         job_button = (Button) findViewById(R.id.job_button);

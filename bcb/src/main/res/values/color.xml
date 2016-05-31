@@ -4,8 +4,12 @@
     <color name="txt_green">#93c52e</color>
     <!-- 背景色 -->
     <color name="background">#F0F0F0</color>
+    <!-- 背景白 -->
+    <color name="background_white">#FDFDFE</color>
     <!-- 背景灰 -->
     <color name="background_gray">#EFEFEF</color>
+    <!-- 背景灰2 -->
+    <color name="background_gray2">#F4F4F4</color>
     <!--半透明背景-->
     <color name="transparent_background">#B0000000</color>
     <!-- 文本黑色 -->
@@ -34,6 +38,8 @@
     <color name="orange">#DD8C00</color>
     <!-- 横线灰色 -->
     <color name="linegray">#EEEEEE</color>
+    <!-- 横线灰色2 -->
+    <color name="linegray2">#DCDCDC</color>
     <!-- 公司名称黄色 -->
     <color name="company_name">#FF8E3A</color>
     <!-- 整体的红色值 -->

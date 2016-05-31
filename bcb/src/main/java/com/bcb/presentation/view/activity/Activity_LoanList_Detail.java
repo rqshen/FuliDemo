@@ -3,6 +3,7 @@ package com.bcb.presentation.view.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -11,12 +12,12 @@ import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.bcb.R;
-import android.support.v4.app.Fragment;
-import com.bcb.presentation.adapter.MyFragmentPagerAdapter;
-import com.bcb.presentation.view.fragment.Frag_Repayment;
-import com.bcb.presentation.view.fragment.Frag_LoanDetail;
 import com.bcb.data.util.MyActivityManager;
+import com.bcb.presentation.adapter.MyFragmentPagerAdapter;
+import com.bcb.presentation.view.fragment.Frag_LoanDetail;
+import com.bcb.presentation.view.fragment.Frag_Repayment;
 
 import java.util.ArrayList;
 
@@ -41,8 +42,6 @@ public class Activity_LoanList_Detail extends Activity_Base_Fragment {
     private int offset = 0;
     private int position_one;
 
-
-
     public static void launche(Context context, String uniqueId, String assetCode) {
         Intent intent = new Intent();
         intent.putExtra("uniqueId", uniqueId);
@@ -55,15 +54,14 @@ public class Activity_LoanList_Detail extends Activity_Base_Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //管理Activity栈，用于忘记密码的时候，跳转至登陆界面之前销毁栈中所有的Activity
-        MyActivityManager myActivityManager = MyActivityManager.getInstance();
-        myActivityManager.pushOneActivity(Activity_LoanList_Detail.this);
+        MyActivityManager.getInstance().pushOneActivity(Activity_LoanList_Detail.this);
         uniqueId = getIntent().getStringExtra("uniqueId");
         assetCode = getIntent().getStringExtra("assetCode");
         setBaseContentView(R.layout.activity_loanlist_detail);
         setLeftTitleVisible(true);
         setTitleValue("我的借款");
         setupView();
-        InitWidth();
+        initWidth();
         setupViewPager();
     }
 
@@ -77,7 +75,7 @@ public class Activity_LoanList_Detail extends Activity_Base_Fragment {
     }
 
     //设置下面的白色横条的长度
-    private void InitWidth() {
+    private void initWidth() {
         ivBottomLine = (ImageView) findViewById(R.id.coupons_cursor);
         //获取像素宽度
         DisplayMetrics dmDisplayMetrics = new DisplayMetrics();

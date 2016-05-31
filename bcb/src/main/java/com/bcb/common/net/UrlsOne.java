@@ -130,6 +130,9 @@ public class UrlsOne {
 	//借款详情
 	public static final String MyLoanItemDetailMessage = host + "/api/v1.2/db3a4dd4fe70";
 
+	//上传借款补充材料
+	public static final String Loan_Supplementary_Material = host + "/api/v1.3.4/a61000b6a80a";
+
 	//还款列表
 	public static final String MyLoanRepaymentMessage = host + "/api/v1.2/82dcb6a645aa";
 
