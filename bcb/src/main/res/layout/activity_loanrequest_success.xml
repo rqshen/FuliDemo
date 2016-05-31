@@ -17,14 +17,16 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:background="@color/white"
+                android:paddingTop="28dp"
+                android:paddingBottom="35dp"
                 android:orientation="vertical" >
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="40dip"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:layout_gravity="center_horizontal"
-                    android:background="@drawable/recharge_success"
+                    android:background="@drawable/loan_success"
                     android:gravity="center" />
 
                 <TextView
@@ -42,55 +44,94 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="10dp"
+                    android:paddingLeft="48dp"
+                    android:paddingRight="48dp"
+                    android:lineSpacingExtra="6dp"
                     android:gravity="center"
-                    android:text="下一步：补充材料，提交风控中心审核"
-                    android:textColor="@color/txt_black"
-                    android:textSize="@dimen/main_text_default" />
+                    android:text="下一步：请在5天内准备以下的材料，前往我的借款-借款详情，提交给风控中心审核"
+                    android:textColor="@color/txt_middle_gray"
+                    android:textSize="@dimen/main_text_rather_small" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="20dp"
-                    android:gravity="center"
-                    android:text="请将以下材料在提交借款申请当日"
-                    android:textColor="@color/red"
-                    android:textSize="@dimen/main_text_default" />
-                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingTop="0dip"
-                    android:orientation="horizontal"
-                    android:layout_gravity="center"
-                    android:gravity="center">
+                    android:textColor="@color/txt_middle_gray"
+                    android:textSize="@dimen/main_text_rather_small"
+                    android:text="补充材料："/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:textColor="@color/txt_middle_gray"
+                    android:textSize="@dimen/main_text_rather_small"
+                    android:text="1.二代身份证正反两面"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:textColor="@color/txt_middle_gray"
+                    android:textSize="@dimen/main_text_rather_small"
+                    android:text="2.手持个人二代身份证的个人半身正面照"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:textColor="@color/txt_middle_gray"
+                    android:textSize="@dimen/main_text_rather_small"
+                    android:text="3.个人信用报告。可登陆中国人民银行征信中心在线免费生成"/>
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:orientation="horizontal">
+
                     <TextView
-                        android:id="@+id/textView1"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/personal_credit_report"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="5dip"
-                        android:layout_alignParentBottom="true"
-                        android:text="发送至"
-                        android:textColor="@color/red"
-                        android:textSize="@dimen/main_text_default"/>
+                        android:textColor="@color/txt_middle_gray"
+                        android:textSize="@dimen/main_text_rather_small"
+                        android:text="https://ipcrs.pbccrc.org.cn/"/>
+
                     <TextView
-                        android:id="@+id/textView2"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_toRightOf="@id/textView1"
-                        android:layout_marginTop="5dip"
-                        android:text="fksh@100cb.cn"
-                        android:textColor="@color/blue"
-                        android:textSize="@dimen/main_text_default"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_toRightOf="@id/textView2"
-                        android:layout_marginLeft="5dip"
-                        android:text="提交审核"
-                        android:textColor="@color/red"
-                        android:textSize="@dimen/main_text_default"/>
-                </RelativeLayout>
+                        android:textColor="@color/txt_middle_gray"
+                        android:textSize="@dimen/main_text_rather_small"
+                        android:text="，要求距申请1周内"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:textColor="@color/txt_middle_gray"
+                    android:lineSpacingExtra="6dp"
+                    android:textSize="@dimen/main_text_rather_small"
+                    android:text="4.工资银行流水及银行卡照片，近半年的打卡工资流水（有年终奖者打该卡一年流水）；银行卡照片应清晰可见卡号"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/txt_middle_gray"
+                    android:textSize="@dimen/main_text_rather_small"
+                    android:text="5.公积金或社保缴存证明二选一，需要显示基数"/>
 
             </LinearLayout>
 
@@ -98,129 +139,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dip"
-                android:gravity="center_vertical"
-                android:orientation="horizontal" >
-
-                <ImageView
-                    android:layout_width="3dip"
-                    android:layout_height="14dip"
-                    android:layout_marginLeft="15dip"
-                    android:background="@drawable/line_red" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="3dip"
-                    android:paddingBottom="1dip"
-                    android:text="借款申请人本人证明"
-                    android:textColor="@color/txt_black"
-                    android:textSize="@dimen/main_text_default" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dip"
-                    android:layout_marginLeft="50dip"
-                    android:layout_marginRight="20dip"
-                    android:text="身份证正面、反面照，手持身份证照"
-                    android:textColor="@color/txt_black"
-                    android:textSize="@dimen/main_text_default"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dip"
-                    android:layout_marginLeft="50dip"
-                    android:layout_marginRight="20dip"
-                    android:text="最近一年流水证明"
-                    android:textColor="@color/txt_black"
-                    android:textSize="@dimen/main_text_default"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dip"
-                    android:layout_marginLeft="50dip"
-                    android:layout_marginRight="20dip"
-                    android:text="中国人民银行征信报告:"
-                    android:textColor="@color/txt_black"
-                    android:textSize="@dimen/main_text_default"/>
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dip"
-                        android:layout_marginLeft="50dip"
-                        android:layout_marginRight="20dip"
-                        android:text="http://www.pbccrc.org.cn/"
-                        android:textColor="@color/blue"
-                        android:textSize="@dimen/main_text_default"/>
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="1dip"
-                        android:layout_marginLeft="50dip"
-                        android:layout_marginRight="20dip"
-                        android:background="@color/blue"/>
-                </LinearLayout>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dip"
-                    android:layout_marginLeft="50dip"
-                    android:layout_marginRight="20dip"
-                    android:text="资产证明"
-                    android:textColor="@color/txt_black"
-                    android:textSize="@dimen/main_text_default"/>
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="25dip"
-                android:gravity="center_vertical"
-                android:orientation="horizontal" >
-
-                <ImageView
-                    android:layout_width="3dip"
-                    android:layout_height="14dip"
-                    android:layout_marginLeft="15dip"
-                    android:background="@drawable/line_red" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="3dip"
-                    android:paddingBottom="1dip"
-                    android:text="借款担保人证明"
-                    android:textColor="@color/txt_black"
-                    android:textSize="@dimen/main_text_default" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dip"
-                    android:layout_marginLeft="50dip"
-                    android:layout_marginRight="20dip"
-                    android:text="身份证正面、最近一年银行流水证明、征信报告"
-                    android:textColor="@color/txt_black"
-                    android:textSize="@dimen/main_text_default"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="25dip"
                 android:orientation="vertical"
                 android:layout_gravity="center"
                 android:gravity="center">
@@ -228,68 +146,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/apply_workflow_01"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dip"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="33dp"
-                    android:text="@string/borrow_success_tips"
-                    android:textColor="@color/red"
-                    android:textSize="@dimen/main_text_default" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="33dp"
-                        android:layout_marginTop="10dp"
-                        android:text="1、"
-                        android:textColor="@color/txt_gray"
-                        android:textSize="@dimen/main_text_default" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="20dp"
-                        android:layout_marginTop="10dp"
-                        android:text="@string/borrow_success_tips1"
-                        android:textColor="@color/txt_gray"
-                        android:textSize="@dimen/main_text_default" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dip"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="33dp"
-                        android:layout_marginTop="10dp"
-                        android:text="2、"
-                        android:textColor="@color/txt_gray"
-                        android:textSize="@dimen/main_text_default" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="20dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="20dp"
-                        android:text="@string/borrow_success_tips2"
-                        android:textColor="@color/txt_gray"
-                        android:textSize="@dimen/main_text_default" />
-                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
