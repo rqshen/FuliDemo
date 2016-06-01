@@ -806,9 +806,6 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
             return;
         }
 
-        //点击借款请求一次定位
-        App.getInstance().doLocation();
-
         LogUtil.d("借款", loanRequestInfo.toString());
         if (loanRequestInfo.getStatus().equals("0")){//可以申请借款
             //判断是否跟原来的数据一样，如果跟原来申请的借款一样没有变化，直接提示完善个人信息
@@ -851,6 +848,8 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
      * 将借款信息提交到服务器
      */
     private void pushLoanMessageToService() {
+        //提交数据时候上传用户定位数据
+        UserExtraInfo userExtraInfo = DbUtil.getUserExtra();
         JSONObject jsonObject = new JSONObject();
         try{
             if (!loanRequestInfo.AggregateId.equals("0") && !loanRequestInfo.AggregateId.equals("00000000-0000-0000-0000-000000000000")) {
@@ -869,6 +868,15 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
             } else {
                 jsonObject.put("CouponId", null);
             }
+
+            //位置信息、imei、机型、网络环境
+            if (null != userExtraInfo){
+                jsonObject.put("MobileMode", userExtraInfo.getModel());
+                jsonObject.put("IMEI", userExtraInfo.getImei());
+                jsonObject.put("Network", userExtraInfo.getNetwork());
+                jsonObject.put("Position", userExtraInfo.getLocation());
+            }
+
             LogUtil.d("请求的数据是", jsonObject.toString());
             showProgressBar();
             BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.PostRequestMessage, jsonObject, TokenUtil.getEncodeToken(this), new BcbRequest.BcbCallBack<JSONObject>() {

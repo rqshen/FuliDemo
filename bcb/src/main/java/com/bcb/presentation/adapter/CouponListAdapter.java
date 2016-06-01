@@ -128,9 +128,8 @@ public class CouponListAdapter extends BaseAdapter {
 		// 选择优惠券时，传递进来的值大于等于0
 		if (investAmount >= 0) {
 			//判断couponType是否为1，如果为1，则表示是新手体验标
-			if (couponType == 1 || investAmount >= data.get(pos).getMinAmount()) {
-				mHolder.select.setVisibility(View.VISIBLE);
-				mHolder.item_bg_layout.setEnabled(true);
+			if (MyConstants.EXPERIENCE == couponType || investAmount >= data.get(pos).getMinAmount()) {
+				setupUsedCoupon(mHolder);
 				mHolder.item_bg_layout.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -153,7 +152,7 @@ public class CouponListAdapter extends BaseAdapter {
 				});
 			}
 			//如果不是体验券且输入金额最小使用金额
-			else {
+			else{
 				setupUnusedCoupon(mHolder);
 			}
 		} 
@@ -199,8 +198,7 @@ public class CouponListAdapter extends BaseAdapter {
 		// 已过期优惠券
 		else if (investAmount == -3) {
             setupUnusedCoupon(mHolder);
-		} 
-		
+		}
 		return view;
 	}
     //跳转至新页面
@@ -218,6 +216,16 @@ public class CouponListAdapter extends BaseAdapter {
 		holder.select.setVisibility(View.GONE);
 		holder.item_bg_layout.setEnabled(false);
 		holder.layout_view.setBackgroundResource(R.color.gray);
+	}
+
+	//设置可用优惠券的样式
+	private void setupUsedCoupon(Holder holder) {
+		holder.amount.setTextColor(ctx.getResources().getColor(R.color.red));
+		holder.time.setTextColor(ctx.getResources().getColor(R.color.red));
+		holder.txt_yuan.setTextColor(ctx.getResources().getColor(R.color.red));
+		holder.select.setVisibility(View.VISIBLE);
+		holder.item_bg_layout.setEnabled(true);
+		holder.layout_view.setBackgroundResource(R.color.red);
 	}
 
 	class Holder {

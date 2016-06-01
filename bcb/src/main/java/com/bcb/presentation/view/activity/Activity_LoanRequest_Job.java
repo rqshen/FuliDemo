@@ -3,6 +3,8 @@ package com.bcb.presentation.view.activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,11 +16,8 @@ import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
 import com.bcb.common.net.UrlsOne;
-import com.bcb.data.bean.UserExtraInfo;
 import com.bcb.data.bean.loan.PersonInfoBean;
-import com.bcb.data.util.DbUtil;
 import com.bcb.data.util.LoanPersonalConfigUtil;
-import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.RegexManager;
 import com.bcb.data.util.ToastUtil;
@@ -30,6 +29,7 @@ import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -43,7 +43,7 @@ public class Activity_LoanRequest_Job extends Activity_Base {
     private EditText loan_jobs;
     //所在部门
     private EditText loan_department;
-    //工作时间
+    //入职时间
     private EditTextWithDate loan_work_experience;
     //办公地点
     private EditText loan_office_address;
@@ -63,6 +63,7 @@ public class Activity_LoanRequest_Job extends Activity_Base {
     private BcbRequestQueue requestQueue;
     //转圈提示
     private ProgressDialog progressDialog;
+    private SimpleDateFormat dateFormater = new SimpleDateFormat("yyyy-MM-dd");//将dateString格式化成 XXX-XX-XX 的形式
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -100,8 +101,36 @@ public class Activity_LoanRequest_Job extends Activity_Base {
         loan_jobs = (EditText) findViewById(R.id.loan_jobs);
         //所在部门
         loan_department = (EditText) findViewById(R.id.loan_department);
-        //工作时间
+        //入职时间
         loan_work_experience = (EditTextWithDate) findViewById(R.id.loan_work_experience);
+        loan_work_experience.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                try {
+                    Date date = dateFormater.parse(s.toString());
+                    StringBuilder stringBuilder = new StringBuilder();
+                    Calendar calendar = Calendar.getInstance();
+                    stringBuilder.append("").append(calendar.get(Calendar.YEAR)).append("-").append(calendar.get(Calendar.MONTH) + 1).append("-").append(calendar.get(Calendar.DAY_OF_MONTH)).append("");
+                    Date today = dateFormater.parse(stringBuilder.toString());
+                    if (date.after(today)){
+                        ToastUtil.alert(Activity_LoanRequest_Job.this, "入职时间不能晚于今天");
+                        loan_work_experience.setText("");
+                    }
+                } catch (ParseException e){
+                    e.printStackTrace();
+                }
+            }
+        });
         //办公地点
         loan_office_address = (EditText) findViewById(R.id.loan_office_address);
         //月均收入
@@ -148,25 +177,19 @@ public class Activity_LoanRequest_Job extends Activity_Base {
         if (personInfoBean.Department != null && !personInfoBean.Department.equalsIgnoreCase("null") && !personInfoBean.Department.equalsIgnoreCase("")) {
             loan_department.setText(personInfoBean.Department);
         }
-        //工作时间
-        if (personInfoBean.EntryDate != null && !personInfoBean.EntryDate.equalsIgnoreCase("null") && !personInfoBean.EntryDate.equalsIgnoreCase("")) {
-            loan_work_experience.setText(personInfoBean.EntryDate);
-        }
         //入职时间
-        SimpleDateFormat dateFormater = new SimpleDateFormat("yyyy-MM-dd");//将dateString格式化成 XXX-XX-XX 的形式
-        Date date = new Date();
-        try {
-            //判断入职时间是否存在
-            if (personInfoBean.EntryDate != null) {
-                date = dateFormater.parse(personInfoBean.EntryDate);
+        if (personInfoBean.EntryDate != null && !personInfoBean.EntryDate.equalsIgnoreCase("null") && !personInfoBean.EntryDate.equalsIgnoreCase("")) {
+            try {
+                Date date = dateFormater.parse(personInfoBean.EntryDate);
                 String dateStr = dateFormater.format(date);
                 if (!dateStr.isEmpty()){
                     loan_work_experience.setText(dateStr);
                 }
+            } catch (ParseException e) {
+                e.printStackTrace();
             }
-        } catch (ParseException e) {
-            e.printStackTrace();
         }
+
         //办公地点
         if (personInfoBean.WorkAddress != null && !personInfoBean.WorkAddress.equalsIgnoreCase("null") && !personInfoBean.WorkAddress.equalsIgnoreCase("")) {
             loan_office_address.setText(personInfoBean.WorkAddress);
@@ -258,13 +281,6 @@ public class Activity_LoanRequest_Job extends Activity_Base {
      * 将个人信息提交给服务器
      */
     private void postDatatoService() {
-
-        //提交数据时候上传用户定位数据
-        UserExtraInfo userExtraInfo = DbUtil.getUserExtra();
-        if (null != userExtraInfo){
-            LogUtil.d("借款", "imei = " + userExtraInfo.getImei() + " model = " + userExtraInfo.getModel()
-                    + " network = " + userExtraInfo.getNetwork() + " address = " + userExtraInfo.getLocation());
-        }
 
         //使用Gson将对象转成JSOnObject对象
         Gson mGson = new Gson();

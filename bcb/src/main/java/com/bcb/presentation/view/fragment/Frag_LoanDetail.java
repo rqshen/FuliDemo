@@ -2,9 +2,7 @@ package com.bcb.presentation.view.fragment;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -97,8 +95,8 @@ public class Frag_LoanDetail extends Frag_Base {
     private ArrayList<String> pics;
     private AlertView alertView;
 
-    private static ProgressDialog progressDialog;
-
+    //补充材料
+    private LinearLayout extra_material;
 
     //立即还款
     private Button button_recharge;
@@ -122,6 +120,7 @@ public class Frag_LoanDetail extends Frag_Base {
         View view = inflater.inflate(R.layout.frag_loan_detail, container, false);
 
         //上传图片
+        extra_material = (LinearLayout) view.findViewById(R.id.extra_material);
         noScrollgridview = (GridView) view.findViewById(R.id.noScrollgridview);
 
         noScrollgridview.setSelector(new ColorDrawable(Color.TRANSPARENT));
@@ -291,6 +290,12 @@ public class Frag_LoanDetail extends Frag_Base {
         loanPunitive.setText(loanItemDetailBean.LatePenaltyRate * 100 + "%");
         loanNextDate.setText(loanItemDetailBean.NextPayDate);
         loanNextPayment.setText(String.format("%.2f", loanItemDetailBean.NextPayAmount) + "元");
+        if (loanItemDetailBean.AllowUpload){
+            extra_material.setVisibility(View.VISIBLE);
+        } else {
+            extra_material.setVisibility(View.GONE);
+        }
+
         //status 等于 15 时，表示正在还款中
         if (loanItemDetailBean.Status == 15) {
             layoutNextPayDate.setVisibility(View.VISIBLE);
@@ -340,6 +345,7 @@ public class Frag_LoanDetail extends Frag_Base {
             case ALBUM_CLICK:
                 if (data != null && resultCode == Activity.RESULT_OK) {
                     try {
+                        UIUtil.showProgressBar(context, "正在压缩上传...");
                         Uri selectedImage = data.getData(); //获取系统返回的照片的Uri
                         String[] filePathColumn = { MediaStore.Images.Media.DATA };
                         Cursor cursor = context.getContentResolver().query(selectedImage, filePathColumn, null, null, null);//从系统表中查询指定Uri对应的照片
@@ -354,8 +360,6 @@ public class Frag_LoanDetail extends Frag_Base {
                         String path = savePhotoCache(tempName, bitmap);
                         System.gc();
                         uploadFile(path);
-//                        pics.add(picturePath);
-//                        adapter.notifyDataSetChanged();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -390,7 +394,7 @@ public class Frag_LoanDetail extends Frag_Base {
         try {
             output = new FileOutputStream(cachedImage);
             Log.d("Bitmap图片的大小", "压缩前：" + bitmap.getByteCount() +"字节");
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 70, output);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, output);
         } catch (IOException e) {
             Log.d("CACHED_IMAGE", "Exception writing cache image", e);
         } finally {

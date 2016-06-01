@@ -220,8 +220,10 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/extra_material"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:orientation="vertical">
 
                 <LinearLayout
@@ -429,6 +431,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
+                    android:layout_marginBottom="20dp"
                     android:padding="15dp"
                     android:background="@color/background_white"
                     android:orientation="vertical">
@@ -467,19 +470,6 @@
                         android:scrollbars="none" />
 
                 </LinearLayout>
-
-                <!-- 附件上传确认按钮-->
-                <Button
-                    android:id="@+id/button_comfirm"
-                    android:layout_width="@dimen/button_width"
-                    android:layout_height="@dimen/button_height"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginBottom="30dp"
-                    android:background="@drawable/button_solid_red"
-                    android:text="确认"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/main_text_default"/>
 
             </LinearLayout>
 

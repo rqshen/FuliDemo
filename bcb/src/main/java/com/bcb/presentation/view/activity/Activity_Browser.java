@@ -222,6 +222,7 @@ public class Activity_Browser extends Activity_Base {
 		webSetting.setGeolocationDatabasePath(this.getDir("geolocation", 0).getPath());
 		webSetting.setPluginState(WebSettings.PluginState.ON_DEMAND);
 		webSetting.setRenderPriority(WebSettings.RenderPriority.HIGH);
+		webSetting.setCacheMode(WebSettings.LOAD_NO_CACHE);
 		if (TextUtils.isEmpty(mIntentUrl)) {
 			mWebView.loadUrl(UrlsOne.AboutFuliJingRong);//一分钟了解福利金融
 		} else {

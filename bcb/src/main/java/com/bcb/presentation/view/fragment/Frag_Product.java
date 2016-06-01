@@ -117,9 +117,10 @@ public class Frag_Product extends Frag_Base implements OnClickListener {
         //切换公司
         left_text = (TextView) view.findViewById(R.id.left_text);
         left_text.setText("全部公司");
+        left_text.setVisibility(View.GONE);
         left_text.setOnClickListener(this);
         dropdown = (ImageView) view.findViewById(R.id.dropdown);
-        dropdown.setVisibility(View.VISIBLE);
+        dropdown.setVisibility(View.GONE);
         dropdown.setOnClickListener(this);
 
         CompanyId = "";

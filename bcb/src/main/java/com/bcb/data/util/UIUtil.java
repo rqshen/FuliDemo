@@ -3,6 +3,7 @@ package com.bcb.data.util;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.Build;
 import android.view.Window;
 import android.view.WindowManager;
@@ -53,7 +54,7 @@ public class UIUtil {
         progressDialog.setMessage(msg);
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.setCancelable(true);
-        if (!context.isFinishing()){
+        if (!context.isFinishing() && context.hasWindowFocus()){
             progressDialog.show();
         }
     }

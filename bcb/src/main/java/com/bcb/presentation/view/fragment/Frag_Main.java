@@ -470,7 +470,6 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPa
         }
 	}
 
-
     /**
      * 获取首页Banner
      */
@@ -481,7 +480,7 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPa
                 @Override
                 public void onResponse(JSONObject response) {
                     successConnectCount = successConnectCount + 1;
-                    firstLoadBanner = false;
+//                    firstLoadBanner = false;
                     try {
                         if (PackageUtil.getRequestStatus(response, ctx)) {
                             synchronized (this) {

@@ -128,7 +128,7 @@ public class UrlsOne {
 	public static final String MyLoanListMessage = host + "/api/v1.2/8be49b965b27";
 
 	//借款详情
-	public static final String MyLoanItemDetailMessage = host + "/api/v1.2/db3a4dd4fe70";
+	public static final String MyLoanItemDetailMessage = host + "/api/v1.3.4/db3a4dd4fe70";
 
 	//上传借款补充材料
 	public static final String Loan_Supplementary_Material = host + "/api/v1.3.4/a61000b6a80a";

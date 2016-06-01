@@ -17,6 +17,8 @@ public class LoanItemDetailBean {
     public String PaymentType;  //还款类型
     public float ServiceFee;    //平台服务费
 
+    public boolean AllowUpload;//是否允许上传
+
     public String NextPayDate;  //下一个还款日期
     public float NextPayAmount; //下一次还款金额
 }
