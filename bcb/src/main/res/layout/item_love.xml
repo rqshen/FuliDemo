@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/item_selector_background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="12dp"
+            android:paddingTop="12dp"
+            android:gravity="center_vertical">
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="15dp"
+                android:singleLine="true"
+                android:text="特殊儿童圆梦公益活动"
+                android:textColor="@color/item_text_color"
+                android:textSize="@dimen/item_text_default" />
+            <TextView
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:layout_marginLeft="@dimen/margin_size_default"
+                android:background="@drawable/main_item_stroke_green"
+                android:layout_marginRight="@dimen/margin_size_large"
+                android:padding="3dp"
+                android:singleLine="true"
+                android:text="爱拍原创"
+                android:textColor="@color/item_color"
+                android:textSize="@dimen/item_text_small"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1px"
+            android:background="@color/linegray" />
+    </LinearLayout>
+
+
+
+</LinearLayout>

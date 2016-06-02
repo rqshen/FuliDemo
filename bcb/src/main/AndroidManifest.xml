@@ -360,6 +360,12 @@
             android:name=".presentation.view.activity.Activity_Image_Display"
             android:label="@string/app_name"
             android:screenOrientation="portrait"/>
+        <!--聚爱申请-->
+        <activity
+            android:name=".presentation.view.activity.Activity_Apply_Love"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"/>
+
         <!-- ***********以下是极光推送相关配置************ -->
         <!-- Required SDK核心功能-->
         <activity
