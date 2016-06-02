@@ -1,7 +1,10 @@
 package com.bcb.data.bean;
 
 
-public class CouponRecordsBean {
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
+public class CouponRecordsBean implements Comparable<CouponRecordsBean>{
 	private String Name;
 	private float Amount;
 	private String ExpireDate;
@@ -10,7 +13,11 @@ public class CouponRecordsBean {
 	private int CouponType;
 	private String CouponId;
 	private String ConditionDescn;
+	private SimpleDateFormat dateFormater;
 
+	public CouponRecordsBean() {
+		dateFormater = new SimpleDateFormat("yyyy-MM-dd");//将dateString格式化成 XXX-XX-XX 的形式
+	}
 
 	public String getName() {
 		return Name;
@@ -76,4 +83,18 @@ public class CouponRecordsBean {
 		ConditionDescn = conditionDescn;
 	}
 
+	@Override
+	public int compareTo(CouponRecordsBean another) {//按照过期日期进行排序
+		int result = 0;
+		try {
+			if (dateFormater.parse(ExpireDate).after(dateFormater.parse(another.getExpireDate()))){
+				result = 1;
+			}else {
+				result = -1;
+			}
+		}catch (ParseException e){
+			e.printStackTrace();
+		}
+		return result;
+	}
 }

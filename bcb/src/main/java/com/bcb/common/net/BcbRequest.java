@@ -97,9 +97,11 @@ public abstract class BcbRequest<T> extends Request<T> {
             @Override
             public void onErrorResponse(VolleyError error) {
                 bcbCallBack.onErrorResponse(error);
+                Log.d("url","error = " + error.toString());
             }
         });
         Log.d("url","url = " + url + " requestBody = " + requestBody);
+
         mBcbCallBack = bcbCallBack;
         if (TextUtils.isEmpty(requestBody)) {
             mRequestBody = null;

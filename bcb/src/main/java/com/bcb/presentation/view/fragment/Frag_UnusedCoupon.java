@@ -39,6 +39,7 @@ import com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Frag_UnusedCoupon extends Frag_Base {
@@ -185,6 +186,7 @@ public class Frag_UnusedCoupon extends Frag_Base {
                             setupListViewVisible(true);
                             synchronized (this){
                                 recordsBeans.addAll(mCouponList.Records);
+                                Collections.sort(recordsBeans);
                             }
                             if (null != mCouponListAdapter) {
                                 mCouponListAdapter.notifyDataSetChanged();
