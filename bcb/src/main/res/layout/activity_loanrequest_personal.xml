@@ -233,14 +233,14 @@
                         android:layout_marginLeft="15dip"
                         android:layout_gravity="center_vertical"
                         android:gravity="center_vertical"
-                        android:text="身份证地址"
+                        android:text="居住地址"
                         android:textSize="@dimen/main_text_default"/>
                     <EditText
                         android:id="@+id/loan_identity_address"
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
                         android:layout_marginRight="15dip"
-                        android:hint="请填写身份证地址"
+                        android:hint="请输入居住地址"
                         android:textSize="@dimen/main_text_default"
                         android:textColorHint="@color/txt_gray"
                         android:gravity="center_vertical|right"
@@ -266,14 +266,14 @@
                         android:layout_marginLeft="15dip"
                         android:layout_gravity="center_vertical"
                         android:gravity="center_vertical"
-                        android:text="现居住地址"
+                        android:text="户籍地址"
                         android:textSize="@dimen/main_text_default"/>
                     <EditText
                         android:id="@+id/loan_live_address"
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
                         android:layout_marginRight="15dip"
-                        android:hint="请填写现居住地址"
+                        android:hint="请输入户籍地址"
                         android:textSize="@dimen/main_text_default"
                         android:textColorHint="@color/txt_gray"
                         android:gravity="center_vertical|right"
