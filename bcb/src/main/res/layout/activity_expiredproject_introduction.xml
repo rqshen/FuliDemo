@@ -368,7 +368,7 @@
                             android:layout_marginRight="@dimen/margin_size_default"
                             android:textColor="@color/txt_black"
                             android:textSize="@dimen/main_text_default"
-                            android:text="34%"/>
+                            android:text="0%"/>
                         <ProgressBar
                             android:id="@+id/progress_percent"
                             android:layout_width="wrap_content"
