@@ -220,7 +220,7 @@
                     android:visibility="gone"
                     android:background="@color/linegray"/>
 
-                <!-- 身份证地址 -->
+                <!-- 居住地址 -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -253,7 +253,7 @@
                     android:layout_height="1dip"
                     android:background="@color/linegray"/>
 
-                <!-- 现居住地址 -->
+                <!-- 户籍地址 -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

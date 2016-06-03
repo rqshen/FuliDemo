@@ -4,4 +4,117 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- 目标金额 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dip"
+        android:layout_marginBottom="10dip"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:text="目标金额"
+            android:textSize="@dimen/main_text_default"/>
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="30dp"
+            android:hint="你想要筹到的金额"
+            android:textSize="@dimen/main_text_default"
+            android:textColorHint="@color/txt_gray"
+            android:gravity="center_vertical|right"
+            android:singleLine="true"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/edittext_none_background"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:text="元"
+            android:textSize="@dimen/main_text_default"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/linegray"/>
+
+    <!-- 所在公司 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dip"
+        android:layout_marginBottom="10dip"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:text="所在公司"
+            android:textSize="@dimen/main_text_default"/>
+        <EditText
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="30dp"
+            android:hint="请填写你所在的公司"
+            android:textSize="@dimen/main_text_default"
+            android:textColorHint="@color/txt_gray"
+            android:gravity="center_vertical|right"
+            android:singleLine="true"
+            android:background="@drawable/edittext_none_background"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/linegray"/>
+
+    <!-- 受助人与本人关系 -->
+    <LinearLayout
+        android:id="@+id/ll_marital"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dip"
+        android:layout_marginBottom="10dip"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:text="受助人与本人关系"
+            android:textSize="@dimen/main_text_default"/>
+
+        <TextView
+            android:id="@+id/loan_marital_status"
+            style="@style/spinner_style"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="30dp"
+            android:gravity="center_vertical|right"
+            android:hint="请选择"
+            android:textColorHint="@color/txt_gray"
+            android:layout_marginRight="5dp"
+            android:singleLine="true" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/loan_request_arrow"/>
+    </LinearLayout>
+
 </LinearLayout>
