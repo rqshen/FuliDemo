@@ -73,7 +73,7 @@ public class Activity_Money_Item_Detail extends Activity_Base {
         setBaseContentView(R.layout.activity_money_item_detail);
         //设置标题
         setLeftTitleVisible(true);
-        setTitleValue("明细详情");
+        setTitleValue("交易详情");
         requestQueue = BcbNetworkManager.newRequestQueue(this);
         //初始化界面
         initView();
