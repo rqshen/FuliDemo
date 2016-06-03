@@ -71,12 +71,6 @@ public class Activity_Main extends Activity_Base_Fragment {
 		UmengUtil.update(Activity_Main.this);
 		EventBus.getDefault().register(this);
 
-		//仅用于JPush测试用的 tag ： 1234
-		Set<String> tagSet = new LinkedHashSet<>();
-		tagSet.add(App.mUserDetailInfo.getCustomerId());//设置别名为CustomerId
-		LogUtil.d("1234", "CustomerId = " + tagSet.toString());
-		JPushInterface.setAliasAndTags(getApplicationContext(), null, tagSet, mTagsCallback);
-
 	}
 
 	private void init() {
@@ -300,28 +294,4 @@ public class Activity_Main extends Activity_Base_Fragment {
 		}
 	}
 
-	//仅用于JPush测试
-	private final TagAliasCallback mTagsCallback = new TagAliasCallback() {
-
-		@Override
-		public void gotResult(int code, String alias, Set<String> tags) {
-			String logs ;
-			switch (code) {
-				case 0:
-					logs = "Set tag and alias success";
-					LogUtil.i("1234", logs);
-					break;
-
-				case 6002:
-					logs = "Failed to set alias and tags due to timeout. Try again after 60s.";
-					LogUtil.i("1234", logs);
-					break;
-
-				default:
-					logs = "Failed with errorCode = " + code;
-					LogUtil.e("1234", logs);
-			}
-		}
-
-	};
 }

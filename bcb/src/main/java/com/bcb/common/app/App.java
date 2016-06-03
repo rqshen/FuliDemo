@@ -3,6 +3,7 @@ package com.bcb.common.app;
 import android.app.Application;
 import android.content.Context;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationListener;
@@ -27,7 +28,11 @@ import com.google.gson.Gson;
 import org.json.JSONObject;
 import org.litepal.LitePalApplication;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.TagAliasCallback;
 import de.greenrobot.event.EventBus;
 
 public class App extends Application implements AMapLocationListener{
@@ -90,8 +95,10 @@ public class App extends Application implements AMapLocationListener{
 			welfare = null == welfareBean ? "" : welfareBean.getValue();
 		}
 
+		//设置极光推送别名
+		setAlias();
 	}
-	
+
 	public static App getInstance() {
 	    return instance;
 	} 
@@ -106,6 +113,25 @@ public class App extends Application implements AMapLocationListener{
 
 	public void setWelfare(String welfare) {
 		this.welfare = welfare;
+	}
+
+	/**
+	 * 设置极光推送别名
+	 */
+	public void setAlias(){
+		LogUtil.d(TAG, "CustomerId = " + mUserDetailInfo.getCustomerId());
+		JPushInterface.setAliasAndTags(getApplicationContext(), mUserDetailInfo.getCustomerId(), null, mAliasCallback);
+	}
+
+	/**
+	 * 设置极光推送标签
+	 */
+	public void setTag(){
+		Set<String> tagSet = new LinkedHashSet<>();
+		tagSet.add(mUserDetailInfo.getCustomerId());//设置别名为CustomerId
+		LogUtil.d(TAG, "CustomerId = " + tagSet.toString());
+		JPushInterface.setAliasAndTags(getApplicationContext(), null, tagSet, mTagsCallback);
+
 	}
 
 	/**
@@ -160,4 +186,54 @@ public class App extends Application implements AMapLocationListener{
 		LogUtil.d("位置信息", "imei = " + imei + " model = " + model + " network = " + network + " address = " + address);
 		DbUtil.saveUserExtra(imei,model,network,address);
 	}
+
+	//仅用于JPush测试
+	private final TagAliasCallback mTagsCallback = new TagAliasCallback() {
+
+		@Override
+		public void gotResult(int code, String alias, Set<String> tags) {
+			String logs ;
+			switch (code) {
+				case 0:
+					logs = "Set tag and alias success";
+					LogUtil.i(TAG, logs);
+					break;
+
+				case 6002:
+					logs = "Failed to set alias and tags due to timeout. Try again after 60s.";
+					LogUtil.i(TAG, logs);
+					break;
+
+				default:
+					logs = "Failed with errorCode = " + code;
+					LogUtil.e(TAG, logs);
+			}
+		}
+
+	};
+
+	private final TagAliasCallback mAliasCallback = new TagAliasCallback() {
+
+		@Override
+		public void gotResult(int code, String alias, Set<String> tags) {
+			String logs ;
+			switch (code) {
+				case 0:
+					logs = "Set tag and alias success";
+					LogUtil.i(TAG, logs);
+					break;
+
+				case 6002:
+					logs = "Failed to set alias and tags due to timeout. Try again after 60s.";
+					LogUtil.i(TAG, logs);
+					break;
+
+				default:
+					logs = "Failed with errorCode = " + code;
+					LogUtil.e(TAG, logs);
+			}
+		}
+
+	};
+
 }
