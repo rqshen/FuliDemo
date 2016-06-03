@@ -19,4 +19,13 @@
         <item>@string/scroll_value_five</item>
     </array>
 
+    <array name="relationship">
+        <item>@string/relationship1</item>
+        <item>@string/relationship2</item>
+        <item>@string/relationship3</item>
+        <item>@string/relationship4</item>
+        <item>@string/relationship5</item>
+        <item>@string/relationship6</item>
+    </array>
+
 </resources>

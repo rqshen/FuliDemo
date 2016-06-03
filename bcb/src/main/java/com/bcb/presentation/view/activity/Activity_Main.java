@@ -23,7 +23,6 @@ import com.bcb.common.event.BroadcastEvent;
 import com.bcb.data.util.UmengUtil;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
 import com.bcb.presentation.view.custom.CustomViewPager;
-import com.bcb.presentation.view.fragment.Frag_Love;
 import com.bcb.presentation.view.fragment.Frag_Main;
 import com.bcb.presentation.view.fragment.Frag_Product;
 import com.bcb.presentation.view.fragment.Frag_User;
