@@ -26,6 +26,7 @@ import com.bcb.common.app.App;
 import com.bcb.common.net.UrlsOne;
 import com.bcb.data.util.BitmapUtil;
 import com.bcb.data.util.DESUtil;
+import com.bcb.data.util.MQCustomerManager;
 import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.MyConstants;
 import com.bcb.presentation.view.custom.CustomDialog.DialogWidget;
@@ -155,8 +156,8 @@ public class Activity_Browser extends Activity_Base {
 	private void init() {
 		mWebView = new X5WebView(this);
 		mViewParent.addView(mWebView, new FrameLayout.LayoutParams(
-				FrameLayout.LayoutParams.FILL_PARENT,
-				FrameLayout.LayoutParams.FILL_PARENT));
+				FrameLayout.LayoutParams.MATCH_PARENT,
+				FrameLayout.LayoutParams.MATCH_PARENT));
 		mWebView.setWebViewClient(new WebViewClient() {
 			@Override
 			public boolean shouldOverrideUrlLoading(WebView view, String url) {
@@ -174,6 +175,14 @@ public class Activity_Browser extends Activity_Base {
 					} catch (UnsupportedEncodingException e) {
 						e.printStackTrace();
 					}
+					return true;
+				} else if(url.contains("fulihui://callcenter")){
+					//如果ID存在
+					String userId = null;
+					if (App.mUserDetailInfo != null) {
+						userId = App.mUserDetailInfo.getCustomerId();
+					}
+					MQCustomerManager.getInstance(Activity_Browser.this).showCustomer(userId);
 					return true;
 				} else {
 					return super.shouldOverrideUrlLoading(view, url);
