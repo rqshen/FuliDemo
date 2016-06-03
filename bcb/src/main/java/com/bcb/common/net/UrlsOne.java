@@ -163,6 +163,8 @@ public class UrlsOne {
     public static final String DailyWelfareData = host + "/api/v1.3.4/a60100b02646";
 	//查询今日拆得利率
 	public static final String SearchWelfareData = host + "/api/v1.3.4/a60600ef9560";
+	//借款服务协议
+	public static final String LoanProtocol = host + "/static/loan-agreement.html";
 
 	// 安全保障WebView
 	public static final String SecureWebView = "http://wap.100cb.cn/static/security.html";

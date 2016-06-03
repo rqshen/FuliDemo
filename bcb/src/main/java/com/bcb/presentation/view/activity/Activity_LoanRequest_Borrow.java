@@ -686,8 +686,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
                 break;
             //借款服务协议
             case R.id.loan_protocol:
-                //TODO
-
+                Activity_Browser.launche(Activity_LoanRequest_Borrow.this, "借款服务协议", UrlsOne.LoanProtocol);
                 break;
 
             //点击利息抵扣券

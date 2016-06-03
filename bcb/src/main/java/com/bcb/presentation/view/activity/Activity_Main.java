@@ -19,7 +19,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bcb.R;
+import com.bcb.common.app.App;
 import com.bcb.common.event.BroadcastEvent;
+import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.UmengUtil;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
 import com.bcb.presentation.view.custom.CustomViewPager;
@@ -28,8 +30,12 @@ import com.bcb.presentation.view.fragment.Frag_Product;
 import com.bcb.presentation.view.fragment.Frag_User;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.TagAliasCallback;
 import de.greenrobot.event.EventBus;
 
 public class Activity_Main extends Activity_Base_Fragment {
@@ -65,11 +71,11 @@ public class Activity_Main extends Activity_Base_Fragment {
 		UmengUtil.update(Activity_Main.this);
 		EventBus.getDefault().register(this);
 
-//		//仅用于JPush测试用的 tag ： 1234
-//		Set<String> tagSet = new LinkedHashSet<String>();
-//		tagSet.add("1234");
-//		LogUtil.d("1234", tagSet.toString());
-//		JPushInterface.setAliasAndTags(getApplicationContext(), null, tagSet, mTagsCallback);
+		//仅用于JPush测试用的 tag ： 1234
+		Set<String> tagSet = new LinkedHashSet<>();
+		tagSet.add(App.mUserDetailInfo.getCustomerId());//设置别名为CustomerId
+		LogUtil.d("1234", "CustomerId = " + tagSet.toString());
+		JPushInterface.setAliasAndTags(getApplicationContext(), null, tagSet, mTagsCallback);
 
 	}
 
@@ -294,28 +300,28 @@ public class Activity_Main extends Activity_Base_Fragment {
 		}
 	}
 
-//	//仅用于JPush测试
-//	private final TagAliasCallback mTagsCallback = new TagAliasCallback() {
-//
-//		@Override
-//		public void gotResult(int code, String alias, Set<String> tags) {
-//			String logs ;
-//			switch (code) {
-//				case 0:
-//					logs = "Set tag and alias success";
-//					LogUtil.i("1234", logs);
-//					break;
-//
-//				case 6002:
-//					logs = "Failed to set alias and tags due to timeout. Try again after 60s.";
-//					LogUtil.i("1234", logs);
-//					break;
-//
-//				default:
-//					logs = "Failed with errorCode = " + code;
-//					LogUtil.e("1234", logs);
-//			}
-//		}
-//
-//	};
+	//仅用于JPush测试
+	private final TagAliasCallback mTagsCallback = new TagAliasCallback() {
+
+		@Override
+		public void gotResult(int code, String alias, Set<String> tags) {
+			String logs ;
+			switch (code) {
+				case 0:
+					logs = "Set tag and alias success";
+					LogUtil.i("1234", logs);
+					break;
+
+				case 6002:
+					logs = "Failed to set alias and tags due to timeout. Try again after 60s.";
+					LogUtil.i("1234", logs);
+					break;
+
+				default:
+					logs = "Failed with errorCode = " + code;
+					LogUtil.e("1234", logs);
+			}
+		}
+
+	};
 }

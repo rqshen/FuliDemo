@@ -77,7 +77,6 @@ public class IPresenter_AccountSettingImpl implements IPresenter_AccountSetting 
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    interfaceBase.onRequestResult(-100, "返回数据异常，解析出错");
                 }
             }
 
