@@ -78,7 +78,6 @@ public class IPresenter_JoinCompanyImpl implements IPresenter_JoinCompany {
                 try{
                     if (response.getInt("status") == 1) {
                         interfaceJoinCompany.onRequestResult(response.getInt("status"), "您的材料已提交，预计2个工作日内完成审核");
-                        iModelUserAccount.updateJoinedCompanyName(companyShortName, 5);
                     } else {
                         interfaceJoinCompany.onRequestResult(response.getInt("status"), response.getString("message").isEmpty() ? "提交失败，请稍后再试" : response.getString("message"));
                     }

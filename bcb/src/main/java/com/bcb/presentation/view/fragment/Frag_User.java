@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -438,13 +439,8 @@ public class Frag_User extends Frag_Base implements OnClickListener {
         if (App.mUserDetailInfo.MyCompany != null) {
             joinCompany.setVisibility(View.GONE);
             user_company_layout.setVisibility(View.VISIBLE);
-            //审核中
-            if (App.mUserDetailInfo.MyCompany.Status == 5) {
-                user_comany_shortname.setText(mUserDetailInfo.MyCompany.getShortName() + "(审核中)");
-                user_join_name.setText(mUserDetailInfo.RealName);
-            }
             //审核通过
-            else if (App.mUserDetailInfo.MyCompany.Status == 10) {
+            if (!TextUtils.isEmpty(mUserDetailInfo.MyCompany.getShortName())){
                 user_comany_shortname.setText(mUserDetailInfo.MyCompany.getShortName());
                 user_join_name.setText(mUserDetailInfo.RealName);
             } else {

@@ -2,8 +2,8 @@
 <manifest package="com.bcb"
           xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools"
-          android:versionCode="26"
-          android:versionName="1.5.1">
+          android:versionCode="27"
+          android:versionName="1.5.2">
 
     <uses-sdk
         android:minSdkVersion="14"

@@ -163,8 +163,6 @@ public class UrlsOne {
     public static final String DailyWelfareData = host + "/api/v1.3.4/a60100b02646";
 	//查询今日拆得利率
 	public static final String SearchWelfareData = host + "/api/v1.3.4/a60600ef9560";
-	//借款服务协议
-	public static final String LoanProtocol = host + "/static/loan-agreement.html";
 
 	// 安全保障WebView
 	public static final String SecureWebView = "http://wap.100cb.cn/static/security.html";
@@ -176,5 +174,7 @@ public class UrlsOne {
 	public static final String How2GetSubsidy = "http://wap.flh001.com/Loan/CouponActivity/index";
 	//起息第一时间通知
 	public static final String WxBindIndex = "http://wap.flh001.com/account/wxbindindex";
+	//借款服务协议
+	public static final String LoanProtocol = "http://wap.flh001.com/static/loan-agreement.html";
 
 }

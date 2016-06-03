@@ -80,9 +80,8 @@ public class Activity_Browser extends Activity_Base {
 	 * @param hasToken true表示包含token
 	 */
 	public static void launche(Context ctx, String tittle, String url, boolean hasToken) {
-		Intent intent = new Intent();
-		intent.setClass(ctx, Activity_Browser.class);
-		intent.putExtra("tittle", tittle);
+		Intent intent = new Intent(ctx, Activity_Browser.class);
+		intent.putExtra("title", tittle);
 		intent.putExtra("url", url);
 		intent.putExtra("hasToken", hasToken);
 		ctx.startActivity(intent);
@@ -115,6 +114,7 @@ public class Activity_Browser extends Activity_Base {
 
 		setBaseContentView(R.layout.activity_browser);
 		setLeftTitleVisible(true);
+		setTitleVisiable(View.VISIBLE);
 		setTitleValue(title);
 
 		mViewParent = (ViewGroup) findViewById(R.id.layout_webview);
@@ -176,7 +176,7 @@ public class Activity_Browser extends Activity_Base {
 						e.printStackTrace();
 					}
 					return true;
-				} else if(url.contains("fulihui://callcenter")){
+				} else if (url.contains("fulihui://callcenter")){
 					//如果ID存在
 					String userId = null;
 					if (App.mUserDetailInfo != null) {
