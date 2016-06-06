@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
+    android:focusable="true"
+    android:background="@color/white">
+
+    <!-- 客服按钮和我要申请按钮 -->
+    <LinearLayout
+        android:id="@+id/layout_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/white"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:background="@color/linegray"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:id="@+id/layout_customer_service"
+                android:layout_width="65dp"
+                android:layout_height="47dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="19.5dp"
+                    android:layout_height="18.5dp"
+                    android:layout_marginTop="2dp"
+                    android:background="@drawable/icon_project_customer"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/main_text_small"
+                    android:text="客服"/>
+            </LinearLayout>
+            <Button
+                android:id="@+id/borrow_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="@color/red"
+                android:text="我要申请"
+                android:textColor="@color/white"
+                android:textSize="@dimen/button_titlesize" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_above="@id/layout_button"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- 目标金额 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dip"
+                android:layout_marginBottom="10dip"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    android:text="目标金额"
+                    android:textSize="@dimen/main_text_default"/>
+
+                <EditText
+                    android:id="@+id/tag_amount"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="30dp"
+                    android:hint="你想要筹到的金额"
+                    android:textSize="@dimen/main_text_default"
+                    android:textColorHint="@color/txt_gray"
+                    android:gravity="center_vertical|right"
+                    android:singleLine="true"
+                    android:layout_marginRight="5dp"
+                    android:maxLength="12"
+                    android:digits=".0123456789"
+                    android:inputType="numberDecimal"
+                    android:background="@drawable/edittext_none_background"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    android:text="元"
+                    android:textSize="@dimen/main_text_default"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/linegray"/>
+
+            <!-- 所在公司 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dip"
+                android:layout_marginBottom="10dip"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    android:text="所在公司"
+                    android:textSize="@dimen/main_text_default"/>
+                <EditText
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="30dp"
+                    android:hint="请填写你所在的公司"
+                    android:textSize="@dimen/main_text_default"
+                    android:textColorHint="@color/txt_gray"
+                    android:gravity="center_vertical|right"
+                    android:maxLength="15"
+                    android:singleLine="true"
+                    android:background="@drawable/edittext_none_background"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/linegray"/>
+
+            <!-- 受助人与本人关系 -->
+            <LinearLayout
+                android:id="@+id/ll_relationship"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dip"
+                android:layout_marginBottom="10dip"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    android:text="受助人与本人关系"
+                    android:textSize="@dimen/main_text_default"/>
+
+                <TextView
+                    android:id="@+id/tv_relationship"
+                    style="@style/spinner_style"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="30dp"
+                    android:gravity="center_vertical|right"
+                    android:hint="请选择"
+                    android:textColorHint="@color/txt_gray"
+                    android:layout_marginRight="5dp"
+                    android:singleLine="true" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/loan_request_arrow"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/linegray"/>
+
+            <!-- 募捐天数 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dip"
+                android:layout_marginBottom="10dip"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    android:text="募捐天数"
+                    android:textSize="@dimen/main_text_default"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="1dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    android:text="共"
+                    android:textSize="@dimen/main_text_default"/>
+
+                <TextView
+                    android:id="@+id/limit_date"
+                    android:layout_width="37dp"
+                    android:layout_height="30dp"
+                    android:textSize="@dimen/main_text_default"
+                    android:gravity="center"
+                    android:text=""
+                    android:singleLine="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
+                    android:text="天"
+                    android:textSize="@dimen/main_text_default"/>
+            </LinearLayout>
+
+            <SeekBar
+                android:id="@+id/seekBar"
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="27" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="3天"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="1dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="30天"/>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:background="@color/linegray"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:text="受助人基本情况："/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="15dp"
+                android:layout_margin="15dp"
+                android:hint="1.建议详细描述受助人的基本情况；如身份信息、家庭背景、经济状况等\n\n2.为什么要筹款？"
+                android:textSize="@dimen/main_text_default"
+                android:textColorHint="@color/txt_gray"
+                android:gravity="top"
+                android:maxLength="500"
+                android:minHeight="150dp"
+                android:lineSpacingExtra="3dp"
+                android:background="@drawable/rounded_edit_bg"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>
