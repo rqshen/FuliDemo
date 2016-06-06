@@ -47,7 +47,7 @@
                     android:text="客服"/>
             </LinearLayout>
             <Button
-                android:id="@+id/borrow_button"
+                android:id="@+id/apply_button"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"

@@ -360,9 +360,13 @@
             android:name=".presentation.view.activity.Activity_Image_Display"
             android:label="@string/app_name"
             android:screenOrientation="portrait"/>
-        <!--聚爱申请-->
+        <!--聚爱-->
         <activity
             android:name=".presentation.view.activity.Activity_Apply_Love"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".presentation.view.activity.Activity_Apply_Love_Success"
             android:label="@string/app_name"
             android:screenOrientation="portrait"/>
 

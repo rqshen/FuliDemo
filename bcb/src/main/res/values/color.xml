@@ -10,6 +10,8 @@
     <color name="background_gray">#EFEFEF</color>
     <!-- 背景灰2 -->
     <color name="background_gray2">#F4F4F4</color>
+    <!-- 背景灰2 -->
+    <color name="background_gray3">#E6E7E9</color>
     <!--半透明背景-->
     <color name="transparent_background">#B0000000</color>
     <!-- 文本黑色 -->

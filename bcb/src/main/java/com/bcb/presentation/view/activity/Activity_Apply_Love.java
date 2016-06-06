@@ -35,7 +35,7 @@ public class Activity_Apply_Love extends Activity_Base implements View.OnClickLi
     private String[] relationships;
     private int index_relationship;
     //我要申请
-    private Button borrow_button;
+    private Button apply_button;
 
     public static void launch(Context context){
         Intent intent = new Intent(context, Activity_Apply_Love.class);
@@ -118,8 +118,8 @@ public class Activity_Apply_Love extends Activity_Base implements View.OnClickLi
         });
 
         //我要申请
-        borrow_button = (Button) findViewById(R.id.borrow_button);
-        borrow_button.setOnClickListener(this);
+        apply_button = (Button) findViewById(R.id.apply_button);
+        apply_button.setOnClickListener(this);
 
 
     }
@@ -136,8 +136,9 @@ public class Activity_Apply_Love extends Activity_Base implements View.OnClickLi
                     }
                 });
                 break;
-            case R.id.borrow_button:
-
+            case R.id.apply_button:
+                Activity_Apply_Love_Success.launch(this);
+                finish();
                 break;
         }
     }
