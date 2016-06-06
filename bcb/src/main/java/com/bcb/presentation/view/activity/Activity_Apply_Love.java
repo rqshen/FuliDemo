@@ -6,12 +6,15 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.bcb.R;
 import com.bcb.data.util.SpinnerWheelUtil;
+
+import app.minimize.com.seek_bar_compat.SeekBarCompat;
 
 /**
  * Created by Ray on 2016/6/2.
@@ -21,7 +24,7 @@ import com.bcb.data.util.SpinnerWheelUtil;
 public class Activity_Apply_Love extends Activity_Base implements View.OnClickListener{
 
     //募捐天数
-    private SeekBar seekBar;
+    private SeekBarCompat seekBar;
     private TextView limit_date;
 
     //目标金额
@@ -31,6 +34,8 @@ public class Activity_Apply_Love extends Activity_Base implements View.OnClickLi
     private TextView tv_relationship;
     private String[] relationships;
     private int index_relationship;
+    //我要申请
+    private Button borrow_button;
 
     public static void launch(Context context){
         Intent intent = new Intent(context, Activity_Apply_Love.class);
@@ -94,7 +99,7 @@ public class Activity_Apply_Love extends Activity_Base implements View.OnClickLi
 
         //募捐天数
         limit_date = (TextView) findViewById(R.id.limit_date);
-        seekBar = (SeekBar) findViewById(R.id.seekBar);
+        seekBar = (SeekBarCompat) findViewById(R.id.seekBar);
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -111,6 +116,12 @@ public class Activity_Apply_Love extends Activity_Base implements View.OnClickLi
 
             }
         });
+
+        //我要申请
+        borrow_button = (Button) findViewById(R.id.borrow_button);
+        borrow_button.setOnClickListener(this);
+
+
     }
 
     @Override
@@ -124,6 +135,9 @@ public class Activity_Apply_Love extends Activity_Base implements View.OnClickLi
                         tv_relationship.setText(relationships[currentItem]);
                     }
                 });
+                break;
+            case R.id.borrow_button:
+
                 break;
         }
     }

@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:focusableInTouchMode="true"
     android:focusable="true"
-    android:background="@color/white">
+    android:background="@color/background_white">
 
     <!-- 客服按钮和我要申请按钮 -->
     <LinearLayout
@@ -13,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@android:color/white"
+        android:background="@color/background_white"
         android:orientation="vertical">
         <ImageView
             android:layout_width="match_parent"
@@ -238,12 +239,16 @@
                     android:textSize="@dimen/main_text_default"/>
             </LinearLayout>
 
-            <SeekBar
+            <app.minimize.com.seek_bar_compat.SeekBarCompat
                 android:id="@+id/seekBar"
-                android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:max="27" />
+                android:maxHeight="300sp"
+                android:max="27"
+                app:progressColor="@color/red"
+                app:progressBackgroundColor="@color/linegray"
+                app:thumbColor="@color/red"
+                app:thumbAlpha="1.0"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
