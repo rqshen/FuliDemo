@@ -253,12 +253,16 @@ public class Activity_Recharge_Second extends Activity_Base implements View.OnCl
 				}
 
 				String tip = "";
-				if(null != mBanklist && mBanklist.size() > 0){
-					for(BankItem bankItem : mBanklist){
-						if (bankCode.equalsIgnoreCase(bankItem.getBankCode())){
-							tip = "该卡本次最多可充值"+ bankItem.getMaxSingle() +"元，每日最多"+ bankItem.getMaxDay() +"元";
+				if (mUserDetailInfo.BankCard.isBankCodeSupport()){
+					if(null != mBanklist && mBanklist.size() > 0){
+						for(BankItem bankItem : mBanklist){
+							if (bankCode.equalsIgnoreCase(bankItem.getBankCode())){
+								tip = "该卡本次最多可充值"+ bankItem.getMaxSingle() +"元，每日最多"+ bankItem.getMaxDay() +"元";
+							}
 						}
 					}
+				} else {
+					tip = mUserDetailInfo.getBankCard().BankName + "渠道维护中，建议您到pc端充值";
 				}
 				//设置银行卡充值提示
 				setBankCardTip(tip);
@@ -298,7 +302,7 @@ public class Activity_Recharge_Second extends Activity_Base implements View.OnCl
 		//判断是否支持该银行
 		if (!mUserDetailInfo.BankCard.isBankCodeSupport()) {
 			//如果不支持该银行，则弹框提示
-			showAlertView();
+//			showAlertView(); TODO 暂时不确定要不要提示
 			return;
 		}
 
@@ -343,22 +347,22 @@ public class Activity_Recharge_Second extends Activity_Base implements View.OnCl
 	}
 
 
-    //弹框提示手机端充值暂不支持某个银行
-    private void showAlertView() {
-        AlertView.Builder builder = new AlertView.Builder(this);
-        builder.setTitle("手机端充值暂不支持" + mUserDetailInfo.BankCard.getBankName());
-        builder.setMessage("您可以使用APP进行提现或使用电脑版充值");
-        builder.setPositiveButton("知道了", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                alertView.dismiss();
-                alertView = null;
-                finish();
-            }
-        });
-        alertView = builder.create();
-        alertView.show();
-	}
+//    //弹框提示手机端充值暂不支持某个银行
+//    private void showAlertView() {
+//        AlertView.Builder builder = new AlertView.Builder(this);
+//        builder.setTitle("手机端充值暂不支持" + mUserDetailInfo.BankCard.getBankName());
+//        builder.setMessage("您可以使用APP进行提现或使用电脑版充值");
+//        builder.setPositiveButton("知道了", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                alertView.dismiss();
+//                alertView = null;
+//                finish();
+//            }
+//        });
+//        alertView = builder.create();
+//        alertView.show();
+//	}
 
     @Override
 	public void onClick(View view) {

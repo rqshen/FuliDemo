@@ -3,8 +3,11 @@ package com.bcb.data.util;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Build;
+import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -45,6 +48,15 @@ public class UIUtil {
         win.setAttributes(winParams);
     }
 
+    public static int dp2px(Context context, int dp) {
+        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        Display display = wm.getDefaultDisplay();
+
+        DisplayMetrics displaymetrics = new DisplayMetrics();
+        display.getMetrics(displaymetrics);
+
+        return (int) (dp * displaymetrics.density + 0.5f);
+    }
 
     private static ProgressDialog progressDialog;
 

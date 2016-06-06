@@ -151,7 +151,7 @@ public class Activity_ChangeMoney_Success extends Activity_Base implements View.
 		layout_recharging = (RelativeLayout) findViewById(R.id.layout_recharging);
 		//Gif图层
 		rechargingGif = (GifView) findViewById(R.id.recharging_gif);
-		rechargingGif.setGifImage(R.drawable.refresh_loading);
+		rechargingGif.setGifImage(R.drawable.refreshing);
 		rechargingGif.setGifImageType(GifView.GifImageType.COVER);
 
 		//充值超时
