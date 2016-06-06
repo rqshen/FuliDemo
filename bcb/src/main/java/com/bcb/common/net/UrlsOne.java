@@ -174,5 +174,7 @@ public class UrlsOne {
 	public static final String How2GetSubsidy = "http://wap.flh001.com/Loan/CouponActivity/index";
 	//起息第一时间通知
 	public static final String WxBindIndex = "http://wap.flh001.com/account/wxbindindex";
+	//借款服务协议
+	public static final String LoanProtocol = "http://wap.flh001.com/static/loan-agreement.html";
 
 }

@@ -158,6 +158,9 @@ public class Activity_Login extends Activity_Base implements Interface_Base, OnC
 
         EventBus.getDefault().post(new BroadcastEvent(BroadcastEvent.LOGIN));
 
+        //设置极光推送别名
+        App.getInstance().setAlias();
+
         //获取数据库缓存数据,若有数据就显示已经缓存的数据,则不去请求
         WelfareBean welfareBean = DbUtil.getWelfare();
         if (null != welfareBean && !TextUtils.isEmpty(welfareBean.getValue())){

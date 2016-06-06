@@ -236,7 +236,7 @@ public class Frag_LoanDetail extends Frag_Base {
 
         JSONObject jsonObject = new JSONObject();
         try{
-//            jsonObject.put("LoandId", loanUniqueId);
+//            jsonObject.put("LoandId", loanUniqueId);//不需要了
             jsonObject.put("FileData", convertBitmap2String(path));
         } catch (Exception e) {
             e.printStackTrace();
@@ -355,7 +355,6 @@ public class Frag_LoanDetail extends Frag_Base {
                         cursor.close();
 //                        //压缩
                         Bitmap bitmap = getSmallBitmap(picturePath);
-//                        Bitmap bitmap = imageZoom(BitmapFactory.decodeFile(picturePath));
                         //缓存数据
                         String tempName = "bcb_" + new Date().getTime();
                         String path = savePhotoCache(tempName, bitmap);

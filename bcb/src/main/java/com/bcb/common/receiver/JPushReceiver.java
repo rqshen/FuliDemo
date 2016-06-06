@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.bcb.data.util.LogUtil;
+import com.bcb.presentation.view.activity.Activity_Main;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -51,12 +52,11 @@ public class JPushReceiver extends BroadcastReceiver {
         } else if (JPushInterface.ACTION_NOTIFICATION_OPENED.equals(intent.getAction())) {
             LogUtil.d(TAG, "[MyReceiver] 用户点击打开了通知");
 
-//            //打开自定义的Activity
-//            Intent i = new Intent(context, TestActivity.class);
-//            i.putExtras(bundle);
-//            //i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
-//            context.startActivity(i);
+            //打开自定义的Activity
+            Intent i = new Intent(context, Activity_Main.class);
+            i.putExtras(bundle);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
+            context.startActivity(i);
 
         } else if (JPushInterface.ACTION_RICHPUSH_CALLBACK.equals(intent.getAction())) {
             LogUtil.d(TAG, "[MyReceiver] 用户收到到RICH PUSH CALLBACK: " + bundle.getString(JPushInterface.EXTRA_EXTRA));

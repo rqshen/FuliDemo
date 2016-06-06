@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.bcb.R;
 import com.bcb.common.app.App;
 import com.bcb.common.event.BroadcastEvent;
+import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.TextUtil;
 import com.bcb.data.util.ToastUtil;
@@ -474,6 +475,7 @@ public class Activity_Account_Setting extends Activity_Base implements OnClickLi
         if (!TextUtils.isEmpty(localPhone)) {
             phone_text.setText(localPhone);
         }
+        LogUtil.d("1234", "companyMessage = " + companyMessage);
         text_company.setText(companyMessage);
     }
 

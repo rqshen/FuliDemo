@@ -610,7 +610,7 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPa
                 @Override
                 public void onClick(View v) {
                     if(!TextUtils.isEmpty(data.get(position).PageUrl)) {
-                        Activity_WebView.launche(context, data.get(position).Title, data.get(position).PageUrl, true);
+                        Activity_Browser.launche(context, data.get(position).Title, data.get(position).PageUrl, true);
                     }
                 }
             });

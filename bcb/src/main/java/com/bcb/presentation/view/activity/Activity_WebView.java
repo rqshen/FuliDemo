@@ -22,6 +22,7 @@ import com.bcb.R;
 import com.bcb.common.app.App;
 import com.bcb.data.util.BitmapUtil;
 import com.bcb.data.util.DESUtil;
+import com.bcb.data.util.MQCustomerManager;
 import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.MyConstants;
 import com.bcb.presentation.view.custom.CustomDialog.DialogWidget;
@@ -164,6 +165,7 @@ public class Activity_WebView extends Activity_Base {
         webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
         webView.getSettings().setUseWideViewPort(true);
         webView.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+        webView.getSettings().setCacheMode(com.tencent.smtt.sdk.WebSettings.LOAD_NO_CACHE);
         webView.setVerticalScrollBarEnabled(false);
         webView.setVerticalScrollbarOverlay(false);
         webView.setHorizontalScrollBarEnabled(false);
@@ -217,6 +219,14 @@ public class Activity_WebView extends Activity_Base {
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }
+                return true;
+            } else if (url.contains("fulihui://callcenter")){
+                //如果ID存在
+                String userId = null;
+                if (App.mUserDetailInfo != null) {
+                    userId = App.mUserDetailInfo.getCustomerId();
+                }
+                MQCustomerManager.getInstance(Activity_WebView.this).showCustomer(userId);
                 return true;
             } else {
                 return super.shouldOverrideUrlLoading(view, urlString);

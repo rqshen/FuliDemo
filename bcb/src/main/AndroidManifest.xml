@@ -2,8 +2,8 @@
 <manifest package="com.bcb"
           xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools"
-          android:versionCode="26"
-          android:versionName="1.5.1">
+          android:versionCode="27"
+          android:versionName="1.5.2">
 
     <uses-sdk
         android:minSdkVersion="14"
@@ -455,7 +455,7 @@
 
         <!-- Required . Enable it you can get statistics data with channel -->
         <meta-data android:name="JPUSH_CHANNEL" android:value="developer-default"/>
-        <meta-data android:name="JPUSH_APPKEY" android:value="983f6d809971c6e36d403c49" /> <!-- </>值来自开发者平台取得的AppKey-->
+        <meta-data android:name="JPUSH_APPKEY" android:value="983f6d809971c6e36d403c49" /> <!-- </>值来自开发者平台取得的AppKey ： 983f6d809971c6e36d403c49-->
 
 
     </application>

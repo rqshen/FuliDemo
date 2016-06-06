@@ -17,7 +17,7 @@ import java.util.List;
  * Created by Ray on 2016/4/23.
  * 仅用借款界面附件上传
  */
-public class GridAdapter extends BaseAdapter {
+public class GridAdapter extends BaseAdapter implements View.OnClickListener{
     private LayoutInflater inflater;
     private List<String> pics;
     private Context context;
@@ -47,9 +47,11 @@ public class GridAdapter extends BaseAdapter {
         convertView = inflater.inflate(R.layout.item_grid, parent, false);
         ViewHolder holder = new ViewHolder();
         holder.image = (ImageView) convertView.findViewById(R.id.item_grid_image);
+        holder.image_del = (ImageView) convertView.findViewById(R.id.item_grid_del);
+        holder.image_del.setTag(position);
+        holder.image_del.setOnClickListener(this);
         if ((getCount()-1) == position){
-//            holder.image_del = (ImageView) convertView.findViewById(R.id.item_grida_del);
-//            holder.image_del.setVisibility(View.GONE);
+            holder.image_del.setVisibility(View.GONE);
             holder.image.setImageResource(R.drawable.ico_img_add);
         }else{
             Glide.with(context).load(pics.get(position)).centerCrop().into(holder.image);
@@ -57,8 +59,17 @@ public class GridAdapter extends BaseAdapter {
         return convertView;
     }
 
+    @Override
+    public void onClick(View v) {
+        int pos = (int) v.getTag();
+        if (pos >= 0 && pos < pics.size()){
+            pics.remove(pos);
+            notifyDataSetChanged();
+        }
+    }
+
     public class ViewHolder {
         public ImageView image;
-//        public ImageView image_del;
+        public ImageView image_del;
     }
 }

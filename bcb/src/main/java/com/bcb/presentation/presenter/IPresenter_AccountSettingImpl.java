@@ -1,6 +1,7 @@
 package com.bcb.presentation.presenter;
 
 import android.content.Context;
+import android.text.TextUtils;
 
 import com.bcb.common.net.BcbJsonRequest;
 import com.bcb.common.net.BcbNetworkManager;
@@ -77,7 +78,6 @@ public class IPresenter_AccountSettingImpl implements IPresenter_AccountSetting 
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    interfaceBase.onRequestResult(-100, "返回数据异常，解析出错");
                 }
             }
 
@@ -128,10 +128,8 @@ public class IPresenter_AccountSettingImpl implements IPresenter_AccountSetting 
      */
     private void callBackUserInfo() {
         String companyMessage = null;
-        if (iModelUserAccount.getCompanyStatus() == 10) {
-            companyMessage = iModelUserAccount.getCompanyShortName();
-        } else if (iModelUserAccount.getCompanyStatus() == 5) {
-            companyMessage = "审核中";
+        if (!TextUtils.isEmpty(iModelUserAccount.getCompanyShortName())) {
+            companyMessage = "修改";
         } else {
             companyMessage = "加入公司";
         }
