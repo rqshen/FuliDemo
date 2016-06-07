@@ -44,7 +44,7 @@
         android:padding="15dp">
 
         <Button
-            android:id="@+id/person_button"
+            android:id="@+id/check_button"
             android:layout_width="match_parent"
             android:layout_height="@dimen/button_height"
             android:layout_gravity="center"

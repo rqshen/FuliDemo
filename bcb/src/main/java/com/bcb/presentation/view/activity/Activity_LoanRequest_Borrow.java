@@ -895,7 +895,6 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
-//                        ToastUtil.alert(Activity_LoanRequest_Borrow.this, "解析数据出错");
                         //数据出错重新登录
                         Activity_Login.launche(Activity_LoanRequest_Borrow.this);
                     }
@@ -996,7 +995,6 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
                     }
                 }catch(Exception e){
                     e.printStackTrace();
-//                    ToastUtil.alert(Activity_LoanRequest_Borrow.this, "解析数据出错");
                     //数据出错重新登录
                     Activity_Login.launche(Activity_LoanRequest_Borrow.this);
                 }
