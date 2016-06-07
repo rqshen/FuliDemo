@@ -32,7 +32,6 @@ import de.greenrobot.event.EventBus;
 public class Activity_Daily_Welfare_Result extends Activity_Base implements View.OnClickListener{
 
     private RelativeLayout coin;//弹跳金币
-//    private ImageView coin_bg;//金币背景光环
     private LinearLayout ll_text;//按钮下面文本
     private TextView btn_welfare_check;//立即查看
     private ImageView activity_close;//关闭按钮

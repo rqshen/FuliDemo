@@ -322,7 +322,6 @@ public class Activity_Daily_Welfare extends Activity_Base implements View.OnClic
         requestQueue.add(jsonRequest);
     }
 
-
     private long lastClickTime;//上次点击时间
     private final long MIN_CLICK_DELAY_TIME = 500;//最小时间间隔
 
@@ -336,6 +335,12 @@ public class Activity_Daily_Welfare extends Activity_Base implements View.OnClic
                 UmengUtil.eventById(context, R.string.fuli_c2);
                 if (App.saveUserInfo.getAccess_Token() == null) {
                     Activity_Login.launche(context);
+                    break;
+                }
+                String value = App.getInstance().getWelfare();
+                if (!TextUtils.isEmpty(value)){
+                    Activity_Daily_Welfare_Static.launche(context,value,totalInterest);
+                    finish();
                     break;
                 }
                 //防止按钮多次点击

@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -75,9 +76,6 @@ public class Activity_Recharge_Second extends Activity_Base implements View.OnCl
 	private TextView recharge_tips;
 
     private ProgressDialog progressDialog;
-	//弹框
-    private AlertView alertView;
-
     private BcbRequestQueue requestQueue;
 
 	public static void launche(Context ctx) {
@@ -103,6 +101,9 @@ public class Activity_Recharge_Second extends Activity_Base implements View.OnCl
 		//充值按钮
         recharge_button = (Button) findViewById(R.id.recharge_button);
         recharge_button.setOnClickListener(this);
+		//先设置为不可点击状态，等加载出数据再设置为可以点击
+		recharge_button.setClickable(false);
+		recharge_button.setBackgroundResource(R.drawable.button_gray_change);
 
 		//充值说明
 		description_text = (LinearLayout) findViewById(R.id.description_text);
@@ -254,6 +255,7 @@ public class Activity_Recharge_Second extends Activity_Base implements View.OnCl
 
 				String tip = "";
 				if (mUserDetailInfo.BankCard.isBankCodeSupport()){
+					recharge_button.setClickable(true);
 					if(null != mBanklist && mBanklist.size() > 0){
 						for(BankItem bankItem : mBanklist){
 							if (bankCode.equalsIgnoreCase(bankItem.getBankCode())){
@@ -261,11 +263,17 @@ public class Activity_Recharge_Second extends Activity_Base implements View.OnCl
 							}
 						}
 					}
+					recharge_button.setBackgroundResource(R.drawable.button_red_selector);
+					recharge_tips.setTextColor(getResources().getColor(R.color.txt_black));
 				} else {
-					tip = mUserDetailInfo.getBankCard().BankName + "渠道维护中，建议您到pc端充值";
+					recharge_button.setClickable(false);
+					recharge_button.setBackgroundResource(R.drawable.button_gray_change);
+					tip = "该银行快捷支付维护中，建议使用 PC 端网银充值";
+					recharge_tips.setTextColor(getResources().getColor(R.color.red));
 				}
 				//设置银行卡充值提示
-				setBankCardTip(tip);
+				recharge_tips.setText(tip);
+				tip_layout.setVisibility(View.VISIBLE);
             }
 
             @Override
@@ -299,13 +307,6 @@ public class Activity_Recharge_Second extends Activity_Base implements View.OnCl
 			ToastUtil.alert(Activity_Recharge_Second.this, "无法获取账户银行卡帐号信息，充值失败");
 			return;
 		}
-		//判断是否支持该银行
-		if (!mUserDetailInfo.BankCard.isBankCodeSupport()) {
-			//如果不支持该银行，则弹框提示
-//			showAlertView(); TODO 暂时不确定要不要提示
-			return;
-		}
-
 		//没有输入金额
 		if(!ToastUtil.checkInputParam(Activity_Recharge_Second.this, editext_money, "请输入充值金额")){
 			return;
@@ -346,24 +347,6 @@ public class Activity_Recharge_Second extends Activity_Base implements View.OnCl
 		}
 	}
 
-
-//    //弹框提示手机端充值暂不支持某个银行
-//    private void showAlertView() {
-//        AlertView.Builder builder = new AlertView.Builder(this);
-//        builder.setTitle("手机端充值暂不支持" + mUserDetailInfo.BankCard.getBankName());
-//        builder.setMessage("您可以使用APP进行提现或使用电脑版充值");
-//        builder.setPositiveButton("知道了", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                alertView.dismiss();
-//                alertView = null;
-//                finish();
-//            }
-//        });
-//        alertView = builder.create();
-//        alertView.show();
-//	}
-
     @Override
 	public void onClick(View view) {
 		switch(view.getId()) {
@@ -400,21 +383,6 @@ public class Activity_Recharge_Second extends Activity_Base implements View.OnCl
 		super.onDestroy();
 		unregisterReceiver(receiver);
 	}
-
-
-	/**
-	 * 设置银行卡充值提示
-	 * @param tip 提示
-     */
-	private void setBankCardTip(String tip){
-		if (TextUtils.isEmpty(tip)){
-			tip_layout.setVisibility(View.GONE);
-		} else {
-			tip_layout.setVisibility(View.VISIBLE);
-			recharge_tips.setText(tip);
-		}
-	}
-
 
 	/********************* 转圈提示 **************************/
 	//显示转圈提示
