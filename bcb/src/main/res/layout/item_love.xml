@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -47,6 +48,48 @@
             android:background="@color/linegray" />
     </LinearLayout>
 
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp"
+        android:orientation="horizontal">
+        
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="14dp"
+            android:layout_height="wrap_content" />
+
+        <com.bcb.presentation.view.custom.CircleProgressBar
+            android:id="@+id/love_circle_progress"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:gravity="center_horizontal"
+            android:background="#FFFFFFFF"
+            android:textSize="20sp"
+            app:cpbNeedAnim="false"
+            app:cpbStrokeWidth="6"
+            app:cpbBackgroundColor="#e1e1e1"
+            app:cpbForegroundColor="@color/red"
+            app:cpbProgressTextColor="@color/red"
+            app:cpbWholeBackgroundColor="@color/white"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1px"
+        android:background="@color/linegray" />
 
 
 </LinearLayout>
