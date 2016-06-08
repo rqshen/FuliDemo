@@ -139,9 +139,6 @@ public class UrlsOne {
 	//订单状态查询
 	public static final String RechargeOrderStatus = host + "/api/v1.0/8b441a56e2e1";
 
-//	//首页标的数据
-//	public static final String MainFragmentListData = host + "/api/v1.3/af3af1b08768";
-
     //首页标的数据(v1.3.4)
     public static final String MainFragmentListData = host + "/api/v1.3.4/af3af1b08768";
 
@@ -163,6 +160,9 @@ public class UrlsOne {
     public static final String DailyWelfareData = host + "/api/v1.3.4/a60100b02646";
 	//查询今日拆得利率
 	public static final String SearchWelfareData = host + "/api/v1.3.4/a60600ef9560";
+
+	//不支持银行邮件发送接口
+	public static final String UnSupportBankEmail = host + "/api/v1.5.2/262ade95357b";
 
 	// 安全保障WebView
 	public static final String SecureWebView = "http://wap.100cb.cn/static/security.html";

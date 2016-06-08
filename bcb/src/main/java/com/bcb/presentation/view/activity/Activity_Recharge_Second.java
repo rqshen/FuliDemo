@@ -3,13 +3,10 @@ package com.bcb.presentation.view.activity;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
@@ -39,10 +36,10 @@ import com.bcb.data.util.PackageUtil;
 import com.bcb.data.util.TextUtil;
 import com.bcb.data.util.ToastUtil;
 import com.bcb.data.util.TokenUtil;
-import com.bcb.presentation.view.custom.AlertView.AlertView;
 import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.List;
@@ -131,7 +128,6 @@ public class Activity_Recharge_Second extends Activity_Base implements View.OnCl
         } else {
             loadUserWalletData();
         }
-
         //获取账户信息，如果静态数据区存在数据，则不用从服务器中获取数据
         if (App.mUserDetailInfo != null && App.mUserDetailInfo.BankCard != null
                 && App.mUserDetailInfo.BankCard.getCardNumber() != null) {
@@ -270,6 +266,10 @@ public class Activity_Recharge_Second extends Activity_Base implements View.OnCl
 					recharge_button.setBackgroundResource(R.drawable.button_gray_change);
 					tip = "该银行快捷支付维护中，建议使用 PC 端网银充值";
 					recharge_tips.setTextColor(getResources().getColor(R.color.red));
+
+					//调用后台接口通知发送邮件
+//					LogUtil.d("1234", "不支持银行数据提交了");
+					postUnSupportBankData(Activity_Recharge_Second.this,mUserDetailInfo.BankCard.BankName);
 				}
 				//设置银行卡充值提示
 				recharge_tips.setText(tip);
@@ -284,6 +284,31 @@ public class Activity_Recharge_Second extends Activity_Base implements View.OnCl
         jsonRequest.setTag(BcbRequestTag.SupportBankTag);
         requestQueue.add(jsonRequest);
     }
+
+	/**
+	 * 提交不支持银行卡数据
+	 */
+	private void postUnSupportBankData(Context context,String bankName){
+		JSONObject obj = new JSONObject();
+		try {
+			obj.put("bankName",bankName);
+		}catch (JSONException e) {
+			e.printStackTrace();
+		}
+		BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.UnSupportBankEmail, obj, TokenUtil.getEncodeToken(context), true, new BcbRequest.BcbCallBack<JSONObject>() {
+			@Override
+			public void onResponse(JSONObject response) {
+//				LogUtil.d("1234", "不支持银行数据提交了" + response.toString());
+			}
+
+			@Override
+			public void onErrorResponse(Exception error) {
+//				LogUtil.d("1234", "不支持银行数据提交出错");
+			}
+		});
+		jsonRequest.setTag(BcbRequestTag.SupportBankTag);
+		requestQueue.add(jsonRequest);
+	}
 
     //显示用户余额
 	private void showUserWallet(){

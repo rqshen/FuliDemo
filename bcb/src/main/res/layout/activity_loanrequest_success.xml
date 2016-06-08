@@ -134,19 +134,6 @@
                     android:text="5.公积金或社保缴存证明二选一，需要显示基数"/>
 
             </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dip"
-                android:orientation="vertical"
-                android:layout_gravity="center"
-                android:gravity="center">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/apply_workflow_01"/>
-            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

@@ -68,6 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="在投金额已加息\n(有效期1天)"
+                android:gravity="center"
                 android:textColor="@color/orange"
                 android:textSize="12sp"/>
         </LinearLayout>

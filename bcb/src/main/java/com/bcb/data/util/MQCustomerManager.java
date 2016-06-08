@@ -6,10 +6,15 @@ import android.content.Intent;
 import android.text.TextUtils;
 
 import com.bcb.R;
+import com.bcb.common.app.App;
 import com.meiqia.core.MQManager;
+import com.meiqia.core.callback.OnClientInfoCallback;
 import com.meiqia.core.callback.OnInitCallback;
 import com.meiqia.meiqiasdk.util.MQConfig;
 import com.meiqia.meiqiasdk.util.MQIntentBuilder;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
@@ -24,15 +29,17 @@ public class MQCustomerManager {
     //采用单利模式创建管理对象
     private static MQCustomerManager instance;
     private Context context;
+    private static boolean hasSetClientInfo;
 
     public static synchronized MQCustomerManager getInstance(Context context) {
         if (instance == null) {
             instance = new MQCustomerManager(context);
+            hasSetClientInfo = false;
         }
         return instance;
     }
 
-    private MQCustomerManager(Context context) {
+    private MQCustomerManager(final Context context) {
         this.context = context;
         //初始化美洽客服
         MQManager.init(context, meiqiaKey, new OnInitCallback() {
@@ -49,6 +56,24 @@ public class MQCustomerManager {
 
     //打开客服
     public void showCustomer(String userId) {
+        //上传用户信息到后台
+        if (!hasSetClientInfo && null != App.saveUserInfo.getAccess_Token()){
+            Map<String, String> info = new HashMap<>();
+            info.put("用户名", App.mUserDetailInfo.CustomerId);
+            MQManager.getInstance(context).setClientInfo(info, new OnClientInfoCallback(){
+
+                @Override
+                public void onFailure(int i, String s) {
+
+                }
+
+                @Override
+                public void onSuccess() {
+                    hasSetClientInfo = true;
+                }
+            });
+        }
+
         //没有美洽用户ID时，使用游客登录
         if (TextUtils.isEmpty(userId)) {
             conversationWrapper();

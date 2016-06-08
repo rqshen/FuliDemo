@@ -202,7 +202,7 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
                         }else {
                             PersonInfo = mGson.fromJson(result, PersonInfoBean.class);
                         }
-                        /////////////此处代码是为了兼容旧版本，否则会出现空指针异常
+                        /////////////此处代码是为了兼容旧版本升级，否则会出现空指针异常
                         if (null == PersonInfo.Relationship2){
                             PersonInfoBean temp = mGson.fromJson(result, PersonInfoBean.class);
                             PersonInfo.Relationship2 = temp.Relationship2;
@@ -220,13 +220,6 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
                         changeRelationshipList(PersonInfo);
                         //设置个人信息
                         setupPersonalData();
-                    } else {
-                        //Token过期，需要重登陆
-                        if (response.getInt("status") == -5) {
-
-                        } else {
-
-                        }
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -331,23 +324,16 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
         //婚姻状况
         if (PersonInfo.MaritalStatus > 0) {
             loan_marital_status.setText(maritalList.get(PersonInfo.MaritalStatus - 1));
-        } else {
-            loan_marital_status.setText(maritalList.get(0));
         }
         //孩子情况
         loan_children.setText(childrenList.get(PersonInfo.ChildrenStatus));
         //住房状况
         if (PersonInfo.HousingStatus > 0){
             loan_house_situation.setText(houseList.get(PersonInfo.HousingStatus - 1));
-        } else {
-            loan_house_situation.setText(houseList.get(0));
         }
-
         //文化程度
         if (PersonInfo.EducationLevel > 0) {
             loan_literacy_level.setText(literacyList.get(PersonInfo.EducationLevel - 1));
-        } else {
-            loan_literacy_level.setText(literacyList.get(0));
         }
         //毕业院校
         if (PersonInfo.GraduateSchool != null && !PersonInfo.GraduateSchool.equalsIgnoreCase("null") && !PersonInfo.GraduateSchool.equalsIgnoreCase("")) {

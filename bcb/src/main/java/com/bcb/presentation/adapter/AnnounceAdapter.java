@@ -131,14 +131,12 @@ public class AnnounceAdapter extends BaseAdapter {
         });
         viewHolder.announce_text.setBackgroundResource(R.drawable.announce_button_background);
         viewHolder.announce_text.setText("立即预约");
-//        viewHolder.announce_text.setTextColor(Color.argb(255, 120, 158, 246));
         viewHolder.announce_text.setTextColor(Color.argb(221, 72, 127, 248));
         //判断是否预约
         if (TokenUtil.getEncodeToken(context)!= null && data.get(pos).loadStatus) {
             viewHolder.announce_text.setBackgroundResource(R.drawable.announce_button_gray);
             viewHolder.announce_text.setOnClickListener(null);
             viewHolder.announce_text.setText("已预约");
-//            viewHolder.announce_text.setTextColor(Color.argb(255, 136, 143, 155));
             viewHolder.announce_text.setTextColor(Color.rgb(153, 153, 153));
         }
     }
