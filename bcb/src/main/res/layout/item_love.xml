@@ -26,9 +26,9 @@
                 android:layout_marginLeft="15dp"
                 android:singleLine="true"
                 android:text="特殊儿童圆梦公益活动"
-                android:textColor="@color/item_text_color"
                 android:textSize="@dimen/item_text_default" />
             <TextView
+                android:id="@+id/company"
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
@@ -60,12 +60,20 @@
             android:layout_width="80dp"
             android:layout_height="60dp"
             android:layout_marginTop="12dp"
-            android:layout_marginBottom="12dp"/>
+            android:layout_marginBottom="12dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/banner01"/>
 
         <TextView
+            android:id="@+id/desc"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_marginTop="14dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="10dp"
+            android:text=""
+            android:ellipsize="end"
+            android:maxLength="20"
             android:layout_height="wrap_content" />
 
         <com.bcb.presentation.view.custom.CircleProgressBar
@@ -75,14 +83,14 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:gravity="center_horizontal"
-            android:background="#FFFFFFFF"
+            android:background="@android:color/transparent"
             android:textSize="20sp"
             app:cpbNeedAnim="false"
             app:cpbStrokeWidth="6"
             app:cpbBackgroundColor="#e1e1e1"
             app:cpbForegroundColor="@color/red"
             app:cpbProgressTextColor="@color/red"
-            app:cpbWholeBackgroundColor="@color/white"/>
+            app:cpbWholeBackgroundColor="@android:color/transparent"/>
 
     </LinearLayout>
 
@@ -91,5 +99,69 @@
         android:layout_height="1px"
         android:background="@color/linegray" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="12dp"
+        android:paddingTop="12dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:layout_height="wrap_content">
+            
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ico_money"
+                android:gravity="center_vertical"
+                android:drawablePadding="5dp"
+                android:text="已筹资"/>
+
+            <TextView
+                android:id="@+id/love_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:text="0000元"
+                android:textColor="@color/red"/>
+            
+        </LinearLayout>
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="@color/linegray" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ico_support"
+                android:gravity="center_vertical"
+                android:drawablePadding="5dp"
+                android:text="支持次数"/>
+
+            <TextView
+                android:id="@+id/love_support"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:text="000次"
+                android:textColor="@color/red"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </LinearLayout>

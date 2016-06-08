@@ -56,22 +56,22 @@
                 android:text="产品" />
         </RelativeLayout>
 
-        <RelativeLayout
-            android:id="@+id/layout_love"
-            style="@style/layout_main_bottom"
-            android:layout_gravity="center"
-            android:onClick="onClick" >
+        <!--<RelativeLayout-->
+            <!--android:id="@+id/layout_love"-->
+            <!--style="@style/layout_main_bottom"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:onClick="onClick" >-->
 
-            <ImageView
-                android:id="@+id/img_love"
-                style="@style/txt_mainpage_bottom"
-                android:src="@drawable/main_my_default" />
+            <!--<ImageView-->
+                <!--android:id="@+id/img_love"-->
+                <!--style="@style/txt_mainpage_bottom"-->
+                <!--android:src="@drawable/main_my_default" />-->
 
-            <TextView
-                android:id="@+id/txt_love"
-                style="@style/txt_main_bottom"
-                android:text="聚爱" />
-        </RelativeLayout>
+            <!--<TextView-->
+                <!--android:id="@+id/txt_love"-->
+                <!--style="@style/txt_main_bottom"-->
+                <!--android:text="聚爱" />-->
+        <!--</RelativeLayout>-->
 
         <RelativeLayout
             android:id="@+id/layout_user"

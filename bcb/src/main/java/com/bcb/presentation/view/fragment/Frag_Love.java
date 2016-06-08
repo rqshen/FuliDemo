@@ -6,14 +6,15 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bcb.R;
-import com.bcb.data.bean.CouponRecordsBean;
 import com.bcb.data.bean.love.LoveBean;
 import com.bcb.data.util.HttpUtils;
+import com.bcb.data.util.MyListView;
 import com.bcb.data.util.ToastUtil;
 import com.bcb.presentation.adapter.LoveAdapter;
 import com.bcb.presentation.view.activity.Activity_Apply_Love;
@@ -27,7 +28,7 @@ import java.util.List;
  *
  * @desc 聚爱
  */
-public class Frag_Love extends Frag_Base implements View.OnClickListener{
+public class Frag_Love extends Frag_Base implements View.OnClickListener, AdapterView.OnItemClickListener{
 
     //标题
     private TextView title_text, right_text;
@@ -42,6 +43,7 @@ public class Frag_Love extends Frag_Base implements View.OnClickListener{
     private int PageSize = 10;
     private List<LoveBean> loveBeens;
     private LoveAdapter loveAdapter;
+    private MyListView mListView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -63,6 +65,9 @@ public class Frag_Love extends Frag_Base implements View.OnClickListener{
 
         loveBeens = new ArrayList<>();
         loveAdapter = new LoveAdapter(ctx, loveBeens);
+        mListView = (MyListView) view.findViewById(R.id.listview_data_layout);
+        mListView.setOnItemClickListener(this);
+        mListView.setAdapter(loveAdapter);
 
         //刷新
         null_data_layout = (LinearLayout) view.findViewById(R.id.null_data_layout);
@@ -102,7 +107,32 @@ public class Frag_Love extends Frag_Base implements View.OnClickListener{
     }
 
     private void loadData() {
+        //测试数据
+        LoveBean loveBean;
+        for(int i=0;i<10;i++){
+            loveBean = new LoveBean();
+            loveBean.setCompany("公司" + i);
+            loveBean.setDesc("说明(这里最多要显示20个字符)1234567890" + i);
+            loveBean.setName("测试名称" + i);
+            loveBean.setProgress(50 + i);
+            loveBean.setMoney(3000 + i);
+            loveBean.setSupport(20 + i);
+            loveBeens.add(loveBean);
+        }
+        setupListViewVisible(true);
+        loveAdapter.notifyDataSetChanged();
+        refreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
+        refreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
 
+    }
+
+    private void setupListViewVisible(boolean status) {
+        // 如果存在数据的时候，显示
+        if (status) {
+            null_data_layout.setVisibility(View.GONE);
+        } else {
+            null_data_layout.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -112,5 +142,10 @@ public class Frag_Love extends Frag_Base implements View.OnClickListener{
                 Activity_Apply_Love.launch(ctx);
                 break;
         }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
     }
 }

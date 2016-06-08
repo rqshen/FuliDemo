@@ -13,6 +13,9 @@ public class LoveBean implements Serializable{
     private String ImagePath;//图片路径
     private String Company;//公司
     private String Desc;//说明
+    private int Progress;//进度
+    private int Support;//支持次数
+    private float Money;//已筹资金额
 
     public String getPackageId() {
         return PackageId;
@@ -52,5 +55,29 @@ public class LoveBean implements Serializable{
 
     public void setDesc(String desc) {
         Desc = desc;
+    }
+
+    public int getProgress() {
+        return Progress;
+    }
+
+    public void setProgress(int progress) {
+        Progress = progress;
+    }
+
+    public int getSupport() {
+        return Support;
+    }
+
+    public void setSupport(int support) {
+        Support = support;
+    }
+
+    public float getMoney() {
+        return Money;
+    }
+
+    public void setMoney(float money) {
+        Money = money;
     }
 }

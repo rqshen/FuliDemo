@@ -18,20 +18,17 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bcb.R;
+import com.bcb.common.app.App;
 import com.bcb.common.event.BroadcastEvent;
 import com.bcb.common.net.BcbJsonRequest;
 import com.bcb.common.net.BcbNetworkManager;
 import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
-import com.bcb.presentation.adapter.ProductAdapter;
-import com.bcb.common.app.App;
-import com.bcb.R;
+import com.bcb.common.net.UrlsOne;
 import com.bcb.data.bean.ProductListBean;
 import com.bcb.data.bean.ProductRecordsBean;
-import com.bcb.common.net.UrlsOne;
-import com.bcb.presentation.view.activity.Activity_NormalProject_Introduction;
-import com.bcb.presentation.view.activity.Activity_Station_Change;
 import com.bcb.data.util.HttpUtils;
 import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MyListView;
@@ -39,6 +36,9 @@ import com.bcb.data.util.PackageUtil;
 import com.bcb.data.util.ToastUtil;
 import com.bcb.data.util.TokenUtil;
 import com.bcb.data.util.UmengUtil;
+import com.bcb.presentation.adapter.ProductAdapter;
+import com.bcb.presentation.view.activity.Activity_NormalProject_Introduction;
+import com.bcb.presentation.view.activity.Activity_Station_Change;
 import com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout;
 
 import org.json.JSONException;
@@ -68,6 +68,7 @@ public class Frag_Product extends Frag_Base implements OnClickListener {
 
 	private String CompanyId, CompanyName = "";
 	private LinearLayout null_data_layout;
+    private TextView null_data_tip;
 
 	private Context ctx;
 
@@ -126,6 +127,7 @@ public class Frag_Product extends Frag_Base implements OnClickListener {
         CompanyId = "";
         PageNow = 1;
         null_data_layout = (LinearLayout) view.findViewById(R.id.null_data_layout);
+        null_data_tip = (TextView) view.findViewById(R.id.null_data_tip);
 
         //产品列表数据
         recordsBeans = new ArrayList<ProductRecordsBean>();
@@ -148,7 +150,8 @@ public class Frag_Product extends Frag_Base implements OnClickListener {
                     loadData();
                     loadmore_view.setVisibility(View.VISIBLE);
                 } else {
-                    ToastUtil.alert(ctx, "网络异常，请稍后再试");
+                    ToastUtil.alert(ctx, "网络延迟，请稍后再试");
+                    null_data_tip.setText("网络延迟，请稍后再试");
                     refreshLayout.refreshFinish(PullToRefreshLayout.FAIL);
                 }
             }
@@ -164,7 +167,8 @@ public class Frag_Product extends Frag_Base implements OnClickListener {
                         refreshLayout.loadmoreFinish(PullToRefreshLayout.NOMORE);
                     }
                 } else {
-                    ToastUtil.alert(ctx, "网络异常，请稍后再试");
+                    ToastUtil.alert(ctx, "网络延迟，请稍后再试");
+                    null_data_tip.setText("网络延迟，请稍后再试");
                     refreshLayout.loadmoreFinish(PullToRefreshLayout.FAIL);
                 }
             }
@@ -284,6 +288,7 @@ public class Frag_Product extends Frag_Base implements OnClickListener {
         if (status) {
             null_data_layout.setVisibility(View.GONE);
         } else {
+            null_data_tip.setText("该公司暂无产品");
             null_data_layout.setVisibility(View.VISIBLE);
         }
     }

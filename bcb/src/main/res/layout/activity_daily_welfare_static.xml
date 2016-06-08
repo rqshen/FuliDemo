@@ -63,7 +63,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="(加息券有效期1天)"
+                android:gravity="center"
+                android:text="在投金额已加息\n(有效期1天)"
                 android:textColor="@color/orange"
                 android:textSize="12sp"/>
         </LinearLayout>
@@ -76,7 +77,7 @@
             android:textColor="@color/gold2"
             android:textSize="@dimen/main_text_default"
             android:layout_gravity="center_horizontal"
-            android:text="你已经参加过活动啦！\n明天再来拆福袋吧，加油~"/>
+            android:text="你已拆过福袋啦！\n明天再来吧，加油~"/>
 
         <TextView
             android:id="@+id/btn_welfare_check"
@@ -84,7 +85,7 @@
             android:layout_height="46dp"
             android:layout_marginTop="98dp"
             android:layout_above="@id/ll_text"
-            android:text="立即查看"
+            android:text="立即加息"
             android:gravity="center"
             android:textColor="@color/red"
             android:layout_centerHorizontal="true"
@@ -105,7 +106,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/red"
                 android:layout_gravity="bottom"
-                android:text="在投金额已加息，活动累计收益"
+                android:text="活动累计收益"
                 android:textSize="11sp"/>
 
             <TextView
