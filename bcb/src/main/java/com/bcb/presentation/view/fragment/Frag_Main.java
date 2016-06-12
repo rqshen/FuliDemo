@@ -52,7 +52,9 @@ import com.bcb.presentation.adapter.ProductAdapter;
 import com.bcb.presentation.view.activity.Activity_Browser;
 import com.bcb.presentation.view.activity.Activity_Daily_Welfare;
 import com.bcb.presentation.view.activity.Activity_ExpiredProject_Introduction;
+import com.bcb.presentation.view.activity.Activity_Loan;
 import com.bcb.presentation.view.activity.Activity_Login_Introduction;
+import com.bcb.presentation.view.activity.Activity_Love;
 import com.bcb.presentation.view.activity.Activity_Main;
 import com.bcb.presentation.view.activity.Activity_NormalProject_Introduction;
 import com.bcb.presentation.view.activity.Activity_WebView;
@@ -183,10 +185,11 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPa
             }
         });
 
-        //三个按钮:每日福利、理财学院、安全保障
+        //4个按钮:每日福利、理财学院、安全保障、聚爱
         view.findViewById(R.id.ll_daily_welfare).setOnClickListener(this);
         view.findViewById(R.id.ll_wealth_college).setOnClickListener(this);
         view.findViewById(R.id.ll_security).setOnClickListener(this);
+        view.findViewById(R.id.ll_love).setOnClickListener(this);
 
         //滚动广告
         notice_text = (TextView) view.findViewById(R.id.notice_text);
@@ -807,6 +810,9 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPa
             case R.id.ll_security://安全保障
                 UmengUtil.eventById(ctx, R.string.safe_c);
                 Activity_Browser.launche(ctx,"安全保障",UrlsOne.SecureWebView);
+                break;
+            case R.id.ll_love:
+                Activity_Love.launche(ctx);
                 break;
         }
     }

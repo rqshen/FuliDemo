@@ -366,19 +366,7 @@
             android:screenOrientation="portrait"/>
         <!--聚爱-->
         <activity
-            android:name=".presentation.view.activity.Activity_Apply_Love"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name=".presentation.view.activity.Activity_Apply_Love_Success"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name=".presentation.view.activity.Activity_Apply_Love_Detail"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name=".presentation.view.activity.Activity_My_Love"
+            android:name=".presentation.view.activity.Activity_Love"
             android:label="@string/app_name"
             android:screenOrientation="portrait"/>
 

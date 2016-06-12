@@ -1,11 +1,9 @@
-package com.bcb.presentation.view.fragment;
+package com.bcb.presentation.view.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -17,23 +15,19 @@ import com.bcb.data.util.HttpUtils;
 import com.bcb.data.util.MyListView;
 import com.bcb.data.util.ToastUtil;
 import com.bcb.presentation.adapter.LoveAdapter;
-import com.bcb.presentation.view.activity.Activity_Apply_Love;
 import com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Ray on 2016/6/2.
+ * Created by Ray on 2016/6/12.
  *
  * @desc 聚爱
  */
-public class Frag_Love extends Frag_Base implements View.OnClickListener, AdapterView.OnItemClickListener{
+public class Activity_Love extends Activity_Base implements AdapterView.OnItemClickListener {
 
-    //标题
-    private TextView title_text, right_text;
     private Context ctx;
-
     private LinearLayout null_data_layout;
     private boolean canLoadmore = true;
     private PullToRefreshLayout refreshLayout;
@@ -45,34 +39,35 @@ public class Frag_Love extends Frag_Base implements View.OnClickListener, Adapte
     private LoveAdapter loveAdapter;
     private MyListView mListView;
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.frag_love, container, false);
+    public static void launche(Context context) {
+        Intent intent = new Intent(context, Activity_Love.class);
+        context.startActivity(intent);
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        this.ctx = view.getContext();
-        super.onViewCreated(view, savedInstanceState);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setBaseContentView(R.layout.activity_love);
+        ctx = this;
         //标题
-        title_text = (TextView) view.findViewById(R.id.title_text);
-        title_text.setText("聚爱");
-
-        right_text = (TextView) view.findViewById(R.id.right_text);
-        right_text.setText("我要申请");
-        right_text.setOnClickListener(this);
-
+        setTitleValue("聚爱");
+        setRightTitleValue("", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                finish();
+            }
+        });
 
         loveBeens = new ArrayList<>();
         loveAdapter = new LoveAdapter(ctx, loveBeens);
-        mListView = (MyListView) view.findViewById(R.id.listview_data_layout);
+        mListView = (MyListView) findViewById(R.id.listview_data_layout);
         mListView.setOnItemClickListener(this);
         mListView.setAdapter(loveAdapter);
 
         //刷新
-        null_data_layout = (LinearLayout) view.findViewById(R.id.null_data_layout);
-        loadmore_view = (RelativeLayout) view.findViewById(R.id.loadmore_view);
-        refreshLayout = (PullToRefreshLayout) view.findViewById(R.id.refresh_view);
+        null_data_layout = (LinearLayout) findViewById(R.id.null_data_layout);
+        loadmore_view = (RelativeLayout) findViewById(R.id.loadmore_view);
+        refreshLayout = (PullToRefreshLayout) findViewById(R.id.refresh_view);
         refreshLayout.setRefreshResultView(false);
         refreshLayout.setOnRefreshListener(new PullToRefreshLayout.OnRefreshListener() {
             @Override
@@ -132,15 +127,6 @@ public class Frag_Love extends Frag_Base implements View.OnClickListener, Adapte
             null_data_layout.setVisibility(View.GONE);
         } else {
             null_data_layout.setVisibility(View.VISIBLE);
-        }
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.right_text:
-                Activity_Apply_Love.launch(ctx);
-                break;
         }
     }
 

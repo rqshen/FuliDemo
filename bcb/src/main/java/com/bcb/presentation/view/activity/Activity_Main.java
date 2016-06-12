@@ -19,24 +19,17 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bcb.R;
-import com.bcb.common.app.App;
 import com.bcb.common.event.BroadcastEvent;
-import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.UmengUtil;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
 import com.bcb.presentation.view.custom.CustomViewPager;
-import com.bcb.presentation.view.fragment.Frag_Love;
 import com.bcb.presentation.view.fragment.Frag_Main;
 import com.bcb.presentation.view.fragment.Frag_Product;
 import com.bcb.presentation.view.fragment.Frag_User;
 
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Set;
 
-import cn.jpush.android.api.JPushInterface;
-import cn.jpush.android.api.TagAliasCallback;
 import de.greenrobot.event.EventBus;
 
 public class Activity_Main extends Activity_Base_Fragment {
@@ -46,15 +39,13 @@ public class Activity_Main extends Activity_Base_Fragment {
 	private List<Fragment> mFragments;
 	private MyFragmentPagerAdapter myFragmentPagerAdapter;
 
-    //4个按钮
+    //3个按钮
 	private ImageView img_mainpage;
 	private ImageView img_product;
-//	private ImageView img_love;
 	private ImageView img_user;
 
 	private TextView txt_mainpage;
 	private TextView txt_product;
-//	private TextView txt_love;
 	private TextView txt_user;
 
 	private Receiver mReceiver;
@@ -79,11 +70,9 @@ public class Activity_Main extends Activity_Base_Fragment {
 	private void init() {
 		img_mainpage = (ImageView) findViewById(R.id.img_mainpage);	
 		img_product = (ImageView) findViewById(R.id.img_product);
-//		img_love = (ImageView) findViewById(R.id.img_love);
 		img_user = (ImageView) findViewById(R.id.img_user);
 		txt_mainpage = (TextView) findViewById(R.id.txt_mainpage);
 		txt_product = (TextView) findViewById(R.id.txt_product);
-//		txt_love = (TextView) findViewById(R.id.txt_love);
 		txt_user = (TextView) findViewById(R.id.txt_user);
         bottom = (LinearLayout) findViewById(R.id.bottom);
 
@@ -92,7 +81,6 @@ public class Activity_Main extends Activity_Base_Fragment {
 		mFragments = new ArrayList<>();
 		mFragments.add(frag_main);
 		mFragments.add(new Frag_Product());
-//		mFragments.add(new Frag_Love());
 		mFragments.add(new Frag_User());
 		myFragmentPagerAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager(), mFragments);
 		content.setAdapter(myFragmentPagerAdapter);
@@ -115,10 +103,6 @@ public class Activity_Main extends Activity_Base_Fragment {
 				setFragProduct();
 				break;
 
-//			case R.id.layout_love:
-//				setFragLove();
-//				break;
-			
 			case R.id.layout_user:
 				UmengUtil.eventById(Activity_Main.this,R.string.self_c);
 				setFragUser();
@@ -155,12 +139,6 @@ public class Activity_Main extends Activity_Base_Fragment {
 		content.setCurrentItem(1, false);
 	}
 
-//	private void setFragLove() {
-//        resetstatus(txt_love);
-//        img_love.setImageResource(R.drawable.main_my_select);
-//		content.setCurrentItem(2, false);
-//	}
-
 	private void setFragUser() {
 		resetstatus(txt_user);
 		img_user.setImageResource(R.drawable.main_my_select);
@@ -170,11 +148,9 @@ public class Activity_Main extends Activity_Base_Fragment {
 	private void resetstatus(TextView select) {
 		img_mainpage.setImageResource(R.drawable.main_home_page_default);
 		img_product.setImageResource(R.drawable.main_product_default);
-//		img_love.setImageResource(R.drawable.main_my_default);
 		img_user.setImageResource(R.drawable.main_my_default);
 		txt_mainpage.setTextColor(getResources().getColor(R.color.txt_gray));
 		txt_product.setTextColor(getResources().getColor(R.color.txt_gray));
-//		txt_love.setTextColor(getResources().getColor(R.color.txt_gray));
 		txt_user.setTextColor(getResources().getColor(R.color.txt_gray));
 		select.setTextColor(getResources().getColor(R.color.red));
 	}

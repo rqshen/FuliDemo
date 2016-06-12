@@ -135,6 +135,34 @@
 
                         </LinearLayout>
 
+                        <View
+                            android:layout_width="1px"
+                            android:layout_height="match_parent"
+                            android:background="@color/divider"/>
+
+                        <LinearLayout
+                            android:id="@+id/ll_love"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:src="@drawable/ico_safe" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/margin_size_default"
+                                android:text="聚爱"
+                                android:textColor="@color/txt_gray"
+                                android:textSize="@dimen/main_text_default" />
+
+                        </LinearLayout>
+
                     </LinearLayout>
 
                     <View
