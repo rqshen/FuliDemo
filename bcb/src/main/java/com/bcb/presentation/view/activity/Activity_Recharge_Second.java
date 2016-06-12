@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
@@ -250,15 +251,15 @@ public class Activity_Recharge_Second extends Activity_Base implements View.OnCl
 				}
 
 				String tip = "";
-				if (mUserDetailInfo.BankCard.isBankCodeSupport()){
-					recharge_button.setClickable(true);
-					if(null != mBanklist && mBanklist.size() > 0){
-						for(BankItem bankItem : mBanklist){
-							if (bankCode.equalsIgnoreCase(bankItem.getBankCode())){
-								tip = "该卡本次最多可充值"+ bankItem.getMaxSingle() +"元，每日最多"+ bankItem.getMaxDay() +"元";
-							}
+				if(null != mBanklist && mBanklist.size() > 0){
+					for(BankItem bankItem : mBanklist){
+						if (bankCode.equalsIgnoreCase(bankItem.getBankCode())){
+							tip = "该卡本次最多可充值"+ bankItem.getMaxSingle() +"元，每日最多"+ bankItem.getMaxDay() +"元";
 						}
 					}
+				}
+				if (!TextUtils.isEmpty(tip)){
+					recharge_button.setClickable(true);
 					recharge_button.setBackgroundResource(R.drawable.button_red_selector);
 					recharge_tips.setTextColor(getResources().getColor(R.color.txt_black));
 				} else {
@@ -268,7 +269,7 @@ public class Activity_Recharge_Second extends Activity_Base implements View.OnCl
 					recharge_tips.setTextColor(getResources().getColor(R.color.red));
 
 					//调用后台接口通知发送邮件
-//					LogUtil.d("1234", "不支持银行数据提交了");
+					LogUtil.d("1234", "不支持银行数据提交了");
 					postUnSupportBankData(Activity_Recharge_Second.this,mUserDetailInfo.BankCard.BankName);
 				}
 				//设置银行卡充值提示

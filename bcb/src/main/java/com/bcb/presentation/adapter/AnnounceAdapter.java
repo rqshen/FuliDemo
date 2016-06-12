@@ -7,20 +7,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
 import com.bcb.R;
+import com.bcb.common.app.App;
 import com.bcb.common.net.BcbJsonRequest;
 import com.bcb.common.net.BcbNetworkManager;
 import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
-import com.bcb.data.bean.AnnounceRecordsBean;
 import com.bcb.common.net.UrlsOne;
+import com.bcb.data.bean.AnnounceRecordsBean;
 import com.bcb.data.util.ToastUtil;
 import com.bcb.data.util.TokenUtil;
 import com.bcb.data.util.UmengUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.List;
 
 /**
@@ -107,7 +110,6 @@ public class AnnounceAdapter extends BaseAdapter {
             getAnnounceStatus(pos);
         } else if (TokenUtil.getEncodeToken(context) == null) {
             AccessToken = null;
-            data.get(pos).loadStatus = false;
         }
 
         //项目名称
@@ -133,7 +135,7 @@ public class AnnounceAdapter extends BaseAdapter {
         viewHolder.announce_text.setText("立即预约");
         viewHolder.announce_text.setTextColor(Color.argb(221, 72, 127, 248));
         //判断是否预约
-        if (TokenUtil.getEncodeToken(context)!= null && data.get(pos).loadStatus) {
+        if (TokenUtil.getEncodeToken(context)!= null && App.saveUserInfo.isPreviewInvest(data.get(pos).PackageId)) {
             viewHolder.announce_text.setBackgroundResource(R.drawable.announce_button_gray);
             viewHolder.announce_text.setOnClickListener(null);
             viewHolder.announce_text.setText("已预约");
@@ -142,7 +144,7 @@ public class AnnounceAdapter extends BaseAdapter {
     }
 
     //查询数据
-    private void getAnnounceStatus(int pos) {
+    private void getAnnounceStatus(final int pos) {
         JSONObject obj = new JSONObject();
         try {
             obj.put("UniqueId", data.get(pos).getPackageId());
@@ -156,11 +158,10 @@ public class AnnounceAdapter extends BaseAdapter {
                     if (response.getInt("status") == 1) {
                         //设置对应位置的数据
                         if (response.getJSONObject("result").getInt("PackageStatus") == 1) {
-                            data.get(index).loadStatus = true;
+                            App.saveUserInfo.setPreviewInvest(data.get(pos).PackageId);
                             //更新UI
                             notifyDataSetChanged();
                         } else {
-                            data.get(index).loadStatus = false;
                             //更新UI
                             notifyDataSetChanged();
                         }
@@ -181,7 +182,7 @@ public class AnnounceAdapter extends BaseAdapter {
 
 
     //点击请求预约
-    private void requestAnnounce(int pos) {
+    private void requestAnnounce(final int pos) {
         JSONObject obj = new JSONObject();
         try {
             showProgressBar();
@@ -197,7 +198,7 @@ public class AnnounceAdapter extends BaseAdapter {
                         //设置对应位置的数据
                         if (response.getJSONObject("result").getInt("PredictCount") > 0) {
                             data.get(index).setPredictCount(response.getJSONObject("result").getInt("PredictCount"));
-                            data.get(index).loadStatus = true;
+                            App.saveUserInfo.setPreviewInvest(data.get(pos).PackageId);
                             //更新数据
                             notifyDataSetChanged();
                         }

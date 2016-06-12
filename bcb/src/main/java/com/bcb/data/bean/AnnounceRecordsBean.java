@@ -6,7 +6,6 @@ import java.io.Serializable;
  * Created by cain on 16/2/17.
  */
 public class AnnounceRecordsBean implements Serializable {
-    public boolean loadStatus = false;
     public String PackageId;        //项目Id
     public String Name;             //项目名称
     public int Duration;            //融资期限

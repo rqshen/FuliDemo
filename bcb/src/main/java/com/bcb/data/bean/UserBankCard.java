@@ -20,7 +20,6 @@ public class UserBankCard {
 	public String CityCode;
 	public String CityName;
 	public String BranchBankName;
-    public boolean BankCodeSupport;
 	public int BankChannel;
 
 	public int getBankChannel() {
@@ -29,14 +28,6 @@ public class UserBankCard {
 	public void setBankChannel(int bankChannel) {
 		BankChannel = bankChannel;
 	}
-
-    public boolean isBankCodeSupport() {
-        return BankCodeSupport;
-    }
-
-    public void setBankCodeSupport(boolean bankCodeSupport) {
-        BankCodeSupport = bankCodeSupport;
-    }
 
     public String getRealName() {
 		return RealName;

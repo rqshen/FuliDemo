@@ -52,8 +52,15 @@ public class SaveUserInfoUtils {
 	     editor.commit();
 	}
 
-    //是否显示专属客服提示
+	//是否已经预约新标预告
+	public void setPreviewInvest(String packageId){
+		editor.putBoolean(packageId, true);
+		editor.commit();
+	}
 
+	public boolean isPreviewInvest(String packageId){
+		return sp.getBoolean(packageId, false);
+	}
 
     //获取手势密码
     public String getGesturePassword(){
