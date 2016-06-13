@@ -43,6 +43,12 @@
         <item name="android:src">@drawable/return_delault</item>
     </style>
 
+    <style name="btn_right">
+        <item name="android:layout_width">50dip</item>
+        <item name="android:layout_height">50dip</item>
+        <item name="android:padding">15dip</item>
+    </style>
+
     <declare-styleable name="TapBar">
         <attr name="selected_btn" format="dimension" />
     </declare-styleable>

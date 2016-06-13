@@ -157,6 +157,17 @@ public class Activity_Base extends Activity {
         (findViewById(R.id.right_text)).setOnClickListener(onClickListener);
     }
 
+    @SuppressLint("NewApi")
+    public void setRightBtnVisiable(int visibility) {
+        findViewById(R.id.right_img).setVisibility(visibility);
+    }
+
+    @SuppressLint("NewApi")
+    public void setRightBtnImg(int drawable, View.OnClickListener onClickListener){
+        ((ImageView) findViewById(R.id.right_img)).setImageResource(drawable);
+        (findViewById(R.id.right_img)).setOnClickListener(onClickListener);
+    }
+
     @Override
 	protected void onStart() {
 		super.onStart();

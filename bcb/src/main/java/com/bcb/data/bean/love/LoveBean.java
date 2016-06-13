@@ -8,76 +8,85 @@ import java.io.Serializable;
  * @desc 聚爱项目详情
  */
 public class LoveBean implements Serializable{
-    private String PackageId;//项目编号
-    private String Name;//标题
-    private String ImagePath;//图片路径
-    private String Company;//公司
-    private String Desc;//说明
-    private int Progress;//进度
-    private int Support;//支持次数
-    private float Money;//已筹资金额
+    private String AggregateId;//项目编号
+    private String Title;//标题
+    private String ThumbnailImg;//图片路径
+    private String CompanyName;//公司
+    private String Description;//说明
+    private String Jumplink;//跳转链接
+    private int Supports;//支持次数
+    private int Status;//筹款中（1）筹款完成（2）
+    private float Amounts;//已筹资金额
 
-    public String getPackageId() {
-        return PackageId;
+    public String getAggregateId() {
+        return AggregateId;
     }
 
-    public void setPackageId(String packageId) {
-        PackageId = packageId;
+    public void setAggregateId(String aggregateId) {
+        AggregateId = aggregateId;
     }
 
-    public String getName() {
-        return Name;
+    public String getTitle() {
+        return Title;
     }
 
-    public void setName(String name) {
-        Name = name;
+    public void setTitle(String title) {
+        Title = title;
     }
 
-    public String getImagePath() {
-        return ImagePath;
+    public String getThumbnailImg() {
+        return ThumbnailImg;
     }
 
-    public void setImagePath(String imagePath) {
-        ImagePath = imagePath;
+    public void setThumbnailImg(String thumbnailImg) {
+        ThumbnailImg = thumbnailImg;
     }
 
-    public String getCompany() {
-        return Company;
+    public String getCompanyName() {
+        return CompanyName;
     }
 
-    public void setCompany(String company) {
-        Company = company;
+    public void setCompanyName(String companyName) {
+        CompanyName = companyName;
     }
 
-    public String getDesc() {
-        return Desc;
+    public String getDescription() {
+        return Description;
     }
 
-    public void setDesc(String desc) {
-        Desc = desc;
+    public void setDescription(String description) {
+        Description = description;
     }
 
-    public int getProgress() {
-        return Progress;
+    public String getJumplink() {
+        return Jumplink;
     }
 
-    public void setProgress(int progress) {
-        Progress = progress;
+    public void setJumplink(String jumplink) {
+        Jumplink = jumplink;
     }
 
-    public int getSupport() {
-        return Support;
+    public int getSupports() {
+        return Supports;
     }
 
-    public void setSupport(int support) {
-        Support = support;
+    public void setSupports(int supports) {
+        Supports = supports;
     }
 
-    public float getMoney() {
-        return Money;
+    public int getStatus() {
+        return Status;
     }
 
-    public void setMoney(float money) {
-        Money = money;
+    public void setStatus(int status) {
+        Status = status;
+    }
+
+    public float getAmounts() {
+        return Amounts;
+    }
+
+    public void setAmounts(float amounts) {
+        Amounts = amounts;
     }
 }

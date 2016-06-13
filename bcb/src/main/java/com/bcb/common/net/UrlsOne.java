@@ -152,7 +152,7 @@ public class UrlsOne {
 	public static final String WithdrawCouponInfo = host + "/api/v1.3/d3625b30882b";
 
     // 用户钱包信息
-    public static String UserWalletMessage = host + "/api/v1.0/e7401af956b5";
+    public static final String UserWalletMessage = host + "/api/v1.0/e7401af956b5";
 
     //参加每日福利
     public static final String JoinDailyWelfare = host + "/api/v1.3.4/a60100aabccb";
@@ -163,6 +163,9 @@ public class UrlsOne {
 
 	//不支持银行邮件发送接口
 	public static final String UnSupportBankEmail = host + "/api/v1.5.2/262ade95357b";
+
+	//聚爱项目列表
+	public static final String LoveProduct = host + "/api/v1.6/a6240133fbae";
 
 	// 安全保障WebView
 	public static final String SecureWebView = "http://wap.100cb.cn/static/security.html";

@@ -57,12 +57,13 @@
         android:orientation="horizontal">
         
         <ImageView
+            android:id="@+id/love_image"
             android:layout_width="80dp"
             android:layout_height="60dp"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="12dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/banner01"/>
+            android:src="@drawable/love_loading"/>
 
         <TextView
             android:id="@+id/desc"
@@ -75,22 +76,6 @@
             android:ellipsize="end"
             android:maxLength="20"
             android:layout_height="wrap_content" />
-
-        <com.bcb.presentation.view.custom.CircleProgressBar
-            android:id="@+id/love_circle_progress"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="12dp"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:gravity="center_horizontal"
-            android:background="@android:color/transparent"
-            android:textSize="20sp"
-            app:cpbNeedAnim="false"
-            app:cpbStrokeWidth="6"
-            app:cpbBackgroundColor="#e1e1e1"
-            app:cpbForegroundColor="@color/red"
-            app:cpbProgressTextColor="@color/red"
-            app:cpbWholeBackgroundColor="@android:color/transparent"/>
 
     </LinearLayout>
 
@@ -108,25 +93,23 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:gravity="center_horizontal"
+            android:gravity="center"
             android:layout_height="wrap_content">
             
-            <TextView
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/ico_money"
-                android:gravity="center_vertical"
-                android:drawablePadding="5dp"
-                android:text="已筹资"/>
+                android:src="@drawable/ico_money"
+                android:gravity="center_vertical"/>
 
             <TextView
                 android:id="@+id/love_money"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="5dp"
                 android:singleLine="true"
                 android:ellipsize="end"
-                android:text="0000元"
+                android:text="100000.00元"
                 android:textColor="@color/red"/>
             
         </LinearLayout>
@@ -139,25 +122,52 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:gravity="center_horizontal"
+            android:gravity="center"
             android:layout_height="wrap_content">
 
-            <TextView
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/ico_support"
-                android:gravity="center_vertical"
-                android:drawablePadding="5dp"
-                android:text="支持次数"/>
+                android:src="@drawable/ico_support"
+                android:gravity="center_vertical" />
 
             <TextView
                 android:id="@+id/love_support"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="5dp"
                 android:singleLine="true"
                 android:ellipsize="end"
                 android:text="000次"
+                android:textColor="@color/red"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="@color/linegray" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ico_time"
+                android:gravity="center_vertical" />
+
+            <TextView
+                android:id="@+id/love_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:text="筹建中"
                 android:textColor="@color/red"/>
 
         </LinearLayout>

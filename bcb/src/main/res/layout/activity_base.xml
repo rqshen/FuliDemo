@@ -79,6 +79,13 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/main_text_default" />
         </LinearLayout>
+
+        <!-- 右边的图标 -->
+        <ImageView
+            android:id="@+id/right_img"
+            style="@style/btn_right"
+            android:layout_alignParentRight="true"
+            android:visibility="gone" />
     </RelativeLayout>
     <LinearLayout
         android:id="@+id/content"

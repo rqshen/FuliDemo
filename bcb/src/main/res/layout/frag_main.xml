@@ -75,7 +75,7 @@
                                 android:layout_marginTop="@dimen/margin_size_default"
                                 android:text="每日福利"
                                 android:textColor="@color/txt_gray"
-                                android:textSize="@dimen/main_text_default" />
+                                android:textSize="@dimen/main_text_small" />
 
                         </LinearLayout>
 
@@ -103,7 +103,7 @@
                                 android:layout_marginTop="@dimen/margin_size_default"
                                 android:text="理财学院"
                                 android:textColor="@color/txt_gray"
-                                android:textSize="@dimen/main_text_default" />
+                                android:textSize="@dimen/main_text_small" />
 
                         </LinearLayout>
 
@@ -131,7 +131,7 @@
                                 android:layout_marginTop="@dimen/margin_size_default"
                                 android:text="安全保障"
                                 android:textColor="@color/txt_gray"
-                                android:textSize="@dimen/main_text_default" />
+                                android:textSize="@dimen/main_text_small" />
 
                         </LinearLayout>
 
@@ -151,7 +151,7 @@
                             <ImageView
                                 android:layout_width="40dp"
                                 android:layout_height="40dp"
-                                android:src="@drawable/ico_safe" />
+                                android:src="@drawable/ico_love" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -159,7 +159,7 @@
                                 android:layout_marginTop="@dimen/margin_size_default"
                                 android:text="聚爱"
                                 android:textColor="@color/txt_gray"
-                                android:textSize="@dimen/main_text_default" />
+                                android:textSize="@dimen/main_text_small" />
 
                         </LinearLayout>
 

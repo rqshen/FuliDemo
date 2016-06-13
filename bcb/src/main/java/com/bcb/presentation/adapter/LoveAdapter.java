@@ -5,12 +5,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bcb.R;
 import com.bcb.data.bean.love.LoveBean;
-import com.bcb.presentation.view.custom.CircleProgressBar;
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -67,17 +66,20 @@ public class LoveAdapter extends BaseAdapter{
         viewHolder.company = (TextView) view.findViewById(R.id.company);
         viewHolder.love_money = (TextView) view.findViewById(R.id.love_money);
         viewHolder.love_support = (TextView) view.findViewById(R.id.love_support);
-        viewHolder.love_circle_progress = (CircleProgressBar) view.findViewById(R.id.love_circle_progress);
+        viewHolder.love_status = (TextView) view.findViewById(R.id.love_status);
+        viewHolder.love_image = (ImageView) view.findViewById(R.id.love_image);
     }
 
     //设置ViewHolder数据
     private void setDataWithViewHolder(ViewHolder viewHolder, int pos) {
-        viewHolder.name.setText(loveBeens.get(pos).getName());
-        viewHolder.desc.setText(loveBeens.get(pos).getDesc());
-        viewHolder.company.setText(loveBeens.get(pos).getCompany());
-        viewHolder.love_money.setText(loveBeens.get(pos).getMoney() + "元");
-        viewHolder.love_support.setText(loveBeens.get(pos).getSupport() + "次");
-        viewHolder.love_circle_progress.setProgress(loveBeens.get(pos).getProgress());
+        viewHolder.name.setText(loveBeens.get(pos).getTitle());
+        viewHolder.desc.setText(loveBeens.get(pos).getDescription());
+        viewHolder.company.setText(loveBeens.get(pos).getCompanyName());
+        viewHolder.love_money.setText(loveBeens.get(pos).getAmounts() + "万元");
+        viewHolder.love_support.setText(loveBeens.get(pos).getSupports() + "次");
+        String status = 1 == loveBeens.get(pos).getStatus() ? "筹款中" : "筹款完成";
+        viewHolder.love_status.setText(status);
+        Glide.with(ctx).load(loveBeens.get(pos).getThumbnailImg()).into(viewHolder.love_image);
     }
 
     private class ViewHolder {
@@ -86,6 +88,7 @@ public class LoveAdapter extends BaseAdapter{
         TextView company;
         TextView love_money;
         TextView love_support;
-        CircleProgressBar love_circle_progress;
+        TextView love_status;
+        ImageView love_image;
     }
 }

@@ -17,6 +17,8 @@ public interface BcbRequestTag {
     String MainAdRotatorTag = "BcbMainAdRotatorRequest";
     //产品列表
     String MainProductTag = "BcbMainProductRequest";
+    //聚爱列表
+    String LoveProductTag = "BcbLoveProductRequest";
     //热门驿站
     String MainHotStationTag = "BcbMainHotStationRequest";
     //安全保障

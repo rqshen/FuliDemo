@@ -26,12 +26,13 @@ import com.bcb.common.app.App;
 import com.bcb.common.net.UrlsOne;
 import com.bcb.data.util.BitmapUtil;
 import com.bcb.data.util.DESUtil;
+import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MQCustomerManager;
 import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.MyConstants;
+import com.bcb.presentation.view.custom.Browser.X5WebView;
 import com.bcb.presentation.view.custom.CustomDialog.DialogWidget;
 import com.bcb.presentation.view.custom.CustomDialog.IdentifyAlertView;
-import com.bcb.presentation.view.custom.Browser.X5WebView;
 import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
 import com.tencent.mm.sdk.modelmsg.WXMediaMessage;
 import com.tencent.mm.sdk.modelmsg.WXWebpageObject;
@@ -73,6 +74,22 @@ public class Activity_Browser extends Activity_Base {
 	}
 
 	/**
+	 * 聚爱跳转过来的
+	 * @param ctx
+	 * @param tittle
+	 * @param isLove
+     * @param url
+     */
+	public static void launcheFromLove(Context ctx, String tittle, boolean isLove, String url){
+		Intent intent = new Intent();
+		intent.setClass(ctx, Activity_Browser.class);
+		intent.putExtra("title", tittle);
+		intent.putExtra("url", url);
+		intent.putExtra("isLove", isLove);
+		ctx.startActivity(intent);
+	}
+
+	/**
 	 * 启动WebView，带是否包含token的状态
 	 * @param ctx
 	 * @param tittle
@@ -85,6 +102,7 @@ public class Activity_Browser extends Activity_Base {
 		intent.putExtra("url", url);
 		intent.putExtra("hasToken", hasToken);
 		ctx.startActivity(intent);
+		LogUtil.d("url", url);
 	}
 
 	@Override
@@ -97,8 +115,17 @@ public class Activity_Browser extends Activity_Base {
 		Intent intent = getIntent();
 		if (intent != null) {
 			//最终的URL
-			mIntentUrl =getUrlStrWithDES();
+			mIntentUrl = getUrlStrWithDES();
 			title = intent.getStringExtra("title");
+			if (getIntent().getBooleanExtra("isLove",false)){
+				setRightBtnVisiable(View.VISIBLE);
+				setRightBtnImg(R.drawable.ico_share, new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+
+					}
+				});
+			}
 		}
 		//硬件加速
 		try {
