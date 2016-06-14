@@ -122,7 +122,10 @@ public class Activity_Browser extends Activity_Base {
 				setRightBtnImg(R.drawable.ico_share, new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-
+						//注册微信
+						registerToWeiXin();
+						//打开对话框
+						popShareToWeiXin("测试标题",mIntentUrl,"测试内容");
 					}
 				});
 			}
@@ -157,7 +160,7 @@ public class Activity_Browser extends Activity_Base {
 			return url;
 		}
 		byte[] data = null;
-		byte[] encodeByte_ECB = new byte[0];
+		byte[] encodeByte_ECB;
 		try {
 			data =  App.saveUserInfo.getLocalPhone().getBytes("UTF-8");
 		} catch (UnsupportedEncodingException e) {
@@ -284,12 +287,18 @@ public class Activity_Browser extends Activity_Base {
 		iwxapi = WXAPIFactory.createWXAPI(this, MyConstants.APP_ID, true);
 		iwxapi.registerApp(MyConstants.APP_ID);
 	}
+
 	//弹框提示是否分享到微信对话还是分享到微信朋友圈
 	private void popShareToWeiXin(String urlStr) {
 		String values[] = urlStr.split("\\|");
 		final String title = values[1];
 		final String tmpurl = values[2];
 		final String content = values[3];
+		popShareToWeiXin(title,tmpurl,content);
+	}
+
+	//弹框提示是否分享到微信对话还是分享到微信朋友圈
+	private void popShareToWeiXin(final String title,final String url,final String content) {
 		final Dialog certDialog = new Dialog(Activity_Browser.this);
 		View view = View.inflate(Activity_Browser.this, R.layout.dialog_alertview, null);
 
@@ -316,7 +325,7 @@ public class Activity_Browser extends Activity_Base {
 			@Override
 			public void onClick(View view) {
 				WXWebpageObject webpage = new WXWebpageObject();
-				webpage.webpageUrl = tmpurl;
+				webpage.webpageUrl = url;
 				WXMediaMessage msg = new WXMediaMessage(webpage);
 				msg.title = title;
 				msg.description = content;
@@ -338,7 +347,7 @@ public class Activity_Browser extends Activity_Base {
 			public void onClick(View view) {
 
 				WXWebpageObject webpage = new WXWebpageObject();
-				webpage.webpageUrl = tmpurl;
+				webpage.webpageUrl = url;
 				WXMediaMessage msg = new WXMediaMessage(webpage);
 				msg.title = title;
 				msg.description = content;
