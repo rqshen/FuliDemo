@@ -411,8 +411,10 @@ public class Activity_Browser extends Activity_Base {
 
 	@Override
 	protected void onDestroy() {
-		if (mWebView != null)
+		if (mWebView != null){
+			mWebView.setVisibility(View.GONE);
 			mWebView.destroy();
+		}
 		super.onDestroy();
 	}
 

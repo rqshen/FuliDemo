@@ -1,29 +1,24 @@
 package com.bcb.presentation.view.activity;
 
-import com.bcb.R;
-import com.bcb.common.app.App;
-import com.bcb.presentation.view.custom.AlertView.AlertView;
-import com.umeng.analytics.MobclickAgent;
-import com.bcb.data.util.TokenUtil;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.bcb.R;
+import com.bcb.common.app.App;
+import com.bcb.data.util.TokenUtil;
+import com.bcb.presentation.view.custom.AlertView.AlertView;
+import com.umeng.analytics.MobclickAgent;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

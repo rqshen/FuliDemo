@@ -53,8 +53,7 @@ public class X5WebView extends WebView {
 		}
 
 		public void onReceivedHttpAuthRequest(WebView webview,
-				com.tencent.smtt.export.external.interfaces.HttpAuthHandler httpAuthHandlerhost, String host,
-				String realm) {
+				com.tencent.smtt.export.external.interfaces.HttpAuthHandler httpAuthHandlerhost, String host, String realm) {
 			boolean flag = httpAuthHandlerhost.useHttpAuthUsernamePassword();
 		}
 	};
@@ -98,24 +97,22 @@ public class X5WebView extends WebView {
 		 */
 		@Override
 		public boolean onCreateWindow(WebView arg0, boolean arg1, boolean arg2, Message msg) {
-			if (X5WebView.isSmallWebViewDisplayed == true) {
-
+			if (X5WebView.isSmallWebViewDisplayed) {
 				WebView.WebViewTransport webViewTransport = (WebView.WebViewTransport) msg.obj;
 				WebView webView = new WebView(X5WebView.this.getContext()) {
-
 					protected void onDraw(Canvas canvas) {
 						super.onDraw(canvas);
 						Paint paint = new Paint();
 						paint.setColor(Color.GREEN);
 						paint.setTextSize(15);
 						canvas.drawText("新建窗口", 10, 10, paint);
-					};
+					}
 				};
 				webView.setWebViewClient(new WebViewClient() {
 					public boolean shouldOverrideUrlLoading(WebView arg0, String arg1) {
 						arg0.loadUrl(arg1);
 						return true;
-					};
+					}
 				});
 				LayoutParams lp = new LayoutParams(400, 600);
 				lp.gravity = Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL;
@@ -128,22 +125,6 @@ public class X5WebView extends WebView {
 
 		@Override
 		public boolean onJsAlert(WebView arg0, String arg1, String arg2, JsResult arg3) {
-			/**
-			 * 这里写入你自定义的window alert
-			 */
-			// AlertDialog.Builder builder = new Builder(getContext());
-			// builder.setTitle("X5内核");
-			// builder.setPositiveButton("确定", new
-			// DialogInterface.OnClickListener() {
-			//
-			// @Override
-			// public void onClick(DialogInterface dialog, int which) {
-			// dialog.dismiss();
-			// }
-			// });
-			// builder.show();
-			// arg3.confirm();
-			// return true;
 			Log.i("yuanhaizhou", "setX5webview = null");
 			return super.onJsAlert(null, "www.baidu.com", "aa", arg3);
 		}
@@ -213,27 +194,6 @@ public class X5WebView extends WebView {
 		// this.getSettingsExtension().setPageCacheCapacity(IX5WebSettings.DEFAULT_CACHE_CAPACITY);//extension
 		// settings 的设计
 	}
-
-//	@Override
-//	protected boolean drawChild(Canvas canvas, View child, long drawingTime) {
-//		boolean ret = super.drawChild(canvas, child, drawingTime);
-//		canvas.save();
-//		Paint paint = new Paint();
-//		paint.setColor(0x7fff0000);
-//		paint.setTextSize(24.f);
-//		paint.setAntiAlias(true);
-//		if (getX5WebViewExtension() != null) {
-//			canvas.drawText(this.getContext().getPackageName() + "-pid:" + android.os.Process.myPid(), 10, 50, paint);
-//			canvas.drawText("X5  Core:" + QbSdk.getTbsVersion(this.getContext()), 10, 100, paint);
-//		} else {
-//			canvas.drawText(this.getContext().getPackageName() + "-pid:" + android.os.Process.myPid(), 10, 50, paint);
-//			canvas.drawText("Sys Core", 10, 100, paint);
-//		}
-//		canvas.drawText(Build.MANUFACTURER, 10, 150, paint);
-//		canvas.drawText(Build.MODEL, 10, 200, paint);
-//		canvas.restore();
-//		return ret;
-//	}
 
 	public X5WebView(Context arg0) {
 		super(arg0);

@@ -145,7 +145,7 @@
     <LinearLayout
         android:id="@+id/keyboard"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="220dp"
         android:layout_alignParentBottom="true"
         android:background="#CFCFCF"
         android:orientation="vertical" >
@@ -163,7 +163,8 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="1dp"
                 android:layout_weight="1"
-                android:background="@drawable/keyboard_one_selector"
+                android:src="@drawable/keyboard_one_selector"
+                android:scaleType="centerCrop"
                 android:contentDescription="@string/action_settings" />
 
             <ImageView
@@ -175,7 +176,8 @@
                 android:layout_marginLeft="1dp"
                 android:layout_marginRight="1dp"
                 android:layout_weight="1"
-                android:background="@drawable/keyboard_two_selector"
+                android:src="@drawable/keyboard_two_selector"
+                android:scaleType="centerCrop"
                 android:contentDescription="@string/action_settings" />
 
             <ImageView
@@ -185,7 +187,8 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="1dp"
                 android:layout_weight="1"
-                android:background="@drawable/keyboard_three_selector"
+                android:src="@drawable/keyboard_three_selector"
+                android:scaleType="centerCrop"
                 android:contentDescription="@string/action_settings" />
         </LinearLayout>
 
@@ -202,7 +205,8 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="1dp"
                 android:layout_weight="1"
-                android:background="@drawable/keyboard_four_selector"
+                android:src="@drawable/keyboard_four_selector"
+                android:scaleType="centerCrop"
                 android:contentDescription="@string/action_settings" />
 
             <ImageView
@@ -214,7 +218,8 @@
                 android:layout_marginLeft="1dp"
                 android:layout_marginRight="1dp"
                 android:layout_weight="1"
-                android:background="@drawable/keyboard_five_selector"
+                android:src="@drawable/keyboard_five_selector"
+                android:scaleType="centerCrop"
                 android:contentDescription="@string/action_settings" />
 
             <ImageView
@@ -224,7 +229,8 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="1dp"
                 android:layout_weight="1"
-                android:background="@drawable/keyboard_sex_selector"
+                android:src="@drawable/keyboard_sex_selector"
+                android:scaleType="centerCrop"
                 android:contentDescription="@string/action_settings" />
         </LinearLayout>
 
@@ -241,7 +247,8 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="1dp"
                 android:layout_weight="1"
-                android:background="@drawable/keyboard_seven_selector"
+                android:src="@drawable/keyboard_seven_selector"
+                android:scaleType="centerCrop"
                 android:contentDescription="@string/action_settings" />
 
             <ImageView
@@ -253,7 +260,8 @@
                 android:layout_marginLeft="1dp"
                 android:layout_marginRight="1dp"
                 android:layout_weight="1"
-                android:background="@drawable/keyboard_eight_selector"
+                android:src="@drawable/keyboard_eight_selector"
+                android:scaleType="centerCrop"
                 android:contentDescription="@string/action_settings" />
 
             <ImageView
@@ -263,7 +271,8 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="1dp"
                 android:layout_weight="1"
-                android:background="@drawable/keyboard_nine_selector"
+                android:src="@drawable/keyboard_nine_selector"
+                android:scaleType="centerCrop"
                 android:contentDescription="@string/action_settings" />
         </LinearLayout>
 
@@ -288,7 +297,8 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:background="@drawable/keyboard_zero_selector"
+                android:src="@drawable/keyboard_zero_selector"
+                android:scaleType="centerCrop"
                 android:contentDescription="@string/action_settings" />
 
             <ImageView
@@ -297,7 +307,8 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:background="@drawable/keyboard_del_selector"
+                android:src="@drawable/keyboard_del_selector"
+                android:scaleType="centerCrop"
                 android:contentDescription="@string/action_settings" />
         </LinearLayout>
     </LinearLayout>

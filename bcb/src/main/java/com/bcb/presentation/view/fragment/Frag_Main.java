@@ -972,7 +972,7 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPa
                 public void onSureClick() {
                     dialogWidget.dismiss();
                     dialogWidget = null;
-                    if (expiredRecordsBeans != null) {
+                    if (expiredRecordsBeans != null && expiredRecordsBeans.size() > 0) {
                         Activity_ExpiredProject_Introduction.launche(ctx,
                                 expiredRecordsBeans.get(0).getPackageId(),
                                 expiredRecordsBeans.get(0).getName());

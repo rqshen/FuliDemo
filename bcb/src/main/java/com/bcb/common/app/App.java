@@ -93,6 +93,8 @@ public class App extends Application implements AMapLocationListener{
 		if (null != saveUserInfo.getAccess_Token()){
 			WelfareBean welfareBean = DbUtil.getWelfare();
 			welfare = null == welfareBean ? "" : welfareBean.getValue();
+		} else {
+			welfare = "";
 		}
 
 		//设置极光推送别名
@@ -108,7 +110,7 @@ public class App extends Application implements AMapLocationListener{
 	}
 
 	public String getWelfare() {
-		return welfare;
+		return null == saveUserInfo.getAccess_Token() ? "" : welfare;
 	}
 
 	public void setWelfare(String welfare) {

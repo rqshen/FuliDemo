@@ -352,4 +352,13 @@ public class Activity_WebView extends Activity_Base {
     private String buildTransaction(final String type) {
         return (type == null) ? String.valueOf(System.currentTimeMillis()) : type + System.currentTimeMillis();
     }
+
+    @Override
+    protected void onDestroy() {
+        if (webView != null){
+            webView.setVisibility(View.GONE);
+            webView.destroy();
+        }
+        super.onDestroy();
+    }
 }
