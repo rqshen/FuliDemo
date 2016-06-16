@@ -11,6 +11,7 @@ import com.bcb.data.util.MyConstants;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
+import java.util.Map;
 
 /**
  * Created by cain on 16/4/15.
@@ -88,8 +89,11 @@ public class BcbJsonRequest extends BcbRequest<JSONObject> {
 
             //返回不成功，则提示是否成功
             if (response.statusCode != 200) {
-                LogUtil.d(getUrl(), "返回出错，状态码为：" + response.statusCode);
-                return null;
+                LogUtil.d("error", "返回出错，状态码为：" + response.statusCode + " 请求链接：" + getUrl());
+//                for (String key : response.headers.keySet()){
+//                    LogUtil.d("error", "key：" + key + " value:" + response.headers.get(key));
+//                }
+                return Response.error(new ParseError());
             }
 
             //获取解密的key
