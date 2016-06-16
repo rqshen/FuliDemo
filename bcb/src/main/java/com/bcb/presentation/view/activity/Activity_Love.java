@@ -219,8 +219,10 @@ public class Activity_Love extends Activity_Base implements AdapterView.OnItemCl
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         String url = loveBeens.get(position).getJumplink();
+        String title = loveBeens.get(position).getTitle();
+        String content = loveBeens.get(position).getDescription();
         if (!TextUtils.isEmpty(url)){
-            Activity_Browser.launcheFromLove(ctx, "聚爱", true, url);
+            Activity_Browser.launcheFromLove(ctx, "聚爱", true, title, content, url);
         }
     }
 }

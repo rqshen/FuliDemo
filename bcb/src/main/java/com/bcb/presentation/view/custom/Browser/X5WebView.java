@@ -15,7 +15,6 @@ import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.tencent.smtt.export.external.interfaces.IX5WebChromeClient.CustomViewCallback;
@@ -25,7 +24,6 @@ import com.tencent.smtt.sdk.ValueCallback;
 import com.tencent.smtt.sdk.WebChromeClient;
 import com.tencent.smtt.sdk.WebSettings;
 import com.tencent.smtt.sdk.WebSettings.LayoutAlgorithm;
-import com.tencent.smtt.sdk.WebStorage;
 import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewClient;
 
@@ -34,15 +32,9 @@ import java.util.Map;
 
 public class X5WebView extends WebView {
 	public static final int FILE_CHOOSER = 0;
-	private String resourceUrl = "";
-	private WebView smallWebView;
 	private static boolean isSmallWebViewDisplayed = false;
-	private boolean isClampedY = false;
 	private Map<String, Object> mJsBridges;
-	private TextView tog;
-	RelativeLayout.LayoutParams layoutParams;
-	private RelativeLayout refreshRela;
-	TextView title;
+	private TextView title;
 	private WebViewClient client = new WebViewClient() {
 		/**
 		 * 防止加载网页时调起系统浏览器
@@ -154,12 +146,12 @@ public class X5WebView extends WebView {
 	};
 
 	@SuppressLint("SetJavaScriptEnabled")
-	public X5WebView(Context arg0, AttributeSet arg1) {
-		super(arg0, arg1);
+	public X5WebView(Context context, AttributeSet attributeSet) {
+		super(context, attributeSet);
+
 		this.setWebViewClientExtension(new X5WebViewEventHandler(this));// 配置X5webview的事件处理
 		this.setWebViewClient(client);
 		this.setWebChromeClient(chromeClient);
-		WebStorage webStorage = WebStorage.getInstance();
 		initWebViewSettings();
 		this.getView().setClickable(true);
 		this.getView().setOnTouchListener(new OnTouchListener() {
@@ -289,4 +281,5 @@ public class X5WebView extends WebView {
 	protected boolean tbs_onTouchEvent(MotionEvent event, View view) {
 		return super_onTouchEvent(event);
 	}
+
 }

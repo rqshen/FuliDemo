@@ -24,11 +24,10 @@
 
             <ImageView
                 android:id="@+id/pay_cancel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
                 android:layout_centerVertical="true"
-                android:layout_alignParentLeft="true"
-                android:background="@drawable/ico_dismiss" />
+                android:src="@drawable/ico_dismiss" />
 
             <TextView
                 android:id="@+id/pay_title"

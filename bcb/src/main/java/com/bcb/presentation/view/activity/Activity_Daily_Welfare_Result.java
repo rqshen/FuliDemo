@@ -11,6 +11,7 @@ import android.os.Message;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.BounceInterpolator;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -20,7 +21,6 @@ import com.bcb.R;
 import com.bcb.common.event.BroadcastEvent;
 import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.UmengUtil;
-import com.bcb.presentation.view.custom.Animation.BounceInterpolator;
 
 import de.greenrobot.event.EventBus;
 

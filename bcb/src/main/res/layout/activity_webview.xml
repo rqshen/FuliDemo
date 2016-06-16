@@ -3,13 +3,13 @@
               android:id="@+id/root"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:background="@color/background"
+              android:background="@android:color/transparent"
               android:orientation="vertical" >
     <RelativeLayout
         android:id="@+id/load_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="@android:color/transparent"
         android:gravity="center" >
     </RelativeLayout>
 

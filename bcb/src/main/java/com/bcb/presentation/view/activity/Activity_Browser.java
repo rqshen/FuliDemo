@@ -20,12 +20,14 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.bcb.R;
 import com.bcb.common.app.App;
 import com.bcb.common.net.UrlsOne;
 import com.bcb.data.util.BitmapUtil;
 import com.bcb.data.util.DESUtil;
+import com.bcb.data.util.LoadingLayoutMgr;
 import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MQCustomerManager;
 import com.bcb.data.util.MyActivityManager;
@@ -55,6 +57,9 @@ public class Activity_Browser extends Activity_Base {
 
 	private X5WebView mWebView;
 	private ViewGroup mViewParent;
+	//加载刷新工具
+	private RelativeLayout loading_layout;
+	private LoadingLayoutMgr ld;
 	//加密的key
 	private static final String key = "9e469d566f5d41j1a83b9rf4";
 	private String mIntentUrl;
@@ -80,12 +85,14 @@ public class Activity_Browser extends Activity_Base {
 	 * @param isLove
      * @param url
      */
-	public static void launcheFromLove(Context ctx, String tittle, boolean isLove, String url){
+	public static void launcheFromLove(Context ctx, String tittle, boolean isLove, String loveTitle, String loveContent, String url){
 		Intent intent = new Intent();
 		intent.setClass(ctx, Activity_Browser.class);
 		intent.putExtra("title", tittle);
 		intent.putExtra("url", url);
 		intent.putExtra("isLove", isLove);
+		intent.putExtra("loveTitle", loveTitle);
+		intent.putExtra("loveContent", loveContent);
 		ctx.startActivity(intent);
 	}
 
@@ -118,6 +125,8 @@ public class Activity_Browser extends Activity_Base {
 			mIntentUrl = getUrlStrWithDES();
 			title = intent.getStringExtra("title");
 			if (getIntent().getBooleanExtra("isLove",false)){
+				final String loveTitle = intent.getStringExtra("loveTitle");
+				final String loveContent = intent.getStringExtra("loveContent");
 				setRightBtnVisiable(View.VISIBLE);
 				setRightBtnImg(R.drawable.ico_share, new View.OnClickListener() {
 					@Override
@@ -125,7 +134,7 @@ public class Activity_Browser extends Activity_Base {
 						//注册微信
 						registerToWeiXin();
 						//打开对话框
-						popShareToWeiXin("测试标题",mIntentUrl,"测试内容");
+						popShareToWeiXin(loveTitle,mIntentUrl,loveContent);
 					}
 				});
 			}
@@ -133,8 +142,7 @@ public class Activity_Browser extends Activity_Base {
 		//硬件加速
 		try {
 			if (Build.VERSION.SDK_INT >= 11) {
-				getWindow()
-						.setFlags(
+				getWindow().setFlags(
 								WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED,
 								WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED);
 			}
@@ -227,6 +235,8 @@ public class Activity_Browser extends Activity_Base {
 
 			@Override
 			public void onPageFinished(WebView view, String url) {
+				loading_layout.setVisibility(View.GONE);
+				loading_layout.removeAllViews();
 				super.onPageFinished(view, url);
 			}
 		});
@@ -241,6 +251,11 @@ public class Activity_Browser extends Activity_Base {
 
 			}
 		});
+
+		//加载控件
+		loading_layout = (RelativeLayout) findViewById(R.id.load_layout);
+		ld = new LoadingLayoutMgr(Activity_Browser.this, false, "正在加载...");
+		loading_layout.addView(ld.getLayout());
 
 		WebSettings webSetting = mWebView.getSettings();
 		webSetting.setAllowFileAccess(true);

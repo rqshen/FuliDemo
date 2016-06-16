@@ -17,6 +17,7 @@ public class LoveBean implements Serializable{
     private int Supports;//支持次数
     private int Status;//筹款中（1）筹款完成（2）
     private float Amounts;//已筹资金额
+    private String CreateDate;
 
     public String getAggregateId() {
         return AggregateId;
@@ -88,5 +89,13 @@ public class LoveBean implements Serializable{
 
     public void setAmounts(float amounts) {
         Amounts = amounts;
+    }
+
+    public String getCreateDate() {
+        return CreateDate;
+    }
+
+    public void setCreateDate(String createDate) {
+        CreateDate = createDate;
     }
 }
