@@ -9,12 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bcb.R;
-
 import com.bcb.data.bean.project.KeyboardEnum;
-import com.lidroid.xutils.ViewUtils;
-import com.lidroid.xutils.view.annotation.ViewInject;
-import com.lidroid.xutils.view.annotation.event.OnClick;
-import com.lidroid.xutils.view.annotation.event.OnLongClick;
 
 import java.util.ArrayList;
 
@@ -23,112 +18,85 @@ import java.util.ArrayList;
  * Created by cain on 16/2/1.
  */
 @SuppressLint("InflateParams")
-public class PayPasswordView {
+public class PayPasswordView implements View.OnClickListener, View.OnLongClickListener{
 
-    @ViewInject(R.id.pay_keyboard_del)
     private ImageView del;
-    @ViewInject(R.id.pay_keyboard_zero)
     private ImageView zero;
-    @ViewInject(R.id.pay_keyboard_one)
     private ImageView one;
-    @ViewInject(R.id.pay_keyboard_two)
     private ImageView two;
-    @ViewInject(R.id.pay_keyboard_three)
     private ImageView three;
-    @ViewInject(R.id.pay_keyboard_four)
     private ImageView four;
-    @ViewInject(R.id.pay_keyboard_five)
     private ImageView five;
-    @ViewInject(R.id.pay_keyboard_sex)
     private ImageView sex;
-    @ViewInject(R.id.pay_keyboard_seven)
     private ImageView seven;
-    @ViewInject(R.id.pay_keyboard_eight)
     private ImageView eight;
-    @ViewInject(R.id.pay_keyboard_nine)
     private ImageView nine;
-    @ViewInject(R.id.pay_box1)
     private TextView box1;
-    @ViewInject(R.id.pay_box2)
     private TextView box2;
-    @ViewInject(R.id.pay_box3)
     private TextView box3;
-    @ViewInject(R.id.pay_box4)
     private TextView box4;
-    @ViewInject(R.id.pay_box5)
     private TextView box5;
-    @ViewInject(R.id.pay_box6)
     private TextView box6;
-    @ViewInject(R.id.pay_title)
     private TextView title;
-    @ViewInject(R.id.pay_content)
     private TextView content;
-    @ViewInject(R.id.pay_cancel)
     private ImageView cancel;
 
     private ArrayList<String> mList=new ArrayList<String>();
     private View mView;
     private OnPayListener listener;
     private Context mContext;
+
     //构造函数
-    public PayPasswordView(String monney,
-                           Context mContext,
-                           OnPayListener listener){
+    public PayPasswordView(String monney, Context mContext, OnPayListener listener){
         getDecorView(monney, mContext, listener);
     }
 
-    public static PayPasswordView getInstance(String monney,
-                                              Context mContext,
-                                              OnPayListener listener){
-        return  new PayPasswordView(monney, mContext, listener);
+    public static PayPasswordView getInstance(String monney, Context mContext, OnPayListener listener){
+        return new PayPasswordView(monney, mContext, listener);
     }
 
     public void getDecorView(String monney,Context mContext,OnPayListener listener) {
         this.listener = listener;
         this.mContext = mContext;
         mView = LayoutInflater.from(mContext).inflate(R.layout.dialog_buy_project, null);
-        ViewUtils.inject(this, mView);
+
+        del = (ImageView) mView.findViewById(R.id.pay_keyboard_del);
+        del.setOnClickListener(this);
+        del.setOnLongClickListener(this);
+        zero = (ImageView) mView.findViewById(R.id.pay_keyboard_zero);
+        zero.setOnClickListener(this);
+        one = (ImageView) mView.findViewById(R.id.pay_keyboard_one);
+        one.setOnClickListener(this);
+        two = (ImageView) mView.findViewById(R.id.pay_keyboard_two);
+        two.setOnClickListener(this);
+        three = (ImageView) mView.findViewById(R.id.pay_keyboard_three);
+        three.setOnClickListener(this);
+        four = (ImageView) mView.findViewById(R.id.pay_keyboard_four);
+        four.setOnClickListener(this);
+        five = (ImageView) mView.findViewById(R.id.pay_keyboard_five);
+        five.setOnClickListener(this);
+        sex = (ImageView) mView.findViewById(R.id.pay_keyboard_sex);
+        sex.setOnClickListener(this);
+        seven = (ImageView) mView.findViewById(R.id.pay_keyboard_seven);
+        seven.setOnClickListener(this);
+        eight = (ImageView) mView.findViewById(R.id.pay_keyboard_eight);
+        eight.setOnClickListener(this);
+        nine = (ImageView) mView.findViewById(R.id.pay_keyboard_nine);
+        nine.setOnClickListener(this);
+
+        cancel = (ImageView) mView.findViewById(R.id.pay_cancel);
+        cancel.setOnClickListener(this);
+
+        box1 = (TextView) mView.findViewById(R.id.pay_box1);
+        box2 = (TextView) mView.findViewById(R.id.pay_box2);
+        box3 = (TextView) mView.findViewById(R.id.pay_box3);
+        box4 = (TextView) mView.findViewById(R.id.pay_box4);
+        box5 = (TextView) mView.findViewById(R.id.pay_box5);
+        box6 = (TextView) mView.findViewById(R.id.pay_box6);
+
+        title = (TextView) mView.findViewById(R.id.pay_title);
+        content = (TextView) mView.findViewById(R.id.pay_content);
         content.setText(monney + "元");
-    }
-
-    @OnClick({R.id.pay_keyboard_del,R.id.pay_keyboard_zero,
-            R.id.pay_keyboard_one,R.id.pay_keyboard_two,
-            R.id.pay_keyboard_three,R.id.pay_keyboard_four,
-            R.id.pay_keyboard_five,R.id.pay_keyboard_sex,
-            R.id.pay_keyboard_seven,R.id.pay_keyboard_eight,
-            R.id.pay_keyboard_nine, R.id.pay_cancel})
-    private void onClick (View v) {
-        if(v == zero) {
-            parseActionType(KeyboardEnum.zero);
-        } else if (v == one) {
-            parseActionType(KeyboardEnum.one);
-        } else if (v == two) {
-            parseActionType(KeyboardEnum.two);
-        } else if (v == three) {
-            parseActionType(KeyboardEnum.three);
-        } else if (v == four) {
-            parseActionType(KeyboardEnum.four);
-        } else if (v == five) {
-            parseActionType(KeyboardEnum.five);
-        } else if (v == sex) {
-            parseActionType(KeyboardEnum.sex);
-        } else if (v == seven) {
-            parseActionType(KeyboardEnum.seven);
-        } else if (v == eight) {
-            parseActionType(KeyboardEnum.eight);
-        } else if(v == nine) {
-            parseActionType(KeyboardEnum.nine);
-        } else if(v == del) {
-            parseActionType(KeyboardEnum.del);
-        } else if (v == cancel) {
-            parseActionType(KeyboardEnum.cancel);
-        }
-    }
-
-    @OnLongClick(R.id.pay_keyboard_del)
-    public boolean onLongClick(View v) {
-        parseActionType(KeyboardEnum.longdel);
-        return false;
     }
 
     private void parseActionType(KeyboardEnum type) {
@@ -152,8 +120,9 @@ public class PayPasswordView {
         }
         //删除
         else if (type.getType() == KeyboardEnum.ActionEnum.delete) {
-            if (mList.size() > 0) {
-                mList.remove(mList.get(mList.size()-1));
+            int size = mList.size();
+            if (size > 0) {
+                mList.remove(size - 1);
                 updateUi();
             }
         }
@@ -164,7 +133,7 @@ public class PayPasswordView {
         }
     }
     private void updateUi() {
-        if (mList.size()==0) {
+        if (mList.size() == 0) {
             box1.setText("");
             box2.setText("");
             box3.setText("");
@@ -215,6 +184,41 @@ public class PayPasswordView {
             box6.setText(mList.get(5));
 
         }
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(v == zero) {
+            parseActionType(KeyboardEnum.zero);
+        } else if (v == one) {
+            parseActionType(KeyboardEnum.one);
+        } else if (v == two) {
+            parseActionType(KeyboardEnum.two);
+        } else if (v == three) {
+            parseActionType(KeyboardEnum.three);
+        } else if (v == four) {
+            parseActionType(KeyboardEnum.four);
+        } else if (v == five) {
+            parseActionType(KeyboardEnum.five);
+        } else if (v == sex) {
+            parseActionType(KeyboardEnum.sex);
+        } else if (v == seven) {
+            parseActionType(KeyboardEnum.seven);
+        } else if (v == eight) {
+            parseActionType(KeyboardEnum.eight);
+        } else if(v == nine) {
+            parseActionType(KeyboardEnum.nine);
+        } else if(v == del) {
+            parseActionType(KeyboardEnum.del);
+        } else if (v == cancel) {
+            parseActionType(KeyboardEnum.cancel);
+        }
+    }
+
+    @Override
+    public boolean onLongClick(View v) {
+        parseActionType(KeyboardEnum.longdel);
+        return true;
     }
 
     public interface OnPayListener {
