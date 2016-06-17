@@ -330,8 +330,11 @@ public class Frag_User extends Frag_Base implements OnClickListener {
                         //显示数据
                         showData();
                     }
-                } else {
-                    // ToastUtil.alert(ctx, "网络好像有问题，请稍后重试");
+                }else{
+                    value_earn.setText("0.00");
+                    value_balance.setText("0.00");
+                    value_back.setText("0.00");
+                    value_total.setText("0.00");
                 }
                 loadingStatus = false;
                 refreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
@@ -549,7 +552,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
     //加入公司
     private void toJoinCompany() {
         //如果未认证，则去认证
-        if (mUserDetailInfo == null || mUserDetailInfo.HasCert == false) {
+        if (mUserDetailInfo == null || !mUserDetailInfo.HasCert) {
             popCertDialog();
         }
         //否则需要判断MyCompany字段

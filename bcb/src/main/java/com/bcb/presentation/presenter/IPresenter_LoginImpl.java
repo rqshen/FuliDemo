@@ -86,6 +86,8 @@ public class IPresenter_LoginImpl implements IPresenter_Login {
                     if (response.getInt("status") == 1) {
                         JSONObject result = response.getJSONObject("result");
                         if (result != null) {
+                            //清除掉缓存数据
+                            iModelUserAccount.clearAccount();
                             //保存账号信息
                             iModelUserAccount.saveAccount(result.getString("Access_Token"), phoneNumber, result.toString());
                         }
