@@ -480,7 +480,7 @@
                             android:layout_height="wrap_content"
                             android:textSize="@dimen/margin_size_large"
                             android:textColor="@color/txt_black"
-                            android:text="30万"/>
+                            android:text="50万"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
