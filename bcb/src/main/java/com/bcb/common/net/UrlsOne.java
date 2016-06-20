@@ -179,5 +179,17 @@ public class UrlsOne {
 	public static final String WxBindIndex = "http://wap.flh001.com/account/wxbindindex";
 	//借款服务协议
 	public static final String LoanProtocol = "http://wap.flh001.com/static/loan-agreement.html";
+	//关于福利金融
+	public static final String AboutConpany = "http://cnt.flh001.com/2015/12/08/mabout/";
+	//体验标说明
+	public static final String ExpiredProjectIntroduction = "http://cnt.flh001.com/2016/01/27/tiyanbiaoshuoming/";
+	//我能贷多少
+	public static final String LoanCalculated = "http://wap.100cb.cn/static/LoanCalculated.html";
+	//利息怎么算
+	public static final String InterestCalculated = "http://wap.100cb.cn/static/InterestCalculated.html";
+	//如何还款
+	public static final String How2Repay = "http://cnt.flh001.com/2016/01/15/ruhehuankuan/";
+	//准备材料
+	public static final String LoanMaterial = "http://cnt.flh001.com/2016/01/21/zunbeicailiao/";
 
 }

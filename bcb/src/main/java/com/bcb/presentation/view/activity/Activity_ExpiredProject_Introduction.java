@@ -19,6 +19,7 @@ import com.bcb.common.net.BcbNetworkManager;
 import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
+import com.bcb.common.net.UrlsOne;
 import com.bcb.common.net.UrlsTwo;
 import com.bcb.data.bean.UserDetailInfo;
 import com.bcb.data.bean.WelfareBean;
@@ -337,7 +338,7 @@ public class Activity_ExpiredProject_Introduction extends Activity_Base implemen
 
             //体验标说明
             case R.id.layout_description:
-                Activity_WebView.launche(Activity_ExpiredProject_Introduction.this, "体验标说明", "http://cnt.flh001.com/2016/01/27/tiyanbiaoshuoming/");
+                Activity_WebView.launche(Activity_ExpiredProject_Introduction.this, "体验标说明", UrlsOne.ExpiredProjectIntroduction);
                 break;
 
             //专属客服
