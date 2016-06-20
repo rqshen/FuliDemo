@@ -24,6 +24,8 @@ import com.bcb.data.util.SaveUserInfoUtils;
 import com.bcb.data.util.SystemUtil;
 import com.bcb.data.util.TokenUtil;
 import com.google.gson.Gson;
+import com.tencent.bugly.crashreport.CrashReport;
+import com.umeng.analytics.MobclickAgent;
 
 import org.json.JSONObject;
 import org.litepal.LitePalApplication;
@@ -66,6 +68,11 @@ public class App extends Application implements AMapLocationListener{
 		//极光推送初始化
 		JPushInterface.setDebugMode(true); 	// 设置开启日志,发布时请关闭日志
 		JPushInterface.init(this);     		// 初始化 JPush
+
+		//关闭友盟bug收集
+		MobclickAgent.setCatchUncaughtExceptions(false);
+		//腾讯bugly
+		CrashReport.initCrashReport(getApplicationContext(), "900035490", false);
 
 		if (saveUserInfo == null) {
 			saveUserInfo = new SaveUserInfoUtils(this);

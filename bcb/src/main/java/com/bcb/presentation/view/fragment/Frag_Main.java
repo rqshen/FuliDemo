@@ -52,7 +52,6 @@ import com.bcb.presentation.adapter.ProductAdapter;
 import com.bcb.presentation.view.activity.Activity_Browser;
 import com.bcb.presentation.view.activity.Activity_Daily_Welfare;
 import com.bcb.presentation.view.activity.Activity_ExpiredProject_Introduction;
-import com.bcb.presentation.view.activity.Activity_Loan;
 import com.bcb.presentation.view.activity.Activity_Login_Introduction;
 import com.bcb.presentation.view.activity.Activity_Love;
 import com.bcb.presentation.view.activity.Activity_Main;
@@ -940,22 +939,8 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPa
         //如果新标预告或者新手标为空的时候就显示列表
         if (announceRecordsBeans == null || announceRecordsBeans.size() <= 0 || newRecordsBeans == null || newRecordsBeans.size() <= 0) {
             setupBoutiqueVisible(View.VISIBLE);
-//            if (additionListview != null && ((Activity_Main)ctx).getFragProduct().getFirstItemData() != null) {
-//                additionRecordsBeans.clear();
-//                additionRecordsBeans.add((ProductRecordsBean) ((Activity_Main)ctx).getFragProduct().getFirstItemData());
-//                if (mAdditionAdapter != null) {
-//                    mAdditionAdapter.notifyDataSetChanged();
-//                    setupAdditionVisible(View.VISIBLE);
-//                }
-//            }
+            setupNewVisible(View.GONE);
         }
-//        else  {
-//            additionRecordsBeans.clear();
-//            if (mAdditionAdapter != null) {
-//                mAdditionAdapter.notifyDataSetChanged();
-//                setupAdditionVisible(View.GONE);
-//            }
-//        }
     }
 
     //显示送体验金对话框
