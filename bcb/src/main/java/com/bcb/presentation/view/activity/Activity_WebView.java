@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Base64;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -132,7 +133,7 @@ public class Activity_WebView extends Activity_Base {
     //加密后的链接
     private String getUrlStrWithDES() {
         byte[] data = null;
-        byte[] encodeByte_ECB = new byte[0];
+        byte[] encodeByte_ECB;
         try {
             data =  App.saveUserInfo.getLocalPhone().getBytes("UTF-8");
         } catch (UnsupportedEncodingException e) {
@@ -350,6 +351,19 @@ public class Activity_WebView extends Activity_Base {
 
     private String buildTransaction(final String type) {
         return (type == null) ? String.valueOf(System.currentTimeMillis()) : type + System.currentTimeMillis();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (webView != null && webView.canGoBack()) {
+                webView.goBack();
+                return true;
+            } else
+                return super.onKeyDown(keyCode, event);
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     @Override

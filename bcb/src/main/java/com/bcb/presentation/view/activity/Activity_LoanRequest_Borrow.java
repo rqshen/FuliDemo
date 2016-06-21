@@ -24,7 +24,6 @@ import android.widget.TextView;
 import com.bcb.R;
 import com.bcb.common.app.App;
 import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbNetworkManager;
 import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
@@ -190,7 +189,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
             }
         });
         //创建请求队列
-        requestQueue = BcbNetworkManager.newRequestQueue(this);
+        requestQueue = App.getInstance().getRequestQueue();
         //初始化Banner
         setupBanner();
         //初始化刷新控件

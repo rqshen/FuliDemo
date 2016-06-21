@@ -7,10 +7,10 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.bcb.R;
 import com.bcb.common.app.App;
 import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbNetworkManager;
 import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
@@ -18,6 +18,7 @@ import com.bcb.common.net.UrlsOne;
 import com.bcb.data.bean.transaction.MoneyItemDetailBean;
 import com.bcb.data.util.PackageUtil;
 import com.bcb.data.util.TokenUtil;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -74,7 +75,7 @@ public class Activity_Money_Item_Detail extends Activity_Base {
         //设置标题
         setLeftTitleVisible(true);
         setTitleValue("交易详情");
-        requestQueue = BcbNetworkManager.newRequestQueue(this);
+        requestQueue = App.getInstance().getRequestQueue();
         //初始化界面
         initView();
         //加载数据

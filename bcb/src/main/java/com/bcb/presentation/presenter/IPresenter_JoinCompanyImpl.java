@@ -5,8 +5,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
 
+import com.bcb.common.app.App;
 import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbNetworkManager;
 import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
@@ -43,7 +43,7 @@ public class IPresenter_JoinCompanyImpl implements IPresenter_JoinCompany {
         this.context = context;
         this.interfaceJoinCompany = interfaceJoinCompany;
         this.iModelUserAccount = new IModel_UserAccountImpl();
-        requestQueue = BcbNetworkManager.newRequestQueue(context);
+        requestQueue = App.getInstance().getRequestQueue();
     }
 
     @Override

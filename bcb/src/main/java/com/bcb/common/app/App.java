@@ -3,7 +3,6 @@ package com.bcb.common.app;
 import android.app.Application;
 import android.content.Context;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationListener;
@@ -106,6 +105,17 @@ public class App extends Application implements AMapLocationListener{
 
 		//设置极光推送别名
 		setAlias();
+	}
+
+	public BcbRequestQueue getRequestQueue() {
+		if (null == requestQueue) {
+			requestQueue = BcbNetworkManager.newRequestQueue(instance);
+		}
+		return requestQueue;
+	}
+
+	public void setRequestQueue(BcbRequestQueue requestQueue) {
+		this.requestQueue = requestQueue;
 	}
 
 	public static App getInstance() {

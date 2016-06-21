@@ -20,7 +20,6 @@ import android.widget.TextView;
 import com.bcb.R;
 import com.bcb.common.app.App;
 import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbNetworkManager;
 import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
@@ -91,7 +90,7 @@ public class Activity_Recharge_Second extends Activity_Base implements View.OnCl
 		setBaseContentView(R.layout.activity_recharge_second);
 		setLeftTitleVisible(true);
 		setTitleValue("充值");
-        requestQueue = BcbNetworkManager.newRequestQueue(this);
+        requestQueue = App.getInstance().getRequestQueue();
         showProgressBar();
 		receiver = new Receiver();
 		IntentFilter filter = new IntentFilter("com.bcb.money.change.success");

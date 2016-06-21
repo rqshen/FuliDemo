@@ -15,16 +15,13 @@ import android.widget.TextView;
 import com.bcb.R;
 import com.bcb.common.app.App;
 import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbNetworkManager;
 import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
 import com.bcb.common.net.UrlsOne;
 import com.bcb.common.net.UrlsTwo;
 import com.bcb.data.bean.UserDetailInfo;
-import com.bcb.data.bean.WelfareBean;
 import com.bcb.data.bean.project.ExpiredProjectDetail;
-import com.bcb.data.util.DbUtil;
 import com.bcb.data.util.MQCustomerManager;
 import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.PackageUtil;
@@ -115,7 +112,7 @@ public class Activity_ExpiredProject_Introduction extends Activity_Base implemen
         setBaseContentView(R.layout.activity_expiredproject_introduction);
         setLeftTitleVisible(true);
         setTitleValue(title);
-        requestQueue = BcbNetworkManager.newRequestQueue(this);
+        requestQueue = App.getInstance().getRequestQueue();
         //初始化标的界面
         setupView();
         //加载数据

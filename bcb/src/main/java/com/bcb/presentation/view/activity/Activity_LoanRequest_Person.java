@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.bcb.R;
 import com.bcb.common.app.App;
 import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbNetworkManager;
 import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
@@ -181,7 +180,7 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
     private void getPersonalLoanMessage() {
         showProgressBar();
         //创建队列
-        requestQueue = BcbNetworkManager.newRequestQueue(this);
+        requestQueue = App.getInstance().getRequestQueue();
         //创建请求
         BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.GetLoanPersonalMessage, null, TokenUtil.getEncodeToken(this), new BcbRequest.BcbCallBack<JSONObject>() {
             @Override

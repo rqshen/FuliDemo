@@ -18,16 +18,14 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.bcb.common.app.App;
 import com.bcb.R;
+import com.bcb.common.app.App;
 import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbNetworkManager;
 import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
-import com.bcb.data.bean.CardPwdPostData;
 import com.bcb.common.net.UrlsOne;
-import com.bcb.data.util.LogUtil;
+import com.bcb.data.bean.CardPwdPostData;
 import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.PackageUtil;
 import com.bcb.data.util.RegexManager;
@@ -41,6 +39,7 @@ import com.bcb.presentation.view.custom.CustomDialog.DialogWidget;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.net.URLEncoder;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -115,7 +114,7 @@ public class Activity_Recharge_Confirm extends Activity_Base implements View.OnC
 		setBaseContentView(R.layout.activity_recharge_confirm);
 		setLeftTitleVisible(true);
 		setTitleValue("确认充值");
-        requestQueue = BcbNetworkManager.newRequestQueue(this);
+        requestQueue = App.getInstance().getRequestQueue();
 		receiver = new Receiver();
 		IntentFilter filter = new IntentFilter("com.bcb.money.change.success");
 		registerReceiver(receiver, filter);

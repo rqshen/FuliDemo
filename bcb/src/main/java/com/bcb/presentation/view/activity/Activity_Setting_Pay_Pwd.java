@@ -14,12 +14,10 @@ import android.widget.TextView;
 import com.bcb.R;
 import com.bcb.common.app.App;
 import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbNetworkManager;
 import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
 import com.bcb.common.net.UrlsOne;
-import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.PackageUtil;
 import com.bcb.data.util.ToastUtil;
@@ -60,7 +58,7 @@ public class Activity_Setting_Pay_Pwd  extends Activity_Base {
         setLeftTitleVisible(true);
 		setTitleValue("设置福利金融交易密码");
 		UmengUtil.eventById(Activity_Setting_Pay_Pwd.this, R.string.set_f_key);
-		requestQueue = BcbNetworkManager.newRequestQueue(this);
+		requestQueue = App.getInstance().getRequestQueue();
         init();
 	}
 

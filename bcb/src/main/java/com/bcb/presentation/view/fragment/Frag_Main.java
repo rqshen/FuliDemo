@@ -158,7 +158,7 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPa
     public void onViewCreated(View view, Bundle savedInstanceState) {
         this.ctx =(Activity) view.getContext();
         EventBus.getDefault().register(this);
-        requestQueue = BcbNetworkManager.newRequestQueue(ctx);
+        requestQueue = App.getInstance().getRequestQueue();
         //仅保留下拉刷新，隐藏上拉加载更多
         //隐藏加载更多
         (view.findViewById(R.id.loadmore_view)).setVisibility(View.GONE);

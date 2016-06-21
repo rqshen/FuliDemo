@@ -3,8 +3,8 @@ package com.bcb.presentation.presenter;
 import android.content.Context;
 import android.text.TextUtils;
 
+import com.bcb.common.app.App;
 import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbNetworkManager;
 import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
@@ -37,7 +37,7 @@ public class IPresenter_AuthenticationImpl implements IPresenter_Authentication 
         this.context = context;
         this.interfaceBase = interfaceBase;
         iModelUserAccount = new IModel_UserAccountImpl();
-        requestQueue = BcbNetworkManager.newRequestQueue(context);
+        requestQueue = App.getInstance().getRequestQueue();
     }
 
     @Override

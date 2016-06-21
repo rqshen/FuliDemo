@@ -77,7 +77,7 @@ public class Frag_Repayment extends Frag_Base {
     //初始化页面要在这里进行，多线程情况下，在onCreateView中初始化会崩溃
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        requestQueue = BcbNetworkManager.newRequestQueue(context);
+        requestQueue = App.getInstance().getRequestQueue();
         setupView(view);
         loanRepaymentData();
     }

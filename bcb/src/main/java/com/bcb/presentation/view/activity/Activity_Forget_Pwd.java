@@ -1,11 +1,5 @@
 package com.bcb.presentation.view.activity;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -27,18 +21,22 @@ import android.widget.TextView;
 import com.bcb.R;
 import com.bcb.common.app.App;
 import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbNetworkManager;
 import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
 import com.bcb.common.net.UrlsOne;
-import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.PackageUtil;
 import com.bcb.data.util.RegexManager;
 import com.bcb.data.util.ToastUtil;
 import com.bcb.data.util.TokenUtil;
 import com.bcb.data.util.UmengUtil;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 //忘记密码
 public class Activity_Forget_Pwd extends Activity_Base {
@@ -89,7 +87,7 @@ public class Activity_Forget_Pwd extends Activity_Base {
 		} else {
 			setTitleValue("找回交易密码");
 		}
-        requestQueue = BcbNetworkManager.newRequestQueue(this);
+        requestQueue = App.getInstance().getRequestQueue();
 		init();
 	}
 
@@ -356,8 +354,8 @@ public class Activity_Forget_Pwd extends Activity_Base {
 		boolean idEmptyState = (idCardStr.length()== 0);
 		boolean idEndState =  (idCardStr.length()==18 && str[17] == 'x');
 		boolean idErrorState = (!RegexManager.isSecondGenerationIDCardNum(idCardStr));
-		boolean phoneEmptyState = isLogin ? (phoneStr.length()  == 0) : false;
-		boolean phoneErrorState = isLogin ? (!RegexManager.isPhoneNum(phoneStr)) : false;
+		boolean phoneEmptyState = isLogin && (phoneStr.length()  == 0);
+		boolean phoneErrorState = isLogin && (!RegexManager.isPhoneNum(phoneStr));
 		
 		// 判断身份证、手机号码是否正确
 		if(idEmptyState ||  idEndState || idErrorState || phoneEmptyState || phoneErrorState) {
@@ -395,7 +393,7 @@ public class Activity_Forget_Pwd extends Activity_Base {
 		// 获取身份证
 		boolean idErrorState = (!RegexManager.isSecondGenerationIDCardNum(idCardStr));
 		//判断手机号码的状态，只有登录的时候才需要
-		boolean phoneErrorState = isLogin ? (!RegexManager.isPhoneNum(phone.getText().toString())) : false;
+		boolean phoneErrorState = isLogin && (!RegexManager.isPhoneNum(phone.getText().toString()));
 		//判断验证码的状态
 		boolean regErrorState = (!RegexManager.isResizngCode(regservicecode.getText().toString()));
 		

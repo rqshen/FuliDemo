@@ -42,6 +42,7 @@ public class BcbNetworkManager {
             PackageInfo info = context.getPackageManager().getPackageInfo(packageName, 0);
             userAgent = packageName + "/" + info.versionCode;
         } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
         }
 
         if (stack == null) {

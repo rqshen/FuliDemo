@@ -60,7 +60,7 @@ public class Activity_LoanList extends Activity_Base {
         setBaseContentView(R.layout.activity_loanlist);
         setLeftTitleVisible(true);
         setTitleValue("借款列表");
-        requestQueue = BcbNetworkManager.newRequestQueue(this);
+        requestQueue = App.getInstance().getRequestQueue();
         setupView();
     }
 

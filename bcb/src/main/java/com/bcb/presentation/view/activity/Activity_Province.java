@@ -1,11 +1,5 @@
 package com.bcb.presentation.view.activity;
 
-import java.util.List;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -18,20 +12,26 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import com.bcb.common.app.App;
+
 import com.bcb.R;
+import com.bcb.common.app.App;
 import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbNetworkManager;
 import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
+import com.bcb.common.net.UrlsOne;
 import com.bcb.data.bean.AreaBean;
+import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MyActivityManager;
+import com.bcb.data.util.PackageUtil;
 import com.bcb.data.util.TokenUtil;
 import com.google.gson.reflect.TypeToken;
-import com.bcb.common.net.UrlsOne;
-import com.bcb.data.util.LogUtil;
-import com.bcb.data.util.PackageUtil;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.List;
 
 public class Activity_Province extends Activity_Base {
 
@@ -52,7 +52,7 @@ public class Activity_Province extends Activity_Base {
 		setBaseContentView(R.layout.activity_choose);
 		setLeftTitleVisible(true);
 		setTitleValue("选择省份");
-        requestQueue = BcbNetworkManager.newRequestQueue(this);
+        requestQueue = App.getInstance().getRequestQueue();
 		mListView = (ListView) findViewById(R.id.list);
 		mListView.setOnItemClickListener(mOnItemClickListener);
 		loadData();

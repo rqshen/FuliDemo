@@ -10,15 +10,14 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.bcb.R;
+import com.bcb.common.app.App;
 import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbNetworkManager;
 import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
 import com.bcb.common.net.UrlsOne;
 import com.bcb.data.bean.loan.PersonInfoBean;
 import com.bcb.data.util.LoanPersonalConfigUtil;
-import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MoneyTextUtil;
 import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.ToastUtil;
@@ -151,7 +150,7 @@ public class Activity_LoanRequest_Asset extends Activity_Base {
      * 初始化队列
      */
     private void setupQueue() {
-        requestQueue = BcbNetworkManager.newRequestQueue(this);
+        requestQueue = App.getInstance().getRequestQueue();
     }
 
     /**

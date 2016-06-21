@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.bcb.R;
 import com.bcb.common.app.App;
 import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbNetworkManager;
 import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
@@ -62,7 +61,7 @@ public class Activity_Project_Investment_Details extends Activity_Base {
 		setBaseContentView(R.layout.activity_project_investment_details);
 		setLeftTitleVisible(true);
 		setTitleValue("项目投资详情");
-		requestQueue = BcbNetworkManager.newRequestQueue(this);
+		requestQueue = App.getInstance().getRequestQueue();
         init();
 	}
 	private void init() {

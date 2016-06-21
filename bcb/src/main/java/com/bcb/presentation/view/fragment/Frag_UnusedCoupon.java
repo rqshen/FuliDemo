@@ -89,7 +89,7 @@ public class Frag_UnusedCoupon extends Frag_Base {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         this.ctx = view.getContext();
-        requestQueue = BcbNetworkManager.newRequestQueue(ctx);
+        requestQueue = App.getInstance().getRequestQueue();
         IntentFilter intentFilter = new IntentFilter("com.bcb.update.couponui");
         mReceiver = new Receiver();
         ctx.registerReceiver(mReceiver, intentFilter);

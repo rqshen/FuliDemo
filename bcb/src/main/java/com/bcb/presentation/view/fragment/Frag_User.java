@@ -129,7 +129,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         this.ctx = view.getContext();
-        requestQueue = BcbNetworkManager.newRequestQueue(ctx);
+        requestQueue = App.getInstance().getRequestQueue();
         //注册监听器
         receiver = new Receiver();
         ctx.registerReceiver(receiver, new IntentFilter("com.bcb.update.company.joined"));

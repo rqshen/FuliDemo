@@ -19,7 +19,6 @@ import android.widget.TextView;
 import com.bcb.R;
 import com.bcb.common.app.App;
 import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbNetworkManager;
 import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
@@ -103,7 +102,7 @@ public class Activity_Withdraw extends Activity_Base implements View.OnClickList
 		setBaseContentView(R.layout.activity_withdraw);
 		setLeftTitleVisible(true);
 		setTitleValue("提现");
-        requestQueue = BcbNetworkManager.newRequestQueue(this);
+        requestQueue = App.getInstance().getRequestQueue();
 		init();
 	}
 	

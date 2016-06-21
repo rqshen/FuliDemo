@@ -13,15 +13,14 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ant.liao.GifView;
-import com.bcb.common.app.App;
 import com.bcb.R;
+import com.bcb.common.app.App;
 import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbNetworkManager;
 import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
-import com.bcb.data.bean.UserWallet;
 import com.bcb.common.net.UrlsOne;
+import com.bcb.data.bean.UserWallet;
 import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MQCustomerManager;
 import com.bcb.data.util.MyActivityManager;
@@ -135,7 +134,7 @@ public class Activity_ChangeMoney_Success extends Activity_Base implements View.
                 MyActivityManager.getInstance().finishAllActivity();
             }
         });
-        requestQueue = BcbNetworkManager.newRequestQueue(this);
+        requestQueue = App.getInstance().getRequestQueue();
 		init();
 	}
 

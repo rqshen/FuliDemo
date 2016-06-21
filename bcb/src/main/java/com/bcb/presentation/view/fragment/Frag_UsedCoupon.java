@@ -75,7 +75,7 @@ public class Frag_UsedCoupon extends Frag_Base {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         this.ctx = view.getContext();
-        requestQueue = BcbNetworkManager.newRequestQueue(ctx);
+        requestQueue = App.getInstance().getRequestQueue();
         null_data_layout = (LinearLayout) view.findViewById(R.id.null_data_layout);
         //产品列表数据
         recordsBeans = new ArrayList<>();

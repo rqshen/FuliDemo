@@ -10,18 +10,16 @@ import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.bcb.common.app.App;
 import com.bcb.R;
+import com.bcb.common.app.App;
 import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbNetworkManager;
 import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
+import com.bcb.common.net.UrlsOne;
 import com.bcb.data.bean.HotStationListBean;
 import com.bcb.data.bean.HotStationRecordsBean;
-import com.bcb.common.net.UrlsOne;
 import com.bcb.data.util.AutoWrapLinearLayout;
-
 import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.PackageUtil;
@@ -76,7 +74,7 @@ public class Activity_Station_Change extends Activity_Base {
 		setBaseContentView(R.layout.activity_station_change);
 		setLeftTitleVisible(true);
 		setTitleValue("当前公司：" + stationName);
-		requestQueue = BcbNetworkManager.newRequestQueue(this);
+		requestQueue = App.getInstance().getRequestQueue();
         init();
 	}
 

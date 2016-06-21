@@ -24,7 +24,6 @@ import android.widget.Toast;
 import com.bcb.R;
 import com.bcb.common.app.App;
 import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbNetworkManager;
 import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
@@ -186,7 +185,7 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
             }
         });
         setTitleValue(title);
-        requestQueue = BcbNetworkManager.newRequestQueue(this);
+        requestQueue =App.getInstance().getRequestQueue();
         //初始化页面
         setupView();
         //注册广播

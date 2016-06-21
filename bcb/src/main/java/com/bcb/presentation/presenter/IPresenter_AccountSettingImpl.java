@@ -3,8 +3,8 @@ package com.bcb.presentation.presenter;
 import android.content.Context;
 import android.text.TextUtils;
 
+import com.bcb.common.app.App;
 import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbNetworkManager;
 import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
@@ -35,7 +35,7 @@ public class IPresenter_AccountSettingImpl implements IPresenter_AccountSetting 
         this.iModelUserAccount = new IModel_UserAccountImpl();
         this.context = context;
         this.interfaceBase = interfaceBase;
-        this.requestQueue = BcbNetworkManager.newRequestQueue(context);
+        this.requestQueue = App.getInstance().getRequestQueue();
     }
 
     @Override

@@ -25,20 +25,19 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 
+import com.bcb.R;
+import com.bcb.common.app.App;
 import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbNetworkManager;
 import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
-import com.bcb.presentation.adapter.MyFragmentPagerAdapter;
-import com.bcb.R;
 import com.bcb.common.net.UrlsOne;
+import com.bcb.data.util.MyActivityManager;
+import com.bcb.data.util.TokenUtil;
+import com.bcb.presentation.adapter.MyFragmentPagerAdapter;
 import com.bcb.presentation.view.fragment.Frag_ExpiredCoupon;
 import com.bcb.presentation.view.fragment.Frag_UnusedCoupon;
 import com.bcb.presentation.view.fragment.Frag_UsedCoupon;
-import com.bcb.data.util.LogUtil;
-import com.bcb.data.util.MyActivityManager;
-import com.bcb.data.util.TokenUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -77,7 +76,7 @@ public class Activity_Coupons extends Activity_Base_Fragment {
                 exchangeCoupon();
             }
         });
-		requestQueue = BcbNetworkManager.newRequestQueue(this);
+		requestQueue = App.getInstance().getRequestQueue();
         InitWidth();
 		InitTextView();
 		InitViewPager();

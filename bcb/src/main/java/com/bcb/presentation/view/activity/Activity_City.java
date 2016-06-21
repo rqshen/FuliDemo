@@ -58,7 +58,7 @@ public class Activity_City extends Activity_Base {
 		setBaseContentView(R.layout.activity_city);
 		setLeftTitleVisible(true);
 		setTitleValue("选择城市");
-		requestQueue = BcbNetworkManager.newRequestQueue(this);
+		requestQueue = App.getInstance().getRequestQueue();
         pid = getIntent().getIntExtra("pid", 0);
 		pcode = getIntent().getStringExtra("pcode");
 		pname = getIntent().getStringExtra("pname");

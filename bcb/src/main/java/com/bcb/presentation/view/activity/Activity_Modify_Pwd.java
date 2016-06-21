@@ -1,8 +1,5 @@
 package com.bcb.presentation.view.activity;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,18 +14,20 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bcb.R;
+import com.bcb.common.app.App;
 import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbNetworkManager;
 import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
 import com.bcb.common.net.UrlsOne;
-import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.PackageUtil;
 import com.bcb.data.util.RegexManager;
 import com.bcb.data.util.ToastUtil;
 import com.bcb.data.util.TokenUtil;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 //更改密码
 public class Activity_Modify_Pwd extends Activity_Base {
@@ -67,7 +66,7 @@ public class Activity_Modify_Pwd extends Activity_Base {
 		} else {
 			setTitleValue("修改交易密码");
 		}
-        requestQueue = BcbNetworkManager.newRequestQueue(this);
+        requestQueue = App.getInstance().getRequestQueue();
 		init();
 	}
 

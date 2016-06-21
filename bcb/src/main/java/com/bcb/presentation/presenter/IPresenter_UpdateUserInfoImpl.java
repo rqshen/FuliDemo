@@ -2,6 +2,7 @@ package com.bcb.presentation.presenter;
 
 import android.content.Context;
 
+import com.bcb.common.app.App;
 import com.bcb.common.net.BcbJsonRequest;
 import com.bcb.common.net.BcbNetworkManager;
 import com.bcb.common.net.BcbRequest;
@@ -30,7 +31,7 @@ public class IPresenter_UpdateUserInfoImpl implements IPresenter_Base {
         this.context = context;
         this.iModelUserAccount = new IModel_UserAccountImpl();
         this.interfaceBase = interfaceBase;
-        requestQueue = BcbNetworkManager.newRequestQueue(context);
+        requestQueue = App.getInstance().getRequestQueue();
     }
 
     @Override

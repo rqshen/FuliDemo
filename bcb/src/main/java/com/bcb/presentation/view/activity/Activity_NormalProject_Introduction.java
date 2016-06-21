@@ -15,7 +15,6 @@ import android.widget.TextView;
 import com.bcb.R;
 import com.bcb.common.app.App;
 import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbNetworkManager;
 import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
@@ -163,7 +162,7 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
             }
         });
         setTitleValue(title);
-        requestQueue = BcbNetworkManager.newRequestQueue(this);
+        requestQueue = App.getInstance().getRequestQueue();
         UmengUtil.eventById(Activity_NormalProject_Introduction.this, R.string.buy_home);
         //初始化界面
         setupView();
