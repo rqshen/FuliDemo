@@ -206,6 +206,12 @@ public class Activity_Love extends Activity_Base implements AdapterView.OnItemCl
         requestQueue.add(jsonRequest);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        requestQueue.cancelAll(BcbRequestTag.LoveProductTag);
+    }
+
     private void setupListViewVisible(boolean status) {
         // 如果存在数据的时候，显示
         if (status) {

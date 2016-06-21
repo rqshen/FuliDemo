@@ -123,25 +123,25 @@ public class Activity_Loan_Introduction extends Activity_Base implements View.On
             //我能贷多少？
             case R.id.loan_amount:
                 UmengUtil.eventById(Activity_Loan_Introduction.this, R.string.loan_info);
-                Activity_WebView.launche(Activity_Loan_Introduction.this, "我能贷多少", UrlsOne.LoanCalculated);
+                Activity_Browser.launche(Activity_Loan_Introduction.this, "我能贷多少", UrlsOne.LoanCalculated);
                 break;
 
             //利息怎么算？
             case R.id.loan_interest:
                 UmengUtil.eventById(Activity_Loan_Introduction.this, R.string.loan_info2);
-                Activity_WebView.launche(Activity_Loan_Introduction.this, "利息怎么算", UrlsOne.InterestCalculated);
+                Activity_Browser.launche(Activity_Loan_Introduction.this, "利息怎么算", UrlsOne.InterestCalculated);
                 break;
 
             //如何还款？
             case R.id.loan_repayment:
                 UmengUtil.eventById(Activity_Loan_Introduction.this, R.string.loan_info3);
-                Activity_WebView.launche(Activity_Loan_Introduction.this, "如何还款", UrlsOne.How2Repay);
+                Activity_Browser.launche(Activity_Loan_Introduction.this, "如何还款", UrlsOne.How2Repay);
                 break;
 
             //准备哪些材料?
             case R.id.loan_material:
                 UmengUtil.eventById(Activity_Loan_Introduction.this, R.string.loan_info4);
-                Activity_WebView.launche(Activity_Loan_Introduction.this, "准备材料", UrlsOne.LoanMaterial);
+                Activity_Browser.launche(Activity_Loan_Introduction.this, "准备材料", UrlsOne.LoanMaterial);
                 break;
 
             //立即申请借款

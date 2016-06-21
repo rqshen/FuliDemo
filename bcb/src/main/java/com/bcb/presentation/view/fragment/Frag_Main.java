@@ -28,7 +28,6 @@ import com.bcb.R;
 import com.bcb.common.app.App;
 import com.bcb.common.event.BroadcastEvent;
 import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbNetworkManager;
 import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
@@ -56,7 +55,6 @@ import com.bcb.presentation.view.activity.Activity_Login_Introduction;
 import com.bcb.presentation.view.activity.Activity_Love;
 import com.bcb.presentation.view.activity.Activity_Main;
 import com.bcb.presentation.view.activity.Activity_NormalProject_Introduction;
-import com.bcb.presentation.view.activity.Activity_WebView;
 import com.bcb.presentation.view.custom.CustomDialog.DialogWidget;
 import com.bcb.presentation.view.custom.CustomDialog.RegisterSuccessDialogView;
 import com.bcb.presentation.view.custom.PagerIndicator.AutoLoopViewPager;
@@ -804,7 +802,7 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPa
                 break;
             case R.id.ll_wealth_college://理财学院
                 UmengUtil.eventById(ctx, R.string.college_c);
-                Activity_WebView.launche(ctx,"理财学院",UrlsOne.CollegeWebView);
+                Activity_Browser.launche(ctx,"理财学院",UrlsOne.CollegeWebView);
                 break;
             case R.id.ll_security://安全保障
                 UmengUtil.eventById(ctx, R.string.safe_c);

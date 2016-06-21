@@ -426,7 +426,7 @@ public class Activity_Account_Setting extends Activity_Base implements OnClickLi
 
     //公司信息
     private void aboutCompany() {
-		Activity_WebView.launche(Activity_Account_Setting.this, "关于福利金融", UrlsOne.AboutConpany);
+        Activity_Browser.launche(Activity_Account_Setting.this, "关于福利金融", UrlsOne.AboutConpany);
     }
 
 

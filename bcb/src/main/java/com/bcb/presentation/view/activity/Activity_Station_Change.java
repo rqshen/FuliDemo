@@ -242,11 +242,11 @@ public class Activity_Station_Change extends Activity_Base {
 
     public void mapStationInfo(View view, final int position, final HotStationRecordsBean bean){
 		//查看公司介绍
-		((LinearLayout) view.findViewById(R.id.layout_check_company)).setOnClickListener(new OnClickListener() {
+		(view.findViewById(R.id.layout_check_company)).setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
                 UmengUtil.eventById(Activity_Station_Change.this, R.string.list_select_com_intro);
-				Activity_WebView.launche(Activity_Station_Change.this, bean.getShortName(), bean.getPageUrl());
+				Activity_Browser.launche(Activity_Station_Change.this, bean.getShortName(), bean.getPageUrl());
 			}
 		});
 		//公司名称

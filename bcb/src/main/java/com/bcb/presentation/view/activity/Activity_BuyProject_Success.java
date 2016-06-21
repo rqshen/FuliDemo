@@ -116,7 +116,7 @@ public class Activity_BuyProject_Success extends Activity_Base implements Interf
 			@Override
 			public void onClick(View v) {
 				//点击图片，跳转至微信
-				Activity_WebView.launche(Activity_BuyProject_Success.this, "起息第一时间通知", UrlsOne.WxBindIndex);
+				Activity_Browser.launche(Activity_BuyProject_Success.this, "起息第一时间通知", UrlsOne.WxBindIndex);
 			}
 		});
 		//根据Banner的宽高比进行等比缩放

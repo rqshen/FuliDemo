@@ -226,7 +226,7 @@ public class Activity_ChangeMoney_Success extends Activity_Base implements View.
 			@Override
 			public void onClick(View v) {
 				//点击图片，跳转至微信
-				Activity_WebView.launche(Activity_ChangeMoney_Success.this, "提现结果早知道", UrlsOne.WxBindIndex);
+				Activity_Browser.launche(Activity_ChangeMoney_Success.this, "提现结果早知道", UrlsOne.WxBindIndex);
 			}
 		});
 		//根据Banner的宽高比进行等比缩放
