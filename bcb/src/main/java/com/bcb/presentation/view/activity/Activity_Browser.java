@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.PixelFormat;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -32,6 +33,7 @@ import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MQCustomerManager;
 import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.MyConstants;
+import com.bcb.data.util.ToastUtil;
 import com.bcb.presentation.view.custom.Browser.X5WebView;
 import com.bcb.presentation.view.custom.CustomDialog.DialogWidget;
 import com.bcb.presentation.view.custom.CustomDialog.IdentifyAlertView;
@@ -50,6 +52,7 @@ import com.tencent.smtt.sdk.WebSettings.LayoutAlgorithm;
 import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewClient;
 
+import java.io.EOFException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
@@ -69,6 +72,8 @@ public class Activity_Browser extends Activity_Base {
 	private DialogWidget certDialog;
 	//微信分享
 	private IWXAPI iwxapi;
+
+	private Context context;
 
 	public static void launche(Context ctx, String tittle, String url){
 		Intent intent = new Intent();
@@ -115,6 +120,7 @@ public class Activity_Browser extends Activity_Base {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		context = this;
 		//管理Activity栈，用于忘记密码的时候，跳转至登陆界面之前销毁栈中所有的Activity
 		MyActivityManager myActivityManager = MyActivityManager.getInstance();
 		myActivityManager.pushOneActivity(Activity_Browser.this);
@@ -221,6 +227,13 @@ public class Activity_Browser extends Activity_Base {
 						userId = App.mUserDetailInfo.getCustomerId();
 					}
 					MQCustomerManager.getInstance(Activity_Browser.this).showCustomer(userId);
+					return true;
+				} else if (url.contains("mqqapi://forward")){
+					try {
+						startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+					}catch (Exception e){
+						ToastUtil.alert(context, "请先安装QQ");
+					}
 					return true;
 				} else {
 					return super.shouldOverrideUrlLoading(view, url);
