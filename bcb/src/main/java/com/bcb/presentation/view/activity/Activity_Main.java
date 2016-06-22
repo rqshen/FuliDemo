@@ -52,7 +52,7 @@ public class Activity_Main extends Activity_Base_Fragment {
 
     //底部
     private LinearLayout bottom;
-    AlertView alertView = null;
+	private AlertView alertView = null;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

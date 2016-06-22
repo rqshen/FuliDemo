@@ -66,13 +66,6 @@ public class Activity_Love extends Activity_Base implements AdapterView.OnItemCl
         //标题
         setTitleValue("聚爱");
         setLeftTitleVisible(true);
-        setRightBtnVisiable(View.VISIBLE);
-        setRightBtnImg(R.drawable.ico_info, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
 
         requestQueue = App.getInstance().getRequestQueue();
         loveBeens = new ArrayList<>();

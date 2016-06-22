@@ -134,7 +134,7 @@ public class UrlsOne {
 	public static final String Loan_Supplementary_Material = host + "/api/v1.3.4/a61000b6a80a";
 
 	//还款列表
-	public static final String MyLoanRepaymentMessage = host + "/api/v1.2/82dcb6a645aa";
+	public static final String MyLoanRepaymentMessage = host + "/api/v1.3.4/82dcb6a645aa";
 
 	//订单状态查询
 	public static final String RechargeOrderStatus = host + "/api/v1.0/8b441a56e2e1";

@@ -10,4 +10,14 @@ public class RepaymentListBean {
     public int PageSize;
     public int TotalCount;
     public List<RepaymentRecordsBean> Records;
+
+    @Override
+    public String toString() {
+        return "RepaymentListBean{" +
+                "PageNow=" + PageNow +
+                ", PageSize=" + PageSize +
+                ", TotalCount=" + TotalCount +
+                ", Records=" + Records +
+                '}';
+    }
 }

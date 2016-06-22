@@ -8,4 +8,14 @@ public class RepaymentRecordsBean {
     public float Amount;        //金额
     public String Status;       //状态
     public float LatePenalty;   //罚息
+
+    @Override
+    public String toString() {
+        return "RepaymentRecordsBean{" +
+                "PayDate='" + PayDate + '\'' +
+                ", Amount=" + Amount +
+                ", Status='" + Status + '\'' +
+                ", LatePenalty=" + LatePenalty +
+                '}';
+    }
 }
