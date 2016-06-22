@@ -21,14 +21,13 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
+import android.widget.ProgressBar;
 
 import com.bcb.R;
 import com.bcb.common.app.App;
 import com.bcb.common.net.UrlsOne;
 import com.bcb.data.util.BitmapUtil;
 import com.bcb.data.util.DESUtil;
-import com.bcb.data.util.LoadingLayoutMgr;
 import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MQCustomerManager;
 import com.bcb.data.util.MyActivityManager;
@@ -52,7 +51,6 @@ import com.tencent.smtt.sdk.WebSettings.LayoutAlgorithm;
 import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewClient;
 
-import java.io.EOFException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
@@ -60,9 +58,6 @@ public class Activity_Browser extends Activity_Base {
 
 	private X5WebView mWebView;
 	private ViewGroup mViewParent;
-	//加载刷新工具
-	private RelativeLayout loading_layout;
-	private LoadingLayoutMgr ld;
 	//加密的key
 	private static final String key = "9e469d566f5d41j1a83b9rf4";
 	private String mIntentUrl;
@@ -74,6 +69,7 @@ public class Activity_Browser extends Activity_Base {
 	private IWXAPI iwxapi;
 
 	private Context context;
+	private ProgressBar mPageLoadingProgressBar;
 
 	public static void launche(Context ctx, String tittle, String url){
 		Intent intent = new Intent();
@@ -165,6 +161,14 @@ public class Activity_Browser extends Activity_Base {
 		QbSdk.preInit(this);
 		X5WebView.setSmallWebViewEnabled(true);
 		mTestHandler.sendEmptyMessageDelayed(MSG_INIT_UI, 10);
+
+		initProgressBar();
+	}
+
+	private void initProgressBar() {
+		mPageLoadingProgressBar = (ProgressBar) findViewById(R.id.progressBar);
+		mPageLoadingProgressBar.setMax(100);
+		mPageLoadingProgressBar.setProgressDrawable(this.getResources().getDrawable(R.drawable.color_progressbar));
 	}
 
 	//加密后的链接
@@ -228,7 +232,7 @@ public class Activity_Browser extends Activity_Base {
 					}
 					MQCustomerManager.getInstance(Activity_Browser.this).showCustomer(userId);
 					return true;
-				} else if (url.contains("mqqapi://forward")){
+				} else if (url.contains("mqqapi://forward") || url.contains("wtloginmqq://ptlogin/qlogin")){
 					try {
 						startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
 					}catch (Exception e){
@@ -248,8 +252,6 @@ public class Activity_Browser extends Activity_Base {
 
 			@Override
 			public void onPageFinished(WebView view, String url) {
-				loading_layout.setVisibility(View.GONE);
-				loading_layout.removeAllViews();
 				super.onPageFinished(view, url);
 			}
 		});
@@ -261,14 +263,14 @@ public class Activity_Browser extends Activity_Base {
 
 			@Override
 			public void onProgressChanged(WebView view, int newProgress) {
-
+				mPageLoadingProgressBar.setProgress(newProgress);
+				if (mPageLoadingProgressBar != null && newProgress != 100) {
+					mPageLoadingProgressBar.setVisibility(View.VISIBLE);
+				} else if (mPageLoadingProgressBar != null) {
+					mPageLoadingProgressBar.setVisibility(View.GONE);
+				}
 			}
 		});
-
-		//加载控件
-		loading_layout = (RelativeLayout) findViewById(R.id.load_layout);
-		ld = new LoadingLayoutMgr(Activity_Browser.this, false, "正在加载...");
-		loading_layout.addView(ld.getLayout());
 
 		WebSettings webSetting = mWebView.getSettings();
 		webSetting.setAllowFileAccess(true);

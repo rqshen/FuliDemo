@@ -42,7 +42,6 @@ dependencies {
     compile 'org.litepal.android:core:1.3.1'
     compile 'com.bigkoo:alertview:1.0.2'
     compile 'com.github.bumptech.glide:glide:3.7.0'
-    compile files('libs/tbs_sdk_v1.5.1.1057_25436_obfs_20160331_144900.jar')
     compile files('libs/jpush-android-2.1.5.jar')
     compile files('libs/AMap_Location_V2.4.1_20160414.jar')
     compile 'com.tencent.bugly:crashreport:latest.release'
@@ -54,6 +53,6 @@ dependencies {
     compile 'org.java-websocket:Java-WebSocket:1.3.0'
     compile 'com.commit451:PhotoView:1.2.4'
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
-
+    compile files('libs/tbs_sdk_v2.0.jar')
 }
 

@@ -8,13 +8,11 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:orientation="vertical" >
-        <RelativeLayout
-            android:id="@+id/load_layout"
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:gravity="center" >
-        </RelativeLayout>
+            android:layout_height="3dp" />
         <FrameLayout
             android:id="@+id/layout_webview"
             android:layout_width="match_parent"

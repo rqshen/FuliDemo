@@ -221,8 +221,8 @@ public class Activity_Withdraw extends Activity_Base implements View.OnClickList
                 }
 
                 //无法提现100万以上的金额
-                if (temp.indexOf(".") <= 0 && temp.length() > 6) {
-                    s.delete(6, temp.length());
+                if (temp.indexOf(".") <= 0 && temp.length() > 5) {
+                    s.delete(5, temp.length());
                 }
                 //显示提示
                 setupCouponTips();
