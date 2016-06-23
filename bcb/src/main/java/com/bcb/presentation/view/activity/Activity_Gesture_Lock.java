@@ -76,7 +76,7 @@ public class Activity_Gesture_Lock extends Activity_Base {
         body_layout = (FrameLayout) findViewById(R.id.body_layout);
 
         // 初始化一个显示各个点的viewGroup
-        if (isSettingPasswd) {
+        if (isSettingPasswd) {//设置手势密码
             //设置手势密码时的构造器
             content = new ContentView(this, new Drawl.GestureCallBack() {
                 @Override
@@ -110,13 +110,14 @@ public class Activity_Gesture_Lock extends Activity_Base {
                     }
                 }
             });
-        } else {
+        } else {//清除手势密码
             //输入手势密码的构造器
             content = new ContentView(this, App.saveUserInfo.getGesturePassword(), new Drawl.GestureCallBack() {
                 @Override
                 public void checkedSuccess() {
                     //清除上一次退到后台时保存的时间
                     clearEnterTime();
+                    App.saveUserInfo.setGesturePassword("");
                     finish();
                 }
 

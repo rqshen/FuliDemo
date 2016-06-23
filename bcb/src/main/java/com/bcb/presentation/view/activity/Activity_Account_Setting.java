@@ -102,6 +102,33 @@ public class Activity_Account_Setting extends Activity_Base implements OnClickLi
 		updateUserData();
 	}
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //手势密码
+        switch_gesture = (Switch) findViewById(R.id.switch_gesture);
+        switch_gesture.setOnCheckedChangeListener(null);
+        //如果手势密码不为空，则设置为打开状态
+        switch_gesture.setChecked(!App.saveUserInfo.getGesturePassword().isEmpty());
+        switch_gesture.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                //选中状态
+                if (isChecked) {
+                    //判断是否第一次创建的
+                    if (isFirstCreate) {
+                        return;
+                    }
+                    //去设置手势密码
+                    settingGesturePassword();
+                    switch_gesture.setChecked(false);
+                } else {
+                    clearGesturePassword();
+                }
+            }
+        });
+    }
+
     private void initView() {
 		//用户名
 		layout_username = (RelativeLayout) findViewById(R.id.layout_username);
@@ -135,27 +162,27 @@ public class Activity_Account_Setting extends Activity_Base implements OnClickLi
 		layout_login_pwd = (RelativeLayout) findViewById(R.id.layout_login_pwd);
 		layout_login_pwd.setOnClickListener(this);
 
-        //手势密码
-        switch_gesture = (Switch) findViewById(R.id.switch_gesture);
-        //如果手势密码不为空，则设置为打开状态
-        switch_gesture.setChecked(!App.saveUserInfo.getGesturePassword().isEmpty());
-        switch_gesture.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                //选中状态
-                if (isChecked) {
-                    //判断是否第一次创建的
-                    if (isFirstCreate) {
-                        return;
-                    }
-                    //去设置手势密码
-                    settingGesturePassword();
-                    switch_gesture.setChecked(false);
-                } else {
-                    clearGesturePassword();
-                }
-            }
-        });
+//        //手势密码
+//        switch_gesture = (Switch) findViewById(R.id.switch_gesture);
+//        //如果手势密码不为空，则设置为打开状态
+//        switch_gesture.setChecked(!App.saveUserInfo.getGesturePassword().isEmpty());
+//        switch_gesture.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+//                //选中状态
+//                if (isChecked) {
+//                    //判断是否第一次创建的
+//                    if (isFirstCreate) {
+//                        return;
+//                    }
+//                    //去设置手势密码
+//                    settingGesturePassword();
+//                    switch_gesture.setChecked(false);
+//                } else {
+//                    clearGesturePassword();
+//                }
+//            }
+//        });
 
         isFirstCreate = false;
         //找回交易密码
@@ -307,7 +334,7 @@ public class Activity_Account_Setting extends Activity_Base implements OnClickLi
 	private void joinCompany() {
         UmengUtil.eventById(Activity_Account_Setting.this, R.string.self_auth_c2);
 		//如果未认证，则去认证
-		if (App.mUserDetailInfo == null || App.mUserDetailInfo.HasCert == false) {
+		if (App.mUserDetailInfo == null || !App.mUserDetailInfo.HasCert) {
 			popCertDialog();
 		}
 		//否则去选择公司
