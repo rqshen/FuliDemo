@@ -1,11 +1,8 @@
 package com.bcb.data.util;
 
-import android.media.Image;
-
 import com.bcb.R;
 
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by baicaibang on 2016/5/12.
@@ -33,12 +30,13 @@ public class BankLogo {
     }
 
     public int getDrawableBankLogo(String key) {
+        key = key.toUpperCase();
         if (hashmap == null) {
             new BankLogo();
         }
         //如果不存在对应的logo，则返回空白图片
         if (hashmap.get(key) == null) {
-            return (int)R.drawable.edittext_none_background;
+            return R.drawable.edittext_none_background;
         }
         return (int) hashmap.get(key);
     }

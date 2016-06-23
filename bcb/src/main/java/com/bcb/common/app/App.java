@@ -65,7 +65,7 @@ public class App extends Application implements AMapLocationListener{
 		//数据库初始化
 		LitePalApplication.initialize(this);
 		//极光推送初始化
-		JPushInterface.setDebugMode(true); 	// 设置开启日志,发布时请关闭日志
+		JPushInterface.setDebugMode(false); 	// 设置开启日志,发布时请关闭日志
 		JPushInterface.init(this);     		// 初始化 JPush
 
 		//关闭友盟bug收集
