@@ -432,7 +432,6 @@ public class Activity_ExpiredProject_Introduction extends Activity_Base implemen
     /********************* 去买标页面 **********************/
     private void gotoBuyPrjectPage() {
         Activity_Project_Buy.launche(Activity_ExpiredProject_Introduction.this, packageId, title, 1, countDate, expiredProjectDetail, true);
-        finish();
     }
 
     /********************* 转圈提示 **************************/

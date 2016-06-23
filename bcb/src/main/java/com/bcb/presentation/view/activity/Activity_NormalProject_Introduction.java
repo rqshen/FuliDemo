@@ -522,7 +522,6 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
     /********************* 去买标页面 **********************/
     private void gotoBuyPrjectPage() {
         Activity_Project_Buy.launche(Activity_NormalProject_Introduction.this, packageId, title, CouponType, countDate, mSimpleProjectDetail, false);
-        finish();
     }
 
     /********************* 转圈提示 **************************/
