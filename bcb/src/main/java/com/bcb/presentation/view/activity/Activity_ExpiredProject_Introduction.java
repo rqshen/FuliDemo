@@ -52,8 +52,6 @@ public class Activity_ExpiredProject_Introduction extends Activity_Base implemen
     private TextView value_total;
     //投资期限
     private TextView time_value;
-//    //万元收益
-//    private TextView value_gain;
     //奖励说明
     private TextView value_description;
     //本息保障
@@ -91,9 +89,7 @@ public class Activity_ExpiredProject_Introduction extends Activity_Base implemen
     private BcbRequestQueue requestQueue;
 
     //默认的构造函数
-    public static void launche(Context ctx,
-                               String pid,
-                               String title) {
+    public static void launche(Context ctx, String pid, String title) {
         Intent intent = new Intent();
         intent.putExtra("pid", pid);
         intent.putExtra("title", title);
@@ -140,8 +136,6 @@ public class Activity_ExpiredProject_Introduction extends Activity_Base implemen
         value_total = (TextView) findViewById(R.id.value_total);
         //投资期限
         time_value = (TextView) findViewById(R.id.time_value);
-        //万元收益
-//        value_gain = (TextView) findViewById(R.id.value_gain);
         //奖励说明
         value_description = (TextView) findViewById(R.id.value_description);
         //本息保障
@@ -210,7 +204,7 @@ public class Activity_ExpiredProject_Introduction extends Activity_Base implemen
         //年化利率
         value_lilv.setText(String.format("%.2f", expiredProjectDetail.Rate));
         //可投金额
-        value_total.setText(String.format("%.2f", expiredProjectDetail.AmountBalance) + "元");
+        value_total.setText(String.format("%.2f", expiredProjectDetail.AmountBalance));
 
         //判断借款期限的天标月标
         switch (expiredProjectDetail.DurationExchangeType) {
@@ -231,10 +225,8 @@ public class Activity_ExpiredProject_Introduction extends Activity_Base implemen
                 break;
         }
 
-//        //万元收益
-//        value_gain.setText(String.format("%.2f", (expiredProjectDetail.Rate + expiredProjectDetail.RewardRate) * 100));
         //融资总额
-        value_invest_mini.setText(String.format("%.2f", expiredProjectDetail.AmountTotal) + "元");
+        value_invest_mini.setText(String.format("%.2f", expiredProjectDetail.AmountTotal));
 
         //奖励说明
         if (expiredProjectDetail.RewardRateDescn != null
@@ -247,11 +239,9 @@ public class Activity_ExpiredProject_Introduction extends Activity_Base implemen
         }
 
         //投标进度条
-        progress_percent.setProgress((int) (100 - ((float) expiredProjectDetail.AmountBalance / expiredProjectDetail.AmountTotal) * 100));
+        progress_percent.setProgress((int) (100 - (expiredProjectDetail.AmountBalance / expiredProjectDetail.AmountTotal) * 100));
         //投资进度百分比
-        value_percent.setText(String.format("%.2f", (1 - (float)expiredProjectDetail.AmountBalance/expiredProjectDetail.AmountTotal) * 100) + "%");
-//        //投标人数
-//        value_person.setText(347 + "");
+        value_percent.setText(String.format("%.0f", (1 - expiredProjectDetail.AmountBalance/expiredProjectDetail.AmountTotal) * 100) + "%");
 
         //还款方式
         payment_type.setText(expiredProjectDetail.PaymentType);

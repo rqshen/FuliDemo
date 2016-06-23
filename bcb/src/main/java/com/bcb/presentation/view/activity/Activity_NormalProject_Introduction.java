@@ -321,7 +321,7 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
     /***************** 显示普通标的数据 *******************************/
     private void showProjectData() {
         // 年化利率
-        value_lilv.setText(mSimpleProjectDetail.Rate+"");
+        value_lilv.setText(String.format("%.2f",mSimpleProjectDetail.Rate));
         text_description.setVisibility(View.VISIBLE);
 
         //领投人
@@ -338,7 +338,7 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
         }
 
         //可投金额
-        total_money.setText(String.format("%d", (int)mSimpleProjectDetail.AmountBalance) + "元");
+        total_money.setText(String.format("%d", (int)mSimpleProjectDetail.AmountBalance));
 
         //理财期限
         switch (mSimpleProjectDetail.DurationExchangeType) {
@@ -360,14 +360,14 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
         }
 
         //融资总额
-        miniValue_invest.setText(String.format("%d", (int)mSimpleProjectDetail.AmountTotal) + "元");
+        miniValue_invest.setText(String.format("%d", (int)mSimpleProjectDetail.AmountTotal));
 
         /************************* 进度等 ************************************/
         //投标进度条
-        progress_percent.setProgress((int) (100 - ((float) mSimpleProjectDetail.AmountBalance / mSimpleProjectDetail.AmountTotal) * 100));
-        progress_percent.setSecondaryProgress((int)(100 - ((float)mSimpleProjectDetail.AmountBalance/mSimpleProjectDetail.AmountTotal) * 100));
+        progress_percent.setProgress((int) (100 - (mSimpleProjectDetail.AmountBalance / mSimpleProjectDetail.AmountTotal) * 100));
+        progress_percent.setSecondaryProgress((int)(100 - (mSimpleProjectDetail.AmountBalance/mSimpleProjectDetail.AmountTotal) * 100));
         //投资进度百分比
-        value_percent.setText(String.format("%.2f", (1 - (float)mSimpleProjectDetail.AmountBalance/mSimpleProjectDetail.AmountTotal) * 100) + "%");
+        value_percent.setText(String.format("%.0f", (1 - mSimpleProjectDetail.AmountBalance/mSimpleProjectDetail.AmountTotal) * 100) + "%");
         //还款方式
         payment_type.setText(mSimpleProjectDetail.PaymentType);
         //截止日期

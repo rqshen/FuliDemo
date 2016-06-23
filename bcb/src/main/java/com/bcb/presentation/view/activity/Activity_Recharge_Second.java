@@ -63,6 +63,8 @@ public class Activity_Recharge_Second extends Activity_Base implements View.OnCl
 
 	private UserWallet mUserWallet;
 	private UserDetailInfo mUserDetailInfo;
+	//单笔最多
+	private Float maxSingle;
 
 	//错误提示
     private RelativeLayout error_layout;
@@ -253,6 +255,7 @@ public class Activity_Recharge_Second extends Activity_Base implements View.OnCl
 				if(null != mBanklist && mBanklist.size() > 0){
 					for(BankItem bankItem : mBanklist){
 						if (bankCode.equalsIgnoreCase(bankItem.getBankCode())){
+							maxSingle = bankItem.getMaxSingle();
 							tip = "该卡本次最多可充值"+ bankItem.getMaxSingle() +"元，每日最多"+ bankItem.getMaxDay() +"元";
 						}
 					}
@@ -337,9 +340,9 @@ public class Activity_Recharge_Second extends Activity_Base implements View.OnCl
 			return;
 		}
 
-		//判断输入金额是否大于10000元
-		if (Float.parseFloat(editext_money.getText().toString()) > 10000) {
-			ToastUtil.alert(Activity_Recharge_Second.this, "充值金额不能大于10000元");
+		//判断输入金额是否大于相应的银行上限
+		if (Float.parseFloat(editext_money.getText().toString()) > maxSingle) {
+			ToastUtil.alert(Activity_Recharge_Second.this, "充值金额不能大于" + maxSingle + "元");
 			return;
 		}
 

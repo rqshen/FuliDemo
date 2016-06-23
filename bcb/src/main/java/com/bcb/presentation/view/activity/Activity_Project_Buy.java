@@ -92,6 +92,9 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
     //是否体验标
     private boolean isExpired = false;
     private ExpiredProjectDetail expiredProjectDetail;
+    //优惠券金额
+    private RelativeLayout layout_coupon_money;
+    private TextView coupon_momey;
     //普通标的
     private SimpleProjectDetail mSimpleProjectDetail;
     //CouponType默认为0，为1的时候表示体验标， 为2表示体验券
@@ -142,6 +145,7 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
         intent.putExtras(bundle);
         ctx.startActivity(intent);
     }
+
     //加载体验标数据
     public static void launche(Context ctx,
                                String pid,
@@ -173,8 +177,8 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
         title = this.getIntent().getStringExtra("title");
         CouponType = this.getIntent().getIntExtra("CouponType", 0);
         countDate = this.getIntent().getIntExtra("countDate", 0);
-        mSimpleProjectDetail = (SimpleProjectDetail)this.getIntent().getSerializableExtra("SimpleProjectDetail");
-        expiredProjectDetail = (ExpiredProjectDetail)this.getIntent().getSerializableExtra("ExpiredProjectDetail");
+        mSimpleProjectDetail = (SimpleProjectDetail) this.getIntent().getSerializableExtra("SimpleProjectDetail");
+        expiredProjectDetail = (ExpiredProjectDetail) this.getIntent().getSerializableExtra("ExpiredProjectDetail");
         isExpired = this.getIntent().getBooleanExtra("isExpired", false);
         setBaseContentView(R.layout.activity_project_buy);
         setLeftTitleListener(new View.OnClickListener() {
@@ -185,7 +189,7 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
             }
         });
         setTitleValue(title);
-        requestQueue =App.getInstance().getRequestQueue();
+        requestQueue = App.getInstance().getRequestQueue();
         //初始化页面
         setupView();
         //注册广播
@@ -199,7 +203,9 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
         }
     }
 
-    /********************** 注册广播 **************************/
+    /**********************
+     * 注册广播
+     **************************/
     private void setupRegister() {
         //注册广播
         buySuccessReceiver = new Receiver();
@@ -211,7 +217,9 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
         registerReceiver(buySuccessReceiver, setTragePasswd);
     }
 
-    /******************* 初始化页面 ***************************/
+    /*******************
+     * 初始化页面
+     ***************************/
     private void setupView() {
         //体验标隐藏账户余额，投资金额
         if (isExpired) {
@@ -222,9 +230,9 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
         invest_money = (EditText) findViewById(R.id.invest_money);
         invest_money.setTextColor(getResources().getColor(R.color.txt_gray));
         if (!isExpired && mSimpleProjectDetail != null) {
-            invest_money.setHint(String.format("%d", (int)mSimpleProjectDetail.StartingAmount) + "元起投");
+            invest_money.setHint(String.format("%d", (int) mSimpleProjectDetail.StartingAmount) + "元起投");
         } else if (isExpired && expiredProjectDetail != null) {
-            invest_money.setHint(String.format("%d", (int)expiredProjectDetail.StartingAmount) + "元起投");
+            invest_money.setHint(String.format("%d", (int) expiredProjectDetail.StartingAmount) + "元起投");
         }
         //如果是体验券，设置光标不可显示，并且设置提示——“请选择体验券”
         if ((CouponType & 1) == 1) {
@@ -238,16 +246,25 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
             invest_money.setSelection(invest_money.getText().toString().length());
             invest_money.addTextChangedListener(mTextWatcher);
         }
-            //选择优惠券
+        //选择优惠券
         layout_coupon = (RelativeLayout) findViewById(R.id.layout_coupon);
         layout_coupon.setOnClickListener(this);
+        coupon_momey = (TextView) findViewById(R.id.coupon_momey);
         if (CouponType == 0) {
             layout_coupon.setVisibility(View.GONE);
         }
+        //优惠券金额
+        layout_coupon_money = (RelativeLayout) findViewById(R.id.layout_coupon_money);
+        layout_coupon_money.setVisibility(View.GONE);
+        if ((CouponType & 1) == 1) {
+            layout_coupon_money.setVisibility(View.VISIBLE);
+        }
+
         //优惠券信息
         coupon_description = (TextView) findViewById(R.id.coupon_description);
         coupon_arrow = (ImageView) findViewById(R.id.coupon_arrow);
         coupon_arrow.setVisibility(View.GONE);
+
         //账户余额
         wallet_money = (TextView) findViewById(R.id.wallet_money);
         //充值
@@ -272,12 +289,14 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
         error_tips.setVisibility(View.GONE);
     }
 
-    /**************** 输入监听器 ***********************/
+    /****************
+     * 输入监听器
+     ***********************/
     TextWatcher mTextWatcher = new TextWatcher() {
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             invest_money.setTextColor(Color.BLACK);
             String input = invest_money.getText().toString();
-            if(!TextUtils.isEmpty(input)){
+            if (!TextUtils.isEmpty(input)) {
                 error_tips.setVisibility(View.GONE);
                 //如果不是体验券，则计算收益，在优惠那一栏中显示返现
                 if ((CouponType & 1) != 1) {
@@ -297,7 +316,6 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
                         e.printStackTrace();
                     }
                 }
-
             } else {
                 countEarnMoney(0);
                 checkCommitBtnStatus(0);
@@ -324,8 +342,10 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
         }
     };
 
-    /*************** 设置按钮文字的样式 *****************/
-    private void checkCommitBtnStatus(float money){
+    /***************
+     * 设置按钮文字的样式
+     *****************/
+    private void checkCommitBtnStatus(float money) {
         //是否存在用户信息
         if (null != App.mUserWallet) {
             //如果不是体验券，则判断账户余额是否足够
@@ -346,7 +366,10 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
     }
 
     //获取优惠券张数
-    /*************** 获取优惠券张数 **********************/
+
+    /***************
+     * 获取优惠券张数
+     **********************/
     private void getCouponCount() {
         JSONObject obj = new JSONObject();
         try {
@@ -367,7 +390,7 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
             public void onResponse(JSONObject response) {
                 try {
                     boolean flag = PackageUtil.getRequestStatus(response, Activity_Project_Buy.this);
-                    if(flag){
+                    if (flag) {
                         JSONObject obj = PackageUtil.getResultObject(response);
                         //显示优惠券数量
                         //判断JSON对象是否为空
@@ -389,7 +412,9 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
         requestQueue.add(jsonRequest);
     }
 
-    /**************************** 显示优惠券张数 ***********************************/
+    /****************************
+     * 显示优惠券张数
+     ***********************************/
     protected void ShowCouponCount(String TotalCount) {
         int totalCount = Integer.parseInt(TotalCount);
         String couponName = "优惠券";
@@ -399,9 +424,9 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
             couponName = "现金券";
         }
 
-        if (totalCount == 0){
+        if (totalCount == 0) {
             coupon_description.setText("您当前无可用" + couponName);
-        }else{
+        } else {
             coupon_description.setText("您当前有(" + totalCount + ")张" + couponName);
             UmengUtil.eventById(Activity_Project_Buy.this, R.string.bid_buy_coupon_avi);
         }
@@ -420,8 +445,10 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
         }
     }
 
-    /*************** 获取用户银行卡信息 *********************/
-    private void loadUserDetailInfoData(){
+    /***************
+     * 获取用户银行卡信息
+     *********************/
+    private void loadUserDetailInfoData() {
         BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsTwo.UserBankMessage, null, TokenUtil.getEncodeToken(this), new BcbRequest.BcbCallBack<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -457,7 +484,9 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
     }
 
 
-    /************ 获取用户余额 *********************/
+    /************
+     * 获取用户余额
+     *********************/
     private void getUserBanlance() {
         showProgressBar("正在获取用户余额...");
         BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.UserWalletMessage, null, TokenUtil.getEncodeToken(this), new BcbRequest.BcbCallBack<JSONObject>() {
@@ -500,14 +529,16 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
     }
 
 
-    /***************************** 计算收益 ***********************************/
-    private void countEarnMoney(float moneyinput){
+    /*****************************
+     * 计算收益
+     ***********************************/
+    private void countEarnMoney(float moneyinput) {
         // 如果传错了月标(1)、天标(2)，则不显示收益
         if (countDate != 0) {
             //显示值
             prospective_earning.setVisibility(View.VISIBLE);
             //如果输入金额为0时，不显示
-            if(moneyinput == 0) {
+            if (moneyinput == 0) {
                 earnings_description.setText("预期收益");
                 prospective_earning.setText("0元");
             } else {
@@ -516,19 +547,19 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
                 //计算奖励收益
                 float jiangliamount;
                 //奖励描述
-                String description  = "";
+                String description = "";
                 //如果是新手体验标
                 if (isExpired) {
-                    shouyi = ((moneyinput * expiredProjectDetail.Rate * 0.01f)/countDate) * expiredProjectDetail.Duration ;
-                    jiangliamount = ((moneyinput * expiredProjectDetail.RewardRate)/countDate * 0.01f) * expiredProjectDetail.Duration;
+                    shouyi = ((moneyinput * expiredProjectDetail.Rate * 0.01f) / countDate) * expiredProjectDetail.Duration;
+                    jiangliamount = ((moneyinput * expiredProjectDetail.RewardRate) / countDate * 0.01f) * expiredProjectDetail.Duration;
                     if (expiredProjectDetail.RewardRateDescn != null && !expiredProjectDetail.RewardRateDescn.equalsIgnoreCase("null")) {
                         description = expiredProjectDetail.RewardRateDescn;
                     }
                 }
                 //不是新手体验标的时候
                 else {
-                    shouyi = ((moneyinput * mSimpleProjectDetail.Rate * 0.01f)/countDate)*mSimpleProjectDetail.Duration ;
-                    jiangliamount = ((moneyinput * mSimpleProjectDetail.RewardRate)/countDate * 0.01f)*mSimpleProjectDetail.Duration;
+                    shouyi = ((moneyinput * mSimpleProjectDetail.Rate * 0.01f) / countDate) * mSimpleProjectDetail.Duration;
+                    jiangliamount = ((moneyinput * mSimpleProjectDetail.RewardRate) / countDate * 0.01f) * mSimpleProjectDetail.Duration;
                     if (mSimpleProjectDetail.RewardRateDescn != null && !mSimpleProjectDetail.RewardRateDescn.equalsIgnoreCase("null")) {
                         description = mSimpleProjectDetail.RewardRateDescn;
                     }
@@ -540,6 +571,7 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
             prospective_earning.setVisibility(View.GONE);
         }
     }
+
     //设置奖励描述
     private String rewardDescription(String description, float shouyi, float jiangliamount) {
         String valueText = "";
@@ -551,13 +583,15 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
                         "(含" + TextUtil.delFloat(jiangliamount) + "元" + "奖励)";
             } else {
                 valueText = TextUtil.delFloat(shouyi + jiangliamount) + "元" +
-                        "(含" + TextUtil.delFloat(jiangliamount) + "元" + description +"奖励)";
+                        "(含" + TextUtil.delFloat(jiangliamount) + "元" + description + "奖励)";
             }
         }
         return valueText;
     }
 
-    /***************** 点击购买按钮 **********************/
+    /*****************
+     * 点击购买按钮
+     **********************/
     private void clickButton() {
         // 用户是否登录
         if (App.saveUserInfo.getAccess_Token() == null) {
@@ -573,7 +607,7 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
                 ToastUtil.alert(Activity_Project_Buy.this, "无法获取买标数据");
                 return;
             }
-            if (expiredProjectDetail.AmountBalance <=0) {
+            if (expiredProjectDetail.AmountBalance <= 0) {
                 error_tips.setVisibility(View.VISIBLE);
                 error_tips.setText("可投金额为0，该标不能投");
                 return;
@@ -597,7 +631,7 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
         if ((CouponType & 1) == 1) {
             // 判断是否输入金额
             String input_moneyStr = invest_money.getText().toString().replace(",", "");
-            if(null == input_moneyStr || input_moneyStr.trim().equals("")){
+            if (null == input_moneyStr || input_moneyStr.trim().equals("")) {
                 error_tips.setVisibility(View.VISIBLE);
                 error_tips.setText("请选择体验券投标");
                 return;
@@ -618,7 +652,7 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
         else {
             // 判断是否输入金额
             String input_moneyStr = invest_money.getText().toString().replace(",", "");
-            if(null == input_moneyStr || input_moneyStr.trim().equals("")){
+            if (null == input_moneyStr || input_moneyStr.trim().equals("")) {
                 error_tips.setVisibility(View.VISIBLE);
                 error_tips.setText("请输入投资金额");
                 return;
@@ -631,7 +665,7 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
             if (mSimpleProjectDetail.StartingAmount > 0) {
                 if (inputMoney < mSimpleProjectDetail.StartingAmount) {
                     error_tips.setVisibility(View.VISIBLE);
-                    error_tips.setText("当前输入小于起投金额" + (int)mSimpleProjectDetail.StartingAmount + "元");
+                    error_tips.setText("当前输入小于起投金额" + (int) mSimpleProjectDetail.StartingAmount + "元");
                     return;
                 }
             }
@@ -640,14 +674,14 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
             if (mSimpleProjectDetail.SingletonAmount > 0) {
                 if (Float.parseFloat(invest_money.getText().toString().replace(",", "")) > mSimpleProjectDetail.SingletonAmount) {
                     error_tips.setVisibility(View.VISIBLE);
-                    error_tips.setText("当前输入超出单笔限额" + (int)mSimpleProjectDetail.SingletonAmount + "元");
+                    error_tips.setText("当前输入超出单笔限额" + (int) mSimpleProjectDetail.SingletonAmount + "元");
                     return;
                 }
             }
             //要先认证用户信息，判断是否绑卡和设置了交易密码
-            if(null != App.mUserDetailInfo){
+            if (null != App.mUserDetailInfo) {
                 // 检测是否绑卡
-                if(!App.mUserDetailInfo.HasBindCard){
+                if (!App.mUserDetailInfo.HasBindCard) {
                     popCertDialog();
                     return;
                 }
@@ -673,7 +707,7 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
             }
             //判断输入金额是否大于可投金额
             float moneyf = Float.valueOf(invest_money.getText().toString().replace(",", ""));
-            if(moneyf > mSimpleProjectDetail.AmountBalance){
+            if (moneyf > mSimpleProjectDetail.AmountBalance) {
                 error_tips.setVisibility(View.VISIBLE);
                 error_tips.setText("超出项目可投金额");
                 return;
@@ -683,14 +717,18 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
         popInputPswDialog(invest_money.getText().toString().replace(",", ""));
     }
 
-    /****************** 跳转到登录页面 ***************/
+    /******************
+     * 跳转到登录页面
+     ***************/
     private void gotoLoginActivity() {
         UmengUtil.eventById(Activity_Project_Buy.this, R.string.bid_buy_n_login);
         Intent newIntent = new Intent(Activity_Project_Buy.this, Activity_Login.class);
         startActivity(newIntent);
     }
 
-    /***************** 设置交易密码 ***********************/
+    /*****************
+     * 设置交易密码
+     ***********************/
     private void popSetPswDialog() {
         UmengUtil.eventById(Activity_Project_Buy.this, R.string.bid_buy_n_key);
         AlertView.Builder builder = new AlertView.Builder(this);
@@ -709,7 +747,9 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
         alertView.show();
     }
 
-    /************************ 去认证 ******************************/
+    /************************
+     * 去认证
+     ******************************/
     private void popCertDialog() {
         UmengUtil.eventById(Activity_Project_Buy.this, R.string.bid_buy_n_auth);
         certDialog = new DialogWidget(Activity_Project_Buy.this, IdentifyAlertView.getInstance(Activity_Project_Buy.this, new IdentifyAlertView.OnClikListener() {
@@ -737,7 +777,9 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
         startActivityForResult(newIntent, 10);
     }
 
-    /***************** 输入交易密码 *************************/
+    /*****************
+     * 输入交易密码
+     *************************/
     private void popInputPswDialog(String moneyInvest) {
         UmengUtil.eventById(Activity_Project_Buy.this, R.string.bid_buy_confirm);
         enterPswDialog = new DialogWidget(Activity_Project_Buy.this, getDecorViewDialog(moneyInvest));
@@ -765,10 +807,12 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
         }).getView();
     }
 
-    /***************** 购买请求 ******************************/
-    private void onPostBuyProject(String psw){
+    /*****************
+     * 购买请求
+     ******************************/
+    private void onPostBuyProject(String psw) {
         //是否请求过一次
-        if(isPaying)return;
+        if (isPaying) return;
         isPaying = true;
         showProgressBar("正在买标，请耐心等候...");
         JSONObject data = new JSONObject();
@@ -797,7 +841,7 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
             public void onResponse(JSONObject response) {
                 hideProgressBar();
                 isPaying = false;
-                if(PackageUtil.getRequestStatus(response, Activity_Project_Buy.this)){
+                if (PackageUtil.getRequestStatus(response, Activity_Project_Buy.this)) {
                     JSONObject obj = PackageUtil.getResultObject(response);
                     BuyProjectSuccess successInfo = null;
                     UmengUtil.eventById(Activity_Project_Buy.this, R.string.bid_buy_succ);
@@ -835,35 +879,41 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
         requestQueue.add(jsonRequest);
     }
 
-    public void onPostSuccess(BuyProjectSuccess successInfo){
+    public void onPostSuccess(BuyProjectSuccess successInfo) {
         UmengUtil.eventById(this, R.string.buy_success);
         Activity_BuyProject_Success.launche(this, successInfo);
         finish();
     }
 
-    public void onPostFail(){
+    public void onPostFail() {
         isPaying = false;
         hideProgressBar();
     }
 
-    /********************* 转圈提示 **************************/
+    /*********************
+     * 转圈提示
+     **************************/
     //显示转圈提示
     private void showProgressBar(String title) {
-        if(null == progressDialog) progressDialog = new ProgressDialog(this,ProgressDialog.THEME_HOLO_LIGHT);
+        if (null == progressDialog)
+            progressDialog = new ProgressDialog(this, ProgressDialog.THEME_HOLO_LIGHT);
         progressDialog.setMessage(title);
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.setCancelable(true);
         progressDialog.show();
     }
+
     //隐藏转圈提示
-    private void hideProgressBar(){
-        if(null != progressDialog && progressDialog.isShowing()){
+    private void hideProgressBar() {
+        if (null != progressDialog && progressDialog.isShowing()) {
             progressDialog.dismiss();
         }
     }
 
 
-    /******************************* 点击事件 ****************************/
+    /*******************************
+     * 点击事件
+     ****************************/
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -918,7 +968,9 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
         }
     }
 
-    /************************** 去充值 *****************************************/
+    /**************************
+     * 去充值
+     *****************************************/
     private void gotoRechargePage() {
         // 用户是否登录
         if (App.saveUserInfo.getAccess_Token() == null) {
@@ -927,9 +979,9 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
             return;
         }
         //要先认证用户信息，判断是否绑卡和设置了交易密码
-        if(null != App.mUserDetailInfo){
+        if (null != App.mUserDetailInfo) {
             // 检测是否绑卡
-            if(!App.mUserDetailInfo.HasBindCard){
+            if (!App.mUserDetailInfo.HasBindCard) {
                 popCertDialog();
                 return;
             }
@@ -944,8 +996,10 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
         Activity_Recharge_Second.launche(Activity_Project_Buy.this);
     }
 
-    /************************** 跳转到选择优惠券页面 **********************/
-    private void startupActivity(int couponType){
+    /**************************
+     * 跳转到选择优惠券页面
+     **********************/
+    private void startupActivity(int couponType) {
         Intent newIntent = new Intent(Activity_Project_Buy.this, Activity_Select_Coupon.class);
         String newInput = invest_money.getText().toString().replace(",", "");
         float newInvestAmount = 0;
@@ -957,7 +1011,9 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
         startActivityForResult(newIntent, 1);
     }
 
-    /*************** 点击投资服务费图标实现蒙版效果 *****************/
+    /***************
+     * 点击投资服务费图标实现蒙版效果
+     *****************/
     private void showServiceFee(int duration, int durationExchangeType, float rate, float rewardRate) {
         //计算信息服务费
         double fee = 0.0;
@@ -1004,6 +1060,7 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
                     CouponId = data.getStringExtra("CouponId");
                     CouponAmount = data.getStringExtra("CouponAmount");
                     CouponMinAmount = data.getStringExtra("CouponMinAmount");
+                    coupon_momey.setText("￥" + CouponAmount);
                     if ((CouponType & 1) == 1) {
                         error_tips.setVisibility(View.GONE);
                         coupon_description.setText(data.getStringExtra("ConditionDescn"));
@@ -1018,7 +1075,6 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
                     }
                 }
                 break;
-
             //认证成功返回
             case 10:
                 if (data != null) {

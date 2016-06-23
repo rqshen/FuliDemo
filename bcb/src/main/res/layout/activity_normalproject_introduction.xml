@@ -202,7 +202,7 @@
                 android:orientation="horizontal">
                 <!-- 可投金额 -->
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_gravity="center_horizontal"
@@ -211,22 +211,24 @@
                     android:orientation="vertical"
                     android:padding="4dip" >
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="11dip"
                         android:orientation="vertical">
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:gravity="center"
                             android:text="@string/investment_amount_title"
                             android:textSize="@dimen/main_text_default"
                             android:textColor="@color/txt_gray"/>
 
                         <TextView
                             android:id="@+id/value_total"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="12dip"
+                            android:gravity="center"
                             android:text=""
                             android:textSize="@dimen/main_text_default"
                             android:textColor="@color/txt_black"/>
@@ -240,7 +242,7 @@
                     android:background="@color/linegray"/>
                 <!-- 理财期限 -->
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginTop="@dimen/margin_size_default"
@@ -249,20 +251,23 @@
                     android:padding="4dip"
                     android:orientation="vertical">
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="11dip"
+                        android:layout_gravity="center_horizontal"
                         android:orientation="vertical">
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:gravity="center"
                             android:text="投资期限"
                             android:textSize="@dimen/main_text_default"
                             android:textColor="@color/txt_gray"/>
                         <TextView
                             android:id="@+id/time_value"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:gravity="center"
                             android:layout_marginTop="12dip"
                             android:text=""
                             android:textSize="@dimen/main_text_default"
@@ -277,7 +282,7 @@
                     android:background="@color/linegray"/>
                 <!-- 借款来源 -->
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:layout_marginBottom="@dimen/margin_size_default"
@@ -286,20 +291,23 @@
                     android:orientation="vertical"
                     android:padding="4dip" >
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="11dip"
+                        android:layout_gravity="center_horizontal"
                         android:orientation="vertical">
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="融资总额"
+                            android:gravity="center"
+                            android:text="融资总额(元)"
                             android:textSize="@dimen/project_font_size"
                             android:textColor="@color/txt_gray"/>
                         <TextView
                             android:id="@+id/value_invest_mini"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:gravity="center"
                             android:layout_marginTop="12dip"
                             android:singleLine="true"
                             android:textSize="@dimen/project_font_size"

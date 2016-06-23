@@ -114,11 +114,6 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPa
     //滚动广告
     private TextView notice_text;
 
-    //标识
-	private boolean canReFresh = true;
-	private boolean firstLoadCopyWriter = true;
-    private boolean firstLoadBanner = true;
-
 	private TextView JXPackageAdWord;
     private int successConnectCount = 0;
 
@@ -222,7 +217,7 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPa
         //从产品列表中获取回来的列表
         additionListview = (MyListView) view.findViewById(R.id.addition_listView);
         additionListview.setOnItemClickListener(new boutiqueItemClickListener());
-        additionRecordsBeans = new ArrayList<ProductRecordsBean>();
+        additionRecordsBeans = new ArrayList<>();
         mAdditionAdapter = new ProductAdapter(ctx, additionRecordsBeans);
         additionListview.setAdapter(mAdditionAdapter);
 
@@ -427,84 +422,78 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPa
      * 文案配置
      */
 	private void loadCopyWriter() {
-        //只需要第一次加载的时候获取一次数据就行，获取了数据之后会写入到静态数据区中，不用每次都请求
-        if (firstLoadCopyWriter) {
-            BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.WordDataConfig, null, null, new BcbRequest.BcbCallBack<JSONObject>() {
-                @Override
-                public void onResponse(JSONObject response) {
-                    successConnectCount = successConnectCount + 1;
-                    firstLoadCopyWriter = false;
-                    try {
-                        if(response.getInt("status") == 1) {
-                            //存入静态数据区
-                            App.saveUserInfo.setJXPackageAdWord(response.getJSONObject("result").getString("JXPackageAdWord"));
-                            App.saveUserInfo.setXFBPackageAdWord(response.getJSONObject("result").getString("XFBPackageAdWord"));
-                            App.saveUserInfo.setInvestButtonAdWord(response.getJSONObject("result").getString("InvestButtonAdWord"));
-                            App.saveUserInfo.setUpgradeWord(response.getJSONObject("result").getString("UpgradeWord"));
-                            //设置精品项目和新房宝文案
-                            String JXPackageAdWordString = App.saveUserInfo.getJXPackageAdWord();
-                            //判断是否为空，包括 null、"null"、""
-                            if (JXPackageAdWordString != null
-                                    && !JXPackageAdWordString.equalsIgnoreCase("null")
-                                    && !JXPackageAdWordString.equalsIgnoreCase("")) {
-                                JXPackageAdWord.setText(JXPackageAdWordString);
-                            } else {
-                                JXPackageAdWord.setText("");
-                                JXPackageAdWord.setVisibility(View.GONE);
-                            }
+        BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.WordDataConfig, null, null, new BcbRequest.BcbCallBack<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                successConnectCount = successConnectCount + 1;
+                LogUtil.d("文案", response.toString());
+                try {
+                    if(response.getInt("status") == 1) {
+                        //存入静态数据区
+                        App.saveUserInfo.setJXPackageAdWord(response.getJSONObject("result").getString("JXPackageAdWord"));
+                        App.saveUserInfo.setXFBPackageAdWord(response.getJSONObject("result").getString("XFBPackageAdWord"));
+                        App.saveUserInfo.setInvestButtonAdWord(response.getJSONObject("result").getString("InvestButtonAdWord"));
+                        App.saveUserInfo.setUpgradeWord(response.getJSONObject("result").getString("UpgradeWord"));
+                        //设置精品项目和新房宝文案
+                        String JXPackageAdWordString = App.saveUserInfo.getJXPackageAdWord();
+                        //判断是否为空，包括 null、"null"、""
+                        if (JXPackageAdWordString != null
+                                && !JXPackageAdWordString.equalsIgnoreCase("null")
+                                && !JXPackageAdWordString.equalsIgnoreCase("")) {
+                            JXPackageAdWord.setText(JXPackageAdWordString);
                         } else {
-                            LogUtil.e(TAG, "获取文案配置失败:" + response.getString("message"));
+                            JXPackageAdWord.setText("");
+                            JXPackageAdWord.setVisibility(View.GONE);
                         }
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                    } else {
+                        LogUtil.e(TAG, "获取文案配置失败:" + response.getString("message"));
                     }
-                }
 
-                @Override
-                public void onErrorResponse(Exception error) {
-
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-            });
-            jsonRequest.setTag(BcbRequestTag.WordDataConfigTag);
-        }
+            }
+
+            @Override
+            public void onErrorResponse(Exception error) {
+
+            }
+        });
+        jsonRequest.setTag(BcbRequestTag.WordDataConfigTag);
+        requestQueue.add(jsonRequest);
 	}
 
     /**
      * 获取首页Banner
      */
     private void loadBanner() {
-        //Banner只需要第一次创建的时候加载一次，不用每次都请求服务器
-        if (firstLoadBanner) {
-            BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.MainpageAdRotator, null, TokenUtil.getEncodeToken(ctx), new BcbRequest.BcbCallBack<JSONObject>() {
-                @Override
-                public void onResponse(JSONObject response) {
-                    successConnectCount = successConnectCount + 1;
-//                    firstLoadBanner = false;
-                    try {
-                        if (PackageUtil.getRequestStatus(response, ctx)) {
-                            synchronized (this) {
-                                JSONObject obj = PackageUtil.getResultObject(response);
-                                if (null != obj){
-                                    mAdPhotoListBean = App.mGson.fromJson(obj.toString(), AdPhotoListBean.class);
-                                }
+        BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.MainpageAdRotator, null, TokenUtil.getEncodeToken(ctx), new BcbRequest.BcbCallBack<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                successConnectCount = successConnectCount + 1;
+                try {
+                    if (PackageUtil.getRequestStatus(response, ctx)) {
+                        synchronized (this) {
+                            JSONObject obj = PackageUtil.getResultObject(response);
+                            if (null != obj){
+                                mAdPhotoListBean = App.mGson.fromJson(obj.toString(), AdPhotoListBean.class);
                             }
                         }
-                        initBanner();
-                        initScrollText();
-                    } catch (Exception e) {
-                        e.printStackTrace();
                     }
+                    initBanner();
+                    initScrollText();
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
+            }
 
-                @Override
-                public void onErrorResponse(Exception error) {
+            @Override
+            public void onErrorResponse(Exception error) {
 
-                }
-            });
-            jsonRequest.setTag(BcbRequestTag.MainAdRotatorTag);
-            requestQueue.add(jsonRequest);
-        }
+            }
+        });
+        jsonRequest.setTag(BcbRequestTag.MainAdRotatorTag);
+        requestQueue.add(jsonRequest);
     }
 
     //初始化Banner
@@ -514,7 +503,7 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPa
             return;
         }
         //创建新的列表数据
-		listBanner = new ArrayList<BannerInfo>();	
+		listBanner = new ArrayList<>();
 		for (int i = 0; i < mAdPhotoListBean.BannerList.size(); i++) {
 			BannerInfo  item = new BannerInfo();
 			item.Title = mAdPhotoListBean.BannerList.get(i).Title;
@@ -665,13 +654,11 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPa
                 } catch (Exception e) {
                     LogUtil.d(TAG, "" + e.getMessage());
                 }
-                canReFresh = true;
                 refreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
             }
 
             @Override
             public void onErrorResponse(Exception error) {
-                canReFresh = true;
                 refreshLayout.refreshFinish(PullToRefreshLayout.FAIL);
                 setupExpiredVisible(View.GONE);
                 setupAnnounceVisible(View.GONE);
