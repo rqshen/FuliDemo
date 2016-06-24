@@ -265,5 +265,9 @@ public class X5WebViewEventHandler extends ProxyWebViewClientExtension implement
 
     }
 
+    @Override
+    public void onColorModeChanged(long arg0) {
+
+    }
 
 }
