@@ -600,6 +600,21 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
             return;
         }
 
+        //要先认证用户信息，判断是否绑卡和设置了交易密码
+        if (null != App.mUserDetailInfo) {
+            // 检测是否绑卡
+            if (!App.mUserDetailInfo.HasBindCard) {
+                popCertDialog();
+                return;
+            }
+            // 检测是否设置交易密码
+            if (!App.mUserDetailInfo.HasTradePassword) {
+                // 弹出设置密码提示框
+                popSetPswDialog();
+                return;
+            }
+        }
+
         //判断是否获取了数据
         //属于新手体验标的情况
         if (isExpired) {
@@ -675,20 +690,6 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
                 if (Float.parseFloat(invest_money.getText().toString().replace(",", "")) > mSimpleProjectDetail.SingletonAmount) {
                     error_tips.setVisibility(View.VISIBLE);
                     error_tips.setText("当前输入超出单笔限额" + (int) mSimpleProjectDetail.SingletonAmount + "元");
-                    return;
-                }
-            }
-            //要先认证用户信息，判断是否绑卡和设置了交易密码
-            if (null != App.mUserDetailInfo) {
-                // 检测是否绑卡
-                if (!App.mUserDetailInfo.HasBindCard) {
-                    popCertDialog();
-                    return;
-                }
-                // 检测是否设置交易密码
-                if (!App.mUserDetailInfo.HasTradePassword) {
-                    // 弹出设置密码提示框
-                    popSetPswDialog();
                     return;
                 }
             }
