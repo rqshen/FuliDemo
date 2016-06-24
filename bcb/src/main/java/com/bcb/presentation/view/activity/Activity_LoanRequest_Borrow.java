@@ -474,7 +474,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
      */
     private void setupLoanUsage() {
         //将元素添加到数组中
-        purposes_types = new ArrayList<String>();
+        purposes_types = new ArrayList<>();
         for (int i = 0; i <loanRequestInfo.LoanTypeTable.size(); i++) {
             LogUtil.d("借款用途", loanRequestInfo.LoanTypeTable.get(i).Name);
             purposes_types.add(loanRequestInfo.LoanTypeTable.get(i).Name);
@@ -497,7 +497,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
     private void setupLoanDuration() {
         //将元素添加到数组中
         duration_types = new ArrayList<>();
-        durationList = new ArrayList<LoanDurationListBean>();
+        durationList = new ArrayList<>();
         for (int i = 0; i < loanRequestInfo.RateTable.size(); i++) {
             //用于判断数组中是否存在对应的借款期限
             boolean duration = false;
@@ -531,7 +531,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
     private void setupLoanPeriod() {
         period_types = new ArrayList<>();
         //还款期数要从利率表里面查找，这尼玛简直就是坑爹
-        periodList = new ArrayList<LoanPeriodWithRateBean>();
+        periodList = new ArrayList<>();
         for (int i = 0; i < loanRequestInfo.RateTable.size(); i++) {
             //如果借款期限相同，则将期限加载到页面中去
             if (loanRequestInfo.RateTable.get(i).getDuration() == durationStatus) {
