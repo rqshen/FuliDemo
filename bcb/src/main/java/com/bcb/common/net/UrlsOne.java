@@ -191,5 +191,7 @@ public class UrlsOne {
 	public static final String How2Repay = "http://cnt.flh001.com/2016/01/15/ruhehuankuan/";
 	//准备材料
 	public static final String LoanMaterial = "http://cnt.flh001.com/2016/01/21/zunbeicailiao/";
+	//关于聚爱
+	public static final String AboutLove = "http://cnt.flh001.com/juaiintro/";
 
 }
