@@ -96,4 +96,19 @@ public class UserDetailInfo {
     public void setCustomerId(String customerId) {
         CustomerId = customerId;
     }
+
+	@Override
+	public String toString() {
+		return "UserDetailInfo{" +
+				"RealName='" + RealName + '\'' +
+				", IDCard='" + IDCard + '\'' +
+				", HasCert=" + HasCert +
+				", HasTradePassword=" + HasTradePassword +
+				", HasBindCard=" + HasBindCard +
+				", BankCard=" + BankCard +
+				", MyCompany=" + MyCompany +
+				", HasInvest=" + HasInvest +
+				", CustomerId='" + CustomerId + '\'' +
+				'}';
+	}
 }

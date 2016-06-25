@@ -1,6 +1,7 @@
 package com.bcb.presentation.presenter;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.bcb.common.app.App;
 import com.bcb.common.net.BcbJsonRequest;
@@ -9,6 +10,7 @@ import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
 import com.bcb.common.net.UrlsOne;
+import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.PackageUtil;
 import com.bcb.data.util.TokenUtil;
 import com.bcb.presentation.model.IModel_UserAccount;
@@ -43,11 +45,11 @@ public class IPresenter_UpdateUserInfoImpl implements IPresenter_Base {
                     try {
                         int status = response.getInt("status");
                         String message = response.getString("message");
-                        interfaceBase.onRequestResult(status, message);
                         //如果获取成功，则缓存数据
                         if (PackageUtil.getRequestStatus(response, context)) {
                             iModelUserAccount.saveAcount(response.toString());
                         }
+                        interfaceBase.onRequestResult(status, message);
                     } catch (JSONException e) {
                         e.printStackTrace();
                         interfaceBase.onRequestResult(-100, "解析数据出错");

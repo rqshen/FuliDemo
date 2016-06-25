@@ -132,8 +132,6 @@ public class Activity_BuyProject_Success extends Activity_Base implements Interf
 	@Override
 	public void onBackPressed() {
         sendBroardCast();
-        iPresenterUpdateUserInfo.clearDependency();
-        iPresenterUpdateUserInfo = null;
         MyActivityManager.getInstance().finishAllActivity();
 	}
 
@@ -147,7 +145,8 @@ public class Activity_BuyProject_Success extends Activity_Base implements Interf
     //请求用户信息回调
     @Override
     public void onRequestResult(int resultStatus, String message) {
-
+//        iPresenterUpdateUserInfo.clearDependency();
+//        iPresenterUpdateUserInfo = null;
     }
 }
 

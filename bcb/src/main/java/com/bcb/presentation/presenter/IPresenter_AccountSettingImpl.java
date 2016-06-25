@@ -43,7 +43,7 @@ public class IPresenter_AccountSettingImpl implements IPresenter_AccountSetting 
         switch (status) {
             //获取用户数据
             case 1:
-                if (iModelUserAccount.isUserDetailInfoEmpty()) {
+                if (iModelUserAccount.isUserDetailInfoEmpty() || TextUtils.isEmpty(iModelUserAccount.getCardNumber())) {
                     getUserInfomationRequest();
                 } else {
                     callBackUserInfo();
@@ -127,7 +127,7 @@ public class IPresenter_AccountSettingImpl implements IPresenter_AccountSetting 
      * 回调用户信息
      */
     private void callBackUserInfo() {
-        String companyMessage = null;
+        String companyMessage;
         if (!TextUtils.isEmpty(iModelUserAccount.getCompanyShortName())) {
             companyMessage = "修改";
         } else {
