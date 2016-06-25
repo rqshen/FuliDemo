@@ -141,7 +141,7 @@
                 android:layout_marginLeft="5dp"
                 android:singleLine="true"
                 android:ellipsize="end"
-                android:text="000次"
+                android:text="000人"
                 android:textColor="@color/red"/>
 
         </LinearLayout>

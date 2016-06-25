@@ -76,7 +76,7 @@ public class LoveAdapter extends BaseAdapter{
         viewHolder.desc.setText(loveBeens.get(pos).getDescription());
         viewHolder.company.setText(loveBeens.get(pos).getCompanyName());
         viewHolder.love_money.setText(loveBeens.get(pos).getAmounts() + "万元");
-        viewHolder.love_support.setText(loveBeens.get(pos).getSupports() + "次");
+        viewHolder.love_support.setText(loveBeens.get(pos).getSupports() + "人");
         String status = 1 == loveBeens.get(pos).getStatus() ? "筹款中" : "筹款完成";
         viewHolder.love_status.setText(status);
         Glide.with(ctx).load(loveBeens.get(pos).getThumbnailImg()).centerCrop().into(viewHolder.love_image);
