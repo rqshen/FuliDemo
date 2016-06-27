@@ -8,7 +8,6 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.Matrix;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -27,7 +26,6 @@ import android.widget.TextView;
 import com.bcb.R;
 import com.bcb.common.app.App;
 import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbNetworkManager;
 import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
@@ -81,7 +79,6 @@ public class Frag_LoanDetail extends Frag_Base {
     private TextView loanNextPayment;
 
     //客服和邮箱
-    private LinearLayout layoutOtherMessage;
     private LoanItemDetailBean loanItemDetailBean;
 
     //相机
@@ -236,7 +233,6 @@ public class Frag_LoanDetail extends Frag_Base {
 
         JSONObject jsonObject = new JSONObject();
         try{
-//            jsonObject.put("LoandId", loanUniqueId);//不需要了
             jsonObject.put("FileData", convertBitmap2String(path));
         } catch (Exception e) {
             e.printStackTrace();
@@ -299,17 +295,14 @@ public class Frag_LoanDetail extends Frag_Base {
         //status 等于 15 时，表示正在还款中
         if (loanItemDetailBean.Status == 15) {
             layoutNextPayDate.setVisibility(View.VISIBLE);
-            layoutOtherMessage.setVisibility(View.GONE);
         }
         //表示还款完成
         else if (loanItemDetailBean.Status == 20) {
             layoutNextPayDate.setVisibility(View.GONE);
-            layoutOtherMessage.setVisibility(View.GONE);
         }
         //其余状态均表示审核中的状态
         else {
             layoutNextPayDate.setVisibility(View.GONE);
-            layoutOtherMessage.setVisibility(View.VISIBLE);
         }
     }
 

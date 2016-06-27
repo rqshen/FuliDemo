@@ -9,10 +9,10 @@ import com.android.volley.NetworkResponse;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.Response.ErrorListener;
-import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.bcb.data.util.DESUtil;
+import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MyConstants;
 
 import java.util.HashMap;
@@ -71,7 +71,7 @@ public abstract class BcbRequest<T> extends Request<T> {
                 bcbCallBack.onErrorResponse(error);
             }
         });
-        Log.d("url","url = " + url + " requestBody = " + requestBody);
+        LogUtil.d("url","url = " + url + " requestBody = " + requestBody);
         mBcbCallBack = bcbCallBack;
         if (TextUtils.isEmpty(requestBody)) {
             mRequestBody = null;

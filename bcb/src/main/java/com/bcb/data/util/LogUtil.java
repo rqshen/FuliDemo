@@ -6,7 +6,7 @@ import android.util.Log;
 
 public final class LogUtil {
 	
-	private static boolean isDebug = false;// 为true时Locat会打印出相关日志，为false时不打印
+	private static boolean isDebug = true;// 为true时Locat会打印出相关日志，为false时不打印
 	
 	// Locat日志的颜色
 	// v 黑色，verbose啰嗦，任何信息都会输出

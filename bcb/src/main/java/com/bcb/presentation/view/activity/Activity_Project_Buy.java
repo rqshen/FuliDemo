@@ -906,7 +906,7 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 
     //隐藏转圈提示
     private void hideProgressBar() {
-        if (null != progressDialog && progressDialog.isShowing()) {
+        if (!isFinishing() && null != progressDialog && progressDialog.isShowing()) {
             progressDialog.dismiss();
         }
     }
