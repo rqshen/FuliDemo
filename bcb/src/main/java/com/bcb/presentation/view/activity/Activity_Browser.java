@@ -448,6 +448,18 @@ public class Activity_Browser extends Activity_Base {
 		super.onDestroy();
 	}
 
+	/**
+	 * 处理问题：
+	 * Activity has leaked window Android.widget.ZoomButtonsController
+	 * that was originally added here android.view.WindowLeaked
+	 */
+	@Override
+	public void finish() {
+		ViewGroup view = (ViewGroup) getWindow().getDecorView();
+		view.removeAllViews();
+		super.finish();
+	}
+
 	public static final int MSG_INIT_UI = 1;
 	private Handler mTestHandler = new Handler() {
 		@Override

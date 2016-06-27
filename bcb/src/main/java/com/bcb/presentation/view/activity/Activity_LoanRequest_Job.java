@@ -166,19 +166,19 @@ public class Activity_LoanRequest_Job extends Activity_Base {
      */
     private void setupJobMessage() {
         //工作单位全称
-        if (personInfoBean.WorkUnit != null && !personInfoBean.WorkUnit.equalsIgnoreCase("null") && !personInfoBean.WorkUnit.equalsIgnoreCase("")) {
+        if (null != personInfoBean && personInfoBean.WorkUnit != null && !personInfoBean.WorkUnit.equalsIgnoreCase("null") && !personInfoBean.WorkUnit.equalsIgnoreCase("")) {
             loan_office.setText(personInfoBean.WorkUnit);
         }
         //工作职位
-        if (personInfoBean.Position != null && !personInfoBean.Position.equalsIgnoreCase("null") && !personInfoBean.Position.equalsIgnoreCase("")) {
+        if (null != personInfoBean && personInfoBean.Position != null && !personInfoBean.Position.equalsIgnoreCase("null") && !personInfoBean.Position.equalsIgnoreCase("")) {
             loan_jobs.setText(personInfoBean.Position);
         }
         //所在事业部
-        if (personInfoBean.Department != null && !personInfoBean.Department.equalsIgnoreCase("null") && !personInfoBean.Department.equalsIgnoreCase("")) {
+        if (null != personInfoBean && personInfoBean.Department != null && !personInfoBean.Department.equalsIgnoreCase("null") && !personInfoBean.Department.equalsIgnoreCase("")) {
             loan_department.setText(personInfoBean.Department);
         }
         //入职时间
-        if (personInfoBean.EntryDate != null && !personInfoBean.EntryDate.equalsIgnoreCase("null") && !personInfoBean.EntryDate.equalsIgnoreCase("")) {
+        if (null != personInfoBean && personInfoBean.EntryDate != null && !personInfoBean.EntryDate.equalsIgnoreCase("null") && !personInfoBean.EntryDate.equalsIgnoreCase("")) {
             try {
                 Date date = dateFormater.parse(personInfoBean.EntryDate);
                 String dateStr = dateFormater.format(date);
@@ -191,25 +191,25 @@ public class Activity_LoanRequest_Job extends Activity_Base {
         }
 
         //办公地点
-        if (personInfoBean.WorkAddress != null && !personInfoBean.WorkAddress.equalsIgnoreCase("null") && !personInfoBean.WorkAddress.equalsIgnoreCase("")) {
+        if (null != personInfoBean && personInfoBean.WorkAddress != null && !personInfoBean.WorkAddress.equalsIgnoreCase("null") && !personInfoBean.WorkAddress.equalsIgnoreCase("")) {
             loan_office_address.setText(personInfoBean.WorkAddress);
         }
         //月均收入
-        if (personInfoBean.IncomeAmount > 0) {
+        if (null != personInfoBean && personInfoBean.IncomeAmount > 0) {
             loan_earn.setText(String.format("%.2f", personInfoBean.IncomeAmount));
         } else {
             loan_earn.setText("0");
         }
         //年税后总收入
-        if (personInfoBean.TotalIncomePerYear > 0) {
+        if (null != personInfoBean && personInfoBean.TotalIncomePerYear > 0) {
             loan_earn_total.setText(String.format("%.2f", personInfoBean.TotalIncomePerYear));
         }
         //邮箱地址
-        if (personInfoBean.Email != null && !personInfoBean.Email.equalsIgnoreCase("null") && !personInfoBean.Email.equalsIgnoreCase("")) {
+        if (null != personInfoBean && personInfoBean.Email != null && !personInfoBean.Email.equalsIgnoreCase("null") && !personInfoBean.Email.equalsIgnoreCase("")) {
             loan_email.setText(personInfoBean.Email);
         }
         //公积金缴存额度
-        if (personInfoBean.FundLimit >= 0) {
+        if (null != personInfoBean && personInfoBean.FundLimit >= 0) {
             loan_accumulation_fund.setText(String.format("%d", personInfoBean.FundLimit));
         } else {
             loan_accumulation_fund.setText("0");

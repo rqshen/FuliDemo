@@ -276,7 +276,7 @@ public class MQPhotoPreviewActivity extends Activity implements PhotoViewAttache
 
         @Override
         public int getCount() {
-            return mPreviewImages.size();
+            return null == mPreviewImages ? 0 : mPreviewImages.size();
         }
 
         @Override

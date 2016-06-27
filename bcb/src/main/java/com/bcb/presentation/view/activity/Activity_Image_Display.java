@@ -29,9 +29,6 @@ import uk.co.senab.photoview.PhotoView;
  */
 public class Activity_Image_Display extends Activity_Base implements ViewPager.OnPageChangeListener, View.OnClickListener{
 
-//    private static final int EXIT = 10;
-//    private long clikTime, lastClikTime;
-
     private Context context;
     private int curposition;
     private ArrayList<String> pics;
@@ -40,17 +37,6 @@ public class Activity_Image_Display extends Activity_Base implements ViewPager.O
     private ViewPager viewPager;
     private ViewPagerAdapter viewPagerAdapter;
     private CirclePageIndicator circle_index;
-
-//    private Handler handler = new Handler(){
-//        @Override
-//        public void handleMessage(Message msg) {
-//            switch (msg.what){
-//                case EXIT:
-//                    finish();
-//                    break;
-//            }
-//        }
-//    };
 
     public static void launch(Context context, int pos, ArrayList<String> pics){
         Intent intent = new Intent(context, Activity_Image_Display.class);
@@ -100,24 +86,11 @@ public class Activity_Image_Display extends Activity_Base implements ViewPager.O
     }
 
     private String getUri(int index){
-        if (index >= 0 && index < pics.size())
+        if (index >= 0 && null != pics && index < pics.size())
             return pics.get(index);
         else
             return null;
     }
-
-//    @Override
-//    public void onClick(View view) {
-//        if (view.getId() == R.id.imageView){
-//            long tmpTime = System.currentTimeMillis();
-//            if (tmpTime - lastClikTime > 300){
-//                handler.sendEmptyMessageDelayed(EXIT, 500);
-//            } else {
-//                handler.removeMessages(EXIT);
-//            }
-//            lastClikTime = tmpTime;
-//        }
-//    }
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -160,7 +133,6 @@ public class Activity_Image_Display extends Activity_Base implements ViewPager.O
         public Object instantiateItem(ViewGroup container, int pos) {
             View view = LayoutInflater.from(context).inflate(R.layout.layout_imageview, null);
             viewHoder.mImageView = (PhotoView) view.findViewById(R.id.imageView);
-//			viewHoder.mImageView.setOnClickListener(ImageDisplayActivity.this);
             Glide.with(context).load(getUri(pos)).centerCrop().into(viewHoder.mImageView);
             container.addView(view);
             return view;

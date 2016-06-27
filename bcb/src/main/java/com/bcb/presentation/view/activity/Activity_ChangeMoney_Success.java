@@ -179,7 +179,7 @@ public class Activity_ChangeMoney_Success extends Activity_Base implements View.
         layout_recharge_failed.setOnClickListener(this);
 
 		//充值
-		if(action.equals(ACTION_Recharge)) {
+		if(null != action && action.equals(ACTION_Recharge)) {
 
 			switch (rechargeStatus) {
 				//充值过程中
@@ -207,7 +207,7 @@ public class Activity_ChangeMoney_Success extends Activity_Base implements View.
 
 		}
 		//提现
-		else if (action.equals(ACTION_Withdrawals)) {
+		else if (null != action && action.equals(ACTION_Withdrawals)) {
 			setTitleValue("提现成功");
 			txt_status.setText("当前账户余额为：" + (App.mUserWallet.getBalanceAmount() <= 0 ? "0.00" : String.format("%.2f", App.mUserWallet.getBalanceAmount())) + "元");
 			layout_success.setVisibility(View.VISIBLE);

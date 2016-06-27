@@ -205,17 +205,6 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar">
         </activity>
 
-        <receiver
-            android:name=".common.receiver.PackageInstallReceiver"
-            android:label="@string/app_name">
-            <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_ADDED"/>
-                <action android:name="android.intent.action.PACKAGE_REMOVED"/>
-
-                <data android:scheme="package"/>
-            </intent-filter>
-        </receiver>
-
         <!-- 充值 -->
         <activity
             android:name=".presentation.view.activity.Activity_Recharge_First"
