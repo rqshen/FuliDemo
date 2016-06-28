@@ -50,40 +50,19 @@
             android:layout_marginBottom="15dp"
             android:orientation="vertical">
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/join_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:textColor="@color/white"
-                    android:text="今日已有"
-                    android:textSize="@dimen/main_text_default"/>
-                <TextView
-                    android:id="@+id/join_count"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:textColor="@color/red"
-                    android:text="5"
-                    android:textSize="@dimen/main_text_large"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:textColor="@color/white"
-                    android:text="位用户领取了福利"
-                    android:textSize="@dimen/main_text_default"/>
-
-            </LinearLayout>
+                android:textColor="@color/red"
+                android:text="今天已有5位用户获得加息"
+                android:textSize="@dimen/main_text_default"/>
 
             <com.dg.spinnerwheel.WheelVerticalView
                 android:id="@+id/value_scroll"
                 android:layout_width="wrap_content"
-                android:layout_height="110dp"
+                android:layout_height="80dp"
                 android:layout_gravity="center_horizontal"
                 android:gravity="center"
                 android:background="@drawable/welfare_text_bg"
@@ -92,13 +71,12 @@
             <TextView
                 android:id="@+id/btn_welfare_rule"
                 android:layout_width="180dp"
-                android:layout_height="46dp"
-                android:layout_marginTop="10dp"
+                android:layout_height="30dp"
                 android:gravity="center"
-                android:textColor="@color/gold"
-                android:textSize="@dimen/main_text_xlarge"
+                android:textColor="@color/welfare_color1"
+                android:textSize="12sp"
                 android:layout_gravity="center_horizontal"
-                android:background="@drawable/img_welfare_rule"/>
+                android:text="活动规则 >" />
 
         </LinearLayout>
 

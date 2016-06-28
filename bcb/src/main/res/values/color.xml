@@ -57,7 +57,6 @@
     <!-- 列表颜色 -->
     <color name="item_color">#f46548</color>
     <color name="item_text_color">@color/txt_middle_gray</color>
-    <!--<color name="item_blue">#487FF8</color>-->
     <color name="item_blue">#487FF8</color>
     <!--列表选中的灰色-->
     <color name="item_selected_gray">#F7F7F7</color>
@@ -65,4 +64,6 @@
     <color name="btntextcolor">#ff1E90FF</color>
     <!--分割线-->
     <color name="divider">#eeeeee</color>
+    <!--每日福利颜色-->
+    <color name="welfare_color1">#b06800</color>
 </resources>

@@ -45,7 +45,7 @@ public class Activity_Daily_Welfare_Static extends Activity_Base implements View
         setTitleValue("每日福利");
         welfare_value = (TextView) findViewById(R.id.welfare_value);
         String welfare = getIntent().getStringExtra("welfare_value");
-        welfare_value.setText(welfare + "%");
+        welfare_value.setText(welfare);
         String totalInterest = getIntent().getStringExtra("totalInterest");
         welfare_totalInterest = (TextView) findViewById(R.id.welfare_totalInterest);
         welfare_totalInterest.setText(totalInterest);

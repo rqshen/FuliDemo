@@ -146,7 +146,8 @@ public class Activity_Daily_Welfare extends Activity_Base implements View.OnClic
                         //参与人数
                         String totalPopulation = resultObject.getString("TotalPopulation");
                         if(!TextUtils.isEmpty(totalPopulation)){
-                            join_count.setText(totalPopulation);
+                            String str = String.format("今天已有%s位用户获得加息", totalPopulation);
+                            join_count.setText(str);
                         }
                         //累计收益
                         totalInterest = resultObject.getString("TotalInterest");
@@ -173,9 +174,9 @@ public class Activity_Daily_Welfare extends Activity_Base implements View.OnClic
             adapter = new ArrayWheelAdapter<>(this, rotateValues);
             adapter.setTextGravity(Gravity.CENTER);
             adapter.setTextSize(12);
-            adapter.setTextColor(getResources().getColor(R.color.red));
+            adapter.setTextColor(getResources().getColor(R.color.txt_middle_gray));
             adapter.setTextTypeface(Typeface.DEFAULT);
-            value_scroll.setVisibleItems(5);
+            value_scroll.setVisibleItems(3);
             value_scroll.setViewAdapter(adapter);
             value_scroll.setCurrentItem(0);
             value_scroll.setCyclic(true);

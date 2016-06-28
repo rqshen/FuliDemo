@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <!-- 标题 -->
     <RelativeLayout
@@ -25,109 +27,149 @@
 
     </RelativeLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:paddingTop="80dp"
         android:background="@drawable/bg_welfare_tip">
 
-        <LinearLayout
-            android:layout_width="160dp"
-            android:layout_height="160dp"
-            android:orientation="vertical"
-            android:layout_marginTop="80dp"
-            android:layout_gravity="center_horizontal"
-            android:background="@drawable/img_coin"
-            android:gravity="center">
+        <RelativeLayout
+            android:id="@+id/center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:id="@+id/center_bottom"
+                android:layout_width="310dp"
+                android:layout_height="120dp"
+                android:orientation="horizontal"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/center_top"
+                android:layout_marginTop="-10dp"
+                android:background="@drawable/bg_welfare_center_text"
+                android:gravity="center">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="+"
-                    android:textColor="@color/orange"
-                    android:textSize="20sp"/>
-                <TextView
-                    android:id="@+id/welfare_value"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="0.0%"
-                    android:textColor="@color/orange"
-                    android:textSize="34sp"/>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="今日已加息(%)"
+                        android:textSize="11sp"
+                        android:textColor="@color/welfare_color1"/>
+
+                    <TextView
+                        android:id="@+id/welfare_value"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0.0"
+                        android:textColor="@color/red"
+                        android:textSize="30sp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="11sp"
+                        android:textColor="@color/welfare_color1"
+                        android:text="累计收益(元)" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/welfare_totalInterest"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0.00"
+                            android:textColor="@color/red"
+                            android:textSize="30sp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text=" >"
+                            android:textColor="@color/red"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
             </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="在投金额已加息\n(有效期1天)"
-                android:textColor="@color/orange"
-                android:textSize="12sp"/>
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:gravity="center"
-            android:textColor="@color/gold2"
-            android:textSize="@dimen/main_text_default"
-            android:layout_gravity="center_horizontal"
-            android:text="你已拆过福袋啦！\n明天再来吧，加油~"/>
+            <ImageView
+                android:id="@+id/center_top"
+                android:layout_width="286dp"
+                android:layout_height="84dp"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/bg_welfare_center_top"/>
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/btn_welfare_check"
-            android:layout_width="180dp"
-            android:layout_height="46dp"
-            android:layout_marginTop="98dp"
-            android:layout_above="@id/ll_text"
-            android:text="立即加息"
+            android:layout_width="140dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="23dp"
+            android:layout_below="@id/center"
+            android:text="马上投资"
             android:gravity="center"
             android:textColor="@color/red"
             android:layout_centerHorizontal="true"
-            android:textSize="@dimen/main_text_xlarge"
-            android:layout_gravity="center_horizontal"
+            android:textSize="@dimen/main_text_default"
             android:background="@drawable/img_welfare_check"/>
 
         <LinearLayout
-            android:id="@+id/ll_text"
-            android:layout_width="wrap_content"
+            android:id="@+id/text_count"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="12dp"
-            android:orientation="horizontal">
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="15dp"
+            android:orientation="vertical">
 
             <TextView
+                android:id="@+id/join_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:textColor="@color/red"
-                android:layout_gravity="bottom"
-                android:text="活动累计收益"
-                android:textSize="11sp"/>
-
-            <TextView
-                android:id="@+id/welfare_totalInterest"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0.00"
-                android:textColor="@color/red"
-                android:layout_gravity="bottom"
+                android:text="今天已有5位用户获得加息"
                 android:textSize="@dimen/main_text_default"/>
 
-            <TextView
+            <com.dg.spinnerwheel.WheelVerticalView
+                android:id="@+id/value_scroll"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/red"
-                android:layout_gravity="bottom"
-                android:textSize="11sp"
-                android:text="元 >"/>
+                android:layout_height="80dp"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:background="@drawable/welfare_text_bg"
+                app:isItemsDimmedAlphaAnimator="false"/>
+
+            <TextView
+                android:id="@+id/btn_welfare_rule"
+                android:layout_width="180dp"
+                android:layout_height="30dp"
+                android:gravity="center"
+                android:textColor="@color/welfare_color1"
+                android:textSize="12sp"
+                android:layout_gravity="center_horizontal"
+                android:text="活动规则 >" />
 
         </LinearLayout>
 
-    </LinearLayout>
-
+    </RelativeLayout>
 </LinearLayout>
