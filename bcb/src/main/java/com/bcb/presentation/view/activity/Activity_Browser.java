@@ -13,6 +13,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
 import android.util.Base64;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -209,6 +210,7 @@ public class Activity_Browser extends Activity_Base {
 		mWebView.setWebViewClient(new WebViewClient() {
 			@Override
 			public boolean shouldOverrideUrlLoading(WebView view, String url) {
+				LogUtil.d("url", "X5WebView click url = " + url);
 				//页面内部跳转至首页的时候，则销毁当前WebView
 				if (url.equalsIgnoreCase("fulihui://joincompany")) {
 					joinCompany();

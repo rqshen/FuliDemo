@@ -65,5 +65,6 @@
     <!--分割线-->
     <color name="divider">#eeeeee</color>
     <!--每日福利颜色-->
-    <color name="welfare_color1">#b06800</color>
+    <color name="welfare_yellow">#b06800</color>
+    <color name="welfare_red">#f64333</color>
 </resources>

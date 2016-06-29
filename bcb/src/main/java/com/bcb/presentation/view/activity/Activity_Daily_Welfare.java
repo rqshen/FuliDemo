@@ -106,7 +106,7 @@ public class Activity_Daily_Welfare extends Activity_Base implements View.OnClic
         //初始化滚动文字
         rotateValues = getResources().getStringArray(R.array.scrollValues);
         //文字滚动
-        value_scroll  = (WheelVerticalView) findViewById(R.id.value_scroll);
+        value_scroll = (WheelVerticalView) findViewById(R.id.value_scroll);
         isPause = false;
         startRotate();
 
@@ -339,7 +339,7 @@ public class Activity_Daily_Welfare extends Activity_Base implements View.OnClic
                 }
                 String value = App.getInstance().getWelfare();
                 if (!TextUtils.isEmpty(value)){
-                    Activity_Daily_Welfare_Static.launche(context,value,totalInterest);
+                    Activity_Daily_Welfare_Static.launche(context,value,totalInterest,join_count.getText().toString(),rotateValues);
                     finish();
                     break;
                 }
