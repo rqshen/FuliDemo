@@ -169,12 +169,16 @@ public class Activity_Daily_Welfare extends Activity_Base implements View.OnClic
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
+                    ToastUtil.alert(context,"请求失败，请稍后重试");
+                    finish();
                 }
             }
 
             @Override
             public void onErrorResponse(Exception error) {
                 hideProgressBar();
+                ToastUtil.alert(context,"请求失败，请稍后重试");
+                finish();
             }
         });
         jsonRequest.setTag(BcbRequestTag.UrlWelfareStatisticsTag);
@@ -371,7 +375,7 @@ public class Activity_Daily_Welfare extends Activity_Base implements View.OnClic
             case R.id.null_view://打开福袋
                 UmengUtil.eventById(context, R.string.fuli_c2);
                 String value = App.getInstance().getWelfare();
-                if (!TextUtils.isEmpty(value)){
+                if (!TextUtils.isEmpty(value) && null != welfareDto){
                     Activity_Daily_Welfare_Static.launche(context,value,
                             String.valueOf(welfareDto.getTotalInterest()),join_count.getText().toString(),rotateValues);
                     finish();
