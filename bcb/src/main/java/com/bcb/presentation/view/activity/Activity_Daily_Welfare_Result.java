@@ -52,6 +52,7 @@ public class Activity_Daily_Welfare_Result extends Activity_Base implements View
 
         setContentView(R.layout.activity_daily_welfare_result);
         ctx = this;
+
         coin = (RelativeLayout) findViewById(R.id.coin);
 
         ll_text = (LinearLayout) findViewById(R.id.ll_text);

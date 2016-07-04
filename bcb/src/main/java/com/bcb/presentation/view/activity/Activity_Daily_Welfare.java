@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.AnimationDrawable;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -38,7 +40,9 @@ import com.dg.spinnerwheel.adapters.ArrayWheelAdapter;
 
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -68,6 +72,10 @@ public class Activity_Daily_Welfare extends Activity_Base implements View.OnClic
     private String[] rotateValues;//滚动内容
     private WelfareDto welfareDto;//完整数据
 
+    //短促音
+    private SoundPool soundPool;
+    private HashMap<Integer, Integer> soundID;
+
     private Activity context;
     private ProgressDialog progressDialog;
     private BcbRequestQueue requestQueue;
@@ -91,6 +99,8 @@ public class Activity_Daily_Welfare extends Activity_Base implements View.OnClic
         setContentView(R.layout.activity_daily_welfare);
         context = this;
         setTitleValue("每日福利");
+
+        initSoundPool();
 
         setLeftTitleListener(new View.OnClickListener() {
             @Override
@@ -200,6 +210,25 @@ public class Activity_Daily_Welfare extends Activity_Base implements View.OnClic
         }
     }
 
+    /**
+     * 初始化音乐池
+     */
+    public void initSoundPool(){//初始化声音池
+        soundPool = new SoundPool(
+                1,     //maxStreams参数，该参数为设置同时能够播放多少音效
+                AudioManager.STREAM_MUSIC,    //streamType参数，该参数设置音频类型，在游戏中通常设置为：STREAM_MUSIC
+                0    //srcQuality参数，该参数设置音频文件的质量，目前还没有效果，设置为0为默认值。
+        );
+
+        soundID = new HashMap<>();
+        try{
+            soundID.put(1 , soundPool.load(getAssets().openFd("welfare.wav") , 1));  //需要捕获IO异常
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -290,6 +319,9 @@ public class Activity_Daily_Welfare extends Activity_Base implements View.OnClic
                         String value = response.getString("result");
                         LogUtil.d("福袋数据", value);
                         if (!TextUtils.isEmpty(value) && !value.equals("null")){
+                            //播放短促音
+                            soundPool.play(soundID.get(1), 1, 1, 0, 0, 1);
+                            //弹出金币
                             Activity_Daily_Welfare_Result.launche(context, value, String.valueOf(welfareDto.getTotalInterest()));
 
                             //保存到数据库
