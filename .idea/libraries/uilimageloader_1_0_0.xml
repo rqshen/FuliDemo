@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="uilimageloader-1.0.0">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/bcb/build/intermediates/exploded-aar/com.meiqia/uilimageloader/1.0.0/res" />
+      <root url="jar://$PROJECT_DIR$/bcb/build/intermediates/exploded-aar/com.meiqia/uilimageloader/1.0.0/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.meiqia/uilimageloader/1.0.0/88d41dd15bcaeabcc7202eaf9fd86951a367621a/uilimageloader-1.0.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

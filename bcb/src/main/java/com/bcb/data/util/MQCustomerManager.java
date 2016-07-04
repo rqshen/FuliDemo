@@ -10,6 +10,7 @@ import com.bcb.common.app.App;
 import com.meiqia.core.MQManager;
 import com.meiqia.core.callback.OnClientInfoCallback;
 import com.meiqia.core.callback.OnInitCallback;
+import com.meiqia.meiqiasdk.uilimageloader.UILImageLoader;
 import com.meiqia.meiqiasdk.util.MQConfig;
 import com.meiqia.meiqiasdk.util.MQIntentBuilder;
 
@@ -42,7 +43,7 @@ public class MQCustomerManager {
     private MQCustomerManager(final Context context) {
         this.context = context;
         //初始化美洽客服
-        MQManager.init(context, meiqiaKey, new OnInitCallback() {
+        MQConfig.init(context, meiqiaKey, new UILImageLoader(), new OnInitCallback() {
             @Override
             public void onSuccess(String clientId) {
             }
@@ -51,7 +52,7 @@ public class MQCustomerManager {
             public void onFailure(int code, String message) {
             }
         });
-        MQManager.setDebugMode(true);
+        MQManager.setDebugMode(false);
     }
 
     //打开客服
