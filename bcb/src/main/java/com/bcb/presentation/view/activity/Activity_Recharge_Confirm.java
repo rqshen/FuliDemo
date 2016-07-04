@@ -629,7 +629,7 @@ public class Activity_Recharge_Confirm extends Activity_Base implements View.OnC
 
 	//隐藏进度
 	private void hideProgressBar(){
-		if(null != mProgressBar && mProgressBar.isShowing()){
+		if(!isFinishing() && null != mProgressBar && mProgressBar.isShowing()){
 			mProgressBar.dismiss();
 		}
 	}

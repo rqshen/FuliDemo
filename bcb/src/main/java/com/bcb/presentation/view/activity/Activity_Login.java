@@ -138,14 +138,14 @@ public class Activity_Login extends Activity_Base implements Interface_Base, OnC
 	//显示转圈提示
 	private void showProgressBar() {
 		if(null == progressDialog) progressDialog = new ProgressDialog(this,ProgressDialog.THEME_HOLO_LIGHT);
-		progressDialog.setMessage("正在登陆....");
+		progressDialog.setMessage("正在登陆...");
 		progressDialog.setCanceledOnTouchOutside(false);
 		progressDialog.setCancelable(true);
 		progressDialog.show();
 	}
 	//隐藏转圈提示
 	private void hideProgressBar() {
-		if(null != progressDialog && progressDialog.isShowing()){
+		if(!isFinishing() && null != progressDialog && progressDialog.isShowing()){
 			progressDialog.dismiss();
 		}
 	}

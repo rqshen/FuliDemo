@@ -1,6 +1,7 @@
 package com.bcb.presentation.view.activity;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -24,6 +25,7 @@ import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
 import com.bcb.common.net.UrlsOne;
+import com.bcb.data.bean.WelfareDto;
 import com.bcb.data.util.DbUtil;
 import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MyActivityManager;
@@ -34,7 +36,6 @@ import com.bcb.presentation.view.custom.AlertView.AlertView;
 import com.dg.spinnerwheel.WheelVerticalView;
 import com.dg.spinnerwheel.adapters.ArrayWheelAdapter;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.Calendar;
@@ -65,9 +66,10 @@ public class Activity_Daily_Welfare extends Activity_Base implements View.OnClic
 
     private TextView join_count;//参与人数
     private String[] rotateValues;//滚动内容
-    private String totalInterest;//累计收益
+    private WelfareDto welfareDto;//完整数据
 
     private Activity context;
+    private ProgressDialog progressDialog;
     private BcbRequestQueue requestQueue;
 
     private Handler handler = new Handler(){
@@ -124,33 +126,36 @@ public class Activity_Daily_Welfare extends Activity_Base implements View.OnClic
      * 请求统计数据
      */
     private void getStatisticsData(){
+        showProgressBar();
         JSONObject obj = new JSONObject();
         BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.DailyWelfareData, obj, TokenUtil.getEncodeToken(context), true, new BcbRequest.BcbCallBack<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
+                hideProgressBar();
                 try {
                     if (response.getInt("status") == 1) {
                         JSONObject resultObject = response.getJSONObject("result");
-                        //设置对应位置的数据
-                        JSONArray jsonArray = resultObject.getJSONArray("JoinList");
-                        if (null != jsonArray) {
-                            //更新UI
-                            LogUtil.d("统计数据", jsonArray.toString());
-                            rotateValues = new String[jsonArray.length()];
-                            for (int i=0;i<jsonArray.length();i++){
-                                JSONObject jsonObj = (JSONObject)jsonArray.get(i);
-                                rotateValues[i] = jsonObj.getString("Title");
-                            }
-                            startRotate();
+                        welfareDto = App.mGson.fromJson(resultObject.toString(), WelfareDto.class);
+                        //更新UI
+                        LogUtil.d("统计数据", welfareDto.toString());
+                        //滚动文字
+                        rotateValues = new String[welfareDto.getJoinList().size()];
+                        for (int i=0;i<welfareDto.getJoinList().size();i++){
+                            rotateValues[i] = welfareDto.getJoinList().get(i).get("Title");
                         }
+                        startRotate();
+
                         //参与人数
-                        String totalPopulation = resultObject.getString("TotalPopulation");
-                        if(!TextUtils.isEmpty(totalPopulation)){
-                            String str = String.format("今天已有%s位用户获得加息", totalPopulation);
-                            join_count.setText(str);
+                        String str = String.format("今天已有%s位用户获得加息", welfareDto.getTotalPopulation());
+                        join_count.setText(str);
+
+                        //加息数值大于0说明已经参加过直接跳转
+                        if (welfareDto.getRate() > 0){
+                            Activity_Daily_Welfare_Static.launche(context,String.valueOf(welfareDto.getRate()),
+                                    String.valueOf(welfareDto.getTotalInterest()),join_count.getText().toString(),rotateValues);
+                            finish();
                         }
-                        //累计收益
-                        totalInterest = resultObject.getString("TotalInterest");
+
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -159,7 +164,7 @@ public class Activity_Daily_Welfare extends Activity_Base implements View.OnClic
 
             @Override
             public void onErrorResponse(Exception error) {
-
+                hideProgressBar();
             }
         });
         jsonRequest.setTag(BcbRequestTag.UrlWelfareStatisticsTag);
@@ -285,7 +290,7 @@ public class Activity_Daily_Welfare extends Activity_Base implements View.OnClic
                         String value = response.getString("result");
                         LogUtil.d("福袋数据", value);
                         if (!TextUtils.isEmpty(value) && !value.equals("null")){
-                            Activity_Daily_Welfare_Result.launche(context, value, totalInterest);
+                            Activity_Daily_Welfare_Result.launche(context, value, String.valueOf(welfareDto.getTotalInterest()));
 
                             //保存到数据库
                             DbUtil.saveWelfare(value);
@@ -305,7 +310,7 @@ public class Activity_Daily_Welfare extends Activity_Base implements View.OnClic
                         }else{
                             //通知刷新
                             EventBus.getDefault().post(new BroadcastEvent(BroadcastEvent.REFRESH));
-                            Activity_Daily_Welfare_Result.launche(context, App.getInstance().getWelfare(), totalInterest);
+                            Activity_Daily_Welfare_Result.launche(context, App.getInstance().getWelfare(), String.valueOf(welfareDto.getTotalInterest()));
                         }
                     }
                 } catch (Exception e) {
@@ -333,13 +338,10 @@ public class Activity_Daily_Welfare extends Activity_Base implements View.OnClic
                 break;
             case R.id.null_view://打开福袋
                 UmengUtil.eventById(context, R.string.fuli_c2);
-                if (App.saveUserInfo.getAccess_Token() == null) {
-                    Activity_Login.launche(context);
-                    break;
-                }
                 String value = App.getInstance().getWelfare();
                 if (!TextUtils.isEmpty(value)){
-                    Activity_Daily_Welfare_Static.launche(context,value,totalInterest,join_count.getText().toString(),rotateValues);
+                    Activity_Daily_Welfare_Static.launche(context,value,
+                            String.valueOf(welfareDto.getTotalInterest()),join_count.getText().toString(),rotateValues);
                     finish();
                     break;
                 }
@@ -353,5 +355,26 @@ public class Activity_Daily_Welfare extends Activity_Base implements View.OnClic
         }
     }
 
+    /**
+     * 转圈提示
+     */
+    private void showProgressBar() {
+        if(null == progressDialog) {
+            progressDialog = new ProgressDialog(this,ProgressDialog.THEME_HOLO_LIGHT);
+        }
+        progressDialog.setMessage("正在加载数据...");
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.setCancelable(true);
+        progressDialog.show();
+    }
+
+    /**
+     * 隐藏转圈
+     */
+    private void hideProgressBar() {
+        if(!isFinishing() && null != progressDialog && progressDialog.isShowing()){
+            progressDialog.dismiss();
+        }
+    }
 
 }

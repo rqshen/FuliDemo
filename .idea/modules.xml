@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/bcb/bcb.iml" filepath="$PROJECT_DIR$/bcb/bcb.iml" />
       <module fileurl="file://$PROJECT_DIR$/bcb_android.iml" filepath="$PROJECT_DIR$/bcb_android.iml" />
-      <module fileurl="file://$PROJECT_DIR$/meiqiasdk/meiqiasdk.iml" filepath="$PROJECT_DIR$/meiqiasdk/meiqiasdk.iml" />
       <module fileurl="file://$PROJECT_DIR$/spinnerwheel/spinnerwheel.iml" filepath="$PROJECT_DIR$/spinnerwheel/spinnerwheel.iml" />
       <module fileurl="file://$PROJECT_DIR$/volley/volley.iml" filepath="$PROJECT_DIR$/volley/volley.iml" />
     </modules>

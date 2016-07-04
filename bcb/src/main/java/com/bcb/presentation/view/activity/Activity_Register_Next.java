@@ -375,7 +375,7 @@ public class Activity_Register_Next extends Activity_Base implements Interface_V
 	}
 	//隐藏进度
 	private void hideProgressBar(){
-		if(null != mProgressBar && mProgressBar.isShowing()){
+		if(!isFinishing() && null != mProgressBar && mProgressBar.isShowing()){
 			mProgressBar.dismiss();
 		}
 	}

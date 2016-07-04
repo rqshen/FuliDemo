@@ -2,6 +2,7 @@ package com.bcb.presentation.view.fragment;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.database.Cursor;
@@ -35,7 +36,6 @@ import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.PackageUtil;
 import com.bcb.data.util.ToastUtil;
 import com.bcb.data.util.TokenUtil;
-import com.bcb.data.util.UIUtil;
 import com.bcb.presentation.adapter.GridAdapter;
 import com.bcb.presentation.view.activity.Activity_Image_Display;
 import com.bcb.presentation.view.activity.Activity_Recharge_Second;
@@ -98,6 +98,7 @@ public class Frag_LoanDetail extends Frag_Base {
     //立即还款
     private Button button_recharge;
 
+    private ProgressDialog progressDialog;
     private BcbRequestQueue requestQueue;
 
     //构造函数
@@ -240,7 +241,7 @@ public class Frag_LoanDetail extends Frag_Base {
         BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.Loan_Supplementary_Material, jsonObject, TokenUtil.getEncodeToken(context), new BcbRequest.BcbCallBack<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                UIUtil.hideProgressBar();
+                hideProgressBar();
                 LogUtil.d("1234", "uploadFile = " + response.toString());
                 try{
                     //如果存在返回数据时
@@ -257,7 +258,7 @@ public class Frag_LoanDetail extends Frag_Base {
 
             @Override
             public void onErrorResponse(Exception error) {
-                UIUtil.hideProgressBar();
+                hideProgressBar();
                 ToastUtil.alert(context, "上传失败，请稍后重试");
             }
         });
@@ -325,7 +326,7 @@ public class Frag_LoanDetail extends Frag_Base {
             //拍照
             case CAMERA_CLICK:
                 if (data != null && resultCode == Activity.RESULT_OK) {
-                    UIUtil.showProgressBar(context, "正在压缩上传...");
+                    showProgressBar();
                     Bitmap bitmap = (Bitmap) data.getExtras().get("data");
                     //缓存数据
                     String tempName = "bcb_" + new Date().getTime();
@@ -338,7 +339,7 @@ public class Frag_LoanDetail extends Frag_Base {
             case ALBUM_CLICK:
                 if (data != null && resultCode == Activity.RESULT_OK) {
                     try {
-                        UIUtil.showProgressBar(context, "正在压缩上传...");
+                        showProgressBar();
                         Uri selectedImage = data.getData(); //获取系统返回的照片的Uri
                         String[] filePathColumn = { MediaStore.Images.Media.DATA };
                         Cursor cursor = context.getContentResolver().query(selectedImage, filePathColumn, null, null, null);//从系统表中查询指定Uri对应的照片
@@ -346,7 +347,7 @@ public class Frag_LoanDetail extends Frag_Base {
                         int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
                         String picturePath = cursor.getString(columnIndex);  //获取照片路径
                         cursor.close();
-//                        //压缩
+                        //压缩
                         Bitmap bitmap = getSmallBitmap(picturePath);
                         //缓存数据
                         String tempName = "bcb_" + new Date().getTime();
@@ -441,8 +442,7 @@ public class Frag_LoanDetail extends Frag_Base {
 
             // Calculate ratios of height and width to requested height and
             // width
-            final int heightRatio = Math.round((float) height
-                    / (float) reqHeight);
+            final int heightRatio = Math.round((float) height / (float) reqHeight);
             final int widthRatio = Math.round((float) width / (float) reqWidth);
 
             // Choose the smallest ratio as inSampleSize value, this will
@@ -453,5 +453,27 @@ public class Frag_LoanDetail extends Frag_Base {
         }
 
         return inSampleSize;
+    }
+
+    /**
+     * 转圈提示
+     */
+    private void showProgressBar() {
+        if(null == progressDialog) {
+            progressDialog = new ProgressDialog(context,ProgressDialog.THEME_HOLO_LIGHT);
+        }
+        progressDialog.setMessage("正在压缩上传...");
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.setCancelable(true);
+        progressDialog.show();
+    }
+
+    /**
+     * 隐藏转圈
+     */
+    private void hideProgressBar() {
+        if(!context.isFinishing() && null != progressDialog && progressDialog.isShowing()){
+            progressDialog.dismiss();
+        }
     }
 }

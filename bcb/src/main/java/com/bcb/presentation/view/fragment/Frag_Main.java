@@ -51,6 +51,7 @@ import com.bcb.presentation.adapter.ProductAdapter;
 import com.bcb.presentation.view.activity.Activity_Browser;
 import com.bcb.presentation.view.activity.Activity_Daily_Welfare;
 import com.bcb.presentation.view.activity.Activity_ExpiredProject_Introduction;
+import com.bcb.presentation.view.activity.Activity_Login;
 import com.bcb.presentation.view.activity.Activity_Login_Introduction;
 import com.bcb.presentation.view.activity.Activity_Love;
 import com.bcb.presentation.view.activity.Activity_Main;
@@ -784,6 +785,10 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPa
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.ll_daily_welfare://每日福利
+                if (App.saveUserInfo.getAccess_Token() == null) {
+                    Activity_Login.launche(ctx);
+                    break;
+                }
                 UmengUtil.eventById(ctx, R.string.fuli_c);
                 Activity_Daily_Welfare.launche(ctx);
                 break;

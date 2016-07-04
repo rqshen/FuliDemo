@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="meiqia-v3.2.2">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/meiqiasdk/libs/meiqia-v3.2.2.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

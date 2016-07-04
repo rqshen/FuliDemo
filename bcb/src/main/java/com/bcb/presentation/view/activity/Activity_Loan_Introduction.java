@@ -279,7 +279,7 @@ public class Activity_Loan_Introduction extends Activity_Base implements View.On
     }
 
     private void hideProgressBar(){
-        if(null != progressDialog && progressDialog.isShowing()){
+        if(!isFinishing() && null != progressDialog && progressDialog.isShowing()){
             progressDialog.dismiss();
         }
     }

@@ -212,7 +212,7 @@ public class Activity_Authentication extends Activity_Base implements Interface_
     }
     //隐藏转圈提示
     private void hideProgressBar() {
-        if(null != progressDialog && progressDialog.isShowing()){
+        if(!isFinishing() && null != progressDialog && progressDialog.isShowing()){
             progressDialog.dismiss();
         }
     }

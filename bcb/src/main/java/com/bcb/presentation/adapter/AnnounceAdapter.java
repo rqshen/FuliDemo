@@ -1,7 +1,7 @@
 package com.bcb.presentation.adapter;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,7 +30,7 @@ import java.util.List;
  */
 public class AnnounceAdapter extends BaseAdapter {
 
-    private Context context;
+    private Activity context;
     private List<AnnounceRecordsBean> data;
     private int tokenTicker = 0;
     private ProgressDialog progressDialog;
@@ -39,7 +39,7 @@ public class AnnounceAdapter extends BaseAdapter {
     private BcbRequestQueue requestQueue;
 
     //构造函数
-    public AnnounceAdapter(Context context, List<AnnounceRecordsBean> data) {
+    public AnnounceAdapter(Activity context, List<AnnounceRecordsBean> data) {
         if (data != null) {
             this.context = context;
             this.data = data;
@@ -224,22 +224,22 @@ public class AnnounceAdapter extends BaseAdapter {
     //显示转圈提示
     private void showProgressBar() {
         if(null == progressDialog) progressDialog = new ProgressDialog(context, ProgressDialog.THEME_HOLO_LIGHT);
-        progressDialog.setMessage("正在加载数据....");
+        progressDialog.setMessage("正在加载数据...");
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.setCancelable(true);
         progressDialog.show();
     }
     //隐藏转圈提示
     private void hideProgressBar() {
-        if(null != progressDialog && progressDialog.isShowing()){
+        if(!context.isFinishing() && null != progressDialog && progressDialog.isShowing()){
             progressDialog.dismiss();
         }
     }
 
     class ViewHolder {
-        TextView    announce_name;      //名称
-        TextView    announce_rate;      //年化利率
-        TextView    announce_text;  //立即预约、已预约字样
-        TextView    announce_predict;   //预约人数
+        TextView announce_name;      //名称
+        TextView announce_rate;      //年化利率
+        TextView announce_text;  //立即预约、已预约字样
+        TextView announce_predict;   //预约人数
     }
 }

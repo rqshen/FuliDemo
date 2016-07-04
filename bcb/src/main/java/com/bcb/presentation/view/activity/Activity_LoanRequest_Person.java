@@ -252,7 +252,7 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
      * 隐藏转圈提示
      */
     private void hideProgressBar() {
-        if(null != progressDialog && progressDialog.isShowing()){
+        if(!isFinishing() && null != progressDialog && progressDialog.isShowing()){
             progressDialog.dismiss();
         }
     }

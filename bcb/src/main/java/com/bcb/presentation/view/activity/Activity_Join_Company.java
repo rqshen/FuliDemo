@@ -240,7 +240,7 @@ public class Activity_Join_Company extends Activity_Base implements Interface_Ba
 
     //隐藏转圈提示
     private void hideProgressBar() {
-        if(null != progressDialog && progressDialog.isShowing()){
+        if(!isFinishing() && null != progressDialog && progressDialog.isShowing()){
             progressDialog.dismiss();
         }
     }

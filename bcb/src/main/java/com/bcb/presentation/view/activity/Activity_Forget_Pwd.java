@@ -614,7 +614,7 @@ public class Activity_Forget_Pwd extends Activity_Base {
 
 	//隐藏进度
 	private void hideProgressBar() {
-		if(null != progressDialog && progressDialog.isShowing()){
+		if(!isFinishing() && null != progressDialog && progressDialog.isShowing()){
 			progressDialog.dismiss();
 		}
 	}

@@ -220,7 +220,7 @@ public class Activity_Setting_Pay_Pwd  extends Activity_Base {
 	}
 	//隐藏转圈提示
 	private void hideProgressBar() {
-		if(null != progressDialog && progressDialog.isShowing()){
+		if(!isFinishing() && null != progressDialog && progressDialog.isShowing()){
 			progressDialog.dismiss();
 		}
 	}

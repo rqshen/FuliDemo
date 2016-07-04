@@ -409,7 +409,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
         if(null == progressDialog) {
             progressDialog = new ProgressDialog(this,ProgressDialog.THEME_HOLO_LIGHT);
         }
-        progressDialog.setMessage("正在验证借款信息....");
+        progressDialog.setMessage("正在验证借款信息...");
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.setCancelable(true);
         progressDialog.show();
@@ -419,7 +419,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
      * 隐藏转圈
      */
     private void hideProgressBar() {
-        if(null != progressDialog && progressDialog.isShowing()){
+        if(!isFinishing() && null != progressDialog && progressDialog.isShowing()){
             progressDialog.dismiss();
         }
     }

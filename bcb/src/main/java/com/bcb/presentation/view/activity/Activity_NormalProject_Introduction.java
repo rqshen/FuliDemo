@@ -535,7 +535,7 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
     }
     //隐藏转圈提示
     private void hideProgressBar(){
-        if(null != mProgressBar && mProgressBar.isShowing()){
+        if(!isFinishing() && null != mProgressBar && mProgressBar.isShowing()){
             mProgressBar.dismiss();
         }
     }

@@ -445,7 +445,7 @@ public class Activity_ExpiredProject_Introduction extends Activity_Base implemen
     }
     //隐藏转圈提示
     private void hideProgressBar(){
-        if(null != progressDialog && progressDialog.isShowing()){
+        if(!isFinishing() && null != progressDialog && progressDialog.isShowing()){
             progressDialog.dismiss();
         }
     }

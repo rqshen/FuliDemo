@@ -543,7 +543,7 @@ public class Activity_Account_Setting extends Activity_Base implements OnClickLi
      */
 	private void showProgressBar() {
 		if(null == progressDialog) progressDialog = new ProgressDialog(this,ProgressDialog.THEME_HOLO_LIGHT);
-		progressDialog.setMessage("正在获取用户信息....");
+		progressDialog.setMessage("正在获取用户信息...");
 		progressDialog.setCanceledOnTouchOutside(false);
 		progressDialog.setCancelable(true);
 		progressDialog.show();
@@ -553,7 +553,7 @@ public class Activity_Account_Setting extends Activity_Base implements OnClickLi
      * 隐藏转圈提示
      */
 	private void hideProgressBar() {
-		if(null != progressDialog && progressDialog.isShowing()){
+		if(!isFinishing() && null != progressDialog && progressDialog.isShowing()){
 			progressDialog.dismiss();
 		}
 	}

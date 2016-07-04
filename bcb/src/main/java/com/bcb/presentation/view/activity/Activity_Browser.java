@@ -460,6 +460,8 @@ public class Activity_Browser extends Activity_Base {
 		ViewGroup view = (ViewGroup) getWindow().getDecorView();
 		view.removeAllViews();
 		super.finish();
+		//退出页面使用向右退出
+		overridePendingTransition(0, R.anim.push_right_out);
 	}
 
 	public static final int MSG_INIT_UI = 1;

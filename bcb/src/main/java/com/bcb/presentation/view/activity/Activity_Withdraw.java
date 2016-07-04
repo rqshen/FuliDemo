@@ -344,6 +344,7 @@ public class Activity_Withdraw extends Activity_Base implements View.OnClickList
      * 加载用户银行卡信息
      */
 	private void loadBankInfo() {
+		showProgressBar();
         BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsTwo.UserBankMessage, null, TokenUtil.getEncodeToken(this), new BcbRequest.BcbCallBack<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -448,7 +449,7 @@ public class Activity_Withdraw extends Activity_Base implements View.OnClickList
 			return;
 		}
 		// 是否输入了交易密码
-		if (!ToastUtil.checkInputParam(Activity_Withdraw.this, userpwd, "请输入提现密码")) {
+		if (!ToastUtil.checkInputParam(Activity_Withdraw.this, userpwd, "请输入交易密码")) {
 			return;
 		}
 		// 输入交易密码位数不对
@@ -594,14 +595,14 @@ public class Activity_Withdraw extends Activity_Base implements View.OnClickList
 	//显示转圈提示
 	private void showProgressBar() {
 		if(null == progressDialog) progressDialog = new ProgressDialog(this,ProgressDialog.THEME_HOLO_LIGHT);
-		progressDialog.setMessage("正在加载数据....");
+		progressDialog.setMessage("正在加载数据...");
 		progressDialog.setCanceledOnTouchOutside(false);
 		progressDialog.setCancelable(true);
 		progressDialog.show();
 	}
 	//隐藏转圈提示
 	private void hideProgressBar() {
-		if(null != progressDialog && progressDialog.isShowing()){
+		if(!isFinishing() && null != progressDialog && progressDialog.isShowing()){
 			progressDialog.dismiss();
 		}
 	}

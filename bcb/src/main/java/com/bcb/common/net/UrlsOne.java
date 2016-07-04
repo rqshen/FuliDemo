@@ -157,7 +157,7 @@ public class UrlsOne {
     //参加每日福利
     public static final String JoinDailyWelfare = host + "/api/v1.3.4/a60100aabccb";
 	//每日福利统计的数据
-    public static final String DailyWelfareData = host + "/api/v1.3.4/a60100b02646";
+    public static final String DailyWelfareData = host + "/api/v1.3.4/a6390100103a";
 	//查询今日拆得利率
 	public static final String SearchWelfareData = host + "/api/v1.3.4/a60600ef9560";
 
