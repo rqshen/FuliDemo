@@ -1,5 +1,8 @@
 <component name="libraryTable">
   <library name="uilimageloader-1.0.0">
+    <ANNOTATIONS>
+      <root url="jar://$PROJECT_DIR$/bcb/build/intermediates/exploded-aar/com.meiqia/uilimageloader/1.0.0/annotations.zip!/" />
+    </ANNOTATIONS>
     <CLASSES>
       <root url="file://$PROJECT_DIR$/bcb/build/intermediates/exploded-aar/com.meiqia/uilimageloader/1.0.0/res" />
       <root url="jar://$PROJECT_DIR$/bcb/build/intermediates/exploded-aar/com.meiqia/uilimageloader/1.0.0/jars/classes.jar!/" />

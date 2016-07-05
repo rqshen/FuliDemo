@@ -271,12 +271,6 @@
     <string name="rotate_value_six">袁先生 成功借款20w</string>
     <string name="rotate_value_seven">植先生 成功借款5w</string>
     <string name="rotate_value_eight">张小姐 成功借款12w</string>
-    <!--每日福利-->
-    <string name="scroll_value_one">刘** 刚刚领取了+0.5%</string>
-    <string name="scroll_value_two">沈** 刚刚领取了+0.2%</string>
-    <string name="scroll_value_three">赵** 刚刚领取了+0.3%</string>
-    <string name="scroll_value_four">陈** 刚刚领取了+0.1%</string>
-    <string name="scroll_value_five">苏** 刚刚领取了+0.3%</string>
     <!--与本人关系-->
     <string name="relationship1">本人</string>
     <string name="relationship2">父亲</string>

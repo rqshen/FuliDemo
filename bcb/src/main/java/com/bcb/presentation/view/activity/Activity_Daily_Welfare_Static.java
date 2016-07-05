@@ -89,9 +89,6 @@ public class Activity_Daily_Welfare_Static extends Activity_Base implements View
 
         //初始化滚动文字
         rotateValues = getIntent().getStringArrayExtra("rotateValues");
-        if (null == rotateValues || 0 == rotateValues.length){
-            rotateValues = getResources().getStringArray(R.array.scrollValues);
-        }
         //文字滚动
         value_scroll = (WheelVerticalView) findViewById(R.id.value_scroll);
         isPause = false;

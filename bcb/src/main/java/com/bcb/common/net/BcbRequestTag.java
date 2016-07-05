@@ -99,8 +99,6 @@ public interface BcbRequestTag {
     String UrlWithdrawalTag = "BcbUrlWithdrawalRequest";
     //投标
     String UrlBuyProjectTag = "BcbUrlBuyProjectRequest";
-    //每日福利统计
-    String UrlWelfareStatisticsTag = "WelfareStatisticsRequest";
     //参加每日福利
     String UrlJoinWelfareTag = "JoinWelfareRequest";
 }

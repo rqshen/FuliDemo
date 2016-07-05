@@ -11,13 +11,6 @@
         <item>@string/rotate_value_seven</item>
         <item>@string/rotate_value_eight</item>
     </array>
-    <array name="scrollValues">
-        <item>@string/scroll_value_one</item>
-        <item>@string/scroll_value_two</item>
-        <item>@string/scroll_value_three</item>
-        <item>@string/scroll_value_four</item>
-        <item>@string/scroll_value_five</item>
-    </array>
 
     <array name="relationship">
         <item>@string/relationship1</item>

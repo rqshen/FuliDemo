@@ -1,7 +1,6 @@
 package com.bcb.presentation.view.activity;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -27,7 +26,6 @@ import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
 import com.bcb.common.net.UrlsOne;
-import com.bcb.data.bean.WelfareDto;
 import com.bcb.data.util.DbUtil;
 import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MyActivityManager;
@@ -69,15 +67,15 @@ public class Activity_Daily_Welfare extends Activity_Base implements View.OnClic
     private static final int SCROLL = 100;//滚屏文字
 
     private TextView join_count;//参与人数
+    private int totalPopulation;//参与人数
+    private float totalInterest;//累计收益
     private String[] rotateValues;//滚动内容
-    private WelfareDto welfareDto;//完整数据
 
     //短促音
     private SoundPool soundPool;
     private HashMap<Integer, Integer> soundID;
 
     private Activity context;
-    private ProgressDialog progressDialog;
     private BcbRequestQueue requestQueue;
 
     private Handler handler = new Handler(){
@@ -91,6 +89,21 @@ public class Activity_Daily_Welfare extends Activity_Base implements View.OnClic
             }
         }
     };
+
+    /**
+     * 启动
+     * @param ctx
+     * @param rotateValues 滚动文字
+     * @param totalPopulation 参与人数
+     * @param totalInterest 累计加息
+     */
+    public static void launche(Context ctx, String[] rotateValues, int totalPopulation, float totalInterest){
+        Intent intent = new Intent(ctx, Activity_Daily_Welfare.class);
+        intent.putExtra("rotateValues", rotateValues);
+        intent.putExtra("totalPopulation", totalPopulation);
+        intent.putExtra("totalInterest", totalInterest);
+        ctx.startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,74 +128,25 @@ public class Activity_Daily_Welfare extends Activity_Base implements View.OnClic
         img_background.setImageResource(R.drawable.daily_welfare_frame);
         welfare_animationDrawable = (AnimationDrawable) img_background.getDrawable();
 
-        //初始化滚动文字
-        rotateValues = getResources().getStringArray(R.array.scrollValues);
-        //文字滚动
-        value_scroll = (WheelVerticalView) findViewById(R.id.value_scroll);
-        isPause = false;
-        startRotate();
+        //初始化滚动文字、累计加息、参与人数
+        rotateValues = getIntent().getStringArrayExtra("rotateValues");
+        totalInterest = getIntent().getFloatExtra("totalInterest", 0);
+        totalPopulation = getIntent().getIntExtra("totalPopulation", 0);
 
         //活动规则按钮
         findViewById(R.id.btn_welfare_rule).setOnClickListener(this);
         //动画按钮点击
         findViewById(R.id.null_view).setOnClickListener(this);
-
+        //参与人数
         join_count = (TextView) findViewById(R.id.join_count);
+        String str = String.format("今天已有%s位用户获得加息", totalPopulation);
+        join_count.setText(str);
+        //文字滚动
+        value_scroll = (WheelVerticalView) findViewById(R.id.value_scroll);
+        isPause = false;
+        startRotate();
 
         requestQueue = App.getInstance().getRequestQueue();
-    }
-
-    /**
-     * 请求统计数据
-     */
-    private void getStatisticsData(){
-        showProgressBar();
-        JSONObject obj = new JSONObject();
-        BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.DailyWelfareData, obj, TokenUtil.getEncodeToken(context), true, new BcbRequest.BcbCallBack<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                hideProgressBar();
-                try {
-                    if (response.getInt("status") == 1) {
-                        JSONObject resultObject = response.getJSONObject("result");
-                        welfareDto = App.mGson.fromJson(resultObject.toString(), WelfareDto.class);
-                        //更新UI
-                        LogUtil.d("统计数据", welfareDto.toString());
-                        //滚动文字
-                        rotateValues = new String[welfareDto.getJoinList().size()];
-                        for (int i=0;i<welfareDto.getJoinList().size();i++){
-                            rotateValues[i] = welfareDto.getJoinList().get(i).get("Title");
-                        }
-                        startRotate();
-
-                        //参与人数
-                        String str = String.format("今天已有%s位用户获得加息", welfareDto.getTotalPopulation());
-                        join_count.setText(str);
-
-                        //加息数值大于0说明已经参加过直接跳转
-                        if (welfareDto.getRate() > 0){
-                            Activity_Daily_Welfare_Static.launche(context,String.valueOf(welfareDto.getRate()),
-                                    String.valueOf(welfareDto.getTotalInterest()),join_count.getText().toString(),rotateValues);
-                            finish();
-                        }
-
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    ToastUtil.alert(context,"请求失败，请稍后重试");
-                    finish();
-                }
-            }
-
-            @Override
-            public void onErrorResponse(Exception error) {
-                hideProgressBar();
-                ToastUtil.alert(context,"请求失败，请稍后重试");
-                finish();
-            }
-        });
-        jsonRequest.setTag(BcbRequestTag.UrlWelfareStatisticsTag);
-        requestQueue.add(jsonRequest);
     }
 
     /**
@@ -254,8 +218,6 @@ public class Activity_Daily_Welfare extends Activity_Base implements View.OnClic
             isPause = false;
         }
 
-        //请求统计数据
-        getStatisticsData();
     }
 
     @Override
@@ -278,17 +240,7 @@ public class Activity_Daily_Welfare extends Activity_Base implements View.OnClic
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        requestQueue.cancelAll(BcbRequestTag.UrlWelfareStatisticsTag);
         requestQueue.cancelAll(BcbRequestTag.UrlJoinWelfareTag);
-    }
-
-    /**
-     * 启动
-     * @param ctx
-     */
-    public static void launche(Context ctx){
-        Intent intent = new Intent(ctx, Activity_Daily_Welfare.class);
-        ctx.startActivity(intent);
     }
 
     /**
@@ -326,7 +278,7 @@ public class Activity_Daily_Welfare extends Activity_Base implements View.OnClic
                             //播放短促音
                             soundPool.play(soundID.get(1), 1, 1, 0, 0, 1);
                             //弹出金币
-                            Activity_Daily_Welfare_Result.launche(context, value, String.valueOf(welfareDto.getTotalInterest()));
+                            Activity_Daily_Welfare_Result.launche(context, value, String.valueOf(totalInterest));
 
                             //保存到数据库
                             DbUtil.saveWelfare(value);
@@ -346,7 +298,7 @@ public class Activity_Daily_Welfare extends Activity_Base implements View.OnClic
                         }else{
                             //通知刷新
                             EventBus.getDefault().post(new BroadcastEvent(BroadcastEvent.REFRESH));
-                            Activity_Daily_Welfare_Result.launche(context, App.getInstance().getWelfare(), String.valueOf(welfareDto.getTotalInterest()));
+                            Activity_Daily_Welfare_Result.launche(context, App.getInstance().getWelfare(), String.valueOf(totalInterest));
                         }
                     }
                 } catch (Exception e) {
@@ -375,9 +327,9 @@ public class Activity_Daily_Welfare extends Activity_Base implements View.OnClic
             case R.id.null_view://打开福袋
                 UmengUtil.eventById(context, R.string.fuli_c2);
                 String value = App.getInstance().getWelfare();
-                if (!TextUtils.isEmpty(value) && null != welfareDto){
+                if (!TextUtils.isEmpty(value)){
                     Activity_Daily_Welfare_Static.launche(context,value,
-                            String.valueOf(welfareDto.getTotalInterest()),join_count.getText().toString(),rotateValues);
+                            String.valueOf(totalInterest),String.format("今天已有%d位用户获得加息", totalPopulation),rotateValues);
                     finish();
                     break;
                 }
@@ -388,28 +340,6 @@ public class Activity_Daily_Welfare extends Activity_Base implements View.OnClic
                     getPackageData();
                 }
                 break;
-        }
-    }
-
-    /**
-     * 转圈提示
-     */
-    private void showProgressBar() {
-        if(null == progressDialog) {
-            progressDialog = new ProgressDialog(this,ProgressDialog.THEME_HOLO_LIGHT);
-        }
-        progressDialog.setMessage("正在加载数据...");
-        progressDialog.setCanceledOnTouchOutside(false);
-        progressDialog.setCancelable(true);
-        progressDialog.show();
-    }
-
-    /**
-     * 隐藏转圈
-     */
-    private void hideProgressBar() {
-        if(!isFinishing() && null != progressDialog && progressDialog.isShowing()){
-            progressDialog.dismiss();
         }
     }
 

@@ -1,6 +1,7 @@
 package com.bcb.presentation.view.fragment;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -38,6 +39,7 @@ import com.bcb.data.bean.BannerInfo;
 import com.bcb.data.bean.ExpiredRecordsBean;
 import com.bcb.data.bean.MainListBean;
 import com.bcb.data.bean.ProductRecordsBean;
+import com.bcb.data.bean.WelfareDto;
 import com.bcb.data.util.HttpUtils;
 import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MyListView;
@@ -50,6 +52,7 @@ import com.bcb.presentation.adapter.ExpiredAdapter;
 import com.bcb.presentation.adapter.ProductAdapter;
 import com.bcb.presentation.view.activity.Activity_Browser;
 import com.bcb.presentation.view.activity.Activity_Daily_Welfare;
+import com.bcb.presentation.view.activity.Activity_Daily_Welfare_Static;
 import com.bcb.presentation.view.activity.Activity_ExpiredProject_Introduction;
 import com.bcb.presentation.view.activity.Activity_Login;
 import com.bcb.presentation.view.activity.Activity_Login_Introduction;
@@ -138,6 +141,10 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPa
     private int lastX;
     private int lastY;
     private Button button_floating;
+
+    //点击每日福利
+    private ProgressDialog progressDialog;
+    private WelfareDto welfareDto;//完整数据
 
     public Frag_Main(){
         super();
@@ -351,8 +358,6 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPa
             }
         });
     }
-
-
 
     /**
      * 获取状态条的高度
@@ -790,7 +795,8 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPa
                     break;
                 }
                 UmengUtil.eventById(ctx, R.string.fuli_c);
-                Activity_Daily_Welfare.launche(ctx);
+                //请求统计数据
+                getStatisticsData();
                 break;
             case R.id.ll_wealth_college://理财学院
                 UmengUtil.eventById(ctx, R.string.college_c);
@@ -971,6 +977,76 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPa
                     refreshLayout.autoRefresh();
                     break;
             }
+        }
+    }
+
+    /**
+     * 请求统计数据
+     */
+    private void getStatisticsData(){
+        showProgressBar();
+        JSONObject obj = new JSONObject();
+        BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.DailyWelfareData, obj, TokenUtil.getEncodeToken(ctx), true, new BcbRequest.BcbCallBack<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                hideProgressBar();
+                try {
+                    if (response.getInt("status") == 1) {
+                        JSONObject resultObject = response.getJSONObject("result");
+                        welfareDto = App.mGson.fromJson(resultObject.toString(), WelfareDto.class);
+                        //更新UI
+                        LogUtil.d("统计数据", welfareDto.toString());
+
+                        //滚动文字
+                        String[] rotateValues = new String[welfareDto.getJoinList().size()];
+                        for (int i=0;i<welfareDto.getJoinList().size();i++){
+                            rotateValues[i] = welfareDto.getJoinList().get(i).get("Title");
+                        }
+                        //参与人数
+                        String str = String.format("今天已有%s位用户获得加息", welfareDto.getTotalPopulation());
+                        //加息数值大于0说明已经参加过直接跳转
+                        if (welfareDto.getRate() > 0){
+                            Activity_Daily_Welfare_Static.launche(ctx,String.valueOf(welfareDto.getRate()),
+                                    String.valueOf(welfareDto.getTotalInterest()),str,rotateValues);
+                        }else{
+                            Activity_Daily_Welfare.launche(ctx, rotateValues, welfareDto.getTotalPopulation(), welfareDto.getTotalInterest());
+                        }
+
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    ToastUtil.alert(ctx,"请求失败，请稍后重试");
+                }
+            }
+
+            @Override
+            public void onErrorResponse(Exception error) {
+                hideProgressBar();
+                ToastUtil.alert(ctx,"请求失败，请稍后重试");
+            }
+        });
+        requestQueue.add(jsonRequest);
+    }
+
+    /**
+     * 转圈提示
+     */
+    private void showProgressBar() {
+        if(null == progressDialog) {
+            progressDialog = new ProgressDialog(ctx,ProgressDialog.THEME_HOLO_LIGHT);
+        }
+        progressDialog.setMessage("正在加载数据...");
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.setCancelable(true);
+        progressDialog.show();
+    }
+
+    /**
+     * 隐藏转圈
+     */
+    private void hideProgressBar() {
+        if(!ctx.isFinishing() && null != progressDialog && progressDialog.isShowing()){
+            progressDialog.dismiss();
         }
     }
 }
