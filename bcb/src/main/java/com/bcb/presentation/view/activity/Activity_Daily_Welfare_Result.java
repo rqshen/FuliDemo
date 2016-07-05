@@ -101,7 +101,7 @@ public class Activity_Daily_Welfare_Result extends Activity_Base implements View
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        overridePendingTransition(0, 0);
+        handler.sendEmptyMessageDelayed(destroy, 50);
     }
 
     //仅用于界面延迟销毁
@@ -124,8 +124,10 @@ public class Activity_Daily_Welfare_Result extends Activity_Base implements View
         switch (v.getId()){
             case R.id.ll_text://跳转到投资记录
                 UmengUtil.eventById(ctx, R.string.self_tzjl);
+                handler.sendEmptyMessage(destroy);
                 Activity_Money_Flowing_Water.launche(ctx);
                 finish();
+                overridePendingTransition(0, 0);
                 break;
             case R.id.btn_welfare_check://跳转到首页产品列表
                 EventBus.getDefault().post(new BroadcastEvent(BroadcastEvent.PRODUCT));
@@ -136,6 +138,7 @@ public class Activity_Daily_Welfare_Result extends Activity_Base implements View
             case R.id.activity_close:
                 finish();
                 overridePendingTransition(0, 0);
+                handler.sendEmptyMessageDelayed(destroy, 50);
                 break;
         }
     }

@@ -290,6 +290,10 @@ public class Activity_Daily_Welfare extends Activity_Base implements View.OnClic
                     }else if(-2 == status){//领福利时间为每日 06：00-22：00
                         Activity_Daily_Welfare_Tip.launche(context);
                         finish();
+                    }else if(-5 == status) {
+                        App.saveUserInfo.clear();
+                        Intent intent = new Intent(context, Activity_Login.class);
+                        context.startActivity(intent);
                     }else{
                         //获取数据库缓存数据,若有数据就显示已经缓存的数据
                         if (TextUtils.isEmpty(App.getInstance().getWelfare())){
@@ -326,13 +330,6 @@ public class Activity_Daily_Welfare extends Activity_Base implements View.OnClic
                 break;
             case R.id.null_view://打开福袋
                 UmengUtil.eventById(context, R.string.fuli_c2);
-                String value = App.getInstance().getWelfare();
-                if (!TextUtils.isEmpty(value)){
-                    Activity_Daily_Welfare_Static.launche(context,value,
-                            String.valueOf(totalInterest),String.format("今天已有%d位用户获得加息", totalPopulation),rotateValues);
-                    finish();
-                    break;
-                }
                 //防止按钮多次点击
                 long currentTime = Calendar.getInstance().getTimeInMillis();
                 if (currentTime - lastClickTime > MIN_CLICK_DELAY_TIME) {

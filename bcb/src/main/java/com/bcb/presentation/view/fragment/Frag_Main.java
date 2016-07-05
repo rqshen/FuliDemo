@@ -995,7 +995,8 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPa
             public void onResponse(JSONObject response) {
                 progressDialog.dismiss();
                 try {
-                    if (response.getInt("status") == 1) {
+                    boolean status = PackageUtil.getRequestStatus(response,ctx);
+                    if (status) {
                         JSONObject resultObject = response.getJSONObject("result");
                         welfareDto = App.mGson.fromJson(resultObject.toString(), WelfareDto.class);
                         //更新UI
@@ -1016,6 +1017,8 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPa
                             Activity_Daily_Welfare.launche(ctx, rotateValues, welfareDto.getTotalPopulation(), welfareDto.getTotalInterest());
                         }
 
+                    }else{
+                        ToastUtil.alert(ctx,response.getString("message"));
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

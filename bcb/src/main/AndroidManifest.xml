@@ -2,8 +2,8 @@
 <manifest package="com.bcb"
           xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools"
-          android:versionCode="28"
-          android:versionName="1.6.0">
+          android:versionCode="29"
+          android:versionName="1.6.1">
 
     <uses-sdk
         android:minSdkVersion="14"
@@ -333,6 +333,7 @@
             android:name=".presentation.view.activity.Activity_Daily_Welfare_Result"
             android:label="@string/app_name"
             android:theme="@style/Dialog_Fullscreen"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"/>
         <activity
             android:name=".presentation.view.activity.Activity_Daily_Welfare_Tip"
