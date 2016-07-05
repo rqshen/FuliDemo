@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
@@ -236,11 +237,11 @@ public class Activity_Recharge_Confirm extends Activity_Base implements View.OnC
             public void onResponse(JSONObject response) {
                 hideProgressBar();
                 try {
-
                     boolean status = PackageUtil.getRequestStatus(response, Activity_Recharge_Confirm.this);
-                    if (status) {
+                    JSONObject result = response.getJSONObject("result");
+                    int tradeStatus = result.getInt("TradeStatus");
+                    if (status && 1 == tradeStatus) {
                         verificationStatus = true;
-                        JSONObject result = response.getJSONObject("result");
                         //判断JSON对象是否为空
                         if (result != null) {
                             repalAmount = result.getInt("Amount");
@@ -280,6 +281,9 @@ public class Activity_Recharge_Confirm extends Activity_Base implements View.OnC
                                 && !response.getString("message").equalsIgnoreCase("")) {
                             error_tips.setVisibility(View.VISIBLE);
                             error_tips.setText(response.getString("message"));
+                        } else if(1 != tradeStatus && !TextUtils.isEmpty(result.getString("ErrorMessage"))){
+                            error_tips.setVisibility(View.VISIBLE);
+                            error_tips.setText(result.getString("ErrorMessage"));
                         } else {
                             error_tips.setVisibility(View.VISIBLE);
                             error_tips.setText("获取验证码失败");

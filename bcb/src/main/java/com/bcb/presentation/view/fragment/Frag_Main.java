@@ -1,7 +1,7 @@
 package com.bcb.presentation.view.fragment;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
+import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -40,6 +40,7 @@ import com.bcb.data.bean.ExpiredRecordsBean;
 import com.bcb.data.bean.MainListBean;
 import com.bcb.data.bean.ProductRecordsBean;
 import com.bcb.data.bean.WelfareDto;
+import com.bcb.data.util.DialogUtil;
 import com.bcb.data.util.HttpUtils;
 import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MyListView;
@@ -143,7 +144,7 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPa
     private Button button_floating;
 
     //点击每日福利
-    private ProgressDialog progressDialog;
+    private Dialog progressDialog;
     private WelfareDto welfareDto;//完整数据
 
     public Frag_Main(){
@@ -160,6 +161,9 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPa
         this.ctx =(Activity) view.getContext();
         EventBus.getDefault().register(this);
         requestQueue = App.getInstance().getRequestQueue();
+
+        progressDialog = DialogUtil.createLoadingDialog(ctx);
+
         //仅保留下拉刷新，隐藏上拉加载更多
         //隐藏加载更多
         (view.findViewById(R.id.loadmore_view)).setVisibility(View.GONE);
@@ -984,12 +988,12 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPa
      * 请求统计数据
      */
     private void getStatisticsData(){
-        showProgressBar();
+        progressDialog.show();
         JSONObject obj = new JSONObject();
         BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.DailyWelfareData, obj, TokenUtil.getEncodeToken(ctx), true, new BcbRequest.BcbCallBack<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                hideProgressBar();
+                progressDialog.dismiss();
                 try {
                     if (response.getInt("status") == 1) {
                         JSONObject resultObject = response.getJSONObject("result");
@@ -1021,32 +1025,11 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPa
 
             @Override
             public void onErrorResponse(Exception error) {
-                hideProgressBar();
+                progressDialog.dismiss();
                 ToastUtil.alert(ctx,"请求失败，请稍后重试");
             }
         });
         requestQueue.add(jsonRequest);
     }
 
-    /**
-     * 转圈提示
-     */
-    private void showProgressBar() {
-        if(null == progressDialog) {
-            progressDialog = new ProgressDialog(ctx,ProgressDialog.THEME_HOLO_LIGHT);
-        }
-        progressDialog.setMessage("正在加载数据...");
-        progressDialog.setCanceledOnTouchOutside(false);
-        progressDialog.setCancelable(true);
-        progressDialog.show();
-    }
-
-    /**
-     * 隐藏转圈
-     */
-    private void hideProgressBar() {
-        if(!ctx.isFinishing() && null != progressDialog && progressDialog.isShowing()){
-            progressDialog.dismiss();
-        }
-    }
 }
