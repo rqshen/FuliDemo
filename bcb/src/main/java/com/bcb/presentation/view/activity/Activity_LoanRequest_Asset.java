@@ -90,7 +90,9 @@ public class Activity_LoanRequest_Asset extends Activity_Base {
         //初始化队列
         setupQueue();
         //设置房产信息
-        setupAssetMessage();
+        if (null != personInfoBean){
+            setupAssetMessage();
+        }
     }
 
     /**

@@ -66,6 +66,10 @@ public class Activity_BuyProject_Success extends Activity_Base implements Interf
 		RewardRateDescn_tips = (TextView) findViewById(R.id.RewardRateDescn_tips);
 		RewardRateDescn_layout = (LinearLayout) findViewById(R.id.RewardRateDescn_layout);
 
+		if (null == successInfo){
+			return;
+		}
+
         //显示投资金额
 		OrderAmount.setText(successInfo.getOrderAmount()+"元");
 
@@ -145,8 +149,6 @@ public class Activity_BuyProject_Success extends Activity_Base implements Interf
     //请求用户信息回调
     @Override
     public void onRequestResult(int resultStatus, String message) {
-//        iPresenterUpdateUserInfo.clearDependency();
-//        iPresenterUpdateUserInfo = null;
     }
 }
 

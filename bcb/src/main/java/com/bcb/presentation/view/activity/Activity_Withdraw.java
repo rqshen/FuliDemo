@@ -144,7 +144,7 @@ public class Activity_Withdraw extends Activity_Base implements View.OnClickList
         coupon_description = (LinearLayout) findViewById(R.id.coupon_description);
         coupon_description.setOnClickListener(this);
         //设置账户余额，有账户余额就不用加载数据了
-        if (App.mUserWallet.getBalanceAmount() > 0) {
+        if (null != App.mUserWallet && App.mUserWallet.getBalanceAmount() > 0) {
             username_balance.setText("" + App.mUserWallet.BalanceAmount + " 元");
             mUserWallet = App.mUserWallet;
         } else {

@@ -146,7 +146,7 @@ public class Activity_Recharge_Confirm extends Activity_Base implements View.OnC
         //预留手机号
         bank_card_mobile = (EditText) findViewById(R.id.bank_card_mobile);
         //如果返回的信息存在手机号码，则禁止输入
-        if (App.mUserDetailInfo.BankCard.getCardMobile() != null
+        if (App.mUserDetailInfo.BankCard != null && App.mUserDetailInfo.BankCard.getCardMobile() != null
 					&& !App.mUserDetailInfo.BankCard.CardMobile.equalsIgnoreCase("null")
 					&& !App.mUserDetailInfo.BankCard.CardMobile.equalsIgnoreCase("")) {
             //强制隐藏光标和键盘
