@@ -615,6 +615,7 @@
                             android:layout_height="0.5dp"
                             android:background="@color/linegray"/>
                     </LinearLayout>
+                    <include layout="@layout/com_funds_trusteeship_tip" />
                 </LinearLayout>
                 <ImageView
                     android:id="@+id/user_customer_tips"

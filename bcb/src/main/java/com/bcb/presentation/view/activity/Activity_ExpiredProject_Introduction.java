@@ -101,8 +101,7 @@ public class Activity_ExpiredProject_Introduction extends Activity_Base implemen
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //管理Activity栈，用于忘记密码的时候，跳转至登陆界面之前销毁栈中所有的Activity
-        MyActivityManager myActivityManager = MyActivityManager.getInstance();
-        myActivityManager.pushOneActivity(Activity_ExpiredProject_Introduction.this);
+        MyActivityManager.getInstance().pushOneActivity(Activity_ExpiredProject_Introduction.this);
         packageId = getIntent().getStringExtra("pid");
         title = getIntent().getStringExtra("title");
         setBaseContentView(R.layout.activity_expiredproject_introduction);

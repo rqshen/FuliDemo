@@ -826,7 +826,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dip"
-                android:layout_marginBottom="18dip"
                 android:gravity="center">
                 <ImageView
                     android:layout_width="wrap_content"
@@ -840,6 +839,8 @@
                     android:textColor="@color/txt_gray"
                     android:text="@string/project_other_description"/>
             </LinearLayout>
+
+            <include layout="@layout/com_funds_trusteeship_tip"/>
 
         </LinearLayout>
     </ScrollView>

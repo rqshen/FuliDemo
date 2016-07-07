@@ -41,6 +41,7 @@ import com.bcb.presentation.view.activity.Activity_Join_Company;
 import com.bcb.presentation.view.activity.Activity_LoanRequest_Borrow;
 import com.bcb.presentation.view.activity.Activity_Login;
 import com.bcb.presentation.view.activity.Activity_Money_Flowing_Water;
+import com.bcb.presentation.view.activity.Activity_Privilege_Money;
 import com.bcb.presentation.view.activity.Activity_Recharge_Second;
 import com.bcb.presentation.view.activity.Activity_Setting_Pay_Pwd;
 import com.bcb.presentation.view.activity.Activity_Trading_Record;
@@ -706,7 +707,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 
     //特权本金
     private void privilegeMoney() {
-        ToastUtil.alert(ctx, "即将上线，敬请期待");
+        Activity_Privilege_Money.launch(ctx);
     }
 
     //资金托管

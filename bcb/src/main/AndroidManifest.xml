@@ -353,6 +353,11 @@
             android:name=".presentation.view.activity.Activity_Love"
             android:label="@string/app_name"
             android:screenOrientation="portrait"/>
+        <!--特权本金-->
+        <activity
+            android:name=".presentation.view.activity.Activity_Privilege_Money"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"/>
 
         <!-- ***********以下是极光推送相关配置************ -->
         <!-- Required SDK核心功能-->

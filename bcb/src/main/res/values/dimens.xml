@@ -16,6 +16,7 @@
     <dimen name="main_text_default">15sp</dimen>
     <dimen name="main_text_large">17sp</dimen>
     <dimen name="main_text_xlarge">20sp</dimen>
+    <dimen name="main_text_xxxlarge">30sp</dimen>
     <!-- 按钮的宽高 -->
     <dimen name="button_width">200dp</dimen>
     <dimen name="button_height">42dp</dimen>

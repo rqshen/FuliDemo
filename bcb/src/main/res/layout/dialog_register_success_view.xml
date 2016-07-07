@@ -28,7 +28,7 @@
                 android:layout_gravity="center"
                 android:textSize="@dimen/main_text_large"
                 android:textColor="@android:color/white"
-                android:text="体验万元户"/>
+                android:text="立即激活"/>
         </LinearLayout>
     </RelativeLayout>
 </LinearLayout>

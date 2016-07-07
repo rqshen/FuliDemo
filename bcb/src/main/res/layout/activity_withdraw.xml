@@ -561,6 +561,8 @@
                 </LinearLayout>
             </LinearLayout>
 
+            <include layout="@layout/com_funds_trusteeship_tip"/>
+
         </LinearLayout>
     </ScrollView>
 

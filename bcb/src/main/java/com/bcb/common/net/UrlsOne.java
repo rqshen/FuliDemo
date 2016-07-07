@@ -33,9 +33,6 @@ public class UrlsOne {
 	// 项目汇总
 	public static final String CompanyProduct = host + "/api/v1.0/ae72adb06802";
 	
-	// 首页新房宝列表
-	public static final String MainpageHouses = host + "/api/v1.0/c98980c8d6f6";
-	
 	// 首页驿站切换-热门驿站
 	public static final String MainpageHotStation = host + "/api/v1.0/7469e8252732";
 		

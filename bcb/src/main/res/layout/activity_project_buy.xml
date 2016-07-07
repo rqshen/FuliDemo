@@ -257,6 +257,9 @@
                     android:text="@string/buy"
                     android:textColor="@color/white"
                     android:textSize="@dimen/main_text_default" />
+
+                <include layout="@layout/com_funds_trusteeship_tip"/>
+
                 <!-- 忘记密码 -->
                 <RelativeLayout
                     android:layout_width="match_parent"
