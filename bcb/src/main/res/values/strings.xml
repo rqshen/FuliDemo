@@ -54,13 +54,14 @@
     <string name="money_flow_water">交易明细</string>
     <string name="borrow_money">借款</string>
     <string name="coupons">优惠券</string>
-    <string name="invitation_award">邀请奖励</string>
-    <string name="account_setting">设置</string>
+    <string name="privilege_money">特权本金</string>
+    <string name="managed_funds">资金托管</string>
     <string name="customer_service">专属客服</string>
     <string name="value_qqvip">闪电回复</string>
     <string name="wechat">客服微信</string>
     <string name="value_wechat">福利金融 (fulijinrong)</string>
     <string name="hotline">客服热线</string>
+    <string name="account_setting">账户设置</string>
     <string name="value_hotline">020-38476886</string>
 
     <!-- 优惠券 -->

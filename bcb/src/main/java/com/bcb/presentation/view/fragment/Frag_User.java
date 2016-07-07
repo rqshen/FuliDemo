@@ -13,7 +13,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -22,7 +21,6 @@ import android.widget.TextView;
 import com.bcb.R;
 import com.bcb.common.app.App;
 import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbNetworkManager;
 import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
@@ -59,17 +57,9 @@ public class Frag_User extends Frag_Base implements OnClickListener {
     //标题
 	private TextView  title_text;
 
-	private LinearLayout  trading_record, money_flow_water, borrow_money, coupons, invitation_award, account_setting;
-
 	private Context ctx;
-
-	private Button recharge_btn, withdraw_btn;
-
 	private TextView value_earn, value_balance, value_back, value_total;
-    private LinearLayout freezeAmountImage;
-
 	private UserWallet mUserWallet;
-
 	private UserDetailInfo mUserDetailInfo;
 
     private boolean firstLoadWallet;
@@ -160,34 +150,25 @@ public class Frag_User extends Frag_Base implements OnClickListener {
         // 冻结金额
         value_total = (TextView) view.findViewById(R.id.value_total);
         //叹号
-        freezeAmountImage = (LinearLayout) view.findViewById(R.id.freeze_amount_image);
-        freezeAmountImage.setOnClickListener(this);
-
+        view.findViewById(R.id.freeze_amount_image).setOnClickListener(this);
         //充值
-        recharge_btn = (Button) view.findViewById(R.id.recharge_btn);
-        recharge_btn.setOnClickListener(this);
+        view.findViewById(R.id.recharge_btn).setOnClickListener(this);
         //提现
-        withdraw_btn = (Button) view.findViewById(R.id.withdraw_btn);
-        withdraw_btn.setOnClickListener(this);
-
+        view.findViewById(R.id.withdraw_btn).setOnClickListener(this);
         //投资记录
-        trading_record = (LinearLayout) view.findViewById(R.id.trading_record);
-        trading_record.setOnClickListener(this);
+        view.findViewById(R.id.trading_record).setOnClickListener(this);
         //资金流水
-        money_flow_water = (LinearLayout) view.findViewById(R.id.money_flow_water);
-        money_flow_water.setOnClickListener(this);
+        view.findViewById(R.id.money_flow_water).setOnClickListener(this);
         //借款
-        borrow_money = (LinearLayout) view.findViewById(R.id.borrow_money);
-        borrow_money.setOnClickListener(this);
+        view.findViewById(R.id.borrow_money).setOnClickListener(this);
         //优惠券
-        coupons = (LinearLayout)view.findViewById(R.id.coupons);
-        coupons.setOnClickListener(this);
-        //邀请奖励
-        invitation_award = (LinearLayout)view.findViewById(R.id.invitation_award);
-        invitation_award.setOnClickListener(this);
+        view.findViewById(R.id.coupons).setOnClickListener(this);
+        //特权本金
+        view.findViewById(R.id.privilege_money).setOnClickListener(this);
+        //资金托管
+        view.findViewById(R.id.managed_funds).setOnClickListener(this);
         //账号设置
-        account_setting = (LinearLayout)view.findViewById(R.id.account_setting);
-        account_setting.setOnClickListener(this);
+        view.findViewById(R.id.layout_account_settting).setOnClickListener(this);
         //专属客服
         layout_customer_service = (RelativeLayout) view.findViewById(R.id.layout_customer_service);
         layout_customer_service.setOnClickListener(new OnClickListener() {
@@ -521,14 +502,19 @@ public class Frag_User extends Frag_Base implements OnClickListener {
                 checkCoupon();
                 break;
 
-            // 邀请奖励
-            case R.id.invitation_award:
+            // 特权本金
+            case R.id.privilege_money:
                 UmengUtil.eventById(ctx, R.string.self_invate);
-                invitationAward();
+                privilegeMoney();
+                break;
+
+            // 资金托管
+            case R.id.managed_funds:
+                managedFunds();
                 break;
 
             // 账号设置
-            case R.id.account_setting:
+            case R.id.layout_account_settting:
                 accountSetting();
                 break;
         }
@@ -718,8 +704,13 @@ public class Frag_User extends Frag_Base implements OnClickListener {
         startActivityForResult(new Intent(ctx, Activity_Coupons.class), 1);
     }
 
-    //邀请奖励
-    private void invitationAward() {
+    //特权本金
+    private void privilegeMoney() {
+        ToastUtil.alert(ctx, "即将上线，敬请期待");
+    }
+
+    //资金托管
+    private void managedFunds() {
         ToastUtil.alert(ctx, "即将上线，敬请期待");
     }
 

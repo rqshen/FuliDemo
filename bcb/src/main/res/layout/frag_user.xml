@@ -300,8 +300,8 @@
                                 android:orientation="vertical"
                                 android:gravity="center_horizontal">
                                 <ImageView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
                                     android:src="@drawable/trade_record" />
 
                                 <TextView
@@ -334,8 +334,8 @@
                                 android:gravity="center_horizontal">
 
                                 <ImageView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
                                     android:src="@drawable/flow_water" />
 
                                 <TextView
@@ -367,8 +367,8 @@
                                 android:orientation="vertical"
                                 android:gravity="center_horizontal">
                                 <ImageView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
                                     android:src="@drawable/borrow_money" />
 
                                 <TextView
@@ -404,8 +404,8 @@
                                 android:orientation="vertical"
                                 android:gravity="center_horizontal">
                                 <ImageView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
                                     android:src="@drawable/coupons" />
 
                                 <TextView
@@ -422,7 +422,7 @@
                             android:layout_height="match_parent"
                             android:background="@color/linegray"/>
                         <LinearLayout
-                            android:id="@+id/invitation_award"
+                            android:id="@+id/privilege_money"
                             android:layout_width="wrap_content"
                             android:layout_height="fill_parent"
                             android:layout_weight="1"
@@ -437,15 +437,15 @@
                                 android:orientation="vertical"
                                 android:gravity="center_horizontal">
                                 <ImageView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:src="@drawable/invitation_award" />
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:src="@drawable/privilege_money" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="7.5dp"
-                                    android:text="@string/invitation_award"
+                                    android:text="@string/privilege_money"
                                     android:textColor="@color/txt_black"
                                     android:textSize="@dimen/main_text_default" />
                             </LinearLayout>
@@ -455,7 +455,7 @@
                             android:layout_height="match_parent"
                             android:background="@color/linegray"/>
                         <LinearLayout
-                            android:id="@+id/account_setting"
+                            android:id="@+id/managed_funds"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -470,15 +470,15 @@
                                 android:orientation="vertical"
                                 android:gravity="center_horizontal">
                                 <ImageView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:src="@drawable/account_setting" />
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:src="@drawable/managed_funds" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="7.5dp"
-                                    android:text="@string/account_setting"
+                                    android:text="@string/managed_funds"
                                     android:textColor="@color/txt_black"
                                     android:textSize="@dimen/main_text_default" />
                             </LinearLayout>
@@ -507,7 +507,7 @@
                                 android:layout_alignParentLeft="true"
                                 android:layout_centerVertical="true"
                                 android:layout_marginLeft="22dp"
-                                android:background="@drawable/icon_user_customer" />
+                                android:src="@drawable/icon_user_customer" />
 
                             <TextView
                                 android:id="@+id/text_customer"
@@ -551,7 +551,7 @@
                                 android:layout_alignParentLeft="true"
                                 android:layout_centerVertical="true"
                                 android:layout_marginLeft="22dp"
-                                android:background="@drawable/icon_contact" />
+                                android:src="@drawable/icon_contact" />
                             <TextView
                                 android:id="@+id/textView3"
                                 android:layout_width="wrap_content"
@@ -576,6 +576,39 @@
                                 android:text="@string/value_hotline"
                                 android:textColor="@color/txt_gray"
                                 android:textSize="@dimen/main_text_default"/>
+                        </RelativeLayout>
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:background="@color/linegray"/>
+                        <RelativeLayout
+                            android:id="@+id/layout_account_settting"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical" >
+                            <ImageView
+                                android:id="@+id/optionicon_04"
+                                android:layout_width="21dp"
+                                android:layout_height="21dp"
+                                android:layout_alignParentLeft="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="22dp"
+                                android:src="@drawable/account_setting" />
+                            <TextView
+                                android:id="@+id/textView4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="10dp"
+                                android:layout_toRightOf="@+id/optionicon_04"
+                                android:gravity="center"
+                                android:text="@string/account_setting"
+                                android:textColor="@color/txt_gray"
+                                android:textSize="@dimen/main_text_default"/>
+                            <ImageView
+                                android:id="@+id/user_image_ind03"
+                                style="@style/image_indicator"
+                                android:layout_alignParentRight="true"/>
                         </RelativeLayout>
                         <ImageView
                             android:layout_width="match_parent"
