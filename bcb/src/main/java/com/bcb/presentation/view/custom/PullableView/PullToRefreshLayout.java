@@ -509,7 +509,11 @@ public class PullToRefreshLayout extends RelativeLayout {
                 break;
         }
         // 事件分发交给父类
-        super.dispatchTouchEvent(ev);
+        try {
+            super.dispatchTouchEvent(ev);
+        }catch (IllegalStateException e){
+            e.printStackTrace();
+        }
         return true;
     }
 

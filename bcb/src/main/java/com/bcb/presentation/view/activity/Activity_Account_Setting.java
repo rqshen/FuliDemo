@@ -40,10 +40,9 @@ import de.greenrobot.event.EventBus;
 
 public class Activity_Account_Setting extends Activity_Base implements OnClickListener, Interface_AccountSetting {
 	private RelativeLayout layout_username, layout_id_card, layout_bank_card, layout_phone;
-	private RelativeLayout layout_pay_pwd, layout_login_pwd, layout_foget_passwd, layout_logout, layout_update, layout_feedback, layout_guide, layout_aboutus;
+	private RelativeLayout layout_login_pwd, layout_logout, layout_update, layout_feedback, layout_guide, layout_aboutus;
 
-	private TextView username_text, id_card_text, bank_card_text, pay_pwd_text, phone_text;
-	private TextView pay_pwd_status;
+	private TextView username_text, id_card_text, bank_card_text, phone_text;
 
     private LinearLayout layout_name,layout_idcard, layout_bankcard;
 
@@ -153,19 +152,11 @@ public class Activity_Account_Setting extends Activity_Base implements OnClickLi
 		company_arrow = (ImageView) findViewById(R.id.company_arrow);
 		company_arrow.setVisibility(View.VISIBLE);
 
-		//交易密码
-		layout_pay_pwd = (RelativeLayout) findViewById(R.id.layout_pay_pwd);
-		layout_pay_pwd.setOnClickListener(this);
-		pay_pwd_text = (TextView) findViewById(R.id.pay_pwd_text);
-		pay_pwd_status = (TextView) findViewById(R.id.pay_pwd_status);
 		//登陆密码
 		layout_login_pwd = (RelativeLayout) findViewById(R.id.layout_login_pwd);
 		layout_login_pwd.setOnClickListener(this);
 
         isFirstCreate = false;
-        //找回交易密码
-        layout_foget_passwd = (RelativeLayout) findViewById(R.id.layout_foget_passwd);
-        layout_foget_passwd.setOnClickListener(this);
 		//检查升级
 		layout_update = (RelativeLayout) findViewById(R.id.layout_update);
 		layout_update.setOnClickListener(this);
@@ -229,7 +220,6 @@ public class Activity_Account_Setting extends Activity_Base implements OnClickLi
         iPresenterAccountSetting.updateUserInfo(1);
 	}
 
-
 	/*********************** 点击事件及响应 ***********************************/
 	@Override
 	public void onClick(View v) {
@@ -252,19 +242,9 @@ public class Activity_Account_Setting extends Activity_Base implements OnClickLi
 				joinCompany();
 				break;
 
-            //修改支付密码
-            case R.id.layout_pay_pwd:
-                changeTragePasswd();
-                break;
-
             //修改登录密码
             case R.id.layout_login_pwd:
                 changeLoginPasswd();
-                break;
-
-            //找回交易密码
-            case R.id.layout_foget_passwd:
-                findPayPassword();
                 break;
 
             //退出登录
@@ -377,30 +357,9 @@ public class Activity_Account_Setting extends Activity_Base implements OnClickLi
         });
     }
 
-
-    //修改交易密码
-    private void changeTragePasswd() {
-        if (!iModelUserAccount.isUserDetailInfoEmpty()) {
-            if (iModelUserAccount.hasTradePassword()) {
-                Activity_Modify_Pwd.launche(Activity_Account_Setting.this, false);
-            } else {
-                Activity_Setting_Pay_Pwd.launche(Activity_Account_Setting.this);
-            }
-        } else {
-            Activity_Setting_Pay_Pwd.launche(Activity_Account_Setting.this);
-        }
-    }
-
     //修改登录密码
     private void changeLoginPasswd() {
         Activity_Modify_Pwd.launche(Activity_Account_Setting.this, true);
-    }
-
-    //找回交易密码
-    private void findPayPassword() {
-        UmengUtil.eventById(Activity_Account_Setting.this, R.string.find_f_key);
-        Activity_Forget_Pwd.launche(Activity_Account_Setting.this);
-        finish();
     }
 
     //退出登录
@@ -457,14 +416,6 @@ public class Activity_Account_Setting extends Activity_Base implements OnClickLi
         hideProgressBar();
         //显示认证状态
         certificateStatus(hasCert);
-        //设置交易密码状态
-        if (hasTradePassword) {
-            pay_pwd_text.setText("已设置");
-            pay_pwd_status.setText("点击修改");
-        } else {
-            pay_pwd_text.setText("未设置");
-            pay_pwd_status.setText("点击设置");
-        }
         //用户姓名
         if (!TextUtils.isEmpty(userName)) {
             username_text.setText(userName);

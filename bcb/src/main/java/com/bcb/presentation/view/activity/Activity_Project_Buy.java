@@ -82,8 +82,6 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
     private TextView prospective_earning;
     //立即购买按钮
     private Button button_buy;
-    //忘记密码
-    private LinearLayout forgetPayPassWord;
     //出错信息
     private TextView error_tips;
 
@@ -280,9 +278,6 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
         //立即购买按钮
         button_buy = (Button) findViewById(R.id.button_buy);
         button_buy.setOnClickListener(this);
-        //忘记密码
-        forgetPayPassWord = (LinearLayout) findViewById(R.id.forgetPayPassWord);
-        forgetPayPassWord.setOnClickListener(this);
 
         //出错信息，默认隐藏
         error_tips = (TextView) findViewById(R.id.error_tips);
@@ -957,11 +952,6 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
             case R.id.button_buy:
                 UmengUtil.eventById(Activity_Project_Buy.this, R.string.bid_buy_act2);
                 clickButton();
-                break;
-            //忘记密码
-            case R.id.forgetPayPassWord:
-                UmengUtil.eventById(Activity_Project_Buy.this, R.string.bid_buy_f_key);
-                Activity_Forget_Pwd.launche(Activity_Project_Buy.this);
                 break;
 
             default:

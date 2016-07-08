@@ -260,37 +260,6 @@
 
                 <include layout="@layout/com_funds_trusteeship_tip"/>
 
-                <!-- 忘记密码 -->
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <LinearLayout
-                        android:id="@+id/forgetPayPassWord"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="20dip"
-                        android:gravity="center_vertical"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentRight="true">
-                        <TextView
-                            android:singleLine="true"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="5dip"
-                            android:gravity="center_vertical"
-                            android:text="忘记密码"
-                            android:textColor="@color/red"
-                            android:textSize="@dimen/main_text_small" />
-                        <ImageView
-                            android:layout_width="15dip"
-                            android:layout_height="15dip"
-                            android:layout_alignParentRight="true"
-                            android:layout_marginRight="10dip"
-                            android:gravity="right|center_vertical"
-                            android:layout_centerVertical="true"
-                            android:background="@drawable/question_mark" />
-                    </LinearLayout>
-                </RelativeLayout>
                 <!-- 出错提示 -->
                 <TextView
                     android:id="@+id/error_tips"

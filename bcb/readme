@@ -13,4 +13,4 @@
 3根据业务需求，有时新需求并不是在下一版本上线，而只上线bug修复版本，所以最好在上线后才进行分支合并。
 
 三、遗留问题
-1极光推送在bug收集后台有不少崩溃bug，如有更新需要尽快升级SDK。
+1极光推送与美洽客服在bug收集后台有不少崩溃bug，如有更新需要尽快升级SDK，只需要修改gradle。https://github.com/Meiqia/MeiqiaSDK-Android

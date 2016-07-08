@@ -69,7 +69,9 @@ public class IPresenter_AccountSettingImpl implements IPresenter_AccountSetting 
                 try{
                     //如果返回成功清空数据
                     if (response.getInt("status") == 1) {
-                        iModelUserAccount.clearAccount();
+                        if (null != iModelUserAccount){
+                            iModelUserAccount.clearAccount();
+                        }
                         interfaceBase.onRequestResult(1000, null);
                     }
                     //如果返回不成功，则回调出错信息
