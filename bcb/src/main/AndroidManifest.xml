@@ -272,10 +272,6 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".presentation.view.activity.Activity_LoanRequest_Asset"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"/>
-        <activity
             android:name=".presentation.view.activity.Activity_Loan_Introduction"
             android:label="@string/app_name"
             android:screenOrientation="portrait"/>

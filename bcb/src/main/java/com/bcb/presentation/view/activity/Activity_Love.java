@@ -138,7 +138,7 @@ public class Activity_Love extends Activity_Base implements AdapterView.OnItemCl
                         LoveListBean loveListBean = null;
                         //判断JSON对象是否为空
                         if (obj != null) {
-                            LogUtil.d("1234", obj.toString());
+//                            LogUtil.d("1234", obj.toString());
                             loveListBean = App.mGson.fromJson(obj.toString(), LoveListBean.class);
                         }
                         //存在产品列表

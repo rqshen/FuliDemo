@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -57,5 +58,123 @@
             android:src="@drawable/icon_privilege_info"/>
 
     </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/red"
+                android:textSize="@dimen/main_text_default"
+                android:text="￥3760"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:textSize="@dimen/item_text_small"
+                android:textColor="@color/txt_middle_gray"
+                android:text="生效中本金"/>
+
+        </LinearLayout>
+        
+        <View
+            android:layout_width="1dp"
+            android:background="@color/linegray"
+            android:layout_height="match_parent"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="7dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/red"
+                android:textSize="@dimen/main_text_default"
+                android:text="￥360"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:textSize="@dimen/item_text_small"
+                android:textColor="@color/txt_middle_gray"
+                android:text="待发收益"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout
+        android:id="@+id/refresh_view"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <!-- 下拉刷新控件-->
+        <include layout="@layout/refresh_head" />
+        <com.bcb.presentation.view.custom.PullableView.PullableScrollView
+            android:id="@+id/layout_scrollview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <com.bcb.data.util.MyListView
+                    android:id="@+id/listview_data_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:cacheColorHint="@android:color/white"
+                    android:divider="@color/background"
+                    android:dividerHeight="10dp"
+                    android:fastScrollEnabled="false"
+                    android:listSelector="@drawable/list_selector"
+                    android:scrollbars="none" />
+                <LinearLayout
+                    android:id="@+id/null_data_layout"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="84dip"
+                        android:src="@drawable/data_null" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="20dip"
+                        android:text="暂无特权本金"
+                        android:textSize="@dimen/main_text_default" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.bcb.presentation.view.custom.PullableView.PullableScrollView>
+        <!-- 上拉加载更多 -->
+        <include layout="@layout/load_more" />
+    </com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout>
 
 </LinearLayout>

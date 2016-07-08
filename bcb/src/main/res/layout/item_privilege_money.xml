@@ -14,6 +14,7 @@
         android:layout_height="wrap_content">
 
         <TextView
+            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/txt_black"
@@ -31,6 +32,7 @@
                 android:layout_height="wrap_content"
                 android:text="收益："/>
             <TextView
+                android:id="@+id/income"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/red"
@@ -54,6 +56,7 @@
                 android:layout_height="wrap_content"
                 android:text="期限："/>
             <TextView
+                android:id="@+id/term"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="2016年7月8日过期"/>
@@ -82,7 +85,5 @@
             android:singleLine="true"/>
 
     </LinearLayout>
-
-
 
 </LinearLayout>

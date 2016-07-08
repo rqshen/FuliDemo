@@ -268,13 +268,6 @@ public class Activity_LoanRequest_Job extends Activity_Base {
         personInfoBean.Email = loan_email.getText().toString();
         //公积金
         personInfoBean.FundLimit = Integer.parseInt(loan_accumulation_fund.getText().toString().equalsIgnoreCase("") ? "0" : loan_accumulation_fund.getText().toString());
-//        //暂存数据到本地
-//        Gson mGson = new Gson();
-//        (new LoanPersonalConfigUtil(this)).saveLoanPersonalMessage(mGson.toJson(personInfoBean));
-//        //跳转至资产页面
-//        Intent intent = new Intent(Activity_LoanRequest_Job.this, Activity_LoanRequest_Asset.class);
-//        intent.putExtra("personInfoBean", mGson.toJson(personInfoBean));
-//        startActivity(intent);
     }
 
     /**
