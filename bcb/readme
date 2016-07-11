@@ -6,6 +6,7 @@
  baicaibang2015@qq.com
  baicaibang123
 5关闭日志打印。
+6.打渠道包：channel.txt
 
 二、Git分支说明：
 1三个主要分支master、bcb_dev、bcb_hotfix，其他release分支是每次版本上线后的一个备份分支。
