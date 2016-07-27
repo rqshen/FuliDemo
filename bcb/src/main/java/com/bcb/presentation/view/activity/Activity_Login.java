@@ -156,10 +156,10 @@ public class Activity_Login extends Activity_Base implements Interface_Base, OnC
         intent.setAction("com.bcb.login.success");
         sendBroadcast(intent);
 
-        EventBus.getDefault().post(new BroadcastEvent(BroadcastEvent.LOGIN));
+        EventBus.getDefault().post(new BroadcastEvent(BroadcastEvent.LOGIN));//通知刷新
 
         //设置极光推送别名
-        App.getInstance().setAlias();
+//        App.getInstance().setAlias();//2016-7-26，服务器未返回任何用户信息，所以后续操作都是不需要的
 
         //获取数据库缓存数据,若有数据就显示已经缓存的数据,则不去请求
         WelfareBean welfareBean = DbUtil.getWelfare();

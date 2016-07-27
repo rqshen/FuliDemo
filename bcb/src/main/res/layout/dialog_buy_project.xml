@@ -13,7 +13,7 @@
         android:layout_marginBottom="15dip"
         android:padding="0dip"
         android:layout_above="@+id/keyboard"
-        android:background="@drawable/button_stroke_gray"
+        android:background="@drawable/bg_sel_stroke_gray"
         android:orientation="vertical" >
         <!-- 标题-->
         <RelativeLayout

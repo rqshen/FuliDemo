@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MQCustomerManager;
 import com.bcb.presentation.presenter.IPresenter_Register;
 import com.bcb.presentation.presenter.IPresenter_RegisterImpl;
@@ -477,6 +478,7 @@ public class Activity_Register_Next extends Activity_Base implements Interface_V
     @Override
     public void onRequestResult(int resultStatus, String message) {
         //不管成功或者失败，都要隐藏转圈
+		LogUtil.i("bqt","注册后返回码："+resultStatus);
         hideProgressBar();
         //成功状态
         if (resultStatus == 1) {

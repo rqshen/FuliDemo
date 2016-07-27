@@ -6,8 +6,9 @@ package com.bcb.data.bean;
  * 
  */
 public class UserDetailInfo {
-	public String RealName;
-	public String IDCard;
+//	public String RealName;
+	public String UserName;
+	public String IDCard;//身份证
 	//是否已经认证
 	public boolean HasCert;
 	//是否已经设置了交易密码
@@ -22,15 +23,17 @@ public class UserDetailInfo {
     public boolean HasInvest;
 
     //美洽ID
-    public String CustomerId;
+    public String CustomerId;//会员编号（用户极光、美洽）
+	public boolean HasOpenCustody;//是否开通托管
+	public String CustodyAccount;//托管账户
 
 
-    public String getRealName() {
-		return RealName;
+	public String getRealName() {
+		return UserName;
 	}
 
 	public void setRealName(String realName) {
-		RealName = realName;
+		UserName = realName;
 	}
 
 	public String getIDCard() {
@@ -100,7 +103,7 @@ public class UserDetailInfo {
 	@Override
 	public String toString() {
 		return "UserDetailInfo{" +
-				"RealName='" + RealName + '\'' +
+				"RealName='" + UserName + '\'' +
 				", IDCard='" + IDCard + '\'' +
 				", HasCert=" + HasCert +
 				", HasTradePassword=" + HasTradePassword +

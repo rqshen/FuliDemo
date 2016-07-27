@@ -4,7 +4,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.bcb.data.util.LogUtil;
 import com.bcb.presentation.view.activity.Activity_Main;
@@ -80,7 +79,7 @@ public class JPushReceiver extends BroadcastReceiver {
                 sb.append("\nkey:" + key + ", value:" + bundle.getBoolean(key));
             } else if (key.equals(JPushInterface.EXTRA_EXTRA)) {
                 if (bundle.getString(JPushInterface.EXTRA_EXTRA).isEmpty()) {
-                    Log.i(TAG, "This message has no Extra data");
+                    LogUtil.i(TAG, "This message has no Extra data");
                     continue;
                 }
 

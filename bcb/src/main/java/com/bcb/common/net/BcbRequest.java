@@ -22,12 +22,14 @@ import java.util.Map;
  * Created by cain on 16/4/15.
  */
 public abstract class BcbRequest<T> extends Request<T> {
-    /** Default charset for JSON request. */
+    /**
+     * Default charset for JSON request.
+     */
     protected static final String PROTOCOL_CHARSET = "utf-8";
     protected static final String CONTENT_TYPE = "application/json; charset=utf-8";
     //自定义监听器
-    private  BcbCallBack<T> mBcbCallBack;
-    private  BcbIndexCallBack<T> mBcbIndexCallBack;
+    private BcbCallBack<T> mBcbCallBack;
+    private BcbIndexCallBack<T> mBcbIndexCallBack;
 
     //Post请求的实体，如果为 null，则为GET请求，否则为POST请求
     private String mRequestBody;
@@ -40,15 +42,15 @@ public abstract class BcbRequest<T> extends Request<T> {
     private int index = -1;
 
     //是否添加设备信息
-    private boolean isAddDevInfo = false;
+    private boolean isAddDevInfo = true;
 
     /**
      * 构造函数
      *
-     * @param url           接口地址
-     * @param requestBody   请求实体
-     * @param encodeToken   已加密的token，没有就传null
-     * @param bcbCallBack   请求结果回调
+     * @param url         接口地址
+     * @param requestBody 请求实体
+     * @param encodeToken 已加密的token，没有就传null
+     * @param bcbCallBack 请求结果回调
      */
     public BcbRequest(String url, String requestBody, String encodeToken, BcbCallBack<T> bcbCallBack) {
         this(requestBody == null ? Method.GET : Method.POST, url, requestBody, encodeToken, bcbCallBack);
@@ -57,11 +59,11 @@ public abstract class BcbRequest<T> extends Request<T> {
     /**
      * 构造函数
      *
-     * @param method        请求方式
-     * @param url           请求接口
-     * @param requestBody   请求实体
-     * @param encodeToken   已加密的token，没有就传null
-     * @param bcbCallBack   请求结果回调
+     * @param method      请求方式
+     * @param url         请求接口
+     * @param requestBody 请求实体
+     * @param encodeToken 已加密的token，没有就传null
+     * @param bcbCallBack 请求结果回调
      */
     public BcbRequest(int method, String url, String requestBody, String encodeToken, final BcbCallBack bcbCallBack) {
         //将出错信息用接口保存起来
@@ -71,11 +73,11 @@ public abstract class BcbRequest<T> extends Request<T> {
                 bcbCallBack.onErrorResponse(error);
             }
         });
-        LogUtil.d("url","url = " + url + " requestBody = " + requestBody);
+        LogUtil.d("url", "url = " + url + " requestBody = " + requestBody);
         mBcbCallBack = bcbCallBack;
         if (TextUtils.isEmpty(requestBody)) {
             mRequestBody = null;
-        } else  {
+        } else {
             mRequestBody = requestBody;
         }
         mEncodeToken = encodeToken;
@@ -84,12 +86,12 @@ public abstract class BcbRequest<T> extends Request<T> {
     /**
      * 构造函数
      *
-     * @param method        请求方式
-     * @param url           请求接口
-     * @param requestBody   请求实体
-     * @param encodeToken   已加密的token，没有就传null
-     * @param isAddDevInfo  是否添加设备信息
-     * @param bcbCallBack   请求结果回调
+     * @param method       请求方式
+     * @param url          请求接口
+     * @param requestBody  请求实体
+     * @param encodeToken  已加密的token，没有就传null
+     * @param isAddDevInfo 是否添加设备信息
+     * @param bcbCallBack  请求结果回调
      */
     public BcbRequest(int method, String url, String requestBody, String encodeToken, boolean isAddDevInfo, final BcbCallBack bcbCallBack) {
         //将出错信息用接口保存起来
@@ -97,15 +99,15 @@ public abstract class BcbRequest<T> extends Request<T> {
             @Override
             public void onErrorResponse(VolleyError error) {
                 bcbCallBack.onErrorResponse(error);
-                Log.d("url","error = " + error.toString());
+                Log.d("url", "error = " + error.toString());
             }
         });
-        Log.d("url","url = " + url + " requestBody = " + requestBody);
+        Log.d("url", "url = " + url + " requestBody = " + requestBody);
 
         mBcbCallBack = bcbCallBack;
         if (TextUtils.isEmpty(requestBody)) {
             mRequestBody = null;
-        } else  {
+        } else {
             mRequestBody = requestBody;
         }
         mEncodeToken = encodeToken;
@@ -114,12 +116,13 @@ public abstract class BcbRequest<T> extends Request<T> {
 
     /**
      * 构造函数
-     * @param method    请求方式
-     * @param url       请求接口
-     * @param requestBody   请求实体，没有就传null
-     * @param encodeToken   已加密的token, 没有就传null
-     * @param index         位置参数，主要用于记录列表某个位置请求
-     * @param bcbCallBack   回调
+     *
+     * @param method      请求方式
+     * @param url         请求接口
+     * @param requestBody 请求实体，没有就传null
+     * @param encodeToken 已加密的token, 没有就传null
+     * @param index       位置参数，主要用于记录列表某个位置请求
+     * @param bcbCallBack 回调
      */
     public BcbRequest(int method, String url, String requestBody, String encodeToken, int index, final BcbIndexCallBack bcbCallBack) {
         //将出错信息用接口保存起来
@@ -129,12 +132,12 @@ public abstract class BcbRequest<T> extends Request<T> {
                 bcbCallBack.onErrorResponse(error);
             }
         });
-        Log.d("url","url = " + url + " requestBody = " + requestBody);
+        Log.d("url", "url = " + url + " requestBody = " + requestBody);
         this.index = index;
         mBcbIndexCallBack = bcbCallBack;
         if (TextUtils.isEmpty(requestBody)) {
             mRequestBody = null;
-        } else  {
+        } else {
             mRequestBody = requestBody;
         }
         mEncodeToken = encodeToken;
@@ -152,6 +155,7 @@ public abstract class BcbRequest<T> extends Request<T> {
 
     /**
      * 子类必须实现该功能，对返回的回调响应数据 response.data 进行解码转成相应类型的数据
+     *
      * @param response Response from the network
      * @return
      */
@@ -182,22 +186,30 @@ public abstract class BcbRequest<T> extends Request<T> {
 
     @Override
     public Map<String, String> getHeaders() throws AuthFailureError {
+        Map<String, String> headers = new HashMap<String, String>();
         if (mEncodeToken != null) {
-            Map<String, String> headers = new HashMap<String, String>();
-            headers.put("access-token",mEncodeToken);
-            if (isAddDevInfo){
-                headers.put("version", android.os.Build.VERSION.RELEASE);
-                headers.put("platform", "android");
-            }
-            return headers;
-        } else {
-            return super.getHeaders();
+            headers.put("access-token", mEncodeToken);
         }
+        headers.put("version", android.os.Build.VERSION.RELEASE);
+        headers.put("platform", "2");
+        return headers;
+//        if (mEncodeToken != null) {
+//            Map<String, String> headers = new HashMap<String, String>();
+//            headers.put("access-token",mEncodeToken);
+//            if (isAddDevInfo){
+//                headers.put("version", android.os.Build.VERSION.RELEASE);
+//                headers.put("platform", "android");
+//            }
+//            return headers;
+//        } else {
+//            return super.getHeaders();
+//        }
     }
 
     /**
      * 重写请求实体
-     * @return  如果存在请求的参数，则需要返回加了密的请求实体
+     *
+     * @return 如果存在请求的参数，则需要返回加了密的请求实体
      */
     @Override
     public byte[] getBody() {
@@ -224,13 +236,15 @@ public abstract class BcbRequest<T> extends Request<T> {
         return null;
     }
 
-    public interface BcbCallBack<T> {
-        void onResponse(T response);
-        void onErrorResponse(Exception error);
-    }
+public interface BcbCallBack<T> {
+    void onResponse(T response);
 
-    public interface BcbIndexCallBack<T> {
-        void onResponse(T response, int index);
-        void onErrorResponse(Exception error);
-    }
+    void onErrorResponse(Exception error);
+}
+
+public interface BcbIndexCallBack<T> {
+    void onResponse(T response, int index);
+
+    void onErrorResponse(Exception error);
+}
 }

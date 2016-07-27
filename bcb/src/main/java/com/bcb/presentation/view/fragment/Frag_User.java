@@ -29,6 +29,7 @@ import com.bcb.common.net.UrlsTwo;
 import com.bcb.data.bean.UserDetailInfo;
 import com.bcb.data.bean.UserWallet;
 import com.bcb.data.util.HttpUtils;
+import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MQCustomerManager;
 import com.bcb.data.util.PackageUtil;
 import com.bcb.data.util.ToastUtil;
@@ -131,7 +132,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 
         //加入公司
         joinCompany = (ImageView) view.findViewById(R.id.join_company);
-        joinCompany.setVisibility(View.GONE);
+//        joinCompany.setVisibility(View.GONE);
         joinCompany.setOnClickListener(this);
 
         //已经加入公司的LinearLayout及其元素
@@ -177,6 +178,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
             public void onClick(View v) {
                 showPopupWindow(false);
                 String userId = null;
+
                 //判断是否为空
                 if (App.mUserDetailInfo != null) {
                     userId = App.mUserDetailInfo.getCustomerId();
@@ -282,6 +284,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
             firstLoadWallet = false;
             requestUserWallet();
         }
+
         //如果不是第一次加载数据，则先从静态数据区中加载数据（如果存在的时候），不存在则从服务器中获取
         //这里是防止用户退出，数据清空了，然后重新登录，出现数据错误
         else {
@@ -300,10 +303,12 @@ public class Frag_User extends Frag_Base implements OnClickListener {
         BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.UserWalletMessage, null, TokenUtil.getEncodeToken(ctx), new BcbRequest.BcbCallBack<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
+                LogUtil.i("bqt", "请求用户资产账户返回：" + response.toString());
                 if (PackageUtil.getRequestStatus(response, ctx)) {
                     JSONObject data = PackageUtil.getResultObject(response);
                     //判断JSON对象是否为空
                     if (data != null) {
+                        //注意数据结构变了，2016-7-26
                         mUserWallet = App.mGson.fromJson(data.toString(), UserWallet.class);
                     }
                     if (null != mUserWallet) {
@@ -384,9 +389,9 @@ public class Frag_User extends Frag_Base implements OnClickListener {
         BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsTwo.UserBankMessage, null, TokenUtil.getEncodeToken(ctx), new BcbRequest.BcbCallBack<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
+                LogUtil.i("bqt", "用户信息返回数据：" + response.toString());
                 if (PackageUtil.getRequestStatus(response, ctx)) {
                     JSONObject data = PackageUtil.getResultObject(response);
-                    //获取用户银行卡信息
                     //判断JSON对象是否为空
                     if (data != null) {
                         mUserDetailInfo = App.mGson.fromJson(data.toString(), UserDetailInfo.class);
@@ -414,6 +419,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
     private void setupJoinCompanyMessage() {
         //如果mUserDetailInfo为空，则表示没有登陆
         if (App.mUserDetailInfo == null) {
+            LogUtil.i("bqt", "++++++没有登录");
             joinCompany.setVisibility(View.VISIBLE);
             user_company_layout.setVisibility(View.GONE);
             user_comany_shortname.setText("");
@@ -422,26 +428,26 @@ public class Frag_User extends Frag_Base implements OnClickListener {
         }
         //如果加入公司信息不为空并且状态值为10(通过)的时候，则显示用户名和加入公司的缩写
         if (App.mUserDetailInfo.MyCompany != null) {
-            joinCompany.setVisibility(View.GONE);
-            user_company_layout.setVisibility(View.VISIBLE);
             //审核通过
             if (!TextUtils.isEmpty(mUserDetailInfo.MyCompany.getShortName())){
-                user_comany_shortname.setText(mUserDetailInfo.MyCompany.getShortName());
-                user_join_name.setText(mUserDetailInfo.RealName);
-            } else {
                 joinCompany.setVisibility(View.GONE);
+                user_company_layout.setVisibility(View.VISIBLE);
+                user_comany_shortname.setText(mUserDetailInfo.MyCompany.getShortName());
+                user_join_name.setText(mUserDetailInfo.UserName);
+            } else {
+                joinCompany.setVisibility(View.VISIBLE);
                 user_company_layout.setVisibility(View.GONE);
             }
 
         }
         //如果加入公司信息为空的时候，则要判断是否要隐藏Banner
         else {
+            user_company_layout.setVisibility(View.GONE);
             //根据标志为判断是否隐藏加入公司Banner
             if (App.viewJoinBanner) {
                 joinCompany.setVisibility(View.VISIBLE);
             } else {
                 joinCompany.setVisibility(View.GONE);
-                user_company_layout.setVisibility(View.GONE);
                 user_join_name.setText("");
                 user_comany_shortname.setText("");
             }

@@ -366,7 +366,7 @@ public class Activity_Recharge_Second extends Activity_Base implements View.OnCl
 			data.put("BankCardNo", mUserDetailInfo.BankCard.CardNumber);
 			data.put("IdCardType", MyConstants.IDCARDTYPE);
 			data.put("IdCard", mUserDetailInfo.IDCard);
-			data.put("HolderName", mUserDetailInfo.RealName);
+			data.put("HolderName", mUserDetailInfo.UserName);
 			data.put("Amount", money);
 			Activity_Recharge_Confirm.launche(Activity_Recharge_Second.this, data);
 			finish();

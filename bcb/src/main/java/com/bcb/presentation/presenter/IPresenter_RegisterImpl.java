@@ -8,6 +8,7 @@ import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
 import com.bcb.common.net.UrlsOne;
+import com.bcb.data.util.LogUtil;
 import com.bcb.presentation.model.IModel_UserAccount;
 import com.bcb.presentation.model.IModel_UserAccountImpl;
 import com.bcb.presentation.view.activity_interface.Interface_Verification;
@@ -34,7 +35,7 @@ public class IPresenter_RegisterImpl implements IPresenter_Register {
         this.context = context;
         requestQueue = App.getInstance().getRequestQueue();
     }
-
+//获取验证码
     @Override
     public void getVerificaionCode(String phoneNumber) {
         //判断手机号码是否正确
@@ -47,6 +48,7 @@ public class IPresenter_RegisterImpl implements IPresenter_Register {
             BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.UserGetRegiCode, obj, null, new BcbRequest.BcbCallBack<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
+                    LogUtil.i("bqt","获取验证码返回："+response.toString());
                     try {
                         int status = response.getInt("status");
                         String message = response.getString("message");
@@ -68,18 +70,21 @@ public class IPresenter_RegisterImpl implements IPresenter_Register {
         }
     }
 
-
+//注册
     @Override
     public void doRegister(String phoneNumber, String inputPassword, String verificationCode) {
+        LogUtil.i("bqt","请求参数："+phoneNumber+"-"+inputPassword+"-"+verificationCode);
         JSONObject obj = new JSONObject();
         try {
             obj.put("Mobile",  phoneNumber);
             obj.put("VCode", verificationCode);
             obj.put("Password", inputPassword);
-            obj.put("Platform", 2);
+
             BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.UserDoRegister, obj, null, new BcbRequest.BcbCallBack<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
+                    LogUtil.i("bqt","url："+UrlsOne.UserDoRegister);
+                    LogUtil.i("bqt","注册后返回数据："+response.toString());
                     try {
                         int status = response.getInt("status");
                         String message = response.getString("message");

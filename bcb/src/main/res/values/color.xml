@@ -67,4 +67,10 @@
     <!--每日福利颜色-->
     <color name="welfare_yellow">#b06800</color>
     <color name="welfare_red">#f64333</color>
+
+    <!--2016-7-25后制定的颜色标准-->
+    <color name="blue_379bd3">#379bd3</color>
+    <color name="blue_7f379bd3">#7f379bd3</color>
+    <color name="gray_333333">#333333</color>
+    <color name="gray_7f333333">#7f333333</color>
 </resources>

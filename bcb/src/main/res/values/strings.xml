@@ -51,7 +51,7 @@
     <string name="recharge_btn">充值</string>
     <string name="withdraw_btn">提现</string>
     <string name="trading_record">投资记录</string>
-    <string name="money_flow_water">交易明细</string>
+    <string name="money_flow_water">资金流水</string>
     <string name="borrow_money">借款</string>
     <string name="coupons">优惠券</string>
     <string name="privilege_money">特权本金</string>

@@ -1,6 +1,15 @@
 package com.bcb.data.bean;
 
 public class UserWallet {
+/*
+http请求方式： POST http://ttgateway.100cb.cn/api/v2.0/a64701348128
+参数	类型	说明
+TotalAsset	float	总资产
+BalanceAmount	float	可用余额
+FreezeAmount	float	冻结金额
+LeftPrincipal	float	待收本金
+LeftInterest	float	待收利息
+ */
 
     //总资产
     public double TotalAsset;
@@ -8,30 +17,30 @@ public class UserWallet {
     //冻结金额
     public double FreezeAmount;
 
-	/**
-	 * 账户余额
-	 */
-	public double BalanceAmount;
-	/**
-	 * 待回款金额
-	 */
-	public double IncomingMoney;
-	/**
-	 * 代收本金
-	 */
-	public double LeftPrincipal;
-	/**
-	 * 代收利息
-	 */
-	public double LeftInterest;
+    /**
+     * 账户余额
+     */
+    public double BalanceAmount;
+    /**
+     * 待回款金额
+     */
+    public double IncomingMoney;
+    /**
+     * 代收本金
+     */
+    public double LeftPrincipal;
+    /**
+     * 代收利息
+     */
+    public double LeftInterest;
     /**
      * 今日收益
      */
     public double TodayInterest;
-	/**
-	 * 累计收益
-	 */
-	public double TotalInterest;
+    /**
+     * 累计收益
+     */
+    public double TotalInterest;
 
     public double getTotalAsset() {
         return TotalAsset;

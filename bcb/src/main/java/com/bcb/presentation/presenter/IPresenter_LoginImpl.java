@@ -2,16 +2,19 @@ package com.bcb.presentation.presenter;
 
 import android.content.Context;
 import android.text.TextUtils;
+
 import com.bcb.common.net.BcbJsonRequest;
 import com.bcb.common.net.BcbNetworkManager;
 import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
+import com.bcb.common.net.UrlsOne;
+import com.bcb.data.util.LogUtil;
+import com.bcb.data.util.RegexManager;
 import com.bcb.presentation.model.IModel_UserAccount;
 import com.bcb.presentation.model.IModel_UserAccountImpl;
 import com.bcb.presentation.view.activity_interface.Interface_Base;
-import com.bcb.common.net.UrlsOne;
-import com.bcb.data.util.RegexManager;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -61,6 +64,7 @@ public class IPresenter_LoginImpl implements IPresenter_Login {
             interfaceLogin.onRequestResult(1, "请输入正确的密码");
             return;
         }
+
         //缓存手机号码
         phoneNumber = name;
         //请求登录
@@ -68,8 +72,10 @@ public class IPresenter_LoginImpl implements IPresenter_Login {
         try {
             obj.put("Mobile", name);
             obj.put("Password", passwd);
-            obj.put("Platform", 2);
+//            obj.put("Platform", 2);
             BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.UserDoLogin, obj, null, jsonCallBack);
+            LogUtil.i("bqt", "请求参数：" +name+"-"+passwd);
+            LogUtil.i("bqt", "请求路径：" + UrlsOne.UserDoLogin);
             //给请求添加队列
             jsonRequest.setTag(BcbRequestTag.BCB_LOGIN_REQUEST);
             requestQueue.add(jsonRequest);
@@ -83,13 +89,15 @@ public class IPresenter_LoginImpl implements IPresenter_Login {
         public void onResponse(JSONObject response) {
             try {
                 if (response != null) {
+                    LogUtil.i("bqt", "登录后返回的数据：" + response.toString());
                     if (response.getInt("status") == 1) {
                         JSONObject result = response.getJSONObject("result");
                         if (result != null) {
                             //清除掉缓存数据
                             iModelUserAccount.clearAccount();
                             //保存账号信息
-                            iModelUserAccount.saveAccount(result.getString("Access_Token"), phoneNumber, result.toString());
+//                            iModelUserAccount.saveAccount(result.getString("Access_Token"), phoneNumber, result.toString());
+                            iModelUserAccount.saveAccessToken(result.getString("Access_Token"));//2016-7-25更改
                         }
                         //登录成功
                         interfaceLogin.onRequestResult(0, "登录成功");
