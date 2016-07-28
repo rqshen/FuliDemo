@@ -60,6 +60,7 @@ import com.bcb.presentation.view.activity.Activity_Login_Introduction;
 import com.bcb.presentation.view.activity.Activity_Love;
 import com.bcb.presentation.view.activity.Activity_Main;
 import com.bcb.presentation.view.activity.Activity_NormalProject_Introduction;
+import com.bcb.presentation.view.activity.Activity_Privilege_Money;
 import com.bcb.presentation.view.custom.CustomDialog.DialogWidget;
 import com.bcb.presentation.view.custom.CustomDialog.RegisterSuccessDialogView;
 import com.bcb.presentation.view.custom.PagerIndicator.AutoLoopViewPager;
@@ -955,6 +956,7 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPa
 
                 @Override
                 public void onSureClick() {
+                    //跳到特权本金页面！
                     dialogWidget.dismiss();
                     dialogWidget = null;
                     if (expiredRecordsBeans != null && expiredRecordsBeans.size() > 0) {
@@ -963,6 +965,7 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPa
                                 expiredRecordsBeans.get(0).getName());
                     } else {
                         ToastUtil.alert(ctx, "体验金已存入账户中心，请查看");
+                        startActivity(new Intent(ctx, Activity_Privilege_Money.class));
                     }
                 }
             }).getView());

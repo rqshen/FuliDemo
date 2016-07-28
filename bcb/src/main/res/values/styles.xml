@@ -22,7 +22,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_alignParentBottom">true</item>
         <item name="android:layout_centerHorizontal">true</item>
-        <item name="android:textSize">@dimen/main_text_rather_small</item>
+        <item name="android:textSize">12sp</item>
         <item name="android:textColor">@color/txt_gray</item>
         <item name="android:gravity">center</item>
     </style>

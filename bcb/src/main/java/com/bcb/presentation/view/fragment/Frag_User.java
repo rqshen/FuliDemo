@@ -42,6 +42,7 @@ import com.bcb.presentation.view.activity.Activity_Join_Company;
 import com.bcb.presentation.view.activity.Activity_LoanRequest_Borrow;
 import com.bcb.presentation.view.activity.Activity_Login;
 import com.bcb.presentation.view.activity.Activity_Money_Flowing_Water;
+import com.bcb.presentation.view.activity.Activity_Open_Account;
 import com.bcb.presentation.view.activity.Activity_Privilege_Money;
 import com.bcb.presentation.view.activity.Activity_Recharge_Second;
 import com.bcb.presentation.view.activity.Activity_Setting_Pay_Pwd;
@@ -57,12 +58,12 @@ import org.json.JSONObject;
 
 public class Frag_User extends Frag_Base implements OnClickListener {
     //标题
-	private TextView  title_text;
+    private TextView title_text;
 
-	private Context ctx;
-	private TextView value_earn, value_balance, value_back, value_total;
-	private UserWallet mUserWallet;
-	private UserDetailInfo mUserDetailInfo;
+    private Context ctx;
+    private TextView value_earn, value_balance, value_back, value_total;
+    private UserWallet mUserWallet;
+    private UserDetailInfo mUserDetailInfo;
 
     private boolean firstLoadWallet;
     private boolean firstLoadBankInfo;
@@ -94,29 +95,29 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 
     private BcbRequestQueue requestQueue;
 
-	public Frag_User() {
-		super();
-	}
+    public Frag_User() {
+        super();
+    }
 
     @SuppressLint("ValidFragment")
-	public Frag_User(Context ctx) {
-		super();	
-		this.ctx = ctx;
-	}
+    public Frag_User(Context ctx) {
+        super();
+        this.ctx = ctx;
+    }
 
     @Override
-    public void onCreate(Bundle savedBundle){
+    public void onCreate(Bundle savedBundle) {
         super.onCreate(savedBundle);
         firstLoadWallet = true;
-        firstLoadBankInfo =true;
+        firstLoadBankInfo = true;
         loadingStatus = true;
         loadingError = false;
     }
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.frag_user, container, false);
-	}
+    }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -253,10 +254,10 @@ public class Frag_User extends Frag_Base implements OnClickListener {
         alertView.show();
     }
 
-	@Override
-	public void onStart()  {
+    @Override
+    public void onStart() {
         super.onStart();
-		if (App.saveUserInfo.getAccess_Token() != null) {
+        if (App.saveUserInfo.getAccess_Token() != null) {
             //加载用户余额
             loadUserWallet();
             //加载用户会员银行卡信息
@@ -269,16 +270,18 @@ public class Frag_User extends Frag_Base implements OnClickListener {
             //初始化余额信息
             showData();
         }
-	}
+    }
 
     @Override
     public void onResume() {
         super.onResume();
     }
 
-    /************** 请求获取用户余额信息 *************************/
-	//加载用户余额信息
-	private void loadUserWallet() {
+    /**************
+     * 请求获取用户余额信息
+     *************************/
+    //加载用户余额信息
+    private void loadUserWallet() {
         //第一次加载Fragment的时候，要请求数据，新创建Fragment和刷新都算第一次加载
         if (firstLoadWallet) {
             firstLoadWallet = false;
@@ -297,7 +300,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
                 refreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
             }
         }
-	}
+    }
 
     private void requestUserWallet() {
         BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.UserWalletMessage, null, TokenUtil.getEncodeToken(ctx), new BcbRequest.BcbCallBack<JSONObject>() {
@@ -317,7 +320,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
                         //显示数据
                         showData();
                     }
-                }else{
+                } else {
                     value_earn.setText("0.00");
                     value_balance.setText("0.00");
                     value_back.setText("0.00");
@@ -339,8 +342,9 @@ public class Frag_User extends Frag_Base implements OnClickListener {
     }
 
     //从静态数据区中取出数据
-	private void showData() {
+    private void showData() {
         if (App.mUserDetailInfo == null) {
+
             value_earn.setText("0.00");
             value_balance.setText("0.00");
             value_back.setText("0.00");
@@ -348,7 +352,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
             return;
         }
         //总资产
-		value_earn.setText("" + String.format("%.2f", App.mUserWallet.getTotalAsset()));
+        value_earn.setText("" + String.format("%.2f", App.mUserWallet.getTotalAsset()));
         //账户余额
         if (App.mUserWallet.getBalanceAmount() <= 0) {
             value_balance.setText("0.00");
@@ -358,13 +362,15 @@ public class Frag_User extends Frag_Base implements OnClickListener {
         //待收本息
         value_back.setText("" + String.format("%.2f", App.mUserWallet.getIncomingMoney()));
         //冻结金额
-		value_total.setText("" + String.format("%.2f", App.mUserWallet.getFreezeAmount()));
-	}
+        value_total.setText("" + String.format("%.2f", App.mUserWallet.getFreezeAmount()));
+    }
 
 
-    /********************* 获取用户银行卡信息 ***************************/
+    /*********************
+     * 获取用户银行卡信息
+     ***************************/
     //获取用户银行卡信息
-	private void loadUserBankInfo() {
+    private void loadUserBankInfo() {
         //第一次加载Fragment的时候，则获取网络数据，新创建Fragment和刷新都算第一次加载
         if (firstLoadBankInfo) {
             firstLoadBankInfo = false;
@@ -383,7 +389,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
                 setupJoinCompanyMessage();
             }
         }
-	}
+    }
 
     private void requestUserBankMessage() {
         BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsTwo.UserBankMessage, null, TokenUtil.getEncodeToken(ctx), new BcbRequest.BcbCallBack<JSONObject>() {
@@ -429,7 +435,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
         //如果加入公司信息不为空并且状态值为10(通过)的时候，则显示用户名和加入公司的缩写
         if (App.mUserDetailInfo.MyCompany != null) {
             //审核通过
-            if (!TextUtils.isEmpty(mUserDetailInfo.MyCompany.getShortName())){
+            if (!TextUtils.isEmpty(mUserDetailInfo.MyCompany.getShortName())) {
                 joinCompany.setVisibility(View.GONE);
                 user_company_layout.setVisibility(View.VISIBLE);
                 user_comany_shortname.setText(mUserDetailInfo.MyCompany.getShortName());
@@ -456,14 +462,14 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 
 
     //点击事件
-	@Override
-	public void onClick(View v) {
+    @Override
+    public void onClick(View v) {
         //除了专属客服和电话客服之外的职位都要在点击之前登陆
         if (App.saveUserInfo.getAccess_Token() == null) {
             Activity_Login.launche(ctx);
             return;
         }
-		switch (v.getId()) {
+        switch (v.getId()) {
             //加入公司
             case R.id.join_company:
                 UmengUtil.eventById(ctx, R.string.self_auth_c);
@@ -525,13 +531,14 @@ public class Frag_User extends Frag_Base implements OnClickListener {
                 accountSetting();
                 break;
         }
-	}
+    }
 
     //显示冻结金额对话框
     private void showFreezeAmountDialog() {
         dialogWidget = new DialogWidget(ctx, getFreezeAmountView(), true);
         dialogWidget.show();
     }
+
     protected View getFreezeAmountView() {
         return MyMaskFullScreenView.getInstance(ctx, "冻结金额包括：提现中资金、投标中资金、借款保证金等", new MyMaskFullScreenView.OnClikListener() {
             @Override
@@ -566,7 +573,9 @@ public class Frag_User extends Frag_Base implements OnClickListener {
     }
 
 
-    /************************ 去认证 ******************************/
+    /************************
+     * 去认证
+     ******************************/
     private void popCertDialog() {
         dialogWidget = new DialogWidget(ctx, IdentifyAlertView.getInstance(ctx, new IdentifyAlertView.OnClikListener() {
             @Override
@@ -588,11 +597,14 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 
     //跳转到认证界面
     private void gotoAuthenticationActivity() {
-        Intent newIntent = new Intent(ctx, Activity_Authentication.class);
+//        Intent newIntent = new Intent(ctx, Activity_Authentication.class);
+        Intent newIntent = new Intent(ctx, Activity_Open_Account.class);
         startActivityForResult(newIntent, 10);
     }
 
-    /*************************** 审核中 *************************/
+    /***************************
+     * 审核中
+     *************************/
     private void companyAlertView(String title, String contentMessage) {
         AlertView.Builder ibuilder = new AlertView.Builder(ctx);
         ibuilder.setTitle(title);
@@ -618,9 +630,9 @@ public class Frag_User extends Frag_Base implements OnClickListener {
         }
 
         //存在用户信息
-        if(null != mUserDetailInfo){
+        if (null != mUserDetailInfo) {
             //用户还没认证时，先去认证
-            if(!App.mUserDetailInfo.HasCert || App.mUserDetailInfo.BankCard == null){
+            if (!App.mUserDetailInfo.HasCert || App.mUserDetailInfo.BankCard == null) {
                 showAlertView("提示", "您仍未认证，请先认证", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -679,9 +691,9 @@ public class Frag_User extends Frag_Base implements OnClickListener {
         }
 
         //存在用户信息
-        if(null != mUserDetailInfo){
+        if (null != mUserDetailInfo) {
             //用户还没认证时，先去认证
-            if(!App.mUserDetailInfo.HasCert || App.mUserDetailInfo.BankCard == null){
+            if (!App.mUserDetailInfo.HasCert || App.mUserDetailInfo.BankCard == null) {
                 showAlertView("提示", "您仍未认证，请先认证", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -727,9 +739,9 @@ public class Frag_User extends Frag_Base implements OnClickListener {
         Activity_Account_Setting.launche(ctx);
     }
 
-	@Override
-	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             //选择优惠券返回
             case 1:
@@ -749,7 +761,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
                 }
                 break;
         }
-	}
+    }
 
 
     //广播
@@ -785,7 +797,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
     }
 
     private void showPopupWindow(boolean visible) {
-        if (visible){
+        if (visible) {
             user_customer_tips.setVisibility(View.VISIBLE);
         } else {
             user_customer_tips.setVisibility(View.GONE);

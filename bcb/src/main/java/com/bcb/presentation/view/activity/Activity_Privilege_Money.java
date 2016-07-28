@@ -7,25 +7,40 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.bcb.R;
+import com.bcb.common.app.App;
+import com.bcb.common.net.BcbJsonRequest;
+import com.bcb.common.net.BcbRequest;
+import com.bcb.common.net.BcbRequestQueue;
+import com.bcb.common.net.BcbRequestTag;
+import com.bcb.common.net.UrlsTwo;
 import com.bcb.data.bean.PrivilegeMoneyDto;
 import com.bcb.data.util.HttpUtils;
+import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.MyListView;
+import com.bcb.data.util.PackageUtil;
 import com.bcb.data.util.ToastUtil;
+import com.bcb.data.util.TokenUtil;
 import com.bcb.presentation.adapter.PrivilegeMoneyAdapter;
 import com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Ray on 2016/7/7.
+ *
  * @desc 特权本金
  */
-public class Activity_Privilege_Money extends Activity_Base implements AdapterView.OnItemClickListener{
-
+public class Activity_Privilege_Money extends Activity_Base implements AdapterView.OnItemClickListener {
+    private BcbRequestQueue requestQueue;
     private List<PrivilegeMoneyDto> datas;
     private MyListView mListView;
     private PrivilegeMoneyAdapter myAdapter;
@@ -37,7 +52,7 @@ public class Activity_Privilege_Money extends Activity_Base implements AdapterVi
     private RelativeLayout loadmore_view;
 
 
-    public static void launch(Context context){
+    public static void launch(Context context) {
         Intent intent = new Intent(context, Activity_Privilege_Money.class);
         context.startActivity(intent);
     }
@@ -53,17 +68,17 @@ public class Activity_Privilege_Money extends Activity_Base implements AdapterVi
         setRightTitleValue("兑换", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Toast.makeText(Activity_Privilege_Money.this, "兑换", Toast.LENGTH_SHORT).show();
             }
         });
 
+        requestQueue = App.getInstance().getRequestQueue();
         ctx = this;
         datas = new ArrayList<>();
-        myAdapter = new PrivilegeMoneyAdapter(this,datas);
+        myAdapter = new PrivilegeMoneyAdapter(this, datas);
         mListView = (MyListView) findViewById(R.id.listview_data_layout);
         mListView.setOnItemClickListener(this);
         mListView.setAdapter(myAdapter);
-
         //刷新
         null_data_layout = (LinearLayout) findViewById(R.id.null_data_layout);
         loadmore_view = (RelativeLayout) findViewById(R.id.loadmore_view);
@@ -102,19 +117,51 @@ public class Activity_Privilege_Money extends Activity_Base implements AdapterVi
 
     }
 
-    private void loadData(){
+    private void loadData() {
         //测试数据
-        for (int i=0;i<10;i++){
-            PrivilegeMoneyDto dto = new PrivilegeMoneyDto();
-            dto.setTitle("10000特权本金" + i);
-            dto.setIncome(i);
-            dto.setTerm("2016年7月10日过期");
-            datas.add(dto);
-        }
-        myAdapter.notifyDataSetChanged();
-        setupListViewVisible(true);
-        refreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
-        refreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
+//        for (int i = 0; i < 10; i++) {
+//            PrivilegeMoneyDto dto = new PrivilegeMoneyDto();
+//            dto.setTitle("10000特权本金" + i);
+//            dto.setIncome(i);
+//            dto.setTerm("2016年7月10日过期");
+//            datas.add(dto);
+//        }
+
+//******************************************************************************************
+        BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsTwo.UserPrivilegeMoneyDto, null, TokenUtil.getEncodeToken(ctx), new BcbRequest.BcbCallBack<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                LogUtil.i("bqt", "用户特权金返回数据：" + response.toString());
+                if (PackageUtil.getRequestStatus(response, ctx)) {
+                    JSONObject data = PackageUtil.getResultObject(response);
+                    //判断JSON对象是否为空
+                    if (data != null) {
+                        JSONArray jsonArray = data.optJSONArray("DataList");
+                        if (jsonArray != null ) {
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                try {
+                                    JSONObject item = jsonArray.getJSONObject(i);
+                                    datas.add(App.mGson.fromJson(item.toString(), PrivilegeMoneyDto.class));
+                                }catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    }
+                    myAdapter.notifyDataSetChanged();
+                    setupListViewVisible(true);
+                    refreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
+                    refreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
+                }
+            }
+
+            @Override
+            public void onErrorResponse(Exception error) {
+
+            }
+        });
+        jsonRequest.setTag(BcbRequestTag.UserPrivilegeMoneyDtoTag);
+        requestQueue.add(jsonRequest);
     }
 
     private void setupListViewVisible(boolean status) {

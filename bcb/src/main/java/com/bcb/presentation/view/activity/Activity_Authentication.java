@@ -26,7 +26,7 @@ import com.bcb.presentation.presenter.IPresenter_AuthenticationImpl;
 import com.bcb.presentation.view.activity_interface.Interface_Authentication;
 
 /**
- * Created by cain on 15/12/15.
+ * 废弃了
  */
 public class Activity_Authentication extends Activity_Base implements Interface_Authentication, View.OnClickListener {
     private static final String TAG = "Activity_Authentication";

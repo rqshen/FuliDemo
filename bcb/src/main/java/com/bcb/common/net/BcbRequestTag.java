@@ -101,4 +101,8 @@ public interface BcbRequestTag {
     String UrlBuyProjectTag = "BcbUrlBuyProjectRequest";
     //参加每日福利
     String UrlJoinWelfareTag = "JoinWelfareRequest";
+    //特权金列表
+    String UserPrivilegeMoneyDtoTag = "UserPrivilegeMoneyRequest";
+    //激活特权金
+   String UserPrivilegeMoneyActivatedTag ="UserPrivilegeMoneyActivatedRequest";
 }
