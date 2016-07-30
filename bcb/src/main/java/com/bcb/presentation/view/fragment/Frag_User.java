@@ -47,6 +47,7 @@ import com.bcb.presentation.view.activity.Activity_Privilege_Money;
 import com.bcb.presentation.view.activity.Activity_Recharge_Second;
 import com.bcb.presentation.view.activity.Activity_Setting_Pay_Pwd;
 import com.bcb.presentation.view.activity.Activity_Trading_Record;
+import com.bcb.presentation.view.activity.Activity_TuoGuan_HF;
 import com.bcb.presentation.view.activity.Activity_Withdraw;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
 import com.bcb.presentation.view.custom.CustomDialog.DialogWidget;
@@ -374,13 +375,13 @@ public class Frag_User extends Frag_Base implements OnClickListener {
         //第一次加载Fragment的时候，则获取网络数据，新创建Fragment和刷新都算第一次加载
         if (firstLoadBankInfo) {
             firstLoadBankInfo = false;
-            requestUserBankMessage();
+            requestUserMessage();
         }
         //不是第一次记载的时候，从静态数据区获取数据
         else {
             //如果静态数据区没有数据，则请求
             if (App.mUserDetailInfo == null) {
-                requestUserBankMessage();
+                requestUserMessage();
             }
             //静态数据区存在数据，则直接赋值，不用再请求了
             else {
@@ -391,8 +392,8 @@ public class Frag_User extends Frag_Base implements OnClickListener {
         }
     }
 
-    private void requestUserBankMessage() {
-        BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsTwo.UserBankMessage, null, TokenUtil.getEncodeToken(ctx), new BcbRequest.BcbCallBack<JSONObject>() {
+    private void requestUserMessage() {
+        BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsTwo.UserMessage, null, TokenUtil.getEncodeToken(ctx), new BcbRequest.BcbCallBack<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 LogUtil.i("bqt", "用户信息返回数据：" + response.toString());
@@ -425,7 +426,6 @@ public class Frag_User extends Frag_Base implements OnClickListener {
     private void setupJoinCompanyMessage() {
         //如果mUserDetailInfo为空，则表示没有登陆
         if (App.mUserDetailInfo == null) {
-            LogUtil.i("bqt", "++++++没有登录");
             joinCompany.setVisibility(View.VISIBLE);
             user_company_layout.setVisibility(View.GONE);
             user_comany_shortname.setText("");
@@ -730,7 +730,11 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 
     //资金托管
     private void managedFunds() {
-        ToastUtil.alert(ctx, "即将上线，敬请期待");
+        if (App.mUserDetailInfo.HasOpenCustody) {//已开通托管
+            startActivity(new Intent(ctx, Activity_TuoGuan_HF.class));
+        }else {
+            startActivity(new Intent(ctx, Activity_Open_Account.class));
+        }
     }
 
     //账号设置

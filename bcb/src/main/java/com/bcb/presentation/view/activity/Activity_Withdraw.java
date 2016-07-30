@@ -345,7 +345,7 @@ public class Activity_Withdraw extends Activity_Base implements View.OnClickList
      */
 	private void loadBankInfo() {
 		showProgressBar();
-        BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsTwo.UserBankMessage, null, TokenUtil.getEncodeToken(this), new BcbRequest.BcbCallBack<JSONObject>() {
+        BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsTwo.UserMessage, null, TokenUtil.getEncodeToken(this), new BcbRequest.BcbCallBack<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 if (PackageUtil.getRequestStatus(response, Activity_Withdraw.this)) {

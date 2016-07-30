@@ -485,7 +485,7 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
         if (App.saveUserInfo.getAccess_Token() == null || App.mUserDetailInfo != null && App.mUserDetailInfo.BankCard != null) {
             return;
         } else {
-            BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsTwo.UserBankMessage, null, TokenUtil.getEncodeToken(this), new BcbRequest.BcbCallBack<JSONObject>() {
+            BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsTwo.UserMessage, null, TokenUtil.getEncodeToken(this), new BcbRequest.BcbCallBack<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
                     try {

@@ -42,7 +42,7 @@ public class IPresenter_AuthenticationImpl implements IPresenter_Authentication 
 
     @Override
     public void onUpdateUserInfo() {
-        BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsTwo.UserBankMessage, null,
+        BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsTwo.UserMessage, null,
                 TokenUtil.getEncodeToken(context), new BcbRequest.BcbCallBack<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {

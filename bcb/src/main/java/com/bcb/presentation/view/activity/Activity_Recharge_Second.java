@@ -205,7 +205,7 @@ public class Activity_Recharge_Second extends Activity_Base implements View.OnCl
 
     //获取用户银行卡信息
     private void loadUserBankData(){
-        BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsTwo.UserBankMessage, null, TokenUtil.getEncodeToken(this), new BcbRequest.BcbCallBack<JSONObject>() {
+        BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsTwo.UserMessage, null, TokenUtil.getEncodeToken(this), new BcbRequest.BcbCallBack<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 if (PackageUtil.getRequestStatus(response, Activity_Recharge_Second.this)) {

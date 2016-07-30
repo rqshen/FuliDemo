@@ -270,7 +270,7 @@ public class Activity_ExpiredProject_Introduction extends Activity_Base implemen
         if (App.saveUserInfo.getAccess_Token() == null || App.mUserDetailInfo != null && App.mUserDetailInfo.BankCard != null) {
             return;
         }
-        BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsTwo.UserBankMessage, null, TokenUtil.getEncodeToken(this), new BcbRequest.BcbCallBack<JSONObject>() {
+        BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsTwo.UserMessage, null, TokenUtil.getEncodeToken(this), new BcbRequest.BcbCallBack<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {

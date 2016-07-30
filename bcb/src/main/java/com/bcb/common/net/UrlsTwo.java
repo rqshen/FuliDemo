@@ -12,8 +12,8 @@ public class UrlsTwo {
     // 普通项目介绍
     public static String NormalProjectIntroduction = host + "/api/v1.0/9f568d457714";
 
-    // 获取银行卡信息
-    public static String UserBankMessage = host + "/api/v1.0/1337fb626563";
+    // 获取会员信息
+    public static String UserMessage = host + "/api/v2.0/a64300c7417c";
 
     //特权金列表
     public static String UserPrivilegeMoneyDto = host + "/api/v2.0/a64400ec1158";
@@ -21,6 +21,12 @@ public class UrlsTwo {
     public static String UserPrivilegeMoneyActivated = host + "/api/v2.0/a64400f4893e";
     //托管用户开户
     public static String OpenAccount = host + "/api/v2.0/a63d00c46389";
+    //托管用户登录
+    public static String LoginAccount = host + "/api/v2.0/a63d00c4eca5";
+    //托管用户信息修改
+    public static String LoginAccountAlert = host + "/api/v2.0/a644012e52bb";
+    //转发给汇付开户
+    public static String OpenAccountHF = host + "/api/v2.0/a63d00c46389";
     // 提现
     public static String UrlWithdrawals = host + "/api/v1.0/a095329ba55b";
 

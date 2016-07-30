@@ -444,7 +444,7 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
      * 获取用户银行卡信息
      *********************/
     private void loadUserDetailInfoData() {
-        BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsTwo.UserBankMessage, null, TokenUtil.getEncodeToken(this), new BcbRequest.BcbCallBack<JSONObject>() {
+        BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsTwo.UserMessage, null, TokenUtil.getEncodeToken(this), new BcbRequest.BcbCallBack<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {

@@ -463,6 +463,8 @@
 
         <activity android:name=".presentation.view.activity.Activity_Open_Account">
         </activity>
+        <activity android:name=".presentation.view.activity.Activity_TuoGuan_HF">
+        </activity>
     </application>
 
 </manifest>
