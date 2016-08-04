@@ -33,7 +33,7 @@ import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.MyConstants;
 import com.bcb.data.util.PackageUtil;
-import com.bcb.data.util.TextUtil;
+import com.bcb.data.util.MyTextUtil;
 import com.bcb.data.util.ToastUtil;
 import com.bcb.data.util.TokenUtil;
 import com.google.gson.reflect.TypeToken;
@@ -134,7 +134,7 @@ public class Activity_Recharge_Second extends Activity_Base implements View.OnCl
         if (App.mUserDetailInfo != null && App.mUserDetailInfo.BankCard != null
                 && App.mUserDetailInfo.BankCard.getCardNumber() != null) {
             mUserDetailInfo = App.mUserDetailInfo;
-            bank_card_text.setText(TextUtil.delBankNum(mUserDetailInfo.BankCard.CardNumber));
+            bank_card_text.setText(MyTextUtil.delBankNum(mUserDetailInfo.BankCard.CardNumber));
 			//加载银行卡限额数据
 			loadBankLimitData(mUserDetailInfo.BankCard.BankCode);
 			//设置银行卡logo
@@ -323,7 +323,7 @@ public class Activity_Recharge_Second extends Activity_Base implements View.OnCl
 
     //显示账号信息
 	private void showData(){
-		bank_card_text.setText(TextUtil.delBankNum(mUserDetailInfo.BankCard.CardNumber));
+		bank_card_text.setText(MyTextUtil.delBankNum(mUserDetailInfo.BankCard.CardNumber));
 		//加载银行卡限额数据
 		loadBankLimitData(mUserDetailInfo.BankCard.BankCode);
 	}

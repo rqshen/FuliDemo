@@ -2,7 +2,7 @@ package com.bcb.data.util;
 
 import java.text.DecimalFormat;
 
-public class TextUtil {
+public class MyTextUtil {
 
 	public static String delBankNum(String data){
 		if (null == data)return "";

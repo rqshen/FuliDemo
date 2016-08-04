@@ -465,6 +465,8 @@
         </activity>
         <activity android:name=".presentation.view.activity.Activity_TuoGuan_HF">
         </activity>
+        <activity android:name=".presentation.view.activity.Activity_Charge_HF">
+        </activity>
     </application>
 
 </manifest>

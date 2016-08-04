@@ -31,7 +31,7 @@ import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.PackageUtil;
 import com.bcb.data.util.RegexManager;
 import com.bcb.data.util.SystemUtil;
-import com.bcb.data.util.TextUtil;
+import com.bcb.data.util.MyTextUtil;
 import com.bcb.data.util.ToastUtil;
 import com.bcb.data.util.TokenUtil;
 import com.bcb.data.util.UmengUtil;
@@ -142,7 +142,7 @@ public class Activity_Recharge_Confirm extends Activity_Base implements View.OnC
 		recharge_amount.setText(Amount + "元");
 		//银行卡号
 		bank_card_text = (TextView) findViewById(R.id.bank_card_text);
-		bank_card_text.setText(TextUtil.delBankNum(BankCardNo));
+		bank_card_text.setText(MyTextUtil.delBankNum(BankCardNo));
         //预留手机号
         bank_card_mobile = (EditText) findViewById(R.id.bank_card_mobile);
         //如果返回的信息存在手机号码，则禁止输入

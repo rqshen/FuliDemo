@@ -33,4 +33,10 @@ public class UrlsTwo {
     // 投标
     public static String UrlBuyProject = host + "/api/v1.0/e7b238e2d3df";
 
+    //支持的银行
+    public static String UrlBanks = host + "/api/v2.0/a63e00b4e136";
+    //充值
+    public static String UrlCharge = host + "/api/v2.0/a63c00fbc64e";
+
+
 }

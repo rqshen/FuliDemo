@@ -96,8 +96,8 @@ public class IPresenter_LoginImpl implements IPresenter_Login {
                             //清除掉缓存数据
                             iModelUserAccount.clearAccount();
                             //保存账号信息
-//                            iModelUserAccount.saveAccount(result.getString("Access_Token"), phoneNumber, result.toString());
-                            iModelUserAccount.saveAccessToken(result.getString("Access_Token"));//2016-7-25更改
+                            iModelUserAccount.saveAccount(result.getString("Access_Token"), phoneNumber, result.toString());
+//                            iModelUserAccount.saveAccessToken(result.getString("Access_Token"));//2016-7-25更改
                         }
                         //登录成功
                         interfaceLogin.onRequestResult(0, "登录成功");

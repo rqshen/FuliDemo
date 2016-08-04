@@ -230,13 +230,19 @@ public class Activity_Browser extends Activity_Base {
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 LogUtil.d("url", "X5WebView click url = " + url);
                 //页面内部跳转至首页的时候，则销毁当前WebView
-                if (url.contains("fulihui:open_result")) {
+                if (url.contains("fulihui:open_result")) {//开户
                     LogUtil.i("bqt", "【Activity_Browser】【shouldOverrideUrlLoading】" + url.toString());
                     String message = url.substring(url.lastIndexOf('|'));
                     Toast.makeText(Activity_Browser.this, message, Toast.LENGTH_SHORT).show();
                     if (url.contains("000")) {
                         App.getInstance().mUserDetailInfo.HasOpenCustody = true;
                     }
+                    finish();
+                    return true;
+                } else if (url.equalsIgnoreCase("fulihui:recharge_result")) {//充值
+                    LogUtil.i("bqt", "【Activity_Browser】【shouldOverrideUrlLoading】" + url.toString());
+                    String message = url.substring(url.lastIndexOf('|'));
+                    Toast.makeText(Activity_Browser.this, message, Toast.LENGTH_SHORT).show();
                     finish();
                     return true;
                 } else if (url.equalsIgnoreCase("fulihui://joincompany")) {
@@ -336,12 +342,12 @@ public class Activity_Browser extends Activity_Base {
 
     //加入公司
     private void joinCompany() {
-        //如果未认证，则去认证
-        if (App.mUserDetailInfo == null || !App.mUserDetailInfo.HasCert) {
-            popCertDialog();
-        }
+//        //如果未认证，则去认证
+//        if (App.mUserDetailInfo == null || !App.mUserDetailInfo.HasCert) {
+//            popCertDialog();
+//        }
         //如果不存在公司信息或者状态不为10(通过审核)的时候，则跳转去加入公司页面
-        else if (App.mUserDetailInfo.MyCompany == null || App.mUserDetailInfo.MyCompany.Status != 10) {
+        if (App.mUserDetailInfo.MyCompany == null || App.mUserDetailInfo.MyCompany.Status != 10) {
             Activity_Join_Company.launche(Activity_Browser.this);
         }
     }

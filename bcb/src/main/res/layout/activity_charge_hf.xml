@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/background"
+              android:descendantFocusability="blocksDescendants"
+              android:orientation="vertical">
+    <!-- 标题 -->
+    <include layout="@layout/frag_base"/>
+
+
+    <ScrollView
+        android:id="@+id/layout_scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="#fff"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:text="账户余额："
+                    android:textColor="#999"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:id="@+id/tv_left_monery"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:text="0元"
+                    android:textColor="#db3838"
+                    android:textSize="16sp"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:gravity="center"
+                android:paddingLeft="10dp"
+                android:singleLine="true"
+                android:text="充值金额:"
+                android:textColor="#333"
+                android:textSize="16sp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="#fff"
+
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+
+                <EditText
+                    android:id="@+id/et_add_monery"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2016"
+                    android:gravity="center_vertical"
+                    android:hint="请输入充值金额"
+                    android:focusable="true"
+                    android:textColorHint="#ccc"
+                    android:inputType="number"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:text="    元    "
+
+                    android:textColor="#999"
+                    android:textSize="16sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="10dp">
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ico_withdraw_tip"/>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:text="该卡本次最多可充值1000元，每日最多2000元"
+                    android:textColor="#999"
+                    android:textSize="12sp"/>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_next"
+                android:layout_width="300dp"
+                android:layout_height="45dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/button_solid_red"
+                android:gravity="center"
+                android:text="下一步"
+                android:textColor="#fff"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:text="快捷支付银行卡将作为本账户唯一提现卡"
+                android:textColor="#39f"
+                android:textSize="12sp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="#e3e3e3"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:singleLine="true"
+
+                    android:text="支持银行列表"
+                    android:textColor="#333"
+                    android:textSize="12sp"/>
+
+                <View
+                    android:layout_width="1px"
+                    android:layout_height="20dp"
+                    android:background="#333"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:singleLine="true"
+
+                    android:text="单笔限额"
+                    android:textColor="#333"
+                    android:textSize="12sp"/>
+
+                <View
+                    android:layout_width="1px"
+                    android:layout_height="20dp"
+                    android:background="#333"/>
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:singleLine="true"
+
+                    android:text="单日限额"
+                    android:textColor="#333"
+                    android:textSize="12sp"/>
+            </LinearLayout>
+
+            <com.bcb.presentation.view.custom.MyListView
+                android:id="@+id/lv_banks"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:descendantFocusability="afterDescendants"
+                android:divider="@null"
+                android:dividerHeight="0.1dp"
+                android:listSelector="@android:color/transparent"
+                android:scrollbars="none"/>
+
+
+            <TextView
+                android:id="@+id/tv_tip_bottom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/charge_tips"
+                android:textColor="#333"
+                android:textSize="12sp"/>
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>

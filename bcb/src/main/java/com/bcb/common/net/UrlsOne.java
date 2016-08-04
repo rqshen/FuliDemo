@@ -73,7 +73,8 @@ public class UrlsOne {
     public static final String ForgetPayPwd = host + "/api/v1.0/8911a5522bec";
 
     // 获取会员信息
-    public static final String GetUserInfo = host + "/api/v1.0/1337fb626563";
+//    public static final String GetUserInfo = host + "/api/v1.0/1337fb626563";//旧接口
+    public static final String GetUserInfo = UrlsTwo.UserMessage;//2.0
 
     // 获取省份
     public static final String GetProvinceList = host + "/api/v1.0/623eee48b868";

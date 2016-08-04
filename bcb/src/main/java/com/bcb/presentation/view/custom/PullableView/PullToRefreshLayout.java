@@ -111,6 +111,11 @@ public class PullToRefreshLayout extends RelativeLayout {
 
     private Context mContext;
 
+  public  void  setPullAble(boolean down,boolean up) {
+      canPullDown=down;
+      canPullUp=up;
+    }
+
     //是否显示刷新结果
     private boolean isRefreshResultView = true;
 
@@ -511,7 +516,7 @@ public class PullToRefreshLayout extends RelativeLayout {
         // 事件分发交给父类
         try {
             super.dispatchTouchEvent(ev);
-        }catch (IllegalStateException e){
+        } catch (IllegalStateException e) {
             e.printStackTrace();
         }
         return true;

@@ -1,10 +1,10 @@
 package com.bcb.data.util;
 
+import android.text.TextUtils;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
-
-import android.text.TextUtils;
 
 public class RegexManager {
 	
@@ -64,6 +64,15 @@ public class RegexManager {
 	// 判断是否是字母
 	public static boolean isAZ(String str) {
 		return str.matches("^[a-zA-Z]*$");
+	}
+
+	// 判断是否是小写字母
+	public static boolean isAZ_small(String str) {
+		return str.matches("^[a-z]*$");
+	}
+	// 判断是否是大写字母
+	public static boolean isAZ_big(String str) {
+		return str.matches("^[A-Z]*$");
 	}
 
 	// 判断是否为数字、字母、字符等合法字符
@@ -133,5 +142,28 @@ public class RegexManager {
 		Pattern p = Pattern.compile(str);
 		Matcher m = p.matcher(email);
 		return m.matches();
+	}
+
+	/**
+	 * 检测密码包含的元素有几种
+	 * @param str	要匹配的字符串
+	 * @return	包含的元素的个数
+	 */
+	public static int getMatchNumber(String str) {
+		int matchNumber = 0;
+		int matchAZ_small = 0;
+		int matchAZ_big = 0;
+		int matchFH = 0;
+		if (Pattern.compile("\\d+").matcher(str).find()) matchNumber = 1;//包含数字
+		if (Pattern.compile("[a-z]").matcher(str).find()) matchAZ_small = 1;//包含小写字母
+		if (Pattern.compile("[A-Z]").matcher(str).find()) matchAZ_big = 1;//包含大写字母
+
+		char[] StrArray = str.toCharArray();
+		for (int i = 0; i < str.length(); i++) {
+			//判断是否是除了数字、字母外的特殊合法字符
+			if ((StrArray[i] >= 33 && StrArray[i] <= 47) || (StrArray[i] >= 58 && StrArray[i] <= 64) || (StrArray[i] >= 91 && StrArray[i] <= 96)
+					|| (StrArray[i] >= 123 && StrArray[i] <= 126)) matchFH = 1;
+		}
+		return matchNumber + matchAZ_big + matchAZ_small + matchFH;
 	}
 }

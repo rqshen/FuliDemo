@@ -38,7 +38,7 @@ import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MoneyTextUtil;
 import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.PackageUtil;
-import com.bcb.data.util.TextUtil;
+import com.bcb.data.util.MyTextUtil;
 import com.bcb.data.util.ToastUtil;
 import com.bcb.data.util.TokenUtil;
 import com.bcb.data.util.UmengUtil;
@@ -571,14 +571,14 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
     private String rewardDescription(String description, float shouyi, float jiangliamount) {
         String valueText = "";
         if (jiangliamount < 0.01) {
-            valueText = TextUtil.delFloat(shouyi) + "元";
+            valueText = MyTextUtil.delFloat(shouyi) + "元";
         } else {
             if (description != null && !description.equalsIgnoreCase("") && !description.equalsIgnoreCase("null")) {
-                valueText = TextUtil.delFloat(shouyi + jiangliamount) + "元" +
-                        "(含" + TextUtil.delFloat(jiangliamount) + "元" + "奖励)";
+                valueText = MyTextUtil.delFloat(shouyi + jiangliamount) + "元" +
+                        "(含" + MyTextUtil.delFloat(jiangliamount) + "元" + "奖励)";
             } else {
-                valueText = TextUtil.delFloat(shouyi + jiangliamount) + "元" +
-                        "(含" + TextUtil.delFloat(jiangliamount) + "元" + description + "奖励)";
+                valueText = MyTextUtil.delFloat(shouyi + jiangliamount) + "元" +
+                        "(含" + MyTextUtil.delFloat(jiangliamount) + "元" + description + "奖励)";
             }
         }
         return valueText;

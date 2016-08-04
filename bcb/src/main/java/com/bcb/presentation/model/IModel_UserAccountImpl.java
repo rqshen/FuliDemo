@@ -4,9 +4,6 @@ import android.content.Context;
 
 import com.bcb.common.app.App;
 import com.bcb.data.bean.UserDetailInfo;
-import com.bcb.data.util.DESUtil;
-import com.bcb.data.util.LogUtil;
-import com.bcb.data.util.MyConstants;
 
 /**
  * Created by cain on 16/3/18.
@@ -37,6 +34,7 @@ public class IModel_UserAccountImpl implements IModel_UserAccount {
         App.mUserDetailInfo = App.mGson.fromJson(userDetailInfo, UserDetailInfo.class);
     }
 
+
     @Override
     public void saveAccessToken(String token) {
         App.saveUserInfo.setAccess_Token(token);
@@ -60,7 +58,8 @@ public class IModel_UserAccountImpl implements IModel_UserAccount {
 
     @Override
     public boolean hasCert() {
-        return App.mUserDetailInfo.isHasCert();
+//        return App.mUserDetailInfo.isHasCert();
+        return App.mUserDetailInfo.HasOpenCustody;//更改为是否开通托管
     }
 
     @Override

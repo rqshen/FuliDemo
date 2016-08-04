@@ -18,11 +18,13 @@ public class BankLogo {
         hashmap.put("ABC", R.drawable.bank_abc);           //中国农业银行
         hashmap.put("CCB", R.drawable.bank_ccb);           //中国建设银行
         hashmap.put("BOC", R.drawable.bank_boc);          //中国银行
+
         hashmap.put("CIB", R.drawable.bank_cib);             //兴业银行
         hashmap.put("CITIC", R.drawable.bank_citic);       //中信银行
         hashmap.put("CEB", R.drawable.bank_ceb);           //光大银行
         hashmap.put("PAYH", R.drawable.bank_payh);      //平安银行
         hashmap.put("PSBC", R.drawable.bank_psbc);       //邮政储蓄银行
+
         hashmap.put("CMBC", R.drawable.bank_cmbc);    //民生银行
         hashmap.put("CGB", R.drawable.bank_cgb);          //广发银行
         hashmap.put("HXB", R.drawable.bank_hxb);          //华夏银行

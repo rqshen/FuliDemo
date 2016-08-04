@@ -31,7 +31,7 @@ import com.bcb.data.util.BankLogo;
 import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.PackageUtil;
 import com.bcb.data.util.PasswordEditText;
-import com.bcb.data.util.TextUtil;
+import com.bcb.data.util.MyTextUtil;
 import com.bcb.data.util.ToastUtil;
 import com.bcb.data.util.TokenUtil;
 import com.bcb.data.util.UmengUtil;
@@ -153,7 +153,7 @@ public class Activity_Withdraw extends Activity_Base implements View.OnClickList
 
         //设置银行卡账号，有账号信息则不用从服务器中加载数据，直接在本地静态数据区中取得
 		if (App.mUserDetailInfo.BankCard != null) {
-            bank_card_text.setText(TextUtil.delBankNum(App.mUserDetailInfo.BankCard.getCardNumber()));
+            bank_card_text.setText(MyTextUtil.delBankNum(App.mUserDetailInfo.BankCard.getCardNumber()));
 			//设置银行卡logo
 			BankLogo bankLogo = new BankLogo();
 			bank_icon.setBackgroundResource(bankLogo.getDrawableBankLogo(App.mUserDetailInfo.BankCard.getBankCode()));
@@ -406,7 +406,7 @@ public class Activity_Withdraw extends Activity_Base implements View.OnClickList
 
     //显示银行卡信息
 	private void showBankInfo(){
-		bank_card_text.setText(TextUtil.delBankNum(mUserBankInfo.BankCard.CardNumber));
+		bank_card_text.setText(MyTextUtil.delBankNum(mUserBankInfo.BankCard.CardNumber));
 		if(null != mUserBankInfo.BankCard.CityCode && null != mUserBankInfo.BankCard.CityName && 
 				null != mUserBankInfo.BankCard.ProvinceCode &&
 				null != mUserBankInfo.BankCard.ProvinceName &&

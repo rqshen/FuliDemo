@@ -10,14 +10,12 @@ import com.bcb.common.app.App;
 import com.bcb.common.net.BcbJsonRequest;
 import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.UrlsTwo;
+import com.bcb.data.util.HttpUtils;
 import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.PackageUtil;
 import com.bcb.data.util.TokenUtil;
 
-import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.Iterator;
 
 public class Activity_Open_Account extends Activity_Base implements View.OnClickListener {
     //标题
@@ -78,15 +76,14 @@ public class Activity_Open_Account extends Activity_Base implements View.OnClick
                             String postUrl = result.optString("PostUrl");
                             result.remove("PostUrl");//移除这个参数
                             //传递的 参数
-                            String postData=jsonToStr(result.toString());
+                            String postData = HttpUtils.jsonToStr(result.toString());
                             //跳转到webview
-                            Activity_Browser.launche(Activity_Open_Account.this, "汇付天下资金托管", postUrl,true,postData);
+                            Activity_Browser.launche(Activity_Open_Account.this, "汇付天下资金托管", postUrl, true, postData);
                         }
                     } catch (Exception e) {
                         LogUtil.d("bqt", "【Activity_Open_Account】【OpenAccount】" + e.getMessage());
                     }
-                }else
-                if (response!=null) {
+                } else if (response != null) {
                     Toast.makeText(Activity_Open_Account.this, response.optString("message"), Toast.LENGTH_SHORT).show();
                 }
             }
@@ -99,27 +96,4 @@ public class Activity_Open_Account extends Activity_Base implements View.OnClick
         App.getInstance().getRequestQueue().add(jsonRequest);
     }
 
-    /**
-     * 将json格式的字符串解析成http中的传递的参数
-     */
-    public static String jsonToStr(String jString) throws JSONException {
-        JSONObject jObject = new JSONObject(jString);
-        // 将json字符串转换成jsonObject
-        if (jObject != null && !jObject.equals("")) {
-            Iterator<String> it = jObject.keys();
-            StringBuilder strBuilder = new StringBuilder();
-            // 遍历JSON数据，添加到Map对象
-            while (it.hasNext()) {
-                String key = String.valueOf(it.next());
-                Object value = jObject.get(key);
-                strBuilder.append(key + "=").append(value.toString()).append("&");
-            }
-            if (strBuilder.toString().endsWith("&")) {
-                strBuilder.deleteCharAt(strBuilder.length() - 1);
-            }
-            return strBuilder.toString();
-        } else {
-            return "";
-        }
-    }
 }

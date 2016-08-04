@@ -24,7 +24,7 @@ import com.bcb.common.event.BroadcastEvent;
 import com.bcb.common.net.UrlsOne;
 import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MyActivityManager;
-import com.bcb.data.util.TextUtil;
+import com.bcb.data.util.MyTextUtil;
 import com.bcb.data.util.ToastUtil;
 import com.bcb.data.util.UmengUtil;
 import com.bcb.presentation.model.IModel_UserAccount;
@@ -179,7 +179,7 @@ public class Activity_Account_Setting extends Activity_Base implements OnClickLi
 		try {
 			String pkName = this.getPackageName();
 			String versionName = this.getPackageManager().getPackageInfo(pkName, 0).versionName;
-			version.setText("当前版本v" + versionName);
+			version.setText("版本 v" + versionName);
 		} catch (PackageManager.NameNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -292,11 +292,11 @@ public class Activity_Account_Setting extends Activity_Base implements OnClickLi
 	private void joinCompany() {
         UmengUtil.eventById(Activity_Account_Setting.this, R.string.self_auth_c2);
 		//如果未认证，则去认证
-		if (App.mUserDetailInfo == null || !App.mUserDetailInfo.HasCert) {
-			popCertDialog();
-		}
-		//否则去选择公司
-		else {
+//		if (App.mUserDetailInfo == null || !App.mUserDetailInfo.HasCert) {
+//			popCertDialog();
+//		}
+//		//否则去选择公司
+//		else {
             if (App.mUserDetailInfo.MyCompany == null) {
                 Activity_Join_Company.launche(Activity_Account_Setting.this);
             } else if (App.mUserDetailInfo.MyCompany.Status == 5) {
@@ -304,7 +304,7 @@ public class Activity_Account_Setting extends Activity_Base implements OnClickLi
             } else if (App.mUserDetailInfo.MyCompany.Status == 10) {
                 changeCompany();
             }
-		}
+//		}
 	}
 
 
@@ -413,6 +413,8 @@ public class Activity_Account_Setting extends Activity_Base implements OnClickLi
                                 String cardNumber,
                                 String localPhone,
                                 String companyMessage) {
+        LogUtil.i("bqt", "【Activity_Account_Setting】【onRequestResult】姓名" + userName);
+
         hideProgressBar();
         //显示认证状态
         certificateStatus(hasCert);
@@ -422,11 +424,11 @@ public class Activity_Account_Setting extends Activity_Base implements OnClickLi
         }
         //身份证号
         if (!TextUtils.isEmpty(IDCard)) {
-            id_card_text.setText(TextUtil.delBankNum(IDCard));
+            id_card_text.setText(MyTextUtil.delBankNum(IDCard));
         }
         //银行卡号
         if (!TextUtils.isEmpty(cardNumber)) {
-            bank_card_text.setText(TextUtil.delBankNum(cardNumber));
+            bank_card_text.setText(MyTextUtil.delBankNum(cardNumber));
         }
         //手机号
         if (!TextUtils.isEmpty(localPhone)) {

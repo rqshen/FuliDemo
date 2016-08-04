@@ -133,6 +133,7 @@
                 android:id="@+id/layout_bank_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:background="@color/white" >
 
                 <TextView
@@ -226,7 +227,7 @@
                     android:layout_marginRight="@dimen/account_setting_margin_right"
                     android:layout_centerVertical="true"
                     android:text="@string/setting_modify"
-                    android:textColor="@color/txt_gray"
+                    android:textColor="@color/blue"
                     android:textSize="@dimen/main_text_default" />
             </RelativeLayout>
 
@@ -234,7 +235,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:background="@color/linegray" />
-
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="@dimen/margin_size_default"
+                android:background="@color/linegray" />
             <!-- 加入公司 -->
             <RelativeLayout
                 android:id="@+id/layout_company"
@@ -267,7 +272,7 @@
                     android:layout_marginRight="@dimen/account_setting_margin_right"
                     android:layout_centerVertical="true"
                     android:text="@string/setting_modify"
-                    android:textColor="@color/txt_black"
+                    android:textColor="@color/blue"
                     android:textSize="@dimen/main_text_default" />
             </RelativeLayout>
 
@@ -313,8 +318,8 @@
                     android:layout_marginRight="@dimen/account_setting_margin_right"
                     android:layout_centerVertical="true"
                     android:text="@string/setting_modify"
-                    android:textColor="@color/txt_black"
-                    android:textSize="14sp" />
+                    android:textColor="@color/blue"
+                    android:textSize="15sp" />
             </RelativeLayout>
             <ImageView
                 android:layout_width="match_parent"
@@ -533,9 +538,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:text=""
+                    android:text="版本"
                     android:textColor="@color/txt_gray"
-                    android:textSize="@dimen/main_text_default"/>
+                    android:textSize="13sp"/>
             </RelativeLayout>
         </LinearLayout>
     </ScrollView>

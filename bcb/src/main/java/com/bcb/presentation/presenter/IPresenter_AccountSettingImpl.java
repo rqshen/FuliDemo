@@ -9,6 +9,7 @@ import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
 import com.bcb.common.net.UrlsOne;
+import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.TokenUtil;
 import com.bcb.presentation.model.IModel_UserAccount;
 import com.bcb.presentation.model.IModel_UserAccountImpl;
@@ -99,6 +100,8 @@ public class IPresenter_AccountSettingImpl implements IPresenter_AccountSetting 
         BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.GetUserInfo, null, TokenUtil.getEncodeToken(context), new BcbRequest.BcbCallBack<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
+                LogUtil.i("bqt", "【IPresenter_AccountSettingImpl】【onResponse】获取用户信息" + response.toString());
+
                 try{
                     int status = response.getInt("status");
                     String message = response.getString("message");
@@ -135,6 +138,7 @@ public class IPresenter_AccountSettingImpl implements IPresenter_AccountSetting 
         } else {
             companyMessage = "加入公司";
         }
+        LogUtil.i("bqt", "【Activity_Account_Setting】【onRequestResult】姓名" + iModelUserAccount.getUserName());
         //回传用户信息
         interfaceBase.onRequestResult(iModelUserAccount.hasCert(),
                 iModelUserAccount.hasTradePassword(),

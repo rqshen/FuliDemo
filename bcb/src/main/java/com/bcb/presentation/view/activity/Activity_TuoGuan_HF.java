@@ -1,5 +1,6 @@
 package com.bcb.presentation.view.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -11,14 +12,12 @@ import com.bcb.common.app.App;
 import com.bcb.common.net.BcbJsonRequest;
 import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.UrlsTwo;
+import com.bcb.data.util.HttpUtils;
 import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.PackageUtil;
 import com.bcb.data.util.TokenUtil;
 
-import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.Iterator;
 
 public class Activity_TuoGuan_HF extends Activity_Base implements View.OnClickListener {
 
@@ -74,7 +73,7 @@ public class Activity_TuoGuan_HF extends Activity_Base implements View.OnClickLi
                 finish();
                 break;
             case R.id.tv_charge:
-                Toast.makeText(Activity_TuoGuan_HF.this, "………………充值……………", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(Activity_TuoGuan_HF.this, Activity_Charge_HF.class));
                 break;
             case R.id.tv_get:
                 Toast.makeText(Activity_TuoGuan_HF.this, "………………提款……………", Toast.LENGTH_SHORT).show();
@@ -120,7 +119,7 @@ public class Activity_TuoGuan_HF extends Activity_Base implements View.OnClickLi
                             String postUrl = result.optString("PostUrl");
                             result.remove("PostUrl");//移除这个参数
                             //传递的参数
-                            String postData = jsonToStr(result.toString()); //跳转到webview
+                            String postData = HttpUtils.jsonToStr(result.toString()); //跳转到webview
                             Activity_Browser.launche(Activity_TuoGuan_HF.this, "登录汇付账户", postUrl, true, postData);
                         }
                     } catch (Exception e) {
@@ -159,7 +158,7 @@ public class Activity_TuoGuan_HF extends Activity_Base implements View.OnClickLi
                             String postUrl = result.optString("PostUrl");
                             result.remove("PostUrl");//移除这个参数
                             //传递的参数
-                            String postData = jsonToStr(result.toString()); //跳转到webview
+                            String postData = HttpUtils.jsonToStr(result.toString()); //跳转到webview
                             Activity_Browser.launche(Activity_TuoGuan_HF.this, title, postUrl, true, postData);
                         }
                     } catch (Exception e) {
@@ -176,29 +175,5 @@ public class Activity_TuoGuan_HF extends Activity_Base implements View.OnClickLi
             }
         });
         App.getInstance().getRequestQueue().add(jsonRequest);
-    }
-
-    /**
-     * 将json格式的字符串解析成http中的传递的参数
-     */
-    public static String jsonToStr(String jString) throws JSONException {
-        JSONObject jObject = new JSONObject(jString);
-        // 将json字符串转换成jsonObject
-        if (jObject != null && !jObject.equals("")) {
-            Iterator<String> it = jObject.keys();
-            StringBuilder strBuilder = new StringBuilder();
-            // 遍历JSON数据，添加到Map对象
-            while (it.hasNext()) {
-                String key = String.valueOf(it.next());
-                Object value = jObject.get(key);
-                strBuilder.append(key + "=").append(value.toString()).append("&");
-            }
-            if (strBuilder.toString().endsWith("&")) {
-                strBuilder.deleteCharAt(strBuilder.length() - 1);
-            }
-            return strBuilder.toString();
-        } else {
-            return "";
-        }
     }
 }

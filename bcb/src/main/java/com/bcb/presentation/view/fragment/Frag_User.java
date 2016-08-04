@@ -37,6 +37,7 @@ import com.bcb.data.util.TokenUtil;
 import com.bcb.data.util.UmengUtil;
 import com.bcb.presentation.view.activity.Activity_Account_Setting;
 import com.bcb.presentation.view.activity.Activity_Authentication;
+import com.bcb.presentation.view.activity.Activity_Charge_HF;
 import com.bcb.presentation.view.activity.Activity_Coupons;
 import com.bcb.presentation.view.activity.Activity_Join_Company;
 import com.bcb.presentation.view.activity.Activity_LoanRequest_Borrow;
@@ -44,11 +45,8 @@ import com.bcb.presentation.view.activity.Activity_Login;
 import com.bcb.presentation.view.activity.Activity_Money_Flowing_Water;
 import com.bcb.presentation.view.activity.Activity_Open_Account;
 import com.bcb.presentation.view.activity.Activity_Privilege_Money;
-import com.bcb.presentation.view.activity.Activity_Recharge_Second;
-import com.bcb.presentation.view.activity.Activity_Setting_Pay_Pwd;
 import com.bcb.presentation.view.activity.Activity_Trading_Record;
 import com.bcb.presentation.view.activity.Activity_TuoGuan_HF;
-import com.bcb.presentation.view.activity.Activity_Withdraw;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
 import com.bcb.presentation.view.custom.CustomDialog.DialogWidget;
 import com.bcb.presentation.view.custom.CustomDialog.IdentifyAlertView;
@@ -595,7 +593,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
         dialogWidget.show();
     }
 
-    //跳转到认证界面
+    //跳转到认证界面－－改为跳到开通汇付页面
     private void gotoAuthenticationActivity() {
 //        Intent newIntent = new Intent(ctx, Activity_Authentication.class);
         Intent newIntent = new Intent(ctx, Activity_Open_Account.class);
@@ -665,9 +663,13 @@ public class Frag_User extends Frag_Base implements OnClickListener {
         }
 
         //只有存在用户信息、有银行卡号并且已经认证三要素都满足时才去充值界面，否则先获取数据，
-        if (App.mUserDetailInfo != null && App.mUserDetailInfo.HasCert && App.mUserDetailInfo.BankCard != null) {
+
+//     if (App.mUserDetailInfo != null && App.mUserDetailInfo.HasCert && App.mUserDetailInfo.BankCard != null) {
+        if (App.mUserDetailInfo != null && App.mUserDetailInfo.HasOpenCustody) {//已开通托管
             UmengUtil.eventById(ctx, R.string.self_charge);
-            Activity_Recharge_Second.launche(ctx);
+//            Activity_Recharge_Second.launche(ctx);
+            startActivity(new Intent(ctx,Activity_Charge_HF.class));
+
         } else {
             UmengUtil.eventById(ctx, R.string.auth_act);
             gotoAuthenticationActivity();
@@ -689,33 +691,48 @@ public class Frag_User extends Frag_Base implements OnClickListener {
             }
             return;
         }
+        if (App.mUserDetailInfo == null || !App.mUserDetailInfo.HasOpenCustody) {//未开通托管
+            gotoAuthenticationActivity();
+            return;
+        }
+        //用户还没指定提现卡
+        if (!App.mUserDetailInfo.HasBindCard) {
+            showAlertView("您还没指定提现卡哦", "该银行卡将作为账户唯一充值、提现银行卡", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    startActivity(new Intent(ctx, Activity_Authentication.class));
+                    alertView.dismiss();
+                    alertView = null;
+                }
+            });
+        }
 
-        //存在用户信息
-        if (null != mUserDetailInfo) {
-            //用户还没认证时，先去认证
-            if (!App.mUserDetailInfo.HasCert || App.mUserDetailInfo.BankCard == null) {
-                showAlertView("提示", "您仍未认证，请先认证", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        startActivity(new Intent(ctx, Activity_Authentication.class));
-                        alertView.dismiss();
-                        alertView = null;
-                    }
-                });
-            }
-            //未设置交易密码，先去设置密码
-            else if (!App.mUserDetailInfo.HasTradePassword) {
-                startActivity(new Intent(ctx, Activity_Setting_Pay_Pwd.class));
-            }
-            //去提现
-            else {
-                startActivity(new Intent(ctx, Activity_Withdraw.class));
-            }
-        }
-        //不存在用户信息时，先去认证
-        else {
-            startActivity(new Intent(ctx, Activity_Authentication.class));
-        }
+//        //存在用户信息
+//        if (null != mUserDetailInfo) {
+//            //用户还没认证时，先去认证
+//            if (!App.mUserDetailInfo.HasCert || App.mUserDetailInfo.BankCard == null) {
+//                showAlertView("提示", "您仍未认证，请先认证", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        startActivity(new Intent(ctx, Activity_Authentication.class));
+//                        alertView.dismiss();
+//                        alertView = null;
+//                    }
+//                });
+//            }
+//            //未设置交易密码，先去设置密码
+//            else if (!App.mUserDetailInfo.HasTradePassword) {
+//                startActivity(new Intent(ctx, Activity_Setting_Pay_Pwd.class));
+//            }
+//            //去提现
+//            else {
+//                startActivity(new Intent(ctx, Activity_Withdraw.class));
+//            }
+//        }
+//        //不存在用户信息时，先去认证
+//        else {
+//            startActivity(new Intent(ctx, Activity_Authentication.class));
+//        }
     }
 
     //优惠券
