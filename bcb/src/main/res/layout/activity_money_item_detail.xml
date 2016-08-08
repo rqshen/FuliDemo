@@ -4,33 +4,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/background"
+    android:orientation="vertical"
     tools:context="com.bcb.presentation.view.activity.Activity_Money_Item_Detail">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@color/red">
+        android:background="@color/red"
+        android:orientation="vertical">
+
         <TextView
             android:id="@+id/value_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="@dimen/margin_size_large"
-            android:layout_marginLeft="@dimen/margin_size_rather_large"
+            android:text=""
             android:textColor="@android:color/white"
-            android:textSize="@dimen/main_text_default"
-            android:text=""/>
+            android:textSize="@dimen/main_text_default"/>
+
         <TextView
             android:id="@+id/value_amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="23dp"
             android:layout_marginBottom="35dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="23dp"
+            android:text=""
             android:textColor="@android:color/white"
-            android:textSize="35sp"
-            android:layout_marginLeft="@dimen/margin_size_rather_large"
-            android:text=""/>
+            android:textSize="35sp"/>
     </LinearLayout>
 
     <!-- 回款成功才有项目名称，所以默认隐藏 -->
@@ -38,36 +41,40 @@
         android:id="@+id/layout_project"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center_vertical"
         android:background="@android:color/white"
-        android:visibility="gone">
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        >
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
             <TextView
-                android:layout_width="93dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="18dp"
-                android:layout_marginBottom="18dp"
-                android:layout_marginLeft="@dimen/margin_size_rather_large"
+                android:layout_width="90dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:gravity="center_vertical"
+                android:text="项目名称"
                 android:textColor="@color/txt_black"
-                android:textSize="@dimen/main_text_default"
-                android:text="项目名称"/>
+                android:textSize="@dimen/main_text_default"/>
+
             <TextView
                 android:id="@+id/value_project"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
+                android:gravity="center_vertical"
+                android:text=""
                 android:textColor="#676f7b"
-                android:textSize="@dimen/main_text_default"
-                android:text=""/>
+                android:textSize="@dimen/main_text_default"/>
         </LinearLayout>
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:layout_marginLeft="@dimen/margin_size_rather_large"
+            android:layout_marginLeft="10dp"
             android:background="@color/linegray"/>
     </LinearLayout>
 
@@ -77,33 +84,76 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:background="@android:color/white"
             android:gravity="center_vertical"
-            android:background="@android:color/white">
+            android:orientation="horizontal">
+
             <TextView
-                android:layout_width="93dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="18dp"
-                android:layout_marginBottom="18dp"
-                android:layout_marginLeft="@dimen/margin_size_rather_large"
+                android:layout_width="90dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:gravity="center_vertical"
+                android:text="订单号"
                 android:textColor="@color/txt_black"
-                android:textSize="@dimen/main_text_default"
-                android:text="订单号"/>
+                android:textSize="@dimen/main_text_default"/>
+
             <TextView
                 android:id="@+id/value_transno"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
+                android:gravity="center_vertical"
+                android:text=""
                 android:textColor="#676f7b"
-                android:textSize="@dimen/main_text_default"
-                android:text=""/>
+                android:textSize="@dimen/main_text_default"/>
         </LinearLayout>
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:layout_marginLeft="@dimen/margin_size_rather_large"
+            android:layout_marginLeft="10dp"
+            android:background="@color/linegray"/>
+    </LinearLayout>
+
+    <!-- 订单金额 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="90dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:gravity="center_vertical"
+                android:text="订单金额"
+                android:textColor="@color/txt_black"
+                android:textSize="@dimen/main_text_default"/>
+
+            <TextView
+                android:id="@+id/tv_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:gravity="center_vertical"
+                android:text=""
+                android:textColor="#676f7b"
+                android:textSize="@dimen/main_text_default"/>
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginLeft="10dp"
             android:background="@color/linegray"/>
     </LinearLayout>
 
@@ -112,36 +162,40 @@
         android:id="@+id/layout_trans_amount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:background="@android:color/white"
         android:gravity="center_vertical"
-        android:background="@android:color/white">
+        android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/title_trans_amount"
-                android:layout_width="93dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="18dp"
-                android:layout_marginBottom="18dp"
-                android:layout_marginLeft="@dimen/margin_size_rather_large"
+                android:layout_width="90dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:gravity="center_vertical"
+                android:text="提现券"
                 android:textColor="@color/txt_black"
-                android:textSize="@dimen/main_text_default"
-                android:text="提现券"/>
+                android:textSize="@dimen/main_text_default"/>
+
             <TextView
                 android:id="@+id/value_trans_amount"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
+                android:gravity="center_vertical"
+                android:text=""
                 android:textColor="#676f7b"
-                android:textSize="@dimen/main_text_default"
-                android:text=""/>
+                android:textSize="@dimen/main_text_default"/>
         </LinearLayout>
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:layout_marginLeft="@dimen/margin_size_rather_large"
+            android:layout_marginLeft="10dp"
             android:background="@color/linegray"/>
     </LinearLayout>
 
@@ -150,36 +204,40 @@
         android:id="@+id/layout_service"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:background="@android:color/white"
         android:gravity="center_vertical"
-        android:background="@android:color/white">
+        android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
             <TextView
                 android:id="@+id/title_service"
-                android:layout_width="93dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="18dp"
-                android:layout_marginBottom="18dp"
-                android:layout_marginLeft="@dimen/margin_size_rather_large"
+                android:layout_width="90dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:gravity="center_vertical"
+                android:text="提现手续费"
                 android:textColor="@color/txt_black"
-                android:textSize="@dimen/main_text_default"
-                android:text="提现手续费"/>
+                android:textSize="@dimen/main_text_default"/>
+
             <TextView
                 android:id="@+id/value_service"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
+                android:gravity="center_vertical"
+                android:text=""
                 android:textColor="#676f7b"
-                android:textSize="@dimen/main_text_default"
-                android:text=""/>
+                android:textSize="@dimen/main_text_default"/>
         </LinearLayout>
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:layout_marginLeft="@dimen/margin_size_rather_large"
+            android:layout_marginLeft="10dp"
             android:background="@color/linegray"/>
     </LinearLayout>
 
@@ -187,52 +245,59 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:background="@android:color/white"
         android:gravity="center_vertical"
-        android:background="@android:color/white">
+        android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
             <TextView
-                android:layout_width="93dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="18dp"
-                android:layout_marginBottom="18dp"
-                android:layout_marginLeft="@dimen/margin_size_rather_large"
+                android:layout_width="90dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:gravity="center_vertical"
+                android:text="订单时间"
                 android:textColor="@color/txt_black"
-                android:textSize="@dimen/main_text_default"
-                android:text="订单时间"/>
+                android:textSize="@dimen/main_text_default"/>
+
             <TextView
                 android:id="@+id/value_time"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
+                android:gravity="center_vertical"
+                android:text=""
                 android:textColor="#676f7b"
-                android:textSize="@dimen/main_text_default"
-                android:text=""/>
+                android:textSize="@dimen/main_text_default"/>
         </LinearLayout>
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:background="@color/linegray"/>
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="23dp"
         android:layout_gravity="center_horizontal"
+        android:layout_marginTop="23dp"
         android:orientation="horizontal">
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/money_item_detail_phone"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:textSize="@dimen/main_text_small"
+            android:text="联系客服：020-38476886"
             android:textColor="@color/txt_gray"
-            android:text="联系客服：020-38476886"/>
+            android:textSize="@dimen/main_text_small"/>
     </LinearLayout>
 </LinearLayout>

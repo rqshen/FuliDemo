@@ -9,11 +9,12 @@ package com.bcb.data.bean;
 
 public class UserBankCard {
 
-	public String RealName;
-	public String BankCardId;
 	public String BankCode;
 	public String BankName;
 	public String CardNumber;
+
+	public String RealName;
+	public String BankCardId;
 	public String CardMobile;
 	public String ProvinceCode;
 	public String ProvinceName;

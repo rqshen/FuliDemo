@@ -379,7 +379,7 @@ public class Activity_ExpiredProject_Introduction extends Activity_Base implemen
             return;
         }
         //如果没有认证则跳转至认证界面
-        if (App.mUserDetailInfo == null ||  !App.mUserDetailInfo.HasCert || !App.mUserDetailInfo.HasBindCard) {
+        if (App.mUserDetailInfo == null ||  !App.mUserDetailInfo.HasCert || App.mUserDetailInfo.BankCard==null) {
             identifyPageTips();
             return;
         }

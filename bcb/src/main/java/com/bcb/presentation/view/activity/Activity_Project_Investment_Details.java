@@ -30,14 +30,14 @@ public class Activity_Project_Investment_Details extends Activity_Base {
 	
 	private static final String TAG = "Activity_Project_Investment_Details";
 	private String OrderNo;
-    private TextView amount,decimal;//投标金额整数及小数
+    private TextView amount,income,tv_away;//投标金额，收益，转让
 	private TextView name;//项目名称
-	private TextView expected_earning;//预期收益
-	private TextView bidding_time;//投资时间
-	private TextView financing_amount;//融资金额
-	private TextView annual_yield;//年化收益率
-	private TextView earnings_beginning;//项目起利期
-	private TextView earnings_end;//项目到期日
+	private TextView bidding_time;//加入时间
+    private TextView earnings_end;//封闭期
+    private TextView expected_earning;//预期收益
+    private TextView earnings_beginning;//项目起利期
+    private TextView financing_amount;//融资金额
+    private TextView annual_yield;//年化收益率
 
     private ImageView image_view;
 
@@ -67,7 +67,8 @@ public class Activity_Project_Investment_Details extends Activity_Base {
 	private void init() {
 		OrderNo = getIntent().getStringExtra("OrderNo");
         amount = (TextView) findViewById(R.id.amount);
-        decimal = (TextView) findViewById(R.id.decimal);
+        income = (TextView) findViewById(R.id.income);
+        tv_away = (TextView) findViewById(R.id.tv_away);
 		name = (TextView) findViewById(R.id.name);
 		expected_earning = (TextView) findViewById(R.id.expected_earning);
 		bidding_time = (TextView) findViewById(R.id.bidding_time);
@@ -113,6 +114,8 @@ public class Activity_Project_Investment_Details extends Activity_Base {
         BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.TradingRecordDetail, obj, TokenUtil.getEncodeToken(this), new BcbRequest.BcbCallBack<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
+                LogUtil.i("bqt", "【Activity_Project_Investment_Details】【onResponse】投资详情" + response.toString());
+
                 try {
                     boolean flag = PackageUtil.getRequestStatus(response, Activity_Project_Investment_Details.this);
                     if(flag){
@@ -122,30 +125,30 @@ public class Activity_Project_Investment_Details extends Activity_Base {
                             bean = App.mGson.fromJson(obj.toString(), Project_Investment_Details_Bean.class);
                         }
                         if (null != bean) {
-                            name.setText(bean.getPackageName());
-                            //投资金额截取整数跟小数，size设计不一样
-                            String[] moneys = String.format("%.2f", bean.getOrderAmount()).split("\\.");
-                            amount.setText("-" + moneys[0]);
-                            decimal.setText("." + moneys[1]);
+                            //投资金额
+                            amount.setText(String.format("%.2f", bean.getOrderAmount()));
+                            income.setText(String.format("%.2f", bean.getInterest()));
+                            tv_away.setText(bean.getEndDate()+"后可申请转退出，满期收益"+String.format("%.2f", bean.getTotalInterest())+"元");
 
+                            name.setText(bean.getPackageName());
                             bidding_time.setText(TextUtils.isEmpty(bean.getPayTime()) ? "" : bean.getPayTime() );
-                            financing_amount.setText(bean.getAmountTotal() > 0 ? String.format("%.2f元", bean.getAmountTotal()) : "0元");
+//                            financing_amount.setText(bean.getAmountTotal() > 0 ? String.format("%.2f元", bean.getAmountTotal()) : "0元");
                             //预期收益还要加上奖励
-                            String expectMoney = bean.getInterestAmount() > 0 ? String.format("%.2f元", bean.getInterestAmount()) + "" : "0元"
-                                    + (bean.getRewardAmount() > 0 ? "(含" + String.format("%.2f", bean.getRewardAmount()) + "元奖励)" : "");
-                            //年化收益率要加上奖励
-                            String annualRate = (bean.getRate() > 0 ? String.format("%.2f", bean.getRate()) + "%" : "0")
-                                    + (bean.getRewardRate() > 0 ? "(含" + String.format("%.2f", bean.getRewardRate()) + "%奖励)" : "");
-                            if (bean.getRewardRateDescn() != null && !bean.getRewardRateDescn().equalsIgnoreCase("null") && !bean.getRewardRateDescn().equalsIgnoreCase("")) {
-                                annualRate = (bean.getRate() > 0 ? bean.getRate()+ "%" : "0") +
-                                        (bean.getRewardRate() > 0 ? "(含" + bean.getRewardRate() + "%" + bean.getRewardRateDescn() + "奖励)" : "");
-                                expectMoney = bean.getInterestAmount() > 0 ? String.format("%.2f元", bean.getInterestAmount()) + "" : "0元"
-                                        + (bean.getRewardAmount() > 0 ? "(含" + String.format("%.2f", bean.getRewardAmount()) + "元"+ bean.getRewardRateDescn() +"奖励)" : "");
-                            }
-                            expected_earning.setText(expectMoney);
-                            annual_yield.setText(annualRate);
-                            earnings_beginning.setText(TextUtils.isEmpty(bean.getAuditTime()) ? "" : bean.getAuditTime() );
-                            earnings_end.setText(TextUtils.isEmpty(bean.getPayEndDate()) ? "" : bean.getPayEndDate());
+//                            String expectMoney = bean.getInterestAmount() > 0 ? String.format("%.2f元", bean.getInterestAmount()) + "" : "0元"
+//                                    + (bean.getRewardAmount() > 0 ? "(含" + String.format("%.2f", bean.getRewardAmount()) + "元奖励)" : "");
+//                            //年化收益率要加上奖励
+//                            String annualRate = (bean.getRate() > 0 ? String.format("%.2f", bean.getRate()) + "%" : "0")
+//                                    + (bean.getRewardRate() > 0 ? "(含" + String.format("%.2f", bean.getRewardRate()) + "%奖励)" : "");
+//                            if (bean.getRewardRateDescn() != null && !bean.getRewardRateDescn().equalsIgnoreCase("null") && !bean.getRewardRateDescn().equalsIgnoreCase("")) {
+//                                annualRate = (bean.getRate() > 0 ? bean.getRate()+ "%" : "0") +
+//                                        (bean.getRewardRate() > 0 ? "(含" + bean.getRewardRate() + "%" + bean.getRewardRateDescn() + "奖励)" : "");
+//                                expectMoney = bean.getInterestAmount() > 0 ? String.format("%.2f元", bean.getInterestAmount()) + "" : "0元"
+//                                        + (bean.getRewardAmount() > 0 ? "(含" + String.format("%.2f", bean.getRewardAmount()) + "元"+ bean.getRewardRateDescn() +"奖励)" : "");
+//                            }
+                            earnings_end.setText(bean.getPeriod()+"个月");
+                            expected_earning.setText("¥"+String.format("%.2f", bean.getPreInterest())+"起");
+                            earnings_beginning.setText(bean.getInterestTakeDate() );
+                            annual_yield.setText(String.format("%.2f", bean.getRate())+"%");
 
                         } else {
                             LogUtil.e(TAG, "请求项目详情出现错误");

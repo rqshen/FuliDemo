@@ -3,11 +3,9 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:background="@color/background"
-              android:descendantFocusability="blocksDescendants"
               android:orientation="vertical">
     <!-- 标题 -->
     <include layout="@layout/frag_base"/>
-
 
     <ScrollView
         android:id="@+id/layout_scrollview"
@@ -58,37 +56,38 @@
                 android:textColor="#333"
                 android:textSize="16sp"/>
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="wrap_content"
                 android:background="#fff"
+                >
+                <TextView
+                    android:id="@+id/danwei"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="50dp"
+                    android:layout_height="45dp"
+                    android:gravity="center"
 
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
+                    android:text=" 元 "
+
+                    android:textColor="#999"
+                    android:textSize="16sp"/>
 
 
                 <EditText
                     android:id="@+id/et_add_monery"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2016"
+                    android:layout_toLeftOf="@+id/danwei"
+                    android:layout_height="45dp"
                     android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
                     android:hint="请输入充值金额"
                     android:focusable="true"
                     android:textColorHint="#ccc"
                     android:inputType="number"
                     android:textSize="16sp"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:singleLine="true"
-                    android:text="    元    "
-
-                    android:textColor="#999"
-                    android:textSize="16sp"/>
-            </LinearLayout>
+            </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"

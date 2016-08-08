@@ -85,14 +85,14 @@ public class ProductAdapter extends BaseAdapter {
 
 	//设置ViewHolder数据
 	private void setDataWithViewHolder(ViewHolder viewHolder, int pos) {
-		viewHolder.name.setText(data.get(pos).getName());
-		viewHolder.rate.setText(String.valueOf(data.get(pos).getRate() + data.get(pos).getRewardRate()));
+		viewHolder.name.setText(data.get(pos).Name);
+		viewHolder.rate.setText(String.valueOf(data.get(pos).Rate ));//+ data.get(pos).RewardRate
 		//福袋利率
 		String welfareRate = TextUtils.isEmpty(App.getInstance().getWelfare()) ? "" : "+" + App.getInstance().getWelfare() + "%";
 		viewHolder.fukubukuro_rate.setText(welfareRate);
-        viewHolder.duration.setText(String.valueOf(data.get(pos).getDuration()));
+        viewHolder.duration.setText(String.valueOf(data.get(pos).Duration));
 		//天标月标
-		switch (data.get(pos).getDurationExchangeType()) {
+		switch (data.get(pos).DurationExchangeType) {
 			case 1:
 				viewHolder.duration_description.setText("天");
 				break;
@@ -103,7 +103,7 @@ public class ProductAdapter extends BaseAdapter {
 				viewHolder.duration.setText("");
 				break;
 		}
-		viewHolder.amountBalance.setText((int)data.get(pos).getAmountBalance() + " 元" );
+		viewHolder.amountBalance.setText((int)data.get(pos).Balance + " 元" );
 		//是否显示新标预告
 		if (isNewProduct) {
 			viewHolder.newProductIndicator.setVisibility(View.VISIBLE);
@@ -112,12 +112,12 @@ public class ProductAdapter extends BaseAdapter {
 			viewHolder.newProductIndicator.setVisibility(View.GONE);
 		}
         //百分比
-        float percent = (100 - 100 * (data.get(pos).getAmountBalance()/data.get(pos).getAmountTotal()));
-		if (data.get(pos).getAmountBalance() <= 0) {
+        float percent = (100 - 100 * (data.get(pos).Balance/data.get(pos).Amount));
+		if (data.get(pos).Balance <= 0) {
 			viewHolder.valuePercent.setText("售罄");
 			viewHolder.progressPercent.setProgressDrawable(ctx.getResources().getDrawable(R.drawable.item_progress_gray));
 		} else {
-			viewHolder.valuePercent.setText(String.format("%.1f", percent) + "%");
+			viewHolder.valuePercent.setText(String.format("%.2f", percent) + "%");
 			viewHolder.progressPercent.setProgressDrawable(ctx.getResources().getDrawable(R.drawable.item_progress_orange));
 		}
         viewHolder.progressPercent.setProgress((int) percent);

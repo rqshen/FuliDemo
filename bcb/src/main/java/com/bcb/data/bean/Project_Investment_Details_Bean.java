@@ -2,24 +2,31 @@ package com.bcb.data.bean;
 
 public class Project_Investment_Details_Bean {
 
-	private float OrderAmount;
-	private String OrderStatus;
-	private String StatusRemark;
-	private String PackageId;
-	private String PackageName;
-	private int PackageStatus;
-	private String PayTime;
-	private float Rate;
-	private float RewardRate;
-	private String RewardRateDescn;
-	private float AmountTotal;
-	private String AuditTime;
-	private int Duration;
-	private String PayEndDate;
-	private float InterestAmount;
-	private float RewardAmount;
-	private String PackageType;
-	private String DiscountDescn;
+	/**
+	 * OrderAmount : 100
+	 * Interest : 14.79
+	 * EndDate : 2016-07-27
+	 * TotalInterest : 20.0
+	 * PayTime : 2016-07-27 13:57:31
+	 * PackageName : 产品部卢先生的首付借款
+	 * Period : 3
+	 * PreInterest : 18.0
+	 * InterestTakeDate : “2016-07-29”
+	 * Rate : 12
+	 * Status : “投资成功”
+	 */
+
+	private float OrderAmount;//在投本金
+	private float Interest;//已获收益
+	private String EndDate;//到期时间
+	private float TotalInterest;//满期收益
+	private String PayTime;//项目名称
+	private String PackageName;//加入时间
+	private int Period;//封闭期
+	private float PreInterest;//预期收益
+	private String InterestTakeDate;//起息日期
+	private float Rate;//年化利率
+	private String Status;//状态
 
 	public float getOrderAmount() {
 		return OrderAmount;
@@ -29,44 +36,28 @@ public class Project_Investment_Details_Bean {
 		OrderAmount = orderAmount;
 	}
 
-	public String getOrderStatus() {
-		return OrderStatus;
+	public float getInterest() {
+		return Interest;
 	}
 
-	public void setOrderStatus(String orderStatus) {
-		OrderStatus = orderStatus;
+	public void setInterest(float interest) {
+		Interest = interest;
 	}
 
-	public String getStatusRemark() {
-		return StatusRemark;
+	public String getEndDate() {
+		return EndDate;
 	}
 
-	public void setStatusRemark(String statusRemark) {
-		StatusRemark = statusRemark;
+	public void setEndDate(String endDate) {
+		EndDate = endDate;
 	}
 
-	public String getPackageId() {
-		return PackageId;
+	public float getTotalInterest() {
+		return TotalInterest;
 	}
 
-	public void setPackageId(String packageId) {
-		PackageId = packageId;
-	}
-
-	public String getPackageName() {
-		return PackageName;
-	}
-
-	public void setPackageName(String packageName) {
-		PackageName = packageName;
-	}
-
-	public int getPackageStatus() {
-		return PackageStatus;
-	}
-
-	public void setPackageStatus(int packageStatus) {
-		PackageStatus = packageStatus;
+	public void setTotalInterest(float totalInterest) {
+		TotalInterest = totalInterest;
 	}
 
 	public String getPayTime() {
@@ -77,6 +68,38 @@ public class Project_Investment_Details_Bean {
 		PayTime = payTime;
 	}
 
+	public String getPackageName() {
+		return PackageName;
+	}
+
+	public void setPackageName(String packageName) {
+		PackageName = packageName;
+	}
+
+	public int getPeriod() {
+		return Period;
+	}
+
+	public void setPeriod(int period) {
+		Period = period;
+	}
+
+	public float getPreInterest() {
+		return PreInterest;
+	}
+
+	public void setPreInterest(float preInterest) {
+		PreInterest = preInterest;
+	}
+
+	public String getInterestTakeDate() {
+		return InterestTakeDate;
+	}
+
+	public void setInterestTakeDate(String interestTakeDate) {
+		InterestTakeDate = interestTakeDate;
+	}
+
 	public float getRate() {
 		return Rate;
 	}
@@ -85,84 +108,11 @@ public class Project_Investment_Details_Bean {
 		Rate = rate;
 	}
 
-	public float getRewardRate() {
-		return RewardRate;
+	public String getStatus() {
+		return Status;
 	}
 
-	public void setRewardRate(float rewardRate) {
-		RewardRate = rewardRate;
+	public void setStatus(String status) {
+		Status = status;
 	}
-
-	public String getRewardRateDescn() {
-		return RewardRateDescn;
-	}
-
-	public void setRewardRateDescn(String rewardRateDescn) {
-		RewardRateDescn = rewardRateDescn;
-	}
-
-	public float getAmountTotal() {
-		return AmountTotal;
-	}
-
-	public void setAmountTotal(float amountTotal) {
-		AmountTotal = amountTotal;
-	}
-
-	public String getAuditTime() {
-		return AuditTime;
-	}
-
-	public void setAuditTime(String auditTime) {
-		AuditTime = auditTime;
-	}
-
-	public int getDuration() {
-		return Duration;
-	}
-
-	public void setDuration(int duration) {
-		Duration = duration;
-	}
-
-	public String getPayEndDate() {
-		return PayEndDate;
-	}
-
-	public void setPayEndDate(String payEndDate) {
-		PayEndDate = payEndDate;
-	}
-
-	public float getInterestAmount() {
-		return InterestAmount;
-	}
-
-	public void setInterestAmount(float interestAmount) {
-		InterestAmount = interestAmount;
-	}
-
-	public float getRewardAmount() {
-		return RewardAmount;
-	}
-
-	public void setRewardAmount(float rewardAmount) {
-		RewardAmount = rewardAmount;
-	}
-
-	public String getPackageType() {
-		return PackageType;
-	}
-
-	public void setPackageType(String packageType) {
-		PackageType = packageType;
-	}
-
-	public String getDiscountDescn() {
-		return DiscountDescn;
-	}
-
-	public void setDiscountDescn(String discountDescn) {
-		DiscountDescn = discountDescn;
-	}
-
 }

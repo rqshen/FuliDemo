@@ -10,7 +10,8 @@ public class UrlsTwo {
     public static String ExpiredProjectIntroduction = host + "/api/v1.0/df76208580b6";
 
     // 普通项目介绍
-    public static String NormalProjectIntroduction = host + "/api/v1.0/9f568d457714";
+//    public static String NormalProjectIntroduction = host + "/api/v1.0/9f568d457714";
+    public static String NormalProjectIntroduction = host + "/api/v2.0/a64b0102ddbd";
 
     // 获取会员信息
     public static String UserMessage = host + "/api/v2.0/a64300c7417c";
@@ -29,6 +30,8 @@ public class UrlsTwo {
     public static String OpenAccountHF = host + "/api/v2.0/a63d00c46389";
     // 提现
     public static String UrlWithdrawals = host + "/api/v1.0/a095329ba55b";
+    // 提现
+    public static String UrlTX_HF = host + "/api/v2.0/a63c0105dc1f";
 
     // 投标
     public static String UrlBuyProject = host + "/api/v1.0/e7b238e2d3df";
@@ -37,6 +40,10 @@ public class UrlsTwo {
     public static String UrlBanks = host + "/api/v2.0/a63e00b4e136";
     //充值
     public static String UrlCharge = host + "/api/v2.0/a63c00fbc64e";
+    //绑定提现卡
+    public static String UrlBandCard = host + "/api/v2.0/a63d00c46c0d";
+    //用户银行卡
+    public static String UrlUserBand = host + "/api/v2.0/a648009fe9f5";
 
 
 }

@@ -12,7 +12,7 @@ public class MoneyRepaymentDetail implements Serializable {
     public float  Interest;   //利息金额
     public String PayDate;  //回款时间
     public int Period;  //回款期数
-    public float ServiceFeeAmount; //信息服务费
+//    public float ServiceFeeAmount; //信息服务费
 
     public float getPrincipal() {
         return Principal;
@@ -54,11 +54,11 @@ public class MoneyRepaymentDetail implements Serializable {
         Period = period;
     }
 
-    public float getServiceFeeAmount() {
-        return ServiceFeeAmount;
-    }
-
-    public void setServiceFeeAmount(float serviceFeeAmount) {
-        ServiceFeeAmount = serviceFeeAmount;
-    }
+//    public float getServiceFeeAmount() {
+//        return ServiceFeeAmount;
+//    }
+//
+//    public void setServiceFeeAmount(float serviceFeeAmount) {
+//        ServiceFeeAmount = serviceFeeAmount;
+//    }
 }

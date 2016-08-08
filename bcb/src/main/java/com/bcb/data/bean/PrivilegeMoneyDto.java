@@ -8,67 +8,11 @@ package com.bcb.data.bean;
 public class PrivilegeMoneyDto {
 
 
-    private String GoldNo;
-    private float Amount;
-    private float Income;
-    private float Rate;
-    private int Days;
-    private String ExpireDate;
-    private int Status;
-
-    public String getGoldNo() {
-        return GoldNo;
-    }
-
-    public void setGoldNo(String GoldNo) {
-        this.GoldNo = GoldNo;
-    }
-
-    public float getAmount() {
-        return Amount;
-    }
-
-    public void setAmount(float Amount) {
-        this.Amount = Amount;
-    }
-
-    public float getIncome() {
-        return Income;
-    }
-
-    public void setIncome(float Income) {
-        this.Income = Income;
-    }
-
-    public float getRate() {
-        return Rate;
-    }
-
-    public void setRate(float Rate) {
-        this.Rate = Rate;
-    }
-
-    public int getDays() {
-        return Days;
-    }
-
-    public void setDays(int Days) {
-        this.Days = Days;
-    }
-
-    public String getExpireDate() {
-        return ExpireDate;
-    }
-
-    public void setExpireDate(String ExpireDate) {
-        this.ExpireDate = ExpireDate;
-    }
-
-    public int getStatus() {
-        return Status;
-    }
-
-    public void setStatus(int Status) {
-        this.Status = Status;
-    }
+    public String GoldNo;//特权金编号
+    public float Amount;//金额
+    public float Income;//预期收益
+    public float Rate;//利率
+    public int Days;//天数
+    public String ExpireDate;//失效日期
+    public int Status;//状态（未使用 = 0,收益中 = 1,已使用 = 2,已过期 = 3）
 }

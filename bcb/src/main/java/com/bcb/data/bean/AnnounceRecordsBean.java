@@ -8,9 +8,9 @@ import java.io.Serializable;
 public class AnnounceRecordsBean implements Serializable {
     public String PackageId;        //项目Id
     public String Name;             //项目名称
+    public float Rate;  //年化利率
     public int Duration;            //融资期限
     public int DurationExchangeType;//天标月标
-    public float Rate;  //年化利率
     public float Amount;    //总金额
     public String Source;   //来源
     public int PredictCount;    //预约人数

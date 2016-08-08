@@ -39,11 +39,12 @@
                             android:id="@+id/wallet_money"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginRight="80dip"
+                            android:layout_marginRight="45dip"
                             android:textSize="@dimen/main_text_default"
+                            android:gravity="right"
                             android:textColorHint="@color/txt_gray"
-                            android:hint="请登录查看余额信息"
-                            android:textColor="@color/txt_gray"/>
+                            android:text="0.00"
+                            android:textColor="@color/red"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -59,6 +60,7 @@
                             android:layout_height="wrap_content"
                             android:text="充值"
                             android:textSize="@dimen/main_text_default"
+                            android:visibility="gone"
                             android:textColor="@color/txt_gray"/>
                         <ImageView
                             style="@style/forward_default" />
@@ -94,6 +96,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginRight="45dip"
                             android:textColor="@color/txt_gray"
+                            android:gravity="right"
                             android:textSize="@dimen/main_text_default"
                             android:text="暂无优惠券信息"/>
                     </LinearLayout>
@@ -112,6 +115,7 @@
                     android:id="@+id/layout_coupon_money"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:visibility="gone"
                     android:layout_gravity="center_vertical"
                     android:gravity="center_vertical">
                     <LinearLayout
@@ -158,30 +162,35 @@
                     android:layout_height="50dip"
                     android:layout_gravity="center_vertical"
                     android:gravity="center_vertical">
-                    <LinearLayout
+                    <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
                         <TextView
                             android:layout_width="80dip"
-                            android:layout_height="wrap_content"
+                            android:id="@+id/tv_tz"
+                            android:layout_height="match_parent"
                             android:layout_marginLeft="18dip"
                             android:text="投资金额"
                             android:textSize="@dimen/main_text_default"
+                            android:gravity="center_vertical"
                             android:textColor="@color/txt_black"/>
                         <EditText
                             android:id="@+id/invest_money"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:layout_toRightOf="@+id/tv_tz"
                             android:layout_marginRight="45dip"
                             android:singleLine="true"
                             android:inputType="number"
                             android:maxLength="7"
+                            android:gravity="right|center_vertical"
                             android:textSize="@dimen/main_text_default"
                             android:textColor="@color/txt_black"
                             android:textColorHint="@color/txt_gray"
-                            android:hint="请输入投资金额"
+
+                            android:hint="100元起投"
                             android:background="@drawable/edittext_none_background"/>
-                    </LinearLayout>
+                    </RelativeLayout>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -190,6 +199,7 @@
                         android:layout_marginRight="18sp"
                         android:textColor="@color/txt_black"
                         android:textSize="@dimen/main_text_default"
+                        android:visibility="gone"
                         android:text="元" />
                     <ImageView
                         android:layout_width="match_parent"

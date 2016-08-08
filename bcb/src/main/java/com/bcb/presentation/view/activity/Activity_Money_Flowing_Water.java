@@ -19,6 +19,7 @@ import com.bcb.common.net.UrlsOne;
 import com.bcb.data.bean.MoneyFlowingWaterListBean;
 import com.bcb.data.bean.MoneyFlowingWaterRecordsBean;
 import com.bcb.data.util.HttpUtils;
+import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.MyListView;
 import com.bcb.data.util.PackageUtil;
@@ -33,7 +34,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/** 交易明细 */
 public class Activity_Money_Flowing_Water extends Activity_Base {
 
 	private MyListView mFlowingWaterListView;
@@ -129,6 +130,8 @@ public class Activity_Money_Flowing_Water extends Activity_Base {
         BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.MoneyDetail, obj, TokenUtil.getEncodeToken(this), new BcbRequest.BcbCallBack<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
+				LogUtil.i("bqt", "【Activity_Money_Flowing_Water】【onResponse】产品列表" + response.toString());
+
                 try {
                     if(PackageUtil.getRequestStatus(response, Activity_Money_Flowing_Water.this)) {
                         JSONObject obj = PackageUtil.getResultObject(response);
@@ -202,10 +205,7 @@ public class Activity_Money_Flowing_Water extends Activity_Base {
     //流水Item点击事件
 	class onClickViewFlowingWater implements OnItemClickListener {
 		public void onItemClick(AdapterView<?> arg0, View view, int position,long arg3) {
-            Activity_Money_Item_Detail.launche(Activity_Money_Flowing_Water.this,
-                    recordsBeans.get(position).getBillId(),
-                    recordsBeans.get(position).getTopCategoryId(),
-                    recordsBeans.get(position).getType(), recordsBeans.get(position).getStatusDescn());
+            Activity_Money_Item_Detail.launche(Activity_Money_Flowing_Water.this,recordsBeans.get(position).getBillId());
 	    }
     }
 	 

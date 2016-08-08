@@ -1,15 +1,15 @@
 package com.bcb.data.util;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.content.Context;
 import android.content.Intent;
 
-import com.bcb.presentation.view.activity.Activity_Login;
-import com.bcb.presentation.view.activity.Activity_ExpiredProject_Introduction;
-import com.bcb.presentation.view.activity.Activity_NormalProject_Introduction;
 import com.bcb.common.app.App;
+import com.bcb.presentation.view.activity.Activity_ExpiredProject_Introduction;
+import com.bcb.presentation.view.activity.Activity_Login;
+import com.bcb.presentation.view.activity.Activity_NormalProject_Introduction;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class PackageUtil {
 	
@@ -133,7 +133,6 @@ public class PackageUtil {
 		try {
 			obj.put("PageNow", PageNow);
 			obj.put("PageSize", PageSize);	
-			obj.put("Platform", 2);		
 			return obj;
 		} catch (JSONException e) {
 			e.printStackTrace();

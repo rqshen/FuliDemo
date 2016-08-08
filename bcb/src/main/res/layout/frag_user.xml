@@ -258,7 +258,7 @@
                             android:layout_margin="@dimen/margin_size_default"
                             android:background="@drawable/bg_sel_stroke_blue"
                             android:text="@string/recharge_btn"
-                            android:textColor="@color/blue"
+                            android:textColor="#3399ff"
                             android:gravity="center"
                             android:textSize="@dimen/main_text_default" />
 
@@ -266,7 +266,7 @@
                             android:id="@+id/withdraw_btn"
                             android:layout_width="120dip"
                             android:layout_height="35dp"
-                            android:layout_marginLeft="30dp"
+                            android:layout_marginLeft="40dp"
 
                             android:background="@drawable/bg_sel_stroke_gray"
                             android:text="@string/withdraw_btn"
@@ -346,7 +346,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="7.5dp"
-                                    android:text="@string/money_flow_water"
+                                    android:text="交易明细"
                                     android:textColor="@color/txt_black"
                                     android:textSize="@dimen/main_text_small" />
                             </LinearLayout>

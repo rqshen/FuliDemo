@@ -31,7 +31,8 @@ public class UrlsOne {
     public static final String MainpageBoutique = host + "/api/v1.0/a59800f24a15";
 
     //产品项目列表
-    public static final String MainpageProduct = host + "/api/v1.0/60bb55e23716";
+//    public static final String MainpageProduct = host + "/api/v1.0/60bb55e23716";
+    public static final String MainpageProduct = host + "/api/v2.0/a64b0102ccf0";
 
     // 项目汇总
     public static final String CompanyProduct = host + "/api/v1.0/ae72adb06802";
@@ -46,16 +47,20 @@ public class UrlsOne {
     public static final String MoneyFlowingWater = host + "/api/v1.0/a5330105d6c3";
 
     // 投资记录
-    public static final String TradingRecord = host + "/api/v1.0/cc738a2de840";
+//    public static final String TradingRecord = host + "/api/v1.0/cc738a2de840";
+    public static final String TradingRecord = host + "/api/v2.0/a65000ed8db8";
 
     // 交易明细
-    public static final String MoneyDetail = host + "/api/v1.0/8152ae00741b";
+//    public static final String MoneyDetail = host + "/api/v1.0/8152ae00741b";
+    public static final String MoneyDetail = host + "/api/v2.0/a64e011c4b73";
 
     //资金流水详情
-    public static final String MoneyItemDetail = host + "/api/v1.3.4/a5da0116755c";
+//    public static final String MoneyItemDetail = host + "/api/v1.3.4/a5da0116755c";
+    public static final String MoneyItemDetail = host + "/api/v2.0/a64e011e0590";
 
     // 投资详情
-    public static final String TradingRecordDetail = host + "/api/v1.0/e2c1df573f9f";
+//    public static final String TradingRecordDetail = host + "/api/v1.0/e2c1df573f9f";
+    public static final String TradingRecordDetail = host + "/api/v2.0/a65000b30f36";
 
     // 修改登录密码
     public static final String ModifyLoginPwd = host + "/api/v1.0/d2c93c3de51b";
@@ -141,7 +146,8 @@ public class UrlsOne {
     public static final String RechargeOrderStatus = host + "/api/v1.0/8b441a56e2e1";
 
     //首页标的数据(v1.3.4)
-    public static final String MainFragmentListData = host + "/api/v1.3.4/af3af1b08768";
+//    public static final String MainFragmentListData = host + "/api/v1.3.4/af3af1b08768";
+    public static final String MainFragmentListData = host + "/api/v2.0/a64b00ed48a0";
 
     //预约新标预告
     public static final String RequestAnnounce = host + "/api/v1.3/075c12497971";

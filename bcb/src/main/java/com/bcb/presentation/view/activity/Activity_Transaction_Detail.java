@@ -32,7 +32,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/** 交易明细 */
 public class Activity_Transaction_Detail extends Activity_Base {
 
     private static final String TAG = "Activity_Transaction_Detail";

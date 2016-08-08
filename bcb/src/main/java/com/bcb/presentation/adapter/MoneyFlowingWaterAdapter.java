@@ -9,9 +9,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.bcb.R;
 import com.bcb.data.bean.MoneyFlowingWaterRecordsBean;
-import com.bcb.data.util.LogUtil;
+
 import java.util.List;
 
 public class MoneyFlowingWaterAdapter extends BaseAdapter {
@@ -68,17 +69,17 @@ public class MoneyFlowingWaterAdapter extends BaseAdapter {
             mViewHolder.layout_date.setVisibility(View.VISIBLE);
         }
 
-        //收入支出是不同的样式，支出为1，收入为2，其余为0
-        if (data.get(pos).getType().equals("支出")) {
+		//收入支出是不同的样式，收入支付类型（1收入0支出）
+        if (data.get(pos).getType()==0) {
             mViewHolder.value_amount.setTextColor(Color.argb(255, 0, 187, 9));
-            mViewHolder.value_amount.setText("-" + data.get(pos).getAmount());
+            mViewHolder.value_amount.setText("-" +String.format("%.2f", data.get(pos).getAmount())+"元");
         } else {
             mViewHolder.value_amount.setTextColor(Color.argb(255, 219, 56, 56));
-            mViewHolder.value_amount.setText("+" + data.get(pos).getAmount());
+            mViewHolder.value_amount.setText("+" + String.format("%.2f", data.get(pos).getAmount())+"元");
         }
 
         //状态描述
-        mViewHolder.value_status.setText(data.get(pos).getStatusDescn());
+        mViewHolder.value_status.setText(data.get(pos).getStatus());
 
         //根据交易类型和状态来判断是否更改图片
         mViewHolder.image_status.setVisibility(View.VISIBLE);

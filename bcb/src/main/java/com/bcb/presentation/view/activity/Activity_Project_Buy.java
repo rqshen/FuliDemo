@@ -55,6 +55,7 @@ import java.text.DecimalFormat;
 
 /**
  * Created by cain on 16/1/28.
+ * 买标
  */
 public class Activity_Project_Buy extends Activity_Base implements View.OnClickListener {
 
@@ -598,7 +599,7 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
         //要先认证用户信息，判断是否绑卡和设置了交易密码
         if (null != App.mUserDetailInfo) {
             // 检测是否绑卡
-            if (!App.mUserDetailInfo.HasBindCard) {
+            if ( App.mUserDetailInfo.BankCard==null) {
                 popCertDialog();
                 return;
             }
@@ -630,7 +631,7 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
                 return;
             }
             //判断可投金额是否大于0元
-            if (mSimpleProjectDetail.AmountBalance <= 0) {
+            if (mSimpleProjectDetail.Balance <= 0) {
                 error_tips.setVisibility(View.VISIBLE);
                 error_tips.setText("可投金额为0，该标不能投");
                 return;
@@ -703,7 +704,7 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
             }
             //判断输入金额是否大于可投金额
             float moneyf = Float.valueOf(invest_money.getText().toString().replace(",", ""));
-            if (moneyf > mSimpleProjectDetail.AmountBalance) {
+            if (moneyf > mSimpleProjectDetail.Balance) {
                 error_tips.setVisibility(View.VISIBLE);
                 error_tips.setText("超出项目可投金额");
                 return;
@@ -972,7 +973,7 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
         //要先认证用户信息，判断是否绑卡和设置了交易密码
         if (null != App.mUserDetailInfo) {
             // 检测是否绑卡
-            if (!App.mUserDetailInfo.HasBindCard) {
+            if ( App.mUserDetailInfo.BankCard==null) {
                 popCertDialog();
                 return;
             }

@@ -61,6 +61,7 @@ import java.util.TimerTask;
 
 /**
  * Created by cain on 15/12/24.
+ * 借款
  */
 public class Activity_LoanRequest_Borrow extends Activity_Base implements View.OnClickListener {
     private static final String TAG = "Activity_LoanRequest_Borrow";

@@ -43,8 +43,6 @@ public class SaveUserInfoUtils {
 
 	//注册的手机号
 	public String getLocalPhone() {
-		LogUtil.i("bqt", "【SaveUserInfoUtils】【getLocalPhone】手机号码" +sp.getString("localPhone", ""));
-
 		 return sp.getString("localPhone", "");  
 	}
 

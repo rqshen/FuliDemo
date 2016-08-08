@@ -14,6 +14,8 @@ public class TradingRecordRecordsBean {
 
 	private float Rate; // 年化收益率
 
+	public	float InterestAmount;//预期收益
+
 	public String getOrderNo() {
 		return OrderNo;
 	}

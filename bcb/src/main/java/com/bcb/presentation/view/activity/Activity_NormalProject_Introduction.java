@@ -22,6 +22,7 @@ import com.bcb.common.net.UrlsOne;
 import com.bcb.common.net.UrlsTwo;
 import com.bcb.data.bean.UserDetailInfo;
 import com.bcb.data.bean.project.SimpleProjectDetail;
+import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MQCustomerManager;
 import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.PackageUtil;
@@ -35,15 +36,24 @@ import com.bcb.presentation.view.custom.CustomDialog.MyMaskFullScreenView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by cain on 16/1/28.
+ * 产品详情
  */
 public class Activity_NormalProject_Introduction extends Activity_Base implements View.OnClickListener {
     private static final String TAG = "Activity_NormalProject_Introduction";
-    /************** 标题栏 *****************/
+    /**************
+     * 标题栏
+     *****************/
     private String title;
 
-    /*************** 立即购买按钮 ********************/
+    /***************
+     * 立即购买按钮
+     ********************/
     private Button button_buy;
     //普通标的数据
     private SimpleProjectDetail mSimpleProjectDetail;
@@ -52,10 +62,13 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
 
     private String packageId = "";
 
-    /************************* 头部年化利率等信息 ************************************/
+    /*************************
+     * 头部年化利率等信息
+     ************************************/
     //年化利率
     private TextView value_lilv;
     private TextView text_description;
+    private TextView tv_qx;
     //加息利率
     private LinearLayout add_rate;
     private TextView value_reward;
@@ -70,7 +83,9 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
     //描述
     private TextView value_description;
 
-    /*************************** 投标进度 ********************************/
+    /***************************
+     * 投标进度
+     ********************************/
     //投资进度条
     private ProgressBar progress_percent;
     //投资进度百分比
@@ -80,7 +95,9 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
     //截止日期
     private TextView end_time;
 
-    /********************************* 风控 ******************************************/
+    /*********************************
+     * 风控
+     ******************************************/
     //风控整体
     private RelativeLayout layout_examine;
 
@@ -99,7 +116,9 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
     private TextView beset_advisers;
 
 
-    /*************************** 项目详情 ****************************************************/
+    /***************************
+     * 项目详情
+     ****************************************************/
     //项目详情整体
     private LinearLayout layout_detail;
     //项目详情
@@ -119,16 +138,18 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
     //专属客服
     private LinearLayout layout_customer_service;
 
-    private String companyUrl;
-    private String companyName;
-    private int durationExchangeType = 1;
-    private float rate = 0;
-    private float rewardRate = 0;
-    private int duration = 1;
+
+    //    private String companyUrl;
+//    private String companyName;
+//    private int durationExchangeType = 1;
+//    private float rate = 0;
+//    private float rewardRate = 0;
+//    private int duration = 1;
     private int CouponType = 0;
     private int countDate = 0;
 
     private BcbRequestQueue requestQueue;
+
     //默认的构造函数
     public static void launche(Context ctx,
                                String pid,
@@ -173,7 +194,9 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
     }
 
 
-    /*************** 初始化界面 *************************/
+    /***************
+     * 初始化界面
+     *************************/
     private void setupView() {
         showProgressBar("正在获取标的数据...");
         /*************** 年化利率等信息 ****************************/
@@ -186,14 +209,15 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
         value_reward = (TextView) findViewById(R.id.value_reward);
 
         //福袋数据
-        if (!TextUtils.isEmpty(App.getInstance().getWelfare())){
+        if (!TextUtils.isEmpty(App.getInstance().getWelfare())) {
             add_rate.setVisibility(View.VISIBLE);
             value_reward.setText("+" + App.getInstance().getWelfare() + "%");
-        }else{
+        } else {
             add_rate.setVisibility(View.GONE);
         }
         //可投金额
         total_money = (TextView) findViewById(R.id.value_total);
+        tv_qx = (TextView) findViewById(R.id.tv_qx);
         // 理财期限
         time_value = (TextView) findViewById(R.id.time_value);
         //融资总额（元）
@@ -269,7 +293,9 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
         layout_customer_service.setOnClickListener(this);
     }
 
-    /****************** 加载普通标的数据 *******************************/
+    /******************
+     * 加载普通标的数据
+     *******************************/
     private void loadProjectData() {
         JSONObject js = new JSONObject();
         try {
@@ -280,24 +306,26 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
         BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsTwo.NormalProjectIntroduction, js, TokenUtil.getEncodeToken(this), new BcbRequest.BcbCallBack<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                if(PackageUtil.getRequestStatus(response, Activity_NormalProject_Introduction.this)){
+                if (PackageUtil.getRequestStatus(response, Activity_NormalProject_Introduction.this)) {
+                    LogUtil.i("bqt", "【Activity_NormalProject_Introduction】【onResponse】普通标" + response.toString());
+
                     try {
                         //先转义
                         String resultString = response.getString("result").replace("\\", "").replace("\"[", "[").replace("]\"", "]");
                         JSONObject resultObject = new JSONObject(resultString);
                         //注意：不去掉会出现json解析语法错误
-                        if (TextUtils.isEmpty(resultObject.getString("AssetAuditContent"))){
+                        if (TextUtils.isEmpty(resultObject.getString("AssetAuditContent"))) {
                             resultObject.remove("AssetAuditContent");
                         }
                         mSimpleProjectDetail = App.mGson.fromJson(resultObject.toString(), SimpleProjectDetail.class);
-                        if(null != mSimpleProjectDetail){
+                        if (null != mSimpleProjectDetail) {
                             //暂存数据
-                            durationExchangeType = mSimpleProjectDetail.DurationExchangeType;
-                            rate = mSimpleProjectDetail.Rate;
-                            rewardRate = mSimpleProjectDetail.RewardRate;
-                            duration = mSimpleProjectDetail.Duration;
-                            companyName = mSimpleProjectDetail.CompanyName;
-                            companyUrl = mSimpleProjectDetail.CompanyUrl;
+//                            durationExchangeType = mSimpleProjectDetail.DurationExchangeType;
+//                            rate = mSimpleProjectDetail.Rate;
+//                            rewardRate = mSimpleProjectDetail.RewardRate;
+//                            duration = mSimpleProjectDetail.Duration;
+//                            companyName = mSimpleProjectDetail.CompanyName;
+//                            companyUrl = mSimpleProjectDetail.CompanyUrl;
                             //显示数据
                             showProjectData();
                         }
@@ -318,10 +346,12 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
         requestQueue.add(jsonRequest);
     }
 
-    /***************** 显示普通标的数据 *******************************/
+    /*****************
+     * 显示普通标的数据
+     *******************************/
     private void showProjectData() {
         // 年化利率
-        value_lilv.setText(String.format("%.2f",mSimpleProjectDetail.Rate));
+        value_lilv.setText(String.format("%.2f", mSimpleProjectDetail.Rate));
         text_description.setVisibility(View.VISIBLE);
 
         //领投人
@@ -338,7 +368,7 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
         }
 
         //可投金额
-        total_money.setText(String.format("%d", (int)mSimpleProjectDetail.AmountBalance));
+        total_money.setText(String.format("%.2f", mSimpleProjectDetail.Balance));
 
         //理财期限
         switch (mSimpleProjectDetail.DurationExchangeType) {
@@ -360,24 +390,31 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
         }
 
         //融资总额
-        miniValue_invest.setText(String.format("%d", (int)mSimpleProjectDetail.AmountTotal));
+        miniValue_invest.setText(String.format("%.2f", mSimpleProjectDetail.Amount));
 
         /************************* 进度等 ************************************/
         //投标进度条
-        progress_percent.setProgress((int) (100 - (mSimpleProjectDetail.AmountBalance / mSimpleProjectDetail.AmountTotal) * 100));
-        progress_percent.setSecondaryProgress((int)(100 - (mSimpleProjectDetail.AmountBalance/mSimpleProjectDetail.AmountTotal) * 100));
+        progress_percent.setProgress((int) (100 - (mSimpleProjectDetail.Balance / mSimpleProjectDetail.Amount) * 100));
+        progress_percent.setSecondaryProgress((int) (100 - (mSimpleProjectDetail.Balance / mSimpleProjectDetail.Amount) * 100));
         //投资进度百分比
-        value_percent.setText(String.format("%.0f", (1 - mSimpleProjectDetail.AmountBalance/mSimpleProjectDetail.AmountTotal) * 100) + "%");
+        value_percent.setText(String.format("%.2f", (1 - mSimpleProjectDetail.Balance / mSimpleProjectDetail.Amount) * 100) + "%");
         //还款方式
         payment_type.setText(mSimpleProjectDetail.PaymentType);
-        //截止日期
-        end_time.setText(mSimpleProjectDetail.ApplyEndTime);
-
+        try {
+            Date ApplyEndTime = new SimpleDateFormat("yyyy-MM-dd").parse(mSimpleProjectDetail.ApplyEndTime);
+            Date InterestTakeDate = new SimpleDateFormat("yyyy-MM-dd").parse(mSimpleProjectDetail.InterestTakeDate);
+            //截止日期
+            end_time.setText(SimpleDateFormat.getDateInstance().format(ApplyEndTime));
+            //起息日
+            tv_qx.setText(SimpleDateFormat.getDateInstance().format(InterestTakeDate));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         /************************** 风控 ********************************/
         //借款来源公司
-        if (!TextUtils.isEmpty(companyName)) {
+        if (!TextUtils.isEmpty(mSimpleProjectDetail.CompanyName)) {
             layout_source.setVisibility(View.VISIBLE);
-            source_inspector.setText(companyName);
+            source_inspector.setText(mSimpleProjectDetail.CompanyName);
         } else {
             layout_source.setVisibility(View.GONE);
         }
@@ -401,7 +438,9 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
         setButtonColor(mSimpleProjectDetail.Status);
     }
 
-    /******************* 设置按钮不可用时的颜色和可用状态 *****************************/
+    /*******************
+     * 设置按钮不可用时的颜色和可用状态
+     *****************************/
     private void setButtonColor(int status) {
         if (status != 20) {
             button_buy.setBackgroundResource(R.drawable.button_project_gray);
@@ -410,7 +449,9 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
         }
     }
 
-    /***************** 购买函数 **********************/
+    /*****************
+     * 购买函数
+     **********************/
     private void clickButton() {
         //判断是否存在买标数据
         if (mSimpleProjectDetail == null) {
@@ -418,7 +459,7 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
             return;
         }
         //判断可投金额是否大于0元
-        if (mSimpleProjectDetail.AmountBalance <= 0) {
+        if (mSimpleProjectDetail.Balance <= 0) {
             ToastUtil.alert(Activity_NormalProject_Introduction.this, "可投金额为0元，该标不能投");
             return;
         }
@@ -428,16 +469,18 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
             finish();
             return;
         }
-        //如果没有认证则跳转至认证界面
-        if (App.mUserDetailInfo == null ||  !App.mUserDetailInfo.HasCert || !App.mUserDetailInfo.HasBindCard) {
-            identifyPageTips();
-            return;
-        }
+//        //如果没有认证则跳转至认证界面
+//        if (App.mUserDetailInfo == null ||  !App.mUserDetailInfo.HasCert ||  App.mUserDetailInfo.BankCard==null) {
+//            identifyPageTips();
+//            return;
+//        }
 
         gotoBuyPrjectPage();
     }
 
-    /******************* 弹出认证提示界面 *************************/
+    /*******************
+     * 弹出认证提示界面
+     *************************/
     private void identifyPageTips() {
         dialogWidget = new DialogWidget(Activity_NormalProject_Introduction.this, IdentifyAlertView.getInstance(Activity_NormalProject_Introduction.this, new IdentifyAlertView.OnClikListener() {
             @Override
@@ -457,7 +500,9 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
         dialogWidget.show();
     }
 
-    /********************** 去认证页面 ***********************/
+    /**********************
+     * 去认证页面
+     ***********************/
     private void gotoAuthenticationActivity() {
         Intent newIntent = new Intent(Activity_NormalProject_Introduction.this, Activity_Authentication.class);
         startActivityForResult(newIntent, 10);
@@ -479,7 +524,9 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
         }
     }
 
-    /*************** 获取用户银行卡信息 *********************/
+    /***************
+     * 获取用户银行卡信息
+     *********************/
     private void loadUserDetailInfoData() {
         //如果Token为空或者银行卡信息不为空，则停止请求
         if (App.saveUserInfo.getAccess_Token() == null || App.mUserDetailInfo != null && App.mUserDetailInfo.BankCard != null) {
@@ -519,29 +566,36 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
         }
     }
 
-    /********************* 去买标页面 **********************/
+    /*********************
+     * 去买标页面
+     **********************/
     private void gotoBuyPrjectPage() {
         Activity_Project_Buy.launche(Activity_NormalProject_Introduction.this, packageId, title, CouponType, countDate, mSimpleProjectDetail, false);
     }
 
-    /********************* 转圈提示 **************************/
+    /*********************
+     * 转圈提示
+     **************************/
     //显示转圈提示
     private void showProgressBar(String title) {
-        if(null == mProgressBar)mProgressBar= new ProgressDialog(this,ProgressDialog.THEME_HOLO_LIGHT);
+        if (null == mProgressBar) mProgressBar = new ProgressDialog(this, ProgressDialog.THEME_HOLO_LIGHT);
         mProgressBar.setMessage(title);
         mProgressBar.setCanceledOnTouchOutside(false);
         mProgressBar.setCancelable(true);
         mProgressBar.show();
     }
+
     //隐藏转圈提示
-    private void hideProgressBar(){
-        if(!isFinishing() && null != mProgressBar && mProgressBar.isShowing()){
+    private void hideProgressBar() {
+        if (!isFinishing() && null != mProgressBar && mProgressBar.isShowing()) {
             mProgressBar.dismiss();
         }
     }
 
 
-    /********************* 蒙版效果提示 ************************/
+    /*********************
+     * 蒙版效果提示
+     ************************/
     private void showAdviserTips(String tips) {
         dialogWidget = new DialogWidget(Activity_NormalProject_Introduction.this, getAdviserView(tips), true);
         dialogWidget.show();
@@ -557,7 +611,9 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
         }).getView();
     }
 
-    /***************************** 更新用户数据 **************************************/
+    /*****************************
+     * 更新用户数据
+     **************************************/
     private void updateUserInfo() {
         showProgressBar("正在更新用户信息...");
 
@@ -567,10 +623,10 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
                 try {
                     int status = response.getInt("status");
                     String message = response.getString("message");
-                    if(status == 1) {
+                    if (status == 1) {
                         UserDetailInfo userDetailInfo = App.mGson.fromJson(response.getJSONObject("result").toString(), UserDetailInfo.class);
                         //判断返回的用户信息是否为空
-                        if(null != userDetailInfo) {
+                        if (null != userDetailInfo) {
                             //将获取到的信息存放到静态数据区中
                             App.mUserDetailInfo = userDetailInfo;
                         }
@@ -601,47 +657,41 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
         finish();
     }
 
-    //销毁广播
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
-
-    //暂存标的订单号的信息
-    @Override
-    public void onSaveInstanceState(Bundle savedInstanceState) {
-        super.onSaveInstanceState(savedInstanceState);
-        //订单号
-        savedInstanceState.putString("PackageId", packageId);
-        savedInstanceState.putInt("durationExchangeType", durationExchangeType);
-        savedInstanceState.putFloat("rate", rate);
-        savedInstanceState.putFloat("rewardRate", rewardRate);
-        savedInstanceState.putInt("duration", duration);
-        savedInstanceState.putString("companyName", companyName);
-        savedInstanceState.putString("companyUrl", companyUrl);
-    }
-
-    //取出暂存的订单号信息
-    @Override
-    public void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        //获取标的订单号
-        packageId = savedInstanceState.getString("PackageId");
-        //获取天标还是月标状态
-        durationExchangeType = savedInstanceState.getInt("durationExchangeType");
-        rate = savedInstanceState.getFloat("rate");
-        rewardRate = savedInstanceState.getFloat("rewardRate");
-        duration = savedInstanceState.getInt("duration");
-        companyName = savedInstanceState.getString("companyName");
-        companyUrl = savedInstanceState.getString("companyUrl");
-    }
+//    //暂存标的订单号的信息
+//    @Override
+//    public void onSaveInstanceState(Bundle savedInstanceState) {
+//        super.onSaveInstanceState(savedInstanceState);
+//        //订单号
+//        savedInstanceState.putString("PackageId", packageId);
+//        savedInstanceState.putInt("durationExchangeType", durationExchangeType);
+//        savedInstanceState.putFloat("rate", rate);
+//        savedInstanceState.putFloat("rewardRate", rewardRate);
+//        savedInstanceState.putInt("duration", duration);
+//        savedInstanceState.putString("companyName", companyName);
+//        savedInstanceState.putString("companyUrl", companyUrl);
+//    }
+//
+//    //取出暂存的订单号信息
+//    @Override
+//    public void onRestoreInstanceState(Bundle savedInstanceState) {
+//        super.onRestoreInstanceState(savedInstanceState);
+//        //获取标的订单号
+//        packageId = savedInstanceState.getString("PackageId");
+//        //获取天标还是月标状态
+//        durationExchangeType = savedInstanceState.getInt("durationExchangeType");
+//        rate = savedInstanceState.getFloat("rate");
+//        rewardRate = savedInstanceState.getFloat("rewardRate");
+//        duration = savedInstanceState.getInt("duration");
+//        companyName = savedInstanceState.getString("companyName");
+//        companyUrl = savedInstanceState.getString("companyUrl");
+//    }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             //本息保障
             case R.id.layout_investment:
-                if (mSimpleProjectDetail != null &&mSimpleProjectDetail.Status != 20) {
+                if (mSimpleProjectDetail != null && mSimpleProjectDetail.Status != 20) {
                     UmengUtil.eventById(Activity_NormalProject_Introduction.this, R.string.bid_buy_info2);
                 }
                 showAdviserTips("该项目受福利金融风险保证金保障");
@@ -658,10 +708,10 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
                 MQCustomerManager.getInstance(this).showCustomer(userId);
                 break;
 
-            
+
             //点击立即购买按钮
             case R.id.button_buy:
-                if (mSimpleProjectDetail != null &&mSimpleProjectDetail.Status != 20) {
+                if (mSimpleProjectDetail != null && mSimpleProjectDetail.Status != 20) {
                     UmengUtil.eventById(Activity_NormalProject_Introduction.this, R.string.bid_buy_act);
                 }
                 clickButton();
@@ -669,12 +719,12 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
 
             //借款来源公司
             case R.id.layout_source:
-                Activity_Browser.launche(this, TextUtils.isEmpty(companyName)? "借款来源公司详情" : companyName, companyUrl);
+                Activity_Browser.launche(this, TextUtils.isEmpty(mSimpleProjectDetail.CompanyName) ? "借款来源公司详情" : mSimpleProjectDetail.CompanyName, mSimpleProjectDetail.CompanyUrl);
                 break;
 
             //风控审查员
             case R.id.layout_company_hr:
-                if (mSimpleProjectDetail != null &&mSimpleProjectDetail.Status != 20){
+                if (mSimpleProjectDetail != null && mSimpleProjectDetail.Status != 20) {
                     UmengUtil.eventById(Activity_NormalProject_Introduction.this, R.string.bid_buy_info);
                 }
                 if (mSimpleProjectDetail.AssetAuditContent.get(0).Introduction != null
@@ -698,7 +748,7 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
                 if (mSimpleProjectDetail != null && mSimpleProjectDetail.Status != 20) {
                     UmengUtil.eventById(Activity_NormalProject_Introduction.this, R.string.bid_buy_detail1);
                 }
-                if (null != mSimpleProjectDetail && !TextUtils.isEmpty(mSimpleProjectDetail.PageUrl)){
+                if (null != mSimpleProjectDetail && !TextUtils.isEmpty(mSimpleProjectDetail.PageUrl)) {
                     Activity_Browser.launche(Activity_NormalProject_Introduction.this, title, mSimpleProjectDetail.PageUrl + "&tab=1");
                 }
                 break;
@@ -707,8 +757,8 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
                 if (mSimpleProjectDetail != null && mSimpleProjectDetail.Status != 20) {
                     UmengUtil.eventById(Activity_NormalProject_Introduction.this, R.string.bid_buy_detail2);
                 }
-                if (null != mSimpleProjectDetail && !TextUtils.isEmpty(mSimpleProjectDetail.PageUrl)){
-                    Activity_Browser.launche(Activity_NormalProject_Introduction.this, title, mSimpleProjectDetail.PageUrl+"&tab=2");
+                if (null != mSimpleProjectDetail && !TextUtils.isEmpty(mSimpleProjectDetail.PageUrl)) {
+                    Activity_Browser.launche(Activity_NormalProject_Introduction.this, title, mSimpleProjectDetail.PageUrl + "&tab=2");
                 }
                 break;
             //证明文件
@@ -716,8 +766,8 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
                 if (mSimpleProjectDetail != null && mSimpleProjectDetail.Status != 20) {
                     UmengUtil.eventById(Activity_NormalProject_Introduction.this, R.string.bid_buy_detail3);
                 }
-                if (null != mSimpleProjectDetail && !TextUtils.isEmpty(mSimpleProjectDetail.PageUrl)){
-                    Activity_Browser.launche(Activity_NormalProject_Introduction.this, title, mSimpleProjectDetail.PageUrl+"&tab=3");
+                if (null != mSimpleProjectDetail && !TextUtils.isEmpty(mSimpleProjectDetail.PageUrl)) {
+                    Activity_Browser.launche(Activity_NormalProject_Introduction.this, title, mSimpleProjectDetail.PageUrl + "&tab=3");
                 }
                 break;
             //投资列表
@@ -725,8 +775,8 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
                 if (mSimpleProjectDetail != null && mSimpleProjectDetail.Status != 20) {
                     UmengUtil.eventById(Activity_NormalProject_Introduction.this, R.string.bid_buy_detail4);
                 }
-                if (null != mSimpleProjectDetail && !TextUtils.isEmpty(mSimpleProjectDetail.PageUrl)){
-                    Activity_Browser.launche(Activity_NormalProject_Introduction.this, title, mSimpleProjectDetail.PageUrl+"&tab=4");
+                if (null != mSimpleProjectDetail && !TextUtils.isEmpty(mSimpleProjectDetail.PageUrl)) {
+                    Activity_Browser.launche(Activity_NormalProject_Introduction.this, title, mSimpleProjectDetail.PageUrl + "&tab=4");
                 }
                 break;
         }

@@ -22,7 +22,6 @@ import com.bcb.R;
 import com.bcb.common.app.App;
 import com.bcb.common.event.BroadcastEvent;
 import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbNetworkManager;
 import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
@@ -30,7 +29,6 @@ import com.bcb.common.net.UrlsOne;
 import com.bcb.data.bean.ProductListBean;
 import com.bcb.data.bean.ProductRecordsBean;
 import com.bcb.data.util.HttpUtils;
-import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MyListView;
 import com.bcb.data.util.PackageUtil;
 import com.bcb.data.util.ToastUtil;
@@ -179,11 +177,11 @@ public class Frag_Product extends Frag_Base implements OnClickListener {
     public void loadData() {
 		JSONObject obj = new JSONObject();
 		try {
-			obj.put("CompanyId", CompanyId);
+//			obj.put("CompanyId", CompanyId);
             obj.put("PageNow", PageNow);
             obj.put("PageSize", PageSize);
-			obj.put("Platform", 2);
-            LogUtil.d("CompanyId", CompanyId);
+//			obj.put("Platform", 2);
+//            LogUtil.d("CompanyId", CompanyId);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -268,18 +266,18 @@ public class Frag_Product extends Frag_Base implements OnClickListener {
 
     class onClickViewProduct implements OnItemClickListener {
         public void onItemClick(AdapterView<?> arg0, View view, int position,long arg3) {
-            if (recordsBeans.get(position).getStatus() == 10) {
+            if (recordsBeans.get(position).Status == 10) {
                 return;
             }
-            if (recordsBeans.get(position).getStatus() == 20) {
+            if (recordsBeans.get(position).Status == 20) {
                 UmengUtil.eventById(ctx, R.string.list_bid_avi);
             } else {
                 UmengUtil.eventById(ctx, R.string.list_bid_unavi);
             }
             Activity_NormalProject_Introduction.launche(ctx,
-                    recordsBeans.get(position).getPackageId(),
-                    recordsBeans.get(position).getName(),
-                    recordsBeans.get(position).getCouponType());
+                    recordsBeans.get(position).PackageId,
+                    recordsBeans.get(position).Name,
+                   0);// recordsBeans.get(position).getCouponType()
         }
     }
 

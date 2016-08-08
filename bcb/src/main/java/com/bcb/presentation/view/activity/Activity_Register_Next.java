@@ -122,31 +122,52 @@ public class Activity_Register_Next extends Activity_Base implements Interface_V
 				
 		        //如果一开始输入的是中文，用空来替换，这时候密码强度不应该显示为弱
 		        if(str.length() == 0){
-                    setupBackground();
+					setupPasswordColor();
 		        }
 		        //长度小于8的时候，密码为弱
 		        else if (str.length() < 8) {
-                    setupBackground();
+					setupPasswordColor();
 		        	strength1.setBackgroundResource(R.drawable.button_solid_green);
 		        	
 				} else {
-					//如果只存在数字、字母或特殊合法字符单一组合，密码显示为弱
-					if (RegexManager.isNum(str) 
-						|| RegexManager.isAZ(str) 
-						|| RegexManager.isSpecialRightCode(str) ) {
-                        setupBackground();
-			        	strength1.setBackgroundResource(R.drawable.button_solid_green);
+					/**
+					 * 一、关于密码强度的设定：
+					 密码包含的元素有四种：数字、符号、大写字母、小写字母
+					 1、密码强度显示为弱：密码中只出现一种元素
+					 2、密码强度显示为中：密码中只出现两种元素
+					 3、密码强度显示为强：密码中出现三种或三种以上的元素
+					 * 日期：2016/8/3 18:34
+					 */
+					int num=RegexManager.getMatchNumber(str);
+					if (num<=1) {
+						setupPasswordColor();
+						strength1.setBackgroundResource(R.drawable.button_solid_green);
 					}
-					//如果包含三种类型的字符并且长度超过10位，则密码强度显示为强
-					else if (RegexManager.isHybridRightCode(str) && str.length() > 10) {
-                        setupBackground();
+					if (num==2) {
+						setupPasswordColor();
+						strength2.setBackgroundResource(R.drawable.button_solid_blue);
+					}
+					if (num>=3) {
+						setupPasswordColor();
 						strength3.setBackgroundResource(R.drawable.button_solid_red);
 					}
-			        //既不是单一组合，也不包含三种字符类型或者包含三种字符但长度不够10的，均显示为中
-					else {
-                        setupBackground();
-			        	strength2.setBackgroundResource(R.drawable.button_solid_blue);
-					}		           
+//					//如果只存在数字、字母或特殊合法字符单一组合，密码显示为弱
+//					if (RegexManager.isNum(str)
+//						|| RegexManager.isAZ(str)
+//						|| RegexManager.isSpecialRightCode(str) ) {
+//                        setupBackground();
+//			        	strength1.setBackgroundResource(R.drawable.button_solid_green);
+//					}
+//					//如果包含三种类型的字符并且长度超过10位，则密码强度显示为强
+//					else if (RegexManager.isHybridRightCode(str) && str.length() > 10) {
+//                        setupBackground();
+//						strength3.setBackgroundResource(R.drawable.button_solid_red);
+//					}
+//			        //既不是单一组合，也不包含三种字符类型或者包含三种字符但长度不够10的，均显示为中
+//					else {
+//                        setupBackground();
+//			        	strength2.setBackgroundResource(R.drawable.button_solid_blue);
+//					}
 				}
             }  
               
@@ -160,7 +181,7 @@ public class Activity_Register_Next extends Activity_Base implements Interface_V
 				
 			}
             //默认为灰色
-            private void setupBackground() {
+            private void setupPasswordColor() {
                 strength1.setBackgroundResource(R.drawable.button_solid_gray);
                 strength2.setBackgroundResource(R.drawable.button_solid_gray);
                 strength3.setBackgroundResource(R.drawable.button_solid_gray);

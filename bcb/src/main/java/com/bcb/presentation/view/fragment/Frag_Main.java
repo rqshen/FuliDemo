@@ -643,12 +643,15 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPa
         BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.MainFragmentListData, obj, TokenUtil.getEncodeToken(ctx), new BcbRequest.BcbCallBack<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
+                LogUtil.i("bqt", "【Frag_Main】【onResponse】精品项目" + response.toString());
+
                 try {
                     if (PackageUtil.getRequestStatus(response, ctx)) {
                         JSONObject obj = PackageUtil.getResultObject(response);
                         MainListBean mainListBean = null;
                         //判断JSON对象是否为空, 不为空则分别获取数据
                         if (obj != null) {
+                            //******************************************************************************************
                             mainListBean = App.mGson.fromJson(obj.toString(), MainListBean.class);
                             //设置体验标
                             setupExpiredView(mainListBean);
@@ -829,10 +832,10 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPa
     //新手标项目点击事件
     class newItemClickListener implements AdapterView.OnItemClickListener{
         public void onItemClick(AdapterView<?> arg0, View view, int position,long arg3) {
-            Activity_NormalProject_Introduction.launche(ctx,
-                    newRecordsBeans.get(position).getPackageId(),
-                    newRecordsBeans.get(position).getName(),
-                    newRecordsBeans.get(position).getCouponType());
+//            Activity_NormalProject_Introduction.launche(ctx,
+//                    newRecordsBeans.get(position).getPackageId(),
+//                    newRecordsBeans.get(position).getName(),
+//                    newRecordsBeans.get(position).getCouponType());
         }
     }
 
@@ -840,19 +843,19 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPa
     class boutiqueItemClickListener implements AdapterView.OnItemClickListener {
         public void onItemClick(AdapterView<?> arg0, View view, int position,long arg3) {
             //判断是否属于新标预告的状态，根据状态来判断是否可点击
-            if (boutqueRecordsBeans.get(position).getStatus() == 10) {
+            if (boutqueRecordsBeans.get(position).Status == 10) {
                 return;
             }
             //判断是否可投标的
-            if (boutqueRecordsBeans.get(position).getStatus() == 20) {
+            if (boutqueRecordsBeans.get(position).Status== 20) {
                 UmengUtil.eventById(ctx, R.string.bid_avi);
             } else {
                 UmengUtil.eventById(ctx, R.string.bid_unavi);
             }
             Activity_NormalProject_Introduction.launche(ctx,
-                    boutqueRecordsBeans.get(position).getPackageId(),
-                    boutqueRecordsBeans.get(position).getName(),
-                    boutqueRecordsBeans.get(position).getCouponType());
+                    boutqueRecordsBeans.get(position).PackageId,
+                    boutqueRecordsBeans.get(position).Name,
+                    0);//boutqueRecordsBeans.get(position).getCouponType()
         }
     }
 

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+
+    android:orientation="vertical">
+    <!-- 标题 -->
+    <include layout="@layout/frag_base"/>
+
+    <ImageView
+        android:id="@+id/iv_pic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="100dp"
+        android:src="@drawable/failed_band_fh"/>
+
+    <TextView
+        android:id="@+id/tv_up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:singleLine="true"
+        android:text="绑卡失败！"
+        android:textColor="#3e3f43"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/tv_down"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:singleLine="true"
+        android:text="信息验证出现错误"
+        android:textColor="#3e3f43"
+        android:textSize="13sp"/>
+
+    <TextView
+        android:id="@+id/tv_next"
+        android:layout_width="300dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/button_solid_red"
+        android:gravity="center"
+        android:text="联系客服"
+        android:textColor="#fff"
+        android:textSize="16sp"/>
+</LinearLayout>
+
+

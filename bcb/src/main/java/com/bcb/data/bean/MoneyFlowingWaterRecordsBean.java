@@ -4,13 +4,13 @@ public class MoneyFlowingWaterRecordsBean {
     private String BillId;
     private String TransNo;
 	private String Title;
-	private String Amount;
+	private float Amount;//float
 	private String Status;
 	private String Descn;
     private String StatusDescn;
 	private String Time;
 	private String CategoryName;
-	private String Type;
+	private int Type;
     private int TopCategoryId;  //交易类型
     private int StatusGroup;    //交易分组，表示是否成功还是失败
 
@@ -39,20 +39,20 @@ public class MoneyFlowingWaterRecordsBean {
 		Title = title;
 	}
 
-	public String getAmount() {
+	public float getAmount() {
 		return Amount;
 	}
 
-	public void setAmount(String amount) {
+	public void setAmount(float amount) {
 		Amount = amount;
 	}
 
-    public String getStatusDescn() {
-        return StatusDescn;
+    public String getStatus() {
+        return Status;
     }
 
-    public void setStatusDescn(String statusDescn) {
-        StatusDescn = statusDescn;
+    public void setStatus(String status) {
+        Status = status;
     }
 	public String getTime() {
         Time = Time.substring(0, 5).replace('-','年')+ Time.substring(5, 10).replace('-', '月')+ "日";
@@ -71,21 +71,12 @@ public class MoneyFlowingWaterRecordsBean {
 		CategoryName = categoryName;
 	}
 
-	public String getType() {
+	public int getType() {
 		return Type;
 	}
 
-    public int getTypeInteger() {
-        if (getType().equals("支出")) {
-            return 1;
-        } else if (getType().equals("收入")) {
-            return 2;
-        } else {
-            return 0;
-        }
-    }
 
-	public void setType(String type) {
+	public void setType(int type) {
 		Type = type;
 	}
 

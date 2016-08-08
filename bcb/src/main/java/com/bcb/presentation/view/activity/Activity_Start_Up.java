@@ -17,19 +17,7 @@ import android.view.WindowManager;
 
 import com.bcb.R;
 import com.bcb.common.app.App;
-import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbRequest;
-import com.bcb.common.net.BcbRequestTag;
-import com.bcb.common.net.UrlsOne;
-import com.bcb.common.net.UrlsTwo;
-import com.bcb.data.bean.UserDetailInfo;
-import com.bcb.data.bean.UserWallet;
-import com.bcb.data.util.LogUtil;
-import com.bcb.data.util.PackageUtil;
-import com.bcb.data.util.TokenUtil;
 import com.bcb.data.util.UmengUtil;
-
-import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -54,8 +42,8 @@ public class Activity_Start_Up extends Activity {
 		super.onCreate(savedInstanceState);
 		ctx=Activity_Start_Up.this;
 		setContentView(R.layout.activity_startup);
-		requestUserWallet();
-		requestUserMessage();
+//		requestUserWallet();
+//		requestUserMessage();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Window window = this.getWindow();
             //顶部状态栏
@@ -229,60 +217,60 @@ public class Activity_Start_Up extends Activity {
 
 	//******************************************************************************************
 	private Context ctx;
-	private UserWallet mUserWallet;
-	private UserDetailInfo mUserDetailInfo;
-	private void requestUserWallet() {
-		BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.UserWalletMessage, null, TokenUtil.getEncodeToken(ctx), new BcbRequest.BcbCallBack<JSONObject>() {
-			@Override
-			public void onResponse(JSONObject response) {
-				LogUtil.i("bqt", "请求用户资产账户返回：" + response.toString());
-				if (PackageUtil.getRequestStatus(response, ctx)) {
-					JSONObject data = PackageUtil.getResultObject(response);
-					//判断JSON对象是否为空
-					if (data != null) {
-						//注意数据结构变了，2016-7-26
-						mUserWallet = App.mGson.fromJson(data.toString(), UserWallet.class);
-					}
-					if (null != mUserWallet) {
-						//先将数据写入全局静态数据区
-						App.mUserWallet = mUserWallet;
-					}
-				}
-			}
-
-			@Override
-			public void onErrorResponse(Exception error) {
-			}
-		});
-		jsonRequest.setTag(BcbRequestTag.UserWalletMessageTag);
-		App.getInstance().getRequestQueue().add(jsonRequest);
-	}
-
-	private void requestUserMessage() {
-		BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsTwo.UserMessage, null, TokenUtil.getEncodeToken(ctx), new BcbRequest.BcbCallBack<JSONObject>() {
-			@Override
-			public void onResponse(JSONObject response) {
-				LogUtil.i("bqt", "用户信息返回数据：" + response.toString());
-				if (PackageUtil.getRequestStatus(response, ctx)) {
-					JSONObject data = PackageUtil.getResultObject(response);
-					//判断JSON对象是否为空
-					if (data != null) {
-						mUserDetailInfo = App.mGson.fromJson(data.toString(), UserDetailInfo.class);
-					}
-					//用户银行卡信息不为空，则将其存放到静态数据区
-					if (null != mUserDetailInfo) {
-						//将获取到的银行卡数据写入静态数据区中
-						App.mUserDetailInfo = mUserDetailInfo;
-					}
-				}
-			}
-
-			@Override
-			public void onErrorResponse(Exception error) {
-
-			}
-		});
-		jsonRequest.setTag(BcbRequestTag.UserBankMessageTag);
-		App.getInstance().getRequestQueue().add(jsonRequest);
-	}
+//	private UserWallet mUserWallet;
+//	private UserDetailInfo mUserDetailInfo;
+//	private void requestUserWallet() {
+//		BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.UserWalletMessage, null, TokenUtil.getEncodeToken(ctx), new BcbRequest.BcbCallBack<JSONObject>() {
+//			@Override
+//			public void onResponse(JSONObject response) {
+//				LogUtil.i("bqt", "请求用户资产账户返回：" + response.toString());
+//				if (PackageUtil.getRequestStatus(response, ctx)) {
+//					JSONObject data = PackageUtil.getResultObject(response);
+//					//判断JSON对象是否为空
+//					if (data != null) {
+//						//注意数据结构变了，2016-7-26
+//						mUserWallet = App.mGson.fromJson(data.toString(), UserWallet.class);
+//					}
+//					if (null != mUserWallet) {
+//						//先将数据写入全局静态数据区
+//						App.mUserWallet = mUserWallet;
+//					}
+//				}
+//			}
+//
+//			@Override
+//			public void onErrorResponse(Exception error) {
+//			}
+//		});
+//		jsonRequest.setTag(BcbRequestTag.UserWalletMessageTag);
+//		App.getInstance().getRequestQueue().add(jsonRequest);
+//	}
+//
+//	private void requestUserMessage() {
+//		BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsTwo.UserMessage, null, TokenUtil.getEncodeToken(ctx), new BcbRequest.BcbCallBack<JSONObject>() {
+//			@Override
+//			public void onResponse(JSONObject response) {
+//				LogUtil.i("bqt", "用户信息返回数据：" + response.toString());
+//				if (PackageUtil.getRequestStatus(response, ctx)) {
+//					JSONObject data = PackageUtil.getResultObject(response);
+//					//判断JSON对象是否为空
+//					if (data != null) {
+//						mUserDetailInfo = App.mGson.fromJson(data.toString(), UserDetailInfo.class);
+//					}
+//					//用户银行卡信息不为空，则将其存放到静态数据区
+//					if (null != mUserDetailInfo) {
+//						//将获取到的银行卡数据写入静态数据区中
+//						App.mUserDetailInfo = mUserDetailInfo;
+//					}
+//				}
+//			}
+//
+//			@Override
+//			public void onErrorResponse(Exception error) {
+//
+//			}
+//		});
+//		jsonRequest.setTag(BcbRequestTag.UserBankMessageTag);
+//		App.getInstance().getRequestQueue().add(jsonRequest);
+//	}
 }

@@ -1,63 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/background"
-    android:orientation="vertical" >
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/background"
+              android:orientation="vertical">
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/red"
         android:orientation="horizontal"
+        android:paddingBottom="20dp"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
-        android:paddingTop="10dp"
-        android:paddingBottom="15dp"
-        android:background="@color/red">
-        <!-- 购买金额 -->
+        android:paddingTop="10dp">
+        <!-- 投资总额 -->
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:layout_weight="1"
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="购买成功"
+                android:text="再投本金(元)"
                 android:textColor="@color/white"
-                android:textSize="18sp" />
+                android:textSize="18sp"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/amount"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="5dp"
-                android:orientation="horizontal">
+                android:paddingRight="20dp"
+                android:paddingTop="10dp"
+                android:singleLine="true"
+                android:text="0.00"
+                android:textColor="@color/white"
+                android:textSize="22sp"/>
+        </LinearLayout>
 
-                <TextView
-                    android:id="@+id/amount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="-00"
-                    android:textColor="@color/white"
-                    android:textSize="35sp" />
-                <TextView
-                    android:id="@+id/decimal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=".00"
-                    android:textColor="@color/white"
-                    android:textSize="25sp" />
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="@color/white"/>
 
-            </LinearLayout>
+        <!-- 累计收益 -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="已获收益(元)"
+                android:textColor="@color/white"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/income"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:singleLine="true"
+                android:text="0.00"
+                android:textColor="@color/white"
+                android:textSize="22sp"/>
         </LinearLayout>
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_away"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/red"
+        android:gravity="center"
+        android:paddingBottom="20dp"
+        android:text="100日后可申请转让，持有可继续享受0.00%收益"
+        android:textColor="#B3ffffff"
+        android:textSize="12sp"/>
+
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -68,222 +101,257 @@
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:orientation="vertical"
-                android:padding="0dip" >
+                android:paddingLeft="5dip"
+                android:paddingRight="5dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="查看回款计划"
+                        android:textColor="#666"
+                        android:textSize="@dimen/main_text_default"/>\
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/forward_default"/>
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/linegray"/>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="15dp">
+                    android:padding="10dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="项目名称"
-                        android:textColor="@color/txt_gray"
-                        android:textSize="@dimen/main_text_default" />\
+                        android:textColor="#666"
+                        android:textSize="@dimen/main_text_default"/>\
 
                     <TextView
                         android:id="@+id/name"
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
-                        android:gravity="right"
                         android:layout_marginLeft="20dp"
-                        android:textColor="@color/txt_black"
-                        android:textSize="@dimen/main_text_default" />
+                        android:gravity="right"
+                        android:textColor="#666"
+                        android:textSize="@dimen/main_text_default"/>
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1px"
-                    android:background="@color/linegray" />
+                    android:background="@color/linegray"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="15dp">
+                    android:padding="10dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="预期收益"
-                        android:textColor="@color/txt_gray"
-                        android:textSize="@dimen/main_text_default" />\
-
-                    <TextView
-                        android:id="@+id/expected_earning"
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:gravity="right"
-                        android:layout_marginLeft="20dp"
-                        android:textColor="@color/txt_black"
-                        android:textSize="@dimen/main_text_default" />
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:background="@color/linegray" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="15dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="投资时间"
-                        android:textColor="@color/txt_gray"
-                        android:textSize="@dimen/main_text_default" />\
+                        android:text="加入时间"
+                        android:textColor="#666"
+                        android:textSize="@dimen/main_text_default"/>\
 
                     <TextView
                         android:id="@+id/bidding_time"
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
-                        android:gravity="right"
                         android:layout_marginLeft="20dp"
-                        android:textColor="@color/txt_black"
-                        android:textSize="@dimen/main_text_default" />
+                        android:gravity="right"
+                        android:textColor="#666"
+                        android:textSize="@dimen/main_text_default"/>
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1px"
-                    android:background="@color/linegray" />
+                    android:background="@color/linegray"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="15dp">
+                    android:padding="10dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="融资金额"
-                        android:textColor="@color/txt_gray"
-                        android:textSize="@dimen/main_text_default" />\
-
-                    <TextView
-                        android:id="@+id/financing_amount"
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:gravity="right"
-                        android:layout_marginLeft="20dp"
-                        android:textColor="@color/txt_black"
-                        android:textSize="@dimen/main_text_default" />
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:background="@color/linegray" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="15dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="年化收益率"
-                        android:textColor="@color/txt_gray"
-                        android:textSize="@dimen/main_text_default" />\
-
-                    <TextView
-                        android:id="@+id/annual_yield"
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:gravity="right"
-                        android:layout_marginLeft="20dp"
-                        android:textColor="@color/txt_black"
-                        android:textSize="@dimen/main_text_default" />
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:background="@color/linegray" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="15dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="项目起利期"
-                        android:textColor="@color/txt_gray"
-                        android:textSize="@dimen/main_text_default" />\
-
-                    <TextView
-                        android:id="@+id/earnings_beginning"
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:gravity="right"
-                        android:layout_marginLeft="20dp"
-                        android:textColor="@color/txt_black"
-                        android:textSize="@dimen/main_text_default" />
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:background="@color/linegray" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="15dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="项目到期日"
-                        android:textColor="@color/txt_gray"
-                        android:textSize="@dimen/main_text_default" />\
+                        android:text="封  闭  期"
+                        android:textColor="#666"
+                        android:textSize="@dimen/main_text_default"/>\
 
                     <TextView
                         android:id="@+id/earnings_end"
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
-                        android:gravity="right"
                         android:layout_marginLeft="20dp"
-                        android:textColor="@color/txt_black"
-                        android:textSize="@dimen/main_text_default" />
+                        android:gravity="right"
+                        android:textColor="#666"
+                        android:textSize="@dimen/main_text_default"/>
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1px"
-                    android:background="@color/linegray" />
+                    android:background="@color/linegray"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="预期收益"
+                        android:textColor="#666"
+                        android:textSize="@dimen/main_text_default"/>\
+
+                    <TextView
+                        android:id="@+id/expected_earning"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_marginLeft="20dp"
+                        android:gravity="right"
+                        android:textColor="#666"
+                        android:textSize="@dimen/main_text_default"/>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/linegray"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="起息时间"
+                        android:textColor="#666"
+                        android:textSize="@dimen/main_text_default"/>\
+
+                    <TextView
+                        android:id="@+id/earnings_beginning"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_marginLeft="20dp"
+                        android:gravity="right"
+                        android:textColor="#666"
+                        android:textSize="@dimen/main_text_default"/>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/linegray"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="融资金额"
+                        android:textColor="#666"
+                        android:textSize="@dimen/main_text_default"/>\
+
+                    <TextView
+                        android:id="@+id/financing_amount"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_marginLeft="20dp"
+                        android:gravity="right"
+                        android:textColor="#666"
+                        android:textSize="@dimen/main_text_default"/>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/linegray"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="年化收益"
+                        android:textColor="#666"
+                        android:textSize="@dimen/main_text_default"/>\
+
+                    <TextView
+                        android:id="@+id/annual_yield"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_marginLeft="20dp"
+                        android:gravity="right"
+                        android:textColor="#666"
+                        android:textSize="@dimen/main_text_default"/>
+
+
+                </LinearLayout>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/linegray"/>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="23dp"
-                android:layout_marginBottom="23dp"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="23dp"
+                android:layout_marginTop="23dp"
                 android:orientation="horizontal">
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/money_item_detail_phone"/>
+                    android:background="@drawable/money_item_detail_phone"
+                    android:visibility="gone"/>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
-                    android:textSize="@dimen/main_text_small"
-                    android:textColor="@color/txt_gray"
-                    android:text="联系客服：020-38476886"/>
+                    android:text="账户资金由汇付天下进行托管"
+                    android:textColor="#999"
+                    android:textSize="@dimen/main_text_small"/>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

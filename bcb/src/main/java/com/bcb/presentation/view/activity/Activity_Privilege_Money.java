@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bcb.R;
@@ -16,6 +17,7 @@ import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
 import com.bcb.common.net.UrlsTwo;
+import com.bcb.data.bean.PrivilegeMoneyBasic;
 import com.bcb.data.bean.PrivilegeMoneyDto;
 import com.bcb.data.util.HttpUtils;
 import com.bcb.data.util.LogUtil;
@@ -50,7 +52,7 @@ public class Activity_Privilege_Money extends Activity_Base implements AdapterVi
     private boolean canLoadmore = true;
     private PullToRefreshLayout refreshLayout;
     private RelativeLayout loadmore_view;
-
+    TextView tv_shouyi_all, tv_benjin, tv_shouyi;
 
     public static void launch(Context context) {
         Intent intent = new Intent(context, Activity_Privilege_Money.class);
@@ -61,6 +63,10 @@ public class Activity_Privilege_Money extends Activity_Base implements AdapterVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setBaseContentView(R.layout.activity_privilege_money);
+        tv_shouyi_all = (TextView) findViewById(R.id.tv_shouyi_all);
+        tv_benjin = (TextView) findViewById(R.id.tv_benjin);
+        tv_shouyi = (TextView) findViewById(R.id.tv_shouyi);
+
         //管理Activity栈，用于忘记密码的时候，跳转至登陆界面之前销毁栈中所有的Activity
         MyActivityManager.getInstance().pushOneActivity(Activity_Privilege_Money.this);
         setTitleValue("特权本金");
@@ -101,12 +107,12 @@ public class Activity_Privilege_Money extends Activity_Base implements AdapterVi
             @Override
             public void onLoadMore(PullToRefreshLayout pullToRefreshLayout) {
                 if (HttpUtils.isNetworkConnected(ctx)) {
-//                    if (canLoadmore) {
-//                        loadData();
-//                    } else {
-//                        loadmore_view.setVisibility(View.GONE);
-//                        refreshLayout.loadmoreFinish(PullToRefreshLayout.NOMORE);
-//                    }
+                    if (canLoadmore) {
+                        loadData();
+                    } else {
+                        loadmore_view.setVisibility(View.GONE);
+                        refreshLayout.loadmoreFinish(PullToRefreshLayout.NOMORE);
+                    }
                 } else {
                     ToastUtil.alert(ctx, "网络异常，请稍后再试");
                     refreshLayout.loadmoreFinish(PullToRefreshLayout.FAIL);
@@ -118,31 +124,29 @@ public class Activity_Privilege_Money extends Activity_Base implements AdapterVi
     }
 
     private void loadData() {
-        //测试数据
-//        for (int i = 0; i < 10; i++) {
-//            PrivilegeMoneyDto dto = new PrivilegeMoneyDto();
-//            dto.setTitle("10000特权本金" + i);
-//            dto.setIncome(i);
-//            dto.setTerm("2016年7月10日过期");
-//            datas.add(dto);
-//        }
 
 //******************************************************************************************
         BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsTwo.UserPrivilegeMoneyDto, null, TokenUtil.getEncodeToken(ctx), new BcbRequest.BcbCallBack<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                LogUtil.i("bqt", "用户特权金返回数据：" + response.toString());
+                LogUtil.i("bqt", "【特权金返回数据】" + response.toString());
                 if (PackageUtil.getRequestStatus(response, ctx)) {
                     JSONObject data = PackageUtil.getResultObject(response);
                     //判断JSON对象是否为空
                     if (data != null) {
+                        PrivilegeMoneyBasic bean = App.mGson.fromJson(data.toString(), PrivilegeMoneyBasic.class);
+                        tv_shouyi_all.setText(String.format("%.2f",bean.TotalIncome));
+                        tv_benjin.setText(String.format("%.2f",bean.ActivedPrincipal));
+                        tv_shouyi.setText(String.format("%.2f",bean.ActivedIncome));
+
+                        //列表
                         JSONArray jsonArray = data.optJSONArray("DataList");
-                        if (jsonArray != null ) {
+                        if (jsonArray != null) {
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 try {
                                     JSONObject item = jsonArray.getJSONObject(i);
                                     datas.add(App.mGson.fromJson(item.toString(), PrivilegeMoneyDto.class));
-                                }catch (JSONException e) {
+                                } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
                             }

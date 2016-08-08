@@ -229,9 +229,9 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="12dip"
                             android:gravity="center"
-                            android:text=""
+                            android:text="0.00"
                             android:textSize="@dimen/main_text_default"
-                            android:textColor="@color/txt_black"/>
+                            android:textColor="#db3838"/>
                     </LinearLayout>
                 </LinearLayout>
                 <ImageView
@@ -260,7 +260,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="投资期限"
+                            android:text="封闭期"
                             android:textSize="@dimen/main_text_default"
                             android:textColor="@color/txt_gray"/>
                         <TextView
@@ -269,9 +269,9 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:layout_marginTop="12dip"
-                            android:text=""
+                            android:text="0天"
                             android:textSize="@dimen/main_text_default"
-                            android:textColor="@color/txt_black"/>
+                            android:textColor="#db3838"/>
                     </LinearLayout>
                 </LinearLayout>
                 <ImageView
@@ -311,8 +311,8 @@
                             android:layout_marginTop="12dip"
                             android:singleLine="true"
                             android:textSize="@dimen/project_font_size"
-                            android:textColor="@color/txt_black"
-                            android:text="" />
+                            android:textColor="#db3838"
+                            android:text="0.00" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -423,6 +423,7 @@
                             android:text="起息日"/>
 
                         <TextView
+                            android:id="@+id/tv_qx"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
@@ -513,7 +514,7 @@
                                 android:layout_marginRight="10dp"
                                 android:layout_centerVertical="true"
                                 android:layout_alignParentRight="true"
-                                android:text=""
+                                android:text="百财帮"
                                 android:textColor="@color/txt_black"
                                 android:textSize="@dimen/main_text_default"/>
                             <ImageView
@@ -563,7 +564,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_centerVertical="true"
                                     android:layout_alignParentRight="true"
-                                    android:text=""
+                                    android:text="HR审核"
                                     android:textColor="@color/txt_black"
                                     android:textSize="@dimen/main_text_default"/>
                             </RelativeLayout>

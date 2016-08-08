@@ -78,7 +78,8 @@ public class Activity_Open_Account extends Activity_Base implements View.OnClick
                             //传递的 参数
                             String postData = HttpUtils.jsonToStr(result.toString());
                             //跳转到webview
-                            Activity_Browser.launche(Activity_Open_Account.this, "汇付天下资金托管", postUrl, true, postData);
+                            Activity_WebView.launche(Activity_Open_Account.this, "汇付天下资金托管", postUrl,  postData);
+                            finish();
                         }
                     } catch (Exception e) {
                         LogUtil.d("bqt", "【Activity_Open_Account】【OpenAccount】" + e.getMessage());

@@ -467,6 +467,10 @@
         </activity>
         <activity android:name=".presentation.view.activity.Activity_Charge_HF">
         </activity>
+        <activity android:name=".presentation.view.activity.Activity_Tips_FaileOrSuccess">
+        </activity>
+        <activity android:name=".presentation.view.activity.Activity_WebView">
+        </activity>
     </application>
 
 </manifest>

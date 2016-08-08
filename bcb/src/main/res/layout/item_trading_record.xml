@@ -13,8 +13,9 @@
         <TextView
             android:id="@+id/value_date"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/margin_size_large"
+            android:layout_height="35dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/margin_size_large"
             android:textSize="13sp"
             android:textColor="@color/date_txt_gray"
             android:text="2016年03月38日"/>
@@ -28,7 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:padding="@dimen/margin_size_large"
+        android:paddingLeft="@dimen/margin_size_large"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -42,6 +43,7 @@
                 android:singleLine="true"
                 android:layout_marginRight="10dip"
                 android:layout_width="wrap_content"
+                android:layout_marginTop="5dp"
                 android:layout_height="wrap_content"
                 android:text="XXX"
                 android:textColor="@color/txt_black"
@@ -53,6 +55,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:text="0.00元"
+                android:layout_marginBottom="5dp"
                 android:textColor="@color/red"
                 android:textSize="@dimen/main_text_large"/>
         </LinearLayout>
@@ -64,6 +67,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="XXXX"
+            android:layout_marginRight="10dp"
             android:layout_gravity="center_vertical"
             android:textColor="@color/txt_black"
             android:textSize="@dimen/main_text_small"/>

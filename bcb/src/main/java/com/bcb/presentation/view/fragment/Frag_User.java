@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bcb.R;
 import com.bcb.common.app.App;
@@ -26,6 +27,7 @@ import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
 import com.bcb.common.net.UrlsOne;
 import com.bcb.common.net.UrlsTwo;
+import com.bcb.data.bean.UserBankCard;
 import com.bcb.data.bean.UserDetailInfo;
 import com.bcb.data.bean.UserWallet;
 import com.bcb.data.util.HttpUtils;
@@ -36,7 +38,6 @@ import com.bcb.data.util.ToastUtil;
 import com.bcb.data.util.TokenUtil;
 import com.bcb.data.util.UmengUtil;
 import com.bcb.presentation.view.activity.Activity_Account_Setting;
-import com.bcb.presentation.view.activity.Activity_Authentication;
 import com.bcb.presentation.view.activity.Activity_Charge_HF;
 import com.bcb.presentation.view.activity.Activity_Coupons;
 import com.bcb.presentation.view.activity.Activity_Join_Company;
@@ -47,6 +48,8 @@ import com.bcb.presentation.view.activity.Activity_Open_Account;
 import com.bcb.presentation.view.activity.Activity_Privilege_Money;
 import com.bcb.presentation.view.activity.Activity_Trading_Record;
 import com.bcb.presentation.view.activity.Activity_TuoGuan_HF;
+import com.bcb.presentation.view.activity.Activity_WebView;
+import com.bcb.presentation.view.activity.Activity_Withdraw;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
 import com.bcb.presentation.view.custom.CustomDialog.DialogWidget;
 import com.bcb.presentation.view.custom.CustomDialog.IdentifyAlertView;
@@ -64,13 +67,11 @@ public class Frag_User extends Frag_Base implements OnClickListener {
     private UserWallet mUserWallet;
     private UserDetailInfo mUserDetailInfo;
 
-    private boolean firstLoadWallet;
-    private boolean firstLoadBankInfo;
 
     //加载数据状态
-    private boolean loadingStatus;
+    private boolean loadingStatus = true;
     //加载数据失败的状态
-    private boolean loadingError;
+    private boolean loadingError = false;
 
     //加入公司
     private LinearLayout user_company_layout;
@@ -104,14 +105,6 @@ public class Frag_User extends Frag_Base implements OnClickListener {
         this.ctx = ctx;
     }
 
-    @Override
-    public void onCreate(Bundle savedBundle) {
-        super.onCreate(savedBundle);
-        firstLoadWallet = true;
-        firstLoadBankInfo = true;
-        loadingStatus = true;
-        loadingError = false;
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -132,7 +125,6 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 
         //加入公司
         joinCompany = (ImageView) view.findViewById(R.id.join_company);
-//        joinCompany.setVisibility(View.GONE);
         joinCompany.setOnClickListener(this);
 
         //已经加入公司的LinearLayout及其元素
@@ -215,11 +207,9 @@ public class Frag_User extends Frag_Base implements OnClickListener {
             @Override
             public void onRefresh(PullToRefreshLayout pullToRefreshLayout) {
                 if (HttpUtils.isNetworkConnected(ctx)) {
-                    //刷新跟第一次加载是一样的效果，都是要求请求
-                    firstLoadWallet = true;
-                    loadUserWallet();
-                    firstLoadBankInfo = true;
-                    loadUserBankInfo();
+                    requestUserDetailInfo();
+                    requestUserWallet();
+//                    requestUserBankCard();
                 } else {
                     ToastUtil.alert(ctx, "网络异常，请稍后重试");
                     refreshLayout.refreshFinish(PullToRefreshLayout.FAIL);
@@ -234,8 +224,26 @@ public class Frag_User extends Frag_Base implements OnClickListener {
         if (App.saveUserInfo.getAccess_Token() != null) {
             refreshLayout.autoRefresh();
         }
+
+        if (App.saveUserInfo.getAccess_Token() != null) {
+            requestUserDetailInfo();
+            requestUserWallet();
+//            requestUserBankCard();
+        }
+        //Token不存在时，则表示没有登陆
+        else {
+            //设置banner
+            setupJoinCompanyMessage();
+            //初始化余额信息
+            showData();
+        }
     }
 
+    @Override
+    public void onResume() {
+        showData();
+        super.onResume();
+    }
     private void showPhoneService() {
         AlertView.Builder ibuilder = new AlertView.Builder(ctx);
         ibuilder.setTitle("是否电联客服？");
@@ -253,172 +261,22 @@ public class Frag_User extends Frag_Base implements OnClickListener {
         alertView.show();
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        if (App.saveUserInfo.getAccess_Token() != null) {
-            //加载用户余额
-            loadUserWallet();
-            //加载用户会员银行卡信息
-            loadUserBankInfo();
-        }
-        //Token不存在时，则表示没有登陆
-        else {
-            //设置banner
-            setupJoinCompanyMessage();
-            //初始化余额信息
-            showData();
-        }
-    }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
-
-    /**************
-     * 请求获取用户余额信息
-     *************************/
-    //加载用户余额信息
-    private void loadUserWallet() {
-        //第一次加载Fragment的时候，要请求数据，新创建Fragment和刷新都算第一次加载
-        if (firstLoadWallet) {
-            firstLoadWallet = false;
-            requestUserWallet();
-        }
-
-        //如果不是第一次加载数据，则先从静态数据区中加载数据（如果存在的时候），不存在则从服务器中获取
-        //这里是防止用户退出，数据清空了，然后重新登录，出现数据错误
-        else {
-            //判断是否为空
-            if (App.mUserWallet == null) {
-                requestUserWallet();
-            } else {
-                showData();
-                refreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
-                refreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
-            }
-        }
-    }
-
-    private void requestUserWallet() {
-        BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.UserWalletMessage, null, TokenUtil.getEncodeToken(ctx), new BcbRequest.BcbCallBack<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                LogUtil.i("bqt", "请求用户资产账户返回：" + response.toString());
-                if (PackageUtil.getRequestStatus(response, ctx)) {
-                    JSONObject data = PackageUtil.getResultObject(response);
-                    //判断JSON对象是否为空
-                    if (data != null) {
-                        //注意数据结构变了，2016-7-26
-                        mUserWallet = App.mGson.fromJson(data.toString(), UserWallet.class);
-                    }
-                    if (null != mUserWallet) {
-                        //先将数据写入全局静态数据区
-                        App.mUserWallet = mUserWallet;
-                        //显示数据
-                        showData();
-                    }
-                } else {
-                    value_earn.setText("0.00");
-                    value_balance.setText("0.00");
-                    value_back.setText("0.00");
-                    value_total.setText("0.00");
-                }
-                loadingStatus = false;
-                refreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
-            }
-
-            @Override
-            public void onErrorResponse(Exception error) {
-                ToastUtil.alert(ctx, "网络异常，请稍后重试");
-                refreshLayout.refreshFinish(PullToRefreshLayout.FAIL);
-                loadingError = true;
-            }
-        });
-        jsonRequest.setTag(BcbRequestTag.UserWalletMessageTag);
-        requestQueue.add(jsonRequest);
-    }
 
     //从静态数据区中取出数据
     private void showData() {
-        if (App.mUserDetailInfo == null) {
-
-            value_earn.setText("0.00");
-            value_balance.setText("0.00");
-            value_back.setText("0.00");
-            value_total.setText("0.00");
-            return;
-        }
-        //总资产
-        value_earn.setText("" + String.format("%.2f", App.mUserWallet.getTotalAsset()));
-        //账户余额
-        if (App.mUserWallet.getBalanceAmount() <= 0) {
-            value_balance.setText("0.00");
-        } else {
+        if (App.mUserWallet != null) {
+            //总资产
+            value_earn.setText("" + String.format("%.2f", App.mUserWallet.getTotalAsset()));
+            //账户余额
             value_balance.setText("" + String.format("%.2f", App.mUserWallet.getBalanceAmount()));
-        }
-        //待收本息
-        value_back.setText("" + String.format("%.2f", App.mUserWallet.getIncomingMoney()));
-        //冻结金额
-        value_total.setText("" + String.format("%.2f", App.mUserWallet.getFreezeAmount()));
-    }
-
-
-    /*********************
-     * 获取用户银行卡信息
-     ***************************/
-    //获取用户银行卡信息
-    private void loadUserBankInfo() {
-        //第一次加载Fragment的时候，则获取网络数据，新创建Fragment和刷新都算第一次加载
-        if (firstLoadBankInfo) {
-            firstLoadBankInfo = false;
-            requestUserMessage();
-        }
-        //不是第一次记载的时候，从静态数据区获取数据
-        else {
-            //如果静态数据区没有数据，则请求
-            if (App.mUserDetailInfo == null) {
-                requestUserMessage();
-            }
-            //静态数据区存在数据，则直接赋值，不用再请求了
-            else {
-                mUserDetailInfo = App.mUserDetailInfo;
-                //加载用户加入公司的信息
-                setupJoinCompanyMessage();
-            }
+            //待收本息
+            value_back.setText("" + String.format("%.2f", App.mUserWallet.getIncomingMoney()));
+            //冻结金额
+            value_total.setText("" + String.format("%.2f", App.mUserWallet.getFreezeAmount()));
         }
     }
 
-    private void requestUserMessage() {
-        BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsTwo.UserMessage, null, TokenUtil.getEncodeToken(ctx), new BcbRequest.BcbCallBack<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                LogUtil.i("bqt", "用户信息返回数据：" + response.toString());
-                if (PackageUtil.getRequestStatus(response, ctx)) {
-                    JSONObject data = PackageUtil.getResultObject(response);
-                    //判断JSON对象是否为空
-                    if (data != null) {
-                        mUserDetailInfo = App.mGson.fromJson(data.toString(), UserDetailInfo.class);
-                    }
-                    //用户银行卡信息不为空，则将其存放到静态数据区
-                    if (null != mUserDetailInfo) {
-                        //将获取到的银行卡数据写入静态数据区中
-                        App.mUserDetailInfo = mUserDetailInfo;
-                        //加载用户加入公司的信息
-                        setupJoinCompanyMessage();
-                    }
-                }
-            }
-
-            @Override
-            public void onErrorResponse(Exception error) {
-
-            }
-        });
-        jsonRequest.setTag(BcbRequestTag.UserBankMessageTag);
-        requestQueue.add(jsonRequest);
-    }
 
     //加载用户加入公司的信息
     private void setupJoinCompanyMessage() {
@@ -426,8 +284,6 @@ public class Frag_User extends Frag_Base implements OnClickListener {
         if (App.mUserDetailInfo == null) {
             joinCompany.setVisibility(View.VISIBLE);
             user_company_layout.setVisibility(View.GONE);
-            user_comany_shortname.setText("");
-            user_join_name.setText("");
             return;
         }
         //如果加入公司信息不为空并且状态值为10(通过)的时候，则显示用户名和加入公司的缩写
@@ -442,19 +298,13 @@ public class Frag_User extends Frag_Base implements OnClickListener {
                 joinCompany.setVisibility(View.VISIBLE);
                 user_company_layout.setVisibility(View.GONE);
             }
-
         }
         //如果加入公司信息为空的时候，则要判断是否要隐藏Banner
         else {
             user_company_layout.setVisibility(View.GONE);
             //根据标志为判断是否隐藏加入公司Banner
-            if (App.viewJoinBanner) {
-                joinCompany.setVisibility(View.VISIBLE);
-            } else {
-                joinCompany.setVisibility(View.GONE);
-                user_join_name.setText("");
-                user_comany_shortname.setText("");
-            }
+            if (App.viewJoinBanner) joinCompany.setVisibility(View.VISIBLE);
+            else joinCompany.setVisibility(View.GONE);
         }
     }
 
@@ -549,9 +399,8 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 
     //加入公司
     private void toJoinCompany() {
-        //如果未认证，则去认证
-        if (mUserDetailInfo == null || !mUserDetailInfo.HasCert) {
-            popCertDialog();
+        if (mUserDetailInfo == null || !mUserDetailInfo.HasOpenCustody) {
+            popHFDialog();
         }
         //否则需要判断MyCompany字段
         else {
@@ -572,9 +421,9 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 
 
     /************************
-     * 去认证
+     * 去开通汇付
      ******************************/
-    private void popCertDialog() {
+    private void popHFDialog() {
         dialogWidget = new DialogWidget(ctx, IdentifyAlertView.getInstance(ctx, new IdentifyAlertView.OnClikListener() {
             @Override
             public void onCancelClick() {
@@ -586,19 +435,12 @@ public class Frag_User extends Frag_Base implements OnClickListener {
             public void onSureClick() {
                 dialogWidget.dismiss();
                 dialogWidget = null;
-                //去认证
-                gotoAuthenticationActivity();
+                startActivity(new Intent(ctx, Activity_Open_Account.class));
             }
         }).getView());
         dialogWidget.show();
     }
 
-    //跳转到认证界面－－改为跳到开通汇付页面
-    private void gotoAuthenticationActivity() {
-//        Intent newIntent = new Intent(ctx, Activity_Authentication.class);
-        Intent newIntent = new Intent(ctx, Activity_Open_Account.class);
-        startActivityForResult(newIntent, 10);
-    }
 
     /***************************
      * 审核中
@@ -614,98 +456,57 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 
     //借款
     private void loanMainPage() {
-        //判断状态，如果获取数据中或者获取数据失败，都表示依旧要加载数据
-        if (loadingStatus) {
-            //加载数据失败
-            if (loadingError) {
-                ToastUtil.alert(ctx, "获取用户数据失败，请刷新重试");
-            }
-            //获取用户数据过程中
-            else {
-                ToastUtil.alert(ctx, "正在获取用户数据");
-            }
-            return;
-        }
-
-        //存在用户信息
-        if (null != mUserDetailInfo) {
-            //用户还没认证时，先去认证
-            if (!App.mUserDetailInfo.HasCert || App.mUserDetailInfo.BankCard == null) {
-                showAlertView("提示", "您仍未认证，请先认证", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        startActivity(new Intent(ctx, Activity_Authentication.class));
-                        alertView.dismiss();
-                        alertView = null;
-                    }
-                });
-            } else {
-                Activity_LoanRequest_Borrow.launche(ctx);
-            }
-        }
-        //不存在用户信息时，先去认证
-        else {
-            startActivity(new Intent(ctx, Activity_Authentication.class));
-        }
-
+//        //存在用户信息
+//        if (!isLoading() && null != mUserDetailInfo) {
+//            //用户还没认证时，先去认证
+//            if (!App.mUserDetailInfo.HasCert || App.mUserDetailInfo.BankCard == null) {
+//                showAlertView("提示", "您仍未认证，请先认证", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        startActivity(new Intent(ctx, Activity_Authentication.class));
+//                        alertView.dismiss();
+//                        alertView = null;
+//                    }
+//                });
+//            } else {
+//                Activity_LoanRequest_Borrow.launche(ctx);
+//            }
+//        }
+//        //不存在用户信息时，先去认证
+//        else {
+//            startActivity(new Intent(ctx, Activity_Authentication.class));
+//        }
+        //已开通托管
+        if (!isLoading() && App.mUserDetailInfo != null && App.mUserDetailInfo.HasOpenCustody) startActivity(new Intent(ctx, Activity_LoanRequest_Borrow.class));
+        else popHFDialog();
     }
 
     //充值
     private void rechargeMoney() {
-        //判断状态，如果获取数据中或者获取数据失败，都表示依旧要加载数据
-        if (loadingStatus) {
-            if (loadingError) {
-                ToastUtil.alert(ctx, "获取用户数据失败，请刷新重试");
-            } else {
-                ToastUtil.alert(ctx, "正在获取用户数据");
-            }
-            return;
-        }
-
-        //只有存在用户信息、有银行卡号并且已经认证三要素都满足时才去充值界面，否则先获取数据，
-
-//     if (App.mUserDetailInfo != null && App.mUserDetailInfo.HasCert && App.mUserDetailInfo.BankCard != null) {
-        if (App.mUserDetailInfo != null && App.mUserDetailInfo.HasOpenCustody) {//已开通托管
-            UmengUtil.eventById(ctx, R.string.self_charge);
-//            Activity_Recharge_Second.launche(ctx);
-            startActivity(new Intent(ctx,Activity_Charge_HF.class));
-
-        } else {
-            UmengUtil.eventById(ctx, R.string.auth_act);
-            gotoAuthenticationActivity();
-        }
+        //已开通托管
+        if (!isLoading() && App.mUserDetailInfo != null && App.mUserDetailInfo.HasOpenCustody) startActivity(new Intent(ctx, Activity_Charge_HF.class));
+        else popHFDialog();
     }
+
 
     //提现
     private void withdrawMoney() {
-        UmengUtil.eventById(ctx, R.string.self_crash);
-        //判断状态，如果获取数据中或者获取数据失败，都表示依旧要加载数据
-        if (loadingStatus) {
-            //加载数据失败
-            if (loadingError) {
-                ToastUtil.alert(ctx, "获取用户数据失败，请刷新重试");
-            }
-            //获取用户数据过程中
-            else {
-                ToastUtil.alert(ctx, "正在获取用户数据");
-            }
+        if (!isLoading() && App.mUserDetailInfo == null || !App.mUserDetailInfo.HasOpenCustody) {//未开通托管
+            popHFDialog();
             return;
         }
-        if (App.mUserDetailInfo == null || !App.mUserDetailInfo.HasOpenCustody) {//未开通托管
-            gotoAuthenticationActivity();
-            return;
-        }
-        //用户还没指定提现卡
-        if (!App.mUserDetailInfo.HasBindCard) {
+        //用户还没绑卡
+        if (App.mUserDetailInfo.BankCard == null) {
             showAlertView("您还没指定提现卡哦", "该银行卡将作为账户唯一充值、提现银行卡", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    startActivity(new Intent(ctx, Activity_Authentication.class));
+                    requestBandCard();
                     alertView.dismiss();
                     alertView = null;
                 }
             });
-        }
+        }else//跳到提现页面
+            startActivity(new Intent(ctx, Activity_Withdraw.class));
 
 //        //存在用户信息
 //        if (null != mUserDetailInfo) {
@@ -747,9 +548,9 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 
     //资金托管
     private void managedFunds() {
-        if (App.mUserDetailInfo.HasOpenCustody) {//已开通托管
+        if (!isLoading() && App.mUserDetailInfo.HasOpenCustody) {//已开通托管
             startActivity(new Intent(ctx, Activity_TuoGuan_HF.class));
-        }else {
+        } else {
             startActivity(new Intent(ctx, Activity_Open_Account.class));
         }
     }
@@ -771,14 +572,6 @@ public class Frag_User extends Frag_Base implements OnClickListener {
                     //跳转至首页
                     intent.setAction("com.bcb.update.mainui");
                     ctx.sendBroadcast(intent);
-                }
-                break;
-
-            //认证成功返回
-            case 10:
-                if (data != null) {
-                    loadUserWallet();
-                    loadUserBankInfo();
                 }
                 break;
         }
@@ -823,5 +616,150 @@ public class Frag_User extends Frag_Base implements OnClickListener {
         } else {
             user_customer_tips.setVisibility(View.GONE);
         }
+    }
+
+    //判断状态，如果获取数据中或者获取数据失败，都表示依旧要加载数据
+    private boolean isLoading() {
+        if (loadingStatus) {
+            //加载数据失败
+            if (loadingError) ToastUtil.alert(ctx, "获取用户数据失败，请刷新重试");
+                //获取用户数据过程中
+            else ToastUtil.alert(ctx, "正在获取用户数据");
+            return true;
+        }
+        return false;
+    }
+
+    //*****************************************                            请求服务器                           ****************************************
+
+    /**
+     * 用户信息
+     */
+    private void requestUserDetailInfo() {
+        BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsTwo.UserMessage, null, TokenUtil.getEncodeToken(ctx), new BcbRequest.BcbCallBack<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                LogUtil.i("bqt", "用户信息返回数据：" + response.toString());
+                if (PackageUtil.getRequestStatus(response, ctx)) {
+                    JSONObject data = PackageUtil.getResultObject(response);
+                    //判断JSON对象是否为空
+                    if (data != null) {
+                        mUserDetailInfo = App.mGson.fromJson(data.toString(), UserDetailInfo.class);
+                        //将获取到的银行卡数据写入静态数据区中
+                        App.mUserDetailInfo = mUserDetailInfo;
+                        requestUserBankCard();
+                        //加载用户加入公司的信息
+                        setupJoinCompanyMessage();
+                    }
+                }
+            }
+
+            @Override
+            public void onErrorResponse(Exception error) {
+
+            }
+        });
+        jsonRequest.setTag(BcbRequestTag.UserBankMessageTag);
+        requestQueue.add(jsonRequest);
+    }
+
+
+    /**
+     * 用户钱包
+     */
+    private void requestUserWallet() {
+        BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.UserWalletMessage, null, TokenUtil.getEncodeToken(ctx), new BcbRequest.BcbCallBack<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                LogUtil.i("bqt", "请求用户资产账户返回：" + response.toString());
+                if (PackageUtil.getRequestStatus(response, ctx)) {
+                    JSONObject data = PackageUtil.getResultObject(response);
+                    if (data != null) {
+                        //注意数据结构变了，2016-7-26
+                        mUserWallet = App.mGson.fromJson(data.toString(), UserWallet.class);
+                        App.mUserWallet = mUserWallet;
+                        showData();
+                    }
+                }
+                loadingStatus = false;
+                refreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
+            }
+
+            @Override
+            public void onErrorResponse(Exception error) {
+                ToastUtil.alert(ctx, "网络异常，请稍后重试");
+                refreshLayout.refreshFinish(PullToRefreshLayout.FAIL);
+                loadingError = true;
+            }
+        });
+        jsonRequest.setTag(BcbRequestTag.UserWalletMessageTag);
+        requestQueue.add(jsonRequest);
+    }
+    /**
+     * 用户银行卡
+     */
+    private void requestUserBankCard() {
+        BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsTwo.UrlUserBand, null, TokenUtil.getEncodeToken(ctx), new BcbRequest.BcbCallBack<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                LogUtil.i("bqt", "绑定的银行卡：" + response.toString());
+                if (PackageUtil.getRequestStatus(response, ctx)) {
+                    JSONObject data = PackageUtil.getResultObject(response);
+                    if (data != null&&App.mUserDetailInfo!=null) {
+                        App.mUserDetailInfo.BankCard = App.mGson.fromJson(data.toString(), UserBankCard.class);
+                    }
+                }
+                loadingStatus = false;
+                refreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
+            }
+
+            @Override
+            public void onErrorResponse(Exception error) {
+                ToastUtil.alert(ctx, "网络异常，请稍后重试");
+                refreshLayout.refreshFinish(PullToRefreshLayout.FAIL);
+                loadingError = true;
+            }
+        });
+        jsonRequest.setTag(BcbRequestTag.UserWalletMessageTag);
+        requestQueue.add(jsonRequest);
+    }
+    /**
+     * 绑定提现卡
+     */
+    private void requestBandCard() {
+        String requestUrl = UrlsTwo.UrlBandCard;
+        String encodeToken = TokenUtil.getEncodeToken(ctx);
+        LogUtil.i("bqt", "【Activity_Charge_HF】【BandCard】请求路径：" + requestUrl);
+        BcbJsonRequest jsonRequest = new BcbJsonRequest(requestUrl, null, encodeToken, true, new BcbRequest.BcbCallBack<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                LogUtil.i("bqt", "【Activity_Charge_HF】【BandCard】返回数据：" + response.toString());
+                if (PackageUtil.getRequestStatus(response, ctx)) {
+                    try {
+                        /** 后台返回的JSON对象，也是要转发给汇付的对象 */
+                        JSONObject result = PackageUtil.getResultObject(response);
+                        if (result != null) {
+                            //网页地址
+                            String postUrl = result.optString("PostUrl");
+                            result.remove("PostUrl");//移除这个参数
+                            //传递的 参数
+                            String postData = HttpUtils.jsonToStr(result.toString());
+                            //跳转到webview
+                            Activity_WebView.launche(ctx, "绑定提现卡", postUrl, postData);
+                        }
+                    } catch (Exception e) {
+                        LogUtil.d("bqt", "【Activity_Open_Account】【OpenAccount】" + e.getMessage());
+                    }
+                } else if (response != null) {
+                    Toast.makeText(ctx, response.optString("message"), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onErrorResponse(Exception error) {
+                LogUtil.d("bqt", "【Activity_Charge_HF】【BandCard】网络异常，请稍后重试" + error.toString());
+            }
+        });
+        App.getInstance().getRequestQueue().add(jsonRequest);
     }
 }

@@ -30,6 +30,7 @@ import java.util.List;
  * 充值
  */
 public class Activity_Charge_HF extends Activity_Base implements View.OnClickListener {
+    public static float ADD_MONERY=0;
     TextView tv_left_monery, tv_next, tv_tip_bottom;
     EditText et_add_monery;
     BanksAdapter adapter;
@@ -54,6 +55,14 @@ public class Activity_Charge_HF extends Activity_Base implements View.OnClickLis
     }
 
     @Override
+    protected void onResume() {
+        if (App.mUserWallet != null) {
+            tv_left_monery.setText(App.mUserWallet.getBalanceAmount() + "元");
+        }
+        super.onResume();
+    }
+
+    @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.back_img:
@@ -63,6 +72,7 @@ public class Activity_Charge_HF extends Activity_Base implements View.OnClickLis
                 if (TextUtils.isEmpty(et_add_monery.getText().toString().trim())) {
                     Toast.makeText(Activity_Charge_HF.this, "请输入充值金额", Toast.LENGTH_SHORT).show();
                 } else
+                    ADD_MONERY=Float.valueOf(et_add_monery.getText().toString().trim());
                     requestCharge();
                 break;
             default:
@@ -89,7 +99,7 @@ public class Activity_Charge_HF extends Activity_Base implements View.OnClickLis
         LogUtil.i("bqt", "【Activity_Charge_HF】【Charge】请求路径：" + requestUrl);
         JSONObject requestObj = new JSONObject();
         try {
-            requestObj.put("Amount", et_add_monery.getText().toString().trim());
+            requestObj.put("Amount", ADD_MONERY+"");
             LogUtil.i("bqt", "【Activity_Charge_HF】【Charge】请求参数：" + requestObj.toString());
         } catch (JSONException e) {
             e.printStackTrace();
@@ -109,7 +119,7 @@ public class Activity_Charge_HF extends Activity_Base implements View.OnClickLis
                             //传递的 参数
                             String postData = HttpUtils.jsonToStr(result.toString());
                             //跳转到webview
-                            Activity_Browser.launche(Activity_Charge_HF.this, "充值", postUrl, true, postData);
+                            Activity_WebView.launche(Activity_Charge_HF.this, "充值", postUrl, postData);
                         }
                     } catch (Exception e) {
                         LogUtil.d("bqt", "【Activity_Open_Account】【OpenAccount】" + e.getMessage());

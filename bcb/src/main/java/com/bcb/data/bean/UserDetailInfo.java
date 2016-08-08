@@ -14,7 +14,7 @@ public class UserDetailInfo {
 	//是否已经设置了交易密码
 	public boolean HasTradePassword;
 	//是否已经绑定了银行卡
-	public boolean HasBindCard;
+//	public boolean HasBindCard;
 	//银行卡信息
 	public UserBankCard BankCard;
 	//我加入的公司
@@ -59,14 +59,14 @@ public class UserDetailInfo {
 	public void setHasTradePassword(boolean hasTradePassword) {
 		HasTradePassword = hasTradePassword;
 	}
-
-	public boolean isHasBindCard() {
-		return HasBindCard;
-	}
-
-	public void setHasBindCard(boolean hasBindCard) {
-		HasBindCard = hasBindCard;
-	}
+//
+//	public boolean isHasBindCard() {
+//		return HasBindCard;
+//	}
+//
+//	public void setHasBindCard(boolean hasBindCard) {
+//		HasBindCard = hasBindCard;
+//	}
 
 	public UserBankCard getBankCard() {
 		return BankCard;
@@ -107,7 +107,7 @@ public class UserDetailInfo {
 				", IDCard='" + IDCard + '\'' +
 				", HasCert=" + HasCert +
 				", HasTradePassword=" + HasTradePassword +
-				", HasBindCard=" + HasBindCard +
+//				", HasBindCard=" + HasBindCard +
 				", BankCard=" + BankCard +
 				", MyCompany=" + MyCompany +
 				", HasInvest=" + HasInvest +
