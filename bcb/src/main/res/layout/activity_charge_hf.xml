@@ -10,7 +10,7 @@
     <ScrollView
         android:id="@+id/layout_scrollview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:scrollbars="none">
 
         <LinearLayout
@@ -41,20 +41,73 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:singleLine="true"
-                    android:text="0元"
+                    android:text="0.00元"
                     android:textColor="#db3838"
                     android:textSize="16sp"/>
             </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dip"
+                android:background="@color/linegray"/>
+
+            <RelativeLayout
+                android:id="@+id/layout_bank_card"
+                android:layout_width="match_parent"
+                android:background="#fff"
+                android:layout_height="45dip">
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dip"
+                    android:gravity="center"
+                    android:text="银行卡号："
+                    android:textColor="@color/txt_gray"
+                    android:textSize="@dimen/main_text_default"/>
+
+                <TextView
+                    android:id="@+id/bank_name_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dip"
+                    android:layout_toRightOf="@id/textView2"
+                    android:gravity="center"
+                    android:text=""
+                    android:textColor="@color/txt_black"
+                    android:textSize="@dimen/main_text_default"/>
+
+                <TextView
+                    android:id="@+id/bank_card_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dip"
+                    android:layout_toRightOf="@id/bank_name_text"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:text=""
+                    android:textColor="@color/txt_black"
+                    android:textSize="@dimen/main_text_default"/>
+
+                <ImageView
+                    android:id="@+id/bank_icon"
+                    android:layout_width="33dp"
+                    android:layout_height="33dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/margin_size_default"/>
+            </RelativeLayout>
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center_vertical"
                 android:paddingLeft="10dp"
                 android:singleLine="true"
                 android:text="充值金额:"
                 android:textColor="#333"
-                android:textSize="16sp"/>
+
+                android:textSize="14sp"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -84,14 +137,19 @@
                     android:hint="请输入充值金额"
                     android:focusable="true"
                     android:textColorHint="#ccc"
-                    android:inputType="number"
+                    android:background="@null"
+                    android:singleLine="true"
+                    android:digits=".0123456789"
+                    android:inputType="numberDecimal"
                     android:textSize="16sp"/>
 
             </RelativeLayout>
 
             <LinearLayout
+                android:id="@+id/ll_card"
                 android:layout_width="match_parent"
-                android:layout_height="35dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:paddingLeft="10dp">
@@ -105,6 +163,7 @@
 
 
                 <TextView
+                    android:id="@+id/tv_xianer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="3dp"
@@ -119,14 +178,16 @@
                 android:id="@+id/tv_next"
                 android:layout_width="300dp"
                 android:layout_height="45dp"
+                android:layout_marginTop="10dp"
                 android:layout_gravity="center_horizontal"
-                android:background="@drawable/button_solid_red"
+                android:background="@drawable/button_solid_black"
                 android:gravity="center"
                 android:text="下一步"
                 android:textColor="#fff"
                 android:textSize="16sp"/>
 
             <TextView
+                android:id="@+id/tv_no"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:layout_gravity="center_horizontal"
@@ -134,8 +195,9 @@
                 android:text="快捷支付银行卡将作为本账户唯一提现卡"
                 android:textColor="#39f"
                 android:textSize="12sp"/>
-
+            <include layout="@layout/com_funds_trusteeship_tip"/>
             <LinearLayout
+                android:id="@+id/ll_banks_title"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:layout_marginLeft="10dp"
@@ -206,9 +268,9 @@
                 android:id="@+id/tv_tip_bottom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="30dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="30dp"
                 android:text="@string/charge_tips"
                 android:textColor="#333"
                 android:textSize="12sp"/>

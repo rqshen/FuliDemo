@@ -35,7 +35,6 @@ import com.bcb.data.util.MyConstants;
 import com.bcb.data.util.ToastUtil;
 import com.bcb.presentation.view.custom.Browser.X5WebView;
 import com.bcb.presentation.view.custom.CustomDialog.DialogWidget;
-import com.bcb.presentation.view.custom.CustomDialog.IdentifyAlertView;
 import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
 import com.tencent.mm.sdk.modelmsg.WXMediaMessage;
 import com.tencent.mm.sdk.modelmsg.WXWebpageObject;
@@ -320,21 +319,22 @@ public class Activity_Browser extends Activity_Base {
      ******************************/
     private DialogWidget dialogWidget;
     private void popHFDialog() {
-        dialogWidget = new DialogWidget(context, IdentifyAlertView.getInstance(context, new IdentifyAlertView.OnClikListener() {
-            @Override
-            public void onCancelClick() {
-                dialogWidget.dismiss();
-                dialogWidget = null;
-            }
-
-            @Override
-            public void onSureClick() {
-                dialogWidget.dismiss();
-                dialogWidget = null;
-                startActivity(new Intent(context, Activity_Open_Account.class));
-            }
-        }).getView());
-        dialogWidget.show();
+        startActivity(new Intent(context, Activity_Open_Account.class));
+//        dialogWidget = new DialogWidget(context, IdentifyAlertView.getInstance(context, new IdentifyAlertView.OnClikListener() {
+//            @Override
+//            public void onCancelClick() {
+//                dialogWidget.dismiss();
+//                dialogWidget = null;
+//            }
+//
+//            @Override
+//            public void onSureClick() {
+//                dialogWidget.dismiss();
+//                dialogWidget = null;
+//                startActivity(new Intent(context, Activity_Open_Account.class));
+//            }
+//        }).getView());
+//        dialogWidget.show();
     }
     //注册微信
     private void registerToWeiXin() {
@@ -477,14 +477,14 @@ public class Activity_Browser extends Activity_Base {
      * Activity has leaked window Android.widget.ZoomButtonsController
      * that was originally added here android.view.WindowLeaked
      */
-    @Override
-    public void finish() {
-        ViewGroup view = (ViewGroup) getWindow().getDecorView();
-        view.removeAllViews();
-        super.finish();
-        //退出页面使用向右退出
-        overridePendingTransition(0, R.anim.push_right_out);
-    }
+//    @Override
+//    public void finish() {
+//        ViewGroup view = (ViewGroup) getWindow().getDecorView();
+//        view.removeAllViews();
+//        super.finish();
+//        //退出页面使用向右退出
+//        overridePendingTransition(0, R.anim.push_right_out);
+//    }
 
     public static final int MSG_INIT_UI = 1;
     private Handler mTestHandler = new Handler() {

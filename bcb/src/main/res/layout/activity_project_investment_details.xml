@@ -25,7 +25,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="再投本金(元)"
+                android:text="在投本金(元)"
                 android:textColor="@color/white"
                 android:textSize="18sp"/>
 

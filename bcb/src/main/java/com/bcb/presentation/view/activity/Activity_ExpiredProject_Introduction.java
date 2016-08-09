@@ -75,6 +75,7 @@ public class Activity_ExpiredProject_Introduction extends Activity_Base implemen
     private ProgressDialog progressDialog;
     //标的Id
     private String packageId = "";
+    private String PackageToken = "";
     //记录天标还是月标的数值360/12
     private int countDate = 0;
     //体验标数据

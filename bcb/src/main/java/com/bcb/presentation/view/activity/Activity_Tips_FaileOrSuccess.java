@@ -7,7 +7,6 @@ import android.os.SystemClock;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bcb.R;
 import com.bcb.common.app.App;
@@ -18,6 +17,7 @@ import com.bcb.common.net.UrlsOne;
 import com.bcb.data.bean.UserWallet;
 import com.bcb.data.util.DensityUtils;
 import com.bcb.data.util.LogUtil;
+import com.bcb.data.util.MQCustomerManager;
 import com.bcb.data.util.PackageUtil;
 import com.bcb.data.util.ToastUtil;
 import com.bcb.data.util.TokenUtil;
@@ -41,7 +41,8 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
     public static final int CHARGE_HF_FAILED = 6;//充值失败
     public static final int TX_HF_SUCCESS = 7;//提现成功
     public static final int TX_HF_FAILED = 8;//提现失败
-    public static final int BUY_HF_FAILED = 9;//申购失败
+    public static final int BUY_HF_SUCCESS = 9;//申购成功
+    public static final int BUY_HF_FAILED = 10;//申购失败
     ImageView iv_pic;
     TextView title_text, tv_up, tv_down, tv_next;
 
@@ -135,11 +136,19 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
                 tv_down.setText("账户余额不足");
                 tv_next.setVisibility(View.GONE);
                 break;
+            case BUY_HF_SUCCESS:
+                title_text.setText("申购成功");
+                iv_pic.setImageResource(R.drawable.success_open_hf);
+                tv_up.setText("申购成功！");
+                tv_down.setVisibility(View.GONE);
+                tv_next.setText("返回个人中心");
+                break;
             case BUY_HF_FAILED:
                 title_text.setText("申购失败");
                 iv_pic.setImageResource(R.drawable.failed_buy_fh);
                 tv_up.setText("申购失败！");
-                tv_down.setText("申购金额超过项目剩余金额");
+//                tv_down.setText("申购金额超过项目剩余金额");
+                tv_down.setText(message);
                 tv_next.setText("联系客服");
                 break;
             default:
@@ -153,6 +162,7 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
         tv_up = (TextView) findViewById(R.id.tv_up);
         tv_down = (TextView) findViewById(R.id.tv_down);
         tv_next = (TextView) findViewById(R.id.tv_next);
+        tv_next.setOnClickListener(this);
         //返回
         View back_img = findViewById(R.id.back_img);
         back_img.setVisibility(View.VISIBLE);
@@ -168,10 +178,17 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
             case R.id.tv_next:
                 switch (type) {
                     case BAND_HF_SUCCESS:
-                        Toast.makeText(Activity_Tips_FaileOrSuccess.this, "返回个人中心", Toast.LENGTH_SHORT).show();
+                    case BUY_HF_SUCCESS:
+                        Intent intent=new Intent(this, Activity_Main.class);
+                        intent.putExtra("jumpTo", 3);
+                        startActivity(intent);
                         break;
                     default:
-                        Toast.makeText(Activity_Tips_FaileOrSuccess.this, "联系客服", Toast.LENGTH_SHORT).show();
+                        String userId = null;
+                        //判断是否为空
+                        if (App.mUserDetailInfo != null) userId = App.mUserDetailInfo.getCustomerId();
+                        MQCustomerManager.getInstance(this).showCustomer(userId);
+                        finish();
                         break;
                 }
                 break;
@@ -194,7 +211,7 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
                         //注意数据结构变了，2016-7-26
                         mUserWallet = App.mGson.fromJson(data.toString(), UserWallet.class);
                         App.mUserWallet = mUserWallet;
-                        tv_down.setText("当前账户余额：" +String.format("%.2f", App.mUserWallet.getBalanceAmount()));
+                        tv_down.setText("当前账户余额：" + String.format("%.2f", App.mUserWallet.getBalanceAmount()));
                     }
                 }
             }

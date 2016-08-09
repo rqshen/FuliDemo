@@ -8,6 +8,7 @@ public class UrlsTwo {
 
     //体验标介绍
     public static String ExpiredProjectIntroduction = host + "/api/v1.0/df76208580b6";
+    public static String AboutExpiredProjectIntroduction = "http://ttwap.100cb.cn/static/specialgoldinfo.html";
 
     // 普通项目介绍
 //    public static String NormalProjectIntroduction = host + "/api/v1.0/9f568d457714";
@@ -29,12 +30,13 @@ public class UrlsTwo {
     //转发给汇付开户
     public static String OpenAccountHF = host + "/api/v2.0/a63d00c46389";
     // 提现
-    public static String UrlWithdrawals = host + "/api/v1.0/a095329ba55b";
+//    public static String UrlWithdrawals = host + "/api/v1.0/a095329ba55b";
     // 提现
     public static String UrlTX_HF = host + "/api/v2.0/a63c0105dc1f";
 
     // 投标
-    public static String UrlBuyProject = host + "/api/v1.0/e7b238e2d3df";
+//    public static String UrlBuyProject = host + "/api/v1.0/e7b238e2d3df";
+    public static String UrlBuyProject = host + "/api/v2.0/a63c0109b86a";
 
     //支持的银行
     public static String UrlBanks = host + "/api/v2.0/a63e00b4e136";

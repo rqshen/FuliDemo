@@ -130,13 +130,13 @@ public class Activity_Login_Introduction extends Activity_Base implements View.O
     /**************** 去注册页面 **********************/
     private void gotoRegisterPage() {
         Activity_Register_First.launche(Activity_Login_Introduction.this);
-        finish();
+//        finish();
     }
 
     /******************* 去登陆页面 *******************/
     private void gotoLoginPage() {
         UmengUtil.eventById(Activity_Login_Introduction.this, R.string.bid_buy_n_login);
         Activity_Login.launche(Activity_Login_Introduction.this);
-        finish();
+//        finish();
     }
 }

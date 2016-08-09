@@ -31,5 +31,6 @@ public class ExpiredProjectDetail implements Serializable {
 //    public float SingletonAmount;   //单笔金额
 //    public float HaploidAmount;     //单倍金额
     public int Status;          //项目状态
+    public String PackageToken;          //项目状态
 //    public List<AssetAuditContentBean> AssetAuditContent;
 }

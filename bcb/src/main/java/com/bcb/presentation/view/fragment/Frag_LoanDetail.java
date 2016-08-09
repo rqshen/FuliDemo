@@ -281,7 +281,7 @@ public class Frag_LoanDetail extends Frag_Base {
     private void setupDetailData() {
         loanType.setText(loanItemDetailBean.LoanType);
         loanDuration.setText(loanItemDetailBean.Duration);
-        loanAmount.setText(String.format("%.0f", loanItemDetailBean.Amount) + "元");
+        loanAmount.setText(String.format("%.2f", loanItemDetailBean.Amount) + "元");
         loanRate.setText(loanItemDetailBean.Rate);
         loanRepayment.setText(loanItemDetailBean.LoanPeriod +"期");
         loanPunitive.setText(loanItemDetailBean.LatePenaltyRate * 100 + "%");

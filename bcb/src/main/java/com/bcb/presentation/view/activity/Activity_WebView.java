@@ -77,6 +77,21 @@ public class Activity_WebView extends Activity_Base {
         X5WebView.setSmallWebViewEnabled(true);
         init();
         initProgressBar();
+
+
+//        findViewById(R.id.loadmore_view).setVisibility(View.GONE);//加载更多
+//        RelativeLayout head_view = ((RelativeLayout) findViewById(R.id.head_view));
+//        head_view.setBackgroundColor(0xff000000);
+//
+//        findViewById(R.id.pull_icon).setVisibility(View.GONE);
+//        findViewById(R.id.refreshing_icon).setVisibility(View.GONE);
+//        findViewById(R.id.state_iv).setVisibility(View.GONE);
+//
+//        TextView state_tv = (TextView) findViewById(R.id.state_tv);
+//        state_tv.setText("网页由 www.chinapnt.com 提供\n福利金融，名企员工都在上的理财平台");
+//
+//        PullToRefreshLayout refreshLayout = (PullToRefreshLayout) findViewById(R.id.refresh_view);
+//        refreshLayout.setRefreshResultView(false);
     }
 
     private void initProgressBar() {
@@ -101,11 +116,11 @@ public class Activity_WebView extends Activity_Base {
                 //【开户】
                 if (url.contains("fulihui://open_result")) {
                     LogUtil.i("bqt", "开户" + url);
+                    finish();
                     if (url.contains("000")) {//成功
                         App.getInstance().mUserDetailInfo.HasOpenCustody = true;
                         Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.OPEN_HF_SUCCESS, message);
                     } else Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.OPEN_HF_FAILED, message);
-                    finish();
                     return true;
                 }
                 //【绑卡】
@@ -122,23 +137,33 @@ public class Activity_WebView extends Activity_Base {
                 //【充值】
                 else if (url.contains("fulihui://recharge_result")) {
                     LogUtil.i("bqt", "充值" + url);
+                    finish();
                     if (url.contains("000")) {//成功
                         Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.CHARGE__HF_SUCCESS, message);
                     } else {
                         Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.CHARGE_HF_FAILED, message);
                     }
-                    finish();
                     return true;
                 }
                 //【提现】
                 else if (url.contains("fulihui://withdraw_result")) {
                     LogUtil.i("bqt", "提现" + url);
+                    finish();
                     if (url.contains("000")) {//成功
                         Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.TX_HF_SUCCESS, message);
                     } else {
                         Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.TX_HF_FAILED, message);
                     }
+                    return true;
+                    //买标、申购
+                } else if (url.contains("fulihui://invest_result")) {
+                    LogUtil.i("bqt", "买标" + url);
                     finish();
+                    if (url.contains("000")) {//成功
+                        Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.BUY_HF_SUCCESS, message);
+                    } else {
+                        Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.BUY_HF_FAILED, message);
+                    }
                     return true;
                 } else {
                     return super.shouldOverrideUrlLoading(view, url);

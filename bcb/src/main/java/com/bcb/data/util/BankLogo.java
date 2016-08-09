@@ -29,6 +29,11 @@ public class BankLogo {
         hashmap.put("CGB", R.drawable.bank_cgb);          //广发银行
         hashmap.put("HXB", R.drawable.bank_hxb);          //华夏银行
         hashmap.put("SPDB", R.drawable.bank_spdb);      //浦发银行
+        hashmap.put("CBHB", R.drawable.cbhb);      //渤海银行
+        hashmap.put("PINGAN", R.drawable.pingan);      //平安银行
+        hashmap.put("GDB", R.drawable.gdb);      //广发银行
+        hashmap.put("BOS", R.drawable.bos);      //上海银行
+        hashmap.put("BOCOM", R.drawable.bocom);      //交通银行
     }
 
     public int getDrawableBankLogo(String key) {

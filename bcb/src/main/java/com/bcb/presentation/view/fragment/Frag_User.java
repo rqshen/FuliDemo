@@ -52,9 +52,9 @@ import com.bcb.presentation.view.activity.Activity_WebView;
 import com.bcb.presentation.view.activity.Activity_Withdraw;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
 import com.bcb.presentation.view.custom.CustomDialog.DialogWidget;
-import com.bcb.presentation.view.custom.CustomDialog.IdentifyAlertView;
 import com.bcb.presentation.view.custom.CustomDialog.MyMaskFullScreenView;
 import com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout;
+import com.bcb.presentation.view.custom.PullableView.PullableScrollView;
 
 import org.json.JSONObject;
 
@@ -66,7 +66,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
     private TextView value_earn, value_balance, value_back, value_total;
     private UserWallet mUserWallet;
     private UserDetailInfo mUserDetailInfo;
-
+    PullableScrollView layout_scrollview;
 
     //加载数据状态
     private boolean loadingStatus = true;
@@ -125,6 +125,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 
         //加入公司
         joinCompany = (ImageView) view.findViewById(R.id.join_company);
+        layout_scrollview = (PullableScrollView) view.findViewById(R.id.layout_scrollview);
         joinCompany.setOnClickListener(this);
 
         //已经加入公司的LinearLayout及其元素
@@ -242,8 +243,9 @@ public class Frag_User extends Frag_Base implements OnClickListener {
     @Override
     public void onResume() {
         showData();
-        super.onResume();
+       super.onResume();
     }
+
     private void showPhoneService() {
         AlertView.Builder ibuilder = new AlertView.Builder(ctx);
         ibuilder.setTitle("是否电联客服？");
@@ -260,7 +262,6 @@ public class Frag_User extends Frag_Base implements OnClickListener {
         alertView = ibuilder.create();
         alertView.show();
     }
-
 
 
     //从静态数据区中取出数据
@@ -283,6 +284,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
         //如果mUserDetailInfo为空，则表示没有登陆
         if (App.mUserDetailInfo == null) {
             joinCompany.setVisibility(View.VISIBLE);
+
             user_company_layout.setVisibility(View.GONE);
             return;
         }
@@ -296,6 +298,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
                 user_join_name.setText(mUserDetailInfo.UserName);
             } else {
                 joinCompany.setVisibility(View.VISIBLE);
+
                 user_company_layout.setVisibility(View.GONE);
             }
         }
@@ -303,9 +306,12 @@ public class Frag_User extends Frag_Base implements OnClickListener {
         else {
             user_company_layout.setVisibility(View.GONE);
             //根据标志为判断是否隐藏加入公司Banner
-            if (App.viewJoinBanner) joinCompany.setVisibility(View.VISIBLE);
-            else joinCompany.setVisibility(View.GONE);
+            if (App.viewJoinBanner) {
+                joinCompany.setVisibility(View.VISIBLE);
+            } else joinCompany.setVisibility(View.GONE);
         }
+        layout_scrollview.scrollTo(0, 0);
+//        layout_scrollview.fullScroll(ScrollView.FOCUS_UP);
     }
 
 
@@ -424,21 +430,22 @@ public class Frag_User extends Frag_Base implements OnClickListener {
      * 去开通汇付
      ******************************/
     private void popHFDialog() {
-        dialogWidget = new DialogWidget(ctx, IdentifyAlertView.getInstance(ctx, new IdentifyAlertView.OnClikListener() {
-            @Override
-            public void onCancelClick() {
-                dialogWidget.dismiss();
-                dialogWidget = null;
-            }
-
-            @Override
-            public void onSureClick() {
-                dialogWidget.dismiss();
-                dialogWidget = null;
-                startActivity(new Intent(ctx, Activity_Open_Account.class));
-            }
-        }).getView());
-        dialogWidget.show();
+        startActivity(new Intent(ctx, Activity_Open_Account.class));
+//        dialogWidget = new DialogWidget(ctx, IdentifyAlertView.getInstance(ctx, new IdentifyAlertView.OnClikListener() {
+//            @Override
+//            public void onCancelClick() {
+//                dialogWidget.dismiss();
+//                dialogWidget = null;
+//            }
+//
+//            @Override
+//            public void onSureClick() {
+//                dialogWidget.dismiss();
+//                dialogWidget = null;
+//                startActivity(new Intent(ctx, Activity_Open_Account.class));
+//            }
+//        }).getView());
+//        dialogWidget.show();
     }
 
 
@@ -497,7 +504,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
         }
         //用户还没绑卡
         if (App.mUserDetailInfo.BankCard == null) {
-            showAlertView("您还没指定提现卡哦", "该银行卡将作为账户唯一充值、提现银行卡", new DialogInterface.OnClickListener() {
+            showAlertView("您还没指定提现卡哦", "该银行卡将作为账户唯一提现银行卡", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     requestBandCard();
@@ -505,7 +512,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
                     alertView = null;
                 }
             });
-        }else//跳到提现页面
+        } else//跳到提现页面
             startActivity(new Intent(ctx, Activity_Withdraw.class));
 
 //        //存在用户信息
@@ -563,6 +570,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             //选择优惠券返回
@@ -636,6 +644,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
      * 用户信息
      */
     private void requestUserDetailInfo() {
+
         BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsTwo.UserMessage, null, TokenUtil.getEncodeToken(ctx), new BcbRequest.BcbCallBack<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -695,6 +704,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
         jsonRequest.setTag(BcbRequestTag.UserWalletMessageTag);
         requestQueue.add(jsonRequest);
     }
+
     /**
      * 用户银行卡
      */
@@ -705,7 +715,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
                 LogUtil.i("bqt", "绑定的银行卡：" + response.toString());
                 if (PackageUtil.getRequestStatus(response, ctx)) {
                     JSONObject data = PackageUtil.getResultObject(response);
-                    if (data != null&&App.mUserDetailInfo!=null) {
+                    if (data != null && App.mUserDetailInfo != null) {
                         App.mUserDetailInfo.BankCard = App.mGson.fromJson(data.toString(), UserBankCard.class);
                     }
                 }
@@ -723,6 +733,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
         jsonRequest.setTag(BcbRequestTag.UserWalletMessageTag);
         requestQueue.add(jsonRequest);
     }
+
     /**
      * 绑定提现卡
      */

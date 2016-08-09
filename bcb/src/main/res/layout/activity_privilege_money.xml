@@ -71,7 +71,7 @@
                         android:textSize="@dimen/main_text_small"/>
 
                     <ImageView
-
+android:id="@+id/iv_about"
                         android:layout_width="15dp"
                         android:layout_height="15dp"
                         android:layout_alignParentRight="true"

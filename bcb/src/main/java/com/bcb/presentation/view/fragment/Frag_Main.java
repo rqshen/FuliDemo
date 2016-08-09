@@ -967,7 +967,7 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPa
                                 expiredRecordsBeans.get(0).getPackageId(),
                                 expiredRecordsBeans.get(0).getName());
                     } else {
-                        ToastUtil.alert(ctx, "体验金已存入账户中心，请查看");
+                        ToastUtil.alert(ctx, "特权本金已存入账户中心，请查看");
                         startActivity(new Intent(ctx, Activity_Privilege_Money.class));
                     }
                 }

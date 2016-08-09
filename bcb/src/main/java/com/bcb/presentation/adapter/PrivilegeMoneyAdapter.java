@@ -33,6 +33,15 @@ import java.util.List;
  * @desc 特权本金
  */
 public class PrivilegeMoneyAdapter extends BaseAdapter {
+    public interface IloadAfterRegeist {
+        void loadAfterRegeist();
+    }
+
+    IloadAfterRegeist iloadAfterRegeist;
+
+    public void setIloadAfterRegeist(IloadAfterRegeist iloadAfterRegeist) {
+        this.iloadAfterRegeist = iloadAfterRegeist;
+    }
 
     private Context ctx;
     private List<PrivilegeMoneyDto> datas;
@@ -88,12 +97,13 @@ public class PrivilegeMoneyAdapter extends BaseAdapter {
     }
 
     AlertView alertView;
+
     //设置ViewHolder数据
     private void setDataWithViewHolder(final ViewHolder viewHolder, final int pos) {
-        viewHolder.title.setText(String.format("%.2f",datas.get(pos).Amount) + "元特权金");
+        viewHolder.title.setText(String.format("%.2f", datas.get(pos).Amount) + "元特权金");
         viewHolder.income.setText(String.format("￥%.2f", datas.get(pos).Income));
-        viewHolder.tv_rate.setText("(年化" + String.format("￥%.2f", datas.get(pos).Rate) + "%*" + datas.get(pos).Days+ "天)");
-        viewHolder.term.setText(datas.get(pos).ExpireDate );//+ "过期"
+        viewHolder.tv_rate.setText("(年化" + String.format("￥%.2f", datas.get(pos).Rate) + "%*" + datas.get(pos).Days + "天)");
+        viewHolder.term.setText(datas.get(pos).ExpireDate);//+ "过期"
 
         viewHolder.tv_time.setVisibility(View.GONE);
         viewHolder.tv_status.setTextColor(0xfff46548);
@@ -124,7 +134,7 @@ public class PrivilegeMoneyAdapter extends BaseAdapter {
                                 String valueDate = data.optString("ValueDate");
                                 AlertView.Builder ibuilder = new AlertView.Builder(ctx);
                                 ibuilder.setTitle("激活成功");
-                                ibuilder.setMessage("特权本金将在"+valueDate+"日发送");
+                                ibuilder.setMessage("特权本金将在" + valueDate + "日发送");
                                 ibuilder.setPositiveButton("开通托管账户领取收益", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
@@ -135,6 +145,9 @@ public class PrivilegeMoneyAdapter extends BaseAdapter {
                                 });
                                 alertView = ibuilder.create();
                                 alertView.show();
+                                if (iloadAfterRegeist!=null) {
+                                    iloadAfterRegeist.loadAfterRegeist();
+                                }
                             }
                         } else
                             Toast.makeText(ctx, response.optString("message"), Toast.LENGTH_SHORT).show();

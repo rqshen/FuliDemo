@@ -4,7 +4,9 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -145,7 +147,7 @@ public class Activity_Withdraw extends Activity_Base implements View.OnClickList
     private void initViews() {
         //账户余额
         if (null != App.mUserWallet) {
-            username_balance.setText("" + App.mUserWallet.BalanceAmount + "  元");
+            username_balance.setText(String.format("%.2f", App.mUserWallet.BalanceAmount) + "  元");
             mUserWallet = App.mUserWallet;
         }
 
@@ -292,6 +294,8 @@ public class Activity_Withdraw extends Activity_Base implements View.OnClickList
             public void onResponse(JSONObject response) {
                 try {
                     if (response.getInt("status") == 1) {
+                        LogUtil.i("bqt", "【Activity_Withdraw】【onResponse】提现券" + response.toString());
+
                         //显示提现券信息
                         CouponId = response.getJSONObject("result").getString("CouponId");
                         CouponCount = response.getJSONObject("result").getInt("CouponCount");
@@ -351,7 +355,7 @@ public class Activity_Withdraw extends Activity_Base implements View.OnClickList
         if (mUserWallet.BalanceAmount > 0)
             username_balance.setText("" + mUserWallet.BalanceAmount + " 元");
         else
-            username_balance.setText("0 元");
+            username_balance.setText("0.00 元");
     }
 
     //提现
@@ -388,7 +392,7 @@ public class Activity_Withdraw extends Activity_Base implements View.OnClickList
             ToastUtil.alert(Activity_Withdraw.this, "提现金额必须大于手续费");
             return;
         }
-        String CouponId = "4dc7bd0c-104e-4cb3-9215-a64900b12de8";
+//        String CouponId = "4dc7bd0c-104e-4cb3-9215-a64900b12de8";
         requestTX(money, CouponId);
     }
 
@@ -402,7 +406,11 @@ public class Activity_Withdraw extends Activity_Base implements View.OnClickList
         JSONObject requestObj = new JSONObject();
         try {
             requestObj.put("Amount", Amount);
-            requestObj.put("CouponId", CouponId);
+            Log.i("bqt", "【CouponId】" + CouponId.toString());
+
+            if (!TextUtils.isEmpty(CouponId)&&!CouponId.equalsIgnoreCase("null")) {
+                requestObj.put("CouponId", CouponId);
+            }
             LogUtil.i("bqt", "【Activity_Withdraw】【TX】请求参数：" + requestObj.toString());
         } catch (JSONException e) {
             e.printStackTrace();

@@ -87,7 +87,7 @@
 
                     <TextView
                         android:id="@+id/bank_name_text"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="10dip"
                         android:layout_toRightOf="@id/textView2"
@@ -100,7 +100,6 @@
                         android:id="@+id/bank_card_text"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_marginLeft="5dip"
                         android:layout_toRightOf="@id/bank_name_text"
                         android:gravity="center"
                         android:singleLine="true"
@@ -233,7 +232,7 @@
                         android:background="@null"
                         android:digits=".0123456789"
                         android:gravity="center_vertical"
-                        android:hint="请输入输入提现金额"
+                        android:hint="请输入提现金额"
                         android:inputType="numberDecimal"
                         android:maxLength="9"
                         android:paddingLeft="10dip"
@@ -332,7 +331,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dip"
-                        android:text="使用提现券（可用108张）"
+                        android:text="使用提现券"
                         android:textColor="@color/txt_black"
                         android:textSize="12sp"/>
 

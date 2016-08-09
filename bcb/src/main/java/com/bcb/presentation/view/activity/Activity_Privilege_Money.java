@@ -5,10 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bcb.R;
 import com.bcb.common.app.App;
@@ -41,7 +41,7 @@ import java.util.List;
  *
  * @desc 特权本金
  */
-public class Activity_Privilege_Money extends Activity_Base implements AdapterView.OnItemClickListener {
+public class Activity_Privilege_Money extends Activity_Base implements AdapterView.OnItemClickListener ,PrivilegeMoneyAdapter.IloadAfterRegeist {
     private BcbRequestQueue requestQueue;
     private List<PrivilegeMoneyDto> datas;
     private MyListView mListView;
@@ -53,6 +53,7 @@ public class Activity_Privilege_Money extends Activity_Base implements AdapterVi
     private PullToRefreshLayout refreshLayout;
     private RelativeLayout loadmore_view;
     TextView tv_shouyi_all, tv_benjin, tv_shouyi;
+    ImageView iv_about;
 
     public static void launch(Context context) {
         Intent intent = new Intent(context, Activity_Privilege_Money.class);
@@ -66,22 +67,29 @@ public class Activity_Privilege_Money extends Activity_Base implements AdapterVi
         tv_shouyi_all = (TextView) findViewById(R.id.tv_shouyi_all);
         tv_benjin = (TextView) findViewById(R.id.tv_benjin);
         tv_shouyi = (TextView) findViewById(R.id.tv_shouyi);
-
+        iv_about = (ImageView) findViewById(R.id.iv_about);
+        iv_about.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Activity_Browser.launche(Activity_Privilege_Money.this, "关于特权本金", UrlsTwo.AboutExpiredProjectIntroduction);
+            }
+        });
         //管理Activity栈，用于忘记密码的时候，跳转至登陆界面之前销毁栈中所有的Activity
         MyActivityManager.getInstance().pushOneActivity(Activity_Privilege_Money.this);
         setTitleValue("特权本金");
         setLeftTitleVisible(true);
-        setRightTitleValue("兑换", new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(Activity_Privilege_Money.this, "兑换", Toast.LENGTH_SHORT).show();
-            }
-        });
+//        setRightTitleValue("兑换", new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(Activity_Privilege_Money.this, "兑换", Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
         requestQueue = App.getInstance().getRequestQueue();
         ctx = this;
         datas = new ArrayList<>();
         myAdapter = new PrivilegeMoneyAdapter(this, datas);
+        myAdapter.setIloadAfterRegeist(this);
         mListView = (MyListView) findViewById(R.id.listview_data_layout);
         mListView.setOnItemClickListener(this);
         mListView.setAdapter(myAdapter);
@@ -135,9 +143,9 @@ public class Activity_Privilege_Money extends Activity_Base implements AdapterVi
                     //判断JSON对象是否为空
                     if (data != null) {
                         PrivilegeMoneyBasic bean = App.mGson.fromJson(data.toString(), PrivilegeMoneyBasic.class);
-                        tv_shouyi_all.setText(String.format("%.2f",bean.TotalIncome));
-                        tv_benjin.setText(String.format("%.2f",bean.ActivedPrincipal));
-                        tv_shouyi.setText(String.format("%.2f",bean.ActivedIncome));
+                        tv_shouyi_all.setText(String.format("%.2f", bean.TotalIncome));
+                        tv_benjin.setText(String.format("%.2f", bean.ActivedPrincipal));
+                        tv_shouyi.setText(String.format("%.2f", bean.ActivedIncome));
 
                         //列表
                         JSONArray jsonArray = data.optJSONArray("DataList");
@@ -183,4 +191,8 @@ public class Activity_Privilege_Money extends Activity_Base implements AdapterVi
     }
 
 
+    @Override
+    public void loadAfterRegeist() {
+        refreshLayout.autoRefresh();
+    }
 }

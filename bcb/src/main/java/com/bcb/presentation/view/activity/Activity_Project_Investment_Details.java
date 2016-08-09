@@ -26,13 +26,16 @@ import com.bcb.data.util.TokenUtil;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Activity_Project_Investment_Details extends Activity_Base {
-	
-	private static final String TAG = "Activity_Project_Investment_Details";
-	private String OrderNo;
-    private TextView amount,income,tv_away;//投标金额，收益，转让
-	private TextView name;//项目名称
-	private TextView bidding_time;//加入时间
+
+    private static final String TAG = "Activity_Project_Investment_Details";
+    private String OrderNo;
+    private TextView amount, income, tv_away;//投标金额，收益，转让
+    private TextView name;//项目名称
+    private TextView bidding_time;//加入时间
     private TextView earnings_end;//封闭期
     private TextView expected_earning;//预期收益
     private TextView earnings_beginning;//项目起利期
@@ -41,48 +44,49 @@ public class Activity_Project_Investment_Details extends Activity_Base {
 
     private ImageView image_view;
 
-	private Project_Investment_Details_Bean bean;
+    private Project_Investment_Details_Bean bean;
 
     private BcbRequestQueue requestQueue;
-	
-	public static void launche(Context ctx, String OrderNo) {
-		Intent intent = new Intent();
-		intent.setClass(ctx, Activity_Project_Investment_Details.class);
-		intent.putExtra("OrderNo", OrderNo);
-		ctx.startActivity(intent);
-	}
-	
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+
+    public static void launche(Context ctx, String OrderNo) {
+        Intent intent = new Intent();
+        intent.setClass(ctx, Activity_Project_Investment_Details.class);
+        intent.putExtra("OrderNo", OrderNo);
+        ctx.startActivity(intent);
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         //管理Activity栈，用于忘记密码的时候，跳转至登陆界面之前销毁栈中所有的Activity
         MyActivityManager myActivityManager = MyActivityManager.getInstance();
         myActivityManager.pushOneActivity(Activity_Project_Investment_Details.this);
-		setBaseContentView(R.layout.activity_project_investment_details);
-		setLeftTitleVisible(true);
-		setTitleValue("项目投资详情");
-		requestQueue = App.getInstance().getRequestQueue();
+        setBaseContentView(R.layout.activity_project_investment_details);
+        setLeftTitleVisible(true);
+        setTitleValue("投资详情");
+        requestQueue = App.getInstance().getRequestQueue();
         init();
-	}
-	private void init() {
-		OrderNo = getIntent().getStringExtra("OrderNo");
+    }
+
+    private void init() {
+        OrderNo = getIntent().getStringExtra("OrderNo");
         amount = (TextView) findViewById(R.id.amount);
         income = (TextView) findViewById(R.id.income);
         tv_away = (TextView) findViewById(R.id.tv_away);
-		name = (TextView) findViewById(R.id.name);
-		expected_earning = (TextView) findViewById(R.id.expected_earning);
-		bidding_time = (TextView) findViewById(R.id.bidding_time);
-		financing_amount = (TextView) findViewById(R.id.financing_amount);
-		annual_yield = (TextView) findViewById(R.id.annual_yield);
-		earnings_beginning = (TextView) findViewById(R.id.earnings_beginning);
-		earnings_end = (TextView) findViewById(R.id.earnings_end);
-		
+        name = (TextView) findViewById(R.id.name);
+        expected_earning = (TextView) findViewById(R.id.expected_earning);
+        bidding_time = (TextView) findViewById(R.id.bidding_time);
+        financing_amount = (TextView) findViewById(R.id.financing_amount);
+        annual_yield = (TextView) findViewById(R.id.annual_yield);
+        earnings_beginning = (TextView) findViewById(R.id.earnings_beginning);
+        earnings_end = (TextView) findViewById(R.id.earnings_end);
+
         setupImageView();
-		loadData();
-	}
+        loadData();
+    }
 
     /**
-     *  回款第一时间通知
+     * 回款第一时间通知
      */
     private void setupImageView() {
         //底部Banner图片要根据屏幕分辨率调整宽高比
@@ -98,19 +102,19 @@ public class Activity_Project_Investment_Details extends Activity_Base {
         //根据Banner的宽高比进行等比缩放
         ViewGroup.LayoutParams params = image_view.getLayoutParams();
         int width = ScreenUtils.getScreenDispaly(this)[0];
-        params.height= width * 316 / 1280;
+        params.height = width * 316 / 1280;
         params.width = width;
         image_view.setLayoutParams(params);
     }
 
 
-	private void loadData() {
-		JSONObject obj = new JSONObject();
-		try {
-			obj.put("OrderNo", OrderNo);
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
+    private void loadData() {
+        JSONObject obj = new JSONObject();
+        try {
+            obj.put("OrderNo", OrderNo);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.TradingRecordDetail, obj, TokenUtil.getEncodeToken(this), new BcbRequest.BcbCallBack<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -118,7 +122,7 @@ public class Activity_Project_Investment_Details extends Activity_Base {
 
                 try {
                     boolean flag = PackageUtil.getRequestStatus(response, Activity_Project_Investment_Details.this);
-                    if(flag){
+                    if (flag) {
                         JSONObject obj = PackageUtil.getResultObject(response);
                         //判断JSON对象是否为空
                         if (obj != null) {
@@ -128,10 +132,12 @@ public class Activity_Project_Investment_Details extends Activity_Base {
                             //投资金额
                             amount.setText(String.format("%.2f", bean.getOrderAmount()));
                             income.setText(String.format("%.2f", bean.getInterest()));
-                            tv_away.setText(bean.getEndDate()+"后可申请转退出，满期收益"+String.format("%.2f", bean.getTotalInterest())+"元");
+                            Date ApplyEndTime = new SimpleDateFormat("yyyy-MM-dd").parse(bean.getEndDate());
+                            String end_time = SimpleDateFormat.getDateInstance().format(ApplyEndTime);
+                            tv_away.setText(end_time+ "后可申请退出，满期收益" + String.format("%.2f", bean.getTotalInterest()) + "元");
 
                             name.setText(bean.getPackageName());
-                            bidding_time.setText(TextUtils.isEmpty(bean.getPayTime()) ? "" : bean.getPayTime() );
+                            bidding_time.setText(TextUtils.isEmpty(bean.getPayTime()) ? "" : bean.getPayTime());
 //                            financing_amount.setText(bean.getAmountTotal() > 0 ? String.format("%.2f元", bean.getAmountTotal()) : "0元");
                             //预期收益还要加上奖励
 //                            String expectMoney = bean.getInterestAmount() > 0 ? String.format("%.2f元", bean.getInterestAmount()) + "" : "0元"
@@ -145,10 +151,10 @@ public class Activity_Project_Investment_Details extends Activity_Base {
 //                                expectMoney = bean.getInterestAmount() > 0 ? String.format("%.2f元", bean.getInterestAmount()) + "" : "0元"
 //                                        + (bean.getRewardAmount() > 0 ? "(含" + String.format("%.2f", bean.getRewardAmount()) + "元"+ bean.getRewardRateDescn() +"奖励)" : "");
 //                            }
-                            earnings_end.setText(bean.getPeriod()+"个月");
-                            expected_earning.setText("¥"+String.format("%.2f", bean.getPreInterest())+"起");
-                            earnings_beginning.setText(bean.getInterestTakeDate() );
-                            annual_yield.setText(String.format("%.2f", bean.getRate())+"%");
+                            earnings_end.setText(bean.getPeriod() + "个月");
+                            expected_earning.setText("¥" + String.format("%.2f", bean.getPreInterest()) + "起");
+                            earnings_beginning.setText(bean.getInterestTakeDate());
+                            annual_yield.setText(String.format("%.2f", bean.getRate()) + "%");
 
                         } else {
                             LogUtil.e(TAG, "请求项目详情出现错误");
@@ -166,6 +172,6 @@ public class Activity_Project_Investment_Details extends Activity_Base {
         });
         jsonRequest.setTag(BcbRequestTag.TradeRecordDetailTag);
         requestQueue.add(jsonRequest);
-	}
+    }
 }
 
