@@ -197,9 +197,10 @@ public class Activity_LoanRequest_Job extends Activity_Base {
         //月均收入
         if (null != personInfoBean && personInfoBean.IncomeAmount > 0) {
             loan_earn.setText(String.format("%.2f", personInfoBean.IncomeAmount));
-        } else {
-            loan_earn.setText("0");
         }
+//        else {
+//            loan_earn.setText("0");
+//        }
         //年税后总收入
         if (null != personInfoBean && personInfoBean.TotalIncomePerYear > 0) {
             loan_earn_total.setText(String.format("%.2f", personInfoBean.TotalIncomePerYear));
@@ -211,9 +212,10 @@ public class Activity_LoanRequest_Job extends Activity_Base {
         //公积金缴存额度
         if (null != personInfoBean && personInfoBean.FundLimit >= 0) {
             loan_accumulation_fund.setText(String.format("%d", personInfoBean.FundLimit));
-        } else {
-            loan_accumulation_fund.setText("0");
         }
+//        else {
+//            loan_accumulation_fund.setText("0");
+//        }
     }
 
     /****************************** 点击下一步按钮 ***********************************/

@@ -9,8 +9,8 @@ public class MoneyLoanDetail implements Serializable {
     public float LoanAmount;   //放款金额
     public String PayDate;     //放款时间
     public int Period; //总期数
-    public float SecurityDepositFeeAmount; //保证金金额
-    public float ServiceFeeAmount;     //信息服务费
+    public float SecurityDepositFee; //保证金金额
+    public float ServiceFee;     //信息服务费
 
     public float getLoanAmount() {
         return LoanAmount;
@@ -37,18 +37,18 @@ public class MoneyLoanDetail implements Serializable {
     }
 
     public float getSecurityDepositFeeAmount() {
-        return SecurityDepositFeeAmount;
+        return SecurityDepositFee;
     }
 
     public void setSecurityDepositFeeAmount(float securityDepositFeeAmount) {
-        SecurityDepositFeeAmount = securityDepositFeeAmount;
+        SecurityDepositFee = securityDepositFeeAmount;
     }
 
     public float getServiceFeeAmount() {
-        return ServiceFeeAmount;
+        return ServiceFee;
     }
 
     public void setServiceFeeAmount(float serviceFeeAmount) {
-        ServiceFeeAmount = serviceFeeAmount;
+        ServiceFee = serviceFeeAmount;
     }
 }

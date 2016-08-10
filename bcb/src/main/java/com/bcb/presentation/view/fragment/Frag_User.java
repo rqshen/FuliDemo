@@ -406,7 +406,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
     //加入公司
     private void toJoinCompany() {
         if (mUserDetailInfo == null || !mUserDetailInfo.HasOpenCustody) {
-            popHFDialog();
+            startActivity(new Intent(ctx, Activity_Open_Account.class));
         }
         //否则需要判断MyCompany字段
         else {
@@ -426,11 +426,11 @@ public class Frag_User extends Frag_Base implements OnClickListener {
     }
 
 
-    /************************
-     * 去开通汇付
-     ******************************/
-    private void popHFDialog() {
-        startActivity(new Intent(ctx, Activity_Open_Account.class));
+//    /************************
+//     * 去开通汇付
+//     ******************************/
+//    private void popHFDialog() {
+
 //        dialogWidget = new DialogWidget(ctx, IdentifyAlertView.getInstance(ctx, new IdentifyAlertView.OnClikListener() {
 //            @Override
 //            public void onCancelClick() {
@@ -446,7 +446,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 //            }
 //        }).getView());
 //        dialogWidget.show();
-    }
+//    }
 
 
     /***************************
@@ -485,21 +485,21 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 //        }
         //已开通托管
         if (!isLoading() && App.mUserDetailInfo != null && App.mUserDetailInfo.HasOpenCustody) startActivity(new Intent(ctx, Activity_LoanRequest_Borrow.class));
-        else popHFDialog();
+        else startActivity(new Intent(ctx, Activity_Open_Account.class));
     }
 
     //充值
     private void rechargeMoney() {
         //已开通托管
         if (!isLoading() && App.mUserDetailInfo != null && App.mUserDetailInfo.HasOpenCustody) startActivity(new Intent(ctx, Activity_Charge_HF.class));
-        else popHFDialog();
+        else startActivity(new Intent(ctx, Activity_Open_Account.class));
     }
 
 
     //提现
     private void withdrawMoney() {
         if (!isLoading() && App.mUserDetailInfo == null || !App.mUserDetailInfo.HasOpenCustody) {//未开通托管
-            popHFDialog();
+            startActivity(new Intent(ctx, Activity_Open_Account.class));
             return;
         }
         //用户还没绑卡

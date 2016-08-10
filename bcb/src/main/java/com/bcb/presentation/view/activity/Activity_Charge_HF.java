@@ -86,8 +86,7 @@ public class Activity_Charge_HF extends Activity_Base implements View.OnClickLis
         tv_no = (TextView) findViewById(R.id.tv_no);
         bank_icon = (ImageView) findViewById(R.id.bank_icon);
         //银行卡账号
-        if (App.mUserDetailInfo.BankCard != null) {//已绑定
-            layout_bank_card.setVisibility(View.VISIBLE);
+        if (App.mUserDetailInfo.BankCard != null && App.mUserDetailInfo.BankCard.IsQPCard) {//已绑定，且是快捷支付
             bank_card_text.setText(MyTextUtil.delBankNum(App.mUserDetailInfo.BankCard.getCardNumber()));
             //设置银行卡logo
             BankLogo bankLogo = new BankLogo();
@@ -237,7 +236,7 @@ public class Activity_Charge_HF extends Activity_Base implements View.OnClickLis
                             view.setText("不在底部加个东西，会被压缩");
                             lv_banks.addFooterView(view);
                         }
-                        if (App.mUserDetailInfo.BankCard != null) {
+                        if (App.mUserDetailInfo.BankCard != null && App.mUserDetailInfo.BankCard.IsQPCard) {//已绑定，且是快捷支付
                             for (int i = 0; i < list.size(); i++) {
                                 if (App.mUserDetailInfo.BankCard.BankCode.equalsIgnoreCase(list.get(i).getBankCode())) {
                                     ll_card.setVisibility(View.VISIBLE);
@@ -271,7 +270,8 @@ public class Activity_Charge_HF extends Activity_Base implements View.OnClickLis
 
     @Override
     public void afterTextChanged(Editable s) {
-        if (Float.valueOf(et_add_monery.getText().toString().trim()) >= 500) {
+        String text = et_add_monery.getText().toString().trim();
+        if (!TextUtils.isEmpty(text) && Float.valueOf(text) >= 500) {
             tv_next.setBackgroundResource(R.drawable.button_solid_red);
         } else {
             tv_next.setBackgroundResource(R.drawable.button_solid_black);

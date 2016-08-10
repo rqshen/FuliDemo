@@ -24,13 +24,14 @@
                 android:background="#fff"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:paddingLeft="10dp">
+                >
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:singleLine="true"
+                    android:layout_marginLeft="10dp"
                     android:text="账户余额："
                     android:textColor="#999"
                     android:textSize="16sp"/>
@@ -43,7 +44,7 @@
                     android:singleLine="true"
                     android:text="0.00元"
                     android:textColor="#db3838"
-                    android:textSize="16sp"/>
+                    android:textSize="15sp"/>
             </LinearLayout>
 
             <View
@@ -65,16 +66,15 @@
                     android:gravity="center"
                     android:text="银行卡号："
                     android:textColor="@color/txt_gray"
-                    android:textSize="@dimen/main_text_default"/>
+                    android:textSize="16sp"/>
 
                 <TextView
                     android:id="@+id/bank_name_text"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="10dip"
                     android:layout_toRightOf="@id/textView2"
                     android:gravity="center"
-                    android:text=""
+                    android:text="41111"
                     android:textColor="@color/txt_black"
                     android:textSize="@dimen/main_text_default"/>
 

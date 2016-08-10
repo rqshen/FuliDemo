@@ -67,8 +67,16 @@ public class Activity_Main extends Activity_Base_Fragment {
         Intent intent = getIntent();
         if (intent != null) {
             int jumpTo = getIntent().getIntExtra("jumpTo", 0);
-            if (jumpTo==3) {
+            switch (jumpTo) {
+            case 2:
+                setFragProduct();
+            	break;
+            case 3:
                 setFragUser();
+            	break;
+            default:
+                setFragMain();
+            	break;
             }
         }
 

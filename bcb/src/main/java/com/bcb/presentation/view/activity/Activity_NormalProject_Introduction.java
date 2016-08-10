@@ -474,7 +474,11 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
 //            identifyPageTips();
 //            return;
 //        }
-
+        if (App.mUserDetailInfo == null || !App.mUserDetailInfo.HasOpenCustody) {
+            startActivity(new Intent(this, Activity_Open_Account.class));
+            finish();
+            return;
+        }
         gotoBuyPrjectPage();
     }
 

@@ -15,33 +15,33 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import com.bcb.R;
+import com.bcb.common.app.App;
 import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbNetworkManager;
 import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
-import com.bcb.data.util.LogUtil;
-import com.bcb.data.util.MyConstants;
-import com.bcb.presentation.adapter.CouponListAdapter;
-import com.bcb.common.app.App;
-import com.bcb.R;
+import com.bcb.common.net.UrlsOne;
 import com.bcb.data.bean.CouponListBean;
 import com.bcb.data.bean.CouponRecordsBean;
-import com.bcb.common.net.UrlsOne;
 import com.bcb.data.util.HttpUtils;
 import com.bcb.data.util.MyListView;
 import com.bcb.data.util.PackageUtil;
 import com.bcb.data.util.ToastUtil;
 import com.bcb.data.util.TokenUtil;
-import com.bcb.presentation.view.activity.Activity_LoanRequest_Borrow;
+import com.bcb.presentation.adapter.CouponListAdapter;
 import com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * 未使用的优惠券
+ */
 public class Frag_UnusedCoupon extends Frag_Base {
 
 	private static final String TAG = "Frag_UnusedCoupon";

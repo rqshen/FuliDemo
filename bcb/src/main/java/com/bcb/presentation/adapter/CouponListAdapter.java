@@ -2,7 +2,6 @@ package com.bcb.presentation.adapter;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -18,8 +17,8 @@ import com.bcb.common.event.BroadcastEvent;
 import com.bcb.data.bean.CouponRecordsBean;
 import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MyConstants;
-import com.bcb.presentation.view.activity.Activity_Authentication;
 import com.bcb.presentation.view.activity.Activity_LoanRequest_Borrow;
+import com.bcb.presentation.view.activity.Activity_Open_Account;
 import com.bcb.presentation.view.activity.Activity_Withdraw;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
 
@@ -134,7 +133,8 @@ public class CouponListAdapter extends BaseAdapter {
 					@Override
 					public void onClick(View v) {
 						if (MyConstants.WITHDRAW == data.get(pos).getCouponType()) {//提现券时，点击则跳转至提现界面
-                            gotoNewPage(Activity_Withdraw.class);
+//                            gotoNewPage(Activity_Withdraw.class);
+							ctx.startActivity(new Intent(ctx, Activity_Withdraw.class));
                         } else {
                             Intent intent = new Intent();
                             intent.putExtra("CouponId", data.get(pos).getCouponId());
@@ -164,21 +164,25 @@ public class CouponListAdapter extends BaseAdapter {
                 public void onClick(View v) {
 //					LogUtil.d("1234", "type = " + data.get(pos).getCouponType());
                     if (MyConstants.WITHDRAW == data.get(pos).getCouponType()) {//提现券时，点击则跳转至提现界面
-                        gotoNewPage(Activity_Withdraw.class);
+//                        gotoNewPage(Activity_Withdraw.class);
+						ctx.startActivity(new Intent(ctx, Activity_Withdraw.class));
                     }else if (MyConstants.LOAN_SUBSIDIES == data.get(pos).getCouponType()){//借款补贴券时，点击则跳转至借款界面
 						//用户还没认证时，先去认证
-						if(!App.mUserDetailInfo.HasCert || App.mUserDetailInfo.BankCard == null){
-							showAlertView("提示", "您仍未认证，请先认证", new DialogInterface.OnClickListener() {
-								@Override
-								public void onClick(DialogInterface dialog, int which) {
-									ctx.startActivity(new Intent(ctx, Activity_Authentication.class));
-									alertView.dismiss();
-									alertView = null;
-								}
-							});
-						} else {
-							Activity_LoanRequest_Borrow.launche(ctx);
-						}
+						if (App.mUserDetailInfo != null && App.mUserDetailInfo.HasOpenCustody) Activity_LoanRequest_Borrow.launche(ctx);
+						else ctx.startActivity(new Intent(ctx, Activity_Open_Account.class));
+
+//						if(!App.mUserDetailInfo.HasCert || App.mUserDetailInfo.BankCard == null){
+//							showAlertView("提示", "您仍未认证，请先认证", new DialogInterface.OnClickListener() {
+//								@Override
+//								public void onClick(DialogInterface dialog, int which) {
+//									ctx.startActivity(new Intent(ctx, Activity_Authentication.class));
+//									alertView.dismiss();
+//									alertView = null;
+//								}
+//							});
+//						} else {
+//							Activity_LoanRequest_Borrow.launche(ctx);
+//						}
             		} else if (MyConstants.CASH == data.get(pos).getCouponType()){//现金券时，点击则跳转至产品列表界面
 						EventBus.getDefault().post(new BroadcastEvent(BroadcastEvent.PRODUCT));
 						((Activity) ctx).finish();
@@ -201,12 +205,12 @@ public class CouponListAdapter extends BaseAdapter {
 		}
 		return view;
 	}
-    //跳转至新页面
-    private void gotoNewPage(Class<? extends Activity> object) {
-        Intent intent = new Intent(ctx, object);
-        ctx.startActivity(intent);
-        ((Activity) ctx).finish();
-    }
+//    //跳转至新页面
+//    private void gotoNewPage(Class<? extends Activity> object) {
+//        Intent intent = new Intent(ctx, object);
+//        ctx.startActivity(intent);
+////        ((Activity) ctx).finish();
+//    }
 
 	//设置不可用优惠券的样式
 	private void setupUnusedCoupon(Holder holder) {
@@ -239,14 +243,14 @@ public class CouponListAdapter extends BaseAdapter {
 		RelativeLayout layout_view;
 	}
 
-	//提示对话框
-	private void showAlertView(String titleName, String contentMessage, DialogInterface.OnClickListener onClickListener) {
-		AlertView.Builder ibuilder = new AlertView.Builder(ctx);
-		ibuilder.setTitle(titleName);
-		ibuilder.setMessage(contentMessage);
-		ibuilder.setPositiveButton("立即设置", onClickListener);
-		ibuilder.setNegativeButton("取消", null);
-		alertView = ibuilder.create();
-		alertView.show();
-	}
+//	//提示对话框
+//	private void showAlertView(String titleName, String contentMessage, DialogInterface.OnClickListener onClickListener) {
+//		AlertView.Builder ibuilder = new AlertView.Builder(ctx);
+//		ibuilder.setTitle(titleName);
+//		ibuilder.setMessage(contentMessage);
+//		ibuilder.setPositiveButton("立即设置", onClickListener);
+//		ibuilder.setNegativeButton("取消", null);
+//		alertView = ibuilder.create();
+//		alertView.show();
+//	}
 }

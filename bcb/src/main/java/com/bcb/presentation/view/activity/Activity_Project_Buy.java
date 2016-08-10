@@ -55,7 +55,7 @@ import java.text.DecimalFormat;
  * Created by cain on 16/1/28.
  * 买标
  */
-public class Activity_Project_Buy extends Activity_Base implements View.OnClickListener {
+public class Activity_Project_Buy extends Activity_Base implements View.OnClickListener, TextWatcher {
 
     private static final String TAG = "Activity_Project_Buy";
 
@@ -114,7 +114,7 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
     //标的Id
     private String packageId = "";
     //
-    private String CouponId, CouponAmount, CouponMinAmount, PackageToken="";
+    private String CouponId, CouponAmount, CouponMinAmount, PackageToken = "";
 
     //广播
     private Receiver buySuccessReceiver;
@@ -122,6 +122,7 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
     private AlertView alertView;
 
     private BcbRequestQueue requestQueue;
+
     //默认构造函数，用来传递普通标的数据
     public static void launche(Context ctx,
                                String pid,
@@ -176,7 +177,7 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
         mSimpleProjectDetail = (SimpleProjectDetail) this.getIntent().getSerializableExtra("SimpleProjectDetail");
         expiredProjectDetail = (ExpiredProjectDetail) this.getIntent().getSerializableExtra("ExpiredProjectDetail");
         isExpired = this.getIntent().getBooleanExtra("isExpired", false);
-        if (!isExpired)  PackageToken = mSimpleProjectDetail.PackageToken;
+        if (!isExpired) PackageToken = mSimpleProjectDetail.PackageToken;
         setBaseContentView(R.layout.activity_project_buy);
         ctx = this;
         setLeftTitleListener(new View.OnClickListener() {
@@ -226,6 +227,10 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
         }
         //投资金额
         invest_money = (EditText) findViewById(R.id.invest_money);
+        invest_money.addTextChangedListener(this);
+        invest_money.setSelection(invest_money.getText().length());//把光标放在EditText中文本的末尾处=============无效
+
+
         if (!isExpired && mSimpleProjectDetail != null) {
             invest_money.setHint(String.format("%.2f", mSimpleProjectDetail.StartingAmount) + "元起投");
         } else if (isExpired && expiredProjectDetail != null) {
@@ -274,7 +279,7 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
         //立即购买按钮
         button_buy = (Button) findViewById(R.id.button_buy);
         button_buy.setOnClickListener(this);
-
+        button_buy.setClickable(false);
         //出错信息，默认隐藏
         error_tips = (TextView) findViewById(R.id.error_tips);
         error_tips.setVisibility(View.GONE);
@@ -592,8 +597,18 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
             gotoLoginActivity();
             return;
         }
-        //已开通托管
-        if (App.mUserDetailInfo == null || !App.mUserDetailInfo.HasOpenCustody) popHFDialog();
+        //未开通托管
+        if (App.mUserDetailInfo == null || !App.mUserDetailInfo.HasOpenCustody) {
+            startActivity(new Intent(ctx, Activity_Open_Account.class));
+            return;
+        }
+        //未绑卡，跳到充值页面
+        if (App.mUserDetailInfo.HasOpenCustody) {
+            startActivity(new Intent(ctx, Activity_Charge_HF.class));
+            return;
+        }
+
+
 //        //要先认证用户信息，判断是否绑卡和设置了交易密码
 //        if (null != App.mUserDetailInfo) {
 //            // 检测是否绑卡
@@ -922,7 +937,6 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 //        jsonRequest.setTag(BcbRequestTag.UrlBuyProjectTag);
 //        requestQueue.add(jsonRequest);
 //    }
-
     public void onPostSuccess(BuyProjectSuccess successInfo) {
         UmengUtil.eventById(this, R.string.buy_success);
         Activity_BuyProject_Success.launche(this, successInfo);
@@ -1049,15 +1063,15 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
         }
         //已开通托管
         if (App.mUserDetailInfo != null && App.mUserDetailInfo.HasOpenCustody) startActivity(new Intent(ctx, Activity_Charge_HF.class));
-        else popHFDialog();
+        else startActivity(new Intent(ctx, Activity_Open_Account.class));
     }
 
     //对话框
     private DialogWidget dialogWidget;
     Context ctx;
 
-    private void popHFDialog() {
-        startActivity(new Intent(ctx, Activity_Open_Account.class));
+//    private void popHFDialog() {
+//        startActivity(new Intent(ctx, Activity_Open_Account.class));
 //        dialogWidget = new DialogWidget(ctx, IdentifyAlertView.getInstance(ctx, new IdentifyAlertView.OnClikListener() {
 //            @Override
 //            public void onCancelClick() {
@@ -1073,7 +1087,7 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 //            }
 //        }).getView());
 //        dialogWidget.show();
-    }
+//    }
 
     /**************************
      * 跳转到选择优惠券页面
@@ -1170,6 +1184,7 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
         }
     }
 
+
     //注册广播，买标成功之后，刷新余额
     class Receiver extends BroadcastReceiver {
         public void onReceive(Context context, Intent intent) {
@@ -1214,5 +1229,27 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
     public void onDestroy() {
         super.onDestroy();
         unregisterReceiver(buySuccessReceiver);
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+        String text = invest_money.getText().toString().replace(",","").trim();
+        if (!TextUtils.isEmpty(text) && Float.valueOf(text) >= 100) {//100元起投
+            button_buy.setBackgroundResource(R.drawable.button_solid_red);
+            button_buy.setClickable(true);
+        } else {
+            button_buy.setBackgroundResource(R.drawable.button_solid_black);
+            button_buy.setClickable(false);
+        }
     }
 }

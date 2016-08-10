@@ -173,15 +173,13 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.back_img:
-                finish();
+                JumpToUser();
                 break;
             case R.id.tv_next:
                 switch (type) {
                     case BAND_HF_SUCCESS:
                     case BUY_HF_SUCCESS:
-                        Intent intent=new Intent(this, Activity_Main.class);
-                        intent.putExtra("jumpTo", 3);
-                        startActivity(intent);
+                        JumpToUser();
                         break;
                     default:
                         String userId = null;
@@ -195,6 +193,13 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
             default:
                 break;
         }
+    }
+
+    private void JumpToUser() {
+        Intent intent = new Intent(Activity_Tips_FaileOrSuccess.this, Activity_Main.class);
+        intent.putExtra("jumpTo", 3);
+        startActivity(intent);
+        finish();
     }
 
     UserWallet mUserWallet;

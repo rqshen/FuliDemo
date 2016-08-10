@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -41,6 +40,9 @@ import com.bcb.presentation.view.custom.CustomDialog.MyMaskFullScreenView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * 提现TX
+ */
 public class Activity_Withdraw extends Activity_Base implements View.OnClickListener {
 
     private static final String TAG = "Activity_Withdraw";
@@ -300,7 +302,9 @@ public class Activity_Withdraw extends Activity_Base implements View.OnClickList
                         CouponId = response.getJSONObject("result").getString("CouponId");
                         CouponCount = response.getJSONObject("result").getInt("CouponCount");
                         showCouponInfo(response.getJSONObject("result").getInt("CouponCount"));
-
+                    } else {
+                        CouponId = "";
+                        CouponCount = 0;
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -392,7 +396,6 @@ public class Activity_Withdraw extends Activity_Base implements View.OnClickList
             ToastUtil.alert(Activity_Withdraw.this, "提现金额必须大于手续费");
             return;
         }
-//        String CouponId = "4dc7bd0c-104e-4cb3-9215-a64900b12de8";
         requestTX(money, CouponId);
     }
 
@@ -406,10 +409,10 @@ public class Activity_Withdraw extends Activity_Base implements View.OnClickList
         JSONObject requestObj = new JSONObject();
         try {
             requestObj.put("Amount", Amount);
-            Log.i("bqt", "【CouponId】" + CouponId.toString());
-
-            if (!TextUtils.isEmpty(CouponId)&&!CouponId.equalsIgnoreCase("null")) {
-                requestObj.put("CouponId", CouponId);
+            if (!TextUtils.isEmpty(CouponId) && !CouponId.equalsIgnoreCase("null")) {
+                if (couponStatus) {
+                    requestObj.put("CouponId", CouponId);
+                }
             }
             LogUtil.i("bqt", "【Activity_Withdraw】【TX】请求参数：" + requestObj.toString());
         } catch (JSONException e) {
@@ -431,6 +434,7 @@ public class Activity_Withdraw extends Activity_Base implements View.OnClickList
                             String postData = HttpUtils.jsonToStr(result.toString());
                             //跳转到webview
                             Activity_WebView.launche(Activity_Withdraw.this, "提现", postUrl, postData);
+                            finish();
                         }
                     } catch (Exception e) {
                         LogUtil.d("bqt", "【Activity_Withdraw】【TX】" + e.getMessage());

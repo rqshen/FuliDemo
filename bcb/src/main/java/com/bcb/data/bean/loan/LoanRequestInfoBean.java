@@ -20,15 +20,16 @@ public class LoanRequestInfoBean implements Serializable {
     public List<LoanTypeListBean> LoanTypeTable;//借款用途
     public List<RateTableBean> RateTable;//借款利率表
 
-    private String Status;//是否可以申请借款
 
-    public String getStatus() {
-        return Status;
-    }
+    /**
+     * 0	草稿
+     5	审核中
+     10	借款中
+     15	已放款
+     20	归档
+     */
+    public int Status;//是否可以申请借款
 
-    public void setStatus(String status) {
-        Status = status;
-    }
 
     @Override
     public String toString() {

@@ -44,6 +44,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+/**
+ * 优惠券
+ */
 public class Activity_Coupons extends Activity_Base_Fragment {
 	
 	private static final String TAG = "Activity_Coupons";
