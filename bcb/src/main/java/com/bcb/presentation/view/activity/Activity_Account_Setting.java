@@ -229,7 +229,7 @@ public class Activity_Account_Setting extends Activity_Base implements OnClickLi
             case R.id.layout_username:
             case R.id.layout_id_card:
             case R.id.layout_bank_card:
-                authentication();
+                startActivity(new Intent(this, Activity_Open_Account.class));
                 break;
 
             //手机号码
@@ -278,10 +278,10 @@ public class Activity_Account_Setting extends Activity_Base implements OnClickLi
 
     }
 
-    //认证
-    private void authentication() {
-        Activity_Authentication.launche(Activity_Account_Setting.this);
-    }
+//    //认证
+//    private void authentication() {
+//        Activity_Authentication.launche(Activity_Account_Setting.this);
+//    }
 
     //修改手机号
     private void changePhoneNumber() {

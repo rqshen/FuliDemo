@@ -72,7 +72,7 @@ public class IPresenter_RegisterImpl implements IPresenter_Register {
 
 //注册
     @Override
-    public void doRegister(String phoneNumber, String inputPassword, String verificationCode) {
+    public void doRegister(final String phoneNumber, String inputPassword, String verificationCode) {
         LogUtil.i("bqt","请求参数："+phoneNumber+"-"+inputPassword+"-"+verificationCode);
         JSONObject obj = new JSONObject();
         try {
@@ -92,6 +92,7 @@ public class IPresenter_RegisterImpl implements IPresenter_Register {
                         if(status == 1) {
                             //存储Token
                             iModelUserAccount.saveAccessToken(response.getJSONObject("result").getString("Access_Token"));
+                            App.saveUserInfo.setLocalPhone(phoneNumber);
                             iModelUserAccount.setFirstLogin(true);
                         }
                     } catch (JSONException e) {

@@ -3,7 +3,6 @@ package com.bcb.presentation.view.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -200,21 +199,25 @@ public class Activity_Money_Item_Detail extends Activity_Base {
         } else {
             value_service.setText(String.format("%.2f", moneyItemDetailBean.WithdrawExt.ProcedureFee));
         }
-        //判断返回来的CouponId不为空，则表示使用了提现券，由于旧数据可能没有提现手续费，为了收支平衡，则需要设置提现手续费为 -2.00元
-        if (!TextUtils.isEmpty(moneyItemDetailBean.WithdrawExt.CouponId)
-                && !moneyItemDetailBean.WithdrawExt.CouponId.equalsIgnoreCase("null")) {
+//        //判断返回来的CouponId不为空，则表示使用了提现券，由于旧数据可能没有提现手续费，为了收支平衡，则需要设置提现手续费为 -2.00元
+//        if (!TextUtils.isEmpty(moneyItemDetailBean.WithdrawExt.CouponId)
+//                && !moneyItemDetailBean.WithdrawExt.CouponId.equalsIgnoreCase("null")) {
+//            value_trans_amount.setText("2.00");
+//            if (moneyItemDetailBean.WithdrawExt.ProcedureFee <= 0) {
+//                value_service.setText("-2.00");
+//            }
+//        } else {
+//            value_trans_amount.setText("0.00");
+//        }
+        value_service.setText("-2.00");
+        if (moneyItemDetailBean.WithdrawExt.CouponId != null //
+                && moneyItemDetailBean.WithdrawExt.CouponId != ""//
+                && !moneyItemDetailBean.WithdrawExt.CouponId.equals("00000000-0000-0000-0000-000000000000")) {
+//            value_trans_amount.setText(moneyItemDetailBean.WithdrawExt.CouponId);
             value_trans_amount.setText("2.00");
-            if (moneyItemDetailBean.WithdrawExt.ProcedureFee <= 0) {
-                value_service.setText("-2.00");
-            }
         } else {
             value_trans_amount.setText("0.00");
         }
-//        if (moneyItemDetailBean.WithdrawExt.CouponId != null //
-//                && moneyItemDetailBean.WithdrawExt.CouponId != ""//
-//                && !moneyItemDetailBean.WithdrawExt.CouponId.equals("00000000-0000-0000-0000-000000000000")) {
-//            value_trans_amount.setText(moneyItemDetailBean.WithdrawExt.CouponId);
-//        } else value_trans_amount.setText("没有使用提现券");
     }
 
     //设置【回款】显示项目名称、信息服务费、回款利息

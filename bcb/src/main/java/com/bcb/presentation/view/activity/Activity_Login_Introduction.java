@@ -1,14 +1,17 @@
 package com.bcb.presentation.view.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 
 import com.bcb.R;
+import com.bcb.common.app.App;
 import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.UmengUtil;
 import com.bcb.presentation.adapter.MyPagerAdapter;
@@ -58,7 +61,7 @@ public class Activity_Login_Introduction extends Activity_Base implements View.O
     //初始化ViewPager
     private void setupViewPager() {
         //获取手机屏幕宽度
-        WindowManager wm=(WindowManager)getSystemService(Context.WINDOW_SERVICE);
+        WindowManager wm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
         int width = wm.getDefaultDisplay().getWidth();
         //初始化ViewPager
         viewPager = (ViewPager) findViewById(R.id.view_pager);
@@ -106,7 +109,9 @@ public class Activity_Login_Introduction extends Activity_Base implements View.O
         }
     }
 
-    /******************* 点击事件 ***********************/
+    /*******************
+     * 点击事件
+     ***********************/
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -127,16 +132,35 @@ public class Activity_Login_Introduction extends Activity_Base implements View.O
         }
     }
 
-    /**************** 去注册页面 **********************/
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (App.saveUserInfo != null && !TextUtils.isEmpty(App.saveUserInfo.getAccess_Token())) {
+            finish();
+        }
+    }
+
+    /****************
+     * 去注册页面
+     **********************/
     private void gotoRegisterPage() {
         Activity_Register_First.launche(Activity_Login_Introduction.this);
 //        finish();
     }
 
-    /******************* 去登陆页面 *******************/
+    /*******************
+     * 去登陆页面
+     *******************/
     private void gotoLoginPage() {
         UmengUtil.eventById(Activity_Login_Introduction.this, R.string.bid_buy_n_login);
-        Activity_Login.launche(Activity_Login_Introduction.this);
-//        finish();
+        startActivity(new Intent(this, Activity_Login.class));
     }
+
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (resultCode==100) {
+//        	finish();
+//        }
+//    }
 }

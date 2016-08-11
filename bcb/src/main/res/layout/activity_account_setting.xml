@@ -61,7 +61,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:text="@string/setting_modify"
+                        android:text="去认证"
                         android:textColor="@color/blue"
                         android:textSize="@dimen/main_text_default" />
                     <ImageView
@@ -114,7 +114,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:text="@string/setting_modify"
+                        android:text="去认证"
                         android:textColor="@color/blue"
                         android:textSize="@dimen/main_text_default" />
                     <ImageView

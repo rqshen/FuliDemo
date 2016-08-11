@@ -91,7 +91,7 @@
                     android:layout_marginTop="6dp"
                     android:textColor="@color/txt_middle_gray"
                     android:textSize="@dimen/main_text_rather_small"
-                    android:text="3.个人信用报告。可登陆中国人民银行征信中心在线免费生成"/>
+                    android:text="3.个人信用报告。可登录中国人民银行征信中心在线免费生成"/>
 
 
                 <LinearLayout

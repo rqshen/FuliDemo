@@ -289,7 +289,7 @@ public class Activity_Daily_Welfare extends Activity_Base implements View.OnClic
                         }
                     }else if(-2 == status){//领福利时间为每日 06：00-22：00
                         Activity_Daily_Welfare_Tip.launche(context);
-                        finish();
+//                        finish();
                     }else if(-5 == status) {
                         App.saveUserInfo.clear();
                         Intent intent = new Intent(context, Activity_Login.class);

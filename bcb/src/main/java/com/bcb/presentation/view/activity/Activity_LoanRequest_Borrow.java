@@ -151,11 +151,11 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
     //刷新
     private PullToRefreshLayout refreshLayout;
 
-    private Handler handler = new Handler(){
+    private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            switch (msg.what){
+            switch (msg.what) {
                 case SCROLL:
                     value_rotate.scroll(1, 1000);
                     break;
@@ -165,9 +165,10 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
 
     /**
      * 启动
+     *
      * @param ctx
      */
-    public static void launche(Context ctx){
+    public static void launche(Context ctx) {
         Intent intent = new Intent(ctx, Activity_LoanRequest_Borrow.class);
         ctx.startActivity(intent);
     }
@@ -206,7 +207,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
         //根据Banner的宽高比进行等比缩放
         ViewGroup.LayoutParams params = banner_image.getLayoutParams();
         int width = ScreenUtils.getScreenDispaly(Activity_LoanRequest_Borrow.this)[0];
-        params.height= width * 608 / 1440;
+        params.height = width * 608 / 1440;
         params.width = width;
         banner_image.setLayoutParams(params);
     }
@@ -245,14 +246,16 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
     /**
      * 初始化
      */
-    private void init(String loanRequestInfoString){
+    private void init(String loanRequestInfoString) {
         //获取从上一个页面传递过来的数据
         loanRequestInfo = (new Gson()).fromJson(loanRequestInfoString, LoanRequestInfoBean.class);
+        LogUtil.i("bqt", "【Activity_LoanRequest_Borrow】【init】借款信息" + loanRequestInfoString);
+
         durationStatus = loanRequestInfo.LoanTimeType;
         periodStatus = loanRequestInfo.Period;
         initLoanMessage();
         //请求获取优惠券张数
-        getCouponCount();
+        getCouponCount(false);
         //初始化借款类型
         setupLoanUsage();
         //初始化借款期限
@@ -265,7 +268,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
         } else {
             loan_amount.setText("5000");
         }
-        if (loanRequestInfo.Status == 0) {
+        if (loanRequestInfo.Status == 0 && !loanRequestInfo.AggregateId.equals("00000000-0000-0000-0000-000000000000")) {
             bottoButton.setText("修改申请");
         } else {
             bottoButton.setText("立即申请");
@@ -334,7 +337,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
         loan_protocol.setOnClickListener(this);
 
         //文字滚动
-        value_rotate  = (WheelVerticalView) findViewById(R.id.value_rotate);
+        value_rotate = (WheelVerticalView) findViewById(R.id.value_rotate);
         isPause = false;
         startRotate();
 
@@ -350,8 +353,8 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
     protected void onResume() {
         super.onResume();
         //恢复滚屏
-        if (isPause){
-            if (null == adTimer){
+        if (isPause) {
+            if (null == adTimer) {
                 adTimer = new Timer();
                 adTimerTask = new TimerTask() {
                     @Override
@@ -371,7 +374,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
         //关闭滚屏定时器
         if (adTimerTask != null)
             adTimerTask.cancel();
-        if (adTimer != null){
+        if (adTimer != null) {
             adTimer.cancel();
             adTimer.purge();
             adTimer = null;
@@ -382,9 +385,9 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
     /**
      * 初始化并开始滚动文字
      */
-    private void startRotate(){
+    private void startRotate() {
         String[] rotateValues = getResources().getStringArray(R.array.rotateValues);
-        if (!this.isFinishing()){
+        if (!this.isFinishing()) {
             adapter = new ArrayWheelAdapter<>(this, rotateValues);
             adapter.setTextGravity(Gravity.CENTER);
             adapter.setTextSize(15);
@@ -395,7 +398,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
             value_rotate.setCyclic(true);
             value_rotate.setEnabled(false);
 
-            if (null == adTimer){
+            if (null == adTimer) {
                 adTimer = new Timer();
                 adTimerTask = new TimerTask() {
                     @Override
@@ -412,8 +415,8 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
      * 转圈提示
      */
     private void showProgressBar() {
-        if(null == progressDialog) {
-            progressDialog = new ProgressDialog(this,ProgressDialog.THEME_HOLO_LIGHT);
+        if (null == progressDialog) {
+            progressDialog = new ProgressDialog(this, ProgressDialog.THEME_HOLO_LIGHT);
         }
         progressDialog.setMessage("正在验证借款信息...");
         progressDialog.setCanceledOnTouchOutside(false);
@@ -425,7 +428,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
      * 隐藏转圈
      */
     private void hideProgressBar() {
-        if(!isFinishing() && null != progressDialog && progressDialog.isShowing()){
+        if (!isFinishing() && null != progressDialog && progressDialog.isShowing()) {
             progressDialog.dismiss();
         }
     }
@@ -433,11 +436,11 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
     /**
      * 获取优惠券张数
      */
-    private void getCouponCount() {
+    private void getCouponCount(final boolean isRefush) {
         //如果使用过券，则设置为券的描述
         if (loanRequestInfo.UseCoupon) {
             value_interest.setText(loanRequestInfo.CouponDescn);
-            return;
+            if (!isRefush) return;
         }
         JSONObject obj = new JSONObject();
         try {
@@ -458,7 +461,11 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
                         if (obj != null) {
                             //获取利息抵扣券张数
                             CouponCount = Integer.parseInt(obj.getString("TotalCount"));
-                            ShowCouponCount(CouponCount);
+                            if (!isRefush) value_interest.setText("你有" + CouponCount + "张利息抵扣券");
+                            else {
+                                LogUtil.i("bqt", "利息抵扣券数量222：" + CouponCount);
+                                value_interest.setText("你有" + CouponCount + "张利息抵扣券");
+                            }
                         }
                     }
                 } catch (Exception e) {
@@ -481,12 +488,12 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
     private void setupLoanUsage() {
         //将元素添加到数组中
         purposes_types = new ArrayList<>();
-        for (int i = 0; i <loanRequestInfo.LoanTypeTable.size(); i++) {
+        for (int i = 0; i < loanRequestInfo.LoanTypeTable.size(); i++) {
             LogUtil.d("借款用途", loanRequestInfo.LoanTypeTable.get(i).Name);
             purposes_types.add(loanRequestInfo.LoanTypeTable.get(i).Name);
         }
         int index = 0;
-        for (int i = 0; i <loanRequestInfo.LoanTypeTable.size(); i++) {
+        for (int i = 0; i < loanRequestInfo.LoanTypeTable.size(); i++) {
             //获取默认选中的借款用途
             if (loanRequestInfo.LoanType == loanRequestInfo.LoanTypeTable.get(i).Value) {
                 index = i;
@@ -522,7 +529,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
         }
 
         //找到durationStatus对应的下表值
-        for (int i =0; i < duration_types.size(); i ++) {
+        for (int i = 0; i < duration_types.size(); i++) {
             if (new String(durationStatus + "个月").equalsIgnoreCase(duration_types.get(i))) {
                 durationIndex = i;
                 break;
@@ -547,7 +554,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
             }
         }
         //设置还款位置
-        for (int i= 0; i < periodList.size(); i++) {
+        for (int i = 0; i < periodList.size(); i++) {
             if (loanRequestInfo.Period == periodList.get(i).Period) {
                 loanIndex = i;
                 break;
@@ -570,7 +577,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
         DecimalFormat df = new DecimalFormat("######0.##");
         float rate = 0;
         //根据表查找利率
-        for (int i = 0; i < loanRequestInfo.RateTable.size();  i ++) {
+        for (int i = 0; i < loanRequestInfo.RateTable.size(); i++) {
             if (durationStatus == loanRequestInfo.RateTable.get(i).getDuration() && periodStatus == loanRequestInfo.RateTable.get(i).getPeriod()) {
                 rate = loanRequestInfo.RateTable.get(i).Rate / 100;
                 break;
@@ -583,7 +590,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
         }
         //借款月数等于还款期数
         else if (durationStatus == periodStatus && durationStatus != -1) {
-            float amount = (getLoanAmount() + getLoanAmount() * durationStatus/12 * rate) / periodStatus;
+            float amount = (getLoanAmount() + getLoanAmount() * durationStatus / 12 * rate) / periodStatus;
             String value = df.format(amount);
             //如果是一个月的时候，就是"到期还款XXX元"
             if (durationStatus == 1) {
@@ -594,14 +601,14 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
         }
         //还款期数为2时
         else if (periodStatus == 2) {
-            float amount = getLoanAmount() * (float) durationStatus / 12 * rate /durationStatus;
+            float amount = getLoanAmount() * (float) durationStatus / 12 * rate / durationStatus;
             String value = df.format(amount);
-            String val = df.format(getLoanAmount()/periodStatus);
+            String val = df.format(getLoanAmount() / periodStatus);
             repayProgramme = "每月还利息" + value + "元" + "每12个月还本金" + val + "元";
         }
         //划款期数为3时
         else if (periodStatus == 3) {
-            float amount = getLoanAmount() * (float)durationStatus/12 * rate/durationStatus;
+            float amount = getLoanAmount() * (float) durationStatus / 12 * rate / durationStatus;
             String value = df.format(amount);
             String val1 = df.format(getLoanAmount() * 0.3);
             String val2 = df.format(getLoanAmount() * 0.4);
@@ -614,7 +621,8 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
 
     /**
      * 获取借款金额
-     * @return  借款金额
+     *
+     * @return 借款金额
      */
     private float getLoanAmount() {
         String amount = loan_amount.getText().toString().replace(",", "");
@@ -624,12 +632,6 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
         return Float.parseFloat(amount);
     }
 
-    /**
-     * 显示利息抵扣券张数
-     */
-    private void ShowCouponCount(int TotalCount) {
-        value_interest.setText("你有"+ TotalCount +"张利息抵扣券");
-    }
 
     @Override
     public void onClick(View view) {
@@ -680,7 +682,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
                 break;
 
             //点击立即申请按钮
-            case  R.id.borrow_button:
+            case R.id.borrow_button:
                 UmengUtil.eventById(Activity_LoanRequest_Borrow.this, R.string.loan_act);
                 borrowButtonClick();
                 break;
@@ -709,7 +711,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
             //申请福利补贴
             case R.id.layout_coupon_select:
                 //已经选择了利息抵扣券，则弹框提示是否仅申请福利补贴
-                 if (statusSelectCoupon) {
+                if (statusSelectCoupon) {
                     showAlertView();
                 }
                 //如果没选过利息抵扣券，则正常申请福利补贴
@@ -736,18 +738,20 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
         ibuilder.setPositiveButton("立即申请", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                //销毁弹框
-                alertView.dismiss();
-                alertView = null;
+                //将利息抵扣券的描述设置为"你有xx张利息抵扣券"
+                LogUtil.i("bqt", "利息抵扣券数量1111：" + CouponCount);
+                getCouponCount(true);
+
                 //清空利息抵扣券的ID、金额和描述等，将利息抵扣券的选中状态置为false
                 InterestAmount = 0;
                 InterestMinAmount = 0;
                 InterestDescn = "";
                 statusSelectCoupon = false;
-                //将利息抵扣券的描述设置为"你有xx张利息抵扣券"
-                ShowCouponCount(CouponCount);
                 //正常申请福利补贴
                 requestSubsidy();
+                //销毁弹框
+                alertView.dismiss();
+                alertView = null;
             }
         });
         ibuilder.setNegativeButton("取消", null);
@@ -766,6 +770,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
             coupon_select_image.setBackgroundResource(R.drawable.loan_rect);
         }
     }
+
     /**
      * 选择利息抵扣券
      */
@@ -793,7 +798,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
      */
     private void borrowButtonClick() {
         //判断是否写了借款金额和期望到账时间
-        if (getLoanAmount()<= 0) {
+        if (getLoanAmount() <= 0) {
             ToastUtil.alert(Activity_LoanRequest_Borrow.this, "请填写完整的借款信息");
             return;
         }
@@ -811,14 +816,14 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
         }
 
         LogUtil.d("借款", loanRequestInfo.toString());
-        if (loanRequestInfo.Status==0){//可以申请借款
+        if (loanRequestInfo.Status == 0) {//可以申请借款
             //判断是否跟原来的数据一样，如果跟原来申请的借款一样没有变化，直接提示完善个人信息
             if (isNeedToPostData()) {
                 pushLoanMessageToService();
             } else {
                 gotoRequestSuccessPage();
             }
-        }else{//存在已审核通过的借款
+        } else {//存在已审核通过的借款
             ToastUtil.alert(Activity_LoanRequest_Borrow.this, message);
         }
 
@@ -826,6 +831,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
 
     /**
      * 判断是否需要提交借款申请数据到服务器
+     *
      * @return 是否需要提交数据
      */
     private boolean isNeedToPostData() {
@@ -834,8 +840,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
                 || loanRequestInfo.AggregateId.equals("0")
                 || loanRequestInfo.AggregateId.equals("00000000-0000-0000-0000-000000000000")) {
             return true;
-        }
-        else if (purposeStatus != loanRequestInfo.LoanType           //借款用途不一致
+        } else if (purposeStatus != loanRequestInfo.LoanType           //借款用途不一致
                 || getLoanAmount() != loanRequestInfo.Amount    //借款金额不一致
                 || durationStatus != loanRequestInfo.LoanTimeType   //借款期限不一致
                 || periodStatus != loanRequestInfo.Period           //还款期数不一致
@@ -855,7 +860,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
         //提交数据时候上传用户定位数据
         UserExtraInfo userExtraInfo = DbUtil.getUserExtra();
         JSONObject jsonObject = new JSONObject();
-        try{
+        try {
             if (!loanRequestInfo.AggregateId.equals("0") && !loanRequestInfo.AggregateId.equals("00000000-0000-0000-0000-000000000000")) {
                 jsonObject.put("AggregateId", loanRequestInfo.AggregateId);
             } else {
@@ -874,7 +879,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
             }
 
             //位置信息、imei、机型、网络环境
-            if (null != userExtraInfo){
+            if (null != userExtraInfo) {
                 jsonObject.put("MobileMode", userExtraInfo.getModel());
                 jsonObject.put("IMEI", userExtraInfo.getImei());
                 jsonObject.put("Network", userExtraInfo.getNetwork());
@@ -929,9 +934,10 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
 
     /**
      * 选择优惠券回调
-     * @param requestCode   请求码
-     * @param resultCode    回调码
-     * @param data          回调数据
+     *
+     * @param requestCode 请求码
+     * @param resultCode  回调码
+     * @param data        回调数据
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -955,7 +961,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
                     //已经选择了利息抵扣券
                     statusSelectCoupon = true;
                 } else {
-                    getCouponCount();
+                    getCouponCount(false);
                 }
                 break;
         }
@@ -969,7 +975,9 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
         requestQueue.cancelAll(BcbRequestTag.BCB_CREATE_LOAN_REQUEST_MESSAGE_REQUEST);
     }
 
-    /****************************** 获取借款验证 ************************************/
+    /******************************
+     * 获取借款验证
+     ************************************/
     private void getLoanCertification() {
         showProgressBar();
         BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.LoanCertification, null, TokenUtil.getEncodeToken(this), new BcbRequest.BcbCallBack<JSONObject>() {
@@ -978,7 +986,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
                 hideProgressBar();
                 refreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
                 try {
-                    if(null == response) {
+                    if (null == response) {
                         ToastUtil.alert(Activity_LoanRequest_Borrow.this, "服务器返回数据为空，无法验证");
                         return;
                     }
@@ -998,7 +1006,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
                         UmengUtil.eventById(Activity_LoanRequest_Borrow.this, R.string.loan_blank);
                         init(response.getString("result"));
                     }
-                }catch(Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                     //数据出错重新登录
                     Activity_Login.launche(Activity_LoanRequest_Borrow.this);

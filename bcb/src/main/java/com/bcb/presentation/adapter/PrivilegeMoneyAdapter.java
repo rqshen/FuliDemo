@@ -135,17 +135,29 @@ public class PrivilegeMoneyAdapter extends BaseAdapter {
                                 AlertView.Builder ibuilder = new AlertView.Builder(ctx);
                                 ibuilder.setTitle("激活成功");
                                 ibuilder.setMessage("特权本金将在" + valueDate + "日发送");
-                                ibuilder.setPositiveButton("开通托管账户领取收益", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        alertView.dismiss();
-                                        alertView = null;
-                                        ctx.startActivity(new Intent(ctx, Activity_Open_Account.class));
-                                    }
-                                });
+                                //已开通托管
+                                if (App.mUserDetailInfo != null && App.mUserDetailInfo.HasOpenCustody) {
+                                    ibuilder.setPositiveButton("知道了", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            alertView.dismiss();
+                                            alertView = null;
+                                        }
+                                    });
+                                } //未开通托管
+                                else {
+                                    ibuilder.setPositiveButton("开通托管账户领取收益", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            alertView.dismiss();
+                                            alertView = null;
+                                            ctx.startActivity(new Intent(ctx, Activity_Open_Account.class));
+                                        }
+                                    });
+                                }
                                 alertView = ibuilder.create();
                                 alertView.show();
-                                if (iloadAfterRegeist!=null) {
+                                if (iloadAfterRegeist != null) {
                                     iloadAfterRegeist.loadAfterRegeist();
                                 }
                             }

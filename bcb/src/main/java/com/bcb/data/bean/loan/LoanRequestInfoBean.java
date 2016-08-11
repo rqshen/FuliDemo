@@ -28,7 +28,7 @@ public class LoanRequestInfoBean implements Serializable {
      15	已放款
      20	归档
      */
-    public int Status;//是否可以申请借款
+    public int Status=-1;//是否可以申请借款
 
 
     @Override

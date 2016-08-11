@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bcb.R;
 import com.bcb.common.app.App;
@@ -591,6 +592,8 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
     float inputMoney;
 
     private void clickButton() {
+        //输入金额
+        inputMoney = Float.parseFloat(invest_money.getText().toString().replace(",", ""));
         // 用户是否登录
         if (App.saveUserInfo.getAccess_Token() == null) {
             ToastUtil.alert(Activity_Project_Buy.this, "请先登录");
@@ -602,11 +605,15 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
             startActivity(new Intent(ctx, Activity_Open_Account.class));
             return;
         }
-        //未绑卡，跳到充值页面
-        if (App.mUserDetailInfo.HasOpenCustody) {
-            startActivity(new Intent(ctx, Activity_Charge_HF.class));
+        //******************************************************************************************
+        //未绑卡或余额不足
+        if (App.mUserDetailInfo.BankCard == null || App.mUserWallet.BalanceAmount < inputMoney) {
+//            startActivity(new Intent(ctx, Activity_Charge_HF.class));
+            Toast.makeText(Activity_Project_Buy.this, "您的帐户余额不足，请充值后再试", Toast.LENGTH_SHORT).show();
             return;
         }
+
+        //******************************************************************************************
 
 
 //        //要先认证用户信息，判断是否绑卡和设置了交易密码
@@ -682,8 +689,6 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
                 return;
             }
 
-            //输入金额
-            inputMoney = Float.parseFloat(invest_money.getText().toString().replace(",", ""));
 
             // 判断是否大于起投金额
             if (mSimpleProjectDetail.StartingAmount > 0) {
@@ -1243,7 +1248,7 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 
     @Override
     public void afterTextChanged(Editable s) {
-        String text = invest_money.getText().toString().replace(",","").trim();
+        String text = invest_money.getText().toString().replace(",", "").trim();
         if (!TextUtils.isEmpty(text) && Float.valueOf(text) >= 100) {//100元起投
             button_buy.setBackgroundResource(R.drawable.button_solid_red);
             button_buy.setClickable(true);

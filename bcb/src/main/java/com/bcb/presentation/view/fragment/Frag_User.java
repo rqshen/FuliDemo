@@ -243,7 +243,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
     @Override
     public void onResume() {
         showData();
-       super.onResume();
+        super.onResume();
     }
 
     private void showPhoneService() {
@@ -366,13 +366,13 @@ public class Frag_User extends Frag_Base implements OnClickListener {
             // 优惠券
             case R.id.coupons:
                 UmengUtil.eventById(ctx, R.string.self_coupon);
-                checkCoupon();
+                startActivityForResult(new Intent(ctx, Activity_Coupons.class), 1);
                 break;
 
             // 特权本金
             case R.id.privilege_money:
                 UmengUtil.eventById(ctx, R.string.self_invate);
-                privilegeMoney();
+                Activity_Privilege_Money.launch(ctx);
                 break;
 
             // 资金托管
@@ -382,7 +382,8 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 
             // 账号设置
             case R.id.layout_account_settting:
-                accountSetting();
+                UmengUtil.eventById(ctx, R.string.self_setting);
+                Activity_Account_Setting.launche(ctx);
                 break;
         }
     }
@@ -394,7 +395,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
     }
 
     protected View getFreezeAmountView() {
-        return MyMaskFullScreenView.getInstance(ctx, "冻结金额包括：提现中资金、投标中资金、借款保证金等", new MyMaskFullScreenView.OnClikListener() {
+        return MyMaskFullScreenView.getInstance(ctx, "冻结金额包括：还款金额、借款保证金等", new MyMaskFullScreenView.OnClikListener() {
             @Override
             public void onViewClik() {
                 dialogWidget.dismiss();
@@ -426,79 +427,30 @@ public class Frag_User extends Frag_Base implements OnClickListener {
     }
 
 
-//    /************************
-//     * 去开通汇付
-//     ******************************/
-//    private void popHFDialog() {
-
-//        dialogWidget = new DialogWidget(ctx, IdentifyAlertView.getInstance(ctx, new IdentifyAlertView.OnClikListener() {
-//            @Override
-//            public void onCancelClick() {
-//                dialogWidget.dismiss();
-//                dialogWidget = null;
-//            }
-//
-//            @Override
-//            public void onSureClick() {
-//                dialogWidget.dismiss();
-//                dialogWidget = null;
-//                startActivity(new Intent(ctx, Activity_Open_Account.class));
-//            }
-//        }).getView());
-//        dialogWidget.show();
-//    }
-
-
-    /***************************
-     * 审核中
-     *************************/
-    private void companyAlertView(String title, String contentMessage) {
-        AlertView.Builder ibuilder = new AlertView.Builder(ctx);
-        ibuilder.setTitle(title);
-        ibuilder.setMessage(contentMessage);
-        ibuilder.setPositiveButton("知道了", null);
-        alertView = ibuilder.create();
-        alertView.show();
-    }
-
     //借款
     private void loanMainPage() {
-//        //存在用户信息
-//        if (!isLoading() && null != mUserDetailInfo) {
-//            //用户还没认证时，先去认证
-//            if (!App.mUserDetailInfo.HasCert || App.mUserDetailInfo.BankCard == null) {
-//                showAlertView("提示", "您仍未认证，请先认证", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        startActivity(new Intent(ctx, Activity_Authentication.class));
-//                        alertView.dismiss();
-//                        alertView = null;
-//                    }
-//                });
-//            } else {
-//                Activity_LoanRequest_Borrow.launche(ctx);
-//            }
-//        }
-//        //不存在用户信息时，先去认证
-//        else {
-//            startActivity(new Intent(ctx, Activity_Authentication.class));
-//        }
         //已开通托管
-        if (!isLoading() && App.mUserDetailInfo != null && App.mUserDetailInfo.HasOpenCustody) startActivity(new Intent(ctx, Activity_LoanRequest_Borrow.class));
+        if (isLoading()) return;
+        if (App.mUserDetailInfo != null && App.mUserDetailInfo.HasOpenCustody) startActivity(new Intent(ctx, Activity_LoanRequest_Borrow.class));
         else startActivity(new Intent(ctx, Activity_Open_Account.class));
     }
 
     //充值
     private void rechargeMoney() {
+        if (isLoading()) return;
         //已开通托管
-        if (!isLoading() && App.mUserDetailInfo != null && App.mUserDetailInfo.HasOpenCustody) startActivity(new Intent(ctx, Activity_Charge_HF.class));
+        if (App.mUserDetailInfo != null && App.mUserDetailInfo.HasOpenCustody) startActivity(new Intent(ctx, Activity_Charge_HF.class));
         else startActivity(new Intent(ctx, Activity_Open_Account.class));
     }
 
-
     //提现
+    //绑定提现卡后请求我的银行卡接口同样会返回银行卡信息，不过【IsQPCard】为【false】
+    // {"status":1,"message":"","result":{"BankCode":"CIB","BankName":"兴业银行","CardNumber":"6229081111111111112","IsQPCard":false}}
     private void withdrawMoney() {
-        if (!isLoading() && App.mUserDetailInfo == null || !App.mUserDetailInfo.HasOpenCustody) {//未开通托管
+        //未开通托管
+        if (isLoading()) return;
+        //没开通托管
+        if (App.mUserDetailInfo == null || !App.mUserDetailInfo.HasOpenCustody) {
             startActivity(new Intent(ctx, Activity_Open_Account.class));
             return;
         }
@@ -512,60 +464,41 @@ public class Frag_User extends Frag_Base implements OnClickListener {
                     alertView = null;
                 }
             });
-        } else//跳到提现页面
-            startActivity(new Intent(ctx, Activity_Withdraw.class));
-
-//        //存在用户信息
-//        if (null != mUserDetailInfo) {
-//            //用户还没认证时，先去认证
-//            if (!App.mUserDetailInfo.HasCert || App.mUserDetailInfo.BankCard == null) {
-//                showAlertView("提示", "您仍未认证，请先认证", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        startActivity(new Intent(ctx, Activity_Authentication.class));
-//                        alertView.dismiss();
-//                        alertView = null;
-//                    }
-//                });
-//            }
-//            //未设置交易密码，先去设置密码
-//            else if (!App.mUserDetailInfo.HasTradePassword) {
-//                startActivity(new Intent(ctx, Activity_Setting_Pay_Pwd.class));
-//            }
-//            //去提现
-//            else {
-//                startActivity(new Intent(ctx, Activity_Withdraw.class));
-//            }
-//        }
-//        //不存在用户信息时，先去认证
-//        else {
-//            startActivity(new Intent(ctx, Activity_Authentication.class));
-//        }
+        } else startActivity(new Intent(ctx, Activity_Withdraw.class));
     }
 
-    //优惠券
-    private void checkCoupon() {
-        startActivityForResult(new Intent(ctx, Activity_Coupons.class), 1);
-    }
-
-    //特权本金
-    private void privilegeMoney() {
-        Activity_Privilege_Money.launch(ctx);
-    }
 
     //资金托管
     private void managedFunds() {
-        if (!isLoading() && App.mUserDetailInfo.HasOpenCustody) {//已开通托管
+        if (isLoading()) return;
+        if (App.mUserDetailInfo.HasOpenCustody) {//已开通托管
             startActivity(new Intent(ctx, Activity_TuoGuan_HF.class));
-        } else {
-            startActivity(new Intent(ctx, Activity_Open_Account.class));
-        }
+        } else startActivity(new Intent(ctx, Activity_Open_Account.class));
     }
 
-    //账号设置
-    private void accountSetting() {
-        UmengUtil.eventById(ctx, R.string.self_setting);
-        Activity_Account_Setting.launche(ctx);
+    //判断状态，如果获取数据中或者获取数据失败，都表示依旧要加载数据
+    private boolean isLoading() {
+        if (loadingStatus) {
+            //加载数据失败
+            if (loadingError) ToastUtil.alert(ctx, "获取用户数据失败，请刷新重试");
+                //获取用户数据过程中
+            else ToastUtil.alert(ctx, "正在获取用户数据");
+            return true;
+        }
+        return false;
+    }
+
+
+    /***************************
+     * 审核中
+     *************************/
+    private void companyAlertView(String title, String contentMessage) {
+        AlertView.Builder ibuilder = new AlertView.Builder(ctx);
+        ibuilder.setTitle(title);
+        ibuilder.setMessage(contentMessage);
+        ibuilder.setPositiveButton("知道了", null);
+        alertView = ibuilder.create();
+        alertView.show();
     }
 
     @Override
@@ -619,24 +552,10 @@ public class Frag_User extends Frag_Base implements OnClickListener {
     }
 
     private void showPopupWindow(boolean visible) {
-        if (visible) {
-            user_customer_tips.setVisibility(View.VISIBLE);
-        } else {
-            user_customer_tips.setVisibility(View.GONE);
-        }
+        if (visible) user_customer_tips.setVisibility(View.VISIBLE);
+        else user_customer_tips.setVisibility(View.GONE);
     }
 
-    //判断状态，如果获取数据中或者获取数据失败，都表示依旧要加载数据
-    private boolean isLoading() {
-        if (loadingStatus) {
-            //加载数据失败
-            if (loadingError) ToastUtil.alert(ctx, "获取用户数据失败，请刷新重试");
-                //获取用户数据过程中
-            else ToastUtil.alert(ctx, "正在获取用户数据");
-            return true;
-        }
-        return false;
-    }
 
     //*****************************************                            请求服务器                           ****************************************
 

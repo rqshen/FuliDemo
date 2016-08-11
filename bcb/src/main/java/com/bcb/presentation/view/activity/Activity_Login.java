@@ -22,6 +22,7 @@ import com.bcb.common.event.BroadcastEvent;
 import com.bcb.data.bean.WelfareBean;
 import com.bcb.data.util.DbUtil;
 import com.bcb.data.util.LoanPersonalConfigUtil;
+import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MQCustomerManager;
 import com.bcb.data.util.RegexManager;
 import com.bcb.data.util.ToastUtil;
@@ -67,6 +68,8 @@ public class Activity_Login extends Activity_Base implements Interface_Base, OnC
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+        LogUtil.i("bqt", "【Activity_Login】【onCreate】");
+
 		setBaseContentView(R.layout.activity_login);
         setLeftTitleVisible(true);
         setTitleValue("用户登录");
@@ -138,7 +141,7 @@ public class Activity_Login extends Activity_Base implements Interface_Base, OnC
 	//显示转圈提示
 	private void showProgressBar() {
 		if(null == progressDialog) progressDialog = new ProgressDialog(this,ProgressDialog.THEME_HOLO_LIGHT);
-		progressDialog.setMessage("正在登陆...");
+		progressDialog.setMessage("正在登录...");
 		progressDialog.setCanceledOnTouchOutside(false);
 		progressDialog.setCancelable(true);
 		progressDialog.show();

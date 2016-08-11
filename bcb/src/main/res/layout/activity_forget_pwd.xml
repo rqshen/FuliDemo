@@ -22,11 +22,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dip"
                 android:textSize="@dimen/main_text_default"
+                android:visibility="gone"
                 android:textColor="@color/txt_black"
                 android:text="身份证号码:"/>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:layout_marginTop="5dip" >
                 <EditText
                     android:id="@+id/id_card"
