@@ -18,6 +18,7 @@ import com.bcb.common.net.BcbRequestTag;
 import com.bcb.common.net.UrlsOne;
 import com.bcb.data.bean.loan.PersonInfoBean;
 import com.bcb.data.util.LoanPersonalConfigUtil;
+import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.RegexManager;
 import com.bcb.data.util.SpinnerWheelUtil;
@@ -33,7 +34,7 @@ import java.util.List;
 /**
  * Created by cain on 16/1/5.
  */
-public class Activity_LoanRequest_Person extends Activity_Base implements View.OnClickListener{
+public class Activity_LoanRequest_Person extends Activity_Base implements View.OnClickListener {
 
     //婚姻状况
     private TextView loan_marital_status;
@@ -185,8 +186,10 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
         BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.GetLoanPersonalMessage, null, TokenUtil.getEncodeToken(this), new BcbRequest.BcbCallBack<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
+                LogUtil.i("bqt", "【Activity_LoanRequest_Person】【onResponse】借款的个人信息" + response.toString());
+
                 hideProgressBar();
-                if(null == response) {
+                if (null == response) {
                     ToastUtil.alert(Activity_LoanRequest_Person.this, "服务器返回数据出错");
                     return;
                 }
@@ -196,16 +199,16 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
                         //将JSON转成PersonInfoBean对象，要先判断是否存在这样的数据
                         Gson mGson = new Gson();
                         String localLoanPersonal = new LoanPersonalConfigUtil(Activity_LoanRequest_Person.this).getLoanPersonalMessage();
-                        if (!TextUtils.isEmpty(localLoanPersonal)){
+                        if (!TextUtils.isEmpty(localLoanPersonal)) {
                             PersonInfo = mGson.fromJson(localLoanPersonal, PersonInfoBean.class);
-                        }else {
+                        } else {
                             PersonInfo = mGson.fromJson(result, PersonInfoBean.class);
                         }
                         /////////////此处代码是为了兼容旧版本升级，否则会出现空指针异常
-                        if (null == PersonInfo.Relationship2){
-                            PersonInfoBean temp = mGson.fromJson(result, PersonInfoBean.class);
-                            PersonInfo.Relationship2 = temp.Relationship2;
-                        }
+//                        if (null == PersonInfo.Relationship2){
+//                            PersonInfoBean temp = mGson.fromJson(result, PersonInfoBean.class);
+//                            PersonInfo.Relationship2 = temp.Relationship2;
+//                        }
                         /////////////
                         //设置婚姻状况
                         changeMaritalStatusList(PersonInfo);
@@ -239,8 +242,8 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
      * 转圈提示
      */
     private void showProgressBar() {
-        if(null == progressDialog) {
-            progressDialog = new ProgressDialog(this,ProgressDialog.THEME_HOLO_LIGHT);
+        if (null == progressDialog) {
+            progressDialog = new ProgressDialog(this, ProgressDialog.THEME_HOLO_LIGHT);
         }
         progressDialog.setMessage("正在验证借款信息....");
         progressDialog.setCanceledOnTouchOutside(false);
@@ -252,7 +255,7 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
      * 隐藏转圈提示
      */
     private void hideProgressBar() {
-        if(!isFinishing() && null != progressDialog && progressDialog.isShowing()){
+        if (!isFinishing() && null != progressDialog && progressDialog.isShowing()) {
             progressDialog.dismiss();
         }
     }
@@ -279,6 +282,7 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
             childrenList.add(i, personInfoBean.ChildrenStatusList.get(i).Name);
         }
     }
+
     /**
      * 设置住房状况列表
      */
@@ -306,14 +310,16 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
     private void changeRelationshipList(PersonInfoBean personInfoBean) {
         relationList1 = new ArrayList<>();
         for (int i = 0; i < personInfoBean.RelationshipList.size(); i++) {
-            relationList1.add(i, personInfoBean.RelationshipList.get(i).Name);
+            LogUtil.i("bqt", "设置关系列表1" + personInfoBean.RelationshipList.get(i).Name);
+            relationList1.add(i, personInfoBean.RelationshipList.get(i).Name);//固定四个
         }
         relationStatus1 = relationList1.get(0);
         relationList2 = new ArrayList<>();
         for (int i = 0; i < personInfoBean.RelationshipList2.size(); i++) {
-            relationList2.add(i, personInfoBean.RelationshipList2.get(i).Name);
+            LogUtil.i("bqt", "设置关系列表2" + personInfoBean.RelationshipList2.get(i).Name);
+            relationList2.add(i, personInfoBean.RelationshipList2.get(i).Name);//固定2个
         }
-        relationStatus2 = relationList2.get(0);
+        if (relationList2.size() > 0) relationStatus2 = relationList2.get(0);
     }
 
     /**
@@ -327,7 +333,7 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
         //孩子情况
         loan_children.setText(childrenList.get(PersonInfo.ChildrenStatus));
         //住房状况
-        if (PersonInfo.HousingStatus > 0){
+        if (PersonInfo.HousingStatus > 0) {
             loan_house_situation.setText(houseList.get(PersonInfo.HousingStatus - 1));
         }
         //文化程度
@@ -467,11 +473,14 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
         PersonInfo.EmergencyContact2 = loan_emergency_case_second.getText().toString();
         //紧急联系人2 关系
         PersonInfo.Relationship2 = relationStatus2;
+        LogUtil.i("bqt", "【Activity_LoanRequest_Person】【saveDataAndGotoJobPage】关系2--" + relationStatus2);
+
         //紧急联系人2 电话
         PersonInfo.ContactPhone2 = loan_emergency_phone_second.getText().toString();
         //将个人信息缓存在本地
         Gson mGson = new Gson();
         (new LoanPersonalConfigUtil(this)).saveLoanPersonalMessage(mGson.toJson(PersonInfo));
+        LogUtil.i("bqt", "【Activity_LoanRequest_Person】【saveDataAndGotoJobPage】关系2--" + mGson.toString());
         //跳转至工作信息页面
         Intent intent = new Intent(Activity_LoanRequest_Person.this, Activity_LoanRequest_Job.class);
         intent.putExtra("personInfoBean", mGson.toJson(PersonInfo));
@@ -488,7 +497,7 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.ll_children://孩子情况
                 String[] arr1 = childrenList.toArray(new String[childrenList.size()]);
                 SpinnerWheelUtil.getInstance().initSpinnerWheelDialog(this, arr1, childrenStatus, new SpinnerWheelUtil.OnDoneClickListener() {

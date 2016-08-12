@@ -64,22 +64,21 @@ public class Activity_Main extends Activity_Base_Fragment {
         init();
         UmengUtil.update(Activity_Main.this);
         EventBus.getDefault().register(this);
-        Intent intent = getIntent();
-        if (intent != null) {
-            int jumpTo = getIntent().getIntExtra("jumpTo", 0);
-            switch (jumpTo) {
-            case 2:
-                setFragProduct();
-            	break;
-            case 3:
-                setFragUser();
-            	break;
-            default:
-                setFragMain();
-            	break;
-            }
-        }
-
+//        Intent intent = getIntent();
+//        if (intent != null) {
+//            int jumpTo = getIntent().getIntExtra("jumpTo", 0);
+//            switch (jumpTo) {
+//            case 2:
+//                setFragProduct();
+//            	break;
+//            case 3:
+//                setFragUser();
+//            	break;
+//            default:
+//                setFragMain();
+//            	break;
+//            }
+//        }
     }
 
     private void init() {

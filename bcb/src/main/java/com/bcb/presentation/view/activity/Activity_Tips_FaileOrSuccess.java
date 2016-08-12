@@ -4,12 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bcb.R;
 import com.bcb.common.app.App;
+import com.bcb.common.event.BroadcastEvent;
 import com.bcb.common.net.BcbJsonRequest;
 import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestTag;
@@ -23,6 +25,10 @@ import com.bcb.data.util.ToastUtil;
 import com.bcb.data.util.TokenUtil;
 
 import org.json.JSONObject;
+
+import java.util.regex.Pattern;
+
+import de.greenrobot.event.EventBus;
 
 /**
  * 错误提示界面
@@ -43,6 +49,8 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
     public static final int TX_HF_FAILED = 8;//提现失败
     public static final int BUY_HF_SUCCESS = 9;//申购成功
     public static final int BUY_HF_FAILED = 10;//申购失败
+    public static final int SLB_SUCCESS = 11;//生利宝成功
+    public static final int SLB_FAILED = 12;//生利宝失败
     ImageView iv_pic;
     TextView title_text, tv_up, tv_down, tv_next;
 
@@ -147,9 +155,30 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
                 title_text.setText("申购失败");
                 iv_pic.setImageResource(R.drawable.failed_buy_fh);
                 tv_up.setText("申购失败！");
-//                tv_down.setText("申购金额超过项目剩余金额");
                 tv_down.setText(message);
                 tv_next.setText("联系客服");
+                break;
+            case SLB_SUCCESS:
+                String[] splitStrs = Pattern.compile("\\|").split(message);//Java Split以竖线作为分隔符
+                title_text.setText("生利宝");
+                iv_pic.setImageResource(R.drawable.success_open_hf);
+                if (splitStrs[2].equalsIgnoreCase("I")) tv_up.setText("成功转入");
+                else if (splitStrs[2].equalsIgnoreCase("O")) tv_up.setText("成功转出");
+                else tv_up.setText("成功");
+                tv_up.setTextColor(0xff22bb66);
+                tv_down.setText("¥ " + splitStrs[3]);
+                tv_down.setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
+                tv_next.setText("返回生利宝");
+                break;
+            case SLB_FAILED:
+                String[] splitStrs2 = Pattern.compile("\\|").split(message);//Java Split以竖线作为分隔符
+                title_text.setText("生利宝");
+                iv_pic.setImageResource(R.drawable.failed_charge_hf);
+                if (splitStrs2[2].equalsIgnoreCase("I")) tv_up.setText("转入失败");
+                else if (splitStrs2[2].equalsIgnoreCase("O")) tv_up.setText("转出失败");
+                else tv_up.setText("失败");
+                tv_down.setText("第三方支付平台出错");
+                tv_next.setText("返回生利宝");
                 break;
             default:
                 break;
@@ -177,13 +206,19 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
                 break;
             case R.id.tv_next:
                 switch (type) {
+                    //个人中心
                     case BAND_HF_SUCCESS:
                     case BUY_HF_SUCCESS:
                         JumpToUser();
                         break;
+                    //生利宝
+                    case SLB_SUCCESS:
+                    case SLB_FAILED:
+                        finish();
+                        break;
+                    //客服
                     default:
                         String userId = null;
-                        //判断是否为空
                         if (App.mUserDetailInfo != null) userId = App.mUserDetailInfo.getCustomerId();
                         MQCustomerManager.getInstance(this).showCustomer(userId);
                         finish();
@@ -196,9 +231,11 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
     }
 
     private void JumpToUser() {
-        Intent intent = new Intent(Activity_Tips_FaileOrSuccess.this, Activity_Main.class);
-        intent.putExtra("jumpTo", 3);
-        startActivity(intent);
+//        Intent intent = new Intent(Activity_Tips_FaileOrSuccess.this, Activity_Main.class);
+//        intent.putExtra("jumpTo", 3);
+//        startActivity(intent);
+        EventBus.getDefault().post(new BroadcastEvent(BroadcastEvent.USER));
+        startActivity(new Intent(this, Activity_Main.class));
         finish();
     }
 

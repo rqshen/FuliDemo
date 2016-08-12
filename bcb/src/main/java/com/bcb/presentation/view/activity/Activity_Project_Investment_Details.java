@@ -27,7 +27,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class Activity_Project_Investment_Details extends Activity_Base {
 
@@ -129,15 +128,20 @@ public class Activity_Project_Investment_Details extends Activity_Base {
                             bean = App.mGson.fromJson(obj.toString(), Project_Investment_Details_Bean.class);
                         }
                         if (null != bean) {
+                            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
                             //投资金额
                             amount.setText(String.format("%.2f", bean.getOrderAmount()));
                             income.setText(String.format("%.2f", bean.getInterest()));
-                            Date ApplyEndTime = new SimpleDateFormat("yyyy-MM-dd").parse(bean.getEndDate());
-                            String end_time = SimpleDateFormat.getDateInstance().format(ApplyEndTime);
-                            tv_away.setText(end_time+ "后可申请退出，满期收益" + String.format("%.2f", bean.getTotalInterest()) + "元");
+                            //退出时间
+                            String end_time = format.format(format.parse(bean.getEndDate()));
+                            tv_away.setText(end_time + "后可申请退出，满期收益" + String.format("%.2f", bean.getTotalInterest()) + "元");
 
                             name.setText(bean.getPackageName());
-                            bidding_time.setText(TextUtils.isEmpty(bean.getPayTime()) ? "" : bean.getPayTime());
+                            //加入时间
+                            String biddingTime=TextUtils.isEmpty(bean.getPayTime()) ? "" : bean.getPayTime();
+                            bidding_time.setText(format.format(format.parse(biddingTime)));
+
 //                            financing_amount.setText(bean.getAmountTotal() > 0 ? String.format("%.2f元", bean.getAmountTotal()) : "0元");
                             //预期收益还要加上奖励
 //                            String expectMoney = bean.getInterestAmount() > 0 ? String.format("%.2f元", bean.getInterestAmount()) + "" : "0元"
@@ -153,7 +157,8 @@ public class Activity_Project_Investment_Details extends Activity_Base {
 //                            }
                             earnings_end.setText(bean.getPeriod() + "个月");
                             expected_earning.setText("¥" + String.format("%.2f", bean.getPreInterest()) + "起");
-                            earnings_beginning.setText(bean.getInterestTakeDate());
+                            //起息时间
+                            earnings_beginning.setText(format.format(format.parse(bean.getInterestTakeDate())));
                             annual_yield.setText(String.format("%.2f", bean.getRate()) + "%");
 
                         } else {

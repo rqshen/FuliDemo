@@ -39,7 +39,7 @@ public class Activity_Money_Flowing_Water extends Activity_Base {
 
 	private MyListView mFlowingWaterListView;
 
-	private int PageNow = 1; 
+	private int PageNow = 1;
 	private int PageSize = 10;
 
 	private List<MoneyFlowingWaterRecordsBean> recordsBeans;

@@ -7,24 +7,26 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.bcb.R;
+import com.bcb.common.app.App;
 import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbNetworkManager;
 import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
-import com.bcb.data.util.TokenUtil;
-import com.bcb.presentation.adapter.LoanListAdapter;
-import com.bcb.common.app.App;
+import com.bcb.common.net.UrlsOne;
 import com.bcb.data.bean.loan.LoanListBean;
 import com.bcb.data.bean.loan.LoanListRecordsBean;
-import com.bcb.data.util.MyActivityManager;
-import com.bcb.data.util.PackageUtil;
-import com.bcb.common.net.UrlsOne;
 import com.bcb.data.util.HttpUtils;
+import com.bcb.data.util.LogUtil;
+import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.MyListView;
+import com.bcb.data.util.PackageUtil;
 import com.bcb.data.util.ToastUtil;
+import com.bcb.data.util.TokenUtil;
+import com.bcb.presentation.adapter.LoanListAdapter;
 import com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout;
+
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -123,6 +125,8 @@ public class Activity_LoanList extends Activity_Base {
         BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.MyLoanListMessage, jsonObject, TokenUtil.getEncodeToken(this), new BcbRequest.BcbCallBack<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
+                LogUtil.i("bqt", "【Activity_LoanList】【onResponse】借款列表" + response.toString());
+
                 try{
                     //如果存在返回数据时
                     if(PackageUtil.getRequestStatus(response, Activity_LoanList.this)) {

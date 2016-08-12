@@ -55,5 +55,6 @@ dependencies {
     // 目前支持常见的 4 种图片加载库，选择其中一种作为 MQConfig.init 方法的第三个参数进行初始化
     compile 'com.github.bumptech.glide:glide:3.7.0'
 
+    compile 'com.google.android.gms:play-services-appindexing:8.1.0'
 }
 

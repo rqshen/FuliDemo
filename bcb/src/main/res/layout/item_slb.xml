@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="15dp">
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="收益"
+        android:textColor="#3e3f43"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_name"
+        android:layout_marginTop="8dp"
+        android:text="2016-8-12"
+        android:textColor="#999"
+        android:textSize="13sp"/>
+
+    <TextView
+        android:id="@+id/tv_monery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/tv_name"
+        android:layout_marginTop="8dp"
+        android:text="+0.00"
+        android:textColor="#3e3f43"
+        android:textSize="13sp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_below="@+id/tv_time"
+        android:layout_marginTop="10dp"
+        android:background="#ddd"/>
+
+</RelativeLayout>

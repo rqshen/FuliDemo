@@ -37,6 +37,7 @@ import com.bcb.data.util.PackageUtil;
 import com.bcb.data.util.ToastUtil;
 import com.bcb.data.util.TokenUtil;
 import com.bcb.data.util.UmengUtil;
+import com.bcb.presentation.view.activity.A_Slb;
 import com.bcb.presentation.view.activity.Activity_Account_Setting;
 import com.bcb.presentation.view.activity.Activity_Charge_HF;
 import com.bcb.presentation.view.activity.Activity_Coupons;
@@ -160,7 +161,8 @@ public class Frag_User extends Frag_Base implements OnClickListener {
         view.findViewById(R.id.coupons).setOnClickListener(this);
         //特权本金
         view.findViewById(R.id.privilege_money).setOnClickListener(this);
-        //资金托管
+        //胜利包
+        view.findViewById(R.id.managed_slb).setOnClickListener(this);
         view.findViewById(R.id.managed_funds).setOnClickListener(this);
         //账号设置
         view.findViewById(R.id.layout_account_settting).setOnClickListener(this);
@@ -378,6 +380,10 @@ public class Frag_User extends Frag_Base implements OnClickListener {
             // 资金托管
             case R.id.managed_funds:
                 managedFunds();
+                break;
+            // 圣力宝
+            case R.id.managed_slb:
+                startActivity(new Intent(ctx, A_Slb.class));
                 break;
 
             // 账号设置

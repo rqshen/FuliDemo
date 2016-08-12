@@ -18,6 +18,7 @@ import com.bcb.common.net.BcbRequestTag;
 import com.bcb.common.net.UrlsOne;
 import com.bcb.data.bean.loan.PersonInfoBean;
 import com.bcb.data.util.LoanPersonalConfigUtil;
+import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.RegexManager;
 import com.bcb.data.util.ToastUtil;
@@ -282,9 +283,13 @@ public class Activity_LoanRequest_Job extends Activity_Base {
         (new LoanPersonalConfigUtil(this)).saveLoanPersonalMessage(mGson.toJson(personInfoBean));
         try {
             JSONObject jsonObject = new JSONObject(mGson.toJson(personInfoBean));
+            LogUtil.i("bqt", "【Activity_LoanRequest_Job】【postDatatoService】提交给服务器的数据" + jsonObject.toString());
+
             BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.PostLoanPersonalMessage, jsonObject, TokenUtil.getEncodeToken(this), new BcbRequest.BcbCallBack<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
+                    LogUtil.i("bqt", "【Activity_LoanRequest_Job】【onResponse】将个人信息提交给服务器后返回" + response.toString());
+
                     hideProgressBar();
                     try {
                         if (response.getInt("status") == 1) {

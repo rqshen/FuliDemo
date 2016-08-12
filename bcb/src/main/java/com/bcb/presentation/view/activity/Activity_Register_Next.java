@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bcb.R;
 import com.bcb.data.util.LogUtil;
@@ -49,7 +48,7 @@ public class Activity_Register_Next extends Activity_Base implements Interface_V
     //客服
     private TextView customer_service;
     //是否成功获取了验证码
-    private boolean isHasGetVerification = false;
+//    private boolean isHasGetVerification = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -464,10 +463,10 @@ public class Activity_Register_Next extends Activity_Base implements Interface_V
                     break;
                 }
                 //没有点击获取验证码
-                if (!isHasGetVerification) {
-                    Toast.makeText(Activity_Register_Next.this, "请先获取验证码", Toast.LENGTH_SHORT).show();
-                    return;
-                }
+//                if (!isHasGetVerification) {
+//                    Toast.makeText(Activity_Register_Next.this, "请先获取验证码", Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
                 if (regservicecode.getText().toString().length() != 6) {
                     errortips_confirm.setVisibility(View.VISIBLE);
                     errortips_confirm.setText("请输入6位验证码");
@@ -509,7 +508,7 @@ public class Activity_Register_Next extends Activity_Base implements Interface_V
             setTimer();
             if (resultStatus == 1) {
                 ToastUtil.alert(Activity_Register_Next.this, " 验证码已发送至 " + phonenum);
-                isHasGetVerification = true;
+//                isHasGetVerification = true;
             } else {
                 errortips_confirm.setVisibility(View.VISIBLE);
                 errortips_confirm.setText(message);

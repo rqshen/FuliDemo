@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="15dp"
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="高收益版的余额宝"
+        android:textColor="#333"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:lineSpacingExtra="5dp"
+        android:text="汇付天下生利宝”是汇付天下与多家优秀基金公司合作开发的理财产品,为汇付天下商户提供闲置资金的货币基金理财服务"
+        android:textColor="#3e3f43"
+        android:textSize="13sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="银行级安全性"
+        android:textColor="#333"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:lineSpacingExtra="5dp"
+        android:text="生利宝风险系数几乎等同于银行存款,但收益则远远高出活期存款10倍有余。"
+        android:textColor="#3e3f43"
+        android:textSize="13sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="资金灵活周转"
+        android:textColor="#333"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:lineSpacingExtra="5dp"
+        android:text="在汇付天下P2P托管账户中,投资人的钱能够”活”起来。”生利宝”能够做到实时申购,实时赎回,不会耽误投资人在P2P平台投标。"
+        android:textColor="#3e3f43"
+        android:textSize="13sp"/>
+
+</LinearLayout>

@@ -46,6 +46,14 @@ public class UrlsTwo {
     public static String UrlBandCard = host + "/api/v2.0/a63d00c46c0d";
     //用户银行卡
     public static String UrlUserBand = host + "/api/v2.0/a648009fe9f5";
+    //生利宝，产品信息查询
+    public static String UrlSlb = host + "/api/v2.0/a65c00f2ac02";
+    //生利宝交易
+    public static String UrlSlbJY = host + "/api/v2.0/a65c00f0eb76";
+    //生利宝账户查询
+    public static String UrlSlbZH = host + "/api/v2.0/a65c00f1d541";
+    //生利宝收益列表
+    public static String UrlSlbSY = host + "/api/v2.0/a65c00f5a8d0";
 
 
 }

@@ -39,7 +39,8 @@ public class Activity_WebView extends Activity_Base {
     private Context context;
     private ProgressBar mPageLoadingProgressBar;
     private X5WebView mWebView;
-    private ViewGroup mViewParent; /*加密的key*/
+    private ViewGroup mViewParent;
+    /*加密的key*/
     private static final String KEY = "9e469d566f5d41j1a83b9rf4";
 
     public static void launche(Context ctx, String tittle, String url, String postData) {
@@ -123,47 +124,41 @@ public class Activity_WebView extends Activity_Base {
                     } else Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.OPEN_HF_FAILED, message);
                     return true;
                 }
-                //【绑卡】
-//                else if (url.contains("fulihui://")) {
-//                    LogUtil.i("bqt", "绑卡" + url);
-//                    if (url.contains("000")) {//成功
-//                        Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.CHARGE__HF_SUCCESS, "");
-//                    } else {
-//                        Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.CHARGE_HF_FAILED, "");
-//                    }
-//                    finish();
-//                    return true;
-//                }
                 //【充值】
                 else if (url.contains("fulihui://recharge_result")) {
                     LogUtil.i("bqt", "充值" + url);
                     finish();
-                    if (url.contains("000")) {//成功
-                        Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.CHARGE__HF_SUCCESS, message);
-                    } else {
-                        Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.CHARGE_HF_FAILED, message);
-                    }
+                    if (url.contains("000")) Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.CHARGE__HF_SUCCESS, message);
+                    else Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.CHARGE_HF_FAILED, message);
                     return true;
                 }
                 //【提现】
                 else if (url.contains("fulihui://withdraw_result")) {
                     LogUtil.i("bqt", "提现" + url);
                     finish();
-                    if (url.contains("000")) {//成功
-                        Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.TX_HF_SUCCESS, message);
-                    } else {
-                        Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.TX_HF_FAILED, message);
-                    }
+                    if (url.contains("000")) Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.TX_HF_SUCCESS, message);
+                    else Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.TX_HF_FAILED, message);
                     return true;
                     //买标、申购
                 } else if (url.contains("fulihui://invest_result")) {
                     LogUtil.i("bqt", "买标" + url);
                     finish();
-                    if (url.contains("000")) {//成功
-                        Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.BUY_HF_SUCCESS, message);
-                    } else {
-                        Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.BUY_HF_FAILED, message);
+                    if (url.contains("000")) Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.BUY_HF_SUCCESS, message);
+                    else Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.BUY_HF_FAILED, message);
+                    return true;
+                    //生利宝
+                } else if (url.contains("fulihui://fsstrans_result")) {
+                    LogUtil.i("bqt", "生利宝" + url);
+                    finish();
+                    //重新生成message
+                    try {
+                        message = URLDecoder.decode(url.substring(url.indexOf('|') + 1), "UTF-8");
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
                     }
+                    LogUtil.i("bqt", "【Activity_WebView】【shouldOverrideUrlLoading】" + message);
+                    if (url.contains("000")) Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.SLB_SUCCESS, message);
+                    else Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.SLB_FAILED, message);
                     return true;
                 } else {
                     return super.shouldOverrideUrlLoading(view, url);
@@ -224,6 +219,7 @@ public class Activity_WebView extends Activity_Base {
         CookieSyncManager.createInstance(this);
         CookieSyncManager.getInstance().sync();
     }
+
 
     //加密后的链接
     private String getUrlStrWithDES() {
