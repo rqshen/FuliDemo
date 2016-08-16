@@ -2,7 +2,6 @@ package com.bcb.data.bean;
 
 public class UserWallet {
 /*
-http请求方式： POST http://ttgateway.100cb.cn/api/v2.0/a64701348128
 参数	类型	说明
 TotalAsset	float	总资产
 BalanceAmount	float	可用余额

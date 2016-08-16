@@ -486,6 +486,8 @@
         </activity>
         <activity android:name=".presentation.view.activity.A_Slb_List">
         </activity>
+        <activity android:name=".presentation.view.activity.A_TZ_Cheques">
+        </activity>
     </application>
 
 </manifest>

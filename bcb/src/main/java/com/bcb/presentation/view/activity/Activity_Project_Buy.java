@@ -548,6 +548,8 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
                 //如果是新手体验标
                 if (isExpired) {
                     shouyi = ((moneyinput * expiredProjectDetail.Rate * 0.01f) / countDate) * expiredProjectDetail.Duration;
+
+
                     jiangliamount = ((moneyinput * expiredProjectDetail.RewardRate) / countDate * 0.01f) * expiredProjectDetail.Duration;
                     if (expiredProjectDetail.RewardRateDescn != null && !expiredProjectDetail.RewardRateDescn.equalsIgnoreCase("null")) {
                         description = expiredProjectDetail.RewardRateDescn;
@@ -555,7 +557,10 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
                 }
                 //不是新手体验标的时候
                 else {
-                    shouyi = ((moneyinput * mSimpleProjectDetail.Rate * 0.01f) / countDate) * mSimpleProjectDetail.Duration;
+//                    shouyi = ((moneyinput * mSimpleProjectDetail.Rate * 0.01f) / countDate) * mSimpleProjectDetail.Duration;
+
+                    shouyi=moneyinput * mSimpleProjectDetail.PreInterest/10000;
+
                     jiangliamount = ((moneyinput * mSimpleProjectDetail.RewardRate) / countDate * 0.01f) * mSimpleProjectDetail.Duration;
                     if (mSimpleProjectDetail.RewardRateDescn != null && !mSimpleProjectDetail.RewardRateDescn.equalsIgnoreCase("null")) {
                         description = mSimpleProjectDetail.RewardRateDescn;
@@ -770,12 +775,13 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
                     } catch (Exception e) {
                         LogUtil.d("bqt", "【Activity_Project_Buy】【Buy】" + e.getMessage());
                     }
-                }
+                } else Toast.makeText(Activity_Project_Buy.this, response.optString("message"), Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onErrorResponse(Exception error) {
                 LogUtil.d("bqt", "【Activity_Project_Buy】【Buy】网络异常，请稍后重试" + error.toString());
+                Toast.makeText(Activity_Project_Buy.this, error.toString(), Toast.LENGTH_SHORT).show();
             }
         });
         App.getInstance().getRequestQueue().add(jsonRequest);

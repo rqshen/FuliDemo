@@ -17,9 +17,11 @@ import com.bcb.data.util.HttpUtils;
 import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.PackageUtil;
 import com.bcb.data.util.TokenUtil;
+import com.bcb.presentation.view.custom.SlbSyView;
 
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -27,7 +29,8 @@ import java.util.List;
  */
 public class A_Slb extends Activity_Base implements View.OnClickListener {
     TextView tv_yesterday, tv_total_top, value_rate, value_total;
-    TextView tv_sy;
+    SlbSyView slbView;
+    TextView tv_values;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +61,8 @@ public class A_Slb extends Activity_Base implements View.OnClickListener {
         tv_total_top = (TextView) findViewById(R.id.tv_total_top);
         value_rate = (TextView) findViewById(R.id.value_rate);
         value_total = (TextView) findViewById(R.id.value_total);
-        tv_sy = (TextView) findViewById(R.id.tv_sy);
+        tv_values = (TextView) findViewById(R.id.tv_values);
+        slbView = (SlbSyView) findViewById(R.id.slbView);
     }
 
     @Override
@@ -101,12 +105,25 @@ public class A_Slb extends Activity_Base implements View.OnClickListener {
                         if (result != null) {
                             SlbBasic bean = App.mGson.fromJson(result.toString(), SlbBasic.class);
                             if (null != bean) {
-                                value_rate.setText(bean.getPrdRate() + "");
+                                value_rate.setText(String.format("%.2f", bean.getPrdRate()) + "");
                                 List<SlbBasic.DailyRateListBean> dailyRateList = bean.getDailyRateList();
                                 if (null != dailyRateList && dailyRateList.size() > 0) {
-                                    for (SlbBasic.DailyRateListBean b : dailyRateList) {
-                                        tv_sy.append(b.getPrdRate() + "\n");
+                                    float[] values = new float[7];
+                                    StringBuilder sb = new StringBuilder();
+                                    SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+                                    SimpleDateFormat format2 = new SimpleDateFormat("MM.dd");
+                                    for (int i = 0; i < dailyRateList.size(); i++) {
+                                        values[i] = dailyRateList.get(i).getAnnuRate();
+                                        String time = format2.format(format1.parse(dailyRateList.get(i).getDate()));
+                                        if (i == 1 || i == 4) sb.append(time + "       ");
+                                        else sb.append(time + "      ");
                                     }
+                                    slbView.setHeights(values);////服务器返回数据有bug******************************************************************************************
+//                                    slbView.setHeights(new float[]{2.1112f, 2.2311f, 2.3001f, 2.1234f, 2.3421f, 2.0015f, 2.3256f});
+                                    slbView.setVisibility(View.VISIBLE);
+                                    tv_values.setText(sb.toString());
+                                    LogUtil.i("bqt", "【A_Slb】【onResponse】" + sb.toString());
+
                                 }
                             }
                         }
@@ -141,9 +158,9 @@ public class A_Slb extends Activity_Base implements View.OnClickListener {
                         if (result != null) {
                             SlbZH bean = App.mGson.fromJson(result.toString(), SlbZH.class);
                             if (null != bean) {
-                                tv_yesterday.setText(bean.getYesterdayProfit() + "");
-                                tv_total_top.setText(bean.getTotalAsset() + "");
-                                value_total.setText(bean.getTotalProfit() + "");
+                                tv_yesterday.setText(String.format("%.2f", bean.getYesterdayProfit()) + "");
+                                tv_total_top.setText(String.format("%.2f", bean.getTotalAsset()) + "");
+                                value_total.setText(String.format("%.2f", bean.getTotalProfit()) + "");
                             }
                         }
                     } catch (Exception e) {

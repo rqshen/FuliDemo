@@ -268,7 +268,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
         } else {
             loan_amount.setText("5000");
         }
-        if (loanRequestInfo.Status == 0 && !loanRequestInfo.AggregateId.equals("00000000-0000-0000-0000-000000000000")) {
+        if (loanRequestInfo.Status == 0 && !loanRequestInfo.AggregateId.equals("00000000-0000-0000-0000-000000000000")||loanRequestInfo.Status == 10) {
             bottoButton.setText("修改申请");
         } else {
             bottoButton.setText("立即申请");

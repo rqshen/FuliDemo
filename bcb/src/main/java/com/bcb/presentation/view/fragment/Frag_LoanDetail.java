@@ -37,8 +37,8 @@ import com.bcb.data.util.PackageUtil;
 import com.bcb.data.util.ToastUtil;
 import com.bcb.data.util.TokenUtil;
 import com.bcb.presentation.adapter.GridAdapter;
+import com.bcb.presentation.view.activity.Activity_Charge_HF;
 import com.bcb.presentation.view.activity.Activity_Image_Display;
-import com.bcb.presentation.view.activity.Activity_Recharge_Second;
 import com.bigkoo.alertview.AlertView;
 import com.bigkoo.alertview.OnItemClickListener;
 
@@ -183,7 +183,8 @@ public class Frag_LoanDetail extends Frag_Base {
             @Override
             public void onClick(View view) {
                 //跳转至充值按钮
-                Activity_Recharge_Second.launche(context);
+//                Activity_Recharge_Second.launche(context);
+                startActivity(new Intent(context, Activity_Charge_HF.class));
             }
         });
     }

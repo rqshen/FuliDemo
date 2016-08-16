@@ -7,7 +7,9 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bcb.R;
 import com.bcb.common.app.App;
@@ -27,6 +29,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Activity_Project_Investment_Details extends Activity_Base {
 
@@ -40,6 +43,7 @@ public class Activity_Project_Investment_Details extends Activity_Base {
     private TextView earnings_beginning;//项目起利期
     private TextView financing_amount;//融资金额
     private TextView annual_yield;//年化收益率
+    RelativeLayout rl_hk;
 
     private ImageView image_view;
 
@@ -79,7 +83,19 @@ public class Activity_Project_Investment_Details extends Activity_Base {
         annual_yield = (TextView) findViewById(R.id.annual_yield);
         earnings_beginning = (TextView) findViewById(R.id.earnings_beginning);
         earnings_end = (TextView) findViewById(R.id.earnings_end);
-
+        rl_hk = (RelativeLayout) findViewById(R.id.rl_hk);
+        rl_hk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (bean != null && bean.getRepaymentPlan() != null && bean.getRepaymentPlan().size() > 0) {
+                    Intent intent = new Intent(Activity_Project_Investment_Details.this, A_TZ_Cheques.class);
+                    intent.putExtra("data", bean);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(Activity_Project_Investment_Details.this, "暂无回款计划", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
         setupImageView();
         loadData();
     }
@@ -134,12 +150,15 @@ public class Activity_Project_Investment_Details extends Activity_Base {
                             amount.setText(String.format("%.2f", bean.getOrderAmount()));
                             income.setText(String.format("%.2f", bean.getInterest()));
                             //退出时间
-                            String end_time = format.format(format.parse(bean.getEndDate()));
-                            tv_away.setText(end_time + "后可申请退出，满期收益" + String.format("%.2f", bean.getTotalInterest()) + "元");
+                            Date date = format.parse(bean.getEndDate());
+                            Date dateFrom = new Date(date.getTime() - 14 * 1000 * 60 * 60 * 24);
+                            Date dateTo = new Date(date.getTime() - 7 * 1000 * 60 * 60 * 24);
+                            String end_time = format.format(dateFrom) + "至" + format.format(dateTo);
+                            tv_away.setText(end_time + "可申请退出，满期收益" + String.format("%.2f", bean.getTotalInterest()) + "元");
 
                             name.setText(bean.getPackageName());
                             //加入时间
-                            String biddingTime=TextUtils.isEmpty(bean.getPayTime()) ? "" : bean.getPayTime();
+                            String biddingTime = TextUtils.isEmpty(bean.getPayTime()) ? "" : bean.getPayTime();
                             bidding_time.setText(format.format(format.parse(biddingTime)));
 
 //                            financing_amount.setText(bean.getAmountTotal() > 0 ? String.format("%.2f元", bean.getAmountTotal()) : "0元");
@@ -155,7 +174,7 @@ public class Activity_Project_Investment_Details extends Activity_Base {
 //                                expectMoney = bean.getInterestAmount() > 0 ? String.format("%.2f元", bean.getInterestAmount()) + "" : "0元"
 //                                        + (bean.getRewardAmount() > 0 ? "(含" + String.format("%.2f", bean.getRewardAmount()) + "元"+ bean.getRewardRateDescn() +"奖励)" : "");
 //                            }
-                            earnings_end.setText(bean.getPeriod() + "个月");
+                            earnings_end.setText(bean.getDuration() + "个月");
                             expected_earning.setText("¥" + String.format("%.2f", bean.getPreInterest()) + "起");
                             //起息时间
                             earnings_beginning.setText(format.format(format.parse(bean.getInterestTakeDate())));

@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:lineSpacingExtra="5dp"
-        android:text="汇付天下生利宝”是汇付天下与多家优秀基金公司合作开发的理财产品,为汇付天下商户提供闲置资金的货币基金理财服务"
+        android:text="”汇付天下生利宝”是汇付天下与多家优秀基金公司合作开发的理财产品,为汇付天下商户提供闲置资金的货币基金理财服务"
         android:textColor="#3e3f43"
         android:textSize="13sp"/>
 

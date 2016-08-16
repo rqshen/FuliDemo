@@ -118,7 +118,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="20dip"
-                        android:text="暂无流水记录"
+                        android:text="暂无投资记录"
                         android:textSize="@dimen/main_text_default" />
                 </LinearLayout>
             </LinearLayout>

@@ -401,7 +401,7 @@
                             android:layout_height="wrap_content"
                             android:textSize="@dimen/main_text_default"
                             android:textColor="@color/txt_gray"
-                            android:text="还款方式"/>
+                            android:text="回款方式"/>
 
                         <TextView
                             android:id="@+id/payment_type"

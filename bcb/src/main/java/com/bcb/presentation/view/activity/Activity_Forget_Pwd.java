@@ -351,33 +351,33 @@ public class Activity_Forget_Pwd extends Activity_Base {
 		char[] str = idCardStr.toCharArray();
 		
 		// 获取输入身份证、手机号的状态
-		boolean idEmptyState = (idCardStr.length()== 0);
-		boolean idEndState =  (idCardStr.length()==18 && str[17] == 'x');
-		boolean idErrorState = (!RegexManager.isSecondGenerationIDCardNum(idCardStr));
+//		boolean idEmptyState = (idCardStr.length()== 0);
+//		boolean idEndState =  (idCardStr.length()==18 && str[17] == 'x');
+//		boolean idErrorState = (!RegexManager.isSecondGenerationIDCardNum(idCardStr));
 		boolean phoneEmptyState = isLogin && (phoneStr.length()  == 0);
 		boolean phoneErrorState = isLogin && (!RegexManager.isPhoneNum(phoneStr));
 		
 		// 判断身份证、手机号码是否正确
-		if(idEmptyState ||  idEndState || idErrorState || phoneEmptyState || phoneErrorState) {
+//		if(idEmptyState ||  idEndState || idErrorState || phoneEmptyState || phoneErrorState) {
+		if(phoneEmptyState || phoneErrorState) {
 			String toastStr = "";
-			if (idEmptyState) 
-				toastStr = "请先输入身份证号码";
-			else if(idEndState)
-				toastStr = "请大写身份证号码的X";
-			else if(idErrorState)
-				toastStr = "请输入正确的身份证号码";
-			else if(phoneEmptyState && isLogin)
+//			if (idEmptyState)
+//				toastStr = "请先输入身份证号码";
+//			else if(idEndState)
+//				toastStr = "请大写身份证号码的X";
+//			else if(idErrorState)
+//				toastStr = "请输入正确的身份证号码";
+			 if(phoneEmptyState && isLogin)
 				toastStr = "请输入手机号码";
 			else if(phoneErrorState && isLogin)
 				toastStr = "请输入正确的手机号码";
-			else {
-				if (isLogin) {
-					toastStr = "请输入正确的身份证、手机号";
-				} else {
-					toastStr = "请输入正确的身份证号码";
-				}
-
-			}
+//			else {
+//				if (isLogin) {
+//					toastStr = "请输入正确的身份证、手机号";
+//				} else {
+//					toastStr = "请输入正确的身份证号码";
+//				}
+//			}
 			//提示
 			ToastUtil.alert(Activity_Forget_Pwd.this, toastStr);
 			id_card.requestFocus();

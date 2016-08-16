@@ -62,6 +62,7 @@ public class SimpleProjectDetail implements Serializable {
     public String PageUrl;//H5详情页面地址
 
     public float RewardRate;
+    public float PreInterest;//10000元预期收益
     public String RewardRateDescn;
     public String Code;
     public int Period;

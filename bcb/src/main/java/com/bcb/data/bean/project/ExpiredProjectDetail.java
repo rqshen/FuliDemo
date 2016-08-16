@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 /**
  * Created by cain on 16/1/4.
+ * 废弃了
  */
 public class ExpiredProjectDetail implements Serializable {
     public String PackageId; //项目编号

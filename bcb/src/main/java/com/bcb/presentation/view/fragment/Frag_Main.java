@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Bitmap;
@@ -33,12 +34,14 @@ import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
 import com.bcb.common.net.UrlsOne;
+import com.bcb.common.net.UrlsTwo;
 import com.bcb.data.bean.AdPhotoListBean;
 import com.bcb.data.bean.AnnounceRecordsBean;
 import com.bcb.data.bean.BannerInfo;
 import com.bcb.data.bean.ExpiredRecordsBean;
 import com.bcb.data.bean.MainListBean;
 import com.bcb.data.bean.ProductRecordsBean;
+import com.bcb.data.bean.UserDetailInfo;
 import com.bcb.data.bean.WelfareDto;
 import com.bcb.data.util.DialogUtil;
 import com.bcb.data.util.HttpUtils;
@@ -60,7 +63,9 @@ import com.bcb.presentation.view.activity.Activity_Login_Introduction;
 import com.bcb.presentation.view.activity.Activity_Love;
 import com.bcb.presentation.view.activity.Activity_Main;
 import com.bcb.presentation.view.activity.Activity_NormalProject_Introduction;
+import com.bcb.presentation.view.activity.Activity_Open_Account;
 import com.bcb.presentation.view.activity.Activity_Privilege_Money;
+import com.bcb.presentation.view.custom.AlertView.AlertView;
 import com.bcb.presentation.view.custom.CustomDialog.DialogWidget;
 import com.bcb.presentation.view.custom.CustomDialog.RegisterSuccessDialogView;
 import com.bcb.presentation.view.custom.PagerIndicator.AutoLoopViewPager;
@@ -885,10 +890,63 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPa
                         button_floating.setVisibility(View.GONE);
                     }
                 }
+                requestUserDetailInfo();
             } else if (intent.getAction().equals("com.bcb.register.success")) {
                 showRegisterSuccessTips();
             }
         }
+    }
+
+
+    /**
+     * 用户信息
+     */
+    private void requestUserDetailInfo() {
+
+        BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsTwo.UserMessage, null, TokenUtil.getEncodeToken(ctx), new BcbRequest.BcbCallBack<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                LogUtil.i("bqt", "用户信息返回数据：" + response.toString());
+                if (PackageUtil.getRequestStatus(response, ctx)) {
+                    JSONObject data = PackageUtil.getResultObject(response);
+                    //判断JSON对象是否为空
+                    if (data != null) {
+                        //将获取到的银行卡数据写入静态数据区中
+                        App.mUserDetailInfo = App.mGson.fromJson(data.toString(), UserDetailInfo.class);
+                        if (App.mUserDetailInfo != null && !App.mUserDetailInfo.HasOpenCustody) {
+                            alterHFOpen();
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onErrorResponse(Exception error) {
+
+            }
+        });
+        jsonRequest.setTag(BcbRequestTag.UserBankMessageTag);
+        requestQueue.add(jsonRequest);
+    }
+
+    AlertView alertView;
+
+    private void alterHFOpen() {
+        AlertView.Builder ibuilder = new AlertView.Builder(ctx);
+        ibuilder.setTitle("提示");
+        ibuilder.setMessage("福利金融接入资金托管啦！" );
+        //已开通托管
+            ibuilder.setPositiveButton("开通资金托管账户", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    alertView.dismiss();
+                    alertView = null;
+                    ctx.startActivity(new Intent(ctx, Activity_Open_Account.class));
+                }
+            });
+
+        alertView = ibuilder.create();
+        alertView.show();
     }
 
     //清空首页标的数据

@@ -44,6 +44,9 @@ import org.json.JSONObject;
 
 import java.util.List;
 
+/**
+ * 废弃了
+ */
 public class Activity_Recharge_Second extends Activity_Base implements View.OnClickListener{
 
 	private static final String TAG = "Activity_Recharge_Second";
@@ -134,7 +137,7 @@ public class Activity_Recharge_Second extends Activity_Base implements View.OnCl
         if (App.mUserDetailInfo != null && App.mUserDetailInfo.BankCard != null
                 && App.mUserDetailInfo.BankCard.getCardNumber() != null) {
             mUserDetailInfo = App.mUserDetailInfo;
-            bank_card_text.setText(MyTextUtil.delBankNum(mUserDetailInfo.BankCard.CardNumber));
+			bank_card_text.setText(MyTextUtil.delBankNum(App.mUserDetailInfo.BankCard.getCardNumber()));
 			//加载银行卡限额数据
 			loadBankLimitData(mUserDetailInfo.BankCard.BankCode);
 			//设置银行卡logo
@@ -323,7 +326,7 @@ public class Activity_Recharge_Second extends Activity_Base implements View.OnCl
 
     //显示账号信息
 	private void showData(){
-		bank_card_text.setText(MyTextUtil.delBankNum(mUserDetailInfo.BankCard.CardNumber));
+		bank_card_text.setText(MyTextUtil.delBankNum(App.mUserDetailInfo.BankCard.getCardNumber()));
 		//加载银行卡限额数据
 		loadBankLimitData(mUserDetailInfo.BankCard.BankCode);
 	}

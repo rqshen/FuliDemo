@@ -146,10 +146,25 @@ public class Activity_Charge_HF extends Activity_Base implements View.OnClickLis
                 if (TextUtils.isEmpty(et_add_monery.getText().toString().trim())) {
                     Toast.makeText(Activity_Charge_HF.this, "请输入充值金额", Toast.LENGTH_SHORT).show();
                     return;
-                } else
-                    ADD_MONERY = Float.valueOf(et_add_monery.getText().toString().trim());
-                requestCharge();
-                break;
+                } else {
+                    try {
+                        ADD_MONERY = Float.valueOf(et_add_monery.getText().toString().trim());
+                    } catch (Exception e) {
+                        LogUtil.i("bqt", "【Activity_Charge_HF】【onClick】" + e.toString());
+                        Toast.makeText(Activity_Charge_HF.this, "输入金额有误", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if (maxMonery > 0 && ADD_MONERY > maxMonery) {
+                        Toast.makeText(Activity_Charge_HF.this, "输入金额超过本卡单次充值限额", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if (ADD_MONERY >= 10000000.0f) {//服务器限制
+                        Toast.makeText(Activity_Charge_HF.this, "输入金额超过受理限额", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    requestCharge();
+                    break;
+                }
             default:
                 break;
         }
@@ -157,8 +172,7 @@ public class Activity_Charge_HF extends Activity_Base implements View.OnClickLis
 
     private void initTitle() {
         //标题
-        TextView title_text = (TextView) findViewById(R.id.title_text);
-        title_text.setText("充值");
+        setTitleValue("充值");
         //返回
         View back_img = findViewById(R.id.back_img);
         back_img.setVisibility(View.VISIBLE);
@@ -206,11 +220,13 @@ public class Activity_Charge_HF extends Activity_Base implements View.OnClickLis
 
             @Override
             public void onErrorResponse(Exception error) {
-                LogUtil.d("bqt", "【Activity_Charge_HF】【Charge】网络异常，请稍后重试" + error.toString());
+                LogUtil.i("bqt", "【Activity_Charge_HF】【Charge】网络异常，请稍后重试" + error.toString());
             }
         });
         App.getInstance().getRequestQueue().add(jsonRequest);
     }
+
+    int maxMonery;
 
     /**
      * 银行列表
@@ -240,6 +256,7 @@ public class Activity_Charge_HF extends Activity_Base implements View.OnClickLis
                             for (int i = 0; i < list.size(); i++) {
                                 if (App.mUserDetailInfo.BankCard.BankCode.equalsIgnoreCase(list.get(i).getBankCode())) {
                                     ll_card.setVisibility(View.VISIBLE);
+                                    maxMonery = list.get(i).getMaxSingle();
                                     tv_xianer.setText("该卡本次最多可充值" + list.get(i).getMaxSingle() + "元，每日最多" + list.get(i).getMaxDay() + "元");
                                 }
                             }

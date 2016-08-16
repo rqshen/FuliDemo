@@ -182,7 +182,6 @@ public class Activity_Login extends Activity_Base implements Interface_Base, OnC
             iPresenterLogin = null;
         }
     }
-
     //登陆结果回调
     @Override
     public void onRequestResult(int resultCode, String message) {
@@ -206,7 +205,7 @@ public class Activity_Login extends Activity_Base implements Interface_Base, OnC
                 break;
 
             //登陆失败
-            case 2:
+            case -1:
                 ToastUtil.alert(Activity_Login.this, message);
                 UmengUtil.eventById(Activity_Login.this, R.string.login_key_n);
                 errorCount++;

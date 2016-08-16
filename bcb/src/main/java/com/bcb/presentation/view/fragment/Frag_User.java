@@ -277,6 +277,15 @@ public class Frag_User extends Frag_Base implements OnClickListener {
             value_back.setText("" + String.format("%.2f", App.mUserWallet.getIncomingMoney()));
             //冻结金额
             value_total.setText("" + String.format("%.2f", App.mUserWallet.getFreezeAmount()));
+        }else {
+            //总资产
+            value_earn.setText("0.00" );
+            //账户余额
+            value_balance.setText("0.00" );
+            //待收本息
+            value_back.setText("0.00" );
+            //冻结金额
+            value_total.setText("0.00" );
         }
     }
 
@@ -383,7 +392,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
                 break;
             // 圣力宝
             case R.id.managed_slb:
-                startActivity(new Intent(ctx, A_Slb.class));
+                slbOpen();
                 break;
 
             // 账号设置
@@ -401,7 +410,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
     }
 
     protected View getFreezeAmountView() {
-        return MyMaskFullScreenView.getInstance(ctx, "冻结金额包括：还款金额、借款保证金等", new MyMaskFullScreenView.OnClikListener() {
+        return MyMaskFullScreenView.getInstance(ctx, "冻结金额包括：投资成功未起息的资金、借款保证金等", new MyMaskFullScreenView.OnClikListener() {
             @Override
             public void onViewClik() {
                 dialogWidget.dismiss();
@@ -481,6 +490,15 @@ public class Frag_User extends Frag_Base implements OnClickListener {
             startActivity(new Intent(ctx, Activity_TuoGuan_HF.class));
         } else startActivity(new Intent(ctx, Activity_Open_Account.class));
     }
+
+    //生利宝
+    private void slbOpen() {
+        if (isLoading()) return;
+        //已开通托管
+        if (App.mUserDetailInfo != null && App.mUserDetailInfo.HasOpenCustody) startActivity(new Intent(ctx, A_Slb.class));
+        else startActivity(new Intent(ctx, Activity_Open_Account.class));
+    }
+
 
     //判断状态，如果获取数据中或者获取数据失败，都表示依旧要加载数据
     private boolean isLoading() {

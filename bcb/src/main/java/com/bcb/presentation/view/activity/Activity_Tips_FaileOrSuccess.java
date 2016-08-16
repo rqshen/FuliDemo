@@ -113,8 +113,6 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
                 iv_pic.setImageResource(R.drawable.success_open_hf);
                 iv_pic.setPadding(0, DensityUtils.dp2px(this, 30), 0, 0);
                 tv_up.setText("充值成功！");
-//                tv_down.setText("当前账户余额：" + (App.getInstance().mUserWallet.BalanceAmount+Activity_Charge_HF.ADD_MONERY));
-//                tv_down.setText(message);
                 tv_next.setVisibility(View.GONE);
                 SystemClock.sleep(3000);//让子弹飞一会
                 requestUserWallet();
@@ -132,8 +130,8 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
                 iv_pic.setImageResource(R.drawable.success_open_hf);
                 iv_pic.setPadding(0, DensityUtils.dp2px(this, 30), 0, 0);
                 tv_up.setText("提现成功！");
-                tv_down.setText("提现请求已提交，正在审核中…");
                 tv_next.setVisibility(View.GONE);
+                SystemClock.sleep(3000);//让子弹飞一会
                 requestUserWallet();
                 break;
             case TX_HF_FAILED:
