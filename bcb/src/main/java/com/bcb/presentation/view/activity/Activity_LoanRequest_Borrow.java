@@ -55,6 +55,7 @@ import org.json.JSONObject;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -268,7 +269,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
         } else {
             loan_amount.setText("5000");
         }
-        if (loanRequestInfo.Status == 0 && !loanRequestInfo.AggregateId.equals("00000000-0000-0000-0000-000000000000")||loanRequestInfo.Status == 10) {
+        if (loanRequestInfo.Status == 0 && !loanRequestInfo.AggregateId.equals("00000000-0000-0000-0000-000000000000") ) {//|| loanRequestInfo.Status == 10
             bottoButton.setText("修改申请");
         } else {
             bottoButton.setText("立即申请");
@@ -639,17 +640,25 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
             //点击借款用途
             case R.id.rl_purposes:
                 String[] ar = purposes_types.toArray(new String[purposes_types.size()]);
+                LogUtil.i("bqt", "借款用途" + Arrays.toString(ar));
+
                 SpinnerWheelUtil.getInstance().initSpinnerWheelDialog(this, ar, purposeStatus - 1, new SpinnerWheelUtil.OnDoneClickListener() {
                     @Override
                     public void onClick(int currentItem) {
                         purposeStatus = currentItem + 1;
                         loan_purposes.setText(purposes_types.get(currentItem));
+                        if (purposes_types.get(currentItem).equals("其他用途")) {
+                            purposeStatus=100;
+                        }
+                        LogUtil.i("bqt", purposeStatus + "--" + purposes_types.get(currentItem));
+
                     }
                 });
                 break;
             //点击借款期限
             case R.id.rl_duration:
                 String[] arr = duration_types.toArray(new String[duration_types.size()]);
+                LogUtil.i("bqt", "借款期限" + Arrays.toString(arr));
                 SpinnerWheelUtil.getInstance().initSpinnerWheelDialog(this, arr, durationIndex, new SpinnerWheelUtil.OnDoneClickListener() {
                     @Override
                     public void onClick(int currentItem) {
@@ -815,7 +824,6 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
             return;
         }
 
-        LogUtil.d("借款", loanRequestInfo.toString());
         if (loanRequestInfo.Status == 0) {//可以申请借款
             //判断是否跟原来的数据一样，如果跟原来申请的借款一样没有变化，直接提示完善个人信息
             if (isNeedToPostData()) {
@@ -886,11 +894,13 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
                 jsonObject.put("Position", userExtraInfo.getLocation());
             }
 
-            LogUtil.d("请求的数据是", jsonObject.toString());
+            LogUtil.i("bqt", "借款第一页页请求的数据是" + jsonObject.toString());
+
             showProgressBar();
             BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.PostRequestMessage, jsonObject, TokenUtil.getEncodeToken(this), new BcbRequest.BcbCallBack<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
+                    LogUtil.i("bqt", "借款第一页相应的数据是" + response.toString());
                     hideProgressBar();
                     try {
                         if (response.getInt("status") == 1) {

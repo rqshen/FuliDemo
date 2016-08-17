@@ -151,7 +151,7 @@
     <RelativeLayout
         android:id="@+id/rl_look"
         android:layout_width="match_parent"
-        android:layout_height="35dp"
+        android:layout_height="45dp"
         android:layout_marginTop="30dp"
         >
 
@@ -164,7 +164,7 @@
             android:gravity="center"
             android:singleLine="true"
             android:text="查看托管接入证明"
-            android:textColor="#000"
+            android:textColor="@color/txt_gray"
             android:textSize="13sp"/>
 
         <ImageView
@@ -179,14 +179,14 @@
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:layout_alignParentBottom="true"
-            android:background="#000"/>
+            android:background="#dbdbdb"/>
 
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/rl_login"
         android:layout_width="match_parent"
-        android:layout_height="35dp"
+        android:layout_height="45dp"
         >
 
         <TextView
@@ -198,7 +198,7 @@
             android:gravity="center"
             android:singleLine="true"
             android:text="登录资金托管账户"
-            android:textColor="#000"
+            android:textColor="@color/txt_gray"
             android:textSize="13sp"/>
 
         <ImageView
@@ -213,14 +213,14 @@
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:layout_alignParentBottom="true"
-            android:background="#000"/>
+            android:background="#dbdbdb"/>
 
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/rl_find_deal"
         android:layout_width="match_parent"
-        android:layout_height="35dp"
+        android:layout_height="45dp"
         >
 
         <TextView
@@ -232,7 +232,7 @@
             android:gravity="center"
             android:singleLine="true"
             android:text="找回交易密码"
-            android:textColor="#000"
+            android:textColor="@color/txt_gray"
             android:textSize="13sp"/>
 
         <ImageView
@@ -247,14 +247,14 @@
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:layout_alignParentBottom="true"
-            android:background="#000"/>
+            android:background="#dbdbdb"/>
 
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/rl_find_login"
         android:layout_width="match_parent"
-        android:layout_height="35dp"
+        android:layout_height="45dp"
         >
 
         <TextView
@@ -266,7 +266,7 @@
             android:gravity="center"
             android:singleLine="true"
             android:text="找回登录密码"
-            android:textColor="#000"
+            android:textColor="@color/txt_gray"
             android:textSize="13sp"/>
 
         <ImageView
@@ -281,14 +281,14 @@
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:layout_alignParentBottom="true"
-            android:background="#000"/>
+            android:background="#dbdbdb"/>
 
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/rl_alert_deal"
         android:layout_width="match_parent"
-        android:layout_height="35dp"
+        android:layout_height="45dp"
         >
 
         <TextView
@@ -300,7 +300,7 @@
             android:gravity="center"
             android:singleLine="true"
             android:text="修改交易密码"
-            android:textColor="#000"
+            android:textColor="@color/txt_gray"
             android:textSize="13sp"/>
 
         <ImageView
@@ -315,7 +315,7 @@
             android:layout_width="match_parent"
             android:layout_height="1px"
             android:layout_alignParentBottom="true"
-            android:background="#000"/>
+            android:background="#dbdbdb"/>
 
     </RelativeLayout>
 </LinearLayout>

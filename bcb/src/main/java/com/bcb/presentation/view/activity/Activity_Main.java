@@ -192,11 +192,15 @@ public class Activity_Main extends Activity_Base_Fragment {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        unregisterReceiver(mReceiver);
+        try {
+            unregisterReceiver(mReceiver);
+        } catch (Exception e) {
+        }
         EventBus.getDefault().unregister(this);
     }
 
     //接收事件
+
     public void onEventMainThread(BroadcastEvent event) {
         //判断要显示的fragment
         String flag = event.getFlag();

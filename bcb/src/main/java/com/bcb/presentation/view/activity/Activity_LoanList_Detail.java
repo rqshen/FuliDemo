@@ -23,6 +23,7 @@ import java.util.ArrayList;
 
 /**
  * Created by cain on 16/1/13.
+ * 我的借款
  */
 public class Activity_LoanList_Detail extends Activity_Base_Fragment {
 

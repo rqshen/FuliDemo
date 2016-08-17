@@ -138,7 +138,6 @@ public class IPresenter_AccountSettingImpl implements IPresenter_AccountSetting 
         } else {
             companyMessage = "加入公司";
         }
-        LogUtil.i("bqt", "【Activity_Account_Setting】【onRequestResult】姓名" + iModelUserAccount.getUserName());
         //回传用户信息
         interfaceBase.onRequestResult(iModelUserAccount.hasCert(),
                 iModelUserAccount.hasTradePassword(),

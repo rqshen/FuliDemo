@@ -111,6 +111,7 @@ public class Activity_WebView extends Activity_Base {
                 String message = null;
                 try {
                     message = URLDecoder.decode(url.substring(url.lastIndexOf('|') + 1), "UTF-8");
+                    LogUtil.i("bqt", "最后一部分消息内容" + message);
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }

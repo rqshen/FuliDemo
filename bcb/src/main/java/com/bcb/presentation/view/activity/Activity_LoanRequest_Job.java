@@ -1,7 +1,6 @@
 package com.bcb.presentation.view.activity;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -35,6 +34,7 @@ import java.util.Date;
 
 /**
  * Created by cain on 16/1/5.
+ * 工作信息
  */
 public class Activity_LoanRequest_Job extends Activity_Base {
 
@@ -123,11 +123,11 @@ public class Activity_LoanRequest_Job extends Activity_Base {
                     Calendar calendar = Calendar.getInstance();
                     stringBuilder.append("").append(calendar.get(Calendar.YEAR)).append("-").append(calendar.get(Calendar.MONTH) + 1).append("-").append(calendar.get(Calendar.DAY_OF_MONTH)).append("");
                     Date today = dateFormater.parse(stringBuilder.toString());
-                    if (date.after(today)){
+                    if (date.after(today)) {
                         ToastUtil.alert(Activity_LoanRequest_Job.this, "入职时间不能晚于今天");
                         loan_work_experience.setText("");
                     }
-                } catch (ParseException e){
+                } catch (ParseException e) {
                     e.printStackTrace();
                 }
             }
@@ -183,7 +183,7 @@ public class Activity_LoanRequest_Job extends Activity_Base {
             try {
                 Date date = dateFormater.parse(personInfoBean.EntryDate);
                 String dateStr = dateFormater.format(date);
-                if (!dateStr.isEmpty()){
+                if (!dateStr.isEmpty()) {
                     loan_work_experience.setText(dateStr);
                 }
             } catch (ParseException e) {
@@ -219,7 +219,9 @@ public class Activity_LoanRequest_Job extends Activity_Base {
 //        }
     }
 
-    /****************************** 点击下一步按钮 ***********************************/
+    /******************************
+     * 点击下一步按钮
+     ***********************************/
     private void jobButtonClick() {
         //判断是否存在信息为空
         if (loan_office.getText().toString().isEmpty()  //工作单位全称
@@ -294,8 +296,9 @@ public class Activity_LoanRequest_Job extends Activity_Base {
                     try {
                         if (response.getInt("status") == 1) {
                             //跳转至借款申请成功页面
-                            Intent intent = new Intent(Activity_LoanRequest_Job.this, Activity_LoanRequest_Success.class);
-                            startActivity(intent);
+//                            Intent intent = new Intent(Activity_LoanRequest_Job.this, Activity_LoanRequest_Success.class);
+//                            startActivity(intent);
+                            Activity_Tips_FaileOrSuccess.launche(Activity_LoanRequest_Job.this, Activity_Tips_FaileOrSuccess.JK_SUCCESS, "");
                             finish();
                             //清空暂存在本地的数据
                             (new LoanPersonalConfigUtil(Activity_LoanRequest_Job.this)).clear();
@@ -328,8 +331,8 @@ public class Activity_LoanRequest_Job extends Activity_Base {
      * 转圈提示
      */
     private void showProgressBar() {
-        if(null == progressDialog) {
-            progressDialog = new ProgressDialog(this,ProgressDialog.THEME_HOLO_LIGHT);
+        if (null == progressDialog) {
+            progressDialog = new ProgressDialog(this, ProgressDialog.THEME_HOLO_LIGHT);
         }
         progressDialog.setMessage("正在验证借款信息...");
         progressDialog.setCanceledOnTouchOutside(false);
@@ -341,7 +344,7 @@ public class Activity_LoanRequest_Job extends Activity_Base {
      * 隐藏转圈提示
      */
     private void hideProgressBar() {
-        if(!isFinishing() && null != progressDialog && progressDialog.isShowing()){
+        if (!isFinishing() && null != progressDialog && progressDialog.isShowing()) {
             progressDialog.dismiss();
         }
     }

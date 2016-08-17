@@ -60,13 +60,13 @@ public class PullToRefreshLayout extends RelativeLayout {
     private float pullUpY = 0;
 
     // 释放刷新的距离
-    private float refreshDist = 200;
+    private float refreshDist = 150;
     // 释放加载的距离
-    private float loadmoreDist = 200;
+    private float loadmoreDist = 150;
 
     private MyTimer timer;
     // 回滚速度
-    public float MOVE_SPEED = 8;
+    public float MOVE_SPEED = 15;
     // 第一次执行布局
     private boolean isLayout = false;
     // 在刷新过程中滑动操作
@@ -564,7 +564,7 @@ public class PullToRefreshLayout extends RelativeLayout {
      */
     public void autoRefresh() {
         AutoRefreshAndLoadTask task = new AutoRefreshAndLoadTask();
-        task.execute(20);
+        task.execute(1);
     }
 
     /**

@@ -33,6 +33,7 @@ import java.util.List;
 
 /**
  * Created by cain on 16/1/5.
+ * 个人信息
  */
 public class Activity_LoanRequest_Person extends Activity_Base implements View.OnClickListener {
 
@@ -186,7 +187,7 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
         BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.GetLoanPersonalMessage, null, TokenUtil.getEncodeToken(this), new BcbRequest.BcbCallBack<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                LogUtil.i("bqt", "【Activity_LoanRequest_Person】【onResponse】借款的个人信息" + response.toString());
+                LogUtil.i("bqt", "借款的个人信息" + response.toString());
 
                 hideProgressBar();
                 if (null == response) {
@@ -310,16 +311,14 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
     private void changeRelationshipList(PersonInfoBean personInfoBean) {
         relationList1 = new ArrayList<>();
         for (int i = 0; i < personInfoBean.RelationshipList.size(); i++) {
-            LogUtil.i("bqt", "设置关系列表1" + personInfoBean.RelationshipList.get(i).Name);
             relationList1.add(i, personInfoBean.RelationshipList.get(i).Name);//固定四个
         }
         relationStatus1 = relationList1.get(0);
         relationList2 = new ArrayList<>();
         for (int i = 0; i < personInfoBean.RelationshipList2.size(); i++) {
-            LogUtil.i("bqt", "设置关系列表2" + personInfoBean.RelationshipList2.get(i).Name);
             relationList2.add(i, personInfoBean.RelationshipList2.get(i).Name);//固定2个
         }
-        if (relationList2.size() > 0) relationStatus2 = relationList2.get(0);
+//        if (relationList2.size() > 0) relationStatus2 = relationList2.get(0);
     }
 
     /**
@@ -378,6 +377,7 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
         //紧急联系人2
         if (PersonInfo.EmergencyContact2 != null && !PersonInfo.EmergencyContact2.equalsIgnoreCase("null") && !PersonInfo.EmergencyContact2.equalsIgnoreCase("")) {
             loan_emergency_case_second.setText(PersonInfo.EmergencyContact2);
+
         }
 
         //紧急联系人2， 判断关系是否存在
@@ -389,6 +389,7 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
                     break;
                 }
             }
+            LogUtil.i("bqt", relStatus2 + "--紧急联系人2--" + loan_relationship_second.getText());
         }
 
         //电话
@@ -473,7 +474,8 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
         PersonInfo.EmergencyContact2 = loan_emergency_case_second.getText().toString();
         //紧急联系人2 关系
         PersonInfo.Relationship2 = relationStatus2;
-        LogUtil.i("bqt", "【Activity_LoanRequest_Person】【saveDataAndGotoJobPage】关系2--" + relationStatus2);
+//        PersonInfo.Relationship2 = "";
+        LogUtil.i("bqt", "关系2--" + relationStatus2);
 
         //紧急联系人2 电话
         PersonInfo.ContactPhone2 = loan_emergency_phone_second.getText().toString();
@@ -485,6 +487,7 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
         Intent intent = new Intent(Activity_LoanRequest_Person.this, Activity_LoanRequest_Job.class);
         intent.putExtra("personInfoBean", mGson.toJson(PersonInfo));
         startActivity(intent);
+        finish();
     }
 
 

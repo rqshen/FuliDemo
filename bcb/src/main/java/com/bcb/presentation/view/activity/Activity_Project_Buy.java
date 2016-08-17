@@ -559,7 +559,7 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
                 else {
 //                    shouyi = ((moneyinput * mSimpleProjectDetail.Rate * 0.01f) / countDate) * mSimpleProjectDetail.Duration;
 
-                    shouyi=moneyinput * mSimpleProjectDetail.PreInterest/10000;
+                    shouyi = moneyinput * mSimpleProjectDetail.PreInterest / 10000;
 
                     jiangliamount = ((moneyinput * mSimpleProjectDetail.RewardRate) / countDate * 0.01f) * mSimpleProjectDetail.Duration;
                     if (mSimpleProjectDetail.RewardRateDescn != null && !mSimpleProjectDetail.RewardRateDescn.equalsIgnoreCase("null")) {
@@ -614,7 +614,8 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
         //未绑卡或余额不足
         if (App.mUserDetailInfo.BankCard == null || App.mUserWallet.BalanceAmount < inputMoney) {
 //            startActivity(new Intent(ctx, Activity_Charge_HF.class));
-            Toast.makeText(Activity_Project_Buy.this, "您的帐户余额不足，请充值后再试", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(Activity_Project_Buy.this, "您的帐户余额不足，请充值后再试", Toast.LENGTH_SHORT).show();
+            altDialog();
             return;
         }
 
@@ -739,6 +740,15 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
         requestBuy();
     }
 
+    private void altDialog() {
+        AlertView.Builder ibuilder = new AlertView.Builder(this);
+        ibuilder.setTitle(" 温馨提示");
+        ibuilder.setMessage("账户余额不足，请修改金额或充值");
+        ibuilder.setPositiveButton("我知道了", null);
+        alertView = ibuilder.create();
+        alertView.show();
+    }
+
     /**
      * Buy表
      */
@@ -770,7 +780,7 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
                             //传递的 参数
                             String postData = HttpUtils.jsonToStr(result.toString());
                             //跳转到webview
-                            Activity_WebView.launche(ctx, "申购", postUrl, postData);
+                            Activity_WebView.launche(ctx, "投资确认", postUrl, postData);
                         }
                     } catch (Exception e) {
                         LogUtil.d("bqt", "【Activity_Project_Buy】【Buy】" + e.getMessage());

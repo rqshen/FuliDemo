@@ -654,14 +654,6 @@
                     </LinearLayout>
                     <include layout="@layout/com_funds_trusteeship_tip" />
                 </LinearLayout>
-                <ImageView
-                    android:id="@+id/user_customer_tips"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="410dp"
-                    android:layout_marginLeft="20dp"
-                    android:background="@drawable/user_customer_tips"
-                    android:visibility="gone"/>
             </FrameLayout>
         </com.bcb.presentation.view.custom.PullableView.PullableScrollView>
         <!-- 上拉加载更多 -->

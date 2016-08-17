@@ -423,7 +423,6 @@ public class Activity_Account_Setting extends Activity_Base implements OnClickLi
                                 String cardNumber,
                                 String localPhone,
                                 String companyMessage) {
-        LogUtil.i("bqt", "【Activity_Account_Setting】【onRequestResult】姓名" + userName);
 
         hideProgressBar();
         //显示认证状态

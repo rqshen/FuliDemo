@@ -62,8 +62,8 @@ public class BanksAdapter extends BaseAdapter {
 
         viewHolder.iv_log.setImageResource(new BankLogo().getDrawableBankLogo(data.get(pos).getBankCode()));
         viewHolder.tv_name.setText(data.get(pos).getBankName());
-        viewHolder.tv_once.setText(data.get(pos).getMaxSingle() + "（元）");
-        viewHolder.tv_day.setText(data.get(pos).getMaxDay() + "（元）");
+        viewHolder.tv_once.setText(data.get(pos).getMaxSingle() + "");
+        viewHolder.tv_day.setText(data.get(pos).getMaxDay() + "");
         return view;
     }
 

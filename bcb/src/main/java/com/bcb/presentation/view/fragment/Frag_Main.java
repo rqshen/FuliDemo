@@ -444,7 +444,8 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPa
             @Override
             public void onResponse(JSONObject response) {
                 successConnectCount = successConnectCount + 1;
-                LogUtil.d("文案", response.toString());
+                LogUtil.i("bqt", "首页：文案配置" + response.toString());
+
                 try {
                     if (response.getInt("status") == 1) {
                         //存入静态数据区
@@ -488,6 +489,8 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPa
         BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.MainpageAdRotator, null, TokenUtil.getEncodeToken(ctx), new BcbRequest.BcbCallBack<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
+                LogUtil.i("bqt", "首页：Banner" + response.toString());
+
                 successConnectCount = successConnectCount + 1;
                 try {
                     if (PackageUtil.getRequestStatus(response, ctx)) {
@@ -650,7 +653,7 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPa
         BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.MainFragmentListData, obj, TokenUtil.getEncodeToken(ctx), new BcbRequest.BcbCallBack<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                LogUtil.i("bqt", "【Frag_Main】【onResponse】精品项目" + response.toString());
+                LogUtil.i("bqt", "首页：精品项目" + response.toString());
 
                 try {
                     if (PackageUtil.getRequestStatus(response, ctx)) {
@@ -906,7 +909,7 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPa
         BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsTwo.UserMessage, null, TokenUtil.getEncodeToken(ctx), new BcbRequest.BcbCallBack<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                LogUtil.i("bqt", "用户信息返回数据：" + response.toString());
+                LogUtil.i("bqt", "首页：用户信息返回数据：" + response.toString());
                 if (PackageUtil.getRequestStatus(response, ctx)) {
                     JSONObject data = PackageUtil.getResultObject(response);
                     //判断JSON对象是否为空
@@ -1061,6 +1064,8 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPa
         BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.DailyWelfareData, obj, TokenUtil.getEncodeToken(ctx), true, new BcbRequest.BcbCallBack<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
+                LogUtil.i("bqt", "首页：请求统计数据" + response.toString());
+
                 progressDialog.dismiss();
                 try {
                     boolean status = PackageUtil.getRequestStatus(response, ctx);

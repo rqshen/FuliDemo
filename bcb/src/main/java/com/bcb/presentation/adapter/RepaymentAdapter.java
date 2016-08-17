@@ -8,13 +8,16 @@ import android.widget.TextView;
 
 import com.bcb.R;
 import com.bcb.data.bean.loan.RepaymentRecordsBean;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
  * Created by cain on 16/1/15.
  */
 public class RepaymentAdapter extends BaseAdapter {
-
+    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
     private Context context;
     private List<RepaymentRecordsBean> data;
 
@@ -68,9 +71,13 @@ public class RepaymentAdapter extends BaseAdapter {
     //设置ViewHolder 数据
     private void setDataWithViewHolder(ViewHolder viewHolder, int pos) {
         //设置还款日
-        viewHolder.repaymentDate.setText(data.get(pos).PayDate);
+        try {
+            viewHolder.repaymentDate.setText(format.format(format.parse(data.get(pos).PayDate)));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         //设置还款金额
-        viewHolder.repaymentAmount.setText(String.format("%.2f", data.get(pos).Amount) + "元");
+        viewHolder.repaymentAmount.setText(String.format("%.2f", data.get(pos).Amount));
         //设置罚息
         if (data.get(pos).LatePenalty > 0) {
             viewHolder.repaymentPenalty.setVisibility(View.VISIBLE);

@@ -231,7 +231,7 @@
                     android:gravity="center"
                     android:singleLine="true"
 
-                    android:text="单笔限额"
+                    android:text="单笔限额（元）"
                     android:textColor="#333"
                     android:textSize="12sp"/>
 
@@ -247,7 +247,7 @@
                     android:gravity="center"
                     android:singleLine="true"
 
-                    android:text="单日限额"
+                    android:text="单日限额（元）"
                     android:textColor="#333"
                     android:textSize="12sp"/>
             </LinearLayout>

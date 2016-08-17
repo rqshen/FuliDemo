@@ -201,7 +201,7 @@ public class Frag_LoanDetail extends Frag_Base {
         BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.MyLoanItemDetailMessage, jsonObject, TokenUtil.getEncodeToken(context), new BcbRequest.BcbCallBack<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                LogUtil.d("1234", "LoanDetail = " + response.toString());
+                LogUtil.i("bqt", "【Frag_LoanDetail】【onResponse】借款详情数据" + response.toString());
                 try{
                     //如果存在返回数据时
                     if(PackageUtil.getRequestStatus(response, context)) {

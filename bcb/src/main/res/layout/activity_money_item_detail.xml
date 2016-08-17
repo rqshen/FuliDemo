@@ -43,6 +43,7 @@
         android:layout_height="wrap_content"
         android:background="@android:color/white"
         android:gravity="center_vertical"
+        android:visibility="gone"
         android:orientation="vertical"
         >
 
@@ -164,6 +165,7 @@
         android:layout_height="wrap_content"
         android:background="@android:color/white"
         android:gravity="center_vertical"
+        android:visibility="gone"
         android:orientation="vertical">
 
         <LinearLayout
@@ -206,6 +208,7 @@
         android:layout_height="wrap_content"
         android:background="@android:color/white"
         android:gravity="center_vertical"
+        android:visibility="gone"
         android:orientation="vertical">
 
         <LinearLayout
@@ -247,6 +250,7 @@
         android:layout_height="wrap_content"
         android:background="@android:color/white"
         android:gravity="center_vertical"
+
         android:orientation="vertical">
 
         <LinearLayout

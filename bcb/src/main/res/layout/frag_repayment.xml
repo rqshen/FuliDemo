@@ -1,62 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/background">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/background"
+              android:orientation="vertical">
 
     <com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout
         android:id="@+id/refresh_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <!-- 下拉刷新控件-->
-        <include layout="@layout/refresh_head" />
+        <include layout="@layout/refresh_head"/>
+
         <com.bcb.presentation.view.custom.PullableView.PullableScrollView
             android:id="@+id/layout_scrollview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbars="none">
-            <LinearLayout
+
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-                <com.bcb.data.util.MyListView
-                    android:id="@+id/repayment_listView"
+                android:layout_height="match_parent">
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:cacheColorHint="@android:color/black"
-                    android:divider="@color/background"
-                    android:dividerHeight="10dp"
-                    android:fastScrollEnabled="false"
-                    android:listSelector="@drawable/list_selector"
-                    android:paddingTop="10dip"
-                    android:paddingBottom="0dip"
-                    android:paddingLeft="10dip"
-                    android:paddingRight="10dip"
-                    android:scrollbars="none" />
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:background="#ddd"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tv_name"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="月份"
+                            android:textColor="#333"
+                            android:textSize="13sp"/>
+
+                        <TextView
+                            android:id="@+id/tv_time"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="归还本金（元）"
+                            android:textColor="#333"
+                            android:textSize="13sp"/>
+
+                        <TextView
+                            android:id="@+id/tv_monery"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="归还利息（元）"
+                            android:textColor="#333"
+                            android:textSize="13sp"/>
+                    </LinearLayout>
+
+                    <com.bcb.data.util.MyListView
+                        android:id="@+id/repayment_listView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:cacheColorHint="@android:color/black"
+                        android:divider="@color/background"
+                        android:dividerHeight="10dp"
+                        android:fastScrollEnabled="false"
+                        android:listSelector="@drawable/list_selector"
+                        android:paddingBottom="0dip"
+                        android:paddingLeft="10dip"
+                        android:paddingRight="10dip"
+                        android:paddingTop="10dip"
+                        android:scrollbars="none"/>
+
+                </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/null_data_layout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:background="@color/background"
                     android:orientation="vertical"
-                    android:visibility="visible" >
+                    android:visibility="visible">
+
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="84dip"
-                        android:src="@drawable/data_null" />
+                        android:src="@drawable/data_null"/>
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="20dip"
                         android:text="暂无还款信息"
-                        android:textSize="@dimen/main_text_default" />
+                        android:textSize="@dimen/main_text_default"/>
                 </LinearLayout>
-            </LinearLayout>
+            </RelativeLayout>
         </com.bcb.presentation.view.custom.PullableView.PullableScrollView>
         <!-- 上拉加载更多 -->
-        <include layout="@layout/load_more" />
+        <include layout="@layout/load_more"/>
     </com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout>
 </LinearLayout>

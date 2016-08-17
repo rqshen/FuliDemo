@@ -256,24 +256,47 @@ public class Activity_Forget_Pwd extends Activity_Base {
 			        	setupBackgroung();
 			        	strength1.setBackgroundResource(R.drawable.button_solid_green);
 					} else {
-						//如果只存在数字、字母或特殊合法字符单一组合，密码显示为弱
-						if (RegexManager.isNum(str) 
-							|| RegexManager.isAZ(str) 
-							|| RegexManager.isSpecialRightCode(str)) {
+
+						/**
+						 * 一、关于密码强度的设定：
+						 密码包含的元素有四种：数字、符号、大写字母、小写字母
+						 1、密码强度显示为弱：密码中只出现一种元素
+						 2、密码强度显示为中：密码中只出现两种元素
+						 3、密码强度显示为强：密码中出现三种或三种以上的元素
+						 * 日期：2016/8/3 18:34
+						 */
+						int num = RegexManager.getMatchNumber(str);
+						if (num <= 1) {
 							setupBackgroung();
-				        	strength1.setBackgroundResource(R.drawable.button_solid_green);
+							strength1.setBackgroundResource(R.drawable.button_solid_green);
 						}
-						//如果包含三种类型的字符并且长度超过10位，则密码强度显示为强
-						else if (RegexManager.isHybridRightCode(str) && str.length() > 10) {
+						if (num == 2) {
+							setupBackgroung();
+							strength2.setBackgroundResource(R.drawable.button_solid_blue);
+						}
+						if (num >= 3) {
 							setupBackgroung();
 							strength3.setBackgroundResource(R.drawable.button_solid_red);
 						}
-				        //既不是单一组合，也不包含三种字符类型或者包含三种字符但长度不够10的，均显示为中
-						else {
-							setupBackgroung();
-				        	strength2.setBackgroundResource(R.drawable.button_solid_blue);
-						}		           
 					}
+//
+//						//如果只存在数字、字母或特殊合法字符单一组合，密码显示为弱
+//						if (RegexManager.isNum(str)
+//							|| RegexManager.isAZ(str)
+//							|| RegexManager.isSpecialRightCode(str)) {
+//							setupBackgroung();
+//				        	strength1.setBackgroundResource(R.drawable.button_solid_green);
+//						}
+//						//如果包含三种类型的字符并且长度超过10位，则密码强度显示为强
+//						else if (RegexManager.isHybridRightCode(str) && str.length() > 10) {
+//							setupBackgroung();
+//							strength3.setBackgroundResource(R.drawable.button_solid_red);
+//						}
+//				        //既不是单一组合，也不包含三种字符类型或者包含三种字符但长度不够10的，均显示为中
+//						else {
+//							setupBackgroung();
+//				        	strength2.setBackgroundResource(R.drawable.button_solid_blue);
+//						}
 				} else {
 					if (!RegexManager.isResizngCode(newpwd.getText().toString())) {
 						error_tips.setVisibility(View.VISIBLE);		
@@ -388,21 +411,23 @@ public class Activity_Forget_Pwd extends Activity_Base {
 	}
 
 	private boolean judgeNext() {
-		String idCardStr = id_card.getText().toString();
+//		String idCardStr = id_card.getText().toString();
 		String errorText = "";
 		// 获取身份证
-		boolean idErrorState = (!RegexManager.isSecondGenerationIDCardNum(idCardStr));
+//		boolean idErrorState = (!RegexManager.isSecondGenerationIDCardNum(idCardStr));
 		//判断手机号码的状态，只有登录的时候才需要
 		boolean phoneErrorState = isLogin && (!RegexManager.isPhoneNum(phone.getText().toString()));
 		//判断验证码的状态
 		boolean regErrorState = (!RegexManager.isResizngCode(regservicecode.getText().toString()));
 		
-		if( idErrorState || phoneErrorState || regErrorState) {
-			if(idErrorState){
-				errorText = "请输入身份证号码";
-				id_card.requestFocus();
-				id_card.setSelection(id_card.getText().toString().length());
-			} else if (phoneErrorState) {
+		if(phoneErrorState || regErrorState) {
+//			if(idErrorState){
+//				errorText = "请输入身份证号码";
+//				id_card.requestFocus();
+//				id_card.setSelection(id_card.getText().toString().length());
+//			}
+
+			 if (phoneErrorState) {
 				errorText = "请输入正确的手机号";
 				phone.requestFocus();
 				phone.setSelection(phone.getText().toString().length());

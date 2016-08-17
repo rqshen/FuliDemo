@@ -44,7 +44,7 @@
         android:paddingBottom="2dp"
         android:paddingTop="2dp"
         android:singleLine="true"
-        android:text="10000（元）"
+        android:text="10000"
         android:textColor="#666"
         android:textSize="12sp"/>
 
@@ -57,7 +57,7 @@
         android:gravity="center"
         android:singleLine="true"
 
-        android:text="20000（元）"
+        android:text="20000"
         android:textColor="#666"
         android:textSize="12sp"/>
 </LinearLayout>

@@ -16,6 +16,8 @@ import com.bcb.common.net.BcbJsonRequest;
 import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestTag;
 import com.bcb.common.net.UrlsOne;
+import com.bcb.common.net.UrlsTwo;
+import com.bcb.data.bean.UserBankCard;
 import com.bcb.data.bean.UserWallet;
 import com.bcb.data.util.DensityUtils;
 import com.bcb.data.util.LogUtil;
@@ -51,6 +53,7 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
     public static final int BUY_HF_FAILED = 10;//申购失败
     public static final int SLB_SUCCESS = 11;//生利宝成功
     public static final int SLB_FAILED = 12;//生利宝失败
+    public static final int JK_SUCCESS = 13;//借款成功
     ImageView iv_pic;
     TextView title_text, tv_up, tv_down, tv_next;
 
@@ -76,7 +79,6 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
     }
 
     private void initView() {
-        //message = message == null ? "银行卡余额不足" : message;
         switch (type) {
             case OPEN_HF_SUCCESS:
                 title_text.setText("开户成功");
@@ -114,7 +116,7 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
                 iv_pic.setPadding(0, DensityUtils.dp2px(this, 30), 0, 0);
                 tv_up.setText("充值成功！");
                 tv_next.setVisibility(View.GONE);
-                SystemClock.sleep(3000);//让子弹飞一会
+                SystemClock.sleep(2000);//让子弹飞一会
                 requestUserWallet();
                 break;
             case CHARGE_HF_FAILED:
@@ -131,7 +133,8 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
                 iv_pic.setPadding(0, DensityUtils.dp2px(this, 30), 0, 0);
                 tv_up.setText("提现成功！");
                 tv_next.setVisibility(View.GONE);
-                SystemClock.sleep(3000);//让子弹飞一会
+                tv_down.setText("本次提现：" + message);
+                SystemClock.sleep(2000);//让子弹飞一会
                 requestUserWallet();
                 break;
             case TX_HF_FAILED:
@@ -178,6 +181,13 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
                 tv_down.setText("第三方支付平台出错");
                 tv_next.setText("返回生利宝");
                 break;
+            case JK_SUCCESS:
+                title_text.setText("借款");
+                iv_pic.setImageResource(R.drawable.success_open_hf);
+                tv_up.setText("提交成功");
+                tv_down.setText("预计2个工作日内审核");
+                tv_next.setText("完成");
+                break;
             default:
                 break;
         }
@@ -200,7 +210,24 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.back_img:
-                JumpToUser();
+                switch (type) {
+                    //个人中心
+                    case CHARGE__HF_SUCCESS:
+                    case CHARGE_HF_FAILED:
+                    case TX_HF_SUCCESS:
+                    case TX_HF_FAILED:
+                        JumpToUser();
+                        break;
+                    //借款
+                    case JK_SUCCESS:
+                        startActivity(new Intent(Activity_Tips_FaileOrSuccess.this, Activity_LoanList.class));
+                        finish();
+                        break;
+                    //客服
+                    default:
+                        finish();
+                        break;
+                }
                 break;
             case R.id.tv_next:
                 switch (type) {
@@ -212,6 +239,11 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
                     //生利宝
                     case SLB_SUCCESS:
                     case SLB_FAILED:
+                        finish();
+                        break;
+                    //借款
+                    case JK_SUCCESS:
+                        startActivity(new Intent(Activity_Tips_FaileOrSuccess.this, Activity_LoanList.class));
                         finish();
                         break;
                     //客服
@@ -229,9 +261,6 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
     }
 
     private void JumpToUser() {
-//        Intent intent = new Intent(Activity_Tips_FaileOrSuccess.this, Activity_Main.class);
-//        intent.putExtra("jumpTo", 3);
-//        startActivity(intent);
         EventBus.getDefault().post(new BroadcastEvent(BroadcastEvent.USER));
         startActivity(new Intent(this, Activity_Main.class));
         finish();
@@ -244,6 +273,7 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
         BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.UserWalletMessage, null, TokenUtil.getEncodeToken(ctx), new BcbRequest.BcbCallBack<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
+                requestUserBankCard();
                 LogUtil.i("bqt", "刷新－－账户余额：" + response.toString());
                 if (PackageUtil.getRequestStatus(response, ctx)) {
                     JSONObject data = PackageUtil.getResultObject(response);
@@ -251,17 +281,51 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
                         //注意数据结构变了，2016-7-26
                         mUserWallet = App.mGson.fromJson(data.toString(), UserWallet.class);
                         App.mUserWallet = mUserWallet;
-                        tv_down.setText("当前账户余额：" + String.format("%.2f", App.mUserWallet.getBalanceAmount()));
+                        switch (type) {
+                            case CHARGE__HF_SUCCESS:
+                                tv_down.setText("当前账户余额：" + String.format("%.2f", App.mUserWallet.getBalanceAmount()));
+                                break;
+                        }
                     }
                 }
             }
 
             @Override
             public void onErrorResponse(Exception error) {
+                requestUserBankCard();
                 ToastUtil.alert(ctx, "网络异常，请稍后重试");
             }
         });
         jsonRequest.setTag(BcbRequestTag.UserWalletMessageTag);
         App.getInstance().getRequestQueue().add(jsonRequest);
+    }
+
+    /**
+     * 用户银行卡
+     */
+    private void requestUserBankCard() {
+        BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsTwo.UrlUserBand, null, TokenUtil.getEncodeToken(ctx), new BcbRequest.BcbCallBack<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                LogUtil.i("bqt", "绑定的银行卡：" + response.toString());
+                if (PackageUtil.getRequestStatus(response, ctx)) {
+                    JSONObject data = PackageUtil.getResultObject(response);
+                    if (data != null && App.mUserDetailInfo != null) {
+                        App.mUserDetailInfo.BankCard = App.mGson.fromJson(data.toString(), UserBankCard.class);
+                    }
+                }
+            }
+
+            @Override
+            public void onErrorResponse(Exception error) {
+            }
+        });
+        jsonRequest.setTag(BcbRequestTag.UserWalletMessageTag);
+        App.getInstance().getRequestQueue().add(jsonRequest);
+    }
+
+    @Override
+    public void onBackPressed() {
+        JumpToUser();
     }
 }
