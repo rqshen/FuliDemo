@@ -424,7 +424,8 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
         if (totalCount == 0) {
             coupon_description.setText("您当前无可用" + couponName);
         } else {
-            coupon_description.setText("您当前有 " + totalCount + " 张" + couponName);
+//            coupon_description.setText("您当前有 " + totalCount + " 张" + couponName);
+            coupon_description.setText(totalCount + " 张，" + " 点击选择" );
             UmengUtil.eventById(Activity_Project_Buy.this, R.string.bid_buy_coupon_avi);
         }
 

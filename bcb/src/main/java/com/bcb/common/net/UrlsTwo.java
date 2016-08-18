@@ -5,6 +5,7 @@ import com.bcb.data.util.MyConstants;
 public class UrlsTwo {
 
     public static final String host = MyConstants.getHost();
+    public static final String hostStatic = MyConstants.getHostStatic();
 
     //体验标介绍
     public static String ExpiredProjectIntroduction = host + "/api/v1.0/df76208580b6";
@@ -54,6 +55,8 @@ public class UrlsTwo {
     public static String UrlSlbZH = host + "/api/v2.0/a65c00f1d541";
     //生利宝收益列表
     public static String UrlSlbSY = host + "/api/v2.0/a65c00f5a8d0";
+    //关于汇付
+    public static String UrlAboutHF= hostStatic + "/static/HftxIntroduce.html";//http://ttwap.100cb.cn/
 
 
 }

@@ -41,7 +41,7 @@ import java.util.List;
  *
  * @desc 特权本金
  */
-public class Activity_Privilege_Money extends Activity_Base implements AdapterView.OnItemClickListener ,PrivilegeMoneyAdapter.IloadAfterRegeist {
+public class Activity_Privilege_Money extends Activity_Base implements AdapterView.OnItemClickListener, PrivilegeMoneyAdapter.IloadAfterRegeist {
     private BcbRequestQueue requestQueue;
     private List<PrivilegeMoneyDto> datas;
     private MyListView mListView;
@@ -52,7 +52,7 @@ public class Activity_Privilege_Money extends Activity_Base implements AdapterVi
     private boolean canLoadmore = false;//就一条数据，不需要加载更多
     private PullToRefreshLayout refreshLayout;
     private RelativeLayout loadmore_view;
-    TextView tv_shouyi_all, tv_benjin, tv_shouyi,total_privilege_money;
+    TextView tv_shouyi_all, tv_benjin, tv_shouyi, total_privilege_money;
     ImageView iv_about;
 
     public static void launch(Context context) {
@@ -72,8 +72,9 @@ public class Activity_Privilege_Money extends Activity_Base implements AdapterVi
         total_privilege_money.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (App.mUserDetailInfo != null && App.mUserDetailInfo.HasOpenCustody) startActivity(new Intent(ctx, Activity_Charge_HF.class));
-                else startActivity(new Intent(ctx, Activity_Open_Account.class));
+                startActivity(new Intent(ctx, Activity_Money_Flowing_Water.class));
+//                if (App.mUserDetailInfo != null && App.mUserDetailInfo.HasOpenCustody) startActivity(new Intent(ctx, Activity_Money_Flowing_Water.class));
+//                else startActivity(new Intent(ctx, Activity_Open_Account.class));
             }
         });
         iv_about.setOnClickListener(new View.OnClickListener() {

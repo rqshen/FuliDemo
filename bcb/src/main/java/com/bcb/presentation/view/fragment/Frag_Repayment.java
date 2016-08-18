@@ -3,7 +3,6 @@ package com.bcb.presentation.view.fragment;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,7 +41,7 @@ public class Frag_Repayment extends Frag_Base {
     private String assetCode;
 
     private int PageNow = 1;
-    private int PageSize = 10;
+    private int PageSize = 36;
 
     //还款列表
     private MyListView repaymentListView;
@@ -53,7 +52,7 @@ public class Frag_Repayment extends Frag_Base {
 
     private LinearLayout null_data_layout;
 
-    private boolean canLoadmore = true;
+    private boolean canLoadmore = false;
     private PullToRefreshLayout refreshLayout;
     private RelativeLayout loadmore_view;
 

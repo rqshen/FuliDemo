@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/iv_bg"
-        android:layout_width="276dp"
-        android:layout_height="337dp"
+        android:layout_width="304dp"
+        android:layout_height="371dp"
         android:layout_centerHorizontal="true"
         android:src="@drawable/register_success_tips"/>
 

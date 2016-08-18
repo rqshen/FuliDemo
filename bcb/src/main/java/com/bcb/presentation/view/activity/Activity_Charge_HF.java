@@ -155,7 +155,7 @@ public class Activity_Charge_HF extends Activity_Base implements View.OnClickLis
                         return;
                     }
                     if (maxMonery > 0 && ADD_MONERY > maxMonery) {
-                        Toast.makeText(Activity_Charge_HF.this, "输入金额超过本卡单次充值限额", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Activity_Charge_HF.this, "充值金额超过单笔最大限额（" + maxMonery + "元），请修改充值金额", Toast.LENGTH_SHORT).show();
                         return;
                     }
                     if (ADD_MONERY >= 10000000.0f) {//服务器限制

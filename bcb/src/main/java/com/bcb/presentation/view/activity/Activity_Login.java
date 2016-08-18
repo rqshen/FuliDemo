@@ -77,7 +77,6 @@ public class Activity_Login extends Activity_Base implements Interface_Base, OnC
             @Override
             public void onClick(View v) {
                 Activity_Register_First.launche(Activity_Login.this);
-                finish();
             }
         });
 		init();

@@ -166,6 +166,14 @@
                         android:layout_marginTop="5dip"
                         android:orientation="horizontal">
                         <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="10dip"
+                            android:gravity="center"
+                            android:text="请输入8-15位字符"
+                            android:textColor="#5677fc"
+                            android:textSize="@dimen/main_text_small"/>
+                        <TextView
                             android:id="@+id/strength1"
                             android:layout_width="30dip"
                             android:layout_height="wrap_content"

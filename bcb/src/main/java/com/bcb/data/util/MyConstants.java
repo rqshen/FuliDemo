@@ -4,9 +4,11 @@ public class MyConstants {
 
     public static final String IDCARDTYPE = "01";
 
-    	public static final String HOST_DEV = "http://ttgateway.100cb.cn";//测试
-//    public static final String HOST_DEV = "http://112.74.107.186:6080";//2016-8-16替换
+    public static final String HOST_DEV = "http://ttgateway.100cb.cn";//测试
     public static final String HOST_RELEASE = "http://app.100cb.cn";
+
+    public static final String HOST_DEV_Static = "http://ttwap.100cb.cn";//测试
+    public static final String HOST_RELEASE_Static = "http://app.100cb.cn";
 
     public static boolean TESTMODE = true;// true为测试环境，false为发布环境
 
@@ -15,6 +17,14 @@ public class MyConstants {
             return HOST_DEV;
         } else {
             return HOST_RELEASE;
+        }
+    }
+
+    public static String getHostStatic() {
+        if (TESTMODE) {
+            return HOST_DEV_Static;
+        } else {
+            return HOST_RELEASE_Static;
         }
     }
 

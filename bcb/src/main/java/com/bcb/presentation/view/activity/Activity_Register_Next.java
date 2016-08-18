@@ -129,7 +129,7 @@ public class Activity_Register_Next extends Activity_Base implements Interface_V
                 //长度小于8的时候，密码为弱
                 else if (str.length() < 8) {
                     setupPasswordColor();
-                    strength1.setBackgroundResource(R.drawable.button_solid_green);
+                    strength1.setBackgroundResource(R.drawable.button_solid_red);
 
                 } else {
                     /**
@@ -143,7 +143,7 @@ public class Activity_Register_Next extends Activity_Base implements Interface_V
                     int num = RegexManager.getMatchNumber(str);
                     if (num <= 1) {
                         setupPasswordColor();
-                        strength1.setBackgroundResource(R.drawable.button_solid_green);
+                        strength1.setBackgroundResource(R.drawable.button_solid_red);
                     }
                     if (num == 2) {
                         setupPasswordColor();
@@ -151,25 +151,8 @@ public class Activity_Register_Next extends Activity_Base implements Interface_V
                     }
                     if (num >= 3) {
                         setupPasswordColor();
-                        strength3.setBackgroundResource(R.drawable.button_solid_red);
+                        strength3.setBackgroundResource(R.drawable.button_solid_green);
                     }
-//					//如果只存在数字、字母或特殊合法字符单一组合，密码显示为弱
-//					if (RegexManager.isNum(str)
-//						|| RegexManager.isAZ(str)
-//						|| RegexManager.isSpecialRightCode(str) ) {
-//                        setupBackground();
-//			        	strength1.setBackgroundResource(R.drawable.button_solid_green);
-//					}
-//					//如果包含三种类型的字符并且长度超过10位，则密码强度显示为强
-//					else if (RegexManager.isHybridRightCode(str) && str.length() > 10) {
-//                        setupBackground();
-//						strength3.setBackgroundResource(R.drawable.button_solid_red);
-//					}
-//			        //既不是单一组合，也不包含三种字符类型或者包含三种字符但长度不够10的，均显示为中
-//					else {
-//                        setupBackground();
-//			        	strength2.setBackgroundResource(R.drawable.button_solid_blue);
-//					}
                 }
             }
 

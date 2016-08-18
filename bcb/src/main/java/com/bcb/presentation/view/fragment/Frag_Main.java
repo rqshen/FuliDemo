@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Bitmap;
@@ -63,9 +62,9 @@ import com.bcb.presentation.view.activity.Activity_Login_Introduction;
 import com.bcb.presentation.view.activity.Activity_Love;
 import com.bcb.presentation.view.activity.Activity_Main;
 import com.bcb.presentation.view.activity.Activity_NormalProject_Introduction;
-import com.bcb.presentation.view.activity.Activity_Open_Account;
 import com.bcb.presentation.view.activity.Activity_Privilege_Money;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
+import com.bcb.presentation.view.custom.CustomDialog.BasicDialog;
 import com.bcb.presentation.view.custom.CustomDialog.DialogWidget;
 import com.bcb.presentation.view.custom.CustomDialog.RegisterSuccessDialogView;
 import com.bcb.presentation.view.custom.PagerIndicator.AutoLoopViewPager;
@@ -935,21 +934,22 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPa
     AlertView alertView;
 
     private void alterHFOpen() {
-        AlertView.Builder ibuilder = new AlertView.Builder(ctx);
-        ibuilder.setTitle("提示");
-        ibuilder.setMessage("福利金融接入资金托管啦！" );
-        //已开通托管
-            ibuilder.setPositiveButton("开通资金托管账户", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    alertView.dismiss();
-                    alertView = null;
-                    ctx.startActivity(new Intent(ctx, Activity_Open_Account.class));
-                }
-            });
-
-        alertView = ibuilder.create();
-        alertView.show();
+        new BasicDialog(ctx).show();
+//        AlertView.Builder ibuilder = new AlertView.Builder(ctx);
+//        ibuilder.setTitle("提示");
+//        ibuilder.setMessage("福利金融接入资金托管啦！" );
+//        //已开通托管
+//            ibuilder.setPositiveButton("开通资金托管账户", new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialog, int which) {
+//                    alertView.dismiss();
+//                    alertView = null;
+//                    ctx.startActivity(new Intent(ctx, Activity_Open_Account.class));
+//                }
+//            });
+//
+//        alertView = ibuilder.create();
+//        alertView.show();
     }
 
     //清空首页标的数据

@@ -81,18 +81,17 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
     private void initView() {
         switch (type) {
             case OPEN_HF_SUCCESS:
-                title_text.setText("开户成功");
+                title_text.setText("资金托管");
                 iv_pic.setImageResource(R.drawable.success_open_hf);
                 iv_pic.setPadding(0, DensityUtils.dp2px(this, 50), 0, 0);
                 tv_up.setText("开户成功！");
                 tv_down.setVisibility(View.GONE);
-                tv_next.setVisibility(View.GONE);
+                tv_next.setText("查看托管账户");
                 break;
             case OPEN_HF_FAILED:
                 title_text.setText("开户失败");
                 iv_pic.setImageResource(R.drawable.failed_open_fh);
                 tv_up.setText("开户失败！");
-//                tv_down.setText("身份信息识别失败");
                 tv_down.setText(message);
                 tv_next.setText("联系客服");
                 break;
@@ -231,6 +230,10 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
                 break;
             case R.id.tv_next:
                 switch (type) {
+                    case OPEN_HF_SUCCESS:
+                        startActivity(new Intent(Activity_Tips_FaileOrSuccess.this, Activity_TuoGuan_HF.class));
+                        finish();
+                        break;
                     //个人中心
                     case BAND_HF_SUCCESS:
                     case BUY_HF_SUCCESS:

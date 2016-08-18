@@ -358,7 +358,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
                 Activity_Trading_Record.launche(ctx);
                 break;
 
-            //资金流水
+            //资金流水，交易明细
             case R.id.money_flow_water:
                 if (isLoading()) return;
                 UmengUtil.eventById(ctx, R.string.self_zjls);
@@ -574,7 +574,6 @@ public class Frag_User extends Frag_Base implements OnClickListener {
         alertView = ibuilder.create();
         alertView.show();
     }
-
 
 
     //*****************************************                            请求服务器                           ****************************************

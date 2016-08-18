@@ -70,7 +70,7 @@ public class Activity_Browser extends Activity_Base {
     private Context context;
     private ProgressBar mPageLoadingProgressBar;
 
-    public static void launche(Context ctx, String tittle, String url){
+    public static void launche(Context ctx, String tittle, String url) {
         Intent intent = new Intent();
         intent.setClass(ctx, Activity_Browser.class);
         intent.putExtra("title", tittle);
@@ -80,12 +80,13 @@ public class Activity_Browser extends Activity_Base {
 
     /**
      * 聚爱跳转过来的
+     *
      * @param ctx
      * @param tittle
      * @param isLove
      * @param url
      */
-    public static void launcheFromLove(Context ctx, String tittle, boolean isLove, String loveTitle, String loveContent, String url){
+    public static void launcheFromLove(Context ctx, String tittle, boolean isLove, String loveTitle, String loveContent, String url) {
         Intent intent = new Intent();
         intent.setClass(ctx, Activity_Browser.class);
         intent.putExtra("title", tittle);
@@ -98,6 +99,7 @@ public class Activity_Browser extends Activity_Base {
 
     /**
      * 启动WebView，带是否包含token的状态
+     *
      * @param ctx
      * @param tittle
      * @param url
@@ -125,7 +127,7 @@ public class Activity_Browser extends Activity_Base {
             //最终的URL
             mIntentUrl = getUrlStrWithDES();
             title = intent.getStringExtra("title");
-            if (getIntent().getBooleanExtra("isLove",false)){
+            if (getIntent().getBooleanExtra("isLove", false)) {
                 final String loveTitle = intent.getStringExtra("loveTitle");
                 final String loveContent = intent.getStringExtra("loveContent");
                 setRightBtnVisiable(View.VISIBLE);
@@ -135,7 +137,7 @@ public class Activity_Browser extends Activity_Base {
                         //注册微信
                         registerToWeiXin();
                         //打开对话框
-                        popShareToWeiXin(loveTitle,mIntentUrl,loveContent);
+                        popShareToWeiXin(loveTitle, mIntentUrl, loveContent);
                     }
                 });
             }
@@ -179,12 +181,12 @@ public class Activity_Browser extends Activity_Base {
         byte[] data = null;
         byte[] encodeByte_ECB;
         try {
-            data =  App.saveUserInfo.getLocalPhone().getBytes("UTF-8");
+            data = App.saveUserInfo.getLocalPhone().getBytes("UTF-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
         String param = "";
-        if (data==null ) {
+        if (data == null) {
             return url;
         }
         try {
@@ -224,7 +226,18 @@ public class Activity_Browser extends Activity_Base {
                         e.printStackTrace();
                     }
                     return true;
-                } else if (url.contains("fulihui://callcenter")){
+                } else if (url.contains("fulihui://register")) {
+                    if (App.saveUserInfo.getAccess_Token() == null) {
+                    	
+                    }
+                    startActivity(new Intent(Activity_Browser.this, Activity_Register_First.class));
+                    finish();
+                    return true;
+                } else if (url.contains("fulihui://login")) {
+                    startActivity(new Intent(Activity_Browser.this, Activity_Login.class));
+                    finish();
+                    return true;
+                } else if (url.contains("fulihui://callcenter")) {
                     //如果ID存在
                     String userId = null;
                     if (App.mUserDetailInfo != null) {
@@ -232,10 +245,10 @@ public class Activity_Browser extends Activity_Base {
                     }
                     MQCustomerManager.getInstance(Activity_Browser.this).showCustomer(userId);
                     return true;
-                } else if (url.contains("mqqapi://forward") || url.contains("wtloginmqq://ptlogin/qlogin")){
+                } else if (url.contains("mqqapi://forward") || url.contains("wtloginmqq://ptlogin/qlogin")) {
                     try {
                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
-                    }catch (Exception e){
+                    } catch (Exception e) {
                         ToastUtil.alert(context, "请先安装QQ");
                     }
                     return true;
@@ -307,17 +320,19 @@ public class Activity_Browser extends Activity_Base {
 //        if (App.mUserDetailInfo == null || !App.mUserDetailInfo.HasCert) {
 //            popCertDialog();
 //        }
-        if (App.mUserDetailInfo == null ||! App.mUserDetailInfo.HasOpenCustody)
+        if (App.mUserDetailInfo == null || !App.mUserDetailInfo.HasOpenCustody)
             popHFDialog();
-        //如果不存在公司信息或者状态不为10(通过审核)的时候，则跳转去加入公司页面
+            //如果不存在公司信息或者状态不为10(通过审核)的时候，则跳转去加入公司页面
         else if (App.mUserDetailInfo.MyCompany == null || App.mUserDetailInfo.MyCompany.Status != 10) {
             Activity_Join_Company.launche(Activity_Browser.this);
         }
     }
+
     /************************
      * 去开通汇付
      ******************************/
     private DialogWidget dialogWidget;
+
     private void popHFDialog() {
         startActivity(new Intent(context, Activity_Open_Account.class));
 //        dialogWidget = new DialogWidget(context, IdentifyAlertView.getInstance(context, new IdentifyAlertView.OnClikListener() {
@@ -336,6 +351,7 @@ public class Activity_Browser extends Activity_Base {
 //        }).getView());
 //        dialogWidget.show();
     }
+
     //注册微信
     private void registerToWeiXin() {
         iwxapi = WXAPIFactory.createWXAPI(this, MyConstants.APP_ID, true);
@@ -348,11 +364,11 @@ public class Activity_Browser extends Activity_Base {
         final String title = values[1];
         final String tmpurl = values[2];
         final String content = values[3];
-        popShareToWeiXin(title,tmpurl,content);
+        popShareToWeiXin(title, tmpurl, content);
     }
 
     //弹框提示是否分享到微信对话还是分享到微信朋友圈
-    private void popShareToWeiXin(final String title,final String url,final String content) {
+    private void popShareToWeiXin(final String title, final String url, final String content) {
         final Dialog certDialog = new Dialog(Activity_Browser.this);
         View view = View.inflate(Activity_Browser.this, R.layout.dialog_alertview, null);
 
@@ -418,6 +434,7 @@ public class Activity_Browser extends Activity_Base {
         });
         certDialog.show();
     }
+
     private String buildTransaction(final String type) {
         return (type == null) ? String.valueOf(System.currentTimeMillis()) : type + System.currentTimeMillis();
     }
@@ -465,7 +482,7 @@ public class Activity_Browser extends Activity_Base {
 
     @Override
     protected void onDestroy() {
-        if (mWebView != null){
+        if (mWebView != null) {
             mWebView.setVisibility(View.GONE);
             mWebView.destroy();
         }
@@ -498,4 +515,11 @@ public class Activity_Browser extends Activity_Base {
             super.handleMessage(msg);
         }
     };
+
+    @Override
+    public void finish() {
+        ViewGroup view = (ViewGroup) getWindow().getDecorView();
+        view.removeAllViews();
+        super.finish();
+    }
 }

@@ -8,7 +8,7 @@
     <com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout
         android:id="@+id/refresh_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"        >
+        android:layout_height="match_parent">
         <!-- 下拉刷新控件-->
         <include layout="@layout/refresh_head"/>
 
@@ -71,11 +71,11 @@
                         android:textSize="@dimen/main_text_small"/>
 
                     <ImageView
-android:id="@+id/iv_about"
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
+                        android:id="@+id/iv_about"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
                         android:layout_alignParentRight="true"
-                        android:layout_marginRight="15dp"
+                        android:padding="15dp"
                         android:src="@drawable/icon_privilege_info"/>
 
                 </RelativeLayout>
@@ -83,10 +83,10 @@ android:id="@+id/iv_about"
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
                     android:background="@color/white"
                     android:orientation="horizontal"
                     android:paddingBottom="8dp"
-                    android:layout_marginBottom="10dp"
                     android:paddingTop="8dp">
 
                     <LinearLayout

@@ -17,42 +17,32 @@ import com.bcb.data.util.TokenUtil;
 
 import org.json.JSONObject;
 
-public class Activity_Open_Account extends Activity_Base implements View.OnClickListener {
-    //标题
-    private TextView title_text;
-    //返回
-    private View back_img;
+public class Activity_Open_Account extends Activity_Base {
+
     /**
-     * 开通
+     * 开通huifu
      */
     private TextView tv_open;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_open_account);
-        //标题
-        title_text = (TextView) findViewById(R.id.title_text);
-        title_text.setText("汇付天下资金托管");
-        back_img = findViewById(R.id.back_img);
-        back_img.setVisibility(View.VISIBLE);
-        back_img.setOnClickListener(this);
-        findViewById(R.id.tv_open).setOnClickListener(this);
-    }
-
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.back_img:
-                finish();
-                break;
-            case R.id.tv_open:
+        setBaseContentView(R.layout.activity_open_account);
+        setTitleValue("资金托管");
+        setLeftTitleVisible(true);
+        setRightBtnVisiable(View.VISIBLE);
+        setRightTitleValue("关于汇付", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Activity_Browser.launche(Activity_Open_Account.this, "关于汇付", UrlsTwo.UrlAboutHF);
+            }
+        });
+        findViewById(R.id.tv_open).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 requestOpenAccount();
-                break;
-            default:
-                break;
-        }
+            }
+        });
     }
 
 
@@ -78,7 +68,7 @@ public class Activity_Open_Account extends Activity_Base implements View.OnClick
                             //传递的 参数
                             String postData = HttpUtils.jsonToStr(result.toString());
                             //跳转到webview
-                            Activity_WebView.launche(Activity_Open_Account.this, "汇付天下资金托管", postUrl,  postData);
+                            Activity_WebView.launche(Activity_Open_Account.this, "汇付天下资金托管", postUrl, postData);
                             finish();
                         }
                     } catch (Exception e) {

@@ -15,8 +15,6 @@ import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.RegexManager;
 import com.bcb.data.util.UmengUtil;
 
-import java.util.Calendar;
-
 public class Activity_Register_First extends Activity_Base {
 
 	private static final String TAG = "Activity_Register_First";
@@ -120,7 +118,6 @@ public class Activity_Register_First extends Activity_Base {
 		intent.putExtra("phone", inputPhone);
 		startActivity(intent);
         //销毁当前页面
-        finish();
 	}
 	
 	private boolean checkNumIsValid(String str){

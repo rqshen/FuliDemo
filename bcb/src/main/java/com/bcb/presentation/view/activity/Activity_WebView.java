@@ -243,5 +243,13 @@ public class Activity_WebView extends Activity_Base {
             e.printStackTrace();
         }
         return url + "?accessToken=" + param;
+
+    }
+
+    @Override
+    public void finish() {
+        ViewGroup view = (ViewGroup) getWindow().getDecorView();
+        view.removeAllViews();
+        super.finish();
     }
 }
