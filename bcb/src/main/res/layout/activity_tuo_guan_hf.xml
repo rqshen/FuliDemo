@@ -231,7 +231,7 @@
             android:layout_marginLeft="20dp"
             android:gravity="center"
             android:singleLine="true"
-            android:text="找回交易密码"
+            android:text="找回汇付交易密码"
             android:textColor="@color/txt_gray"
             android:textSize="13sp"/>
 
@@ -265,7 +265,7 @@
             android:layout_marginLeft="20dp"
             android:gravity="center"
             android:singleLine="true"
-            android:text="找回登录密码"
+            android:text="找回汇付登录密码"
             android:textColor="@color/txt_gray"
             android:textSize="13sp"/>
 
@@ -299,7 +299,7 @@
             android:layout_marginLeft="20dp"
             android:gravity="center"
             android:singleLine="true"
-            android:text="修改交易密码"
+            android:text="修改汇付交易密码"
             android:textColor="@color/txt_gray"
             android:textSize="13sp"/>
 

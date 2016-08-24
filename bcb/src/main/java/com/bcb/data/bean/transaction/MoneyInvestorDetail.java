@@ -8,7 +8,7 @@ import java.io.Serializable;
  */
 public class MoneyInvestorDetail implements Serializable {
     public float Principal; //回款本金
-    public float ServiceFeeAmount; //信息服务费
+    public float ServiceFee; //信息服务费
     public String PackageName;  //项目名称
     public float Interest;  //利息金额
     public String PayDate;  //回款时间
@@ -23,11 +23,11 @@ public class MoneyInvestorDetail implements Serializable {
     }
 
     public float getServiceFeeAmount() {
-        return ServiceFeeAmount;
+        return ServiceFee;
     }
 
     public void setServiceFeeAmount(float serviceFeeAmount) {
-        ServiceFeeAmount = serviceFeeAmount;
+        ServiceFee = serviceFeeAmount;
     }
 
     public String getPackageName() {

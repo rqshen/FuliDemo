@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bcb.R;
 import com.bcb.common.app.App;
@@ -228,7 +229,7 @@ public class Activity_Select_Coupon extends Activity_Base {
 		}
 	}
 
-
+	private boolean isNeedRefush;
     //兑换优惠券
     private void loadExchangeData(String ExchangeCode) {
         JSONObject obj = new JSONObject();
@@ -252,6 +253,8 @@ public class Activity_Select_Coupon extends Activity_Base {
                         //销毁兑换优惠对话框
                         convertDialog.dismiss();
                         convertDialog = null;
+						Toast.makeText(Activity_Select_Coupon.this,  "兑换成功", Toast.LENGTH_SHORT).show();
+						isNeedRefush=true;//兑换成功后需要刷新一下
                     } else {
                         dialog_error_tips.setVisibility(View.VISIBLE);
                         dialog_error_tips.setText(message);
@@ -343,8 +346,8 @@ public class Activity_Select_Coupon extends Activity_Base {
             LogUtil.d(Activity_Select_Coupon.this, "加载数据");
 			CouponRecordsBean coupon = (CouponRecordsBean) mCouponListView.getItemAtPosition(position);
             //如果是体验券(CouponType = 1)，则不用判断是否大于最小金额
+			Intent intent = new Intent();
 			if (investAmount >= coupon.getMinAmount() || CouponType == 1) {
-				Intent intent = new Intent();
 				intent.putExtra("CouponId", coupon.getCouponId());
 				intent.putExtra("CouponAmount", coupon.getAmount()+"");
 				intent.putExtra("CouponMinAmount", coupon.getMinAmount()+"");
@@ -365,6 +368,7 @@ public class Activity_Select_Coupon extends Activity_Base {
                     intent.putExtra("TotalCount", recordsBeans == null ? 0 : recordsBeans.size());
                     LogUtil.d("已经返回券的ID", "已经返回");
                 }
+				intent.putExtra("isNeedRefush",isNeedRefush);
 				setResult(1, intent);
 			} else { //不是体验券，并且输入金额小于最小金额的时候，则提示
                 if (CouponType != 16) {
@@ -373,8 +377,9 @@ public class Activity_Select_Coupon extends Activity_Base {
                 //利息抵扣券，返回的时候，很可能已经兑换过优惠券了，需要返回一个优惠券张数，这样不管选择与否，回去的优惠券张数都是最新的。
                 else {
                     ToastUtil.alert(Activity_Select_Coupon.this, "借款金额小于最小借款金额，无法使用利息抵扣券");
-
                 }
+				intent.putExtra("isNeedRefush",isNeedRefush);
+				setResult(2, intent);
 			}
             finish();
 		}

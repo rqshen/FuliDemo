@@ -18,6 +18,7 @@ import com.bcb.common.net.BcbRequestTag;
 import com.bcb.common.net.UrlsOne;
 import com.bcb.common.net.UrlsTwo;
 import com.bcb.data.bean.UserBankCard;
+import com.bcb.data.bean.UserDetailInfo;
 import com.bcb.data.bean.UserWallet;
 import com.bcb.data.util.DensityUtils;
 import com.bcb.data.util.LogUtil;
@@ -84,28 +85,32 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
                 title_text.setText("资金托管");
                 iv_pic.setImageResource(R.drawable.success_open_hf);
                 iv_pic.setPadding(0, DensityUtils.dp2px(this, 50), 0, 0);
-                tv_up.setText("开户成功！");
+                tv_up.setText("开户成功");
                 tv_down.setVisibility(View.GONE);
                 tv_next.setText("查看托管账户");
+                requestUserDetailInfo();
+                SystemClock.sleep(2000);//让子弹飞一会
                 break;
             case OPEN_HF_FAILED:
                 title_text.setText("开户失败");
                 iv_pic.setImageResource(R.drawable.failed_open_fh);
-                tv_up.setText("开户失败！");
+                tv_up.setText("开户失败");
                 tv_down.setText(message);
                 tv_next.setText("联系客服");
                 break;
             case BAND_HF_SUCCESS:
                 title_text.setText("绑卡成功");
                 iv_pic.setImageResource(R.drawable.success_open_hf);
-                tv_up.setText("绑卡成功！");
+                tv_up.setText("绑卡成功");
                 tv_down.setVisibility(View.GONE);
                 tv_next.setText("返回个人中心");
+                SystemClock.sleep(2000);//让子弹飞一会
+                requestUserBankCard();
                 break;
             case BAND_HF_FAILED:
                 title_text.setText("绑卡失败");
                 iv_pic.setImageResource(R.drawable.failed_band_fh);
-                tv_up.setText("绑卡失败！");
+                tv_up.setText("绑卡失败");
                 tv_down.setText("信息验证出现错误");
                 tv_next.setText("联系客服");
                 break;
@@ -113,7 +118,7 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
                 title_text.setText("充值成功");
                 iv_pic.setImageResource(R.drawable.success_open_hf);
                 iv_pic.setPadding(0, DensityUtils.dp2px(this, 30), 0, 0);
-                tv_up.setText("充值成功！");
+                tv_up.setText("充值成功");
                 tv_next.setVisibility(View.GONE);
                 SystemClock.sleep(2000);//让子弹飞一会
                 requestUserWallet();
@@ -121,7 +126,7 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
             case CHARGE_HF_FAILED:
                 title_text.setText("充值失败");
                 iv_pic.setImageResource(R.drawable.failed_charge_hf);
-                tv_up.setText("充值失败！");
+                tv_up.setText("充值失败");
                 message = message == null ? "银行卡余额不足" : message;
                 tv_down.setText(message);
                 tv_next.setText("联系客服");
@@ -130,7 +135,7 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
                 title_text.setText("提现成功");
                 iv_pic.setImageResource(R.drawable.success_open_hf);
                 iv_pic.setPadding(0, DensityUtils.dp2px(this, 30), 0, 0);
-                tv_up.setText("提现成功！");
+                tv_up.setText("提现成功");
                 tv_next.setVisibility(View.GONE);
                 tv_down.setText("本次提现：" + message);
                 SystemClock.sleep(2000);//让子弹飞一会
@@ -140,21 +145,23 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
                 title_text.setText("提现失败");
                 iv_pic.setImageResource(R.drawable.failed_band_fh);
                 iv_pic.setPadding(0, DensityUtils.dp2px(this, 50), 0, 0);
-                tv_up.setText("提现失败！");
+                tv_up.setText("提现失败");
                 tv_down.setText("账户余额不足");
                 tv_next.setVisibility(View.GONE);
                 break;
             case BUY_HF_SUCCESS:
                 title_text.setText("申购成功");
                 iv_pic.setImageResource(R.drawable.success_open_hf);
-                tv_up.setText("申购成功！");
+                tv_up.setText("申购成功");
                 tv_down.setVisibility(View.GONE);
                 tv_next.setText("返回个人中心");
+                SystemClock.sleep(2000);//让子弹飞一会
+                requestUserWallet();
                 break;
             case BUY_HF_FAILED:
                 title_text.setText("申购失败");
                 iv_pic.setImageResource(R.drawable.failed_buy_fh);
-                tv_up.setText("申购失败！");
+                tv_up.setText("申购失败");
                 tv_down.setText(message);
                 tv_next.setText("联系客服");
                 break;
@@ -169,6 +176,8 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
                 tv_down.setText("¥ " + splitStrs[3]);
                 tv_down.setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
                 tv_next.setText("返回生利宝");
+                SystemClock.sleep(2000);//让子弹飞一会
+                requestUserWallet();
                 break;
             case SLB_FAILED:
                 String[] splitStrs2 = Pattern.compile("\\|").split(message);//Java Split以竖线作为分隔符
@@ -269,9 +278,9 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
         finish();
     }
 
-    UserWallet mUserWallet;
     Context ctx;
 
+    //钱包
     private void requestUserWallet() {
         BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.UserWalletMessage, null, TokenUtil.getEncodeToken(ctx), new BcbRequest.BcbCallBack<JSONObject>() {
             @Override
@@ -281,9 +290,7 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
                 if (PackageUtil.getRequestStatus(response, ctx)) {
                     JSONObject data = PackageUtil.getResultObject(response);
                     if (data != null) {
-                        //注意数据结构变了，2016-7-26
-                        mUserWallet = App.mGson.fromJson(data.toString(), UserWallet.class);
-                        App.mUserWallet = mUserWallet;
+                        App.mUserWallet = App.mGson.fromJson(data.toString(), UserWallet.class);
                         switch (type) {
                             case CHARGE__HF_SUCCESS:
                                 tv_down.setText("当前账户余额：" + String.format("%.2f", App.mUserWallet.getBalanceAmount()));
@@ -330,5 +337,31 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
     @Override
     public void onBackPressed() {
         JumpToUser();
+    }
+
+    /**
+     * 用户信息
+     */
+    private void requestUserDetailInfo() {
+
+        BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsTwo.UserMessage, null, TokenUtil.getEncodeToken(ctx), new BcbRequest.BcbCallBack<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                LogUtil.i("bqt", "用户信息返回数据：" + response.toString());
+                if (PackageUtil.getRequestStatus(response, ctx)) {
+                    JSONObject data = PackageUtil.getResultObject(response);
+                    if (data != null) {
+                        //将获取到的银行卡数据写入静态数据区中
+                        App.mUserDetailInfo = App.mGson.fromJson(data.toString(), UserDetailInfo.class);
+                    }
+                }
+            }
+
+            @Override
+            public void onErrorResponse(Exception error) {
+            }
+        });
+        jsonRequest.setTag(BcbRequestTag.UserBankMessageTag);
+        App.getInstance().getRequestQueue().add(jsonRequest);
     }
 }

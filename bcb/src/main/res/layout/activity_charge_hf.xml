@@ -139,7 +139,7 @@
                     android:textColorHint="#ccc"
                     android:background="@null"
                     android:singleLine="true"
-                    android:digits=".0123456789"
+                    android:digits="0123456789"
                     android:maxLength="9"
                     android:inputType="numberDecimal"
                     android:textSize="16sp"/>
@@ -181,7 +181,7 @@
                 android:layout_height="45dp"
                 android:layout_marginTop="10dp"
                 android:layout_gravity="center_horizontal"
-                android:background="@drawable/button_solid_black"
+                android:background="@drawable/button_solid_red"
                 android:gravity="center"
                 android:text="下一步"
                 android:textColor="#fff"

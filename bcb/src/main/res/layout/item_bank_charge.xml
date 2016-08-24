@@ -40,11 +40,12 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:gravity="center"
+        android:gravity="right|center_vertical"
+        android:paddingRight="40dp"
         android:paddingBottom="2dp"
         android:paddingTop="2dp"
         android:singleLine="true"
-        android:text="10000"
+        android:text="100000"
         android:textColor="#666"
         android:textSize="12sp"/>
 
@@ -54,7 +55,8 @@
         android:layout_width="0dp"
         android:layout_height="25dp"
         android:layout_weight="1"
-        android:gravity="center"
+        android:gravity="right|center_vertical"
+        android:paddingRight="40dp"
         android:singleLine="true"
 
         android:text="20000"

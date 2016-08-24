@@ -1,5 +1,6 @@
 package com.bcb.common.net;
 
+import android.content.pm.PackageManager;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
@@ -11,6 +12,7 @@ import com.android.volley.Response;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
+import com.bcb.common.app.App;
 import com.bcb.data.util.DESUtil;
 import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MyConstants;
@@ -190,7 +192,15 @@ public abstract class BcbRequest<T> extends Request<T> {
         if (mEncodeToken != null) {
             headers.put("access-token", mEncodeToken);
         }
-        headers.put("version", android.os.Build.VERSION.RELEASE);
+//        headers.put("version", android.os.Build.VERSION.RELEASE);
+
+        try {
+            String pkName = App.instance.getPackageName();
+            String version = App.instance.getPackageManager().getPackageInfo(pkName, 0).versionName;
+            headers.put("version", version);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
         headers.put("platform", "2");
         return headers;
 //        if (mEncodeToken != null) {
@@ -236,15 +246,15 @@ public abstract class BcbRequest<T> extends Request<T> {
         return null;
     }
 
-public interface BcbCallBack<T> {
-    void onResponse(T response);
+    public interface BcbCallBack<T> {
+        void onResponse(T response);
 
-    void onErrorResponse(Exception error);
-}
+        void onErrorResponse(Exception error);
+    }
 
-public interface BcbIndexCallBack<T> {
-    void onResponse(T response, int index);
+    public interface BcbIndexCallBack<T> {
+        void onResponse(T response, int index);
 
-    void onErrorResponse(Exception error);
-}
+        void onErrorResponse(Exception error);
+    }
 }

@@ -24,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bcb.R;
 import com.bcb.common.app.App;
@@ -271,6 +272,7 @@ public class Activity_Coupons extends Activity_Base_Fragment {
                         intent.setAction("com.bcb.update.couponui");
                         sendBroadcast(intent);
                         convertDialog.dismiss();
+                        Toast.makeText(Activity_Coupons.this, "兑换成功", Toast.LENGTH_SHORT).show();
                     } else {
                         dialog_error_tips.setVisibility(View.VISIBLE);
                         dialog_error_tips.setText(message);
@@ -291,5 +293,4 @@ public class Activity_Coupons extends Activity_Base_Fragment {
 	}
 
 }
-
 

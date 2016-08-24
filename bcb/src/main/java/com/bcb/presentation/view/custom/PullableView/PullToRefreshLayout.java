@@ -66,7 +66,7 @@ public class PullToRefreshLayout extends RelativeLayout {
 
     private MyTimer timer;
     // 回滚速度
-    public float MOVE_SPEED = 15;
+    public float MOVE_SPEED = 30;
     // 第一次执行布局
     private boolean isLayout = false;
     // 在刷新过程中滑动操作

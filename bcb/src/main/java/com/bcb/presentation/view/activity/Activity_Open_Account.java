@@ -68,7 +68,7 @@ public class Activity_Open_Account extends Activity_Base {
                             //传递的 参数
                             String postData = HttpUtils.jsonToStr(result.toString());
                             //跳转到webview
-                            Activity_WebView.launche(Activity_Open_Account.this, "汇付天下资金托管", postUrl, postData);
+                            Activity_WebView.launche(Activity_Open_Account.this, "资金托管", postUrl, postData);
                             finish();
                         }
                     } catch (Exception e) {

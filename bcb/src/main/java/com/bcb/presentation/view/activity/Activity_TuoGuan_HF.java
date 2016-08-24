@@ -52,7 +52,7 @@ public class Activity_TuoGuan_HF extends Activity_Base implements View.OnClickLi
     private void initTitle() {
         //标题
         TextView title_text = (TextView) findViewById(R.id.title_text);
-        title_text.setText("汇付天下资金托管");
+        title_text.setText("资金托管");
         //返回
         View back_img = findViewById(R.id.back_img);
         back_img.setVisibility(View.VISIBLE);
@@ -94,7 +94,7 @@ public class Activity_TuoGuan_HF extends Activity_Base implements View.OnClickLi
                 withdrawMoney();
                 break;
             case R.id.rl_look:
-                Toast.makeText(Activity_TuoGuan_HF.this, "………………暂无……………", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(Activity_TuoGuan_HF.this, "………………暂无……………", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.rl_login:
                 loginAccount();
@@ -120,7 +120,7 @@ public class Activity_TuoGuan_HF extends Activity_Base implements View.OnClickLi
     private void withdrawMoney() {
         //用户还没绑卡
         if (App.mUserDetailInfo.BankCard == null) {
-            showAlertView("您还没指定提现卡哦", "该银行卡将作为账户唯一充值、提现银行卡", new DialogInterface.OnClickListener() {
+            showAlertView("您还没指定提现卡哦", "该银行卡将作为账户唯一提现银行卡", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     requestBandCard();

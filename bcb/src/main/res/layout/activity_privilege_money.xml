@@ -27,7 +27,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/red"
-                    android:paddingBottom="20dp">
+                    android:paddingBottom="10dp">
 
                     <LinearLayout
                         android:id="@+id/privilege_money"
@@ -37,12 +37,7 @@
                         android:layout_marginTop="20dp"
                         android:orientation="horizontal">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="￥"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/main_text_xxxlarge"/>
+
 
                         <TextView
                             android:id="@+id/tv_shouyi_all"
@@ -66,7 +61,8 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/privilege_money"
                         android:layout_centerHorizontal="true"
-                        android:text="特权本金累计收益 >>"
+                        android:padding="10dp"
+                        android:text="累计收益 >"
                         android:textColor="@color/white"
                         android:textSize="@dimen/main_text_small"/>
 
@@ -86,32 +82,33 @@
                     android:layout_marginBottom="10dp"
                     android:background="@color/white"
                     android:orientation="horizontal"
-                    android:paddingBottom="8dp"
-                    android:paddingTop="8dp">
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp">
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="7dp"
-                        android:layout_marginLeft="16dp"
                         android:layout_marginTop="7dp"
                         android:layout_weight="1"
                         android:orientation="vertical">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="生效中本金"
+                            android:gravity="center"
+                            android:text="生效中本金(元)"
                             android:textColor="@color/txt_middle_gray"
                             android:textSize="13sp"/>
 
                         <TextView
                             android:id="@+id/tv_benjin"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
+                            android:gravity="center"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="￥0.00"
+                            android:text="0.00"
                             android:textColor="@color/red"
                             android:textSize="25sp"/>
 
@@ -127,25 +124,26 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="7dp"
-                        android:layout_marginLeft="16dp"
                         android:layout_marginTop="7dp"
                         android:layout_weight="1"
                         android:orientation="vertical">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
+                            android:gravity="center"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="待发收益"
+                            android:text="待发本金(元)"
                             android:textColor="@color/txt_middle_gray"
                             android:textSize="13sp"/>
 
                         <TextView
                             android:id="@+id/tv_shouyi"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
+                            android:gravity="center"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="￥0.00"
+                            android:text="0.00"
                             android:textColor="@color/red"
                             android:textSize="25sp"/>
 

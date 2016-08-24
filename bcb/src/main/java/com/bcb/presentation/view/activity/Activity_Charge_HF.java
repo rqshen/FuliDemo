@@ -287,16 +287,16 @@ public class Activity_Charge_HF extends Activity_Base implements View.OnClickLis
 
     @Override
     public void afterTextChanged(Editable s) {
-        String text = et_add_monery.getText().toString().trim();
-        try {
-            if (!TextUtils.isEmpty(text) && Float.valueOf(text) >= 500) {
-                tv_next.setBackgroundResource(R.drawable.button_solid_red);
-            } else {
-                tv_next.setBackgroundResource(R.drawable.button_solid_black);
-            }
-        } catch (Exception e) {
-            Toast.makeText(Activity_Charge_HF.this, "输入金额格式有误", Toast.LENGTH_SHORT).show();
-            et_add_monery.setText("");
-        }
+//        String text = et_add_monery.getText().toString().trim();
+//        try {
+//            if (!TextUtils.isEmpty(text) && Float.valueOf(text) >0) {//= 500
+//                tv_next.setBackgroundResource(R.drawable.button_solid_red);
+//            } else {
+//                tv_next.setBackgroundResource(R.drawable.button_solid_black);
+//            }
+//        } catch (Exception e) {
+//            Toast.makeText(Activity_Charge_HF.this, "输入金额格式有误", Toast.LENGTH_SHORT).show();
+//            et_add_monery.setText("");
+//        }
     }
 }

@@ -126,6 +126,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
         title_text = (TextView) view.findViewById(R.id.title_text);
         title_text.setText("我");
 
+        view.findViewById(R.id.ll_test).setOnClickListener(this);
         //加入公司
         joinCompany = (ImageView) view.findViewById(R.id.join_company);
         layout_scrollview = (PullableScrollView) view.findViewById(R.id.layout_scrollview);
@@ -295,7 +296,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
             return;
         }
         //如果加入公司信息不为空并且状态值为10(通过)的时候，则显示用户名和加入公司的缩写
-        if (App.mUserDetailInfo.MyCompany != null) {
+        if (App.mUserDetailInfo.MyCompany != null) { 
             //审核通过
             if (!TextUtils.isEmpty(mUserDetailInfo.MyCompany.getShortName())) {
                 joinCompany.setVisibility(View.GONE);
@@ -324,6 +325,10 @@ public class Frag_User extends Frag_Base implements OnClickListener {
     //点击事件
     @Override
     public void onClick(View v) {
+        if (v.getId() == R.id.ll_test) {
+//            new BasicDialog(ctx).show();
+            return;
+        }
         //除了专属客服和电话客服之外的职位都要在点击之前登陆
         if (App.saveUserInfo.getAccess_Token() == null) {
             Activity_Login.launche(ctx);

@@ -465,7 +465,7 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
         }
         //还没有登陆时，跳转至登陆页面
         if (App.saveUserInfo.getAccess_Token() == null) {
-            startActivity(new Intent(Activity_NormalProject_Introduction.this, Activity_Login_Introduction.class));
+            startActivity(new Intent(Activity_NormalProject_Introduction.this, Activity_Login.class));
             finish();
             return;
         }

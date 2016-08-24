@@ -13,7 +13,7 @@ public class LoveBean implements Serializable{
     private String ThumbnailImg;//图片路径
     private String CompanyName;//公司
     private String Description;//说明
-    private String Jumplink;//跳转链接
+    private String APPJumplink;//跳转链接
     private int Supports;//支持次数
     private int Status;//筹款中（1）筹款完成（2）
     private float Amounts;//已筹资金额
@@ -60,11 +60,11 @@ public class LoveBean implements Serializable{
     }
 
     public String getJumplink() {
-        return Jumplink;
+        return APPJumplink;
     }
 
     public void setJumplink(String jumplink) {
-        Jumplink = jumplink;
+        APPJumplink = jumplink;
     }
 
     public int getSupports() {

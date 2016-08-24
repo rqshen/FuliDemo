@@ -30,6 +30,8 @@ import com.bcb.common.net.BcbRequestTag;
 import com.bcb.common.net.UrlsOne;
 import com.bcb.common.net.UrlsTwo;
 import com.bcb.data.bean.BuyProjectSuccess;
+import com.bcb.data.bean.CouponListBean;
+import com.bcb.data.bean.CouponRecordsBean;
 import com.bcb.data.bean.UserDetailInfo;
 import com.bcb.data.bean.UserWallet;
 import com.bcb.data.bean.project.ExpiredProjectDetail;
@@ -51,6 +53,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.DecimalFormat;
+import java.util.List;
 
 /**
  * Created by cain on 16/1/28.
@@ -367,6 +370,8 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
     /***************
      * 获取优惠券张数
      **********************/
+    int number = 0;
+
     private void getCouponCount() {
         JSONObject obj = new JSONObject();
         try {
@@ -385,6 +390,8 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
         BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.Select_Coupon, obj, TokenUtil.getEncodeToken(this), new BcbRequest.BcbCallBack<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
+                LogUtil.i("bqt", "【Activity_Project_Buy】【onResponse】获取优惠券张数" + response.toString());
+
                 try {
                     boolean flag = PackageUtil.getRequestStatus(response, Activity_Project_Buy.this);
                     if (flag) {
@@ -392,7 +399,19 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
                         //显示优惠券数量
                         //判断JSON对象是否为空
                         if (obj != null) {
-                            ShowCouponCount(obj.getString("TotalCount"));
+                            //******************************************************************************************
+                            List<CouponRecordsBean> Records = App.mGson.fromJson(obj.toString(), CouponListBean.class).Records;
+                            number = 0;
+                            for (int i = 0; i < Records.size(); i++) {
+                                if (Records.get(i).getCouponType() == 2) {
+                                    number++;
+                                }
+                            }
+                            //******************************************************************************************
+//                            ShowCouponCount(obj.getString("TotalCount"));
+                            ShowCouponCount(number + "");
+                            LogUtil.i("bqt", CouponType + "个数" + number);
+
                         }
                     }
                 } catch (Exception e) {
@@ -425,7 +444,7 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
             coupon_description.setText("您当前无可用" + couponName);
         } else {
 //            coupon_description.setText("您当前有 " + totalCount + " 张" + couponName);
-            coupon_description.setText(totalCount + " 张，" + " 点击选择" );
+            coupon_description.setText(totalCount + " 张，" + " 点击选择");
             UmengUtil.eventById(Activity_Project_Buy.this, R.string.bid_buy_coupon_avi);
         }
 
@@ -612,8 +631,8 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
             return;
         }
         //******************************************************************************************
-        //未绑卡或余额不足
-        if (App.mUserDetailInfo.BankCard == null || App.mUserWallet.BalanceAmount < inputMoney) {
+        //未绑卡或余额不足---2016-8-19更改：不管有没有绑卡都可以App.mUserDetailInfo.BankCard == null ||
+        if (App.mUserWallet.BalanceAmount < inputMoney) {
 //            startActivity(new Intent(ctx, Activity_Charge_HF.class));
 //            Toast.makeText(Activity_Project_Buy.this, "您的帐户余额不足，请充值后再试", Toast.LENGTH_SHORT).show();
             altDialog();
@@ -699,7 +718,8 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 
             // 判断是否大于起投金额
             if (mSimpleProjectDetail.StartingAmount > 0) {
-                if (inputMoney < mSimpleProjectDetail.StartingAmount) {
+//                if (inputMoney < mSimpleProjectDetail.StartingAmount) {
+                if (mSimpleProjectDetail.Balance > mSimpleProjectDetail.StartingAmount && inputMoney < mSimpleProjectDetail.StartingAmount) {
                     error_tips.setVisibility(View.VISIBLE);
                     error_tips.setText("当前输入小于起投金额" + (int) mSimpleProjectDetail.StartingAmount + "元");
                     return;
@@ -751,7 +771,7 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
     }
 
     /**
-     * Buy表
+     * Buy标//******************************************************************************************
      */
     private void requestBuy() {
         String requestUrl = UrlsTwo.UrlBuyProject;
@@ -1007,13 +1027,15 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
                 }
                 //判断优惠券类型，跳转
                 else {
-                    UmengUtil.eventById(Activity_Project_Buy.this, R.string.bid_buy_coupon);
-                    if ((CouponType & 1) == 1) {
-                        startupActivity(1);
-                    } else {
-                        startupActivity(CouponType);
-                    }
+//                    UmengUtil.eventById(Activity_Project_Buy.this, R.string.bid_buy_coupon);
+//                    if ((CouponType & 1) == 1) {
+//                        startupActivity(1);
+//                    } else {
+//                        startupActivity(CouponType);
+//                    }
+                    startupActivity(2);
                 }
+
                 break;
 
             //投资信息费
@@ -1115,6 +1137,7 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
      * 跳转到选择优惠券页面
      **********************/
     private void startupActivity(int couponType) {
+
         Intent newIntent = new Intent(Activity_Project_Buy.this, Activity_Select_Coupon.class);
         String newInput = invest_money.getText().toString().replace(",", "");
         float newInvestAmount = 0;
@@ -1189,7 +1212,8 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
                         error_tips.setVisibility(View.GONE);
                         coupon_description.setText("投资满" + CouponMinAmount + "返现" + CouponAmount + "元");
                     }
-                }
+                } else
+                    getCouponCount();
                 break;
             //认证成功返回
             case 10:
@@ -1265,7 +1289,18 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 
     @Override
     public void afterTextChanged(Editable s) {
+        CouponId = null;
+        coupon_description.setText(number + " 张，" + " 点击选择");
         String text = invest_money.getText().toString().replace(",", "").trim();
+        float monery = 0;
+        if (!TextUtils.isEmpty(text)) {
+            monery = Float.valueOf(text);
+        }
+        if (mSimpleProjectDetail.Balance < mSimpleProjectDetail.StartingAmount && monery == mSimpleProjectDetail.Balance) {
+            button_buy.setBackgroundResource(R.drawable.button_solid_red);
+            button_buy.setClickable(true);
+            return;
+        }
         if (!TextUtils.isEmpty(text) && Float.valueOf(text) >= 100) {//100元起投
             button_buy.setBackgroundResource(R.drawable.button_solid_red);
             button_buy.setClickable(true);

@@ -512,7 +512,8 @@ public class Activity_Register_Next extends Activity_Base implements Interface_V
             UmengUtil.eventById(Activity_Register_Next.this, R.string.reg_success);
             // 销毁所有页面，回到首页
             sendBroardCast();
-            MyActivityManager.getInstance().finishAllActivity();
+//            MyActivityManager.getInstance().finishAllActivity();
+            startActivity(new Intent(Activity_Register_Next.this, Activity_Main.class));
         }
         //出错信息
         else {

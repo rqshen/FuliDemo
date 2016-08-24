@@ -248,8 +248,9 @@ public class Activity_WebView extends Activity_Base {
 
     @Override
     public void finish() {
-        ViewGroup view = (ViewGroup) getWindow().getDecorView();
-        view.removeAllViews();
+//        ViewGroup view = (ViewGroup) getWindow().getDecorView();
+//        view.removeAllViews();
+        mWebView.removeAllViews();
         super.finish();
     }
 }

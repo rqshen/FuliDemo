@@ -188,7 +188,6 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
             @Override
             public void onClick(View view) {
                 gotoListPage();
-                finish();
             }
         });
         //创建请求队列
@@ -939,7 +938,6 @@ public class Activity_LoanRequest_Borrow extends Activity_Base implements View.O
         //跳转至填写借款信息页面
         Intent intent = new Intent(Activity_LoanRequest_Borrow.this, Activity_LoanRequest_Person.class);
         startActivity(intent);
-        finish();
     }
 
     /**

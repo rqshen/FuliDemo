@@ -245,7 +245,6 @@ public class Activity_Login extends Activity_Base implements Interface_Base, OnC
             case R.id.layout_foget:
                 UmengUtil.eventById(Activity_Login.this, R.string.login_key_f);
                 Activity_Forget_Pwd.launche(Activity_Login.this, true);
-                finish();
                 break;
 
             //客服
