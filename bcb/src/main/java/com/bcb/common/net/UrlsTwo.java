@@ -56,7 +56,11 @@ public class UrlsTwo {
     //生利宝收益列表
     public static String UrlSlbSY = host + "/api/v2.0/a65c00f5a8d0";
     //关于汇付
-    public static String UrlAboutHF= hostStatic + "/static/HftxIntroduce.html";//http://ttwap.100cb.cn/
+    public static String UrlAboutHF = hostStatic + "/static/HftxIntroduce.html";//http://ttwap.100cb.cn/
+    //解绑
+    public static String UrlUnBand = "https://c.chinapnr.com/p2puser/";
+    //解绑说明
+    public static String UrlUnBandExplain = "https://www.baidu.com";
 
 
 }

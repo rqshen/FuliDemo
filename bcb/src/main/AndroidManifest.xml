@@ -468,7 +468,8 @@
         </activity>
         <activity android:name=".presentation.view.activity.Activity_Charge_HF">
         </activity>
-        <activity android:name=".presentation.view.activity.Activity_Tips_FaileOrSuccess"
+        <activity
+            android:name=".presentation.view.activity.Activity_Tips_FaileOrSuccess"
             android:launchMode="singleTask">
         </activity>
         <activity android:name=".presentation.view.activity.Activity_WebView">
@@ -488,6 +489,8 @@
         <activity android:name=".presentation.view.activity.A_Slb_List">
         </activity>
         <activity android:name=".presentation.view.activity.A_TZ_Cheques">
+        </activity>
+        <activity android:name=".presentation.view.activity.Activity_Charge_Tips">
         </activity>
     </application>
 

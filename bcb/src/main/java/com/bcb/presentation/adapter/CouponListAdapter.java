@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -72,10 +71,10 @@ public class CouponListAdapter extends BaseAdapter {
 	public View getView(final int pos, View view, ViewGroup arg2) {
 		Holder mHolder;
 		if (null == view) {
-			view = View.inflate(ctx, R.layout.item_coupon, null);
+			view = View.inflate(ctx, R.layout.item_coupon2, null);
 			mHolder = new Holder();
 			mHolder.coupon_icon = (TextView)view.findViewById(R.id.coupon_icon);
-			mHolder.item_bg_layout = (LinearLayout) view.findViewById(R.id.item_bg_layout);
+//			mHolder.item_bg_layout = (LinearLayout) view.findViewById(R.id.item_bg_layout);
 			mHolder.layout_view = (RelativeLayout) view.findViewById(R.id.layout_view);
             mHolder.txt_yuan = (TextView)view.findViewById(R.id.txt_yuan);
 			mHolder.amount = (TextView) view.findViewById(R.id.coupon_amount);
@@ -127,9 +126,9 @@ public class CouponListAdapter extends BaseAdapter {
 		// 选择优惠券时，传递进来的值大于等于0
 		if (investAmount >= 0) {
 			//判断couponType是否为1，如果为1，则表示是新手体验标
-			if (MyConstants.EXPERIENCE == couponType || investAmount >= data.get(pos).getMinAmount()) {
+//			if (MyConstants.EXPERIENCE == couponType || investAmount >= data.get(pos).getMinAmount()) {
 				setupUsedCoupon(mHolder);
-				mHolder.item_bg_layout.setOnClickListener(new OnClickListener() {
+				mHolder.select.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View v) {
 						if (MyConstants.WITHDRAW == data.get(pos).getCouponType()) {//提现券时，点击则跳转至提现界面
@@ -150,16 +149,16 @@ public class CouponListAdapter extends BaseAdapter {
                         }
 					}
 				});
-			}
-			//如果不是体验券且输入金额最小使用金额
-			else{
-				setupUnusedCoupon(mHolder);
-			}
+//			}
+//			//如果不是体验券且输入金额小于最小使用金额
+//			else{
+//				setupUnusedCoupon(mHolder);
+//			}
 		} 
 		// 未使用优惠券
 		else if (investAmount == -1) {
-            mHolder.item_bg_layout.setEnabled(true);
-            mHolder.item_bg_layout.setOnClickListener(new OnClickListener() {
+//            mHolder.item_bg_layout.setEnabled(true);
+            mHolder.select.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
 //					LogUtil.d("1234", "type = " + data.get(pos).getCouponType());
@@ -205,21 +204,15 @@ public class CouponListAdapter extends BaseAdapter {
 		}
 		return view;
 	}
-//    //跳转至新页面
-//    private void gotoNewPage(Class<? extends Activity> object) {
-//        Intent intent = new Intent(ctx, object);
-//        ctx.startActivity(intent);
-////        ((Activity) ctx).finish();
-//    }
 
 	//设置不可用优惠券的样式
 	private void setupUnusedCoupon(Holder holder) {
-		holder.amount.setTextColor(ctx.getResources().getColor(R.color.txt_gray));
-		holder.time.setTextColor(ctx.getResources().getColor(R.color.txt_gray));
-		holder.txt_yuan.setTextColor(ctx.getResources().getColor(R.color.txt_gray));
+//		holder.amount.setTextColor(ctx.getResources().getColor(R.color.txt_gray));
+//		holder.time.setTextColor(ctx.getResources().getColor(R.color.txt_gray));
+//		holder.txt_yuan.setTextColor(ctx.getResources().getColor(R.color.txt_gray));
 		holder.select.setVisibility(View.GONE);
-		holder.item_bg_layout.setEnabled(false);
-		holder.layout_view.setBackgroundResource(R.color.gray);
+		holder.layout_view.setEnabled(false);
+		holder.layout_view.setBackgroundResource(R.drawable.bg_yhq_used);
 	}
 
 	//设置可用优惠券的样式
@@ -228,8 +221,8 @@ public class CouponListAdapter extends BaseAdapter {
 		holder.time.setTextColor(ctx.getResources().getColor(R.color.red));
 		holder.txt_yuan.setTextColor(ctx.getResources().getColor(R.color.red));
 		holder.select.setVisibility(View.VISIBLE);
-		holder.item_bg_layout.setEnabled(true);
-		holder.layout_view.setBackgroundResource(R.color.red);
+		holder.layout_view.setEnabled(true);
+		holder.layout_view.setBackgroundResource(R.drawable.bg_yhq_unused);
 	}
 
 	class Holder {
@@ -239,18 +232,7 @@ public class CouponListAdapter extends BaseAdapter {
 		TextView rule;
         TextView txt_yuan;
 		TextView select;
-		LinearLayout item_bg_layout;
+//		LinearLayout item_bg_layout;
 		RelativeLayout layout_view;
 	}
-
-//	//提示对话框
-//	private void showAlertView(String titleName, String contentMessage, DialogInterface.OnClickListener onClickListener) {
-//		AlertView.Builder ibuilder = new AlertView.Builder(ctx);
-//		ibuilder.setTitle(titleName);
-//		ibuilder.setMessage(contentMessage);
-//		ibuilder.setPositiveButton("立即设置", onClickListener);
-//		ibuilder.setNegativeButton("取消", null);
-//		alertView = ibuilder.create();
-//		alertView.show();
-//	}
 }

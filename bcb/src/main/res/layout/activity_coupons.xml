@@ -53,10 +53,11 @@
 
         <ImageView
             android:id="@+id/coupons_cursor"
-            android:layout_width="60dp"
+            android:layout_width="120dp"
             android:layout_height="2dp"
             android:scaleType="matrix"
             android:src="@color/red" />
+
     </LinearLayout>
 
     <android.support.v4.view.ViewPager

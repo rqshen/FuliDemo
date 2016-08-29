@@ -62,9 +62,13 @@ public class BanksAdapter extends BaseAdapter {
 
         viewHolder.iv_log.setImageResource(new BankLogo().getDrawableBankLogo(data.get(pos).getBankCode()));
         viewHolder.tv_name.setText(data.get(pos).getBankName());
-        viewHolder.tv_once.setText(data.get(pos).getMaxSingle() + "");
-        viewHolder.tv_day.setText(data.get(pos).getMaxDay() + "");
+        viewHolder.tv_once.setText(initMonery(data.get(pos).getMaxSingle() )+ "");
+        viewHolder.tv_day.setText(initMonery(data.get(pos).getMaxDay()) + "");
         return view;
+    }
+    private String initMonery(int monery) {
+        if (monery >= 10000) return monery / 10000 + "万";
+        else return monery + "";
     }
 
     class ViewHolder {

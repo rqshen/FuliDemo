@@ -100,7 +100,7 @@ public class Frag_UnusedCoupon extends Frag_Base {
         recordsBeans = new ArrayList<>();
 		mCouponListAdapter = new CouponListAdapter(ctx, recordsBeans, -1);
         mCouponListView = (MyListView) view.findViewById(R.id.listview_data_layout);
-        mCouponListView.setOnItemClickListener(new onClickViewCoupon());
+//        mCouponListView.setOnItemClickListener(new onClickViewCoupon());
 		mCouponListView.setAdapter(mCouponListAdapter);
 
 

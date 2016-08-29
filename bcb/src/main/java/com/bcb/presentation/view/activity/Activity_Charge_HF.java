@@ -1,6 +1,6 @@
 package com.bcb.presentation.view.activity;
 
-import android.graphics.Color;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.Spannable;
@@ -10,7 +10,6 @@ import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
-import android.util.TypedValue;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -29,16 +28,14 @@ import com.bcb.data.util.BankLogo;
 import com.bcb.data.util.HttpUtils;
 import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MQCustomerManager;
-import com.bcb.data.util.MyTextUtil;
 import com.bcb.data.util.PackageUtil;
 import com.bcb.data.util.TokenUtil;
-import com.bcb.presentation.adapter.BanksAdapter;
-import com.bcb.presentation.view.custom.MyListView;
 import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -46,24 +43,28 @@ import java.util.List;
  */
 public class Activity_Charge_HF extends Activity_Base implements View.OnClickListener, TextWatcher {
     public static float ADD_MONERY = 0;
-    TextView tv_left_monery, tv_next, tv_tip_bottom;
+    TextView tv_left_monery, tv_next, tv_tip_bottom, tv_unband;
     EditText et_add_monery;
-    BanksAdapter adapter;
-    MyListView lv_banks;
-    TextView bank_card_text, tv_xianer, tv_no;
+    ArrayList<BanksBean> list;
+
+    TextView bank_card_text, tv_xianer, tv_no, bank_name_text;
     RelativeLayout layout_bank_card;
-    LinearLayout ll_card, ll_banks_title, ll_tips;
-    ImageView bank_icon;
+    LinearLayout ll_card, ll_tips;
+    ImageView bank_icon, iv_clear;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_charge_hf);
         initTitle();
-        lv_banks = (MyListView) findViewById(R.id.lv_banks);
+
         tv_left_monery = (TextView) findViewById(R.id.tv_left_monery);
         tv_next = (TextView) findViewById(R.id.tv_next);
         tv_tip_bottom = (TextView) findViewById(R.id.tv_tip_bottom);
+        tv_unband = (TextView) findViewById(R.id.tv_unband);
+        iv_clear = (ImageView) findViewById(R.id.iv_clear);
+        iv_clear.setOnClickListener(this);
+        tv_unband.setOnClickListener(this);
 
         initTv_tip_bottom();
         initBankCard();
@@ -79,28 +80,44 @@ public class Activity_Charge_HF extends Activity_Base implements View.OnClickLis
     private void initBankCard() {
         layout_bank_card = (RelativeLayout) findViewById(R.id.layout_bank_card);
         ll_card = (LinearLayout) findViewById(R.id.ll_card);
-        ll_banks_title = (LinearLayout) findViewById(R.id.ll_banks_title);
         ll_tips = (LinearLayout) findViewById(R.id.ll_tips);
         bank_card_text = (TextView) findViewById(R.id.bank_card_text);
+        bank_name_text = (TextView) findViewById(R.id.bank_name_text);
         tv_xianer = (TextView) findViewById(R.id.tv_xianer);
         tv_no = (TextView) findViewById(R.id.tv_no);
         bank_icon = (ImageView) findViewById(R.id.bank_icon);
         //银行卡账号
         if (App.mUserDetailInfo.BankCard != null && App.mUserDetailInfo.BankCard.IsQPCard) {//已绑定，且是快捷支付
-            bank_card_text.setText(MyTextUtil.delBankNum(App.mUserDetailInfo.BankCard.getCardNumber()));
+//            bank_card_text.setText(MyTextUtil.delBankNum(App.mUserDetailInfo.BankCard.getCardNumber()));
+            String cardNumber = App.mUserDetailInfo.BankCard.CardNumber;
+            bank_card_text.setText("尾号" + cardNumber.substring(cardNumber.length() - 4));
             //设置银行卡logo
             BankLogo bankLogo = new BankLogo();
-            bank_icon.setBackgroundResource(bankLogo.getDrawableBankLogo(App.mUserDetailInfo.BankCard.getBankCode()));
+            bank_icon.setBackgroundResource(bankLogo.getDrawableBankLogo(App.mUserDetailInfo.BankCard.BankCode));
+            bank_name_text.setText(App.mUserDetailInfo.BankCard.BankName);
+            setRightTitleValue("解绑说明", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Activity_WebView.launche(Activity_Charge_HF.this, "解绑说明", UrlsTwo.UrlUnBandExplain, "");
+                }
+            });
 
-            ll_banks_title.setVisibility(View.GONE);
-            lv_banks.setVisibility(View.GONE);
             tv_no.setVisibility(View.GONE);
             layout_bank_card.setVisibility(View.VISIBLE);//银行卡号
             ll_card.setVisibility(View.VISIBLE);//该卡本次最多可充值1000元，每日最多2000元
             ll_tips.setVisibility(View.VISIBLE);//福利金融由央行监管的****进行资金托管
         } else {//未绑定
-            ll_banks_title.setVisibility(View.VISIBLE);//支持的银行列表标题
-            lv_banks.setVisibility(View.VISIBLE);//支持的银行列表
+            setRightTitleValue("限额说明", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (list != null && list.size() > 0) {
+                        Intent intent = new Intent(Activity_Charge_HF.this, Activity_Charge_Tips.class);
+                        intent.putParcelableArrayListExtra("data", list);
+                        startActivity(intent);
+                    } else
+                        Toast.makeText(Activity_Charge_HF.this, "查询限额信息失败", Toast.LENGTH_SHORT).show();
+                }
+            });
             tv_no.setVisibility(View.VISIBLE);//快捷支付银行卡将作为本账户唯一提现卡
             layout_bank_card.setVisibility(View.GONE);
             ll_card.setVisibility(View.GONE);
@@ -142,6 +159,12 @@ public class Activity_Charge_HF extends Activity_Base implements View.OnClickLis
             case R.id.back_img:
                 finish();
                 break;
+            case R.id.tv_unband:
+                Activity_WebView.launche(this, "解绑", UrlsTwo.UrlUnBand, "");
+                break;
+            case R.id.iv_clear:
+                et_add_monery.setText("");
+                break;
             case R.id.tv_next:
                 if (TextUtils.isEmpty(et_add_monery.getText().toString().trim())) {
                     Toast.makeText(Activity_Charge_HF.this, "请输入充值金额", Toast.LENGTH_SHORT).show();
@@ -173,10 +196,8 @@ public class Activity_Charge_HF extends Activity_Base implements View.OnClickLis
     private void initTitle() {
         //标题
         setTitleValue("充值");
-        //返回
-        View back_img = findViewById(R.id.back_img);
-        back_img.setVisibility(View.VISIBLE);
-        back_img.setOnClickListener(this);
+        setLeftTitleVisible(true);
+        setLeftTitleListener(this);
     }
 
     /**
@@ -241,23 +262,18 @@ public class Activity_Charge_HF extends Activity_Base implements View.OnClickLis
                 LogUtil.i("bqt", "【Activity_Charge_HF】【BankList】返回数据：" + response.toString());
                 if (PackageUtil.getRequestStatus(response, Activity_Charge_HF.this)) {
                     try {
-                        List<BanksBean> list = App.mGson.fromJson(response.optJSONArray("result").toString(), new TypeToken<List<BanksBean>>() {
+                        list = App.mGson.fromJson(response.optJSONArray("result").toString(), new TypeToken<List<BanksBean>>() {
                         }.getType());
                         if (list != null) {
-                            adapter = new BanksAdapter(Activity_Charge_HF.this, list);
-                            lv_banks.setAdapter(adapter);
-                            TextView view = new TextView(Activity_Charge_HF.this);
-                            view.setTextColor(Color.TRANSPARENT);
-                            view.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 16);
-                            view.setText("不在底部加个东西，会被压缩");
-                            lv_banks.addFooterView(view);
+
                         }
                         if (App.mUserDetailInfo.BankCard != null && App.mUserDetailInfo.BankCard.IsQPCard) {//已绑定，且是快捷支付
                             for (int i = 0; i < list.size(); i++) {
                                 if (App.mUserDetailInfo.BankCard.BankCode.equalsIgnoreCase(list.get(i).getBankCode())) {
                                     ll_card.setVisibility(View.VISIBLE);
                                     maxMonery = list.get(i).getMaxSingle();
-                                    tv_xianer.setText("该卡本次最多可充值" + list.get(i).getMaxSingle() + "元，每日最多" + list.get(i).getMaxDay() + "元");
+//                                    tv_xianer.setText("该卡本次最多可充值" + list.get(i).getMaxSingle() + "元，每日最多" + list.get(i).getMaxDay() + "元");
+                                    tv_xianer.setText("单笔最高" + initMonery(list.get(i).getMaxSingle()) + "，单日限额" + initMonery(list.get(i).getMaxDay()));
                                 }
                             }
                         }
@@ -275,6 +291,12 @@ public class Activity_Charge_HF extends Activity_Base implements View.OnClickLis
         App.getInstance().getRequestQueue().add(jsonRequest);
     }
 
+    private String initMonery(int monery) {
+        if (monery >= 10000) return monery / 10000 + "万";
+        else return monery + "";
+    }
+
+
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -287,7 +309,7 @@ public class Activity_Charge_HF extends Activity_Base implements View.OnClickLis
 
     @Override
     public void afterTextChanged(Editable s) {
-//        String text = et_add_monery.getText().toString().trim();
+        String text = et_add_monery.getText().toString().trim();
 //        try {
 //            if (!TextUtils.isEmpty(text) && Float.valueOf(text) >0) {//= 500
 //                tv_next.setBackgroundResource(R.drawable.button_solid_red);
@@ -298,5 +320,9 @@ public class Activity_Charge_HF extends Activity_Base implements View.OnClickLis
 //            Toast.makeText(Activity_Charge_HF.this, "输入金额格式有误", Toast.LENGTH_SHORT).show();
 //            et_add_monery.setText("");
 //        }
+        if (!TextUtils.isEmpty(text)) {
+            iv_clear.setVisibility(View.VISIBLE);
+        } else
+            iv_clear.setVisibility(View.GONE);
     }
 }
