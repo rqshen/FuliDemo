@@ -7,7 +7,9 @@
 
     android:gravity="center_horizontal"
     android:orientation="vertical">
-    <include layout="@layout/frag_base" />
+
+    <include layout="@layout/frag_base"/>
+
     <RelativeLayout
         android:id="@+id/rl_top"
         android:layout_width="305dp"
@@ -37,7 +39,7 @@
             android:paddingRight="15dp"
             android:paddingTop="3dp"
             android:singleLine="true"
-            android:text="资金存管账户"
+            android:text="资金托管账户"
             android:textColor="#fff"
             android:textSize="12sp"/>
 
@@ -300,6 +302,40 @@
             android:gravity="center"
             android:singleLine="true"
             android:text="修改汇付交易密码"
+            android:textColor="@color/txt_gray"
+            android:textSize="13sp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/forward_default"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignParentBottom="true"
+            android:background="#dbdbdb"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_unband"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        >
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="解绑银行卡"
             android:textColor="@color/txt_gray"
             android:textSize="13sp"/>
 

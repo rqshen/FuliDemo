@@ -5,10 +5,10 @@ public class MyConstants {
     public static final String IDCARDTYPE = "01";
 
     public static final String HOST_DEV = "http://ttgateway.100cb.cn";//测试
-    public static final String HOST_RELEASE = "http://app.fulijr.com";
+    public static final String HOST_RELEASE = "http://app.fulijr.com";//正式
 
-    public static final String HOST_DEV_Static = "http://wap.fulijr.com";//测试
-    public static final String HOST_RELEASE_Static = "http://wap.fulijr.com";
+    public static final String HOST_DEV_Static = "http://ttwap.100cb.cn";//测试
+    public static final String HOST_RELEASE_Static = "http://wap.fulijr.com";//正式
 
     public static boolean TESTMODE = true;// true为测试环境，false为发布环境
 

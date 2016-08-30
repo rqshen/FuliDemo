@@ -108,6 +108,8 @@ public class Activity_Account_Setting extends Activity_Base implements OnClickLi
         switch_gesture.setOnCheckedChangeListener(null);
         //如果手势密码不为空，则设置为打开状态
         switch_gesture.setChecked(!App.saveUserInfo.getGesturePassword().isEmpty());
+        LogUtil.i("bqt", "【Activity_Account_Setting】【onResume】保存的手势密码" + App.saveUserInfo.getGesturePassword());
+
         switch_gesture.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {

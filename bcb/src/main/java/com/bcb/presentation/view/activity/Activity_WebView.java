@@ -1,5 +1,6 @@
 package com.bcb.presentation.view.activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.PixelFormat;
@@ -33,224 +34,235 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
 public class Activity_WebView extends Activity_Base {
-    private String mIntentUrl;
-    private String title;
-    private String postData;
-    private Context context;
-    private ProgressBar mPageLoadingProgressBar;
-    private X5WebView mWebView;
-    private ViewGroup mViewParent;
-    /*加密的key*/
-    private static final String KEY = "9e469d566f5d41j1a83b9rf4";
+	private String mIntentUrl;
+	private String title;
+	private String postData;
+	private Context context;
+	private ProgressBar mPageLoadingProgressBar;
+	private X5WebView mWebView;
+	private ViewGroup mViewParent;
+	/*加密的key*/
+	private static final String KEY = "9e469d566f5d41j1a83b9rf4";
 
-    public static void launche(Context ctx, String tittle, String url, String postData) {
-        Intent intent = new Intent(ctx, Activity_WebView.class);
-        intent.putExtra("title", tittle);
-        intent.putExtra("url", url);
-        intent.putExtra("postData", postData);
-        ctx.startActivity(intent);
-    }
+	public static void launche(Context ctx, String tittle, String url, String postData) {
+		Intent intent = new Intent(ctx, Activity_WebView.class);
+		intent.putExtra("title", tittle);
+		intent.putExtra("url", url);
+		intent.putExtra("postData", postData);
+		ctx.startActivity(intent);
+	}
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        context = this; /*管理Activity栈，用于忘记密码的时候，跳转至登陆界面之前销毁栈中所有的Activity*/
-        MyActivityManager myActivityManager = MyActivityManager.getInstance();
-        myActivityManager.pushOneActivity(Activity_WebView.this);
-        getWindow().setFormat(PixelFormat.TRANSLUCENT);
-        Intent intent = getIntent();
-        if (intent != null) {
-            mIntentUrl = getUrlStrWithDES();
-            title = intent.getStringExtra("title");
-            postData = intent.getStringExtra("postData");
-        }
-        try {/*硬件加速*/
-            if (Build.VERSION.SDK_INT >= 11) getWindow().setFlags(WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED, WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        setBaseContentView(R.layout.activity_web_view);
-        setLeftTitleVisible(true);
-        setTitleVisiable(View.VISIBLE);
-        setTitleValue(title);
-        mViewParent = (ViewGroup) findViewById(R.id.layout_webview);
-        QbSdk.preInit(this);
-        X5WebView.setSmallWebViewEnabled(true);
-        init();
-        initProgressBar();
+	public static void launcheForResult(Activity ctx, String tittle, String url, String postData,int requestCode) {
+		Intent intent = new Intent(ctx, Activity_WebView.class);
+		intent.putExtra("title", tittle);
+		intent.putExtra("url", url);
+		intent.putExtra("postData", postData);
+		ctx.startActivityForResult(intent, requestCode);
+	}
 
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		context = this; /*管理Activity栈，用于忘记密码的时候，跳转至登陆界面之前销毁栈中所有的Activity*/
+		MyActivityManager myActivityManager = MyActivityManager.getInstance();
+		myActivityManager.pushOneActivity(Activity_WebView.this);
+		getWindow().setFormat(PixelFormat.TRANSLUCENT);
+		Intent intent = getIntent();
+		if (intent != null) {
+			mIntentUrl = getUrlStrWithDES();
+			title = intent.getStringExtra("title");
+			postData = intent.getStringExtra("postData");
+		}
+		try {/*硬件加速*/
+			if (Build.VERSION.SDK_INT >= 11)
+				getWindow().setFlags(WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED, WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		setBaseContentView(R.layout.activity_web_view);
+		setLeftTitleVisible(true);
+		setTitleVisiable(View.VISIBLE);
+		setTitleValue(title);
+		mViewParent = (ViewGroup) findViewById(R.id.layout_webview);
+		QbSdk.preInit(this);
+		X5WebView.setSmallWebViewEnabled(true);
+		init();
+		initProgressBar();
 
-//        findViewById(R.id.loadmore_view).setVisibility(View.GONE);//加载更多
-//        RelativeLayout head_view = ((RelativeLayout) findViewById(R.id.head_view));
-//        head_view.setBackgroundColor(0xff000000);
-//
-//        findViewById(R.id.pull_icon).setVisibility(View.GONE);
-//        findViewById(R.id.refreshing_icon).setVisibility(View.GONE);
-//        findViewById(R.id.state_iv).setVisibility(View.GONE);
-//
-//        TextView state_tv = (TextView) findViewById(R.id.state_tv);
-//        state_tv.setText("网页由 www.chinapnt.com 提供\n福利金融，名企员工都在上的理财平台");
-//
-//        PullToRefreshLayout refreshLayout = (PullToRefreshLayout) findViewById(R.id.refresh_view);
-//        refreshLayout.setRefreshResultView(false);
-    }
+		//        findViewById(R.id.loadmore_view).setVisibility(View.GONE);//加载更多
+		//        RelativeLayout head_view = ((RelativeLayout) findViewById(R.id.head_view));
+		//        head_view.setBackgroundColor(0xff000000);
+		//
+		//        findViewById(R.id.pull_icon).setVisibility(View.GONE);
+		//        findViewById(R.id.refreshing_icon).setVisibility(View.GONE);
+		//        findViewById(R.id.state_iv).setVisibility(View.GONE);
+		//
+		//        TextView state_tv = (TextView) findViewById(R.id.state_tv);
+		//        state_tv.setText("网页由 www.chinapnt.com 提供\n福利金融，名企员工都在上的理财平台");
+		//
+		//        PullToRefreshLayout refreshLayout = (PullToRefreshLayout) findViewById(R.id.refresh_view);
+		//        refreshLayout.setRefreshResultView(false);
+	}
 
-    private void initProgressBar() {
-        mPageLoadingProgressBar = (ProgressBar) findViewById(R.id.progressBar);
-        mPageLoadingProgressBar.setMax(100);
-        mPageLoadingProgressBar.setProgressDrawable(this.getResources().getDrawable(R.drawable.color_progressbar));
-    }
+	private void initProgressBar() {
+		mPageLoadingProgressBar = (ProgressBar) findViewById(R.id.progressBar);
+		mPageLoadingProgressBar.setMax(100);
+		mPageLoadingProgressBar.setProgressDrawable(this.getResources().getDrawable(R.drawable.color_progressbar));
+	}
 
-    private void init() {
-        mWebView = new X5WebView(this);
-        mViewParent.addView(mWebView, new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT));
-        mWebView.setWebViewClient(new WebViewClient() {
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                LogUtil.i("bqt", "截获的url地址：" + url);
-                String message = null;
-                try {
-                    message = URLDecoder.decode(url.substring(url.lastIndexOf('|') + 1), "UTF-8");
-                    LogUtil.i("bqt", "最后一部分消息内容" + message);
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
-                //【开户】
-                if (url.contains("fulihui://open_result")) {
-                    LogUtil.i("bqt", "开户" + url);
-                    finish();
-                    if (url.contains("000")) {//成功
-                        App.getInstance().mUserDetailInfo.HasOpenCustody = true;
-                        Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.OPEN_HF_SUCCESS, message);
-                    } else Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.OPEN_HF_FAILED, message);
-                    return true;
-                }
-                //【充值】
-                else if (url.contains("fulihui://recharge_result")) {
-                    LogUtil.i("bqt", "充值" + url);
-                    finish();
-                    if (url.contains("000")) Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.CHARGE__HF_SUCCESS, message);
-                    else Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.CHARGE_HF_FAILED, message);
-                    return true;
-                }
-                //【提现】
-                else if (url.contains("fulihui://withdraw_result")) {
-                    LogUtil.i("bqt", "提现" + url);
-                    finish();
-                    if (url.contains("000")) Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.TX_HF_SUCCESS, message);
-                    else Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.TX_HF_FAILED, message);
-                    return true;
-                    //买标、申购
-                } else if (url.contains("fulihui://invest_result")) {
-                    LogUtil.i("bqt", "买标" + url);
-                    finish();
-                    if (url.contains("000")) Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.BUY_HF_SUCCESS, message);
-                    else Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.BUY_HF_FAILED, message);
-                    return true;
-                    //生利宝
-                } else if (url.contains("fulihui://fsstrans_result")) {
-                    LogUtil.i("bqt", "生利宝" + url);
-                    finish();
-                    //重新生成message
-                    try {
-                        message = URLDecoder.decode(url.substring(url.indexOf('|') + 1), "UTF-8");
-                    } catch (UnsupportedEncodingException e) {
-                        e.printStackTrace();
-                    }
-                    LogUtil.i("bqt", "【Activity_WebView】【shouldOverrideUrlLoading】" + message);
-                    if (url.contains("000")) Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.SLB_SUCCESS, message);
-                    else Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.SLB_FAILED, message);
-                    return true;
-                } else {
-                    return super.shouldOverrideUrlLoading(view, url);
-                }
-            }
+	private void init() {
+		mWebView = new X5WebView(this);
+		mViewParent.addView(mWebView, new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams
+                .MATCH_PARENT));
+		mWebView.setWebViewClient(new WebViewClient() {
+			@Override
+			public boolean shouldOverrideUrlLoading(WebView view, String url) {
+				LogUtil.i("bqt", "截获的url地址：" + url);
+				String message = null;
+				try {
+					message = URLDecoder.decode(url.substring(url.lastIndexOf('|') + 1), "UTF-8");
+					LogUtil.i("bqt", "最后一部分消息内容" + message);
+				} catch (UnsupportedEncodingException e) {
+					e.printStackTrace();
+				}
+				//【开户】
+				if (url.contains("fulihui://open_result")) {
+					LogUtil.i("bqt", "开户" + url);
+					finish();
+					if (url.contains("000")) {//成功
+						App.getInstance().mUserDetailInfo.HasOpenCustody = true;
+						Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.OPEN_HF_SUCCESS, message);
+					} else Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.OPEN_HF_FAILED, message);
+					return true;
+				}
+				//【充值】
+				else if (url.contains("fulihui://recharge_result")) {
+					LogUtil.i("bqt", "充值" + url);
+					finish();
+					if (url.contains("000"))
+						Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.CHARGE__HF_SUCCESS, message);
+					else Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.CHARGE_HF_FAILED, message);
+					return true;
+				}
+				//【提现】
+				else if (url.contains("fulihui://withdraw_result")) {
+					LogUtil.i("bqt", "提现" + url);
+					finish();
+					if (url.contains("000"))
+						Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.TX_HF_SUCCESS, message);
+					else Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.TX_HF_FAILED, message);
+					return true;
+					//买标、申购
+				} else if (url.contains("fulihui://invest_result")) {
+					LogUtil.i("bqt", "买标" + url);
+					finish();
+					if (url.contains("000"))
+						Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.BUY_HF_SUCCESS, message);
+					else Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.BUY_HF_FAILED, message);
+					return true;
+					//生利宝
+				} else if (url.contains("fulihui://fsstrans_result")) {
+					LogUtil.i("bqt", "生利宝" + url);
+					finish();
+					//重新生成message
+					try {
+						message = URLDecoder.decode(url.substring(url.indexOf('|') + 1), "UTF-8");
+					} catch (UnsupportedEncodingException e) {
+						e.printStackTrace();
+					}
+					LogUtil.i("bqt", "【Activity_WebView】【shouldOverrideUrlLoading】" + message);
+					if (url.contains("000"))
+						Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.SLB_SUCCESS, message);
+					else Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.SLB_FAILED, message);
+					return true;
+				} else {
+					return super.shouldOverrideUrlLoading(view, url);
+				}
+			}
 
-            @Override
-            public WebResourceResponse shouldInterceptRequest(WebView view,
-                                                              WebResourceRequest request) {
-                return super.shouldInterceptRequest(view, request);
-            }
+			@Override
+			public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
+				return super.shouldInterceptRequest(view, request);
+			}
 
-            @Override
-            public void onPageFinished(WebView view, String url) {
-                super.onPageFinished(view, url);
-            }
-        });
+			@Override
+			public void onPageFinished(WebView view, String url) {
+				super.onPageFinished(view, url);
+			}
+		});
 
-        mWebView.setWebChromeClient(new WebChromeClient() {
-            @Override
-            public void onReceivedTitle(WebView view, String title) {
-            }
+		mWebView.setWebChromeClient(new WebChromeClient() {
+			@Override
+			public void onReceivedTitle(WebView view, String title) {
+			}
 
-            @Override
-            public void onProgressChanged(WebView view, int newProgress) {
-                mPageLoadingProgressBar.setProgress(newProgress);
-                if (mPageLoadingProgressBar != null && newProgress != 100) {
-                    mPageLoadingProgressBar.setVisibility(View.VISIBLE);
-                } else if (mPageLoadingProgressBar != null) {
-                    mPageLoadingProgressBar.setVisibility(View.GONE);
-                }
-            }
-        });
+			@Override
+			public void onProgressChanged(WebView view, int newProgress) {
+				mPageLoadingProgressBar.setProgress(newProgress);
+				if (mPageLoadingProgressBar != null && newProgress != 100) {
+					mPageLoadingProgressBar.setVisibility(View.VISIBLE);
+				} else if (mPageLoadingProgressBar != null) {
+					mPageLoadingProgressBar.setVisibility(View.GONE);
+				}
+			}
+		});
 
-        WebSettings webSetting = mWebView.getSettings();
-        webSetting.setAllowFileAccess(true);
-        webSetting.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
-        webSetting.setSupportZoom(true);
-        webSetting.setBuiltInZoomControls(true);
-        webSetting.setUseWideViewPort(true);
-        webSetting.setSupportMultipleWindows(false);
-        webSetting.setLoadWithOverviewMode(true);
-        webSetting.setAppCacheEnabled(true);
-        webSetting.setDatabaseEnabled(true);
-        webSetting.setDomStorageEnabled(true);
-        webSetting.setJavaScriptEnabled(true);
-        webSetting.setGeolocationEnabled(true);
-        webSetting.setAppCacheMaxSize(Long.MAX_VALUE);
-        webSetting.setAppCachePath(this.getDir("appcache", 0).getPath());
-        webSetting.setDatabasePath(this.getDir("databases", 0).getPath());
-        webSetting.setGeolocationDatabasePath(this.getDir("geolocation", 0).getPath());
-        webSetting.setPluginState(WebSettings.PluginState.ON_DEMAND);
-        webSetting.setRenderPriority(WebSettings.RenderPriority.HIGH);
-        webSetting.setCacheMode(WebSettings.LOAD_NO_CACHE);
+		WebSettings webSetting = mWebView.getSettings();
+		webSetting.setAllowFileAccess(true);
+		webSetting.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
+		webSetting.setSupportZoom(true);
+		webSetting.setBuiltInZoomControls(true);
+		webSetting.setUseWideViewPort(true);
+		webSetting.setSupportMultipleWindows(false);
+		webSetting.setLoadWithOverviewMode(true);
+		webSetting.setAppCacheEnabled(true);
+		webSetting.setDatabaseEnabled(true);
+		webSetting.setDomStorageEnabled(true);
+		webSetting.setJavaScriptEnabled(true);
+		webSetting.setGeolocationEnabled(true);
+		webSetting.setAppCacheMaxSize(Long.MAX_VALUE);
+		webSetting.setAppCachePath(this.getDir("appcache", 0).getPath());
+		webSetting.setDatabasePath(this.getDir("databases", 0).getPath());
+		webSetting.setGeolocationDatabasePath(this.getDir("geolocation", 0).getPath());
+		webSetting.setPluginState(WebSettings.PluginState.ON_DEMAND);
+		webSetting.setRenderPriority(WebSettings.RenderPriority.HIGH);
+		webSetting.setCacheMode(WebSettings.LOAD_NO_CACHE);
 
-        mWebView.postUrl(mIntentUrl, EncodingUtils.getBytes(postData, "base64"));
+		mWebView.postUrl(mIntentUrl, EncodingUtils.getBytes(postData, "base64"));
 
-        CookieSyncManager.createInstance(this);
-        CookieSyncManager.getInstance().sync();
-    }
+		CookieSyncManager.createInstance(this);
+		CookieSyncManager.getInstance().sync();
+	}
 
+	//加密后的链接
+	private String getUrlStrWithDES() {
+		String url = getIntent().getStringExtra("url");
+		byte[] data = null;
+		byte[] encodeByte_ECB;
+		try {
+			data = App.saveUserInfo.getLocalPhone().getBytes("UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		String param = "";
+		if (data == null) {
+			return url;
+		}
+		try {
+			encodeByte_ECB = DESUtil.des3EncodeECB(KEY.getBytes(), data);
+			param = Base64.encodeToString(encodeByte_ECB, Base64.DEFAULT);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return url + "?accessToken=" + param;
 
-    //加密后的链接
-    private String getUrlStrWithDES() {
-        String url = getIntent().getStringExtra("url");
-        byte[] data = null;
-        byte[] encodeByte_ECB;
-        try {
-            data = App.saveUserInfo.getLocalPhone().getBytes("UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-        String param = "";
-        if (data == null) {
-            return url;
-        }
-        try {
-            encodeByte_ECB = DESUtil.des3EncodeECB(KEY.getBytes(), data);
-            param = Base64.encodeToString(encodeByte_ECB, Base64.DEFAULT);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return url + "?accessToken=" + param;
+	}
 
-    }
-
-    @Override
-    public void finish() {
-//        ViewGroup view = (ViewGroup) getWindow().getDecorView();
-//        view.removeAllViews();
-        mWebView.removeAllViews();
-        super.finish();
-    }
+	@Override
+	public void finish() {
+		//        ViewGroup view = (ViewGroup) getWindow().getDecorView();
+		//        view.removeAllViews();
+		mWebView.removeAllViews();
+		super.finish();
+	}
 }

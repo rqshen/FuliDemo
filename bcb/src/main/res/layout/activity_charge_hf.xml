@@ -153,7 +153,7 @@
                 <TextView
                     android:id="@+id/tv_je"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="45dp"
                     android:gravity="center_vertical"
                     android:paddingLeft="10dp"
                     android:singleLine="true"
@@ -186,7 +186,7 @@
                     android:digits="0123456789"
                     android:focusable="true"
                     android:gravity="center_vertical"
-                    android:hint="请输入充值金额"
+                    android:hint="最低充值100元"
                     android:inputType="numberDecimal"
                     android:maxLength="9"
                     android:paddingLeft="20dp"
@@ -201,8 +201,8 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:padding="10dp"
-                    android:visibility="gone"
-                    android:src="@drawable/clear_del"/>
+                    android:src="@drawable/clear_del"
+                    android:visibility="gone"/>
 
             </RelativeLayout>
 
@@ -227,10 +227,10 @@
                 android:gravity="center"
                 android:text="快捷支付银行卡将作为本账户唯一提现卡"
                 android:textColor="#39f"
-                android:textSize="12sp"/>
+                android:textSize="12sp"
+                android:visibility="gone"/>
 
             <include layout="@layout/com_funds_trusteeship_tip"/>
-
 
 
             <TextView
@@ -242,7 +242,8 @@
                 android:layout_marginTop="30dp"
                 android:text="@string/charge_tips"
                 android:textColor="#333"
-                android:textSize="12sp"/>
+                android:textSize="12sp"
+                android:visibility="gone"/>
         </LinearLayout>
 
     </ScrollView>

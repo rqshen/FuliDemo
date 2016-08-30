@@ -773,16 +773,18 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
     private void altDialog2() {
         AlertView.Builder ibuilder = new AlertView.Builder(this);
         ibuilder.setTitle("温馨提示");
-        ibuilder.setMessage("需要投资" + CouponMinAmount + "才能使用此优惠券");
+        ibuilder.setMessage("需要投资" + String.format("%.2f", Float.valueOf(CouponMinAmount)) + "才能使用此优惠券");
         ibuilder.setPositiveButton("继续借款", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-//                CouponId="";
+                alertView.dismiss();
+                CouponId = null;
                 requestBuy();
             }
         });
         ibuilder.setNegativeButton("修改金额", null);
         alertView = ibuilder.create();
+        alertView.setCanceledOnTouchOutside(false);
         alertView.show();
     }
 
@@ -1305,8 +1307,8 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 
     @Override
     public void afterTextChanged(Editable s) {
-        CouponId = null;
-        coupon_description.setText(number + " 张，" + " 点击选择");
+//        CouponId = null;
+//        coupon_description.setText(number + " 张，" + " 点击选择");
         String text = invest_money.getText().toString().replace(",", "").trim();
         float monery = 0;
         if (!TextUtils.isEmpty(text)) {

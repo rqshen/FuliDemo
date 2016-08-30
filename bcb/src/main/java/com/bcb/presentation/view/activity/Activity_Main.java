@@ -19,6 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bcb.R;
+import com.bcb.common.app.App;
 import com.bcb.common.event.BroadcastEvent;
 import com.bcb.data.util.UmengUtil;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
@@ -64,6 +65,9 @@ public class Activity_Main extends Activity_Base_Fragment {
         init();
         UmengUtil.update(Activity_Main.this);
         EventBus.getDefault().register(this);
+        if (!App.saveUserInfo.getGesturePassword().isEmpty()) {
+            Activity_Gesture_Lock.launche(Activity_Main.this, false, true);
+        }
 //        Intent intent = getIntent();
 //        if (intent != null) {
 //            int jumpTo = getIntent().getIntExtra("jumpTo", 0);

@@ -44,7 +44,7 @@
             android:gravity="center"
             android:singleLine="true"
 
-            android:text="单笔限额（元）"
+            android:text="单笔限额(元)"
             android:textColor="#333"
             android:textSize="12sp"/>
 
@@ -60,20 +60,21 @@
             android:gravity="center"
             android:singleLine="true"
 
-            android:text="单日限额（元）"
+            android:text="单日限额(元)"
             android:textColor="#333"
             android:textSize="12sp"/>
     </LinearLayout>
 
-    <com.bcb.presentation.view.custom.MyListView
+    <ListView
+        android:layout_below="@+id/ll_banks_title"
         android:id="@+id/lv_banks"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:descendantFocusability="afterDescendants"
         android:divider="@null"
-        android:dividerHeight="0.1dp"
+        android:dividerHeight="0.5dp"
         android:listSelector="@android:color/transparent"
         android:scrollbars="none"/>
 

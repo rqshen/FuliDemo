@@ -60,7 +60,7 @@ public class UrlsTwo {
     //解绑
     public static String UrlUnBand = "https://c.chinapnr.com/p2puser/";
     //解绑说明
-    public static String UrlUnBandExplain = "https://www.baidu.com";
+    public static String UrlUnBandExplain = hostStatic +"/static/UnbindExplain.html";
 
 
 }

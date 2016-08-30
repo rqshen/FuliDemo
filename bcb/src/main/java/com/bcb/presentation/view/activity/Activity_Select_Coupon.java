@@ -1,7 +1,6 @@
 package com.bcb.presentation.view.activity;
 
 import android.app.Dialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
@@ -10,8 +9,6 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -29,7 +26,6 @@ import com.bcb.common.net.UrlsOne;
 import com.bcb.data.bean.CouponListBean;
 import com.bcb.data.bean.CouponRecordsBean;
 import com.bcb.data.util.HttpUtils;
-import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.MyListView;
 import com.bcb.data.util.PackageUtil;
@@ -108,7 +104,7 @@ public class Activity_Select_Coupon extends Activity_Base {
 		recordsBeans = new ArrayList<>();
 		mCouponListAdapter = new CouponListAdapter(Activity_Select_Coupon.this, recordsBeans, investAmount, CouponType);
 		mCouponListView = (MyListView) findViewById(R.id.listview_data_layout);
-		mCouponListView.setOnItemClickListener(new onClickViewCoupon());
+//		mCouponListView.setOnItemClickListener(new onClickViewCoupon());
 		mCouponListView.setAdapter(mCouponListAdapter);
 
 		//刷新
@@ -338,51 +334,51 @@ public class Activity_Select_Coupon extends Activity_Base {
 		convertDialog.show();
 	}
 
-	//选择优惠券，功能其实已经在CouponListAdapter适配器中已经完成了相应的功能
-	class onClickViewCoupon implements OnItemClickListener {
-		
-		@Override
-		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            LogUtil.d(Activity_Select_Coupon.this, "加载数据");
-			CouponRecordsBean coupon = (CouponRecordsBean) mCouponListView.getItemAtPosition(position);
-            //如果是体验券(CouponType = 1)，则不用判断是否大于最小金额
-			Intent intent = new Intent();
-			if (investAmount >= coupon.getMinAmount() || CouponType == 1) {
-				intent.putExtra("CouponId", coupon.getCouponId());
-				intent.putExtra("CouponAmount", coupon.getAmount()+"");
-				intent.putExtra("CouponMinAmount", coupon.getMinAmount()+"");
-                //如果是体验券CouponType为1的时候，则返回体验券的描述
-                if (CouponType == 1) {
-                    intent.putExtra("Amount", coupon.getAmount());
-                    intent.putExtra("ConditionDescn", coupon.getConditionDescn() + "");
-                }
-                //如果是利息折扣券，CouponType = 16， 则也需要返回券的描述
-                else if (CouponType == 16) {
-                    //利息抵扣券的金额
-                    intent.putExtra("InterestAmount", coupon.getAmount());
-                    //最小借款金额
-                    intent.putExtra("InterestMinAmount", coupon.getMinAmount());
-                    //借款金额描述
-                    intent.putExtra("InterestDescn", coupon.getConditionDescn() + "");
-                    //返回优惠券张数
-                    intent.putExtra("TotalCount", recordsBeans == null ? 0 : recordsBeans.size());
-                    LogUtil.d("已经返回券的ID", "已经返回");
-                }
-				intent.putExtra("isNeedRefush",isNeedRefush);
-				setResult(1, intent);
-			} else { //不是体验券，并且输入金额小于最小金额的时候，则提示
-                if (CouponType != 16) {
-                    ToastUtil.alert(Activity_Select_Coupon.this, "输入金额小于投标最小金额，无法使用优惠券");
-                }
-                //利息抵扣券，返回的时候，很可能已经兑换过优惠券了，需要返回一个优惠券张数，这样不管选择与否，回去的优惠券张数都是最新的。
-                else {
-                    ToastUtil.alert(Activity_Select_Coupon.this, "借款金额小于最小借款金额，无法使用利息抵扣券");
-                }
-				intent.putExtra("isNeedRefush",isNeedRefush);
-				setResult(2, intent);
-			}
-            finish();
-		}
-    }
+//	//选择优惠券，功能其实已经在CouponListAdapter适配器中已经完成了相应的功能
+//	class onClickViewCoupon implements OnItemClickListener {
+//
+//		@Override
+//		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//            LogUtil.d(Activity_Select_Coupon.this, "加载数据");
+//			CouponRecordsBean coupon = (CouponRecordsBean) mCouponListView.getItemAtPosition(position);
+//            //如果是体验券(CouponType = 1)，则不用判断是否大于最小金额
+//			Intent intent = new Intent();
+//			if (investAmount >= coupon.getMinAmount() || CouponType == 1) {
+//				intent.putExtra("CouponId", coupon.getCouponId());
+//				intent.putExtra("CouponAmount", coupon.getAmount()+"");
+//				intent.putExtra("CouponMinAmount", coupon.getMinAmount()+"");
+//                //如果是体验券CouponType为1的时候，则返回体验券的描述
+//                if (CouponType == 1) {
+//                    intent.putExtra("Amount", coupon.getAmount());
+//                    intent.putExtra("ConditionDescn", coupon.getConditionDescn() + "");
+//                }
+//                //如果是利息折扣券，CouponType = 16， 则也需要返回券的描述
+//                else if (CouponType == 16) {
+//                    //利息抵扣券的金额
+//                    intent.putExtra("InterestAmount", coupon.getAmount());
+//                    //最小借款金额
+//                    intent.putExtra("InterestMinAmount", coupon.getMinAmount());
+//                    //借款金额描述
+//                    intent.putExtra("InterestDescn", coupon.getConditionDescn() + "");
+//                    //返回优惠券张数
+//                    intent.putExtra("TotalCount", recordsBeans == null ? 0 : recordsBeans.size());
+//                    LogUtil.d("已经返回券的ID", "已经返回");
+//                }
+//				intent.putExtra("isNeedRefush",isNeedRefush);
+//				setResult(1, intent);
+//			} else { //不是体验券，并且输入金额小于最小金额的时候，则提示
+//                if (CouponType != 16) {
+//                    ToastUtil.alert(Activity_Select_Coupon.this, "输入金额小于投标最小金额，无法使用优惠券");
+//                }
+//                //利息抵扣券，返回的时候，很可能已经兑换过优惠券了，需要返回一个优惠券张数，这样不管选择与否，回去的优惠券张数都是最新的。
+//                else {
+//                    ToastUtil.alert(Activity_Select_Coupon.this, "借款金额小于最小借款金额，无法使用利息抵扣券");
+//                }
+//				intent.putExtra("isNeedRefush",isNeedRefush);
+//				setResult(2, intent);
+//			}
+//            finish();
+//		}
+//    }
 
 }

@@ -5,13 +5,11 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -131,7 +129,7 @@ public class Activity_Base_Fragment extends FragmentActivity {
         if (isAppOnForeground() && isLongerThanOneMinute()) {
             //存在手势密码
             if (hasGesturePassword()) {
-                Activity_Gesture_Lock.launche(Activity_Base_Fragment.this, false);
+                Activity_Gesture_Lock.launche(Activity_Base_Fragment.this, false, true);
             }
         }
     }
@@ -238,7 +236,7 @@ public class Activity_Base_Fragment extends FragmentActivity {
             ibuilder.setPositiveButton("立即设置", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    Activity_Gesture_Lock.launche(Activity_Base_Fragment.this, true);
+                    Activity_Gesture_Lock.launche(Activity_Base_Fragment.this, true, true);
                     alertView.dismiss();
                     alertView = null;
                 }
