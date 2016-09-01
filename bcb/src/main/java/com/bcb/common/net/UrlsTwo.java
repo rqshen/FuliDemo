@@ -61,6 +61,8 @@ public class UrlsTwo {
     public static String UrlUnBand = "https://c.chinapnr.com/p2puser/";
     //解绑说明
     public static String UrlUnBandExplain = hostStatic +"/static/UnbindExplain.html";
+    //接入证明
+    public static String UrlZM = hostStatic +"/static/hftgzm.html";
 
 
 }

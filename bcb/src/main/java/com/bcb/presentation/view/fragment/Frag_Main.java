@@ -77,7 +77,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.reflect.Field;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -977,10 +979,17 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPa
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        LogUtil.i("bqt", "【fragment时间】"+new SimpleDateFormat("mm-ss-S").format(new Date()));
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         showItemVisible();
         if (App.saveUserInfo.getAccess_Token() == null && button_floating != null) button_floating.setVisibility(View.VISIBLE);
+
     }
 
 

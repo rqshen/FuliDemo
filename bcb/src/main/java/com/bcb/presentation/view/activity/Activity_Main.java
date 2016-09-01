@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.bcb.R;
 import com.bcb.common.app.App;
 import com.bcb.common.event.BroadcastEvent;
+import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.UmengUtil;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
 import com.bcb.presentation.view.custom.CustomViewPager;
@@ -28,7 +29,9 @@ import com.bcb.presentation.view.fragment.Frag_Main;
 import com.bcb.presentation.view.fragment.Frag_Product;
 import com.bcb.presentation.view.fragment.Frag_User;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
@@ -106,7 +109,6 @@ public class Activity_Main extends Activity_Base_Fragment {
         content.setOffscreenPageLimit(3);
         content.addOnPageChangeListener(frag_main);
         addFirstFragment();
-
     }
 
     public void onClick(View view) {
@@ -181,6 +183,12 @@ public class Activity_Main extends Activity_Base_Fragment {
                 setFragProduct();
             }
         }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        LogUtil.i("bqt", "【onStart时间】"+new SimpleDateFormat("mm-ss-S").format(new Date()));
     }
 
     @Override
@@ -262,6 +270,9 @@ public class Activity_Main extends Activity_Base_Fragment {
             public void onClick(DialogInterface dialog, int which) {
                 alertView.dismiss();
                 alertView = null;
+                if (App.saveUserInfo.getAccess_Token() == null) {
+                    App.saveUserInfo.setGesturePassword("");
+                }
                 finish();
             }
         });

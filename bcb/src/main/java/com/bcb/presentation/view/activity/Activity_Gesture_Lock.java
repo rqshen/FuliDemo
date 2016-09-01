@@ -19,6 +19,9 @@ import com.bcb.presentation.view.custom.AlertView.AlertView;
 import com.bcb.presentation.view.custom.GesturePatternLock.View.ContentView;
 import com.bcb.presentation.view.custom.GesturePatternLock.View.Drawl;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by cain on 16/3/2.
  */
@@ -26,6 +29,7 @@ public class Activity_Gesture_Lock extends Activity_Base {
 	private FrameLayout body_layout;
 	private ContentView content;
 	private boolean isSettingPasswd = true;
+	private boolean isSettingPasswd2 = false;
 	private boolean isYZ = false;
 	private TextView phone_description; //设置时的提示和输入手势密码时的手机号码
 	private LinearLayout forgetpwd; //忘记密码
@@ -47,6 +51,7 @@ public class Activity_Gesture_Lock extends Activity_Base {
 		setContentView(R.layout.activity_gesture_lock);
 		if (getIntent() != null) {
 			isSettingPasswd = getIntent().getBooleanExtra("isSettingPasswd", true);
+			isSettingPasswd2=isSettingPasswd;
 			isYZ = getIntent().getBooleanExtra("isYZ", false);
 		}
 		//清除上一次进入后台的时间
@@ -82,6 +87,7 @@ public class Activity_Gesture_Lock extends Activity_Base {
 		body_layout = (FrameLayout) findViewById(R.id.body_layout);
 
 		// 初始化一个显示各个点的viewGroup
+		LogUtil.i("bqt", "【是否是设置密码】" + isSettingPasswd);
 		if (isSettingPasswd) {//设置手势密码
 			//设置手势密码时的构造器
 			content = new ContentView(this, new Drawl.GestureCallBack() {
@@ -92,6 +98,7 @@ public class Activity_Gesture_Lock extends Activity_Base {
 						isSettingPasswd = false;
 						App.saveUserInfo.setGesturePassword(password);
 					}
+
 					Intent intent = new Intent();
 					intent.putExtra("SettingGestureSuccess", true);
 					setResult(1, intent);
@@ -128,7 +135,7 @@ public class Activity_Gesture_Lock extends Activity_Base {
 					if (!isYZ) {
 						App.saveUserInfo.setGesturePassword("");
 						LogUtil.i("bqt", "【Activity_Gesture_Lock】【onCreate】清除手势密码");
-					} else LogUtil.i("bqt", "【Activity_Gesture_Lock】【onCreate】验证手势密码");
+					} else LogUtil.i("bqt", "【验证手势密码】" + "，时间" + new SimpleDateFormat("mm-ss-S").format(new Date()));
 					finish();
 				}
 
@@ -156,22 +163,27 @@ public class Activity_Gesture_Lock extends Activity_Base {
 
 	@Override
 	public void onBackPressed() {
-		finish();
+		Intent intent = getIntent();
+		LogUtil.i("bqt", "【设置手势密码】" + isSettingPasswd2);
+		if (intent != null && intent.getBooleanExtra("isCanBack", false) || isSettingPasswd2) {
+			finish();
+		} else gotoLoginPageView();
 	}
 
 	//退出登录
 	private void gotoLoginPageView() {
 		AlertView.Builder ibuilder = new AlertView.Builder(this);
 		ibuilder.setTitle("提示");
+		ibuilder.setMessage("退出账号可以解除密码保护");//，退出和取消按钮，点击退出退出当前账号，点击取消则弹出框消失，留在手势密码界面
 		ibuilder.setNegativeButton("取消", null);
-		ibuilder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+		ibuilder.setPositiveButton("退出", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialogInterface, int i) {
 				alertView.dismiss();
 				alertView = null;
 				MyActivityManager myActivityManager = MyActivityManager.getInstance();
 				myActivityManager.finishAllActivity();
-			    /* 清空当前用户的信息 */
+				/* 清空当前用户的信息 */
 				App.saveUserInfo.clear();
 				App.mUserWallet = null;
 				App.mUserDetailInfo = null;

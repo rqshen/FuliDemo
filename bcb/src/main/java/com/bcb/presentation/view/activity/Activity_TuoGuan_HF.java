@@ -111,7 +111,7 @@ public class Activity_TuoGuan_HF extends Activity_Base implements View.OnClickLi
 				withdrawMoney();
 				break;
 			case R.id.rl_look:
-				//                Toast.makeText(Activity_TuoGuan_HF.this, "………………暂无……………", Toast.LENGTH_SHORT).show();
+				Activity_Browser.launcheForResult(this, "托管接入证明", UrlsTwo.UrlZM, 3);
 				break;
 			case R.id.rl_login:
 				loginAccount();

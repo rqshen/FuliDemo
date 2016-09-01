@@ -25,6 +25,7 @@ import com.bcb.common.net.UrlsOne;
 import com.bcb.data.bean.CouponListBean;
 import com.bcb.data.bean.CouponRecordsBean;
 import com.bcb.data.util.HttpUtils;
+import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MyListView;
 import com.bcb.data.util.PackageUtil;
 import com.bcb.data.util.ToastUtil;
@@ -160,6 +161,11 @@ public class Frag_UnusedCoupon extends Frag_Base {
 
 
     private void loadData() {
+	    /*1	未使用
+	    10	冻结中
+	    20	已使用
+	    30	已回收
+	    40	已过期*/
     	JSONObject obj = new JSONObject();
 		try {
 			obj.put("PageNow", PageNow);
@@ -172,6 +178,8 @@ public class Frag_UnusedCoupon extends Frag_Base {
         BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.Select_Coupon, obj, TokenUtil.getEncodeToken(ctx), new BcbRequest.BcbCallBack<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
+	            LogUtil.i("bqt", "【Frag_UnusedCoupon】【onResponse】未使用的优惠券" + response.toString());
+
                 try {
                     if(PackageUtil.getRequestStatus(response, ctx)){
                         JSONObject obj = PackageUtil.getResultObject(response);

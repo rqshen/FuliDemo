@@ -122,6 +122,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
         receiver = new Receiver();
         ctx.registerReceiver(receiver, new IntentFilter("com.bcb.update.company.joined"));
         ctx.registerReceiver(receiver, new IntentFilter("com.bcb.login.success"));
+        ctx.registerReceiver(receiver, new IntentFilter("com.bcb.logout.success"));
         //标题
         title_text = (TextView) view.findViewById(R.id.title_text);
         title_text.setText("我");
@@ -558,6 +559,12 @@ public class Frag_User extends Frag_Base implements OnClickListener {
             //登陆成功
             else if (intent.getAction().equals("com.bcb.login.success")) {
                 refreshLayout.autoRefresh();
+            }        //注销成功
+            else if (intent.getAction().equals("com.bcb.logout.success")) {
+                LogUtil.i("bqt", "【Receiver】【onReceive】注销" );
+                joinCompany.setVisibility(View.VISIBLE);
+                user_company_layout.setVisibility(View.GONE);
+                layout_scrollview.scrollTo(0, 0);
             }
         }
     }

@@ -569,6 +569,7 @@ public class Activity_Account_Setting extends Activity_Base implements OnClickLi
         UmengUtil.eventById(Activity_Account_Setting.this, R.string.gusture_off);
         Intent newIntent = new Intent(Activity_Account_Setting.this, Activity_Gesture_Lock.class);
         newIntent.putExtra("isSettingPasswd", false);
+        newIntent.putExtra("isCanBack", true);
         startActivityForResult(newIntent, 10);
     }
 

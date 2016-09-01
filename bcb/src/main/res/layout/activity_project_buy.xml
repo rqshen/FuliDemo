@@ -177,7 +177,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginRight="45dip"
                             android:gravity="right"
-                            android:text="暂无优惠券信息"
+                            android:text="暂无可用券"
                             android:textColor="@color/txt_gray"
                             android:textSize="@dimen/main_text_default"/>
                     </LinearLayout>

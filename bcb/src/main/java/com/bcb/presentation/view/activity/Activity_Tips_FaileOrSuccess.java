@@ -108,6 +108,7 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
 				tv_up.setText("开户成功");
 				tv_down.setVisibility(View.GONE);
 				tv_next.setText("查看托管账户");
+				tv_next.setClickable(false);//╮(╯▽╰)╭
 				handler.sendMessageDelayed(Message.obtain(handler, 1), 2000);
 				break;
 			case OPEN_HF_FAILED:
@@ -370,6 +371,7 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
 					if (data != null) {
 						//将获取到的银行卡数据写入静态数据区中
 						App.mUserDetailInfo = App.mGson.fromJson(data.toString(), UserDetailInfo.class);
+						tv_next.setClickable(true);
 					}
 				}
 			}
