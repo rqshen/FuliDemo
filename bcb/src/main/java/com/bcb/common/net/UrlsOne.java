@@ -180,7 +180,8 @@ public class UrlsOne {
     // 安全保障WebView
     public static final String SecureWebView = "http://wap.100cb.cn/static/security.html";
     // 理财学院WebView
-    public static final String CollegeWebView = "http://fulijinrong.kuaizhan.com/58/36/p32451810370302";
+//    public static final String CollegeWebView = "http://fulijinrong.kuaizhan.com/58/36/p32451810370302";
+    public static final String CollegeWebView = "http://fulijinrong.kuaizhan.com";
     //一分钟了解福利金融
     public static final String AboutFuliJingRong = "http://wap.flh001.com/static/1minute/index.html";
     //如何获得补贴
