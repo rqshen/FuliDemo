@@ -14,7 +14,9 @@ import com.bcb.data.util.ScreenUtils;
 import com.bcb.presentation.view.custom.GesturePatternLock.bean.Point;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by cain on 16/3/2.
@@ -100,8 +102,38 @@ public class Drawl extends View {
         if (passWord != null) {
             this.passWord = passWord;
         }
+        initAutoCheckPointMap();//自动选中某些点
     }
-
+    /**自动选中的情况点*/
+    private Map<String, Point> autoCheckPointMap;
+    private void initAutoCheckPointMap() {
+        autoCheckPointMap = new HashMap<String, Point>();
+        autoCheckPointMap.put("1,3", getGesturePointByNum(2));
+        autoCheckPointMap.put("1,7", getGesturePointByNum(4));
+        autoCheckPointMap.put("1,9", getGesturePointByNum(5));
+        autoCheckPointMap.put("2,8", getGesturePointByNum(5));
+        autoCheckPointMap.put("3,7", getGesturePointByNum(5));
+        autoCheckPointMap.put("3,9", getGesturePointByNum(6));
+        autoCheckPointMap.put("4,6", getGesturePointByNum(5));
+        autoCheckPointMap.put("7,9", getGesturePointByNum(8));
+    }
+    private Point getGesturePointByNum(int num) {
+        for (Point point : list) {
+            if (point.getNum() == num) return point;
+        }
+        return null;
+    }
+    private Point getBetweenCheckPoint(Point pointStart, Point pointEnd) {
+        int startNum = pointStart.getNum();
+        int endNum = pointEnd.getNum();
+        String key = null;
+        if (startNum < endNum) {
+            key = startNum + "," + endNum;
+        } else {
+            key = endNum + "," + startNum;
+        }
+        return autoCheckPointMap.get(key);
+    }
     // 画位图
     @Override
     protected void onDraw(Canvas canvas) {
@@ -157,13 +189,27 @@ public class Drawl extends View {
                     canvas.drawLine(currentPoint.getCenterX(), currentPoint.getCenterY(), pointAt.getCenterX(), pointAt.getCenterY(), paint);// 画线
 
                     pointAt.setHighLighted(true);
-
-                    Pair<Point, Point> pair = new Pair<Point, Point>(currentPoint, pointAt);
-                    lineList.add(pair);
-
-                    // 赋值当前的point;
-                    currentPoint = pointAt;
-                    passWordSb.append(currentPoint.getNum());
+                    // 判断是否中间点需要选中
+                    Point betweenPoint = getBetweenCheckPoint(currentPoint, pointAt);
+                    if (betweenPoint != null && !betweenPoint.isHighLighted()) {
+                        // 存在中间点并且没有被选中
+                        Pair<Point, Point> pair1 = new Pair<Point, Point>(currentPoint, betweenPoint);
+                        lineList.add(pair1);
+                        passWordSb.append(betweenPoint.getNum());
+                        Pair<Point, Point> pair2 = new Pair<Point, Point>(betweenPoint, pointAt);
+                        lineList.add(pair2);
+                        passWordSb.append(pointAt.getNum());
+                        // 设置中间点选中
+                        betweenPoint.setHighLighted(true);
+                        // 赋值当前的point;
+                        currentPoint = pointAt;
+                    }else {
+                        Pair<Point, Point> pair = new Pair<Point, Point>(currentPoint, pointAt);
+                        lineList.add(pair);
+                        // 赋值当前的point;
+                        currentPoint = pointAt;
+                        passWordSb.append(currentPoint.getNum());
+                    }
                 }
                 invalidate();
                 break;

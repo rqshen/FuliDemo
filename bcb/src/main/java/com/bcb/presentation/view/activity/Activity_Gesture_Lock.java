@@ -51,7 +51,7 @@ public class Activity_Gesture_Lock extends Activity_Base {
 		setContentView(R.layout.activity_gesture_lock);
 		if (getIntent() != null) {
 			isSettingPasswd = getIntent().getBooleanExtra("isSettingPasswd", true);
-			isSettingPasswd2=isSettingPasswd;
+			isSettingPasswd2 = isSettingPasswd;
 			isYZ = getIntent().getBooleanExtra("isYZ", false);
 		}
 		//清除上一次进入后台的时间
@@ -120,8 +120,10 @@ public class Activity_Gesture_Lock extends Activity_Base {
 						phone_description.setTextColor(getResources().getColor(R.color.txt_gray));
 						phone_description.setText("再次绘制解锁图案");
 						password = stringBuilder.toString();
-					}
-				}
+					}else{
+					phone_description.setTextColor(getResources().getColor(R.color.red));
+					phone_description.setText("请连接至少4个点");
+				}}
 			});
 		} else {//清除手势密码
 
@@ -148,10 +150,10 @@ public class Activity_Gesture_Lock extends Activity_Base {
 
 				@Override
 				public void settingPasswdSuccess(StringBuilder stringBuilder, boolean settingPasswdStatus) {
-					if (!settingPasswdStatus) {
+//					if (!settingPasswdStatus) {
 						phone_description.setTextColor(getResources().getColor(R.color.red));
 						phone_description.setText("请连接至少4个点");
-					}
+//					}
 				}
 			});
 		}
@@ -167,9 +169,33 @@ public class Activity_Gesture_Lock extends Activity_Base {
 		LogUtil.i("bqt", "【设置手势密码】" + isSettingPasswd2);
 		if (intent != null && intent.getBooleanExtra("isCanBack", false) || isSettingPasswd2) {
 			finish();
-		} else gotoLoginPageView();
+		} else {
+			showExitAlertView();
+		}
 	}
-
+	//提示是否退出APP
+	private void showExitAlertView() {
+		AlertView.Builder ibuilder = new AlertView.Builder(this);
+		ibuilder.setTitle("提示");
+		ibuilder.setMessage("确定要退出福利金融吗?");
+		ibuilder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				alertView.dismiss();
+				alertView = null;
+				finish();
+				MyActivityManager.getInstance().finishAllActivity();
+				App.instance.activity_main.finish();
+//				android.os.Process.killProcess(android.os.Process.myPid());    //获取PID
+//				System.exit(0);
+//				ActivityManager am = (ActivityManager)getSystemService (Context.ACTIVITY_SERVICE);
+//				am.killBackgroundProcesses(getPackageName());
+			}
+		});
+		ibuilder.setNegativeButton("取消", null);
+		alertView = ibuilder.create();
+		alertView.show();
+	}
 	//退出登录
 	private void gotoLoginPageView() {
 		AlertView.Builder ibuilder = new AlertView.Builder(this);
@@ -183,6 +209,9 @@ public class Activity_Gesture_Lock extends Activity_Base {
 				alertView = null;
 				MyActivityManager myActivityManager = MyActivityManager.getInstance();
 				myActivityManager.finishAllActivity();
+				LogUtil.i("bqt", "【Activity_Gesture_Lock】【onClick】" + 	App.saveUserInfo.getGesturePassword()+"--"+App.saveUserInfo.getLocalPhone());
+				App.saveUserInfo.removeGesturePassword();
+				LogUtil.i("bqt", "【Activity_Gesture_Lock】【onClick】" + 	App.saveUserInfo.getGesturePassword());
 				/* 清空当前用户的信息 */
 				App.saveUserInfo.clear();
 				App.mUserWallet = null;

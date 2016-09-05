@@ -60,6 +60,7 @@ public class Activity_Main extends Activity_Base_Fragment {
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		App.instance.activity_main=this;
 		setContentView(R.layout.activity_main);
 		content = (CustomViewPager) findViewById(R.id.content);
 

@@ -66,12 +66,23 @@ public class SaveUserInfoUtils {
 
 	//获取手势密码
 	public String getGesturePassword() {
-		return sp.getString("GesturePassword", "");
+		SharedPreferences sp = context.getSharedPreferences("bqt_gesturePassword", Context.MODE_PRIVATE);
+		return sp.getString("GesturePassword" + "|" + getLocalPhone(), "");
 	}
 
 	//储存手势密码
 	public void setGesturePassword(String gesturePassword) {
-		editor.putString("GesturePassword", gesturePassword);
+		SharedPreferences sp = context.getSharedPreferences("bqt_gesturePassword", Context.MODE_PRIVATE);
+		SharedPreferences.Editor editor = sp.edit();
+		editor.putString("GesturePassword" + "|" + getLocalPhone(), gesturePassword);
+		editor.commit();
+	}
+
+	//储存手势密码
+	public void removeGesturePassword() {
+		SharedPreferences sp = context.getSharedPreferences("bqt_gesturePassword", Context.MODE_PRIVATE);
+		SharedPreferences.Editor editor = sp.edit();
+		editor.remove("GesturePassword" + "|" + getLocalPhone());
 		editor.commit();
 	}
 
@@ -185,15 +196,11 @@ public class SaveUserInfoUtils {
 	 * 清除所有数据
 	 */
 	public void clear() {
-
 		//清空SharedPreference
 		SharedPreferences sp = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
-		String gesturePassword = sp.getString("GesturePassword", "");
 		SharedPreferences.Editor editor = sp.edit();
 		editor.clear();
-		editor.putString("GesturePassword", gesturePassword);
 		editor.commit();
-		LogUtil.i("bqt", "【清除所有数据，除了手势密码】" + sp.getString("GesturePassword", ""));
 	}
 
 	/**

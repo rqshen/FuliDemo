@@ -22,6 +22,7 @@ import com.bcb.data.util.SaveConfigUtil;
 import com.bcb.data.util.SaveUserInfoUtils;
 import com.bcb.data.util.SystemUtil;
 import com.bcb.data.util.TokenUtil;
+import com.bcb.presentation.view.activity.Activity_Main;
 import com.google.gson.Gson;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.umeng.analytics.MobclickAgent;
@@ -37,7 +38,7 @@ import cn.jpush.android.api.TagAliasCallback;
 import de.greenrobot.event.EventBus;
 
 public class App extends Application implements AMapLocationListener{
-	
+	public Activity_Main activity_main;
 	public static final String TAG = "App";
 	public static SaveUserInfoUtils saveUserInfo;
 	public static SaveConfigUtil saveConfigUtil;
