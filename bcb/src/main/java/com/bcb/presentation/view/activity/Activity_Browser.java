@@ -23,6 +23,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 
 import com.bcb.R;
 import com.bcb.common.app.App;
@@ -62,7 +63,8 @@ public class Activity_Browser extends Activity_Base {
 	private static final String key = "9e469d566f5d41j1a83b9rf4";
 	private String mIntentUrl;
 	private String title;
-
+	private int type;
+	boolean hasLoad;
 	//对话框
 	private DialogWidget certDialog;
 	//微信分享
@@ -70,12 +72,18 @@ public class Activity_Browser extends Activity_Base {
 
 	private Context context;
 	private ProgressBar mPageLoadingProgressBar;
+	RelativeLayout root;
 
 	public static void launche(Context ctx, String tittle, String url) {
+		launche2(ctx, tittle, url, 0);
+	}
+
+	public static void launche2(Context ctx, String tittle, String url, int type) {
 		Intent intent = new Intent();
 		intent.setClass(ctx, Activity_Browser.class);
 		intent.putExtra("title", tittle);
 		intent.putExtra("url", url);
+		intent.putExtra("type", type);
 		ctx.startActivity(intent);
 	}
 
@@ -136,6 +144,7 @@ public class Activity_Browser extends Activity_Base {
 			//最终的URL
 			mIntentUrl = getUrlStrWithDES();
 			title = intent.getStringExtra("title");
+			type = intent.getIntExtra("type", 0);
 			if (getIntent().getBooleanExtra("isLove", false)) {
 				final String loveTitle = intent.getStringExtra("loveTitle");
 				final String loveContent = intent.getStringExtra("loveContent");
@@ -154,7 +163,8 @@ public class Activity_Browser extends Activity_Base {
 		//硬件加速
 		try {
 			if (Build.VERSION.SDK_INT >= 11) {
-				getWindow().setFlags(WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED, WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED);
+				getWindow().setFlags(WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED, WindowManager.LayoutParams
+						.FLAG_HARDWARE_ACCELERATED);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -166,6 +176,8 @@ public class Activity_Browser extends Activity_Base {
 		setTitleValue(title);
 
 		mViewParent = (ViewGroup) findViewById(R.id.layout_webview);
+		root= (RelativeLayout) findViewById(R.id.root);
+
 		QbSdk.preInit(this);
 		X5WebView.setSmallWebViewEnabled(true);
 		mTestHandler.sendEmptyMessageDelayed(MSG_INIT_UI, 10);
@@ -211,11 +223,16 @@ public class Activity_Browser extends Activity_Base {
 	private void init() {
 		mWebView = new X5WebView(this);
 		mViewParent.addView(mWebView, new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams
-                .MATCH_PARENT));
+				.MATCH_PARENT));
 		mWebView.setWebViewClient(new WebViewClient() {
 			@Override
 			public boolean shouldOverrideUrlLoading(WebView view, String url) {
-				LogUtil.d("url", "X5WebView click url = " + url);
+				LogUtil.i("bqt", "X5WebView的url = " + url);
+				if (type == 20094) {
+					root.setVisibility(View.INVISIBLE);
+					return true;
+				}
+
 				//页面内部跳转至首页的时候，则销毁当前WebView
 				if (url.equalsIgnoreCase("fulihui://joincompany")) {
 					joinCompany();
@@ -268,8 +285,20 @@ public class Activity_Browser extends Activity_Base {
 			}
 
 			@Override
+			public void onPageStarted(WebView webView, String s, Bitmap bitmap) {
+				if (type == 20094) {
+					root.setVisibility(View.INVISIBLE);
+				}
+				super.onPageStarted(webView, s, bitmap);
+			}
+
+			@Override
 			public void onPageFinished(WebView view, String url) {
-				super.onPageFinished(view, url);
+				root.setVisibility(View.VISIBLE);
+				if (type == 20094 && !hasLoad) {
+					view.loadUrl(url);
+					hasLoad = true;
+				} else super.onPageFinished(view, url);
 			}
 		});
 
@@ -339,7 +368,7 @@ public class Activity_Browser extends Activity_Base {
 	private void popHFDialog() {
 		startActivity(new Intent(context, Activity_Open_Account.class));
 		//        dialogWidget = new DialogWidget(context, IdentifyAlertView.getInstance(context, new IdentifyAlertView
-        // .OnClikListener() {
+		// .OnClikListener() {
 		//            @Override
 		//            public void onCancelClick() {
 		//                dialogWidget.dismiss();
@@ -446,7 +475,7 @@ public class Activity_Browser extends Activity_Base {
 	//    /***************************** 认证 *****************************/
 	//    private void popCertDialog() {
 	//        certDialog = new DialogWidget(Activity_Browser.this, IdentifyAlertView.getInstance(Activity_Browser.this, new
-    // IdentifyAlertView.OnClikListener() {
+	// IdentifyAlertView.OnClikListener() {
 	//            @Override
 	//            public void onCancelClick() {
 	//                certDialog.dismiss();

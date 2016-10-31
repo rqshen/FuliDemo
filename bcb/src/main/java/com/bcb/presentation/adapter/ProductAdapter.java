@@ -112,15 +112,16 @@ public class ProductAdapter extends BaseAdapter {
 			viewHolder.newProductIndicator.setVisibility(View.GONE);
 		}
         //百分比
-        float percent = (100 - 100 * (data.get(pos).Balance/data.get(pos).Amount));
+//        float percent = (100 - 100 * (data.get(pos).Balance/data.get(pos).Amount));
 		if (data.get(pos).Balance <= 0) {
 			viewHolder.valuePercent.setText("售罄");
 			viewHolder.progressPercent.setProgressDrawable(ctx.getResources().getDrawable(R.drawable.item_progress_gray));
 		} else {
-			viewHolder.valuePercent.setText(String.format("%.2f", percent) + "%");
+			viewHolder.valuePercent.setText(String.format("%.2f", data.get(pos).ProcessPercent) + "%");
 			viewHolder.progressPercent.setProgressDrawable(ctx.getResources().getDrawable(R.drawable.item_progress_orange));
 		}
-        viewHolder.progressPercent.setProgress((int) percent);
+//        viewHolder.progressPercent.setProgress((int) percent);
+        viewHolder.progressPercent.setProgress((int)(data.get(pos).ProcessPercent));
 	}
 
 	class ViewHolder {

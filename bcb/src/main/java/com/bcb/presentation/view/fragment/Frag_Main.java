@@ -867,10 +867,15 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPa
             } else {
                 UmengUtil.eventById(ctx, R.string.bid_unavi);
             }
-            Activity_NormalProject_Introduction.launche(ctx,
+//            Activity_NormalProject_Introduction.launche(ctx,
+//                    boutqueRecordsBeans.get(position).PackageId,
+//                    boutqueRecordsBeans.get(position).Name,
+//                    0);//boutqueRecordsBeans.get(position).getCouponType()
+            Activity_NormalProject_Introduction.launche2(ctx,
                     boutqueRecordsBeans.get(position).PackageId,
                     boutqueRecordsBeans.get(position).Name,
-                    0);//boutqueRecordsBeans.get(position).getCouponType()
+                    0,
+                    boutqueRecordsBeans.get(position).Type.equals("claim_convey"));//标类型：prj_package则为普通标 claim_convey则为债权转让标
         }
     }
 

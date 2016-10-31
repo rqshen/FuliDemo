@@ -14,9 +14,14 @@ public class UrlsTwo {
     // 普通项目介绍
 //    public static String NormalProjectIntroduction = host + "/api/v1.0/9f568d457714";
     public static String NormalProjectIntroduction = host + "/api/v2.0/a64b0102ddbd";
+    //债权项目详情
+    public static String CLAIMCONVEYPACKAGEDETAIL = host + "/api/v2.0/a6a300b390fe";
 
     // 获取会员信息
     public static String UserMessage = host + "/api/v2.0/a64300c7417c";
+
+    //开启自动投标计划
+    public static String OPENAUTOTENDERPLAN = host + "/api/v2.0/a6a400b598f2";
 
     //特权金列表
     public static String UserPrivilegeMoneyDto = host + "/api/v2.0/a64400ec1158";
@@ -38,6 +43,8 @@ public class UrlsTwo {
     // 投标
 //    public static String UrlBuyProject = host + "/api/v1.0/e7b238e2d3df";
     public static String UrlBuyProject = host + "/api/v2.0/a63c0109b86a";
+    //预约购买债权转让标
+    public static String RRECLAIMCONVEY = host + "/api/v2.0/a6a400e5ed86";
 
     //支持的银行
     public static String UrlBanks = host + "/api/v2.0/a63e00b4e136";

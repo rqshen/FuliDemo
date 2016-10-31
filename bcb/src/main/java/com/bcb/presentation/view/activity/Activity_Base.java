@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -154,7 +155,8 @@ public class Activity_Base extends Activity {
 				ibuilder.setPositiveButton("立即设置", new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						Activity_Gesture_Lock.launche(Activity_Base.this, true, true);
+//						Activity_Gesture_Lock.launche(Activity_Base.this, true, true);
+						startActivity(new Intent(Activity_Base.this, Activity_Gesture_Lock.class));
 						alertView.dismiss();
 						alertView = null;
 					}

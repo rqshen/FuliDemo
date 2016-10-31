@@ -21,6 +21,7 @@ public class UserDetailInfo {
 	public MyCompanyBean MyCompany;
     //判断是否投过标
     public boolean HasInvest;
+    public boolean AutoTenderPlanStatus;//是否开启自动投标计划
 
     //美洽ID
     public String CustomerId;//会员编号（用户极光、美洽）

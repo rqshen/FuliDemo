@@ -1,5 +1,6 @@
 package com.bcb.presentation.view.activity;
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -188,8 +189,8 @@ public class Activity_Gesture_Lock extends Activity_Base {
 				App.instance.activity_main.finish();
 //				android.os.Process.killProcess(android.os.Process.myPid());    //获取PID
 //				System.exit(0);
-//				ActivityManager am = (ActivityManager)getSystemService (Context.ACTIVITY_SERVICE);
-//				am.killBackgroundProcesses(getPackageName());
+				ActivityManager am = (ActivityManager)getSystemService (Context.ACTIVITY_SERVICE);
+				am.killBackgroundProcesses(getPackageName());
 			}
 		});
 		ibuilder.setNegativeButton("取消", null);
@@ -209,9 +210,7 @@ public class Activity_Gesture_Lock extends Activity_Base {
 				alertView = null;
 				MyActivityManager myActivityManager = MyActivityManager.getInstance();
 				myActivityManager.finishAllActivity();
-				LogUtil.i("bqt", "【Activity_Gesture_Lock】【onClick】" + 	App.saveUserInfo.getGesturePassword()+"--"+App.saveUserInfo.getLocalPhone());
 				App.saveUserInfo.removeGesturePassword();
-				LogUtil.i("bqt", "【Activity_Gesture_Lock】【onClick】" + 	App.saveUserInfo.getGesturePassword());
 				/* 清空当前用户的信息 */
 				App.saveUserInfo.clear();
 				App.mUserWallet = null;
@@ -227,4 +226,11 @@ public class Activity_Gesture_Lock extends Activity_Base {
 		alertView.show();
 	}
 
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if (isYZ&&(App.saveUserInfo.getGesturePassword().isEmpty()|| App.saveUserInfo.getAccess_Token() == null)) {
+			finish();
+		}
+	}
 }

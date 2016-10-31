@@ -12,6 +12,7 @@ import android.text.Editable;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.text.method.DigitsKeyListener;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -38,7 +39,6 @@ import com.bcb.data.bean.project.ExpiredProjectDetail;
 import com.bcb.data.bean.project.SimpleProjectDetail;
 import com.bcb.data.util.HttpUtils;
 import com.bcb.data.util.LogUtil;
-import com.bcb.data.util.MoneyTextUtil;
 import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.MyTextUtil;
 import com.bcb.data.util.PackageUtil;
@@ -127,19 +127,27 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 	private BcbRequestQueue requestQueue;
 
 	//默认构造函数，用来传递普通标的数据
-	public static void launche(Context ctx, String pid, String title, int CouponType, int countDate, SimpleProjectDetail
-			simpleProjectDetail, boolean isExpired) {
+	public static void launche2(Context ctx, String pid, String title, int CouponType, int countDate, SimpleProjectDetail
+			simpleProjectDetail, boolean isExpired, boolean auto) {
 		Intent intent = new Intent();
 		intent.putExtra("pid", pid);
 		intent.putExtra("title", title);
 		intent.putExtra("CouponType", CouponType);
 		intent.putExtra("countDate", countDate);
 		intent.putExtra("isExpired", isExpired);
+		intent.putExtra("auto", auto);
 		intent.setClass(ctx, Activity_Project_Buy.class);
 		Bundle bundle = new Bundle();
 		bundle.putSerializable("SimpleProjectDetail", simpleProjectDetail);
 		intent.putExtras(bundle);
 		ctx.startActivity(intent);
+	}
+
+	private boolean auto = false;
+
+	public static void launche(Context ctx, String pid, String title, int CouponType, int countDate, SimpleProjectDetail
+			simpleProjectDetail, boolean isExpired) {
+		launche2(ctx, pid, title, CouponType, countDate, simpleProjectDetail, isExpired, false);
 	}
 
 	//加载体验标数据
@@ -171,6 +179,7 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 		mSimpleProjectDetail = (SimpleProjectDetail) this.getIntent().getSerializableExtra("SimpleProjectDetail");
 		expiredProjectDetail = (ExpiredProjectDetail) this.getIntent().getSerializableExtra("ExpiredProjectDetail");
 		isExpired = this.getIntent().getBooleanExtra("isExpired", false);
+		auto = getIntent().getBooleanExtra("auto", false);
 		if (!isExpired) PackageToken = mSimpleProjectDetail.PackageToken;
 		setBaseContentView(R.layout.activity_project_buy);
 		ctx = this;
@@ -193,6 +202,9 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 			getCouponCount();
 			//加载用户余额
 			getUserBanlance();
+		}
+		if (auto) {
+			layout_coupon.setVisibility(View.GONE);
 		}
 	}
 
@@ -225,10 +237,18 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 		invest_money.setSelection(invest_money.getText().length());//把光标放在EditText中文本的末尾处=============无效
 
 		if (!isExpired && mSimpleProjectDetail != null) {
-			invest_money.setHint(String.format("%.2f", mSimpleProjectDetail.StartingAmount) + "元起投");
+			//			invest_money.setHint(String.format("%.2f", mSimpleProjectDetail.StartingAmount) + "元起投");
+			invest_money.setHint((int) mSimpleProjectDetail.StartingAmount + "元起投");
+			invest_money.setKeyListener(DigitsKeyListener.getInstance("0123456789"));
 		} else if (isExpired && expiredProjectDetail != null) {
-			invest_money.setHint(String.format("%.2f", expiredProjectDetail.StartingAmount) + "元起投");
+			invest_money.setHint((int) expiredProjectDetail.StartingAmount + "元起投");
+			invest_money.setKeyListener(DigitsKeyListener.getInstance("0123456789"));
 		}
+		if (auto) {
+			invest_money.setHint(String.format("%.2f", mSimpleProjectDetail.StartingAmount) + "元起投");
+			invest_money.setKeyListener(DigitsKeyListener.getInstance("0123456789."));
+		}
+
 		//如果是体验券，设置光标不可显示，并且设置提示——“请选择体验券”
 		if ((CouponType & 1) == 1) {
 			invest_money.setOnClickListener(this);
@@ -276,6 +296,17 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 		//出错信息，默认隐藏
 		error_tips = (TextView) findViewById(R.id.error_tips);
 		error_tips.setVisibility(View.GONE);
+
+		//债权标，剩余金额小于起投金额
+		if (auto && mSimpleProjectDetail.Balance < mSimpleProjectDetail.StartingAmount) {
+			invest_money.setText(mSimpleProjectDetail.StartingAmount + "");
+			invest_money.setEnabled(false);
+			invest_money.setKeyListener(null);
+			//			error_tips.setVisibility(View.VISIBLE);
+			//			error_tips.setText("债权转让剩余金额小于100元，只能全额买入");
+			button_buy.setClickable(true);
+			button_buy.setBackgroundResource(R.drawable.button_solid_red);
+		}
 	}
 
 	/****************
@@ -325,7 +356,7 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 				textValue = "";
 			}
 			invest_money.removeTextChangedListener(mTextWatcher);
-			invest_money.setText(MoneyTextUtil.ConversionThousandUnit(textValue.replace(",", "")));
+			//			invest_money.setText(MoneyTextUtil.ConversionThousandUnit(textValue.replace(",", "")));
 			invest_money.setSelection(invest_money.getText().toString().length());
 			invest_money.addTextChangedListener(mTextWatcher);
 		}
@@ -612,6 +643,9 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 	float inputMoney;
 
 	private void clickButton() {
+		if (invest_money.getText().toString().startsWith(".")) {
+			Toast.makeText(Activity_Project_Buy.this, "格式不对", Toast.LENGTH_SHORT).show();
+		}
 		//输入金额
 		inputMoney = Float.parseFloat(invest_money.getText().toString().replace(",", ""));
 		// 用户是否登录
@@ -752,7 +786,10 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 		//        popInputPswDialog(invest_money.getText().toString().replace(",", ""));
 
 		if (CouponMinAmount != null && moneyf < Float.valueOf(CouponMinAmount)) altDialog2();
-		else requestBuy();
+		else {
+			if (auto) requestBuy2();
+			else requestBuy();
+		}
 	}
 
 	private void altDialog() {
@@ -783,8 +820,41 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 		alertView.show();
 	}
 
+	//买债权标******************************************************************************************
+	private void requestBuy2() {
+		String requestUrl = UrlsTwo.RRECLAIMCONVEY;
+		String encodeToken = TokenUtil.getEncodeToken(Activity_Project_Buy.this);
+		LogUtil.i("bqt", "买债权标请求路径：" + requestUrl);
+		JSONObject requestObj = new JSONObject();
+		try {
+			requestObj.put("Amount", inputMoney + "");
+			requestObj.put("ClaimConveyId", packageId);
+			LogUtil.i("bqt", "买债权标请求参数：" + requestObj.toString());
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		BcbJsonRequest jsonRequest = new BcbJsonRequest(requestUrl, requestObj, encodeToken, true, new BcbRequest
+				.BcbCallBack<JSONObject>() {
+			@Override
+			public void onResponse(JSONObject response) {
+				LogUtil.i("bqt", "买债权标返回数据：" + response.toString());
+				if (PackageUtil.getRequestStatus(response, Activity_Project_Buy.this) && !TextUtils.isEmpty(response.optString("result"))) {
+					Activity_Tips_FaileOrSuccess.launche(Activity_Project_Buy.this, Activity_Tips_FaileOrSuccess.BUY_HF_SUCCESS, "");
+				} else Activity_Tips_FaileOrSuccess.launche(Activity_Project_Buy.this, Activity_Tips_FaileOrSuccess.BUY_HF_FAILED,"");
+				finish();
+			}
+
+			@Override
+			public void onErrorResponse(Exception error) {
+				LogUtil.d("bqt", "【Activity_Project_Buy】【Buy】网络异常，请稍后重试" + error.toString());
+				Toast.makeText(Activity_Project_Buy.this, error.toString(), Toast.LENGTH_SHORT).show();
+			}
+		});
+		App.getInstance().getRequestQueue().add(jsonRequest);
+	}
+
 	/**
-	 * Buy标//******************************************************************************************
+	 * Buy平常标//******************************************************************************************
 	 */
 	private void requestBuy() {
 		String requestUrl = UrlsTwo.UrlBuyProject;
@@ -1318,7 +1388,7 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 			button_buy.setClickable(true);
 			return;
 		}
-		if (!TextUtils.isEmpty(text) && Float.valueOf(text) >= 100) {//100元起投
+		if (!TextUtils.isEmpty(text) && Float.valueOf(text) >= mSimpleProjectDetail.StartingAmount) {//100元起投
 			button_buy.setBackgroundResource(R.drawable.button_solid_red);
 			button_buy.setClickable(true);
 		} else {

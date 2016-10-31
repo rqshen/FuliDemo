@@ -1,6 +1,7 @@
 package com.bcb.data.bean;
 
 public class TradingRecordRecordsBean {
+	//http://192.168.1.108:8082/doku.php?id=api:doc2.0:investrecord
 
 	private String OrderNo; // 订单号
 
@@ -15,6 +16,7 @@ public class TradingRecordRecordsBean {
 	private float Rate; // 年化收益率
 
 	public	float InterestAmount;//预期收益
+	public int Duration;//f封闭期
 
 	public String getOrderNo() {
 		return OrderNo;

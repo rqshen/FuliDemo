@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bcb.R;
 import com.bcb.common.app.App;
@@ -22,6 +23,7 @@ import com.bcb.common.net.UrlsOne;
 import com.bcb.common.net.UrlsTwo;
 import com.bcb.data.bean.UserDetailInfo;
 import com.bcb.data.bean.project.SimpleProjectDetail;
+import com.bcb.data.util.HttpUtils;
 import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MQCustomerManager;
 import com.bcb.data.util.MyActivityManager;
@@ -45,6 +47,7 @@ import java.util.Date;
  * 产品详情
  */
 public class Activity_NormalProject_Introduction extends Activity_Base implements View.OnClickListener {
+    //setTitleValue("立即购买"
     private static final String TAG = "Activity_NormalProject_Introduction";
     /**************
      * 标题栏
@@ -139,12 +142,6 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
     private LinearLayout layout_customer_service;
 
 
-    //    private String companyUrl;
-//    private String companyName;
-//    private int durationExchangeType = 1;
-//    private float rate = 0;
-//    private float rewardRate = 0;
-//    private int duration = 1;
     private int CouponType = 0;
     private int countDate = 0;
 
@@ -155,10 +152,19 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
                                String pid,
                                String title,
                                int CouponType) {
+        launche2(ctx,pid,title,CouponType,false);
+    }
+    private boolean auto=false;
+    //默认的构造函数
+    public static void launche2(Context ctx,
+                               String pid,
+                               String title,
+                               int CouponType,boolean auto) {
         Intent intent = new Intent();
         intent.putExtra("pid", pid);
         intent.putExtra("title", title);
         intent.putExtra("CouponType", CouponType);
+        intent.putExtra("auto", auto);
         intent.setClass(ctx, Activity_NormalProject_Introduction.class);
         ctx.startActivity(intent);
     }
@@ -171,7 +177,8 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
         myActivityManager.pushOneActivity(Activity_NormalProject_Introduction.this);
         packageId = getIntent().getStringExtra("pid");
         title = getIntent().getStringExtra("title");
-        CouponType = this.getIntent().getIntExtra("CouponType", 0);
+        CouponType = getIntent().getIntExtra("CouponType", 0);
+        auto = getIntent().getBooleanExtra("auto", false);
         setBaseContentView(R.layout.activity_normalproject_introduction);
         setLeftTitleListener(new View.OnClickListener() {
             @Override
@@ -303,11 +310,13 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
         } catch (Exception e) {
             e.printStackTrace();
         }
-        BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsTwo.NormalProjectIntroduction, js, TokenUtil.getEncodeToken(this), new BcbRequest.BcbCallBack<JSONObject>() {
+        String url=UrlsTwo.NormalProjectIntroduction;
+        if(auto) url=UrlsTwo.CLAIMCONVEYPACKAGEDETAIL;
+        BcbJsonRequest jsonRequest = new BcbJsonRequest(url, js, TokenUtil.getEncodeToken(this), new BcbRequest.BcbCallBack<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 if (PackageUtil.getRequestStatus(response, Activity_NormalProject_Introduction.this)) {
-                    LogUtil.i("bqt", "【Activity_NormalProject_Introduction】【onResponse】普通标" + response.toString());
+                    LogUtil.i("bqt", "普通标或债权标" +auto+"---"+ response.toString());
 
                     try {
                         //先转义
@@ -436,6 +445,17 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
         layout_detail.setVisibility(View.VISIBLE);
         //设置按钮颜色
         setButtonColor(mSimpleProjectDetail.Status);
+
+        try {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            Date beginTime=format.parse(mSimpleProjectDetail.ApplyBeginTime);
+            Date nowTime=new Date();
+            if (nowTime.getTime()<beginTime.getTime()) {
+                setButtonColor(0);//不是20就行
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     /*******************
@@ -474,14 +494,67 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
 //            identifyPageTips();
 //            return;
 //        }
+
         if (App.mUserDetailInfo == null || !App.mUserDetailInfo.HasOpenCustody) {
             startActivity(new Intent(this, Activity_Open_Account.class));
             finish();
             return;
         }
+        if ( !App.mUserDetailInfo.AutoTenderPlanStatus) {
+            autoOpen();
+            return;
+        }
         gotoBuyPrjectPage();
     }
 
+    //******************************************************************************************
+
+    /**
+     * APP自动投标流程：
+     * 1、新用户买标，没有开通托管账户的引导到汇付开通托管账户。
+     * 2、已开通托管账户用户买标没开通自动买标的，引导到汇付开通自动投标。
+     * 3、开通自动投标完毕，手动买入理财标。
+     */
+    private void autoOpen() {
+        String requestUrl = UrlsTwo.OPENAUTOTENDERPLAN;
+        String encodeToken = TokenUtil.getEncodeToken(Activity_NormalProject_Introduction.this);
+        JSONObject obj = new JSONObject();
+        try {
+            obj.put("Platform", 2);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        BcbJsonRequest jsonRequest = new BcbJsonRequest(requestUrl, obj, encodeToken, true, new BcbRequest.BcbCallBack<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                LogUtil.i("bqt", "开通自动投标" + response.toString());
+                if (PackageUtil.getRequestStatus(response, Activity_NormalProject_Introduction.this)) {
+                    try {
+                        /** 后台返回的JSON对象，也是要转发给汇付的对象 */
+                        JSONObject result = PackageUtil.getResultObject(response);
+                        if (result != null) {
+                            //网页地址
+                            String postUrl = result.optString("PostUrl");
+                            result.remove("PostUrl");//移除这个参数
+                            //传递的参数
+                            String postData = HttpUtils.jsonToStr(result.toString()); //跳转到webview
+                            Activity_WebView.launche(Activity_NormalProject_Introduction.this, "开通自动投标", postUrl, postData);
+                        }
+                    } catch (Exception e) {
+                        LogUtil.d("bqt", "开通自动投标2" + e.getMessage());
+                    }
+                } else if (response != null) {
+                    Toast.makeText(Activity_NormalProject_Introduction.this, response.optString("message"), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onErrorResponse(Exception error) {
+                LogUtil.d("bqt", "【Activity_TuoGuan_HF】【loginAccount】网络异常，请稍后重试" + error.toString());
+            }
+        });
+        App.getInstance().getRequestQueue().add(jsonRequest);
+    }
     /*******************
      * 弹出认证提示界面
      *************************/
@@ -574,7 +647,7 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
      * 去买标页面
      **********************/
     private void gotoBuyPrjectPage() {
-        Activity_Project_Buy.launche(Activity_NormalProject_Introduction.this, packageId, title, CouponType, countDate, mSimpleProjectDetail, false);
+        Activity_Project_Buy.launche2(Activity_NormalProject_Introduction.this, packageId, title, CouponType, countDate, mSimpleProjectDetail, false,auto);
     }
 
     /*********************
@@ -753,7 +826,7 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
                     UmengUtil.eventById(Activity_NormalProject_Introduction.this, R.string.bid_buy_detail1);
                 }
                 if (null != mSimpleProjectDetail && !TextUtils.isEmpty(mSimpleProjectDetail.PageUrl)) {
-                    Activity_Browser.launche(Activity_NormalProject_Introduction.this, title, mSimpleProjectDetail.PageUrl + "&tab=1");
+                    Activity_Browser.launche2(Activity_NormalProject_Introduction.this, title, mSimpleProjectDetail.PageUrl + "&tab=1",20094);
                 }
                 break;
             //保障信息
@@ -762,7 +835,7 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
                     UmengUtil.eventById(Activity_NormalProject_Introduction.this, R.string.bid_buy_detail2);
                 }
                 if (null != mSimpleProjectDetail && !TextUtils.isEmpty(mSimpleProjectDetail.PageUrl)) {
-                    Activity_Browser.launche(Activity_NormalProject_Introduction.this, title, mSimpleProjectDetail.PageUrl + "&tab=2");
+                    Activity_Browser.launche2(Activity_NormalProject_Introduction.this, title, mSimpleProjectDetail.PageUrl + "&tab=2",20094);
                 }
                 break;
             //证明文件
@@ -771,7 +844,7 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
                     UmengUtil.eventById(Activity_NormalProject_Introduction.this, R.string.bid_buy_detail3);
                 }
                 if (null != mSimpleProjectDetail && !TextUtils.isEmpty(mSimpleProjectDetail.PageUrl)) {
-                    Activity_Browser.launche(Activity_NormalProject_Introduction.this, title, mSimpleProjectDetail.PageUrl + "&tab=3");
+                    Activity_Browser.launche2(Activity_NormalProject_Introduction.this, title, mSimpleProjectDetail.PageUrl + "&tab=3",20094);
                 }
                 break;
             //投资列表
@@ -780,7 +853,7 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
                     UmengUtil.eventById(Activity_NormalProject_Introduction.this, R.string.bid_buy_detail4);
                 }
                 if (null != mSimpleProjectDetail && !TextUtils.isEmpty(mSimpleProjectDetail.PageUrl)) {
-                    Activity_Browser.launche(Activity_NormalProject_Introduction.this, title, mSimpleProjectDetail.PageUrl + "&tab=4");
+                    Activity_Browser.launche2(Activity_NormalProject_Introduction.this, title, mSimpleProjectDetail.PageUrl + "&tab=4",20094);
                 }
                 break;
         }

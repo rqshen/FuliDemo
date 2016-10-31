@@ -83,6 +83,7 @@ public class PackageUtil {
 	}
 	
 	public static void onUserKickOut(Context ctx){
+		App.saveUserInfo.removeGesturePassword();
 		App.saveUserInfo.clear();
 		Intent intent = new Intent();
 		intent.setClass(ctx, Activity_Login.class);

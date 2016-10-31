@@ -15,15 +15,16 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center"
+            android:gravity="left|center_vertical"
             android:text="收益"
+            android:paddingLeft="30dp"
             android:textColor="#3e3f43"
             android:textSize="13sp"/>
 
         <TextView
             android:id="@+id/tv_time"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:text="2016-8-12"
@@ -33,7 +34,7 @@
         <TextView
             android:id="@+id/tv_monery"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:text="+0.00"

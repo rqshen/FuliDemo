@@ -1,77 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="@color/white"
+              android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/layout_date"
+        android:id="@+id/layout_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/background"
         android:orientation="vertical">
-        <TextView
-            android:id="@+id/value_date"
+
+        <View
             android:layout_width="wrap_content"
+            android:layout_height="10dp"
+            android:background="@color/linegray"/>
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
             android:layout_height="35dp"
             android:gravity="center_vertical"
             android:paddingLeft="@dimen/margin_size_large"
-            android:textSize="13sp"
-            android:textColor="@color/date_txt_gray"
-            android:text="2016年03月38日"/>
+            android:text="涨薪宝"
+            android:textColor="#333"
+            android:textSize="16sp"/>
+
         <View
             android:layout_width="wrap_content"
             android:layout_height="0.5dp"
-            android:background="@color/linegray" />
+            android:background="@color/linegray"/>
     </LinearLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:paddingLeft="@dimen/margin_size_large"
-        android:orientation="horizontal">
+        android:padding="13dp"
+        >
 
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/name"
-                android:singleLine="true"
-                android:layout_marginRight="10dip"
-                android:layout_width="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_height="wrap_content"
-                android:text="XXX"
-                android:textColor="@color/txt_black"
-                android:textSize="@dimen/main_text_small" />
 
             <TextView
                 android:id="@+id/amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:text="0.00元"
-                android:layout_marginBottom="5dp"
+                android:layout_marginRight="10dip"
+                android:singleLine="true"
+                android:text="XXX"
                 android:textColor="@color/red"
-                android:textSize="@dimen/main_text_large"/>
+                android:textSize="19sp"/>
+
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="2016-10-14"
+                android:textColor="#999"
+                android:textSize="13sp"/>
         </LinearLayout>
 
 
         <TextView
-            android:id="@+id/status"
-            android:singleLine="true"
+            android:id="@+id/time_right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="XXXX"
-            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"
             android:layout_gravity="center_vertical"
-            android:textColor="@color/txt_black"
-            android:textSize="@dimen/main_text_small"/>
+            android:singleLine="true"
+            android:text="3个月"
+            android:textColor="#999"
+            android:textSize="16sp"/>
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/time_right"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="10dp"
+            android:singleLine="true"
+            android:text="转让中"
+            android:textColor="#999"
+            android:textSize="13sp"/>
+
+    </RelativeLayout>
 
 </LinearLayout>

@@ -85,6 +85,17 @@ public class Activity_Start_Up extends Activity {
 
 	}
 
+	private static final String FILE_NAME = "App_Enter_Background_Time";
+	@Override
+	protected void onResume() {
+		super.onResume();
+		//清空SharedPreference
+		SharedPreferences sp = this.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
+		SharedPreferences.Editor editor = sp.edit();
+		editor.clear();
+		editor.commit();
+	}
+
 	@Override
 	protected  void onStart() {
 		super.onStart();

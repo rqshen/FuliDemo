@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+    >
+
+    <View
+        android:id="@+id/bg"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/background_gray"/>
+
+    <TextView
+        android:id="@+id/tv_left"
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:layout_below="@+id/bg"
+        android:gravity="center"
+        android:paddingLeft="15dp"
+        android:text="2016-10-11"
+        android:textColor="#666"
+        android:textSize="13sp"/>
+
+
+    <TextView
+        android:id="@+id/tv_yuan"
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/bg"
+        android:gravity="center"
+        android:paddingRight="15dp"
+        android:paddingTop="3dp"
+        android:text="元"
+        android:textColor="#db3838"
+        android:textSize="13sp"/>
+
+    <TextView
+        android:id="@+id/tv_right"
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:layout_below="@+id/bg"
+        android:layout_toLeftOf="@+id/tv_yuan"
+        android:gravity="center"
+        android:text="9000.00"
+        android:textColor="#db3838"
+        android:textSize="18sp"/>
+
+
+</RelativeLayout>

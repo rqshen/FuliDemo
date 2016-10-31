@@ -38,13 +38,9 @@ import de.greenrobot.event.EventBus;
  * 错误提示界面
  */
 public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.OnClickListener {
-	public static final String TYPE = "type";
-	private int type;
-	public static final String MESSAGE = "message";
-	private String message;//提示消息
-
 	public static final int OPEN_HF_SUCCESS = 1;//开户成功
 	public static final int OPEN_HF_FAILED = 2;//开户失败
+	//绑卡没有结果页
 	public static final int BAND_HF_SUCCESS = 3;//绑卡成功
 	public static final int BAND_HF_FAILED = 4;//绑卡失败
 	public static final int CHARGE__HF_SUCCESS = 5;//充值成功
@@ -56,6 +52,240 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
 	public static final int SLB_SUCCESS = 11;//生利宝成功
 	public static final int SLB_FAILED = 12;//生利宝失败
 	public static final int JK_SUCCESS = 13;//借款成功
+
+	public static final int ZR_SUCCESS = 14;//债权转让成功
+	public static final int ZR_FAILED = 15;//债权转让失败
+
+	public static final int ZDTB_SUCCESS = 16;//开通自动投标成功
+	public static final int ZDTB_FAILED = 17;//开通自动投标失败
+
+	private void initView() {
+		switch (type) {
+			case OPEN_HF_SUCCESS:
+				title_text.setText("资金托管");
+				iv_pic.setImageResource(R.drawable.success_open_hf);
+				iv_pic.setPadding(0, DensityUtils.dp2px(this, 50), 0, 0);
+				tv_down.setVisibility(View.GONE);
+				tv_up.setText("开户成功");
+				tv_next.setText("查看托管账户");
+				tv_next.setClickable(false);//╮(╯▽╰)╭
+				handler.sendMessageDelayed(Message.obtain(handler, 1), 2000);
+				break;
+			case OPEN_HF_FAILED:
+				title_text.setText("开户失败");
+				iv_pic.setImageResource(R.drawable.failed_open_fh);
+				tv_up.setText("开户失败");
+				tv_down.setText(message);
+				tv_next.setText("联系客服");
+				break;
+			case BAND_HF_SUCCESS:
+				title_text.setText("绑卡成功");
+				iv_pic.setImageResource(R.drawable.success_open_hf);
+				tv_up.setText("绑卡成功");
+				tv_down.setVisibility(View.GONE);
+				tv_next.setText("返回个人中心");
+				tv_next.setClickable(false);//╮(╯▽╰)╭
+				handler.sendMessageDelayed(Message.obtain(handler, 2), 2000);
+				break;
+			case BAND_HF_FAILED:
+				title_text.setText("绑卡失败");
+				iv_pic.setImageResource(R.drawable.failed_band_fh);
+				tv_up.setText("绑卡失败");
+				tv_down.setText("信息验证出现错误");
+				tv_next.setText("联系客服");
+				break;
+			case CHARGE__HF_SUCCESS:
+				title_text.setText("充值成功");
+				iv_pic.setImageResource(R.drawable.success_open_hf);
+				iv_pic.setPadding(0, DensityUtils.dp2px(this, 30), 0, 0);
+				tv_up.setText("充值成功");
+				tv_next.setVisibility(View.GONE);
+				tv_next.setClickable(false);//╮(╯▽╰)╭
+				handler.sendMessageDelayed(Message.obtain(handler, 3), 2000);
+				break;
+			case CHARGE_HF_FAILED:
+				title_text.setText("充值失败");
+				iv_pic.setImageResource(R.drawable.failed_charge_hf);
+				tv_up.setText("充值失败");
+				message = message == null ? "银行卡余额不足" : message;
+				tv_down.setText(message);
+				tv_next.setText("联系客服");
+				break;
+			case TX_HF_SUCCESS:
+				title_text.setText("提现成功");
+				iv_pic.setImageResource(R.drawable.success_open_hf);
+				iv_pic.setPadding(0, DensityUtils.dp2px(this, 30), 0, 0);
+				tv_up.setText("提现成功");
+				tv_next.setVisibility(View.GONE);
+				tv_down.setText("本次提现：" + message);
+				tv_next.setClickable(false);//╮(╯▽╰)╭
+				handler.sendMessageDelayed(Message.obtain(handler, 2), 2000);
+				break;
+			case TX_HF_FAILED:
+				title_text.setText("提现失败");
+				iv_pic.setImageResource(R.drawable.failed_band_fh);
+				iv_pic.setPadding(0, DensityUtils.dp2px(this, 50), 0, 0);
+				tv_up.setText("提现失败");
+				tv_down.setText("账户余额不足");
+				tv_next.setVisibility(View.GONE);
+				break;
+			case BUY_HF_SUCCESS:
+				title_text.setText("申购成功");
+				iv_pic.setImageResource(R.drawable.success_open_hf);
+				tv_up.setText("申购成功");
+				tv_down.setVisibility(View.GONE);
+				tv_next.setText("返回个人中心");
+				tv_next.setClickable(false);//╮(╯▽╰)╭
+				handler.sendMessageDelayed(Message.obtain(handler, 2), 2000);
+				break;
+			case BUY_HF_FAILED:
+				title_text.setText("申购失败");
+				iv_pic.setImageResource(R.drawable.failed_buy_fh);
+				tv_up.setText("申购失败");
+				tv_down.setText(message);
+				tv_next.setText("联系客服");
+				break;
+			case SLB_SUCCESS:
+				String[] splitStrs = Pattern.compile("\\|").split(message);//Java Split以竖线作为分隔符
+				title_text.setText("生利宝");
+				iv_pic.setImageResource(R.drawable.success_open_hf);
+				if (splitStrs[2].equalsIgnoreCase("I")) tv_up.setText("成功转入");
+				else if (splitStrs[2].equalsIgnoreCase("O")) tv_up.setText("成功转出");
+				else tv_up.setText("成功");
+				tv_up.setTextColor(0xff22bb66);
+				tv_down.setText("¥ " + splitStrs[3]);
+				tv_down.setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
+				tv_next.setText("返回生利宝");
+				tv_next.setClickable(false);//╮(╯▽╰)╭
+				handler.sendMessageDelayed(Message.obtain(handler, 2), 2000);
+				break;
+			case SLB_FAILED:
+				String[] splitStrs2 = Pattern.compile("\\|").split(message);//Java Split以竖线作为分隔符
+				title_text.setText("生利宝");
+				iv_pic.setImageResource(R.drawable.failed_charge_hf);
+				if (splitStrs2[2].equalsIgnoreCase("I")) tv_up.setText("转入失败");
+				else if (splitStrs2[2].equalsIgnoreCase("O")) tv_up.setText("转出失败");
+				else tv_up.setText("失败");
+				tv_down.setText("第三方支付平台出错");
+				tv_next.setText("返回生利宝");
+				break;
+			case JK_SUCCESS:
+				title_text.setText("借款");
+				iv_pic.setImageResource(R.drawable.success_open_hf);
+				tv_up.setText("提交成功");
+				tv_down.setText("预计2个工作日内审核");
+				tv_next.setText("完成");
+				break;
+			case ZR_SUCCESS:
+				title_text.setText("债权转让");
+				iv_pic.setImageResource(R.drawable.success_open_hf);
+				tv_up.setText("您已成功申请债权转让");
+				tv_down.setText(message);
+				tv_next.setText("返回投资记录");
+				break;
+			case ZR_FAILED:
+				title_text.setText("债权转让");
+				iv_pic.setImageResource(R.drawable.failed_open_fh);
+				tv_up.setText("失败");
+				tv_down.setText(message);
+				tv_next.setText("联系客服");
+				break;
+			case ZDTB_SUCCESS:
+				title_text.setText("自动买入");
+				iv_pic.setImageResource(R.drawable.success_open_hf);
+				tv_up.setText("开通成功");
+				tv_down.setText("");
+				tv_next.setText("完成");
+//				App.mUserDetailInfo.AutoTenderPlanStatus=true;//手动更改
+				tv_next.setClickable(false);//╮(╯▽╰)╭
+				handler.sendMessageDelayed(Message.obtain(handler, 1), 2000);//请求服务器最新信息
+				break;
+			case ZDTB_FAILED:
+				title_text.setText("自动买入");
+				iv_pic.setImageResource(R.drawable.failed_open_fh);
+				tv_up.setText("开通失败");
+				tv_down.setText("");
+				tv_next.setText("联系客服");
+				break;
+			default:
+				break;
+		}
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+			case R.id.back_img://返回
+				switch (type) {
+					//个人中心
+					case CHARGE__HF_SUCCESS:
+					case CHARGE_HF_FAILED:
+					case TX_HF_SUCCESS:
+					case TX_HF_FAILED:
+						JumpToUser();
+						break;
+					//借款
+					case JK_SUCCESS:
+						startActivity(new Intent(Activity_Tips_FaileOrSuccess.this, Activity_LoanList.class));
+						finish();
+						break;
+					//客服
+					default:
+						finish();
+						break;
+				}
+				break;
+			//******************************************************************************************
+			case R.id.tv_next://下一步
+				switch (type) {
+					case OPEN_HF_SUCCESS:
+						startActivity(new Intent(Activity_Tips_FaileOrSuccess.this, Activity_TuoGuan_HF.class));
+						finish();
+						break;
+					//个人中心
+					case BAND_HF_SUCCESS:
+					case BUY_HF_SUCCESS:
+						JumpToUser();
+						break;
+					//结束当前页
+					case SLB_SUCCESS:
+					case SLB_FAILED:
+					case ZDTB_SUCCESS:
+						finish();
+						break;
+					//投资记录
+					case ZR_SUCCESS:
+						startActivity(new Intent(Activity_Tips_FaileOrSuccess.this, Activity_Trading_Record.class));
+						finish();
+						break;
+					//借款
+					case JK_SUCCESS:
+						startActivity(new Intent(Activity_Tips_FaileOrSuccess.this, Activity_LoanList.class));
+						finish();
+						break;
+					//客服
+					default:
+						String userId = null;
+						if (App.mUserDetailInfo != null) userId = App.mUserDetailInfo.getCustomerId();
+						MQCustomerManager.getInstance(this).showCustomer(userId);
+						finish();
+						break;
+				}
+				break;
+			default:
+				break;
+		}
+	}
+
+	//***********************************************************************************************************************************
+	//
+	//
+	//***********************************************************************************************************************************
+	public static final String TYPE = "type";
+	private int type;
+	public static final String MESSAGE = "message";
+	private String message;//提示消息
+
 	ImageView iv_pic;
 	TextView title_text, tv_up, tv_down, tv_next;
 	Handler handler = new Handler() {
@@ -99,123 +329,6 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
 		}
 	}
 
-	private void initView() {
-		switch (type) {
-			case OPEN_HF_SUCCESS:
-				title_text.setText("资金托管");
-				iv_pic.setImageResource(R.drawable.success_open_hf);
-				iv_pic.setPadding(0, DensityUtils.dp2px(this, 50), 0, 0);
-				tv_up.setText("开户成功");
-				tv_down.setVisibility(View.GONE);
-				tv_next.setText("查看托管账户");
-				tv_next.setClickable(false);//╮(╯▽╰)╭
-				handler.sendMessageDelayed(Message.obtain(handler, 1), 2000);
-				break;
-			case OPEN_HF_FAILED:
-				title_text.setText("开户失败");
-				iv_pic.setImageResource(R.drawable.failed_open_fh);
-				tv_up.setText("开户失败");
-				tv_down.setText(message);
-				tv_next.setText("联系客服");
-				break;
-			case BAND_HF_SUCCESS:
-				title_text.setText("绑卡成功");
-				iv_pic.setImageResource(R.drawable.success_open_hf);
-				tv_up.setText("绑卡成功");
-				tv_down.setVisibility(View.GONE);
-				tv_next.setText("返回个人中心");
-				handler.sendMessageDelayed(Message.obtain(handler, 2), 2000);
-				break;
-			case BAND_HF_FAILED:
-				title_text.setText("绑卡失败");
-				iv_pic.setImageResource(R.drawable.failed_band_fh);
-				tv_up.setText("绑卡失败");
-				tv_down.setText("信息验证出现错误");
-				tv_next.setText("联系客服");
-				break;
-			case CHARGE__HF_SUCCESS:
-				title_text.setText("充值成功");
-				iv_pic.setImageResource(R.drawable.success_open_hf);
-				iv_pic.setPadding(0, DensityUtils.dp2px(this, 30), 0, 0);
-				tv_up.setText("充值成功");
-				tv_next.setVisibility(View.GONE);
-				handler.sendMessageDelayed(Message.obtain(handler, 3), 2000);
-				break;
-			case CHARGE_HF_FAILED:
-				title_text.setText("充值失败");
-				iv_pic.setImageResource(R.drawable.failed_charge_hf);
-				tv_up.setText("充值失败");
-				message = message == null ? "银行卡余额不足" : message;
-				tv_down.setText(message);
-				tv_next.setText("联系客服");
-				break;
-			case TX_HF_SUCCESS:
-				title_text.setText("提现成功");
-				iv_pic.setImageResource(R.drawable.success_open_hf);
-				iv_pic.setPadding(0, DensityUtils.dp2px(this, 30), 0, 0);
-				tv_up.setText("提现成功");
-				tv_next.setVisibility(View.GONE);
-				tv_down.setText("本次提现：" + message);
-				handler.sendMessageDelayed(Message.obtain(handler, 2), 2000);
-				break;
-			case TX_HF_FAILED:
-				title_text.setText("提现失败");
-				iv_pic.setImageResource(R.drawable.failed_band_fh);
-				iv_pic.setPadding(0, DensityUtils.dp2px(this, 50), 0, 0);
-				tv_up.setText("提现失败");
-				tv_down.setText("账户余额不足");
-				tv_next.setVisibility(View.GONE);
-				break;
-			case BUY_HF_SUCCESS:
-				title_text.setText("申购成功");
-				iv_pic.setImageResource(R.drawable.success_open_hf);
-				tv_up.setText("申购成功");
-				tv_down.setVisibility(View.GONE);
-				tv_next.setText("返回个人中心");
-				handler.sendMessageDelayed(Message.obtain(handler, 2), 2000);
-				break;
-			case BUY_HF_FAILED:
-				title_text.setText("申购失败");
-				iv_pic.setImageResource(R.drawable.failed_buy_fh);
-				tv_up.setText("申购失败");
-				tv_down.setText(message);
-				tv_next.setText("联系客服");
-				break;
-			case SLB_SUCCESS:
-				String[] splitStrs = Pattern.compile("\\|").split(message);//Java Split以竖线作为分隔符
-				title_text.setText("生利宝");
-				iv_pic.setImageResource(R.drawable.success_open_hf);
-				if (splitStrs[2].equalsIgnoreCase("I")) tv_up.setText("成功转入");
-				else if (splitStrs[2].equalsIgnoreCase("O")) tv_up.setText("成功转出");
-				else tv_up.setText("成功");
-				tv_up.setTextColor(0xff22bb66);
-				tv_down.setText("¥ " + splitStrs[3]);
-				tv_down.setTextSize(TypedValue.COMPLEX_UNIT_SP, 30);
-				tv_next.setText("返回生利宝");
-				handler.sendMessageDelayed(Message.obtain(handler, 2), 2000);
-				break;
-			case SLB_FAILED:
-				String[] splitStrs2 = Pattern.compile("\\|").split(message);//Java Split以竖线作为分隔符
-				title_text.setText("生利宝");
-				iv_pic.setImageResource(R.drawable.failed_charge_hf);
-				if (splitStrs2[2].equalsIgnoreCase("I")) tv_up.setText("转入失败");
-				else if (splitStrs2[2].equalsIgnoreCase("O")) tv_up.setText("转出失败");
-				else tv_up.setText("失败");
-				tv_down.setText("第三方支付平台出错");
-				tv_next.setText("返回生利宝");
-				break;
-			case JK_SUCCESS:
-				title_text.setText("借款");
-				iv_pic.setImageResource(R.drawable.success_open_hf);
-				tv_up.setText("提交成功");
-				tv_down.setText("预计2个工作日内审核");
-				tv_next.setText("完成");
-				break;
-			default:
-				break;
-		}
-	}
-
 	private void init() {
 		title_text = (TextView) findViewById(R.id.title_text);
 		iv_pic = (ImageView) findViewById(R.id.iv_pic);
@@ -227,64 +340,6 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
 		View back_img = findViewById(R.id.back_img);
 		back_img.setVisibility(View.VISIBLE);
 		back_img.setOnClickListener(this);
-	}
-
-	@Override
-	public void onClick(View v) {
-		switch (v.getId()) {
-			case R.id.back_img:
-				switch (type) {
-					//个人中心
-					case CHARGE__HF_SUCCESS:
-					case CHARGE_HF_FAILED:
-					case TX_HF_SUCCESS:
-					case TX_HF_FAILED:
-						JumpToUser();
-						break;
-					//借款
-					case JK_SUCCESS:
-						startActivity(new Intent(Activity_Tips_FaileOrSuccess.this, Activity_LoanList.class));
-						finish();
-						break;
-					//客服
-					default:
-						finish();
-						break;
-				}
-				break;
-			case R.id.tv_next:
-				switch (type) {
-					case OPEN_HF_SUCCESS:
-						startActivity(new Intent(Activity_Tips_FaileOrSuccess.this, Activity_TuoGuan_HF.class));
-						finish();
-						break;
-					//个人中心
-					case BAND_HF_SUCCESS:
-					case BUY_HF_SUCCESS:
-						JumpToUser();
-						break;
-					//生利宝
-					case SLB_SUCCESS:
-					case SLB_FAILED:
-						finish();
-						break;
-					//借款
-					case JK_SUCCESS:
-						startActivity(new Intent(Activity_Tips_FaileOrSuccess.this, Activity_LoanList.class));
-						finish();
-						break;
-					//客服
-					default:
-						String userId = null;
-						if (App.mUserDetailInfo != null) userId = App.mUserDetailInfo.getCustomerId();
-						MQCustomerManager.getInstance(this).showCustomer(userId);
-						finish();
-						break;
-				}
-				break;
-			default:
-				break;
-		}
 	}
 
 	private void JumpToUser() {
@@ -307,6 +362,7 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
 					JSONObject data = PackageUtil.getResultObject(response);
 					if (data != null) {
 						App.mUserWallet = App.mGson.fromJson(data.toString(), UserWallet.class);
+						tv_next.setClickable(true);
 						switch (type) {
 							case CHARGE__HF_SUCCESS:
 								tv_down.setText("当前账户余额：" + String.format("%.2f", App.mUserWallet.getBalanceAmount()));
@@ -339,6 +395,7 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
 					JSONObject data = PackageUtil.getResultObject(response);
 					if (data != null && App.mUserDetailInfo != null) {
 						App.mUserDetailInfo.BankCard = App.mGson.fromJson(data.toString(), UserBankCard.class);
+						tv_next.setClickable(true);
 					}
 				}
 			}

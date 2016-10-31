@@ -52,7 +52,7 @@ public class Activity_WebView extends Activity_Base {
 		ctx.startActivity(intent);
 	}
 
-	public static void launcheForResult(Activity ctx, String tittle, String url, String postData,int requestCode) {
+	public static void launcheForResult(Activity ctx, String tittle, String url, String postData, int requestCode) {
 		Intent intent = new Intent(ctx, Activity_WebView.class);
 		intent.putExtra("title", tittle);
 		intent.putExtra("url", url);
@@ -75,7 +75,8 @@ public class Activity_WebView extends Activity_Base {
 		}
 		try {/*硬件加速*/
 			if (Build.VERSION.SDK_INT >= 11)
-				getWindow().setFlags(WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED, WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED);
+				getWindow().setFlags(WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED, WindowManager.LayoutParams
+						.FLAG_HARDWARE_ACCELERATED);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -113,57 +114,74 @@ public class Activity_WebView extends Activity_Base {
 	private void init() {
 		mWebView = new X5WebView(this);
 		mViewParent.addView(mWebView, new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams
-                .MATCH_PARENT));
+				.MATCH_PARENT));
 		mWebView.setWebViewClient(new WebViewClient() {
 			@Override
 			public boolean shouldOverrideUrlLoading(WebView view, String url) {
+				if (url == null) {
+					LogUtil.i("bqt", "截获的url地址为空");
+					return true;
+				}
 				LogUtil.i("bqt", "截获的url地址：" + url);
-				String message = null;
+				String message = "";
 				try {
 					message = URLDecoder.decode(url.substring(url.lastIndexOf('|') + 1), "UTF-8");
 					LogUtil.i("bqt", "最后一部分消息内容" + message);
-				} catch (UnsupportedEncodingException e) {
+				} catch (Exception e) {
+					LogUtil.i("bqt", "提取消息出错" + e.toString());
 					e.printStackTrace();
 				}
-				//【开户】
-				if (url.contains("fulihui://open_result")) {
-					LogUtil.i("bqt", "开户" + url);
-					finish();
+				//******************************************************************************************
+				//开通自动投标
+				if (url.contains("fulihui://openautotenderplanresult")) {
+					LogUtil.i("bqt", "开通自动投标" + url);
 					if (url.contains("000")) {//成功
-						App.getInstance().mUserDetailInfo.HasOpenCustody = true;
+						Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.ZDTB_SUCCESS, message);
+					} else Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.ZDTB_FAILED, message);
+					finish();
+					return true;
+				}
+				//【开户】
+				else if (url.contains("fulihui://open_result")) {
+					LogUtil.i("bqt", "开户" + url);
+					if (url.contains("000")) {//成功
 						Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.OPEN_HF_SUCCESS, message);
 					} else Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.OPEN_HF_FAILED, message);
+					finish();
 					return true;
 				}
 				//【充值】
 				else if (url.contains("fulihui://recharge_result")) {
 					LogUtil.i("bqt", "充值" + url);
-					finish();
-					if (url.contains("000"))
+					//针对【充值失败、绑卡失败】--绑卡没有结果页，暂不做；436也暂不做
+					if (url.contains("434")) message = "银行卡余额不足";
+					else if (url.contains("435")) message = "金额超过单笔限额";
+					//	else if (url.contains("436")) message = "姓名、证件信息或手机与银行账户预留信息不一致";
+					if (url.contains("000")) {
 						Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.CHARGE__HF_SUCCESS, message);
-					else Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.CHARGE_HF_FAILED, message);
+					} else Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.CHARGE_HF_FAILED, message);
+					finish();
 					return true;
 				}
 				//【提现】
 				else if (url.contains("fulihui://withdraw_result")) {
 					LogUtil.i("bqt", "提现" + url);
-					finish();
-					if (url.contains("000"))
+					if (url.contains("000")) {
 						Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.TX_HF_SUCCESS, message);
-					else Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.TX_HF_FAILED, message);
+					} else Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.TX_HF_FAILED, message);
+					finish();
 					return true;
 					//买标、申购
 				} else if (url.contains("fulihui://invest_result")) {
 					LogUtil.i("bqt", "买标" + url);
-					finish();
-					if (url.contains("000"))
+					if (url.contains("000")) {
 						Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.BUY_HF_SUCCESS, message);
-					else Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.BUY_HF_FAILED, message);
+					} else Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.BUY_HF_FAILED, message);
+					finish();
 					return true;
 					//生利宝
 				} else if (url.contains("fulihui://fsstrans_result")) {
 					LogUtil.i("bqt", "生利宝" + url);
-					finish();
 					//重新生成message
 					try {
 						message = URLDecoder.decode(url.substring(url.indexOf('|') + 1), "UTF-8");
@@ -171,13 +189,12 @@ public class Activity_WebView extends Activity_Base {
 						e.printStackTrace();
 					}
 					LogUtil.i("bqt", "【Activity_WebView】【shouldOverrideUrlLoading】" + message);
-					if (url.contains("000"))
+					if (url.contains("000")) {
 						Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.SLB_SUCCESS, message);
-					else Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.SLB_FAILED, message);
+					} else Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.SLB_FAILED, message);
+					finish();
 					return true;
-				} else {
-					return super.shouldOverrideUrlLoading(view, url);
-				}
+				} else return super.shouldOverrideUrlLoading(view, url);
 			}
 
 			@Override
@@ -255,14 +272,17 @@ public class Activity_WebView extends Activity_Base {
 			e.printStackTrace();
 		}
 		return url + "?accessToken=" + param;
-
 	}
 
 	@Override
 	public void finish() {
 		//        ViewGroup view = (ViewGroup) getWindow().getDecorView();
 		//        view.removeAllViews();
-		mWebView.removeAllViews();
+		try {
+			mWebView.removeAllViews();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		super.finish();
 	}
 }

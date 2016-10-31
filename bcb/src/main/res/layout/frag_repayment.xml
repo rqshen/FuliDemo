@@ -50,7 +50,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:text="归还本金（元）"
+                            android:text="还款本息(元)"
                             android:textColor="#333"
                             android:textSize="13sp"/>
 
@@ -60,7 +60,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:text="归还利息（元）"
+                            android:text="状态"
                             android:textColor="#333"
                             android:textSize="13sp"/>
                     </LinearLayout>

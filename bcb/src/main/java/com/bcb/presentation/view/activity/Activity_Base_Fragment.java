@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -47,6 +48,7 @@ public class Activity_Base_Fragment extends FragmentActivity {
 //        }
         //创建的时候判断是否要设置手势密码
         if (isLongerThanOneMinute() && App.saveUserInfo.getAccess_Token() != null && App.saveUserInfo.isFirstLogin()) {
+
             showSettingGestureAlertView();
         }
     }
@@ -228,7 +230,7 @@ public class Activity_Base_Fragment extends FragmentActivity {
     //提示手势密码
     private void showSettingGestureAlertView() {
         //提示设置手势密码
-        if(App.saveUserInfo.getAccess_Token() != null && App.saveUserInfo.isFirstLogin()) {
+        if(App.saveUserInfo.getAccess_Token() != null && App.saveUserInfo.isFirstLogin()&&!hasGesturePassword()) {
             App.saveUserInfo.setFirstLogin(false);
             AlertView.Builder ibuilder = new AlertView.Builder(Activity_Base_Fragment.this);
             ibuilder.setTitle("是否设置手势密码?");
@@ -236,7 +238,8 @@ public class Activity_Base_Fragment extends FragmentActivity {
             ibuilder.setPositiveButton("立即设置", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    Activity_Gesture_Lock.launche(Activity_Base_Fragment.this, true, true);
+//                    Activity_Gesture_Lock.launche(Activity_Base_Fragment.this, true, true);
+                    startActivity(new Intent(Activity_Base_Fragment.this, Activity_Gesture_Lock.class));
                     alertView.dismiss();
                     alertView = null;
                 }

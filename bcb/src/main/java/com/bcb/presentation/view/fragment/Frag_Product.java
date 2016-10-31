@@ -29,6 +29,7 @@ import com.bcb.common.net.UrlsOne;
 import com.bcb.data.bean.ProductListBean;
 import com.bcb.data.bean.ProductRecordsBean;
 import com.bcb.data.util.HttpUtils;
+import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MyListView;
 import com.bcb.data.util.PackageUtil;
 import com.bcb.data.util.ToastUtil;
@@ -112,7 +113,7 @@ public class Frag_Product extends Frag_Base implements OnClickListener {
         ctx.registerReceiver(receiver, new IntentFilter("com.bcb.project.buy.success"));
         //标题
         title_text = (TextView) view.findViewById(R.id.title_text);
-        title_text.setText("产品列表");
+        title_text.setText("产品列表"); //setTitleValue("产品列表");
         //切换公司
         left_text = (TextView) view.findViewById(R.id.left_text);
         left_text.setText("全部公司");
@@ -189,6 +190,8 @@ public class Frag_Product extends Frag_Base implements OnClickListener {
         BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.MainpageProduct, obj, TokenUtil.getEncodeToken(ctx), new BcbRequest.BcbCallBack<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
+                LogUtil.i("bqt", "产品列表" + response.toString());
+
                 try {
                     //如果存在返回数据时
                     if(PackageUtil.getRequestStatus(response, ctx)) {
@@ -263,10 +266,10 @@ public class Frag_Product extends Frag_Base implements OnClickListener {
         jsonRequest.setTag(BcbRequestTag.MainProductTag);
         requestQueue.add(jsonRequest);
 	}
-
+//******************************************************************************************
     class onClickViewProduct implements OnItemClickListener {
         public void onItemClick(AdapterView<?> arg0, View view, int position,long arg3) {
-            if (recordsBeans.get(position).Status == 10) {
+            if (recordsBeans.get(position).Status == 10) {//项目状态
                 return;
             }
             if (recordsBeans.get(position).Status == 20) {
@@ -274,13 +277,15 @@ public class Frag_Product extends Frag_Base implements OnClickListener {
             } else {
                 UmengUtil.eventById(ctx, R.string.list_bid_unavi);
             }
-            Activity_NormalProject_Introduction.launche(ctx,
+            Activity_NormalProject_Introduction.launche2(ctx,
                     recordsBeans.get(position).PackageId,
                     recordsBeans.get(position).Name,
-                   0);// recordsBeans.get(position).getCouponType()
+                   0,
+                    recordsBeans.get(position).Type.equals("claim_convey"));//标类型：prj_package则为普通标 claim_convey则为债权转让标
+            // recordsBeans.get(position).getCouponType()
         }
     }
-
+//******************************************************************************************
     private void setupListViewVisible(boolean status) {
         // 如果存在数据的时候，显示
         if (status) {

@@ -61,6 +61,17 @@ public class UrlsOne {
     // 投资详情
 //    public static final String TradingRecordDetail = host + "/api/v1.0/e2c1df573f9f";
     public static final String TradingRecordDetail = host + "/api/v2.0/a65000b30f36";
+    public static final String ClaimConveyDate = host + "/api/v2.0/a69000af0cfe";//获取债权转让变更记录
+
+    public static final String REQUESTZR = host + "/api/v2.0/a69000ac1b78";//申请债权转让
+    public static final String UNREQUESTZR = host + "/api/v2.0/a69100a6d8a4";//取消债权转让
+
+    //债权转让信息
+    public static final String CLAIMCONVEYDETAIL = host + "/api/v2.0/a69a00bc7e0f";
+
+    //债权转让详情
+    public static final String GETORDERCLAIMCONVEYINFO = host + "/api/v2.0/a69b00b209d2";
+
 
     // 修改登录密码
     public static final String ModifyLoginPwd = host + "/api/v1.0/d2c93c3de51b";
@@ -105,6 +116,9 @@ public class UrlsOne {
 
     // 选择优惠劵
     public static final String Select_Coupon = host + "/api/v1.0/8c1c1c07acf2";
+
+    //债权转让列表
+    public static final String SEARCHCLAIMCONVEY = host + "/api/v2.0/a69a00bc546d";
 
     // 兑换优惠劵
     public static final String Convert_Coupon = host + "/api/v1.0/95aabaaae186";
