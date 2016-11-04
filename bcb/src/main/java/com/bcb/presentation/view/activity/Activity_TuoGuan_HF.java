@@ -33,7 +33,8 @@ public class Activity_TuoGuan_HF extends Activity_Base implements View.OnClickLi
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_tuo_guan_hf);
 		ctx = this;
-		initTitle();
+		setTitleValue("资金托管");
+		setLeftTitleVisible(true);
 		findViews();
 		setOnClickListenerd();
 	}
@@ -47,16 +48,6 @@ public class Activity_TuoGuan_HF extends Activity_Base implements View.OnClickLi
 		if (App.mUserWallet != null) {
 			tv_monery.setText("" + String.format("%.2f", App.mUserWallet.getBalanceAmount()));
 		}
-	}
-
-	private void initTitle() {
-		//标题
-		TextView title_text = (TextView) findViewById(R.id.title_text);
-		title_text.setText("资金托管");
-		//返回
-		View back_img = findViewById(R.id.back_img);
-		back_img.setVisibility(View.VISIBLE);
-		back_img.setOnClickListener(this);
 	}
 
 	private void setOnClickListenerd() {
@@ -98,9 +89,6 @@ public class Activity_TuoGuan_HF extends Activity_Base implements View.OnClickLi
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-			case R.id.back_img:
-				finish();
-				break;
 			case R.id.rl_unband:
 				Activity_Browser.launcheForResult(this, "解绑", UrlsTwo.UrlUnBand, 2);
 				break;

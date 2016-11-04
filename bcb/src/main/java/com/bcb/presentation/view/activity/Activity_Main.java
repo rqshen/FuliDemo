@@ -1,27 +1,42 @@
 package com.bcb.presentation.view.activity;
 
+import android.app.DownloadManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bcb.R;
 import com.bcb.common.app.App;
 import com.bcb.common.event.BroadcastEvent;
+import com.bcb.common.net.BcbJsonRequest;
+import com.bcb.common.net.BcbRequest;
+import com.bcb.common.net.BcbRequestTag;
+import com.bcb.common.net.UrlsOne;
+import com.bcb.data.bean.transaction.VersionBean;
+import com.bcb.data.util.DownloadUtils;
 import com.bcb.data.util.LogUtil;
+import com.bcb.data.util.PackageUtil;
 import com.bcb.data.util.UmengUtil;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
 import com.bcb.presentation.view.custom.CustomViewPager;
@@ -29,68 +44,199 @@ import com.bcb.presentation.view.fragment.Frag_Main;
 import com.bcb.presentation.view.fragment.Frag_Product;
 import com.bcb.presentation.view.fragment.Frag_User;
 
-import java.text.SimpleDateFormat;
+import org.json.JSONObject;
+
+import java.io.File;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
 
 public class Activity_Main extends Activity_Base_Fragment {
-
+	
 	//viewpager
 	private CustomViewPager content;
 	private List<Fragment> mFragments;
 	private MyFragmentPagerAdapter myFragmentPagerAdapter;
-
+	
 	//3个按钮
 	private ImageView img_mainpage;
 	private ImageView img_product;
 	private ImageView img_user;
-
+	
 	private TextView txt_mainpage;
 	private TextView txt_product;
 	private TextView txt_user;
-
+	
 	private Receiver mReceiver;
-
+	
 	//底部
 	private LinearLayout bottom;
 	private AlertView alertView = null;
-
+	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		App.instance.activity_main=this;
+		App.instance.activity_main = this;
 		setContentView(R.layout.activity_main);
+		requestVersion();
 		content = (CustomViewPager) findViewById(R.id.content);
-
 		//注册广播
 		registerBroadcast();
 		init();
 		UmengUtil.update(Activity_Main.this);
 		EventBus.getDefault().register(this);
-		LogUtil.i("bqt", "【是否登录】" +App.saveUserInfo.getAccess_Token());
 
 		if (!App.saveUserInfo.getGesturePassword().isEmpty() && App.saveUserInfo.getAccess_Token() != null) {
 			Activity_Gesture_Lock.launche(Activity_Main.this, false, true);
 		}
-		//        Intent intent = getIntent();
-		//        if (intent != null) {
-		//            int jumpTo = getIntent().getIntExtra("jumpTo", 0);
-		//            switch (jumpTo) {
-		//            case 2:
-		//                setFragProduct();
-		//            	break;
-		//            case 3:
-		//                setFragUser();
-		//            	break;
-		//            default:
-		//                setFragMain();
-		//            	break;
-		//            }
-		//        }
 	}
 
+	//********************************************************************强制升级*******************************************************************
+	VersionBean versionBean;
+	DownloadCompleteReceiver downloadCompleteReceiver;
+	String fileName;
+	File apkFile;
+
+	private void requestVersion() {
+		BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.VERSION, null, null, new BcbRequest.BcbCallBack<JSONObject>() {
+			@Override
+			public void onResponse(JSONObject response) {
+				LogUtil.i("bqt", "新版本强制升级：" + response.toString());
+				JSONObject data = PackageUtil.getResultObject(response);
+				if (data != null) {
+					versionBean = App.mGson.fromJson(data.toString(), VersionBean.class);
+					//判断版本号！
+					if (versionBean != null && versionBean.Force && versionBean.Increment > getVersionCode(Activity_Main.this)) {
+						fileName = "fljr-" + versionBean.Increment + ".apk";
+						apkFile = new File(Environment.getExternalStorageDirectory().getPath() + DownloadUtils.FILE_PATH //
+								+ File.separator + fileName);
+						showVersionDialog();
+					}
+				}
+			}
+
+			@Override
+			public void onErrorResponse(Exception error) {
+				LogUtil.i("bqt", "新版本强制升级：" + error.toString());
+			}
+		});
+		jsonRequest.setTag(BcbRequestTag.UserWalletMessageTag);
+		App.getInstance().getRequestQueue().add(jsonRequest);
+	}
+
+	private void showVersionDialog() {
+		AlertView.Builder ibuilder = new AlertView.Builder(this);
+		ibuilder.setTitle("版本更新啦！");
+		ibuilder.setMessage(getTips());
+		ibuilder.setNegativeButton("退出应用", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				alertView.dismiss();
+				alertView = null;
+				finish();
+			}
+		});
+		ibuilder.setPositiveButton("立即更新", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						boolean hasDoloaded = getSharedPreferences("version", 0).getBoolean(fileName, false);
+						if (hasDoloaded) {//已下载完毕
+							if (apkFile == null || !apkFile.exists()) {
+								SharedPreferences.Editor editor = getSharedPreferences("version", 0).edit();
+								editor.clear();
+								editor.commit();
+								registerReceiver();//被删了，重新下载
+							} else installApk(Activity_Main.this);//否则，安装
+						} else if (getIsFinishedWhenDownloading()) {//上次在下载过程中退出了，下次进入应用时重新下载
+							registerReceiver();//重新下载
+						} else if (apkFile != null && apkFile.exists()) {//正在下载
+							Toast.makeText(Activity_Main.this, "正在下载，请稍后", Toast.LENGTH_SHORT).show();
+						} else {//没下载过
+							registerReceiver();
+						}
+					}
+				}
+
+		);
+		ibuilder.setGravity(Gravity.LEFT);
+		alertView = ibuilder.create();
+		alertView.setCanceledOnTouchOutside(false);
+		alertView.setCancelable(false);
+		alertView.show();
+	}
+
+	private void registerReceiver() {
+		Toast.makeText(Activity_Main.this, "正在下载新版本安装包", Toast.LENGTH_SHORT).show();
+		downloadCompleteReceiver = new DownloadCompleteReceiver();
+		IntentFilter intentFilter = new IntentFilter();
+		intentFilter.addAction(DownloadManager.ACTION_DOWNLOAD_COMPLETE);//下载完成的动作
+		registerReceiver(downloadCompleteReceiver, intentFilter);
+		DownloadUtils.downLoadFile(Activity_Main.this, versionBean.Url, fileName);//开始下载
+	}
+
+	/**
+	 * 记录是否在下载过程中退出了，如果在下载过程中退出了，下次进入应用时重新下载
+	 */
+	private void saveIsFinishedWhenDownloading() {
+		SharedPreferences.Editor editor = getSharedPreferences("version", 0).edit();
+		editor.putBoolean("finish", true);
+		editor.commit();
+	}
+
+	/**
+	 * 是否在下载过程中退出了
+	 */
+	private boolean getIsFinishedWhenDownloading() {
+		return getSharedPreferences("version", 0).getBoolean("finish", false);
+	}
+
+	public String getTips() {
+		StringBuilder sb = new StringBuilder("\n");
+		List<String> tips = versionBean.Tips;
+		if (tips != null && tips.size() > 0) {
+			for (int i = 0 ; i < tips.size() ; i++) {
+				sb.append("    " + (i + 1) + "、" + tips.get(i) + "\n");
+			}
+		}
+		return sb.deleteCharAt(sb.length() - 1).toString();
+	}
+
+	class DownloadCompleteReceiver extends BroadcastReceiver {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			if (intent.getAction().equals(DownloadManager.ACTION_DOWNLOAD_COMPLETE)) {
+				LogUtil.i("bqt", "下载完毕" + apkFile.getPath());
+				SharedPreferences.Editor editor = getSharedPreferences("version", 0).edit();
+				editor.putBoolean(fileName, true);
+				editor.commit();
+				installApk(context);
+				if (downloadCompleteReceiver != null) {
+					unregisterReceiver(downloadCompleteReceiver);
+					downloadCompleteReceiver = null;
+				}
+			}
+		}
+	}
+
+	private void installApk(Context context) {
+		Intent mIntent = new Intent(Intent.ACTION_VIEW);
+		mIntent.setDataAndType(Uri.fromFile(apkFile), "application/vnd.android.package-archive");
+		mIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		context.startActivity(mIntent);
+	}
+
+	//获取VersionCode
+	private int getVersionCode(Context context) {
+		try {
+			PackageInfo packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
+			return packageInfo.versionCode;
+		} catch (PackageManager.NameNotFoundException e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
+
+	//***************************************************************************************************************************************
 	private void init() {
 		img_mainpage = (ImageView) findViewById(R.id.img_mainpage);
 		img_product = (ImageView) findViewById(R.id.img_product);
@@ -99,7 +245,7 @@ public class Activity_Main extends Activity_Base_Fragment {
 		txt_product = (TextView) findViewById(R.id.txt_product);
 		txt_user = (TextView) findViewById(R.id.txt_user);
 		bottom = (LinearLayout) findViewById(R.id.bottom);
-
+		
 		// 初始化主界面的4个Fragment
 		Frag_Main frag_main = new Frag_Main();
 		mFragments = new ArrayList<>();
@@ -113,60 +259,60 @@ public class Activity_Main extends Activity_Base_Fragment {
 		content.addOnPageChangeListener(frag_main);
 		addFirstFragment();
 	}
-
+	
 	public void onClick(View view) {
 		switch (view.getId()) {
 			case R.id.layout_main:
 				UmengUtil.eventById(Activity_Main.this, R.string.home);
 				setFragMain();
 				break;
-
+			
 			case R.id.layout_product:
 				UmengUtil.eventById(Activity_Main.this, R.string.main_product_list);
 				setFragProduct();
 				break;
-
+			
 			case R.id.layout_user:
 				UmengUtil.eventById(Activity_Main.this, R.string.self_c);
 				setFragUser();
 				break;
-
+			
 			default:
 				break;
 		}
 	}
-
+	
 	protected void onNewIntent(android.content.Intent intent) {
 		if (intent == null) return;
 		if (null != img_user) {
 			img_mainpage.performClick();
 		}
 	}
-
+	
 	private void addFirstFragment() {
 		resetstatus(txt_mainpage);
 		img_mainpage.setImageResource(R.drawable.main_home_page_select);
 		content.setCurrentItem(0, false);
 	}
-
+	
 	private void setFragMain() {
 		resetstatus(txt_mainpage);
 		img_mainpage.setImageResource(R.drawable.main_home_page_select);
 		content.setCurrentItem(0, false);
 	}
-
+	
 	private void setFragProduct() {
 		resetstatus(txt_product);
 		img_product.setImageResource(R.drawable.main_product_select);
 		content.setCurrentItem(1, false);
 	}
-
+	
 	private void setFragUser() {
 		resetstatus(txt_user);
 		img_user.setImageResource(R.drawable.main_my_select);
 		content.setCurrentItem(3, false);
 	}
-
+	
 	private void resetstatus(TextView select) {
 		img_mainpage.setImageResource(R.drawable.main_home_page_default);
 		img_product.setImageResource(R.drawable.main_product_default);
@@ -188,33 +334,21 @@ public class Activity_Main extends Activity_Base_Fragment {
 	}
 
 	@Override
-	protected void onStart() {
-		super.onStart();
-		LogUtil.i("bqt", "【onStart时间】" + new SimpleDateFormat("mm-ss-S").format(new Date()));
-	}
-
-	@Override
-	public void onResume() {
-		super.onResume();
-	}
-
-	@Override
-	public void onPause() {
-		super.onPause();
-	}
-
-	@Override
 	protected void onDestroy() {
 		super.onDestroy();
 		try {
 			unregisterReceiver(mReceiver);
+			if (downloadCompleteReceiver != null) {//如果receiver不为空，说明正在下载APK包，即使应用退出了，也会继续下载
+				unregisterReceiver(downloadCompleteReceiver);
+				saveIsFinishedWhenDownloading();//如果在下载过程中退出了，下次进入应用时重新下载
+			}
 		} catch (Exception e) {
 		}
 		EventBus.getDefault().unregister(this);
 	}
-
+	
 	//接收事件
-
+	
 	public void onEventMainThread(BroadcastEvent event) {
 		//判断要显示的fragment
 		String flag = event.getFlag();
@@ -235,7 +369,7 @@ public class Activity_Main extends Activity_Base_Fragment {
 			}
 		}
 	}
-
+	
 	@Override
 	public Resources getResources() {
 		Resources res = super.getResources();
@@ -245,23 +379,23 @@ public class Activity_Main extends Activity_Base_Fragment {
 		res.updateConfiguration(config, res.getDisplayMetrics());
 		return res;
 	}
-
+	
 	@Override
 	public void onBackPressed() {
 		showExitAlertView();
 	}
-
+	
 	//主要是为了获取底部的高度，浮标按钮要用到
 	public int getBottomHeight() {
 		return bottom.getLayoutParams().height;
 	}
-
+	
 	private void registerBroadcast() {
 		mReceiver = new Receiver();
 		registerReceiver(mReceiver, new IntentFilter("com.bcb.update.mainui"));
 		registerReceiver(mReceiver, new IntentFilter("com.bcb.product.regular"));
 	}
-
+	
 	//提示是否退出APP
 	private void showExitAlertView() {
 		AlertView.Builder ibuilder = new AlertView.Builder(this);
@@ -282,19 +416,19 @@ public class Activity_Main extends Activity_Base_Fragment {
 		alertView = ibuilder.create();
 		alertView.show();
 	}
-
+	
 	/**
 	 * viewpager适配器
 	 */
 	private class MyFragmentPagerAdapter extends FragmentPagerAdapter {
-
+		
 		private List<Fragment> tabs = null;
-
+		
 		public MyFragmentPagerAdapter(FragmentManager fm, List<Fragment> tabs) {
 			super(fm);
 			this.tabs = tabs;
 		}
-
+		
 		@Override
 		public Fragment getItem(int pos) {
 			Fragment fragment = null;
@@ -303,22 +437,22 @@ public class Activity_Main extends Activity_Base_Fragment {
 			}
 			return fragment;
 		}
-
+		
 		@Override
 		public int getItemPosition(Object object) {
 			return POSITION_NONE;
 		}
-
+		
 		@Override
 		public int getCount() {
 			if (tabs != null && tabs.size() > 0) return tabs.size();
 			return 0;
 		}
-
+		
 		@Override
 		public Object instantiateItem(ViewGroup container, int position) {
 			return super.instantiateItem(container, position);
 		}
 	}
-
+	
 }

@@ -130,18 +130,18 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
 				tv_next.setVisibility(View.GONE);
 				break;
 			case BUY_HF_SUCCESS:
-				title_text.setText("申购成功");
+				title_text.setText("购买成功");
 				iv_pic.setImageResource(R.drawable.success_open_hf);
-				tv_up.setText("申购成功");
+				tv_up.setText("购买成功");
 				tv_down.setVisibility(View.GONE);
 				tv_next.setText("返回个人中心");
 				tv_next.setClickable(false);//╮(╯▽╰)╭
 				handler.sendMessageDelayed(Message.obtain(handler, 2), 2000);
 				break;
 			case BUY_HF_FAILED:
-				title_text.setText("申购失败");
+				title_text.setText("购买失败");
 				iv_pic.setImageResource(R.drawable.failed_buy_fh);
-				tv_up.setText("申购失败");
+				tv_up.setText("购买失败");
 				tv_down.setText(message);
 				tv_next.setText("联系客服");
 				break;
@@ -196,7 +196,7 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
 				tv_up.setText("开通成功");
 				tv_down.setText("");
 				tv_next.setText("完成");
-//				App.mUserDetailInfo.AutoTenderPlanStatus=true;//手动更改
+				//				App.mUserDetailInfo.AutoTenderPlanStatus=true;//手动更改
 				tv_next.setClickable(false);//╮(╯▽╰)╭
 				handler.sendMessageDelayed(Message.obtain(handler, 1), 2000);//请求服务器最新信息
 				break;
@@ -356,13 +356,13 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
 				BcbRequest.BcbCallBack<JSONObject>() {
 			@Override
 			public void onResponse(JSONObject response) {
+				tv_next.setClickable(true);
 				requestUserBankCard();
 				LogUtil.i("bqt", "刷新－－账户余额：" + response.toString());
 				if (PackageUtil.getRequestStatus(response, ctx)) {
 					JSONObject data = PackageUtil.getResultObject(response);
 					if (data != null) {
 						App.mUserWallet = App.mGson.fromJson(data.toString(), UserWallet.class);
-						tv_next.setClickable(true);
 						switch (type) {
 							case CHARGE__HF_SUCCESS:
 								tv_down.setText("当前账户余额：" + String.format("%.2f", App.mUserWallet.getBalanceAmount()));
@@ -374,7 +374,7 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
 
 			@Override
 			public void onErrorResponse(Exception error) {
-				requestUserBankCard();
+				tv_next.setClickable(true);
 				ToastUtil.alert(ctx, "网络异常，请稍后重试");
 			}
 		});
@@ -390,18 +390,19 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
 				.BcbCallBack<JSONObject>() {
 			@Override
 			public void onResponse(JSONObject response) {
+				tv_next.setClickable(true);
 				LogUtil.i("bqt", "绑定的银行卡：" + response.toString());
 				if (PackageUtil.getRequestStatus(response, ctx)) {
 					JSONObject data = PackageUtil.getResultObject(response);
 					if (data != null && App.mUserDetailInfo != null) {
 						App.mUserDetailInfo.BankCard = App.mGson.fromJson(data.toString(), UserBankCard.class);
-						tv_next.setClickable(true);
 					}
 				}
 			}
 
 			@Override
 			public void onErrorResponse(Exception error) {
+				tv_next.setClickable(true);
 			}
 		});
 		jsonRequest.setTag(BcbRequestTag.UserWalletMessageTag);
@@ -422,19 +423,20 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
 				.BcbCallBack<JSONObject>() {
 			@Override
 			public void onResponse(JSONObject response) {
+				tv_next.setClickable(true);
 				LogUtil.i("bqt", "用户信息返回数据：" + response.toString());
 				if (PackageUtil.getRequestStatus(response, ctx)) {
 					JSONObject data = PackageUtil.getResultObject(response);
 					if (data != null) {
 						//将获取到的银行卡数据写入静态数据区中
 						App.mUserDetailInfo = App.mGson.fromJson(data.toString(), UserDetailInfo.class);
-						tv_next.setClickable(true);
 					}
 				}
 			}
 
 			@Override
 			public void onErrorResponse(Exception error) {
+				tv_next.setClickable(true);
 			}
 		});
 		jsonRequest.setTag(BcbRequestTag.UserBankMessageTag);

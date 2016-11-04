@@ -193,6 +193,8 @@ public class Activity_Trading_Record extends Activity_Base {
 
 			@Override
 			public void onErrorResponse(Exception error) {
+				LogUtil.i("bqt", "【Activity_Trading_Record】【onErrorResponse】" + error.toString());
+				
 				refreshLayout.refreshFinish(PullToRefreshLayout.FAIL);
 				refreshLayout.loadmoreFinish(PullToRefreshLayout.FAIL);
 				if (recordsBeans == null || recordsBeans.size() <= 0) {

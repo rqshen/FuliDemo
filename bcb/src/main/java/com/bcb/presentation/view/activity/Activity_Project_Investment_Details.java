@@ -66,8 +66,8 @@ public class Activity_Project_Investment_Details extends Activity_Base implement
 			@Override
 			public void onClick(View v) {
 				if (bean != null && bean.PackageId != null && bean.Type != null) {
-					Activity_NormalProject_Introduction.launche2(Activity_Project_Investment_Details.this, bean.PackageId, bean
-							.getPackageName(), 0, bean.Type.endsWith("claim_convey"));//标类型：prj_package则为普通标 claim_convey则为债权转让标
+					Activity_NormalProject_Introduction.launche2(Activity_Project_Investment_Details.this, bean.PackageId, 0, bean
+							.Type.endsWith("claim_convey"));//标类型：prj_package则为普通标 claim_convey则为债权转让标
 				} else Toast.makeText(Activity_Project_Investment_Details.this, "获取数据失败", Toast.LENGTH_SHORT).show();
 			}
 		});

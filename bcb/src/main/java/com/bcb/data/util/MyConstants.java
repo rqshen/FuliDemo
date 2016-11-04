@@ -4,14 +4,14 @@ public class MyConstants {
 
 	public static final String IDCARDTYPE = "01";
 
-	public static final String HOST_DEV_LOCAL = "http://192.168.1.111:7071";//本地，http://192.168.1.200:7071
-	public static final String HOST_DEV = "http://ttgateway.100cb.cn";//线下
-	public static final String HOST_RELEASE = "http://app.fulijr.com";//正式
+	public static final String HOST_DEV_LOCAL = "http://192.168.1.111:7071";//本地，"http://192.168.1.111:7071"
+	public static final String HOST_DEV = "http://ttgateway.100cb.cn";//线下"http://ttgateway.100cb.cn";
+	public static final String HOST_RELEASE = "http://app.fulijr.com";//正式"http://app.fulijr.com";
 
 	public static final String HOST_DEV_Static = "http://ttwap.100cb.cn";//测试
 	public static final String HOST_RELEASE_Static = "http://wap.fulijr.com";//正式
 
-	public static int TESTMODE = 1;// 0为本地，1为线下，2为正式
+	public static int TESTMODE = 0;// 0为本地，1为线下，2为正式
 
 	public static String getHost() {
 		switch (TESTMODE) {

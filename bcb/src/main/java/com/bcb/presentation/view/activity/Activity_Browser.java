@@ -3,6 +3,7 @@ package com.bcb.presentation.view.activity;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -35,6 +36,7 @@ import com.bcb.data.util.MQCustomerManager;
 import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.MyConstants;
 import com.bcb.data.util.ToastUtil;
+import com.bcb.presentation.view.custom.AlertView.AlertView;
 import com.bcb.presentation.view.custom.Browser.X5WebView;
 import com.bcb.presentation.view.custom.CustomDialog.DialogWidget;
 import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
@@ -69,7 +71,7 @@ public class Activity_Browser extends Activity_Base {
 	private DialogWidget certDialog;
 	//微信分享
 	private IWXAPI iwxapi;
-
+	AlertView alertView;
 	private Context context;
 	private ProgressBar mPageLoadingProgressBar;
 	RelativeLayout root;
@@ -159,6 +161,28 @@ public class Activity_Browser extends Activity_Base {
 					}
 				});
 			}
+
+			if (title.equals("解绑")) {
+				setRightTitleValue("托管账号", new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						AlertView.Builder ibuilder = new AlertView.Builder(context);
+						ibuilder.setTitle("账号提示");
+						ibuilder.setMessage("您的汇付资金托管账户为：\n" + App.mUserDetailInfo.CustodyAccount);
+						ibuilder.setPositiveButton("复制", new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								((android.content.ClipboardManager) context.getSystemService(CLIPBOARD_SERVICE)).setText(App
+										.mUserDetailInfo.CustodyAccount);
+								alertView.dismiss();
+							}
+						});
+						ibuilder.setNegativeButton("取消", null);
+						alertView = ibuilder.create();
+						alertView.show();
+					}
+				});
+			}
 		}
 		//硬件加速
 		try {
@@ -176,7 +200,7 @@ public class Activity_Browser extends Activity_Base {
 		setTitleValue(title);
 
 		mViewParent = (ViewGroup) findViewById(R.id.layout_webview);
-		root= (RelativeLayout) findViewById(R.id.root);
+		root = (RelativeLayout) findViewById(R.id.root);
 
 		QbSdk.preInit(this);
 		X5WebView.setSmallWebViewEnabled(true);

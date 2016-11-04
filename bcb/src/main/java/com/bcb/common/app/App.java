@@ -37,17 +37,18 @@ import cn.jpush.android.api.JPushInterface;
 import cn.jpush.android.api.TagAliasCallback;
 import de.greenrobot.event.EventBus;
 
-public class App extends Application implements AMapLocationListener{
+public class App extends Application implements AMapLocationListener {
+
 	public Activity_Main activity_main;
 	public static final String TAG = "App";
 	public static SaveUserInfoUtils saveUserInfo;
 	public static SaveConfigUtil saveConfigUtil;
 	public static Gson mGson;
 	public static App instance;
-    //存放银行卡信息
-    public static UserDetailInfo mUserDetailInfo;
-    //存放余额
-    public static UserWallet mUserWallet;
+	//存放银行卡信息
+	public static UserDetailInfo mUserDetailInfo;
+	//存放余额
+	public static UserWallet mUserWallet;
 
 	//存放是否隐藏加入公司的Banner
 	public static Boolean viewJoinBanner = true;
@@ -66,8 +67,8 @@ public class App extends Application implements AMapLocationListener{
 		//数据库初始化
 		LitePalApplication.initialize(this);
 		//极光推送初始化
-		JPushInterface.setDebugMode(false); 	// 设置开启日志,发布时请关闭日志
-		JPushInterface.init(this);     		// 初始化 JPush
+		JPushInterface.setDebugMode(false);    // 设置开启日志,发布时请关闭日志
+		JPushInterface.init(this);            // 初始化 JPush
 
 		//关闭友盟bug收集
 		MobclickAgent.setCatchUncaughtExceptions(false);
@@ -79,25 +80,25 @@ public class App extends Application implements AMapLocationListener{
 		}
 		if (saveConfigUtil == null) {
 			saveConfigUtil = new SaveConfigUtil(this);
-		}		
+		}
 		if (mGson == null) {
 			mGson = new Gson();
 		}
-        if (mUserWallet == null) {
-            mUserWallet = new UserWallet();
-        }
-        if (mUserDetailInfo == null) {
-            mUserDetailInfo = new UserDetailInfo();
-        }
+		if (mUserWallet == null) {
+			mUserWallet = new UserWallet();
+		}
+		if (mUserDetailInfo == null) {
+			mUserDetailInfo = new UserDetailInfo();
+		}
 		instance = this;
 
 		requestQueue = BcbNetworkManager.newRequestQueue(instance);
 
-		mapUtil = new MapUtil(this,this);
+		mapUtil = new MapUtil(this, this);
 		//获取定位数据
 		doLocation();
 		//获取福利数据
-		if (null != saveUserInfo.getAccess_Token()){
+		if (null != saveUserInfo.getAccess_Token()) {
 			WelfareBean welfareBean = DbUtil.getWelfare();
 			welfare = null == welfareBean ? "" : welfareBean.getValue();
 		} else {
@@ -120,11 +121,11 @@ public class App extends Application implements AMapLocationListener{
 	}
 
 	public static App getInstance() {
-	    return instance;
-	} 
+		return instance;
+	}
 
 	public static Context getContext() {
-	    return instance.getApplicationContext();
+		return instance.getApplicationContext();
 	}
 
 	public String getWelfare() {
@@ -138,7 +139,7 @@ public class App extends Application implements AMapLocationListener{
 	/**
 	 * 设置极光推送别名
 	 */
-	public void setAlias(){
+	public void setAlias() {
 		LogUtil.d(TAG, "CustomerId = " + mUserDetailInfo.getCustomerId());
 		JPushInterface.setAliasAndTags(getApplicationContext(), mUserDetailInfo.getCustomerId(), null, mAliasCallback);
 	}
@@ -146,7 +147,7 @@ public class App extends Application implements AMapLocationListener{
 	/**
 	 * 设置极光推送标签
 	 */
-	public void setTag(){
+	public void setTag() {
 		Set<String> tagSet = new LinkedHashSet<>();
 		tagSet.add(mUserDetailInfo.getCustomerId());//设置别名为CustomerId
 		LogUtil.d(TAG, "CustomerId = " + tagSet.toString());
@@ -157,9 +158,10 @@ public class App extends Application implements AMapLocationListener{
 	/**
 	 * 查询今日拆得利率
 	 */
-	public void requestWelfare(){
+	public void requestWelfare() {
 		JSONObject obj = new JSONObject();
-		BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.SearchWelfareData, obj, TokenUtil.getEncodeToken(instance), true, new BcbRequest.BcbCallBack<JSONObject>() {
+		BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.SearchWelfareData, obj, TokenUtil.getEncodeToken(instance), true, new
+				BcbRequest.BcbCallBack<JSONObject>() {
 			@Override
 			public void onResponse(JSONObject response) {
 				try {
@@ -167,7 +169,7 @@ public class App extends Application implements AMapLocationListener{
 						//设置对应位置的数据
 						String value = response.getJSONObject("result").getString("Rate");
 						LogUtil.d("福袋数据", value);
-						if (!TextUtils.isEmpty(value) && Float.valueOf(value) > 0){
+						if (!TextUtils.isEmpty(value) && Float.valueOf(value) > 0) {
 							//保存到数据库
 							DbUtil.saveWelfare(value);
 							setWelfare(value);
@@ -179,6 +181,7 @@ public class App extends Application implements AMapLocationListener{
 					e.printStackTrace();
 				}
 			}
+
 			@Override
 			public void onErrorResponse(Exception error) {
 
@@ -187,8 +190,7 @@ public class App extends Application implements AMapLocationListener{
 		requestQueue.add(jsonRequest);
 	}
 
-
-	public void doLocation(){
+	public void doLocation() {
 		mapUtil.start();
 	}
 
@@ -197,14 +199,14 @@ public class App extends Application implements AMapLocationListener{
 		//在保存地理位置的时候顺便保存一下其他额外信息(网络环境、手机型号、imei)
 		String address = "";
 		if (null != aMapLocation) {
-//			LogUtil.d("位置信息", mapUtil.getLocationStr(aMapLocation));
+			//			LogUtil.d("位置信息", mapUtil.getLocationStr(aMapLocation));
 			address = aMapLocation.getAddress();
 		}
 		String imei = SystemUtil.getImei(this);
 		String model = android.os.Build.MODEL;
 		String network = SystemUtil.getNetworkType(this);
 		LogUtil.d("位置信息", "imei = " + imei + " model = " + model + " network = " + network + " address = " + address);
-		DbUtil.saveUserExtra(imei,model,network,address);
+		DbUtil.saveUserExtra(imei, model, network, address);
 	}
 
 	//仅用于JPush测试
@@ -212,7 +214,7 @@ public class App extends Application implements AMapLocationListener{
 
 		@Override
 		public void gotResult(int code, String alias, Set<String> tags) {
-			String logs ;
+			String logs;
 			switch (code) {
 				case 0:
 					logs = "Set tag and alias success";
@@ -236,7 +238,7 @@ public class App extends Application implements AMapLocationListener{
 
 		@Override
 		public void gotResult(int code, String alias, Set<String> tags) {
-			String logs ;
+			String logs;
 			switch (code) {
 				case 0:
 					logs = "Set tag and alias success";

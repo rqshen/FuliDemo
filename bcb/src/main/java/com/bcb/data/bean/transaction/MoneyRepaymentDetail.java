@@ -9,6 +9,8 @@ import java.io.Serializable;
 public class MoneyRepaymentDetail implements Serializable {
     public float Principal; //回款本金
     public String AssetName;//资产名字
+    public float  SubsidyAmount;   //	赠券补贴
+    public float  PenaltyAmount;   //	违约金
     public float  Interest;   //利息金额
     public String PayDate;  //回款时间
     public int Period;  //回款期数

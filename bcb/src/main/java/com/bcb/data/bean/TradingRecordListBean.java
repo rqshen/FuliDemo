@@ -67,7 +67,7 @@ public class TradingRecordListBean {
 			private String PackageName;
 			private String PayTime;
 			private float Rate;
-			private float InterestAmount;
+//			private float InterestAmount;
 
 			public String getDuration() { return Duration;}
 
@@ -97,9 +97,6 @@ public class TradingRecordListBean {
 
 			public void setRate(float Rate) { this.Rate = Rate;}
 
-			public float getInterestAmount() { return InterestAmount;}
-
-			public void setInterestAmount(float InterestAmount) { this.InterestAmount = InterestAmount;}
 		}
 	}
 }

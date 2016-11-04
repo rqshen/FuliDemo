@@ -178,6 +178,9 @@ public class UrlsOne {
 //    public static final String UserWalletMessage = host + "/api/v1.0/e7401af956b5";
     public static final String UserWalletMessage = host_v2 + "/api/v2.0/a64701348128";//2016-7-25更改
 
+    //是否升级
+    public static final String VERSION = host_v2 + "/api/v1.0/a560012e859f";//获取版本号
+
     //参加每日福利
     public static final String JoinDailyWelfare = host + "/api/v1.3.4/a60100aabccb";
     //每日福利统计的数据

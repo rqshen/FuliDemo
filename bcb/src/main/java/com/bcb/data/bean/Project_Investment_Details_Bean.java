@@ -21,7 +21,6 @@ public class Project_Investment_Details_Bean implements Serializable {
 	public String PackageId;//项目Id
 	public String Type;//项目类型：prj_package则为普通标 claim_convey则为债权转让标
 
-
 	private float OrderAmount;//在投本金
 	private float Interest;//已获收益
 	private String EndDate;//到期时间
