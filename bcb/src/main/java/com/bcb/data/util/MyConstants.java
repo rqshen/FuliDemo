@@ -1,5 +1,6 @@
 package com.bcb.data.util;
 
+//分支
 public class MyConstants {
 
 	public static final String IDCARDTYPE = "01";
