@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\release\\values-w820dp-v13\\values-w820dp-v13.xml",
+        "outputFile": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\release\\values-w820dp-v13\\values-w820dp-v13.xml",
         "map": [
             {
                 "to": {
@@ -11,7 +11,7 @@
                     "endOffset": 108
                 },
                 "from": {
-                    "file": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\values-w820dp\\dimens.xml",
+                    "file": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\values-w820dp\\dimens.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,

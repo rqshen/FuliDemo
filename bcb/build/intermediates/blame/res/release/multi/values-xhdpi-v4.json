@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\release\\values-xhdpi-v4\\values-xhdpi-v4.xml",
+        "outputFile": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\release\\values-xhdpi-v4\\values-xhdpi-v4.xml",
         "map": [
             {
                 "to": {
@@ -11,7 +11,7 @@
                     "endOffset": 102
                 },
                 "from": {
-                    "file": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\values-xhdpi\\dimens.xml",
+                    "file": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\values-xhdpi\\dimens.xml",
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,
@@ -30,7 +30,7 @@
                     "endOffset": 172
                 },
                 "from": {
-                    "file": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\values-xhdpi\\dimens.xml",
+                    "file": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\values-xhdpi\\dimens.xml",
                     "position": {
                         "startLine": 5,
                         "startColumn": 4,

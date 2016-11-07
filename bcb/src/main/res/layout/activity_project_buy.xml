@@ -299,7 +299,7 @@
                     android:gravity="center"
                     android:paddingBottom="0dip"
                     android:paddingTop="0dip"
-                    android:text="@string/buy"
+                    android:text="立即申购"
                     android:textColor="@color/white"
                     android:textSize="@dimen/main_text_default"/>
 

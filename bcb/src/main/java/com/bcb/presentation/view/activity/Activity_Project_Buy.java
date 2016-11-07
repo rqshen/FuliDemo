@@ -335,7 +335,7 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 						if (null != mUserWallet) {
 							App.mUserWallet = mUserWallet;
 							wallet_money.setText(String.format("%.2f", App.mUserWallet.BalanceAmount) + "元");
-							button_buy.setText("立即购买");
+							button_buy.setText("立即申购");
 						}
 					} else if (status == -5) {
 						startActivity(new Intent(Activity_Project_Buy.this, Activity_Login.class));
