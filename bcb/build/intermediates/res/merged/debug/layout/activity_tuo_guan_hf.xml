@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <include layout="@layout/frag_base"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_top"
+        android:layout_width="305dp"
+        android:layout_height="181dp"
+        android:layout_marginTop="16dp"
+
+        android:background="@drawable/tg_hf_bg">
+
+        <ImageView
+            android:id="@+id/iv_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/tg_hf"/>
+
+        <TextView
+            android:id="@+id/tv_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/tg_hf_tv_bg"
+            android:gravity="center"
+            android:paddingBottom="3dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="15dp"
+            android:paddingTop="3dp"
+            android:singleLine="true"
+            android:text="资金托管账户"
+            android:textColor="#fff"
+            android:textSize="12sp"/>
+
+        <LinearLayout
+            android:id="@+id/ll_middle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:text="账户："
+                    android:textColor="#000"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:id="@+id/tv_account"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:text="123456789"
+                    android:textColor="#000"
+                    android:textSize="16sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginLeft="50dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:text="余额："
+                    android:textColor="#000"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:id="@+id/tv_monery"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:text="10000.00"
+                    android:textColor="#fff"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:gravity="center"
+                    android:singleLine="true"
+                    android:text="(元)"
+                    android:textColor="#000"
+                    android:textSize="16sp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_click"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="15dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_charge"
+                android:layout_width="100dp"
+                android:layout_height="37dp"
+                android:background="@drawable/stroke_trans_red"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="充值"
+                android:textColor="#db3838"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:id="@+id/tv_get"
+                android:layout_width="100dp"
+                android:layout_height="37dp"
+                android:layout_marginLeft="25dp"
+                android:background="@drawable/stroke_trans_red"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="提现"
+                android:textColor="#db3838"
+                android:textSize="16sp"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_look"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="30dp"
+        >
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="查看托管接入证明"
+            android:textColor="@color/txt_gray"
+            android:textSize="13sp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/forward_default"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignParentBottom="true"
+            android:background="#dbdbdb"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_login"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        >
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="登录资金托管账户"
+            android:textColor="@color/txt_gray"
+            android:textSize="13sp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/forward_default"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignParentBottom="true"
+            android:background="#dbdbdb"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_find_deal"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        >
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="找回汇付交易密码"
+            android:textColor="@color/txt_gray"
+            android:textSize="13sp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/forward_default"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignParentBottom="true"
+            android:background="#dbdbdb"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_find_login"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        >
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="找回汇付登录密码"
+            android:textColor="@color/txt_gray"
+            android:textSize="13sp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/forward_default"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignParentBottom="true"
+            android:background="#dbdbdb"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_alert_deal"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        >
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="修改汇付交易密码"
+            android:textColor="@color/txt_gray"
+            android:textSize="13sp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/forward_default"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignParentBottom="true"
+            android:background="#dbdbdb"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_unband"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        >
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="解绑银行卡"
+            android:textColor="@color/txt_gray"
+            android:textSize="13sp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/forward_default"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignParentBottom="true"
+            android:background="#dbdbdb"/>
+
+    </RelativeLayout>
+</LinearLayout>

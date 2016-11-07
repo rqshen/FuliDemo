@@ -1,0 +1,830 @@
+[
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\abc_spinner_mtrl_am_alpha.9.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-xxxhdpi\\abc_spinner_mtrl_am_alpha.9.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\project_examine.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\project_examine.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\loan_ico_capital.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\loan_ico_capital.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\login_introduction_image02.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\login_introduction_image02.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\ico_pic.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\ico_pic.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\abc_btn_check_to_on_mtrl_015.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-xxxhdpi\\abc_btn_check_to_on_mtrl_015.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\bcb_logo.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\bcb_logo.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\weixin_timeline.jpg",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\weixin_timeline.jpg"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\managed_slb.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\managed_slb.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\loan_ico_money.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\loan_ico_money.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\abc_ic_menu_share_mtrl_alpha.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-xxxhdpi\\abc_ic_menu_share_mtrl_alpha.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\ico_join_bonus.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\ico_join_bonus.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\ico_join_v.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\ico_join_v.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\abc_btn_check_to_on_mtrl_000.png",
+        "source": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-xxxhdpi\\abc_btn_check_to_on_mtrl_000.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\money_status_doing.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\money_status_doing.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\ico_safe.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\ico_safe.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\ico_join_apply.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\ico_join_apply.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\login_logo.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\login_logo.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\ico_shield.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\ico_shield.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\icon_project_customer_light.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\icon_project_customer_light.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\privilege_money.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\privilege_money.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\apply_borrow_01.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\apply_borrow_01.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\account_setting.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\account_setting.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\icon_loan_repayment.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\icon_loan_repayment.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\abc_ic_menu_moreoverflow_mtrl_alpha.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-xxxhdpi\\abc_ic_menu_moreoverflow_mtrl_alpha.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\borrow_bg_success.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\borrow_bg_success.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\ico_love.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\ico_love.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\apply_form_borrow.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\apply_form_borrow.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\main_home_page_default.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\main_home_page_default.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\abc_ic_clear_mtrl_alpha.png",
+        "source": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-xxxhdpi\\abc_ic_clear_mtrl_alpha.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\buyproject_success_image.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\buyproject_success_image.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\account_tg.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\account_tg.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\withdraw_success_image.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\withdraw_success_image.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\loan_ico_tlimit.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\loan_ico_tlimit.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\abc_ic_menu_paste_mtrl_am_alpha.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-xxxhdpi\\abc_ic_menu_paste_mtrl_am_alpha.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\loan_ico_house.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\loan_ico_house.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\borrow_bg_success.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\borrow_bg_success.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\join_company_banner.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\join_company_banner.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\couponlogo.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\couponlogo.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\ico_safe.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\ico_safe.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\icon_company_default.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\icon_company_default.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\project_examine.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\project_examine.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\loan_ico_capital.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\loan_ico_capital.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\icon_privilege_info.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\icon_privilege_info.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\loan_ico_money.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\loan_ico_money.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\investment_detail_image.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\investment_detail_image.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\icon_project_customer.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\icon_project_customer.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\icon_loan_material.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\icon_loan_material.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\abc_btn_radio_to_on_mtrl_000.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-xxxhdpi\\abc_btn_radio_to_on_mtrl_000.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\ico_shield_white.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\ico_shield_white.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\account_setting.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\account_setting.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\apply_form_borrow.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\apply_form_borrow.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\abc_ic_ab_back_mtrl_am_alpha.png",
+        "source": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-xxxhdpi\\abc_ic_ab_back_mtrl_am_alpha.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\loan_ico_life.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\loan_ico_life.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\abc_switch_track_mtrl_alpha.9.png",
+        "source": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-xxxhdpi\\abc_switch_track_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\borrow_bg_unsuccess.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\borrow_bg_unsuccess.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\join_company_banner.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\join_company_banner.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\ico_college.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\ico_college.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\main_product_select.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\main_product_select.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\loan_ico_house.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\loan_ico_house.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\icon_project_customer_light.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\icon_project_customer_light.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\main_my_default.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\main_my_default.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\investment_detail_image.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\investment_detail_image.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\login_introduction_image02.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\login_introduction_image02.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\ico_borrow_cam.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\ico_borrow_cam.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\money_item_detail_phone.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\money_item_detail_phone.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\icon_loan_interest.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\icon_loan_interest.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\money_status_success.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\money_status_success.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\main_home_page_select.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\main_home_page_select.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\login_introduction_image01.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\login_introduction_image01.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\borrow_request_normal.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\borrow_request_normal.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\coupons.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\coupons.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\abc_btn_radio_to_on_mtrl_015.png",
+        "source": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-xxxhdpi\\abc_btn_radio_to_on_mtrl_015.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\abc_btn_switch_to_on_mtrl_00001.9.png",
+        "source": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-xxxhdpi\\abc_btn_switch_to_on_mtrl_00001.9.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\icon_loan_material.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\icon_loan_material.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\icon_user_customer.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\icon_user_customer.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\abc_spinner_mtrl_am_alpha.9.png",
+        "source": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-xxxhdpi\\abc_spinner_mtrl_am_alpha.9.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\loan_request_arrow.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\loan_request_arrow.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\ico_details.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\ico_details.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\arrow_down.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\arrow_down.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\abc_ic_menu_moreoverflow_mtrl_alpha.png",
+        "source": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-xxxhdpi\\abc_ic_menu_moreoverflow_mtrl_alpha.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\coupons.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\coupons.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\abc_ic_menu_copy_mtrl_am_alpha.png",
+        "source": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-xxxhdpi\\abc_ic_menu_copy_mtrl_am_alpha.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\company_reedit.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\company_reedit.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\loan_request_select.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\loan_request_select.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\money_status_failed.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\money_status_failed.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\apply_borrow_01.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\apply_borrow_01.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\main_my_default.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\main_my_default.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\abc_btn_switch_to_on_mtrl_00012.9.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-xxxhdpi\\abc_btn_switch_to_on_mtrl_00012.9.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\abc_btn_switch_to_on_mtrl_00001.9.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-xxxhdpi\\abc_btn_switch_to_on_mtrl_00001.9.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\abc_ic_search_api_mtrl_alpha.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-xxxhdpi\\abc_ic_search_api_mtrl_alpha.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\user_customer_tips.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\user_customer_tips.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\abc_ic_menu_selectall_mtrl_alpha.png",
+        "source": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-xxxhdpi\\abc_ic_menu_selectall_mtrl_alpha.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\trade_record.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\trade_record.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\trade_record.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\trade_record.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\ico_explain.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\ico_explain.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\abc_tab_indicator_mtrl_alpha.9.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-xxxhdpi\\abc_tab_indicator_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\abc_ic_clear_mtrl_alpha.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-xxxhdpi\\abc_ic_clear_mtrl_alpha.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\weixin_timeline.jpg",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\weixin_timeline.jpg"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\privilege_money.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\privilege_money.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\invitation_award.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\invitation_award.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\buyproject_success_image.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\buyproject_success_image.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\ico_welfare.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\ico_welfare.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\bank_logo.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\bank_logo.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\abc_btn_check_to_on_mtrl_015.png",
+        "source": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-xxxhdpi\\abc_btn_check_to_on_mtrl_015.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\ico_list.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\ico_list.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\icon_contact.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\icon_contact.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\main_home_page_select.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\main_home_page_select.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\freeze_amount.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\freeze_amount.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\abc_scrubber_control_to_pressed_mtrl_000.png",
+        "source": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-xxxhdpi\\abc_scrubber_control_to_pressed_mtrl_000.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\ico_borrow_cam.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\ico_borrow_cam.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\company_reedit.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\company_reedit.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\abc_btn_check_to_on_mtrl_000.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-xxxhdpi\\abc_btn_check_to_on_mtrl_000.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\ico_join_v.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\ico_join_v.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\ico_explain.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\ico_explain.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\abc_ic_menu_share_mtrl_alpha.png",
+        "source": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-xxxhdpi\\abc_ic_menu_share_mtrl_alpha.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\ico_shield.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\ico_shield.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\withdraw_success_image.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\withdraw_success_image.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\icon_project_customer.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\icon_project_customer.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\abc_btn_switch_to_on_mtrl_00012.9.png",
+        "source": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-xxxhdpi\\abc_btn_switch_to_on_mtrl_00012.9.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\freeze_amount.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\freeze_amount.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\loan_ico_rate.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\loan_ico_rate.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\ico_ques.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\ico_ques.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\icon_privilege_info.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\icon_privilege_info.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\main_product_select.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\main_product_select.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\login_introduction_image01.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\login_introduction_image01.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\icon_loan_amount.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\icon_loan_amount.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\money_status_back.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\money_status_back.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\icon_joined_company.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\icon_joined_company.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\abc_ic_menu_cut_mtrl_alpha.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-xxxhdpi\\abc_ic_menu_cut_mtrl_alpha.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\bg_item_privilege_money.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\bg_item_privilege_money.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\main_my_select.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\main_my_select.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\managed_slb.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\managed_slb.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\abc_ic_voice_search_api_mtrl_alpha.png",
+        "source": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-xxxhdpi\\abc_ic_voice_search_api_mtrl_alpha.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\money_status_success.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\money_status_success.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\couponlogo.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\couponlogo.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\icon_contact.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\icon_contact.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\ico_list.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\ico_list.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\account_tg.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\account_tg.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\ico_love.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\ico_love.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\flow_water.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\flow_water.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\abc_scrubber_control_to_pressed_mtrl_000.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-xxxhdpi\\abc_scrubber_control_to_pressed_mtrl_000.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\borrow_request_highlight.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\borrow_request_highlight.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\borrow_money.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\borrow_money.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\icon_loan_amount.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\icon_loan_amount.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\icon_loan_interest.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\icon_loan_interest.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\abc_btn_radio_to_on_mtrl_000.png",
+        "source": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-xxxhdpi\\abc_btn_radio_to_on_mtrl_000.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\ico_ques.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\ico_ques.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\icon_loan_repayment.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\icon_loan_repayment.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\money_status_doing.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\money_status_doing.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\money_item_detail_phone.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\money_item_detail_phone.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\loan_ico_rate.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\loan_ico_rate.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\abc_ic_ab_back_mtrl_am_alpha.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-xxxhdpi\\abc_ic_ab_back_mtrl_am_alpha.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\main_product_default.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\main_product_default.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\borrow_money.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\borrow_money.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\icon_coupon.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\icon_coupon.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\managed_funds.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\managed_funds.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\loan_request_select.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\loan_request_select.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\abc_scrubber_control_to_pressed_mtrl_005.png",
+        "source": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-xxxhdpi\\abc_scrubber_control_to_pressed_mtrl_005.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\abc_ic_voice_search_api_mtrl_alpha.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-xxxhdpi\\abc_ic_voice_search_api_mtrl_alpha.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\icon_coupon.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\icon_coupon.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\ico_details.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\ico_details.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\borrow_request_highlight.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\borrow_request_highlight.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\main_product_default.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\main_product_default.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\loan_ico_tlimit.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\loan_ico_tlimit.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\flow_water.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\flow_water.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\money_status_failed.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\money_status_failed.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\ico_security.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\ico_security.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\abc_ic_menu_paste_mtrl_am_alpha.png",
+        "source": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-xxxhdpi\\abc_ic_menu_paste_mtrl_am_alpha.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\user_customer_tips.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\user_customer_tips.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\abc_ic_menu_selectall_mtrl_alpha.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-xxxhdpi\\abc_ic_menu_selectall_mtrl_alpha.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\money_status_back.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\money_status_back.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\ico_security.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\ico_security.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\main_home_page_default.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\main_home_page_default.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\borrow_bg_unsuccess.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\borrow_bg_unsuccess.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\loan_ico_life.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\loan_ico_life.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\floating_button.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\floating_button.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\project_slogan.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\project_slogan.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\abc_switch_track_mtrl_alpha.9.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-xxxhdpi\\abc_switch_track_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\abc_btn_radio_to_on_mtrl_015.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-xxxhdpi\\abc_btn_radio_to_on_mtrl_015.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\ico_join_bonus.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\ico_join_bonus.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\item_new_product_background.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\item_new_product_background.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\arrow_down.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\arrow_down.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\icon_joined_company.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\icon_joined_company.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\ico_shield_white.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\ico_shield_white.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\ico_welfare.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\ico_welfare.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\managed_funds.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\managed_funds.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\project_slogan.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\project_slogan.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\abc_ic_menu_cut_mtrl_alpha.png",
+        "source": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-xxxhdpi\\abc_ic_menu_cut_mtrl_alpha.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\ico_join_apply.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\ico_join_apply.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\login_logo.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\login_logo.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\borrow_request_normal.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\borrow_request_normal.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\ico_college.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\ico_college.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\abc_scrubber_control_to_pressed_mtrl_005.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-xxxhdpi\\abc_scrubber_control_to_pressed_mtrl_005.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\floating_button.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\floating_button.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\bcb_logo.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\bcb_logo.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\icon_user_customer.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\icon_user_customer.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\abc_ic_menu_copy_mtrl_am_alpha.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-xxxhdpi\\abc_ic_menu_copy_mtrl_am_alpha.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\bank_logo.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\bank_logo.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\icon_company_default.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\icon_company_default.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\loan_request_arrow.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\loan_request_arrow.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\main_my_select.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\main_my_select.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\ico_pic.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\ico_pic.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\abc_tab_indicator_mtrl_alpha.9.png",
+        "source": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-xxxhdpi\\abc_tab_indicator_mtrl_alpha.9.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\abc_ic_search_api_mtrl_alpha.png",
+        "source": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable-xxxhdpi\\abc_ic_search_api_mtrl_alpha.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\item_new_product_background.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\item_new_product_background.png"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\bg_item_privilege_money.png",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\bg_item_privilege_money.png"
+    }
+]

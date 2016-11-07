@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:background="@android:color/transparent">
+
+    <RelativeLayout
+        android:layout_width="270dp"
+        android:layout_height="375.7dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/identify_lert_view"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_margin="8dp"
+            android:gravity="center"
+            android:layout_alignParentBottom="true">
+            <Button
+                android:id="@+id/button_sure"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:background="@drawable/button_solid_red_register"
+                android:layout_gravity="center"
+                android:textSize="@dimen/main_text_large"
+                android:textColor="@android:color/white"
+                android:text="完善信息"/>
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>

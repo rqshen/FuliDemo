@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/rounded_corners_edit_bg"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dip"
+        android:orientation="vertical"
+        android:padding="8dip" >
+
+        <TextView
+            android:id="@+id/maintips"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dip"
+            android:layout_marginRight="10dip"
+            android:gravity="center"
+            android:text="分享到.."
+            android:textColor="@color/txt_black"
+            android:textSize="@dimen/main_text_large" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_timeline"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:gravity="center">
+        <ImageView
+            android:layout_width="40dip"
+            android:layout_height="40dip"
+            android:background="@drawable/weixin_timeline"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dip"
+            android:text="朋友圈"
+            android:textColor="@color/txt_gray"
+            android:textSize="@dimen/main_text_small"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/layout_weixin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:gravity="center">
+        <LinearLayout
+            android:layout_width="40dip"
+            android:layout_height="40dip"
+            android:layout_gravity="center"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="33dip"
+                android:layout_height="33dip"
+                android:background="@drawable/icon_weixin"/>
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dip"
+            android:text="微信群"
+            android:textColor="@color/txt_gray"
+            android:textSize="@dimen/main_text_small"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dip"
+        android:layout_marginTop="20dip"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/bt_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="40dip"
+            android:layout_marginLeft="15dip"
+            android:layout_marginRight="10dip"
+            android:background="@drawable/dialog_gray"
+            android:text="取消"
+            android:textColor="@color/txt_gray"
+            android:textSize="@dimen/main_text_default" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="20dip"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/circle_01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/recharge_success"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:text="密码修改成功"
+            android:textColor="@color/txt_black"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:padding="15dip"
+            android:text="温馨提示：为了保证账户安全，建议您定期修改账户密码涉及资金安全，切勿外泄"
+            android:textColor="@color/txt_gray"
+            android:textSize="@dimen/main_text_default" />
+=
+        <Button
+            android:id="@+id/go"
+            android:layout_width="@dimen/button_width"
+            android:layout_height="@dimen/button_height"
+            android:layout_marginLeft="28dip"
+            android:layout_marginRight="28dip"
+            android:layout_marginTop="20dip"
+            android:background="@drawable/button_red_selector"
+            android:text="立刻登录"
+            android:textColor="@color/white"
+            android:textSize="@dimen/button_titlesize" />
+    </LinearLayout>
+
+</LinearLayout>

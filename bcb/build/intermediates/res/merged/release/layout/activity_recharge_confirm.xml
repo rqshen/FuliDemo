@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:orientation="vertical" >
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="40dip" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dip"
+                android:layout_marginTop="10dip"
+                android:textColor="@color/txt_black"
+                android:textSize="@dimen/main_text_default"
+                android:text="充值信息:"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dip"
+                android:background="@android:color/white"
+                android:orientation="vertical"
+                android:padding="0dip" >
+
+                <LinearLayout
+                    android:id="@+id/layout_username"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dip"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/textView1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="11dip"
+                        android:text="@string/recharge_second_text1"
+                        android:textColor="@color/txt_gray"
+                        android:textSize="@dimen/main_text_default" />
+                    <TextView
+                        android:id="@+id/amount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:layout_marginLeft="10dip"
+                        android:gravity="center_vertical"
+                        android:text="0元"
+                        android:textColor="@color/red"
+                        android:textSize="@dimen/main_text_default" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_marginLeft="2dip"
+                    android:layout_marginRight="2dip"
+                    android:layout_height="1dip"
+                    android:background="@color/linegray" />
+
+                <LinearLayout
+                    android:id="@+id/layout_bank_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dip"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dip"
+                        android:gravity="center"
+                        android:text="@string/recharge_second_text2"
+                        android:textColor="@color/txt_gray"
+                        android:textSize="@dimen/main_text_default" />
+
+                    <TextView
+                        android:id="@+id/bank_name_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dip"
+                        android:gravity="center_vertical"
+                        android:text=""
+                        android:textColor="@color/txt_black"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/bank_card_text"
+                        android:singleLine="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="5dip"
+                        android:gravity="center_vertical"
+                        android:text=""
+                        android:textColor="@color/txt_black"
+                        android:textSize="@dimen/main_text_default" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_marginLeft="2dip"
+                    android:layout_marginRight="2dip"
+                    android:layout_height="1dip"
+                    android:background="@color/linegray" />
+                <LinearLayout
+                    android:id="@+id/layout_bank_mobile"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dip">
+
+                    <TextView
+                        android:id="@+id/textView12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="11dip"
+                        android:gravity="center"
+                        android:text="预留手机"
+                        android:textColor="@color/txt_gray"
+                        android:textSize="@dimen/main_text_default" />
+
+                    <EditText
+                        android:id="@+id/bank_card_mobile"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dip"
+                        android:hint="请输入银行预留手机号"
+                        android:textSize="@dimen/main_text_default"
+                        android:inputType="phone"
+                        android:singleLine="true"
+                        android:textColorHint="@color/txt_gray"
+                        android:background="@null" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dip"
+                android:layout_marginTop="15dip"
+                android:textColor="@color/txt_black"
+                android:textSize="@dimen/main_text_default"
+                android:text="验证码:"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dip"
+                android:layout_marginTop="5dip"
+                android:background="@android:color/white"
+                android:orientation="horizontal">
+                <ImageView
+                    android:id="@+id/service_edit_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dip"
+                    android:background="@drawable/write" />
+                <EditText
+                    android:id="@+id/regservicecode"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@android:color/white"
+                    android:digits="0123456789"
+                    android:hint="@string/recharge_second_text3"
+                    android:inputType="number"
+                    android:maxLength="6"
+                    android:paddingLeft="10dip"
+                    android:singleLine="true"
+                    android:textColorHint="@color/txt_gray"
+                    android:textSize="@dimen/main_text_small" />
+                <Button
+                    android:id="@+id/sendVerification"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dip"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="10dip"
+                    android:background="@drawable/request_code_selector"
+                    android:gravity="center"
+                    android:minWidth="85dip"
+                    android:paddingLeft="10dip"
+                    android:paddingRight="10dip"
+                    android:text="@string/recharge_second_text4"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/main_text_small" />
+            </LinearLayout>
+
+            <!-- 出错提示 -->
+            <TextView
+                android:id="@+id/error_tips"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="28dip"
+                android:layout_marginRight="28dip"
+                android:layout_marginTop="15dip"
+                android:background="@drawable/error_tips"
+                android:gravity="center"
+                android:text="请输入验证码"
+                android:textColor="@color/red"
+                android:textSize="16sp"
+                android:visibility="gone" />
+
+            <!-- 立即充值按钮 -->
+            <Button
+                android:id="@+id/recharge_button"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/button_height"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dip"
+                android:layout_marginLeft="10dip"
+                android:layout_marginRight="10dip"
+                android:background="@drawable/button_red_selector"
+                android:gravity="center"
+                android:text="@string/recharge_second_text5"
+                android:textColor="@color/white"
+                android:textSize="@dimen/main_text_default" />
+
+
+            <LinearLayout
+                android:id="@+id/recharge_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:gravity="center_vertical|right">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dip"
+                    android:text="@string/recharge_second_text6"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/main_text_small" />
+                <ImageView
+                    android:layout_width="15dip"
+                    android:layout_height="15dip"
+                    android:layout_marginRight="10dip"
+                    android:background="@drawable/question_mark" />
+            </LinearLayout>
+            <!-- 充值说明 -->
+            <LinearLayout
+                android:id="@+id/description_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="33dp"
+                        android:layout_marginTop="10dp"
+                        android:text="1."
+                        android:textColor="@color/txt_gray"
+                        android:textSize="@dimen/main_text_small" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dip"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="10dp"
+                        android:text="充值金额将在15分钟内到账，请耐心等待"
+                        android:textColor="@color/txt_gray"
+                        android:textSize="@dimen/main_text_small" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="33dp"
+                        android:layout_marginTop="10dp"
+                        android:text="2."
+                        android:textColor="@color/txt_gray"
+                        android:textSize="@dimen/main_text_small" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dip"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="10dp"
+                        android:text="如果充值金额没有及时到账，请联系客服:\n020-38476886。"
+                        android:textColor="@color/txt_gray"
+                        android:textSize="@dimen/main_text_small" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="33dp"
+                        android:layout_marginTop="10dp"
+                        android:text="3."
+                        android:textColor="@color/txt_gray"
+                        android:textSize="@dimen/main_text_small" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dip"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="10dp"
+                        android:text="首次充值成功后默认完成帐户认证，您的身份证信息和银行卡信息将绑定到福利金融帐号。"
+                        android:textColor="@color/txt_gray"
+                        android:textSize="@dimen/main_text_small" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="33dp"
+                        android:layout_marginTop="10dp"
+                        android:text="4."
+                        android:textColor="@color/txt_gray"
+                        android:textSize="@dimen/main_text_small" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dip"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="10dp"
+                        android:text="请注意您的银行卡充值金额限制，以免造成不便。"
+                        android:textColor="@color/txt_gray"
+                        android:textSize="@dimen/main_text_small" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="33dp"
+                        android:layout_marginTop="10dp"
+                        android:text="5."
+                        android:textColor="@color/txt_gray"
+                        android:textSize="@dimen/main_text_small" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dip"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="10dp"
+                        android:text="福利金融禁止使用信用卡充值。"
+                        android:textColor="@color/txt_gray"
+                        android:textSize="@dimen/main_text_small" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="33dp"
+                        android:layout_marginTop="10dp"
+                        android:text="6."
+                        android:textColor="@color/txt_gray"
+                        android:textSize="@dimen/main_text_small" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dip"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="10dp"
+                        android:text="禁止洗钱、信用卡套现、虚假交易等行为，一经发现并确认，将终止该账户的使用。"
+                        android:textColor="@color/txt_gray"
+                        android:textSize="@dimen/main_text_small" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
