@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_gray"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="20dp"
+        android:background="@color/red">
+        <!-- 投资总额 -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="累计总额(元)"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/TotalAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:text="0.00"
+                android:singleLine="true"
+                android:textColor="@color/white"
+                android:paddingRight="20dp"
+                android:textSize="22sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="@color/white"/>
+
+        <!-- 累计收益 -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="20dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="累计收益(元)"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/income"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0.00"
+                android:paddingTop="10dp"
+                android:textColor="@color/white"
+                android:singleLine="true"
+                android:textSize="22sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout
+        android:id="@+id/refresh_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <!-- 下拉刷新控件-->
+        <include layout="@layout/refresh_head" />
+        <com.bcb.presentation.view.custom.PullableView.PullableScrollView
+            android:id="@+id/layout_scrollview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <com.bcb.data.util.MyListView
+                    android:id="@+id/listview_data_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:cacheColorHint="@android:color/black"
+                    android:divider="@color/background"
+                    android:dividerHeight="1px"
+                    android:fastScrollEnabled="false"
+                    android:listSelector="@drawable/list_selector"
+                    android:scrollbars="none"
+                    android:visibility="gone"/>
+                <LinearLayout
+                    android:id="@+id/null_data_layout"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="vertical"
+                    android:visibility="gone" >
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="84dip"
+                        android:src="@drawable/data_null" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="20dip"
+                        android:text="暂无投资记录"
+                        android:textSize="@dimen/main_text_default" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.bcb.presentation.view.custom.PullableView.PullableScrollView>
+        <!-- 上拉加载更多 -->
+        <include layout="@layout/load_more" />
+    </com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout>
+</LinearLayout>

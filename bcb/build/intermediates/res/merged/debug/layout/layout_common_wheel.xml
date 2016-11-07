@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="300dp"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@color/background">
+
+        <Button
+            android:id="@+id/action_sheet_cancel"
+            android:text="取消"
+            android:background="@null"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/main_text_default"
+            android:layout_width="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_height="40dp" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/action_sheet_done"
+            android:text="好"
+            android:background="@null"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/main_text_default"
+            android:layout_width="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_height="40dp" />
+    </LinearLayout>
+
+    <com.dg.spinnerwheel.WheelVerticalView
+        android:id="@+id/wheel"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        app:selectionDivider="@drawable/divider_dark_gradient_horizontal"
+        app:selectionDividerHeight="1px"
+        app:selectionDividerActiveAlpha="100"
+        app:selectionDividerDimmedAlpha="255"
+        android:background="@color/white"/>
+
+</LinearLayout>

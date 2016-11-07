@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:layout_gravity="center"
+                android:background="@android:color/transparent"
+                android:gravity="center">
+
+    <ImageView
+        android:id="@+id/iv_bg"
+        android:layout_width="304dp"
+        android:layout_height="371dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/register_success_tips"/>
+
+    <Button
+        android:id="@+id/button_sure"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_alignBottom="@+id/iv_bg"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/button_solid_red_register"
+        android:text="立即激活"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/main_text_large"/>
+</RelativeLayout>

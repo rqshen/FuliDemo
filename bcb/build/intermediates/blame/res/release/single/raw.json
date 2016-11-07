@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\release\\raw\\mq_new_message.ogg",
+        "source": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.meiqia\\meiqiasdk\\3.2.4\\res\\raw\\mq_new_message.ogg"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\release\\raw\\mq_send_message.ogg",
+        "source": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.meiqia\\meiqiasdk\\3.2.4\\res\\raw\\mq_send_message.ogg"
+    }
+]

@@ -1,0 +1,146 @@
+[
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\anim\\umeng_fb_dialog_exit_anim.xml",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\anim\\umeng_fb_dialog_exit_anim.xml"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\anim\\out_from_left.xml",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\anim\\out_from_left.xml"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\anim\\slide_in_bottom.xml",
+        "source": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.bigkoo\\alertview\\1.0.2\\res\\anim\\slide_in_bottom.xml"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\anim\\reverse_anim.xml",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\anim\\reverse_anim.xml"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\anim\\in_from_left.xml",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\anim\\in_from_left.xml"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\anim\\abc_fade_out.xml",
+        "source": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\anim\\abc_fade_out.xml"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\anim\\mq_message_form_exit.xml",
+        "source": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.meiqia\\meiqiasdk\\3.2.4\\res\\anim\\mq_message_form_exit.xml"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\anim\\out_from_right.xml",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\anim\\out_from_right.xml"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\anim\\push_right_in.xml",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\anim\\push_right_in.xml"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_out_top.xml",
+        "source": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\anim\\abc_slide_out_top.xml"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\anim\\abc_fade_in.xml",
+        "source": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\anim\\abc_fade_in.xml"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\anim\\fade_in_center.xml",
+        "source": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.bigkoo\\alertview\\1.0.2\\res\\anim\\fade_in_center.xml"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\anim\\push_bottom_out.xml",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\anim\\push_bottom_out.xml"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\anim\\umeng_fb_audio_play_anim.xml",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\anim\\umeng_fb_audio_play_anim.xml"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_in_top.xml",
+        "source": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\anim\\abc_slide_in_top.xml"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\anim\\abc_popup_enter.xml",
+        "source": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\anim\\abc_popup_enter.xml"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_out_bottom.xml",
+        "source": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\anim\\abc_slide_out_bottom.xml"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\anim\\slide_bottom_to_top.xml",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\anim\\slide_bottom_to_top.xml"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\anim\\animation.xml",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\anim\\animation.xml"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\anim\\push_right_down_in.xml",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\anim\\push_right_down_in.xml"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\anim\\mq_message_form_enter.xml",
+        "source": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.meiqia\\meiqiasdk\\3.2.4\\res\\anim\\mq_message_form_enter.xml"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\anim\\rotating.xml",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\anim\\rotating.xml"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\anim\\fade_out_center.xml",
+        "source": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.bigkoo\\alertview\\1.0.2\\res\\anim\\fade_out_center.xml"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_in_bottom.xml",
+        "source": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\anim\\abc_slide_in_bottom.xml"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\anim\\push_right_out.xml",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\anim\\push_right_out.xml"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\anim\\push_right_up_in.xml",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\anim\\push_right_up_in.xml"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\anim\\abc_grow_fade_in_from_bottom.xml",
+        "source": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\anim\\abc_grow_fade_in_from_bottom.xml"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\anim\\action_sheet_enter.xml",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\anim\\action_sheet_enter.xml"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\anim\\umeng_fb_dialog_enter_anim.xml",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\anim\\umeng_fb_dialog_enter_anim.xml"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\anim\\action_sheet_exit.xml",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\anim\\action_sheet_exit.xml"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\anim\\progress_bar.xml",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\anim\\progress_bar.xml"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\anim\\in_from_right.xml",
+        "source": "D:\\code\\bcb_android\\bcb\\src\\main\\res\\anim\\in_from_right.xml"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\anim\\slide_out_bottom.xml",
+        "source": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.bigkoo\\alertview\\1.0.2\\res\\anim\\slide_out_bottom.xml"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\anim\\abc_popup_exit.xml",
+        "source": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\anim\\abc_popup_exit.xml"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\anim\\mq_loading.xml",
+        "source": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.meiqia\\meiqiasdk\\3.2.4\\res\\anim\\mq_loading.xml"
+    },
+    {
+        "merged": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\anim\\abc_shrink_fade_out_from_bottom.xml",
+        "source": "D:\\code\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\anim\\abc_shrink_fade_out_from_bottom.xml"
+    }
+]
