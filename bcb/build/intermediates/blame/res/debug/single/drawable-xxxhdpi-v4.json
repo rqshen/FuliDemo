@@ -92,12 +92,12 @@
         "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\login_logo.png"
     },
     {
-        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\icon_project_customer.png",
-        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\icon_project_customer.png"
-    },
-    {
         "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\withdraw_success_image.png",
         "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\withdraw_success_image.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\icon_project_customer.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxxhdpi\\icon_project_customer.png"
     },
     {
         "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxxhdpi-v4\\ico_security.png",

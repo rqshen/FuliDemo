@@ -60,12 +60,12 @@
         "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\layout\\umeng_fb_fragment.xml"
     },
     {
-        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\layout\\item_product.xml",
-        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\layout\\item_product.xml"
-    },
-    {
         "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\layout\\load_more.xml",
         "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\layout\\load_more.xml"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\layout\\item_product.xml",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\layout\\item_product.xml"
     },
     {
         "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\layout\\frag_user.xml",
