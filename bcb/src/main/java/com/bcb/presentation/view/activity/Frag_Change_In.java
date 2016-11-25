@@ -38,7 +38,7 @@ public class Frag_Change_In extends Frag_Base implements AdapterView.OnItemClick
 	private Context ctx;
 
 	private MyListView lv;
-	private int Status;//	状态 1 转让中 0已完成
+	private int Status;//	状态 【1 转让中】【 0已完成】
 	private int PageNow = 1;
 	private int PageSize = 10;
 
@@ -184,7 +184,6 @@ public class Frag_Change_In extends Frag_Base implements AdapterView.OnItemClick
 					}
 				} catch (Exception e) {
 					LogUtil.i("bqt", "【Frag_Change_In】【onResponse】" + e.toString());
-
 				} finally {
 					refreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
 					refreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
@@ -204,7 +203,9 @@ public class Frag_Change_In extends Frag_Base implements AdapterView.OnItemClick
 			}
 		});
 		jsonRequest.setTag(UrlsOne.SEARCHCLAIMCONVEY);
-		App.getInstance().getRequestQueue().add(jsonRequest);
+		App.getInstance()
+				.getRequestQueue()
+				.add(jsonRequest);
 	}
 
 	//加载优惠券，true 表示有数据，false 表示没数据
@@ -221,6 +222,6 @@ public class Frag_Change_In extends Frag_Base implements AdapterView.OnItemClick
 	//******************************************************************************************
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		Activity_ZRXQ.launche(ctx, recordsBeans.get(position).Id);
+		Activity_ZRXQ.launche(ctx, recordsBeans.get(position).Id, Status);
 	}
 }

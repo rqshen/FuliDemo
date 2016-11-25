@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -16,6 +17,7 @@ import com.bcb.common.net.BcbJsonRequest;
 import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.UrlsOne;
 import com.bcb.data.bean.ClaimConveyDetailBean;
+import com.bcb.data.bean.TradingRecordListBean;
 import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.TokenUtil;
 
@@ -31,16 +33,20 @@ import java.util.List;
  */
 public class Activity_ZRXQ extends Activity_Base {
 	private String Id;
+	int Status;
+	String OrderNo;
 	ListView lv;
+	Button button;
 	ViewHolder holder;
 	List<Item> items;
 	TradingAdapter adapter;
 	ClaimConveyDetailBean bean;
 
-	public static void launche(Context ctx, String Id) {
+	public static void launche(Context ctx, String Id, int Status) {
 		Intent intent = new Intent();
 		intent.setClass(ctx, Activity_ZRXQ.class);
 		intent.putExtra("Id", Id);
+		intent.putExtra("Status", Status);
 		ctx.startActivity(intent);
 	}
 
@@ -48,6 +54,13 @@ public class Activity_ZRXQ extends Activity_Base {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setBaseContentView(R.layout.activity_trading_cancle);
+		button= (Button) findViewById(R.id.button);
+		button.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				requestZR();
+			}
+		});
 
 		setTitleValue("转让详情");
 		setLeftTitleVisible(true);
@@ -60,7 +73,11 @@ public class Activity_ZRXQ extends Activity_Base {
 		lv = (ListView) findViewById(R.id.lv);
 
 		Intent intent = getIntent();
-		if (intent != null) Id = intent.getStringExtra("Id");
+		if (intent != null) {
+			Status = intent.getIntExtra("Status", 0);
+			Id = intent.getStringExtra("Id");
+		}
+
 		loadClaimConveyData();
 	}
 
@@ -74,15 +91,17 @@ public class Activity_ZRXQ extends Activity_Base {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.CLAIMCONVEYDETAIL, obj, TokenUtil.getEncodeToken(this), new
-				BcbRequest.BcbCallBack<JSONObject>() {
+		BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.CLAIMCONVEYDETAIL, obj, TokenUtil.getEncodeToken(this), new BcbRequest
+				.BcbCallBack<JSONObject>() {
 			@Override
 			public void onResponse(JSONObject response) {
 				LogUtil.i("bqt", "债权转让详情" + response.toString());
 				try {
-					bean = App.mGson.fromJson(response.getJSONObject("result").toString(), ClaimConveyDetailBean.class);
+					bean = App.mGson.fromJson(response.getJSONObject("result")
+							                          .toString(), ClaimConveyDetailBean.class);
 					items = new ArrayList<Item>();
 					items.add(new Item("债权订单", bean.OrderNo));
+					OrderNo=bean.OrderNo;
 					items.add(new Item("订单状态", bean.Status));//Status	string	状态 ：申购中 归档 下架
 					items.add(new Item("债权金额", String.format("%.2f", bean.Amount)));
 					items.add(new Item("转让金额", String.format("%.2f", bean.Already)));
@@ -91,6 +110,7 @@ public class Activity_ZRXQ extends Activity_Base {
 					items.add(new Item("申请时间", format.format(format.parse(bean.CreateTime))));
 					adapter = new TradingAdapter();
 					lv.setAdapter(adapter);
+					if (Status==1) button.setVisibility(View.VISIBLE);
 				} catch (Exception e) {
 					LogUtil.d("bqt", "" + e.getMessage());
 				}
@@ -104,7 +124,9 @@ public class Activity_ZRXQ extends Activity_Base {
 
 		);
 		jsonRequest.setTag(UrlsOne.CLAIMCONVEYDETAIL);
-		App.getInstance().getRequestQueue().add(jsonRequest);
+		App.getInstance()
+				.getRequestQueue()
+				.add(jsonRequest);
 	}
 
 	//******************************************************************************************
@@ -129,7 +151,8 @@ public class Activity_ZRXQ extends Activity_Base {
 		public View getView(int position, View convertView, ViewGroup parent) {
 			Item item = items.get(position);
 			if (convertView == null) {
-				convertView = LayoutInflater.from(Activity_ZRXQ.this).inflate(R.layout.rading_cancle_item, null);
+				convertView = LayoutInflater.from(Activity_ZRXQ.this)
+						.inflate(R.layout.rading_cancle_item, null);
 				holder = new ViewHolder();
 				holder.tv_left = (TextView) convertView.findViewById(R.id.tv_left);
 				holder.tv_right = (TextView) convertView.findViewById(R.id.tv_right);
@@ -156,5 +179,41 @@ public class Activity_ZRXQ extends Activity_Base {
 
 		public String title;
 		public String value;
+	}
+	/**
+	 * 申请或取消转让
+	 */
+	private void requestZR() {
+		JSONObject obj = new JSONObject();
+		try {
+			obj.put("OrderNo", OrderNo);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.UNREQUESTZR, obj, TokenUtil.getEncodeToken(this), new BcbRequest
+				.BcbCallBack<JSONObject>() {
+			@Override
+			public void onResponse(JSONObject response) {
+				LogUtil.i("bqt", "【Activity_Trading_Cancle】【onResponse】申请债权转让" + response.toString());
+				if (response.optBoolean("result", false)) {
+					Activity_Tips_FaileOrSuccess.launche(Activity_ZRXQ.this, Activity_Tips_FaileOrSuccess.ZR_SUCCESS,
+					                                     response.optString("message"));
+					Intent intent=new Intent();
+					intent.putExtra("rufush",true);
+					setResult(200,intent);
+				} else {
+					Activity_Tips_FaileOrSuccess.launche(Activity_ZRXQ.this, Activity_Tips_FaileOrSuccess.ZR_FAILED,
+					                                     response.optString("message"));
+				}
+				finish();
+			}
+
+			@Override
+			public void onErrorResponse(Exception error) {
+
+			}
+		});
+		jsonRequest.setTag(UrlsOne.REQUESTZR);
+		App.getInstance().getRequestQueue().add(jsonRequest);
 	}
 }
