@@ -367,7 +367,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 				Activity_Money_Flowing_Water.launche(ctx);
 				break;
 
-			//借款
+			//借款--员工贷
 			case R.id.borrow_money:
 				UmengUtil.eventById(ctx, R.string.loan_blank);
 				loanMainPage();
