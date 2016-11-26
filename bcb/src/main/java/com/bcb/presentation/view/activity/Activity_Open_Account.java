@@ -20,7 +20,7 @@ import org.json.JSONObject;
 public class Activity_Open_Account extends Activity_Base {
 
     /**
-     * 开通huifu
+     * 开通huifu，没开通先实名认证
      */
     private TextView tv_open;
 
