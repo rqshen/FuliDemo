@@ -13,7 +13,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bcb.R;
 import com.bcb.common.app.App;
@@ -59,6 +58,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 	@BindView(R.id.banner_image) ImageView banner_image;//借款Banner
 	@BindView(R.id.loan_amount) EditText loan_amount;//借款金额
 	@BindView(R.id.loan_rate) TextView loan_rate;//执行利率
+	@BindView(R.id.tv_explain) TextView tv_explain;
 	@BindView(R.id.loan_programme) TextView loan_programme;    //还款方案
 	@BindView(R.id.layout_coupon_select) RelativeLayout layout_coupon_select;//申请福利补贴
 	@BindView(R.id.coupon_select_image) ImageView coupon_select_image;//申请福利补贴
@@ -67,7 +67,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 	@BindView(R.id.refresh_view) PullToRefreshLayout refreshLayout;//刷新
 
 	//借款企业类型
-	private int id;
+	private int LOAN_TYPE;
 
 	//利息抵扣券与福利补贴
 	private String CouponId;    //利息抵扣券的ID
@@ -98,9 +98,9 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 
 	private AlertView alertView;
 
-	public static void launche(Context ctx, int id) {
+	public static void launche(Context ctx, int LOAN_TYPE) {
 		Intent intent = new Intent(ctx, Activity_LoanRequest_Borrow.class);
-		intent.putExtra("id", id);
+		intent.putExtra("LOAN_TYPE", LOAN_TYPE);
 		ctx.startActivity(intent);
 	}
 
@@ -122,23 +122,26 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 	//                                                                                                   初始化
 	//****************************************************************************************************************************************
 	private void initType() {
-		id = getIntent().getIntExtra("id", 0);
+		LOAN_TYPE = getIntent().getIntExtra("LOAN_TYPE", 0);
 		//借款banner
-		switch (id) {
+		switch (LOAN_TYPE) {
 			case 1:
 				setTitleValue("名企金领贷");
 				banner_image.setImageResource(R.drawable.loan_brand);
 				layout_coupon_select.setVisibility(View.GONE);
+				tv_explain.setText("名企金领贷");
 				break;
 			case 2:
 				setTitleValue("IT精英贷");
 				banner_image.setImageResource(R.drawable.loan_it);
 				layout_coupon_select.setVisibility(View.GONE);
+				tv_explain.setText("IT精英贷");
 				break;
 			default:
 				setTitleValue("签约企业贷");
 				banner_image.setImageResource(R.drawable.loan_signed);
 				layout_coupon_select.setVisibility(View.VISIBLE);
+				tv_explain.setText("签约企业贷");
 				break;
 		}
 		setLeftTitleVisible(true);
@@ -212,14 +215,11 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 					LogUtil.i("bqt", "借款信息" + response.toString());
 					loanRequestInfo = new Gson().fromJson(response.getString("result"), LoanRequestInfoBean.class);
 					message = response.getString("message");
-					//初始化数据，因为不管状态是不是-1或者1，这里面都要返回列表数据
+					//初始化数据
 					initLoanRequestInfo();
 				} catch (Exception e) {
 					e.printStackTrace();
 					LogUtil.i("bqt", "借款信息出错" + e.getMessage());
-					//数据出错重新登录
-					Toast.makeText(Activity_LoanRequest_Borrow.this, "数据出错啦", Toast.LENGTH_SHORT).show();
-					finish();
 				}
 			}
 
@@ -379,21 +379,21 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 			if (monthNum.equalsIgnoreCase(loan_duration.getText().toString().trim())) {
 				rate = loanRequestInfo.RateTable.get(i).Rate / 100;
 				break;
-			}*
+			}
 		}
+		loan_rate.setText(new DecimalFormat("######0.##").format(rate * 100) + "%");
 	}
 
 	/**
 	 * 计算还款方案
 	 */
 	private void calculateRepayProgramme() {
-		DecimalFormat df = new DecimalFormat("######0.##");
 		String repayProgramme = "";
 		//借款月数等于还款期数
 		if (getLoanAmount() <= 0 || durationStatus == -1) repayProgramme = "0元";
 		else {
 			float amount = (getLoanAmount() + getLoanAmount() * durationStatus / 12 * rate) / durationStatus;
-			String value = df.format(amount);
+			String value = new DecimalFormat("######0.##").format(amount);
 			//如果是一个月的时候，就是"到期还款XXX元"
 			if (durationStatus == 1) repayProgramme = "到期还款" + value + "元";
 			else repayProgramme = "每月还款" + value + "元";
@@ -447,9 +447,8 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 								break;
 							}
 						}
-
 						//重新设置利率
-						loan_rate.setText(rate + "%");
+						loan_rate.setText(new DecimalFormat("######0.##").format(rate * 100) + "%");
 						//重新设置还款期数
 						calculateRepayProgramme();
 					}
@@ -574,7 +573,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 				//判断是否跟原来的数据一样，如果跟原来申请的借款一样没有变化，直接提示完善个人信息
 				if (isNeedToPostData()) pushLoanMessageToService();
 					//跳转至填写借款信息页面
-				else startActivity(new Intent(Activity_LoanRequest_Borrow.this, Activity_LoanRequest_Person.class));
+				else Activity_LoanRequest_Person.launche(Activity_LoanRequest_Borrow.this, LOAN_TYPE);
 				//存在已审核通过的借款
 			} else {
 				LogUtil.i("bqt", "存在已审核通过的借款时的提示信息：" + message);
