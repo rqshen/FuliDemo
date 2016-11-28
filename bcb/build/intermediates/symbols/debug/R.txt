@@ -1192,7 +1192,7 @@ int drawable mq_voice_right_playing_level2 0x7f0201ef
 int drawable mq_voice_right_playing_level3 0x7f0201f0
 int drawable mq_voice_want_cancel 0x7f0201f1
 int drawable no_coupons 0x7f0201f2
-int drawable notification_template_icon_bg 0x7f020256
+int drawable notification_template_icon_bg 0x7f020257
 int drawable often_station_icon 0x7f0201f3
 int drawable open_hf 0x7f0201f4
 int drawable pay_button_nor 0x7f0201f5
@@ -1287,11 +1287,12 @@ int drawable wheel_bg_hor 0x7f02024d
 int drawable wheel_bg_ver 0x7f02024e
 int drawable wheel_val 0x7f02024f
 int drawable white_bg 0x7f020250
-int drawable withdraw_hook 0x7f020251
-int drawable withdraw_rect 0x7f020252
-int drawable withdraw_success_image 0x7f020253
-int drawable write 0x7f020254
-int drawable yes_img 0x7f020255
+int drawable white_shape 0x7f020251
+int drawable withdraw_hook 0x7f020252
+int drawable withdraw_rect 0x7f020253
+int drawable withdraw_success_image 0x7f020254
+int drawable write 0x7f020255
+int drawable yes_img 0x7f020256
 int id Duration 0x7f0d0097
 int id InterestAmount 0x7f0d009b
 int id JXPackageAdWord 0x7f0d0257

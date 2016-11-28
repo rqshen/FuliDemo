@@ -2724,7 +2724,7 @@ containing a value of this type.
         public static final int mq_voice_right_playing_level3=0x7f0201f0;
         public static final int mq_voice_want_cancel=0x7f0201f1;
         public static final int no_coupons=0x7f0201f2;
-        public static final int notification_template_icon_bg=0x7f020256;
+        public static final int notification_template_icon_bg=0x7f020257;
         public static final int often_station_icon=0x7f0201f3;
         public static final int open_hf=0x7f0201f4;
         public static final int pay_button_nor=0x7f0201f5;
@@ -2819,11 +2819,12 @@ containing a value of this type.
         public static final int wheel_bg_ver=0x7f02024e;
         public static final int wheel_val=0x7f02024f;
         public static final int white_bg=0x7f020250;
-        public static final int withdraw_hook=0x7f020251;
-        public static final int withdraw_rect=0x7f020252;
-        public static final int withdraw_success_image=0x7f020253;
-        public static final int write=0x7f020254;
-        public static final int yes_img=0x7f020255;
+        public static final int white_shape=0x7f020251;
+        public static final int withdraw_hook=0x7f020252;
+        public static final int withdraw_rect=0x7f020253;
+        public static final int withdraw_success_image=0x7f020254;
+        public static final int write=0x7f020255;
+        public static final int yes_img=0x7f020256;
     }
     public static final class id {
         public static final int Duration=0x7f0d0097;

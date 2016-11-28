@@ -12,6 +12,7 @@
         android:layout_weight="2016"
         android:gravity="center_vertical"
         android:paddingLeft="15dp"
+        android:singleLine="true"
         android:paddingRight="15dp"
         android:text="包青天"
         android:textColor="#333"

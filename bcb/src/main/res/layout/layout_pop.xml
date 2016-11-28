@@ -2,20 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              android:background="@color/white"
               android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        android:background="@color/background"
-        android:gravity="center_vertical">
+        android:background="@color/background">
 
         <Button
             android:id="@+id/job_button"
             android:layout_width="80dp"
             android:layout_height="35dp"
             android:layout_alignParentRight="true"
-            android:layout_gravity="center"
+
+            android:layout_centerVertical="true"
             android:layout_marginLeft="15dip"
             android:layout_marginRight="15dip"
             android:background="@drawable/button_red_selector"
@@ -28,9 +29,10 @@
             android:id="@+id/et_name"
             android:layout_width="match_parent"
             android:layout_height="35dp"
+            android:layout_centerVertical="true"
             android:layout_marginLeft="15dip"
             android:layout_toLeftOf="@+id/job_button"
-            android:background="@drawable/edittext_none_background"
+            android:background="@drawable/white_shape"
             android:gravity="center_vertical"
             android:hint="请输入公司名称"
             android:paddingLeft="10dip"
