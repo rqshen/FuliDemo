@@ -81,7 +81,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 	//借款用途
 	@BindView(R.id.loan_purposes) TextView loan_purposes;
 	private List<String> purposes_types;
-	private int purposeStatus = 1;//默认借款期限为置业首付，对应值为1
+	private int purposeStatus;
 
 	//借款期限
 	@BindView(R.id.loan_duration) TextView loan_duration;
@@ -323,16 +323,15 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 			LogUtil.d("借款用途", loanRequestInfo.LoanTypeTable.get(i).Name);
 			purposes_types.add(loanRequestInfo.LoanTypeTable.get(i).Name);
 		}
-		int index = 0;
 		for (int i = 0 ; i < loanRequestInfo.LoanTypeTable.size() ; i++) {
 			//获取默认选中的借款用途
 			if (loanRequestInfo.LoanType == loanRequestInfo.LoanTypeTable.get(i).Value) {
-				index = i;
+				purposeStatus = loanRequestInfo.LoanTypeTable.get(i).Value;
+				loan_purposes.setText(purposes_types.get(i));
 				break;
 			}
 		}
 		//设置默认选中的位置
-		loan_purposes.setText(purposes_types.get(index));
 	}
 
 	/**
@@ -418,11 +417,11 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 			case R.id.rl_purposes:
 				String[] ar = purposes_types.toArray(new String[purposes_types.size()]);
 				LogUtil.i("bqt", "借款用途" + Arrays.toString(ar));
-				SpinnerWheelUtil.getInstance().initSpinnerWheelDialog(this, ar, purposeStatus - 1, new SpinnerWheelUtil
+				SpinnerWheelUtil.getInstance().initSpinnerWheelDialog(this, ar, purposeStatus - 2, new SpinnerWheelUtil
 						.OnDoneClickListener() {
 					@Override
 					public void onClick(int currentItem) {
-						purposeStatus = currentItem + 1;
+						purposeStatus = currentItem + 2;
 						loan_purposes.setText(purposes_types.get(currentItem));
 						if (purposes_types.get(currentItem).equals("其他用途")) purposeStatus = 100;
 						LogUtil.i("bqt", purposeStatus + "--" + purposes_types.get(currentItem));

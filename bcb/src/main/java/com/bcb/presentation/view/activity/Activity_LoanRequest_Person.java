@@ -15,7 +15,6 @@ import com.bcb.R;
 import com.bcb.common.app.App;
 import com.bcb.common.net.BcbJsonRequest;
 import com.bcb.common.net.BcbRequest;
-import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
 import com.bcb.common.net.UrlsOne;
 import com.bcb.data.bean.loan.PersonInfoBean;
@@ -94,7 +93,7 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
 	//紧急联系人1电话
 	private EditText loan_emergency_phone;
 	///紧急联系人1 关系
-	private String relationStatus1 = "";
+	private String relationStatus1;
 	private int relStatus1;
 	//紧急联系人2
 	private EditText loan_emergency_case_second;
@@ -103,14 +102,12 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
 	//紧急联系人2电话
 	private EditText loan_emergency_phone_second;
 	//紧急联系人2 关系
-	private String relationStatus2 = "";
+	private String relationStatus2;
 	private int relStatus2;
 	//转圈提示
 	ProgressDialog progressDialog;
 	//个人信息
 	PersonInfoBean PersonInfo;
-	//请求队列
-	private BcbRequestQueue requestQueue;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -191,38 +188,24 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
 	 */
 	private void getPersonalLoanMessage() {
 		showProgressBar();
-		//创建队列
-		requestQueue = App.getInstance().getRequestQueue();
 		//创建请求
 		BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.GetLoanPersonalMessage, null, TokenUtil.getEncodeToken(this), new
 				BcbRequest.BcbCallBack<JSONObject>() {
 			@Override
 			public void onResponse(JSONObject response) {
 				LogUtil.i("bqt", "借款的个人信息" + response.toString());
-
 				hideProgressBar();
-				//                if (null == response) {
-				//                    ToastUtil.alert(Activity_LoanRequest_Person.this, "服务器返回数据出错");
-				//                    return;
-				//                }
 				try {
 					if (response.getInt("status") == 1) {
 						String result = response.getString("result").replace("\\", "").replace("\"[", "[").replace("]\"", "]");
 						//将JSON转成PersonInfoBean对象，要先判断是否存在这样的数据
-						Gson mGson = new Gson();
 						String localLoanPersonal = new LoanPersonalConfigUtil(Activity_LoanRequest_Person.this)
 								.getLoanPersonalMessage();
 						if (!TextUtils.isEmpty(localLoanPersonal)) {
-							PersonInfo = mGson.fromJson(localLoanPersonal, PersonInfoBean.class);
+							PersonInfo = new Gson().fromJson(localLoanPersonal, PersonInfoBean.class);
 						} else {
-							PersonInfo = mGson.fromJson(result, PersonInfoBean.class);
+							PersonInfo = new Gson().fromJson(result, PersonInfoBean.class);
 						}
-						/////////////此处代码是为了兼容旧版本升级，否则会出现空指针异常
-						//                        if (null == PersonInfo.Relationship2){
-						//                            PersonInfoBean temp = mGson.fromJson(result, PersonInfoBean.class);
-						//                            PersonInfo.Relationship2 = temp.Relationship2;
-						//                        }
-						/////////////
 						//设置婚姻状况
 						changeMaritalStatusList(PersonInfo);
 						//设置孩子状况
@@ -251,7 +234,7 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
 			}
 		});
 		jsonRequest.setTag(BcbRequestTag.BCB_GET_LOAN_PERSONAL_MESSAGE_REQUEST);
-		requestQueue.add(jsonRequest);
+		App.getInstance().getRequestQueue().add(jsonRequest);
 	}
 
 	/**
@@ -326,13 +309,19 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
 		relationList1 = new ArrayList<>();
 		for (int i = 0 ; i < personInfoBean.RelationshipList.size() ; i++) {
 			relationList1.add(i, personInfoBean.RelationshipList.get(i).Name);//固定四个
+			if (personInfoBean.RelationshipList.get(i).Name.equals(personInfoBean.Relationship1)) {
+				relStatus1=i;
+				relationStatus1=personInfoBean.RelationshipList.get(i).Name;
+			}
 		}
-		relationStatus1 = relationList1.get(0);
 		relationList2 = new ArrayList<>();
 		for (int i = 0 ; i < personInfoBean.RelationshipList2.size() ; i++) {
 			relationList2.add(i, personInfoBean.RelationshipList2.get(i).Name);//固定2个
+			if (personInfoBean.RelationshipList2.get(i).Name.equals(personInfoBean.Relationship2)) {
+				relStatus2=i;
+				relationStatus2=personInfoBean.RelationshipList2.get(i).Name;
+			}
 		}
-		//        if (relationList2.size() > 0) relationStatus2 = relationList2.get(0);
 	}
 
 	/**
@@ -402,7 +391,6 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
 		if (PersonInfo.EmergencyContact2 != null && !PersonInfo.EmergencyContact2.equalsIgnoreCase("null") && !PersonInfo
 				.EmergencyContact2.equalsIgnoreCase("")) {
 			loan_emergency_case_second.setText(PersonInfo.EmergencyContact2);
-
 		}
 
 		//紧急联系人2， 判断关系是否存在
@@ -502,7 +490,6 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
 		PersonInfo.EmergencyContact2 = loan_emergency_case_second.getText().toString();
 		//紧急联系人2 关系
 		PersonInfo.Relationship2 = relationStatus2;
-		//        PersonInfo.Relationship2 = "";
 		LogUtil.i("bqt", "关系2--" + relationStatus2);
 
 		//紧急联系人2 电话
@@ -513,13 +500,6 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
 		//跳转至工作信息页面
 		Activity_LoanRequest_Job.launche(Activity_LoanRequest_Person.this, LOAN_TYPE, new Gson().toJson(PersonInfo));
 		finish();
-	}
-
-	//销毁广播
-	@Override
-	public void onDestroy() {
-		super.onDestroy();
-		requestQueue.cancelAll(BcbRequestTag.BCB_GET_LOAN_PERSONAL_MESSAGE_REQUEST);
 	}
 
 	@Override
