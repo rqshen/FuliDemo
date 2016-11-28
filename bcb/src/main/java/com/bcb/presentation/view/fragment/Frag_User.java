@@ -38,12 +38,12 @@ import com.bcb.data.util.PackageUtil;
 import com.bcb.data.util.ToastUtil;
 import com.bcb.data.util.TokenUtil;
 import com.bcb.data.util.UmengUtil;
+import com.bcb.presentation.view.activity.A_Elite_Loan;
 import com.bcb.presentation.view.activity.A_Slb;
 import com.bcb.presentation.view.activity.Activity_Account_Setting;
 import com.bcb.presentation.view.activity.Activity_Charge_HF;
 import com.bcb.presentation.view.activity.Activity_Coupons;
 import com.bcb.presentation.view.activity.Activity_Join_Company;
-import com.bcb.presentation.view.activity.Activity_LoanRequest_Borrow;
 import com.bcb.presentation.view.activity.Activity_Login;
 import com.bcb.presentation.view.activity.Activity_Money_Flowing_Water;
 import com.bcb.presentation.view.activity.Activity_Open_Account;
@@ -434,7 +434,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 		//已开通托管
 		if (isLoading()) return;
 		if (App.mUserDetailInfo != null && App.mUserDetailInfo.HasOpenCustody)
-			startActivity(new Intent(ctx, Activity_LoanRequest_Borrow.class));
+			startActivity(new Intent(ctx, A_Elite_Loan.class));
 		else startActivity(new Intent(ctx, Activity_Open_Account.class));
 	}
 

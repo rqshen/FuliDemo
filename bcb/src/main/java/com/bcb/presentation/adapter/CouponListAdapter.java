@@ -16,7 +16,7 @@ import com.bcb.common.event.BroadcastEvent;
 import com.bcb.data.bean.CouponRecordsBean;
 import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MyConstants;
-import com.bcb.presentation.view.activity.Activity_LoanRequest_Borrow;
+import com.bcb.presentation.view.activity.A_Elite_Loan;
 import com.bcb.presentation.view.activity.Activity_Open_Account;
 import com.bcb.presentation.view.activity.Activity_Withdraw;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
@@ -107,10 +107,10 @@ public class CouponListAdapter extends BaseAdapter {
 					else if (data.get(pos).getCouponType() == 16) {
 						intent.putExtra("CouponId", data.get(pos).getCouponId());
 						//利息抵扣券的金额
-						intent.putExtra("InterestAmount", (int)(data.get(pos).getAmount()));
+						intent.putExtra("InterestAmount", (int) (data.get(pos).getAmount()));
 						//最小借款金额
-						intent.putExtra("InterestMinAmount", (int)(data.get(pos).getMinAmount()));
-						LogUtil.i("bqt", "【最小借款金额】" + (int)(data.get(pos).getMinAmount()));
+						intent.putExtra("InterestMinAmount", (int) (data.get(pos).getMinAmount()));
+						LogUtil.i("bqt", "【最小借款金额】" + (int) (data.get(pos).getMinAmount()));
 						//借款金额描述
 						intent.putExtra("InterestDescn", data.get(pos).getConditionDescn() + "");
 						//返回优惠券张数
@@ -143,7 +143,7 @@ public class CouponListAdapter extends BaseAdapter {
 					} else if (MyConstants.LOAN_SUBSIDIES == data.get(pos).getCouponType()) {//借款补贴券时，点击则跳转至借款界面
 						//用户还没认证时，先去认证
 						if (App.mUserDetailInfo != null && App.mUserDetailInfo.HasOpenCustody)
-							Activity_LoanRequest_Borrow.launche(ctx);
+							ctx.startActivity(new Intent(ctx, A_Elite_Loan.class));
 						else ctx.startActivity(new Intent(ctx, Activity_Open_Account.class));
 					} else if (MyConstants.CASH == data.get(pos).getCouponType()) {//现金券时，点击则跳转至产品列表界面
 						EventBus.getDefault().post(new BroadcastEvent(BroadcastEvent.PRODUCT));

@@ -306,6 +306,10 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait"/>
         <activity
+            android:name=".presentation.view.activity.A_Elite_Loan"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"/>
+        <activity
             android:name=".presentation.view.activity.Activity_Base_Fragment"
             android:label="@string/app_name"
             android:screenOrientation="portrait"/>

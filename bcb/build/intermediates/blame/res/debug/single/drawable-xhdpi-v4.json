@@ -48,6 +48,10 @@
         "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xhdpi\\keyboard_zero_press.png"
     },
     {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\loan_brand.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xhdpi\\loan_brand.png"
+    },
+    {
         "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\img_welfare_tip.png",
         "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xhdpi\\img_welfare_tip.png"
     },
@@ -188,6 +192,10 @@
         "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xhdpi\\icon_loan_interest.png"
     },
     {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\loan_signed.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xhdpi\\loan_signed.png"
+    },
+    {
         "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\success_open_hf.png",
         "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xhdpi\\success_open_hf.png"
     },
@@ -222,6 +230,10 @@
     {
         "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\withdraw_hook.png",
         "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xhdpi\\withdraw_hook.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\loan_it.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xhdpi\\loan_it.png"
     },
     {
         "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4\\join_company_banner.png",
