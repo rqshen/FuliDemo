@@ -38,6 +38,7 @@ import com.bcb.data.util.PackageUtil;
 import com.bcb.data.util.ToastUtil;
 import com.bcb.data.util.TokenUtil;
 import com.bcb.data.util.UmengUtil;
+import com.bcb.presentation.view.activity.A_CompanyName;
 import com.bcb.presentation.view.activity.A_Elite_Loan;
 import com.bcb.presentation.view.activity.A_Slb;
 import com.bcb.presentation.view.activity.Activity_Account_Setting;
@@ -324,6 +325,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		if (v.getId() == R.id.ll_test) {
+			startActivity(new Intent(ctx, A_CompanyName.class));
 			return;
 		}
 		//除了专属客服和电话客服之外的职位都要在点击之前登陆

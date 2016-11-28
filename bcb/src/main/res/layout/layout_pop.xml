@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="@color/background"
+        android:gravity="center_vertical">
+
+        <Button
+            android:id="@+id/job_button"
+            android:layout_width="80dp"
+            android:layout_height="35dp"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="center"
+            android:layout_marginLeft="15dip"
+            android:layout_marginRight="15dip"
+            android:background="@drawable/button_red_selector"
+            android:gravity="center"
+            android:text="确定"
+            android:textColor="@color/white"
+            android:textSize="@dimen/main_text_default"/>
+
+        <EditText
+            android:id="@+id/et_name"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginLeft="15dip"
+            android:layout_toLeftOf="@+id/job_button"
+            android:background="@drawable/edittext_none_background"
+            android:gravity="center_vertical"
+            android:hint="请输入公司名称"
+            android:paddingLeft="10dip"
+            android:singleLine="true"
+            android:textColorHint="@color/txt_gray"
+            android:textSize="@dimen/main_text_default"/>
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/lv_pop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:descendantFocusability="afterDescendants"
+        android:divider="#dbdbdb"
+        android:dividerHeight="1px"
+        android:listSelector="@android:color/transparent"/>
+</LinearLayout>

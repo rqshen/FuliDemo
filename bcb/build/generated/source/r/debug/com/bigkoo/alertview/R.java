@@ -483,7 +483,7 @@ public final class R {
 		public static final int layout_alertview_alert = 0x7f030089;
 		public static final int layout_alertview_alert_horizontal = 0x7f03008a;
 		public static final int layout_alertview_alert_vertical = 0x7f03008b;
-		public static final int support_simple_spinner_dropdown_item = 0x7f0300c1;
+		public static final int support_simple_spinner_dropdown_item = 0x7f0300c3;
 	}
 	public static final class string {
 		public static final int abc_action_bar_home_description = 0x7f060000;

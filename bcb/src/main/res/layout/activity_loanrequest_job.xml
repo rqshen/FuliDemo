@@ -47,17 +47,17 @@
                         android:text="工作单位全称"
                         android:textSize="@dimen/main_text_default"/>
 
-                    <EditText
+                    <TextView
                         android:id="@+id/loan_office"
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
                         android:layout_marginRight="10dip"
-                        android:background="@drawable/edittext_none_background"
                         android:gravity="right|center_vertical"
-                        android:hint="请填写详细工作单位信息"
+                        android:hint="请输入公司名称"
                         android:padding="5dip"
                         android:singleLine="true"
-                        android:textColorHint="@color/txt_gray"
+                        android:textColor="#00f"
+                        android:textColorHint="#600f"
                         android:textSize="@dimen/main_text_default"/>
                 </LinearLayout>
 

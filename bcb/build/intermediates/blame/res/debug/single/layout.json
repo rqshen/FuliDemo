@@ -604,6 +604,10 @@
         "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\layout\\dialog_show_image.xml"
     },
     {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\layout\\layout_pop.xml",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\layout\\layout_pop.xml"
+    },
+    {
         "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\layout\\loading_dialog.xml",
         "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\layout\\loading_dialog.xml"
     },
@@ -738,6 +742,10 @@
     {
         "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\layout\\layout_alertview_alert_horizontal.xml",
         "source": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.bigkoo\\alertview\\1.0.2\\res\\layout\\layout_alertview_alert_horizontal.xml"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\layout\\pop_item.xml",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\layout\\pop_item.xml"
     },
     {
         "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\layout\\activity_main.xml",

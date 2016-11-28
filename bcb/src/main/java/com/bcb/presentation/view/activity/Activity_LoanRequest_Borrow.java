@@ -30,7 +30,7 @@ import com.bcb.data.util.MQCustomerManager;
 import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.MyConstants;
 import com.bcb.data.util.PackageUtil;
-import com.bcb.data.util.ProgressBarUtils;
+import com.bcb.data.util.ProgressDialogrUtils;
 import com.bcb.data.util.SpinnerWheelUtil;
 import com.bcb.data.util.ToastUtil;
 import com.bcb.data.util.TokenUtil;
@@ -196,12 +196,12 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 	//                                                                                                   获取借款数据
 	//****************************************************************************************************************************************
 	private void getLoanCertification() {
-		ProgressBarUtils.show(this);
+		ProgressDialogrUtils.show(this, "正在验证借款信息...");
 		BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.LoanCertification, null, TokenUtil.getEncodeToken(this), new
 				BcbRequest.BcbCallBack<JSONObject>() {
 			@Override
 			public void onResponse(JSONObject response) {
-				ProgressBarUtils.hide();
+				ProgressDialogrUtils.hide();
 				refreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
 				try {
 					if (null == response) {
@@ -225,7 +225,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 
 			@Override
 			public void onErrorResponse(Exception error) {
-				ProgressBarUtils.hide();
+				ProgressDialogrUtils.hide();
 				ToastUtil.alert(Activity_LoanRequest_Borrow.this, "网络异常，请稍后重试");
 			}
 		});
@@ -631,13 +631,13 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 
 			LogUtil.i("bqt", "借款第一页页请求的数据是" + jsonObject.toString());
 
-			ProgressBarUtils.show(this);
+			ProgressDialogrUtils.show(this, "正在验证借款信息...");
 			BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.PostRequestMessage, jsonObject, TokenUtil.getEncodeToken(this),
 					new BcbRequest.BcbCallBack<JSONObject>() {
 				@Override
 				public void onResponse(JSONObject response) {
 					LogUtil.i("bqt", "借款第一页相应的数据是" + response.toString());
-					ProgressBarUtils.hide();
+					ProgressDialogrUtils.hide();
 					try {
 						//提示申请成功，是否填写个人信息
 						if (response.getInt("status") == 1)
@@ -657,7 +657,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 
 				@Override
 				public void onErrorResponse(Exception error) {
-					ProgressBarUtils.hide();
+					ProgressDialogrUtils.hide();
 				}
 			});
 			jsonRequest.setTag(BcbRequestTag.BCB_CREATE_LOAN_REQUEST_MESSAGE_REQUEST);
