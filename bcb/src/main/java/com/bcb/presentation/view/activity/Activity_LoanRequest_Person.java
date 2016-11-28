@@ -1,6 +1,7 @@
 package com.bcb.presentation.view.activity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -37,6 +38,15 @@ import java.util.List;
  * 个人信息
  */
 public class Activity_LoanRequest_Person extends Activity_Base implements View.OnClickListener {
+
+	//借款企业类型
+	private int LOAN_TYPE;
+
+	public static void launche(Context ctx, int LOAN_TYPE) {
+		Intent intent = new Intent(ctx, Activity_LoanRequest_Person.class);
+		intent.putExtra("LOAN_TYPE", LOAN_TYPE);
+		ctx.startActivity(intent);
+	}
 
 	//婚姻状况
 	private TextView loan_marital_status;
@@ -105,10 +115,9 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		//管理Activity栈，用于忘记密码的时候，跳转至登陆界面之前销毁栈中所有的Activity
-		MyActivityManager myActivityManager = MyActivityManager.getInstance();
-		myActivityManager.pushOneActivity(Activity_LoanRequest_Person.this);
+		MyActivityManager.getInstance().pushOneActivity(Activity_LoanRequest_Person.this);
 		setBaseContentView(R.layout.activity_loanrequest_personal);
+		LOAN_TYPE = getIntent().getIntExtra("LOAN_TYPE", 0);
 		setLeftTitleVisible(true);
 		setTitleValue("个人信息");
 		setupPersonalView();
@@ -185,7 +194,8 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
 		//创建队列
 		requestQueue = App.getInstance().getRequestQueue();
 		//创建请求
-		BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.GetLoanPersonalMessage, null, TokenUtil.getEncodeToken(this), new BcbRequest.BcbCallBack<JSONObject>() {
+		BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.GetLoanPersonalMessage, null, TokenUtil.getEncodeToken(this), new
+				BcbRequest.BcbCallBack<JSONObject>() {
 			@Override
 			public void onResponse(JSONObject response) {
 				LogUtil.i("bqt", "借款的个人信息" + response.toString());
@@ -201,7 +211,7 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
 						//将JSON转成PersonInfoBean对象，要先判断是否存在这样的数据
 						Gson mGson = new Gson();
 						String localLoanPersonal = new LoanPersonalConfigUtil(Activity_LoanRequest_Person.this)
-                                .getLoanPersonalMessage();
+								.getLoanPersonalMessage();
 						if (!TextUtils.isEmpty(localLoanPersonal)) {
 							PersonInfo = mGson.fromJson(localLoanPersonal, PersonInfoBean.class);
 						} else {
@@ -349,17 +359,17 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
 		}
 		//毕业院校
 		if (PersonInfo.GraduateSchool != null && !PersonInfo.GraduateSchool.equalsIgnoreCase("null") && !PersonInfo.GraduateSchool
-                .equalsIgnoreCase("")) {
+				.equalsIgnoreCase("")) {
 			loan_graduating_academy.setText(PersonInfo.GraduateSchool);
 		}
 		//身份证地址
 		if (PersonInfo.Hometown != null && !PersonInfo.Hometown.equalsIgnoreCase("null") && !PersonInfo.Hometown.equalsIgnoreCase
-                ("")) {
+				("")) {
 			loan_identity_address.setText(PersonInfo.Hometown);
 		}
 		//现居住地址
 		if (PersonInfo.Residence != null && !PersonInfo.Residence.equalsIgnoreCase("null") && !PersonInfo.Residence.equalsIgnoreCase
-                ("")) {
+				("")) {
 			loan_live_address.setText(PersonInfo.Residence);
 		}
 		//芝麻信用分
@@ -367,12 +377,12 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
 
 		//紧急联系人1
 		if (PersonInfo.EmergencyContact1 != null && !PersonInfo.EmergencyContact1.equalsIgnoreCase("null") && !PersonInfo
-                .EmergencyContact1.equalsIgnoreCase("")) {
+				.EmergencyContact1.equalsIgnoreCase("")) {
 			loan_emergency_case.setText(PersonInfo.EmergencyContact1);
 		}
 		//紧急联系人1，判断是否存在
 		if (PersonInfo.Relationship1 != null && !PersonInfo.Relationship1.equalsIgnoreCase("null") && !PersonInfo.Relationship1
-                .equalsIgnoreCase("")) {
+				.equalsIgnoreCase("")) {
 			for (int i = 0 ; i < relationList1.size() ; i++) {
 				if (relationList1.get(i).equalsIgnoreCase(PersonInfo.Relationship1)) {
 					loan_relationship.setText(relationList1.get(i));
@@ -384,20 +394,20 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
 
 		//电话
 		if (PersonInfo.ContactPhone1 != null && !PersonInfo.ContactPhone1.equalsIgnoreCase("null") && !PersonInfo.ContactPhone1
-                .equalsIgnoreCase("")) {
+				.equalsIgnoreCase("")) {
 			loan_emergency_phone.setText(PersonInfo.ContactPhone1);
 		}
 
 		//紧急联系人2
 		if (PersonInfo.EmergencyContact2 != null && !PersonInfo.EmergencyContact2.equalsIgnoreCase("null") && !PersonInfo
-                .EmergencyContact2.equalsIgnoreCase("")) {
+				.EmergencyContact2.equalsIgnoreCase("")) {
 			loan_emergency_case_second.setText(PersonInfo.EmergencyContact2);
 
 		}
 
 		//紧急联系人2， 判断关系是否存在
 		if (PersonInfo.Relationship2 != null && !PersonInfo.Relationship2.equalsIgnoreCase("null") && !PersonInfo.Relationship2
-                .equalsIgnoreCase("")) {
+				.equalsIgnoreCase("")) {
 			for (int i = 0 ; i < relationList2.size() ; i++) {
 				if (relationList2.get(i).equalsIgnoreCase(PersonInfo.Relationship2)) {
 					loan_relationship_second.setText(relationList2.get(i));
@@ -410,7 +420,7 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
 
 		//电话
 		if (PersonInfo.ContactPhone2 != null && !PersonInfo.ContactPhone2.equalsIgnoreCase("null") && !PersonInfo.ContactPhone2
-                .equalsIgnoreCase("")) {
+				.equalsIgnoreCase("")) {
 			loan_emergency_phone_second.setText(PersonInfo.ContactPhone2);
 		}
 	}
@@ -421,8 +431,8 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
 	private void personButtonClick() {
 		//判断是否都填写了信息
 		if (loan_identity_address.getText().toString().equalsIgnoreCase("") || loan_live_address.getText().toString()
-                .equalsIgnoreCase("") || loan_emergency_case.getText().toString().equalsIgnoreCase("") || loan_emergency_phone
-                .getText().toString().equalsIgnoreCase("")) {
+				.equalsIgnoreCase("") || loan_emergency_case.getText().toString().equalsIgnoreCase("") || loan_emergency_phone
+				.getText().toString().equalsIgnoreCase("")) {
 			ToastUtil.alert(Activity_LoanRequest_Person.this, "请填写完整的个人信息");
 			return;
 		}
@@ -430,7 +440,7 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
 		if (!RegexManager.isPhoneNum(loan_emergency_phone.getText().toString())) {
 			//判断紧急联系人2不为空的时候
 			if (!loan_emergency_phone_second.getText().toString().equalsIgnoreCase("") && !RegexManager.isPhoneNum
-                    (loan_emergency_phone_second.getText().toString())) {
+					(loan_emergency_phone_second.getText().toString())) {
 				ToastUtil.alert(Activity_LoanRequest_Person.this, "请填写正确的手机号码");
 				return;
 			} else {
@@ -442,7 +452,7 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
 
 		//判断紧急联系人是否跟用户姓名一样
 		if (loan_emergency_case.getText().toString().equalsIgnoreCase(App.mUserDetailInfo.getRealName()) ||
-                loan_emergency_case_second.getText().toString().equalsIgnoreCase(App.mUserDetailInfo.getRealName())) {
+				loan_emergency_case_second.getText().toString().equalsIgnoreCase(App.mUserDetailInfo.getRealName())) {
 			ToastUtil.alert(Activity_LoanRequest_Person.this, "紧急联系人不能与本人相同");
 			return;
 		}
@@ -481,7 +491,7 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
 		PersonInfo.Residence = loan_live_address.getText().toString();//loan_identity_address.getText().toString();//
 		//芝麻信用分
 		PersonInfo.SesameCredit = Integer.parseInt(loan_sesame_credit.getText().toString().isEmpty() ? "0" : loan_sesame_credit
-                .getText().toString());
+				.getText().toString());
 		//紧急联系人1
 		PersonInfo.EmergencyContact1 = loan_emergency_case.getText().toString();
 		//紧急联系人1 关系
@@ -498,13 +508,10 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
 		//紧急联系人2 电话
 		PersonInfo.ContactPhone2 = loan_emergency_phone_second.getText().toString();
 		//将个人信息缓存在本地
-		Gson mGson = new Gson();
-		(new LoanPersonalConfigUtil(this)).saveLoanPersonalMessage(mGson.toJson(PersonInfo));
-		LogUtil.i("bqt", "【Activity_LoanRequest_Person】【saveDataAndGotoJobPage】关系2--" + mGson.toString());
+		new LoanPersonalConfigUtil(this).saveLoanPersonalMessage(new Gson().toJson(PersonInfo));
+		LogUtil.i("bqt", "关系2--" + new Gson().toJson(PersonInfo));
 		//跳转至工作信息页面
-		Intent intent = new Intent(Activity_LoanRequest_Person.this, Activity_LoanRequest_Job.class);
-		intent.putExtra("personInfoBean", mGson.toJson(PersonInfo));
-		startActivity(intent);
+		Activity_LoanRequest_Job.launche(Activity_LoanRequest_Person.this, LOAN_TYPE, new Gson().toJson(PersonInfo));
 		finish();
 	}
 
@@ -521,7 +528,7 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
 			case R.id.ll_children://孩子情况
 				String[] arr1 = childrenList.toArray(new String[childrenList.size()]);
 				SpinnerWheelUtil.getInstance().initSpinnerWheelDialog(this, arr1, childrenStatus, new SpinnerWheelUtil
-                        .OnDoneClickListener() {
+						.OnDoneClickListener() {
 					@Override
 					public void onClick(int currentItem) {
 						childrenStatus = currentItem;
@@ -532,7 +539,7 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
 			case R.id.ll_house://住房情况
 				String[] arr2 = houseList.toArray(new String[houseList.size()]);
 				SpinnerWheelUtil.getInstance().initSpinnerWheelDialog(this, arr2, houseStatus - 1, new SpinnerWheelUtil
-                        .OnDoneClickListener() {
+						.OnDoneClickListener() {
 					@Override
 					public void onClick(int currentItem) {
 						houseStatus = currentItem + 1;
@@ -543,7 +550,7 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
 			case R.id.ll_marital://婚姻状况
 				String[] arr3 = maritalList.toArray(new String[maritalList.size()]);
 				SpinnerWheelUtil.getInstance().initSpinnerWheelDialog(this, arr3, maritalStatus - 1, new SpinnerWheelUtil
-                        .OnDoneClickListener() {
+						.OnDoneClickListener() {
 					@Override
 					public void onClick(int currentItem) {
 						maritalStatus = currentItem + 1;
@@ -555,7 +562,7 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
 				String[] arr4 = literacyList.toArray(new String[literacyList.size()]);
 
 				SpinnerWheelUtil.getInstance().initSpinnerWheelDialog(this, arr4, literacyStatus - 1, new SpinnerWheelUtil
-                        .OnDoneClickListener() {
+						.OnDoneClickListener() {
 					@Override
 					public void onClick(int currentItem) {
 						if (currentItem == 0) {
@@ -571,7 +578,7 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
 			case R.id.ll_relationship://紧急联系人1
 				String[] arr5 = relationList1.toArray(new String[relationList1.size()]);
 				SpinnerWheelUtil.getInstance().initSpinnerWheelDialog(this, arr5, relStatus1, new SpinnerWheelUtil
-                        .OnDoneClickListener() {
+						.OnDoneClickListener() {
 					@Override
 					public void onClick(int currentItem) {
 						relStatus1 = currentItem;
@@ -583,7 +590,7 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
 			case R.id.ll_relationship_second://紧急联系人2
 				String[] arr6 = relationList2.toArray(new String[relationList2.size()]);
 				SpinnerWheelUtil.getInstance().initSpinnerWheelDialog(this, arr6, relStatus2, new SpinnerWheelUtil
-                        .OnDoneClickListener() {
+						.OnDoneClickListener() {
 					@Override
 					public void onClick(int currentItem) {
 						relStatus2 = currentItem;

@@ -203,8 +203,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:minHeight="47dp">
+                        android:minHeight="47dp"
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -224,7 +224,7 @@
                             android:layout_marginLeft="35dp"
                             android:layout_marginRight="40dp"
                             android:layout_marginTop="16dp"
-                           >
+                            >
 
                             <TextView
                                 android:id="@+id/loan_rate"
@@ -455,6 +455,15 @@
                     android:text="《福利金融借款服务协议》"
                     android:textColor="@color/blue"
                     android:textSize="@dimen/main_text_default"/>
+
+                <TextView
+                    android:id="@+id/tv_explain"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="15dp"
+                    android:text="产品介绍"
+                    android:textColor="@color/txt_gray"
+                    android:textSize="13sp"/>
             </LinearLayout>
         </com.bcb.presentation.view.custom.PullableView.PullableScrollView>
         <!-- 上拉加载更多 -->
