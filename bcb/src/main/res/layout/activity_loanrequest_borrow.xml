@@ -460,10 +460,12 @@
                     android:id="@+id/tv_explain"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="15dp"
+                    android:paddingBottom="20dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
                     android:text="产品介绍"
                     android:textColor="@color/txt_gray"
-                    android:textSize="13sp"/>
+                    android:textSize="14sp"/>
             </LinearLayout>
         </com.bcb.presentation.view.custom.PullableView.PullableScrollView>
         <!-- 上拉加载更多 -->

@@ -15,9 +15,8 @@
             android:layout_width="80dp"
             android:layout_height="35dp"
             android:layout_alignParentRight="true"
-
             android:layout_centerVertical="true"
-            android:layout_marginLeft="15dip"
+            android:layout_marginLeft="10dip"
             android:layout_marginRight="15dip"
             android:background="@drawable/button_red_selector"
             android:gravity="center"
@@ -40,6 +39,28 @@
             android:textColorHint="@color/txt_gray"
             android:textSize="@dimen/main_text_default"/>
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="暂无搜索到相应结果"
+        android:textColor="#999"
+        android:textSize="16sp"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/tv_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="您仍可输入完整公司名称\n点击确认提交"
+        android:textColor="#333"
+        android:textSize="18sp"
+        android:visibility="gone"/>
 
     <ListView
         android:id="@+id/lv_pop"

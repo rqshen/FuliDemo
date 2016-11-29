@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:paddingTop="10dp">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="#fff">
+
+        <TextView
+            android:id="@+id/tv_email"
+            android:layout_width="90dp"
+            android:layout_height="45dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:singleLine="true"
+            android:text="校验邮箱 "
+            android:textColor="#333"
+            android:textSize="16sp"/>
+
+
+        <EditText
+            android:id="@+id/et_email"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_toRightOf="@+id/tv_email"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:hint="请填写工作邮箱"
+            android:paddingLeft="10dp"
+            android:singleLine="true"
+            android:textColorHint="#999"
+            android:textSize="15sp"/>
+
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:background="@color/linegray"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="#fff">
+
+        <TextView
+            android:id="@+id/tv_yzm"
+            android:layout_width="90dp"
+            android:layout_height="45dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:singleLine="true"
+            android:text="验证码 "
+            android:textColor="#333"
+            android:textSize="16sp"/>
+
+        <Button
+            android:id="@+id/send"
+            android:layout_width="wrap_content"
+            android:layout_height="30dip"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:minEms="5"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/request_code_selector"
+            android:gravity="center"
+            android:minWidth="85dip"
+            android:paddingLeft="10dip"
+            android:paddingRight="10dip"
+            android:text="获取验证码"
+            android:textColor="@color/white"
+            android:textSize="@dimen/main_text_small"/>
+
+        <EditText
+            android:id="@+id/et_yzm"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_toLeftOf="@+id/send"
+            android:layout_toRightOf="@+id/tv_yzm"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:hint="请填写邮箱验证码"
+            android:paddingLeft="10dp"
+            android:singleLine="true"
+            android:textColorHint="#999"
+            android:textSize="15sp"/>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_tips"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:singleLine="true"
+        android:visibility="invisible"
+        android:text="验证码已发送到你的邮箱中，请查收后填写 "
+        android:textColor="#999"
+        android:textSize="12sp"/>
+
+    <Button
+        android:id="@+id/next"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_height"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="28dp"
+        android:layout_marginRight="28dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_red_selector"
+        android:text="提交"
+        android:textColor="@color/white"
+        android:textSize="@dimen/main_text_default"/>
+</LinearLayout>

@@ -153,9 +153,17 @@ public class Activity_LoanRequest_Job extends Activity_Base implements TextWatch
 		}
 	}
 
-	@OnClick(R.id.loan_office)
+	@OnClick({R.id.rl_company, R.id.loan_office, R.id.company_right})
 	public void selectCompanyName() {
-		startActivity(new Intent(Activity_LoanRequest_Job.this, A_CompanyName.class));
+		startActivityForResult(new Intent(Activity_LoanRequest_Job.this, A_CompanyName.class),100);
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (requestCode==100&&resultCode==100&&data!=null) {
+			loan_office.setText(data.getStringExtra("COMPANY_NAME"));
+		}
 	}
 
 	//点击下一步按钮

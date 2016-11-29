@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:2:1-517:12
+ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:2:1-521:12
 	package
 		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:4:11-28
 		INJECTED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml
@@ -150,7 +150,7 @@ ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:41:5-79
 	android:name
 		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:41:22-77
 application
-ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:43:5-515:19
+ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:43:5-519:19
 MERGED from [com.android.volley:volley:unspecified] E:\_code_bqt\bcb_android\bcb\build\intermediates\exploded-aar\com.android.volley\volley\unspecified\AndroidManifest.xml:9:5-20
 MERGED from [bcb_android:spinnerwheel:unspecified] E:\_code_bqt\bcb_android\bcb\build\intermediates\exploded-aar\bcb_android\spinnerwheel\unspecified\AndroidManifest.xml:11:5-15:19
 MERGED from [com.android.support:appcompat-v7:23.1.1] E:\_code_bqt\bcb_android\bcb\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.1.1\AndroidManifest.xml:22:5-20
@@ -652,301 +652,309 @@ ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:329:9-332:5
 		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:331:13-45
 	android:name
 		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:330:13-69
-activity#com.bcb.presentation.view.activity.Activity_Daily_Welfare
-ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:334:9-337:51
+activity#com.bcb.presentation.view.activity.A_Email_Check
+ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:333:9-336:51
 	android:screenOrientation
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:337:13-49
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:336:13-49
 	android:label
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:336:13-45
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:335:13-45
 	android:name
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:335:13-78
-activity#com.bcb.presentation.view.activity.Activity_Daily_Welfare_Result
-ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:338:9-343:55
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:334:13-69
+activity#com.bcb.presentation.view.activity.Activity_Daily_Welfare
+ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:338:9-341:51
 	android:screenOrientation
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:342:13-49
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:341:13-49
 	android:label
 		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:340:13-45
-	android:launchMode
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:341:13-44
-	android:theme
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:343:13-53
 	android:name
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:339:13-85
-activity#com.bcb.presentation.view.activity.Activity_Daily_Welfare_Tip
-ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:344:9-347:51
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:339:13-78
+activity#com.bcb.presentation.view.activity.Activity_Daily_Welfare_Result
+ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:342:9-347:55
 	android:screenOrientation
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:347:13-49
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:346:13-49
 	android:label
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:346:13-45
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:344:13-45
+	android:launchMode
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:345:13-44
+	android:theme
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:347:13-53
 	android:name
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:345:13-82
-activity#com.bcb.presentation.view.activity.Activity_Daily_Welfare_Static
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:343:13-85
+activity#com.bcb.presentation.view.activity.Activity_Daily_Welfare_Tip
 ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:348:9-351:51
 	android:screenOrientation
 		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:351:13-49
 	android:label
 		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:350:13-45
 	android:name
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:349:13-85
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:349:13-82
+activity#com.bcb.presentation.view.activity.Activity_Daily_Welfare_Static
+ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:352:9-355:51
+	android:screenOrientation
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:355:13-49
+	android:label
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:354:13-45
+	android:name
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:353:13-85
 activity#com.bcb.presentation.view.activity.Activity_Image_Display
-ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:353:9-356:51
+ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:357:9-360:51
 	android:screenOrientation
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:356:13-49
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:360:13-49
 	android:label
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:355:13-45
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:359:13-45
 	android:name
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:354:13-78
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:358:13-78
 activity#com.bcb.presentation.view.activity.Activity_Love
-ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:358:9-361:51
+ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:362:9-365:51
 	android:screenOrientation
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:361:13-49
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:365:13-49
 	android:label
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:360:13-45
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:364:13-45
 	android:name
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:359:13-69
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:363:13-69
 activity#com.bcb.presentation.view.activity.Activity_Privilege_Money
-ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:363:9-366:51
+ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:367:9-370:51
 	android:screenOrientation
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:366:13-49
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:370:13-49
 	android:label
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:365:13-45
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:369:13-45
 	android:name
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:364:13-80
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:368:13-80
 activity#cn.jpush.android.ui.PushActivity
-ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:370:9-381:20
+ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:374:9-385:20
 	android:exported
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:373:13-37
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:377:13-37
 	android:configChanges
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:372:13-63
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:376:13-63
 	android:theme
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:374:13-60
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:378:13-60
 	android:name
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:371:13-60
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:375:13-60
 intent-filter#${applicationId}+android.intent.category.DEFAULT+cn.jpush.android.ui.PushActivity
-ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:375:13-380:29
+ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:379:13-384:29
 action#cn.jpush.android.ui.PushActivity
-ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:376:17-74
+ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:380:17-74
 	android:name
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:376:25-72
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:380:25-72
 category#android.intent.category.DEFAULT
-ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:378:17-75
+ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:382:17-75
 	android:name
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:378:27-73
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:382:27-73
 category#${applicationId}
-ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:379:17-60
+ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:383:17-60
 	android:name
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:379:27-58
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:383:27-58
 		INJECTED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml
 		INJECTED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml
 		INJECTED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml
 		INJECTED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml
 service#cn.jpush.android.service.DownloadService
-ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:384:9-388:19
+ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:388:9-392:19
 	android:enabled
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:386:13-35
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:390:13-35
 	android:exported
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:387:13-37
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:391:13-37
 	android:name
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:385:13-68
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:389:13-68
 service#cn.jpush.android.service.PushService
-ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:393:9-403:19
+ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:397:9-407:19
 	android:enabled
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:395:13-35
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:399:13-35
 	android:exported
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:396:13-37
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:400:13-37
 	android:name
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:394:13-64
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:398:13-64
 intent-filter#cn.jpush.android.intent.PUSH_TIME+cn.jpush.android.intent.PushService+cn.jpush.android.intent.REGISTER+cn.jpush.android.intent.REPORT
-ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:397:13-402:29
+ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:401:13-406:29
 action#cn.jpush.android.intent.REGISTER
-ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:398:17-74
+ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:402:17-74
 	android:name
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:398:25-72
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:402:25-72
 action#cn.jpush.android.intent.REPORT
-ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:399:17-72
+ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:403:17-72
 	android:name
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:399:25-70
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:403:25-70
 action#cn.jpush.android.intent.PushService
-ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:400:17-77
+ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:404:17-77
 	android:name
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:400:25-75
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:404:25-75
 action#cn.jpush.android.intent.PUSH_TIME
-ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:401:17-75
+ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:405:17-75
 	android:name
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:401:25-73
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:405:25-73
 service#cn.jpush.android.service.DaemonService
-ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:406:9-415:19
+ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:410:9-419:19
 	android:enabled
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:408:13-35
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:412:13-35
 	android:exported
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:409:13-36
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:413:13-36
 	android:name
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:407:13-66
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:411:13-66
 intent-filter#${applicationId}+cn.jpush.android.intent.DaemonService
-ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:410:13-414:29
+ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:414:13-418:29
 action#cn.jpush.android.intent.DaemonService
-ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:411:17-79
+ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:415:17-79
 	android:name
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:411:25-77
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:415:25-77
 receiver#cn.jpush.android.service.PushReceiver
-ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:418:9-438:20
+ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:422:9-442:20
 	android:enabled
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:420:13-35
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:424:13-35
 	android:exported
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:421:13-37
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:425:13-37
 	android:name
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:419:13-65
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:423:13-65
 intent-filter#${applicationId}+cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY
-ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:422:13-426:29
+ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:426:13-430:29
 	android:priority
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:422:28-51
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:426:28-51
 action#cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY
-ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:423:17-93
+ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:427:17-93
 	android:name
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:423:25-91
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:427:25-91
 intent-filter#android.intent.action.USER_PRESENT+android.net.conn.CONNECTIVITY_CHANGE
-ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:427:13-430:29
+ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:431:13-434:29
 action#android.intent.action.USER_PRESENT
-ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:428:17-76
+ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:432:17-76
 	android:name
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:428:25-74
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:432:25-74
 action#android.net.conn.CONNECTIVITY_CHANGE
-ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:429:17-78
+ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:433:17-78
 	android:name
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:429:25-76
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:433:25-76
 intent-filter#android.intent.action.PACKAGE_ADDED+android.intent.action.PACKAGE_REMOVED
-ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:432:13-437:29
+ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:436:13-441:29
 action#android.intent.action.PACKAGE_ADDED
-ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:433:17-77
+ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:437:17-77
 	android:name
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:433:25-75
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:437:25-75
 action#android.intent.action.PACKAGE_REMOVED
-ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:434:17-79
+ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:438:17-79
 	android:name
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:434:25-77
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:438:25-77
 data
-ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:436:17-49
+ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:440:17-49
 	android:scheme
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:436:23-47
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:440:23-47
 receiver#cn.jpush.android.service.AlarmReceiver
-ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:441:9-443:39
+ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:445:9-447:39
 	android:exported
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:443:13-37
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:447:13-37
 	android:name
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:442:13-66
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:446:13-66
 receiver#com.bcb.common.receiver.JPushReceiver
-ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:446:9-464:20
+ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:450:9-468:20
 	android:enabled
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:448:13-35
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:452:13-35
 	android:name
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:447:13-58
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:451:13-58
 intent-filter#${applicationId}+cn.jpush.android.intent.ACTION_RICHPUSH_CALLBACK+cn.jpush.android.intent.CONNECTION+cn.jpush.android.intent.MESSAGE_RECEIVED+cn.jpush.android.intent.NOTIFICATION_OPENED+cn.jpush.android.intent.NOTIFICATION_RECEIVED+cn.jpush.android.intent.REGISTRATION
-ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:449:13-463:29
+ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:453:13-467:29
 action#cn.jpush.android.intent.REGISTRATION
-ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:450:17-78
+ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:454:17-78
 	android:name
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:450:25-76
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:454:25-76
 action#cn.jpush.android.intent.MESSAGE_RECEIVED
-ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:452:17-82
+ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:456:17-82
 	android:name
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:452:25-80
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:456:25-80
 action#cn.jpush.android.intent.NOTIFICATION_RECEIVED
-ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:454:17-87
+ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:458:17-87
 	android:name
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:454:25-85
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:458:25-85
 action#cn.jpush.android.intent.NOTIFICATION_OPENED
-ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:456:17-85
+ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:460:17-85
 	android:name
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:456:25-83
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:460:25-83
 action#cn.jpush.android.intent.ACTION_RICHPUSH_CALLBACK
-ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:458:17-90
+ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:462:17-90
 	android:name
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:458:25-88
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:462:25-88
 action#cn.jpush.android.intent.CONNECTION
-ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:460:17-76
+ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:464:17-76
 	android:name
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:460:25-74
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:464:25-74
 meta-data#JPUSH_CHANNEL
-ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:467:9-469:48
+ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:471:9-473:48
 	android:value
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:469:13-46
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:473:13-46
 	android:name
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:468:13-41
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:472:13-41
 meta-data#JPUSH_APPKEY
-ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:470:9-472:55
+ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:474:9-476:55
 	android:value
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:472:13-53
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:476:13-53
 	android:name
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:471:13-40
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:475:13-40
 activity#com.bcb.presentation.view.activity.Activity_Open_Account
-ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:475:9-476:20
-	android:name
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:475:19-83
-activity#com.bcb.presentation.view.activity.Activity_TuoGuan_HF
-ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:477:9-478:20
-	android:name
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:477:19-81
-activity#com.bcb.presentation.view.activity.Activity_Charge_HF
 ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:479:9-480:20
 	android:name
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:479:19-80
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:479:19-83
+activity#com.bcb.presentation.view.activity.Activity_TuoGuan_HF
+ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:481:9-482:20
+	android:name
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:481:19-81
+activity#com.bcb.presentation.view.activity.Activity_Charge_HF
+ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:483:9-484:20
+	android:name
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:483:19-80
 activity#com.bcb.presentation.view.activity.Activity_Tips_FaileOrSuccess
-ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:481:9-484:20
+ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:485:9-488:20
 	android:launchMode
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:483:13-44
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:487:13-44
 	android:name
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:482:13-84
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:486:13-84
 activity#com.bcb.presentation.view.activity.Activity_WebView
-ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:485:9-486:20
+ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:489:9-490:20
 	android:name
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:485:19-78
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:489:19-78
 activity#com.bcb.presentation.view.activity.A_Slb
-ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:487:9-488:20
+ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:491:9-492:20
 	android:name
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:487:19-67
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:491:19-67
 meta-data#com.google.android.gms.version
-ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:493:9-495:68
+ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:497:9-499:68
 MERGED from [com.google.android.gms:play-services-basement:8.1.0] E:\_code_bqt\bcb_android\bcb\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\8.1.0\AndroidManifest.xml:21:9-23:69
 	android:value
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:495:13-66
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:499:13-66
 	android:name
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:494:13-58
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:498:13-58
 activity#com.bcb.presentation.view.activity.A_AboutSlb
-ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:497:9-498:20
-	android:name
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:497:19-72
-activity#com.bcb.presentation.view.activity.A_Slb_List
-ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:499:9-500:20
-	android:name
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:499:19-72
-activity#com.bcb.presentation.view.activity.A_TZ_Cheques
 ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:501:9-502:20
 	android:name
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:501:19-74
-activity#com.bcb.presentation.view.activity.Activity_Charge_Tips
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:501:19-72
+activity#com.bcb.presentation.view.activity.A_Slb_List
 ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:503:9-504:20
 	android:name
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:503:19-82
-activity#com.bcb.presentation.view.activity.Activity_Trading_Cancle
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:503:19-72
+activity#com.bcb.presentation.view.activity.A_TZ_Cheques
 ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:505:9-506:20
 	android:name
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:505:19-85
-activity#com.bcb.presentation.view.activity.Activity_Trading_change
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:505:19-74
+activity#com.bcb.presentation.view.activity.Activity_Charge_Tips
 ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:507:9-508:20
 	android:name
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:507:19-85
-activity#com.bcb.presentation.view.activity.Activity_Rading_Record
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:507:19-82
+activity#com.bcb.presentation.view.activity.Activity_Trading_Cancle
 ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:509:9-510:20
 	android:name
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:509:19-84
-activity#com.bcb.presentation.view.activity.Activity_ZRXQ
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:509:19-85
+activity#com.bcb.presentation.view.activity.Activity_Trading_change
 ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:511:9-512:20
 	android:name
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:511:19-75
-activity#com.bcb.presentation.view.activity.Activity_Web_Normal
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:511:19-85
+activity#com.bcb.presentation.view.activity.Activity_Rading_Record
 ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:513:9-514:20
 	android:name
-		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:513:19-81
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:513:19-84
+activity#com.bcb.presentation.view.activity.Activity_ZRXQ
+ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:515:9-516:20
+	android:name
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:515:19-75
+activity#com.bcb.presentation.view.activity.Activity_Web_Normal
+ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:517:9-518:20
+	android:name
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:517:19-81
 uses-permission#android.permission.RECORD_AUDIO
 ADDED from [com.meiqia:meiqiasdk:3.2.4] E:\_code_bqt\bcb_android\bcb\build\intermediates\exploded-aar\com.meiqia\meiqiasdk\3.2.4\AndroidManifest.xml:14:5-71
 	android:name

@@ -623,6 +623,16 @@
     <string name="dist_yhxx">存新房宝，立享优惠</string>
     <string name="error_tips">当前输入小于起投金额</string>
     <string name="exit_app">你确定要退出应用吗?</string>
+    <string name="explain_brand">产品介绍：\n
+        1、适用于适用于国家公务员，500强企业高管等，最高可贷30万。\n
+        2、年利率低至8.5%，每月归还本息。</string>
+    <string name="explain_it">产品介绍：\n
+        1、适用于IT从业者（产品经理，程序猿，测试运维等），最高可贷30万。\n
+        2、年利率低至8.5%，每月归还本息。</string>
+    <string name="explain_signed">产品介绍：\n
+        1、适用于福利金融签约企业，最高可贷50万。\n
+        2、年利率低至7%，还可申请公司补贴，最高可以免息。\n
+        3、支持按月还款，一次性还本付息等多种还款方式。</string>
     <string name="fang_act">fang_act</string>
     <string name="fang_detail">fang_detail</string>
     <string name="fang_home">fang_home</string>

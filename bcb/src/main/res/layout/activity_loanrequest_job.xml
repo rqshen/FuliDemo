@@ -31,35 +31,50 @@
                     android:layout_marginRight="3dip"
                     android:background="@color/linegray"/>
                 <!-- 工作单位 -->
-                <LinearLayout
+                <RelativeLayout
+                    android:id="@+id/rl_company"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dip"
-                    android:layout_marginTop="10dip"
-                    android:orientation="horizontal">
+                    android:layout_marginTop="10dip">
 
                     <TextView
-                        android:layout_width="120dip"
+                        android:id="@+id/company_title"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
+                        android:layout_centerVertical="true"
                         android:layout_marginLeft="15dip"
                         android:gravity="center_vertical"
                         android:text="工作单位全称"
                         android:textSize="@dimen/main_text_default"/>
 
+                    <ImageView
+                        android:id="@+id/company_right"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="15dp"
+                        android:background="@drawable/ind"
+                        android:gravity="center_vertical"/>
+
                     <TextView
                         android:id="@+id/loan_office"
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
-                        android:layout_marginRight="10dip"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@+id/company_right"
+                        android:layout_toRightOf="@+id/company_title"
                         android:gravity="right|center_vertical"
                         android:hint="请输入公司名称"
-                        android:padding="5dip"
+
                         android:singleLine="true"
-                        android:textColor="#00f"
-                        android:textColorHint="#600f"
+                        android:textColorHint="@color/txt_gray"
                         android:textSize="@dimen/main_text_default"/>
-                </LinearLayout>
+
+
+                </RelativeLayout>
 
                 <ImageView
                     android:layout_width="match_parent"

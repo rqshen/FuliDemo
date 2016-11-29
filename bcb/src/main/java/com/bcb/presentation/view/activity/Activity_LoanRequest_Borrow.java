@@ -129,19 +129,19 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 				setTitleValue("名企金领贷");
 				banner_image.setImageResource(R.drawable.loan_brand);
 				layout_coupon_select.setVisibility(View.GONE);
-				tv_explain.setText("名企金领贷");
+				tv_explain.setText(getString(R.string.explain_brand));
 				break;
 			case 2:
 				setTitleValue("IT精英贷");
 				banner_image.setImageResource(R.drawable.loan_it);
 				layout_coupon_select.setVisibility(View.GONE);
-				tv_explain.setText("IT精英贷");
+				tv_explain.setText(getString(R.string.explain_it));
 				break;
 			default:
 				setTitleValue("签约企业贷");
 				banner_image.setImageResource(R.drawable.loan_signed);
 				layout_coupon_select.setVisibility(View.VISIBLE);
-				tv_explain.setText("签约企业贷");
+				tv_explain.setText(getString(R.string.explain_signed));
 				break;
 		}
 		setLeftTitleVisible(true);

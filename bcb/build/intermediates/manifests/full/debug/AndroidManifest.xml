@@ -331,6 +331,10 @@
             android:name="com.bcb.presentation.view.activity.A_CompanyName"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
+        <activity
+            android:name="com.bcb.presentation.view.activity.A_Email_Check"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" />
         <!-- 每日福利 -->
         <activity
             android:name="com.bcb.presentation.view.activity.Activity_Daily_Welfare"

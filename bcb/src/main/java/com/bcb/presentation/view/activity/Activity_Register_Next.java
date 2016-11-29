@@ -30,7 +30,7 @@ public class Activity_Register_Next extends Activity_Base implements Interface_V
     private static final String TAG = "Activity_Register_Next";
 
     private EditText userpwd, userpwdconfirm, regservicecode;
-    private Button send, next;
+    private Button send,next;//
     private String phonenum;
     private int time;
     private Timer timer;
