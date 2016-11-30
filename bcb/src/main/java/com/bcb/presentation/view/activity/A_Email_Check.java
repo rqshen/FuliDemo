@@ -1,5 +1,7 @@
 package com.bcb.presentation.view.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
@@ -14,16 +16,14 @@ import com.bcb.common.app.App;
 import com.bcb.common.net.BcbJsonRequest;
 import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.UrlsOne;
-import com.bcb.data.SimpleCompanyBean;
 import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.ProgressDialogrUtils;
+import com.bcb.data.util.TokenUtil;
 import com.bcb.presentation.view.custom.AlertView.DialogBQT;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.regex.Matcher;
@@ -44,7 +44,6 @@ public class A_Email_Check extends Activity_Base {
 	@BindView(R.id.et_yzm) EditText et_yzm;//输入验证码
 	@BindView(R.id.tv_tips) TextView tv_tips;//提示
 
-	private List<SimpleCompanyBean> mListAll;//支持的邮箱集合
 	private int time = 60;//倒计时
 	private Timer timer;
 	private Handler handler = new Handler() {
@@ -63,7 +62,13 @@ public class A_Email_Check extends Activity_Base {
 			}
 		}
 	};
-	
+
+	public static void launche(Context ctx, String email) {
+		Intent intent = new Intent(ctx, A_Email_Check.class);
+		intent.putExtra("email", email);
+		ctx.startActivity(intent);
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -71,15 +76,8 @@ public class A_Email_Check extends Activity_Base {
 		ButterKnife.bind(this);
 		setLeftTitleVisible(true);
 		setTitleValue("非签约IT精英贷");
-		initList();
-	}
-
-	private void initList() {
-		mListAll = new ArrayList<SimpleCompanyBean>();
-		for (int i = 0 ; i < 100. ; i++) {
-			mListAll.add(new SimpleCompanyBean(i + "包青天", "@16" + i + ".com"));
-			mListAll.add(new SimpleCompanyBean(i + "超过2个字符才开始检索", "@sian.com"));
-			mListAll.add(new SimpleCompanyBean(i + "全部匹配，或匹配输入内容的5个字符，都算成功", "@100cb.com"));
+		if (getIntent() != null && getIntent().getStringExtra("email") != null) {
+			et_email.setText(getIntent().getStringExtra("email"));
 		}
 	}
 
@@ -121,18 +119,18 @@ public class A_Email_Check extends Activity_Base {
 			return false;
 		}
 		//是否为指定后缀
-		boolean isContainEmail = false;
-		for (int i = 0 ; i < mListAll.size() ; i++) {
-			if (email.contains(mListAll.get(i).email)) {
-				isContainEmail = true;
-				break;
-			}
-		}
-		//不包含
-		if (!isContainEmail) {
-			showDialog("您输入的邮箱后缀不是公司邮箱地址\n将导致您的借款审核不通过，请重新\n填写。");
-			return false;
-		}
+		//		boolean isContainEmail = false;
+		//		for (int i = 0 ; i < mListAll.size() ; i++) {
+		//			if (email.contains(mListAll.get(i).email)) {
+		//				isContainEmail = true;
+		//				break;
+		//			}
+		//		}
+		//		//不包含
+		//		if (!isContainEmail) {
+		//			showDialog("您输入的邮箱后缀不是公司邮箱地址\n将导致您的借款审核不通过，请重新\n填写。");
+		//			return false;
+		//		}
 		return true;
 	}
 	
@@ -141,9 +139,9 @@ public class A_Email_Check extends Activity_Base {
 		ProgressDialogrUtils.show(this, "正在获取验证码…");
 		JSONObject obj = new org.json.JSONObject();
 		try {
-			obj.put("email", et_email.getText().toString().trim());
-			BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.UserGetRegiCode, obj, null, new BcbRequest
-					.BcbCallBack<JSONObject>() {
+			obj.put("Email", et_email.getText().toString().trim());
+			BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.CREATEVALIDATECODE, obj, TokenUtil.getEncodeToken(this), new
+					BcbRequest.BcbCallBack<JSONObject>() {
 				@Override
 				public void onResponse(JSONObject response) {
 					ProgressDialogrUtils.hide();
@@ -152,11 +150,12 @@ public class A_Email_Check extends Activity_Base {
 					if (response.optInt("status") == 1) {
 						setTimer();
 						tv_tips.setVisibility(View.VISIBLE);
-					} else {
-						Toast.makeText(A_Email_Check.this, response.optString("message"), Toast.LENGTH_SHORT).show();
+					} else if (response.optInt("status") == -3) {
+						//	Toast.makeText(A_Email_Check.this, response.optString("message"), Toast.LENGTH_SHORT).show();
+						showDialog(response.optString("message"));
 						send.setEnabled(true);
 						send.setBackgroundResource(R.drawable.request_code_selector);
-					}
+					} else Toast.makeText(A_Email_Check.this, response.optString("message"), Toast.LENGTH_SHORT).show();
 				}
 
 				@Override
@@ -178,18 +177,20 @@ public class A_Email_Check extends Activity_Base {
 		ProgressDialogrUtils.show(this, "正在提交…");
 		JSONObject obj = new org.json.JSONObject();
 		try {
-			obj.put("yzm", et_yzm.getText().toString().trim());
-			BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.UserGetRegiCode, obj, null, new BcbRequest
-					.BcbCallBack<JSONObject>() {
+			obj.put("Email", et_email.getText().toString().trim());
+			obj.put("VerifyCode", et_yzm.getText().toString().trim());
+			BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.EDITMYBORROWEREMAIL, obj, TokenUtil.getEncodeToken(this), new
+					BcbRequest.BcbCallBack<JSONObject>() {
 				@Override
 				public void onResponse(JSONObject response) {
 					ProgressDialogrUtils.hide();
 					LogUtil.i("bqt", "提交验证码返回：" + response.toString());
 					if (response.optInt("status") == 1) {//成功结果页
 						Activity_Tips_FaileOrSuccess.launche(A_Email_Check.this, Activity_Tips_FaileOrSuccess.EMAIL_SUCCESS, "");
-					} else {//失败提示弹窗
-						showDialog("邮箱校验失败，验证码错误或已过期\n请重新验证");
-					}
+					} else if (response.optInt("status") == -3) {//失败提示弹窗
+						showDialog(response.optString("message"));
+						//showDialog("邮箱校验失败，验证码错误或已过期\n请重新验证");
+					} else Toast.makeText(A_Email_Check.this, response.optString("message"), Toast.LENGTH_SHORT).show();
 				}
 
 				@Override

@@ -17,6 +17,7 @@ import com.bcb.common.net.BcbJsonRequest;
 import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestTag;
 import com.bcb.common.net.UrlsOne;
+import com.bcb.data.bean.loan.LoanKindBean;
 import com.bcb.data.bean.loan.PersonInfoBean;
 import com.bcb.data.util.LoanPersonalConfigUtil;
 import com.bcb.data.util.LogUtil;
@@ -39,11 +40,11 @@ import java.util.List;
 public class Activity_LoanRequest_Person extends Activity_Base implements View.OnClickListener {
 
 	//借款企业类型
-	private int LOAN_TYPE;
+	private LoanKindBean bean;
 
-	public static void launche(Context ctx, int LOAN_TYPE) {
+	public static void launche(Context ctx, LoanKindBean bean) {
 		Intent intent = new Intent(ctx, Activity_LoanRequest_Person.class);
-		intent.putExtra("LOAN_TYPE", LOAN_TYPE);
+		intent.putExtra("bean", bean);
 		ctx.startActivity(intent);
 	}
 
@@ -114,7 +115,7 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
 		super.onCreate(savedInstanceState);
 		MyActivityManager.getInstance().pushOneActivity(Activity_LoanRequest_Person.this);
 		setBaseContentView(R.layout.activity_loanrequest_personal);
-		LOAN_TYPE = getIntent().getIntExtra("LOAN_TYPE", 0);
+		bean = (LoanKindBean) getIntent().getSerializableExtra("bean");
 		setLeftTitleVisible(true);
 		setTitleValue("个人信息");
 		setupPersonalView();
@@ -310,16 +311,16 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
 		for (int i = 0 ; i < personInfoBean.RelationshipList.size() ; i++) {
 			relationList1.add(i, personInfoBean.RelationshipList.get(i).Name);//固定四个
 			if (personInfoBean.RelationshipList.get(i).Name.equals(personInfoBean.Relationship1)) {
-				relStatus1=i;
-				relationStatus1=personInfoBean.RelationshipList.get(i).Name;
+				relStatus1 = i;
+				relationStatus1 = personInfoBean.RelationshipList.get(i).Name;
 			}
 		}
 		relationList2 = new ArrayList<>();
 		for (int i = 0 ; i < personInfoBean.RelationshipList2.size() ; i++) {
 			relationList2.add(i, personInfoBean.RelationshipList2.get(i).Name);//固定2个
 			if (personInfoBean.RelationshipList2.get(i).Name.equals(personInfoBean.Relationship2)) {
-				relStatus2=i;
-				relationStatus2=personInfoBean.RelationshipList2.get(i).Name;
+				relStatus2 = i;
+				relationStatus2 = personInfoBean.RelationshipList2.get(i).Name;
 			}
 		}
 	}
@@ -498,7 +499,7 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
 		new LoanPersonalConfigUtil(this).saveLoanPersonalMessage(new Gson().toJson(PersonInfo));
 		LogUtil.i("bqt", "关系2--" + new Gson().toJson(PersonInfo));
 		//跳转至工作信息页面
-		Activity_LoanRequest_Job.launche(Activity_LoanRequest_Person.this, LOAN_TYPE, new Gson().toJson(PersonInfo));
+		Activity_LoanRequest_Job.launche(Activity_LoanRequest_Person.this, bean, new Gson().toJson(PersonInfo));
 		finish();
 	}
 

@@ -128,6 +128,10 @@
         "source": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.meiqia\\meiqiasdk\\3.2.4\\res\\layout\\mq_activity_photo_picker.xml"
     },
     {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\layout\\activity_open_account2.xml",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\layout\\activity_open_account2.xml"
+    },
+    {
         "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\layout\\abc_activity_chooser_view.xml",
         "source": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\abc_activity_chooser_view.xml"
     },
@@ -340,12 +344,12 @@
         "source": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.bigkoo\\alertview\\1.0.2\\res\\layout\\layout_alertview.xml"
     },
     {
-        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\layout\\activity_login.xml",
-        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\layout\\activity_login.xml"
-    },
-    {
         "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\layout\\notification_media_cancel_action.xml",
         "source": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\notification_media_cancel_action.xml"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\layout\\activity_login.xml",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\layout\\activity_login.xml"
     },
     {
         "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\layout\\activity_trading_record.xml",
@@ -780,12 +784,12 @@
         "source": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.meiqia\\meiqiasdk\\3.2.4\\res\\layout\\mq_item_rich_text.xml"
     },
     {
-        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\layout\\umeng_fb_input_contact.xml",
-        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\layout\\umeng_fb_input_contact.xml"
-    },
-    {
         "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\layout\\frag_coupon_used.xml",
         "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\layout\\frag_coupon_used.xml"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\layout\\umeng_fb_input_contact.xml",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\layout\\umeng_fb_input_contact.xml"
     },
     {
         "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\layout\\frag_secure.xml",

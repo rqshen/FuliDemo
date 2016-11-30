@@ -29,6 +29,10 @@ public class UrlsTwo {
     public static String UserPrivilegeMoneyActivated = host + "/api/v2.0/a64400f4893e";
     //托管用户开户
     public static String OpenAccount = host + "/api/v2.0/a63d00c46389";
+    //借款首页
+    public static String LOANKINDLIST = host + "/api/v2.0/337fca64f90b";
+    //企业列表
+    public static String ENTERPRISELIST = host + "/api/v2.0/8f1171e9a405 ";
     //托管用户登录
     public static String LoginAccount = host + "/api/v2.0/a63d00c4eca5";
     //托管用户信息修改

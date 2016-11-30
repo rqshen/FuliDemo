@@ -22,6 +22,7 @@ import com.bcb.common.net.BcbRequestTag;
 import com.bcb.common.net.UrlsOne;
 import com.bcb.data.bean.UserExtraInfo;
 import com.bcb.data.bean.loan.LoanDurationListBean;
+import com.bcb.data.bean.loan.LoanKindBean;
 import com.bcb.data.bean.loan.LoanRequestInfoBean;
 import com.bcb.data.util.DbUtil;
 import com.bcb.data.util.HttpUtils;
@@ -67,7 +68,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 	@BindView(R.id.refresh_view) PullToRefreshLayout refreshLayout;//刷新
 
 	//借款企业类型
-	private int LOAN_TYPE;
+	private LoanKindBean bean;
 
 	//利息抵扣券与福利补贴
 	private String CouponId;    //利息抵扣券的ID
@@ -98,9 +99,9 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 
 	private AlertView alertView;
 
-	public static void launche(Context ctx, int LOAN_TYPE) {
+	public static void launche(Context ctx, LoanKindBean bean) {
 		Intent intent = new Intent(ctx, Activity_LoanRequest_Borrow.class);
-		intent.putExtra("LOAN_TYPE", LOAN_TYPE);
+		intent.putExtra("bean", bean);
 		ctx.startActivity(intent);
 	}
 
@@ -122,26 +123,28 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 	//                                                                                                   初始化
 	//****************************************************************************************************************************************
 	private void initType() {
-		LOAN_TYPE = getIntent().getIntExtra("LOAN_TYPE", 0);
+		bean = (LoanKindBean) getIntent().getSerializableExtra("bean");
+		tv_explain.setText(bean.DetailDesc);
+		setTitleValue(bean.Title);
 		//借款banner
-		switch (LOAN_TYPE) {
+		switch (bean.LoanKindId) {
 			case 1:
-				setTitleValue("名企金领贷");
+				//				setTitleValue("名企金领贷");
 				banner_image.setImageResource(R.drawable.loan_brand);
 				layout_coupon_select.setVisibility(View.GONE);
-				tv_explain.setText(getString(R.string.explain_brand));
+				//				tv_explain.setText(getString(R.string.explain_brand));
 				break;
 			case 2:
-				setTitleValue("IT精英贷");
+				//				setTitleValue("IT精英贷");
 				banner_image.setImageResource(R.drawable.loan_it);
 				layout_coupon_select.setVisibility(View.GONE);
-				tv_explain.setText(getString(R.string.explain_it));
+				//				tv_explain.setText(getString(R.string.explain_it));
 				break;
 			default:
-				setTitleValue("签约企业贷");
+				//				setTitleValue("签约企业贷");
 				banner_image.setImageResource(R.drawable.loan_signed);
 				layout_coupon_select.setVisibility(View.VISIBLE);
-				tv_explain.setText(getString(R.string.explain_signed));
+				//				tv_explain.setText(getString(R.string.explain_signed));
 				break;
 		}
 		setLeftTitleVisible(true);
@@ -196,8 +199,14 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 	//                                                                                                   获取借款数据
 	//****************************************************************************************************************************************
 	private void getLoanCertification() {
+		JSONObject obj = new org.json.JSONObject();
+		try {
+			obj.put("LoanKindId", bean.LoanKindId);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
 		ProgressDialogrUtils.show(this, "正在验证借款信息...");
-		BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.LoanCertification, null, TokenUtil.getEncodeToken(this), new
+		BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.LoanCertification, obj, TokenUtil.getEncodeToken(this), new
 				BcbRequest.BcbCallBack<JSONObject>() {
 			@Override
 			public void onResponse(JSONObject response) {
@@ -572,7 +581,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 				//判断是否跟原来的数据一样，如果跟原来申请的借款一样没有变化，直接提示完善个人信息
 				if (isNeedToPostData()) pushLoanMessageToService();
 					//跳转至填写借款信息页面
-				else Activity_LoanRequest_Person.launche(Activity_LoanRequest_Borrow.this, LOAN_TYPE);
+				else Activity_LoanRequest_Person.launche(Activity_LoanRequest_Borrow.this, bean);
 				//存在已审核通过的借款
 			} else {
 				LogUtil.i("bqt", "存在已审核通过的借款时的提示信息：" + message);

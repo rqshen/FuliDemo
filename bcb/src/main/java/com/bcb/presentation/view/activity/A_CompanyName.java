@@ -1,6 +1,8 @@
 package com.bcb.presentation.view.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -13,9 +15,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bcb.R;
-import com.bcb.data.SimpleCompanyBean;
+import com.bcb.common.app.App;
+import com.bcb.common.net.BcbJsonRequest;
+import com.bcb.common.net.BcbRequest;
+import com.bcb.common.net.UrlsTwo;
+import com.bcb.data.JEnterprise;
+import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MyActivityManager;
+import com.bcb.data.util.PackageUtil;
+import com.bcb.data.util.ProgressDialogrUtils;
+import com.bcb.data.util.TokenUtil;
 import com.bcb.presentation.adapter.MyPopupListAdapter;
+import com.google.gson.Gson;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -39,9 +53,10 @@ public class A_CompanyName extends Activity_Base implements TextWatcher {
 	@BindView(R.id.tv_top) TextView tv_top;
 	@BindView(R.id.tv_bottom) TextView tv_bottom;
 
-	private List<SimpleCompanyBean> mList;
-	private List<SimpleCompanyBean> mListAll;
-	private MyPopupListAdapter popupListAdapter;
+	private JEnterprise jBean;//选择的企业
+	private JEnterprise.EnterpriseListBean selectBean;//企业列表
+	private List<JEnterprise.EnterpriseListBean> mList = new ArrayList<JEnterprise.EnterpriseListBean>();//匹配的企业
+	private MyPopupListAdapter popupListAdapter;//适配器
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -54,32 +69,37 @@ public class A_CompanyName extends Activity_Base implements TextWatcher {
 		setTitleValue("工作单位全称");
 
 		et_name.addTextChangedListener(this);
-		initList();
 		popupListAdapter = new MyPopupListAdapter(this, mList);
 		lv_pop.setAdapter(popupListAdapter);
+		initData();
 	}
 
-	private void initList() {
-		mList = new ArrayList<SimpleCompanyBean>();
-		mListAll = new ArrayList<SimpleCompanyBean>();
-		for (int i = 0 ; i < 100. ; i++) {
-			mListAll.add(new SimpleCompanyBean(i + "包青天", "@163.com"));
-			mListAll.add(new SimpleCompanyBean(i + "超过2个字符才开始检索", "@163.com"));
-			mListAll.add(new SimpleCompanyBean(i + "全部匹配，或匹配输入内容的5个字符，都算成功", "@163.com"));
+	private void initData() {
+		String data = getData();
+		if (data != null && data != "") {
+			jBean = new Gson().fromJson(data, JEnterprise.class);
+			if (jBean != null) {
+				requestData(jBean.Version);
+				return;
+			}
 		}
+		requestData(0);
 	}
 
 	@OnItemClick(R.id.lv_pop)
-	void onItemClick(int position) {//though there are 4 parameters, you can just write the one you want to use
-		et_name.setText(mList.get(position).name);
+	public void onItemClick(int position) {//though there are 4 parameters, you can just write the one you want to use
+		selectBean = mList.get(position);
+		et_name.setText(selectBean.Name);
 	}
 
+	//点击确定后返回
 	@OnClick(R.id.job_button)
-	void onButtonClick() { //the method should not be declared private or static
+	public void onButtonClick() { //the method should not be declared private or static
 		String companyNam = et_name.getText().toString().trim();
 		if (!TextUtils.isEmpty(companyNam)) {
 			Intent intent = new Intent();
 			intent.putExtra("COMPANY_NAME", companyNam);
+			if (selectBean != null) intent.putExtra("email", selectBean.EmailSuffix);
 			setResult(100, intent);
 			finish();
 		} else Toast.makeText(A_CompanyName.this, "公司名称不能为空", Toast.LENGTH_SHORT).show();
@@ -94,10 +114,10 @@ public class A_CompanyName extends Activity_Base implements TextWatcher {
 	@Override
 	public void onTextChanged(CharSequence s, int start, int before, int count) {
 		mList.clear();
-		if (!TextUtils.isEmpty(s) && s.length() >= 2) {
-			for (int i = 0 ; i < mListAll.size() ; i++) {
-				if (mListAll.get(i).name.contains(s) || isMatchCount(mListAll.get(i).name, s.toString())) {
-					mList.add(mListAll.get(i));
+		if (!TextUtils.isEmpty(s) && s.length() >= 2 && jBean != null && jBean.EnterpriseList != null) {
+			for (int i = 0 ; i < jBean.EnterpriseList.size() ; i++) {
+				if (jBean.EnterpriseList.get(i).Name.contains(s) || isMatchCount(jBean.EnterpriseList.get(i).Name, s.toString())) {
+					mList.add(jBean.EnterpriseList.get(i));
 				}
 			}
 		}
@@ -122,5 +142,59 @@ public class A_CompanyName extends Activity_Base implements TextWatcher {
 		}
 		if (count >= 5) return true;
 		else return false;
+	}
+
+	/**
+	 * 企业列表
+	 */
+	private void requestData(int version) {
+		ProgressDialogrUtils.show(this, "正在请求数据，请稍后…");
+		JSONObject obj = new org.json.JSONObject();
+		try {
+			obj.put("Version", "");
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsTwo.ENTERPRISELIST, obj, TokenUtil.getEncodeToken(this), true, new
+				BcbRequest.BcbCallBack<JSONObject>() {
+			@Override
+			public void onResponse(JSONObject response) {
+				ProgressDialogrUtils.hide();
+				LogUtil.i("bqt", " 企业列表" + response.toString());
+				if (PackageUtil.getRequestStatus(response, A_CompanyName.this)) {
+					try {
+						JSONObject result = PackageUtil.getResultObject(response);
+						if (result != null) {
+							jBean = new Gson().fromJson(result.getJSONObject("EnterpriseList").toString(), JEnterprise.class);
+							if (jBean != null) saveData(jBean);
+						}
+					} catch (Exception e) {
+						LogUtil.d("bqt", "企业列表" + e.getMessage());
+					}
+				} else if (response != null) {
+					Toast.makeText(A_CompanyName.this, response.optString("message"), Toast.LENGTH_SHORT).show();
+				}
+			}
+
+			@Override
+			public void onErrorResponse(Exception error) {
+				ProgressDialogrUtils.hide();
+				LogUtil.d("bqt", "企业列表" + error.toString());
+			}
+		});
+		App.getInstance().getRequestQueue().add(jsonRequest);
+	}
+
+	private void saveData(JEnterprise jBean) {
+		SharedPreferences sp = this.getSharedPreferences("JEnterprise", Context.MODE_PRIVATE);
+		SharedPreferences.Editor editor = sp.edit();
+		editor.putString("JEnterprise", new Gson().toJson(jBean));
+		editor.commit();
+	}
+
+	private String getData() {
+		SharedPreferences sp = this.getSharedPreferences("JEnterprise", Context.MODE_PRIVATE);
+		SharedPreferences.Editor editor = sp.edit();
+		return sp.getString("JEnterprise", "");
 	}
 }

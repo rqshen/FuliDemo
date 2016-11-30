@@ -14,6 +14,7 @@ import com.bcb.common.net.BcbJsonRequest;
 import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestTag;
 import com.bcb.common.net.UrlsOne;
+import com.bcb.data.bean.loan.LoanKindBean;
 import com.bcb.data.bean.loan.PersonInfoBean;
 import com.bcb.data.util.LoanPersonalConfigUtil;
 import com.bcb.data.util.LogUtil;
@@ -41,7 +42,7 @@ import butterknife.OnClick;
  */
 public class Activity_LoanRequest_Job extends Activity_Base implements TextWatcher {
 	//借款企业类型
-	private int LOAN_TYPE;
+	private LoanKindBean bean;
 
 	@BindView(R.id.loan_office) TextView loan_office;//工作单位全称
 	@BindView(R.id.loan_jobs) EditText loan_jobs;//工作职位
@@ -53,11 +54,13 @@ public class Activity_LoanRequest_Job extends Activity_Base implements TextWatch
 
 	//工作信息
 	private PersonInfoBean personInfoBean;
+	//邮箱
+	private String email;
 	private SimpleDateFormat dateFormater = new SimpleDateFormat("yyyy-MM-dd");
 
-	public static void launche(Context ctx, int LOAN_TYPE, String personInfoBean) {
+	public static void launche(Context ctx, LoanKindBean bean, String personInfoBean) {
 		Intent intent = new Intent(ctx, Activity_LoanRequest_Job.class);
-		intent.putExtra("LOAN_TYPE", LOAN_TYPE);
+		intent.putExtra("bean", bean);
 		intent.putExtra("personInfoBean", personInfoBean);
 		ctx.startActivity(intent);
 	}
@@ -71,7 +74,7 @@ public class Activity_LoanRequest_Job extends Activity_Base implements TextWatch
 
 		setLeftTitleVisible(true);
 		setTitleValue("工作信息");
-		LOAN_TYPE = getIntent().getIntExtra("LOAN_TYPE", 0);
+		bean = (LoanKindBean) getIntent().getSerializableExtra("bean");
 		String personInfoString = getIntent().getStringExtra("personInfoBean");
 		LogUtil.i("bqt", "【借款信息】" + personInfoString);
 		personInfoBean = new Gson().fromJson(personInfoString, PersonInfoBean.class);
@@ -155,14 +158,15 @@ public class Activity_LoanRequest_Job extends Activity_Base implements TextWatch
 
 	@OnClick({R.id.rl_company, R.id.loan_office, R.id.company_right})
 	public void selectCompanyName() {
-		startActivityForResult(new Intent(Activity_LoanRequest_Job.this, A_CompanyName.class),100);
+		startActivityForResult(new Intent(Activity_LoanRequest_Job.this, A_CompanyName.class), 100);
 	}
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		if (requestCode==100&&resultCode==100&&data!=null) {
+		if (requestCode == 100 && resultCode == 100 && data != null) {
 			loan_office.setText(data.getStringExtra("COMPANY_NAME"));
+			if (data.getStringExtra("email") != null) email = data.getStringExtra("email");
 		}
 	}
 
@@ -215,7 +219,7 @@ public class Activity_LoanRequest_Job extends Activity_Base implements TextWatch
 					try {
 						if (response.getInt("status") == 1) {
 							Activity_Tips_FaileOrSuccess.launche(Activity_LoanRequest_Job.this, Activity_Tips_FaileOrSuccess
-									.JK_SUCCESS, "");
+									.JK_SUCCESS, email);
 							finish();
 							//清空暂存在本地的数据
 							(new LoanPersonalConfigUtil(Activity_LoanRequest_Job.this)).clear();

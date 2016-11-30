@@ -319,13 +319,12 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 		//        layout_scrollview.fullScroll(ScrollView.FOCUS_UP);
 	}
 
-
 	//******************************************************************************************
 	//点击事件
 	@Override
 	public void onClick(View v) {
 		if (v.getId() == R.id.ll_test) {
-			startActivity(new Intent(ctx, A_Email_Check.class));
+			A_Email_Check.launche(ctx,"@100cb.cn");
 			return;
 		}
 		//除了专属客服和电话客服之外的职位都要在点击之前登陆
@@ -406,9 +405,6 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 		}
 	}
 
-
-
-
 	//加入公司
 	private void toJoinCompany() {
 		if (mUserDetailInfo == null || !mUserDetailInfo.HasOpenCustody) {
@@ -435,8 +431,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 	private void loanMainPage() {
 		//已开通托管
 		if (isLoading()) return;
-		if (App.mUserDetailInfo != null && App.mUserDetailInfo.HasOpenCustody)
-			startActivity(new Intent(ctx, A_Elite_Loan.class));
+		if (App.mUserDetailInfo != null && App.mUserDetailInfo.HasOpenCustody) startActivity(new Intent(ctx, A_Elite_Loan.class));
 		else startActivity(new Intent(ctx, Activity_Open_Account.class));
 	}
 

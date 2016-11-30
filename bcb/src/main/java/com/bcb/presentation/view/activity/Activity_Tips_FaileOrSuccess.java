@@ -272,7 +272,7 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
 						break;
 					//借款
 					case JK_SUCCESS://校验邮箱
-						startActivity(new Intent(Activity_Tips_FaileOrSuccess.this, A_Email_Check.class));
+						A_Email_Check.launche(this,message);
 						finish();
 						break;
 					//客服

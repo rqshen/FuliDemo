@@ -7,16 +7,16 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.bcb.R;
-import com.bcb.data.SimpleCompanyBean;
+import com.bcb.data.JEnterprise;
 
 import java.util.List;
 
 public class MyPopupListAdapter extends BaseAdapter {
 	private ViewHolder holder;
 	private Context context;
-	private List<SimpleCompanyBean> mList;
+	private List<JEnterprise.EnterpriseListBean> mList;
 
-	public MyPopupListAdapter(Context context, List<SimpleCompanyBean> mList) {
+	public MyPopupListAdapter(Context context, List<JEnterprise.EnterpriseListBean> mList) {
 		this.context = context;
 		this.mList = mList;
 	}
@@ -29,7 +29,7 @@ public class MyPopupListAdapter extends BaseAdapter {
 			holder.name = (TextView) convertView.findViewById(R.id.name);
 			convertView.setTag(holder);
 		} else holder = (ViewHolder) convertView.getTag();
-		holder.name.setText(mList.get(position).name);
+		holder.name.setText(mList.get(position).Name);
 		return convertView;
 	}
 
