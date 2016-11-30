@@ -75,14 +75,17 @@ public class A_CompanyName extends Activity_Base implements TextWatcher {
 	}
 
 	private void initData() {
+		//本地数据
 		String data = getData();
 		if (data != null && data != "") {
 			jBean = new Gson().fromJson(data, JEnterprise.class);
+			//本地数据不为空，拿本地的版本请求
 			if (jBean != null) {
 				requestData(jBean.Version);
 				return;
 			}
 		}
+		//拿初始版本请求
 		requestData(0);
 	}
 
@@ -109,7 +112,12 @@ public class A_CompanyName extends Activity_Base implements TextWatcher {
 	public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
 	@Override
-	public void afterTextChanged(Editable s) {}
+	public void afterTextChanged(Editable s) {
+		//如果选中后改变了内容，则清空已选中的公司
+		if (selectBean != null && !et_name.getText().toString().trim().equals(selectBean.Name)) {
+			selectBean = null;
+		}
+	}
 
 	@Override
 	public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -149,9 +157,10 @@ public class A_CompanyName extends Activity_Base implements TextWatcher {
 	 */
 	private void requestData(int version) {
 		ProgressDialogrUtils.show(this, "正在请求数据，请稍后…");
+		LogUtil.i("bqt", "【本地版本】" + version);
 		JSONObject obj = new org.json.JSONObject();
 		try {
-			obj.put("Version", "");
+			obj.put("Version", version);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -164,9 +173,11 @@ public class A_CompanyName extends Activity_Base implements TextWatcher {
 				if (PackageUtil.getRequestStatus(response, A_CompanyName.this)) {
 					try {
 						JSONObject result = PackageUtil.getResultObject(response);
-						if (result != null) {
-							jBean = new Gson().fromJson(result.getJSONObject("EnterpriseList").toString(), JEnterprise.class);
-							if (jBean != null) saveData(jBean);
+						//服务器没有返回列表时不做任何操作
+						if (result != null && result.getJSONArray("EnterpriseList") != null) {
+							//服务器返回列表时，覆盖掉旧的数据
+							jBean = new Gson().fromJson(result.toString(), JEnterprise.class);
+							if (jBean != null && jBean.EnterpriseList != null && jBean.EnterpriseList.size() > 0) saveData(jBean);
 						}
 					} catch (Exception e) {
 						LogUtil.d("bqt", "企业列表" + e.getMessage());
@@ -195,6 +206,8 @@ public class A_CompanyName extends Activity_Base implements TextWatcher {
 	private String getData() {
 		SharedPreferences sp = this.getSharedPreferences("JEnterprise", Context.MODE_PRIVATE);
 		SharedPreferences.Editor editor = sp.edit();
-		return sp.getString("JEnterprise", "");
+		String data = sp.getString("JEnterprise", "");
+		LogUtil.i("bqt", "【获取保存的数据】" + data);
+		return data;
 	}
 }
