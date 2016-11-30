@@ -79,11 +79,14 @@ public class Activity_LoanRequest_Job extends Activity_Base implements TextWatch
 		LogUtil.i("bqt", "【借款信息】" + personInfoString);
 		personInfoBean = new Gson().fromJson(personInfoString, PersonInfoBean.class);
 
-		personInfoBean.Email = "fuck@100cb.com";//★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
+		personInfoBean.Email = "fuck@100cb.com";//★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★★
 
 		//设置工作信息
 		setupJobMessage();
 		loan_work_experience.addTextChangedListener(this);
+
+		//自动填email
+		email = getSharedPreferences("email", Context.MODE_PRIVATE).getString("email", "");
 	}
 
 	@Override

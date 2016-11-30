@@ -201,7 +201,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 	private void getLoanCertification() {
 		JSONObject obj = new org.json.JSONObject();
 		try {
-			obj.put("LoanKindId", bean.LoanKindId);
+			obj.put("LoanKind", bean.LoanKindId);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}

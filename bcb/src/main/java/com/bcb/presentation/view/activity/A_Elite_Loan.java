@@ -47,8 +47,6 @@ public class A_Elite_Loan extends Activity_Base {
 	//支持的企业类型集合
 	private ArrayList<LoanKindBean> list;
 	private LoanKindBean bean1, bean2, bean0;
-	private String message = "正在处理中，请勿重复申请";
-	private int status;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -64,29 +62,25 @@ public class A_Elite_Loan extends Activity_Base {
 			}
 		});
 		requestOpenAccount();
-		getLoanCertification(0);//********************************参数代表什么意思？***************************************
 	}
 	
 	@OnClick({R.id.iv_brand, R.id.iv_it, R.id.iv_signed})
 	public void onClickIv(View v) {
-		//存在已申请的贷款，弹窗提示
-		if (status == -1 || status == 5) showDialog();
-		else if (bean0 != null && bean1 != null && bean2 != null) {
-			switch (v.getId()) {
-				case R.id.iv_brand:
-					Activity_LoanRequest_Borrow.launche(A_Elite_Loan.this, bean1);
-					break;
-				case R.id.iv_it:
-					Activity_LoanRequest_Borrow.launche(A_Elite_Loan.this, bean2);
-					break;
-				case R.id.iv_signed:
-					Activity_LoanRequest_Borrow.launche(A_Elite_Loan.this, bean0);
-					break;
-			}
-		} else Toast.makeText(A_Elite_Loan.this, "网络异常，请稍后重试", Toast.LENGTH_SHORT).show();
+		//请求是否可以申请贷款
+		switch (v.getId()) {
+			case R.id.iv_brand:
+				getLoanCertification(1);
+				break;
+			case R.id.iv_it:
+				getLoanCertification(2);
+				break;
+			case R.id.iv_signed:
+				getLoanCertification(0);
+				break;
+		}
 	}
 	
-	private void showDialog() {
+	private void showDialog(String message) {
 		DialogBQT diaolog = new DialogBQT(this) {
 			@Override
 			public void onSureClick(View v) {
@@ -156,15 +150,15 @@ public class A_Elite_Loan extends Activity_Base {
 	/**
 	 * 验证借款信息
 	 */
-	private void getLoanCertification(int LoanKindId) {
+	private void getLoanCertification(final int LoanKind) {
 		JSONObject obj = new org.json.JSONObject();
 		try {
-			obj.put("LoanKind", LoanKindId);
+			obj.put("LoanKind", LoanKind);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
 		ProgressDialogrUtils.show(this, "正在验证借款信息...");
-		BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.LoanCertification, obj, TokenUtil.getEncodeToken(this), new
+		final BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.LoanCertification, obj, TokenUtil.getEncodeToken(this), new
 				BcbRequest.BcbCallBack<JSONObject>() {
 			@Override
 			public void onResponse(JSONObject response) {
@@ -172,8 +166,23 @@ public class A_Elite_Loan extends Activity_Base {
 				try {
 					if (null != response) {
 						LogUtil.i("bqt", "借款信息" + response.toString());
-						status = response.getInt("status");
-						message = response.getString("message");
+						//不等于1时失败，弹窗
+						if (response.getInt("status") != 1) {
+							String message = response.getString("message");
+							showDialog(message);
+						} else {//否则跳转
+							switch (LoanKind) {
+								case 0:
+									Activity_LoanRequest_Borrow.launche(A_Elite_Loan.this, bean0);
+									break;
+								case 1:
+									Activity_LoanRequest_Borrow.launche(A_Elite_Loan.this, bean1);
+									break;
+								case 2:
+									Activity_LoanRequest_Borrow.launche(A_Elite_Loan.this, bean2);
+									break;
+							}
+						}
 					}
 				} catch (Exception e) {
 					e.printStackTrace();

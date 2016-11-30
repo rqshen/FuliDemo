@@ -21,8 +21,6 @@ import com.bcb.data.util.TokenUtil;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.URLDecoder;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -89,11 +87,8 @@ public class Activity_Open_Account2 extends Activity_Base {
 						/** 后台返回的JSON对象，也是要转发给汇付的对象 */
 						JSONObject result = PackageUtil.getResultObject(response);
 						if (result != null) {
-							String message = response.getString("message");
-							String tips = URLDecoder.decode(message.substring(message.lastIndexOf('|') + 1), "UTF-8");
-							LogUtil.i("bqt", "【消息】" + message + "-------" + tips);
 							//开通自动投标
-							if (message.contains("fulihui://open_result") && message.contains("000")) {//成功
+							if (response.getInt("status") == 1) {//成功
 								//网页地址
 								String postUrl = result.optString("PostUrl");
 								result.remove("PostUrl");//移除这个参数
@@ -102,7 +97,10 @@ public class Activity_Open_Account2 extends Activity_Base {
 								//跳转到webview
 								Activity_WebView.launche(Activity_Open_Account2.this, "资金托管", postUrl, postData);
 								finish();
-							} else Activity_Open_Account3.launche(Activity_Open_Account2.this, tips);
+							} else {
+								String message = response.getString("message");
+								Activity_Open_Account3.launche(Activity_Open_Account2.this, message);
+							}
 						}
 					} catch (Exception e) {
 						LogUtil.d("bqt", "【Activity_Open_Account2】【OpenAccount】" + e.getMessage());

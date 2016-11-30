@@ -102,7 +102,12 @@ public class A_CompanyName extends Activity_Base implements TextWatcher {
 		if (!TextUtils.isEmpty(companyNam)) {
 			Intent intent = new Intent();
 			intent.putExtra("COMPANY_NAME", companyNam);
-			if (selectBean != null) intent.putExtra("email", selectBean.EmailSuffix);
+			if (selectBean != null) {
+				intent.putExtra("email", selectBean.EmailSuffix);
+				SharedPreferences.Editor editor = getSharedPreferences("email", Context.MODE_PRIVATE).edit();
+				editor.putString("email", selectBean.EmailSuffix);
+				editor.commit();
+			}
 			setResult(100, intent);
 			finish();
 		} else Toast.makeText(A_CompanyName.this, "公司名称不能为空", Toast.LENGTH_SHORT).show();
@@ -205,7 +210,6 @@ public class A_CompanyName extends Activity_Base implements TextWatcher {
 
 	private String getData() {
 		SharedPreferences sp = this.getSharedPreferences("JEnterprise", Context.MODE_PRIVATE);
-		SharedPreferences.Editor editor = sp.edit();
 		String data = sp.getString("JEnterprise", "");
 		LogUtil.i("bqt", "【获取保存的数据】" + data);
 		return data;
