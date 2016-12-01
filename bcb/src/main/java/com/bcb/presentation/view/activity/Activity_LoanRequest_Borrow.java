@@ -230,10 +230,12 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 					LogUtil.i("bqt", "借款信息" + response.toString());
 					loanRequestInfo = new Gson().fromJson(response.getString("result"), LoanRequestInfoBean.class);
 					message = response.getString("message");
-					if (loanRequestInfo != null) {
-						//初始化数据
-						initLoanRequestInfo();
+					//没申请过
+					if (loanRequestInfo.Status == 0 && loanRequestInfo.AggregateId.equals("00000000-0000-0000-0000-000000000000")) {
+						//						initBean();
 					}
+					//初始化数据
+					initLoanRequestInfo();
 				} catch (Exception e) {
 					e.printStackTrace();
 					LogUtil.i("bqt", "借款信息出错" + e.getMessage());
@@ -248,6 +250,20 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 		});
 		jsonRequest.setTag(BcbRequestTag.BCB_LOAN_CERTIFICATION_REQUEST);
 		App.getInstance().getRequestQueue().add(jsonRequest);
+	}
+
+	private void initBean() {
+		switch (bean.LoanKindId) {
+			case 1:
+				loanRequestInfo.LoanTimeType = 12;
+				break;
+			case 2:
+				loanRequestInfo.LoanTimeType = 3;
+				break;
+			default:
+				loanRequestInfo.LoanTimeType = 12;
+				break;
+		}
 	}
 
 	/**
