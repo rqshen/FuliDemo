@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bcb.R;
 import com.bcb.common.app.App;
@@ -124,36 +125,41 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 	//****************************************************************************************************************************************
 	private void initType() {
 		bean = (LoanKindBean) getIntent().getSerializableExtra("bean");
+		if (bean == null) {
+			Toast.makeText(Activity_LoanRequest_Borrow.this, "网络异常", Toast.LENGTH_SHORT).show();
+			finish();
+		}
 		tv_explain.setText(bean.DetailDesc);
 		setTitleValue(bean.Title);
 		//借款banner
 		switch (bean.LoanKindId) {
 			case 1:
-				//				setTitleValue("名企金领贷");
 				banner_image.setImageResource(R.drawable.loan_brand);
 				layout_coupon_select.setVisibility(View.GONE);
-				//				tv_explain.setText(getString(R.string.explain_brand));
+
+				//这里可能有bug，卧槽
+				//				durationStatus=12;
+				//				loan_rate.setText("8.5%");
+				//				loan_duration.setText("12个月");
 				break;
 			case 2:
-				//				setTitleValue("IT精英贷");
 				banner_image.setImageResource(R.drawable.loan_it);
 				layout_coupon_select.setVisibility(View.GONE);
-				//				tv_explain.setText(getString(R.string.explain_it));
+
+				//				durationStatus=3;
+				//				loan_rate.setText("12%");
+				//				loan_duration.setText("3个月");
 				break;
 			default:
-				//				setTitleValue("签约企业贷");
 				banner_image.setImageResource(R.drawable.loan_signed);
 				layout_coupon_select.setVisibility(View.VISIBLE);
-				//				tv_explain.setText(getString(R.string.explain_signed));
+
+				//				durationStatus=12;
+				//				loan_rate.setText("7%");
+				//				loan_duration.setText("12个月");
 				break;
 		}
 		setLeftTitleVisible(true);
-		setRightTitleValue("我的借款", new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				startActivity(new Intent(Activity_LoanRequest_Borrow.this, Activity_LoanList.class));
-			}
-		});
 	}
 
 	private void initViews() {
@@ -224,8 +230,10 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 					LogUtil.i("bqt", "借款信息" + response.toString());
 					loanRequestInfo = new Gson().fromJson(response.getString("result"), LoanRequestInfoBean.class);
 					message = response.getString("message");
-					//初始化数据
-					initLoanRequestInfo();
+					if (loanRequestInfo != null) {
+						//初始化数据
+						initLoanRequestInfo();
+					}
 				} catch (Exception e) {
 					e.printStackTrace();
 					LogUtil.i("bqt", "借款信息出错" + e.getMessage());
@@ -347,6 +355,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 	 * 初始化借款期限
 	 */
 	private void setupLoanDuration() {
+
 		//将元素添加到数组中
 		duration_types = new ArrayList<>();
 		durationList = new ArrayList<>();
@@ -375,6 +384,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 				break;
 			}
 		}
+
 		loan_duration.setText(duration_types.get(durationIndex));
 	}
 
@@ -617,6 +627,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 		UserExtraInfo userExtraInfo = DbUtil.getUserExtra();
 		JSONObject jsonObject = new JSONObject();
 		try {
+			jsonObject.put("LoanKind", bean.LoanKindId);
 			if (!loanRequestInfo.AggregateId.equals("0") && !loanRequestInfo.AggregateId.equals
 					("00000000-0000-0000-0000-000000000000")) {
 				jsonObject.put("AggregateId", loanRequestInfo.AggregateId);
@@ -638,14 +649,14 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 				jsonObject.put("Position", userExtraInfo.getLocation());
 			}
 
-			LogUtil.i("bqt", "借款第一页页请求的数据是" + jsonObject.toString());
+			LogUtil.i("bqt", "借款第一页【请求】的数据是" + jsonObject.toString());
 
 			ProgressDialogrUtils.show(this, "正在验证借款信息...");
 			BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.PostRequestMessage, jsonObject, TokenUtil.getEncodeToken(this),
 					new BcbRequest.BcbCallBack<JSONObject>() {
 				@Override
 				public void onResponse(JSONObject response) {
-					LogUtil.i("bqt", "借款第一页相应的数据是" + response.toString());
+					LogUtil.i("bqt", "借款第一页【返回】的数据是" + response.toString());
 					ProgressDialogrUtils.hide();
 					try {
 						//提示申请成功，是否填写个人信息

@@ -59,7 +59,7 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
 	public static final int ZDTB_SUCCESS = 16;//开通自动投标成功
 	public static final int ZDTB_FAILED = 17;//开通自动投标失败
 
-	public static final int EMAIL_SUCCESS = 18;//开通自动投标失败
+	public static final int EMAIL_SUCCESS = 18;
 
 	private void initView() {
 		switch (type) {
@@ -178,6 +178,7 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
 				tv_down.setText("还差一步即可完成借款申请");
 				tv_down.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
 				tv_next.setText("去校验邮箱");
+				setLeftTitleVisible(false);
 				break;
 			case ZR_SUCCESS:
 				title_text.setText("债权转让");
@@ -248,6 +249,10 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
 			//******************************************************************************************
 			case R.id.tv_next://下一步
 				switch (type) {
+					case EMAIL_SUCCESS://借款列表
+						startActivity(new Intent(this, Activity_LoanList.class));
+						finish();
+						break;
 					//托管
 					case OPEN_HF_SUCCESS:
 						startActivity(new Intent(Activity_Tips_FaileOrSuccess.this, Activity_TuoGuan_HF.class));
@@ -262,7 +267,6 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
 					case SLB_SUCCESS:
 					case SLB_FAILED:
 					case ZDTB_SUCCESS:
-					case EMAIL_SUCCESS:
 						finish();
 						break;
 					//投资记录
@@ -272,7 +276,7 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
 						break;
 					//借款
 					case JK_SUCCESS://校验邮箱
-						A_Email_Check.launche(this,message);
+						A_Email_Check.launche(this, message);
 						finish();
 						break;
 					//客服

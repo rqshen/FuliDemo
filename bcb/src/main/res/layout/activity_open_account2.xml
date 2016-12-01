@@ -55,8 +55,8 @@
             android:singleLine="true"
             android:textColorHint="#999"
             android:maxLength="18"
-            android:text="440118198307243929"
-            android:textSize="15sp"/>
+            android:text="440118199008235149"
+            android:textSize="16sp"/>
 
         <View
             android:layout_width="match_parent"

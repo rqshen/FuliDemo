@@ -194,7 +194,7 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
 				BcbRequest.BcbCallBack<JSONObject>() {
 			@Override
 			public void onResponse(JSONObject response) {
-				LogUtil.i("bqt", "借款的个人信息" + response.toString());
+				LogUtil.i("bqt", "借款的【个人】信息" + response.toString());
 				hideProgressBar();
 				try {
 					if (response.getInt("status") == 1) {

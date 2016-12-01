@@ -26,8 +26,6 @@ import org.json.JSONObject;
 
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -43,8 +41,9 @@ public class A_Email_Check extends Activity_Base {
 	@BindView(R.id.et_email) EditText et_email;//输入邮箱
 	@BindView(R.id.et_yzm) EditText et_yzm;//输入验证码
 	@BindView(R.id.tv_tips) TextView tv_tips;//提示
+	@BindView(R.id.tv_email_end) TextView tv_email_end;//邮箱后缀
 
-	private int time = 60;//倒计时
+	private int time;//倒计时
 	private Timer timer;
 	private Handler handler = new Handler() {
 		public void handleMessage(android.os.Message msg) {
@@ -77,7 +76,7 @@ public class A_Email_Check extends Activity_Base {
 		setLeftTitleVisible(true);
 		setTitleValue("非签约IT精英贷");
 		if (getIntent() != null && getIntent().getStringExtra("email") != null) {
-			et_email.setText(getIntent().getStringExtra("email"));
+			tv_email_end.setText(getIntent().getStringExtra("email"));
 		}
 	}
 
@@ -111,13 +110,14 @@ public class A_Email_Check extends Activity_Base {
 			Toast.makeText(A_Email_Check.this, "邮箱不能为空", Toast.LENGTH_SHORT).show();
 			return false;
 		}
-		//是否为邮箱
-		Pattern pattern = Pattern.compile("^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$");
-		Matcher m = pattern.matcher(email);
-		if (!m.matches()) {
-			Toast.makeText(A_Email_Check.this, "邮箱格式非法", Toast.LENGTH_SHORT).show();
-			return false;
-		}
+		//		//是否为邮箱
+		//		Pattern pattern = Pattern.compile("^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,
+		// }$");
+		//		Matcher m = pattern.matcher(email);
+		//		if (!m.matches()) {
+		//			Toast.makeText(A_Email_Check.this, "邮箱格式非法", Toast.LENGTH_SHORT).show();
+		//			return false;
+		//		}
 		//是否为指定后缀
 		//		boolean isContainEmail = false;
 		//		for (int i = 0 ; i < mListAll.size() ; i++) {
@@ -139,7 +139,8 @@ public class A_Email_Check extends Activity_Base {
 		ProgressDialogrUtils.show(this, "正在获取验证码…");
 		JSONObject obj = new org.json.JSONObject();
 		try {
-			obj.put("Email", et_email.getText().toString().trim());
+			String end = tv_email_end.getText().toString().trim();
+			obj.put("Email", et_email.getText().toString().trim() + (end == null ? "" : end));
 			BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.CREATEVALIDATECODE, obj, TokenUtil.getEncodeToken(this), new
 					BcbRequest.BcbCallBack<JSONObject>() {
 				@Override
@@ -187,6 +188,7 @@ public class A_Email_Check extends Activity_Base {
 					LogUtil.i("bqt", "提交验证码返回：" + response.toString());
 					if (response.optInt("status") == 1) {//成功结果页
 						Activity_Tips_FaileOrSuccess.launche(A_Email_Check.this, Activity_Tips_FaileOrSuccess.EMAIL_SUCCESS, "");
+						finish();
 					} else if (response.optInt("status") == -3) {//失败提示弹窗
 						showDialog(response.optString("message"));
 						//showDialog("邮箱校验失败，验证码错误或已过期\n请重新验证");
@@ -214,6 +216,7 @@ public class A_Email_Check extends Activity_Base {
 	
 	//定时器
 	private void setTimer() {
+		time = 60;
 		timer = new Timer();
 		TimerTask task = new TimerTask() {
 			@Override

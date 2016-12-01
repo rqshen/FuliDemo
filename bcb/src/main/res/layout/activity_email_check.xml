@@ -22,17 +22,27 @@
             android:textColor="#333"
             android:textSize="16sp"/>
 
+        <TextView
+            android:id="@+id/tv_email_end"
+            android:layout_width="110dp"
+            android:layout_height="45dp"
+            android:layout_alignParentRight="true"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:singleLine="true"
+            android:textColor="#999"
+            android:textSize="16sp"/>
 
         <EditText
             android:id="@+id/et_email"
             android:layout_width="match_parent"
             android:layout_height="45dp"
+            android:layout_toLeftOf="@+id/tv_email_end"
             android:layout_toRightOf="@+id/tv_email"
             android:background="@null"
             android:gravity="center_vertical"
             android:hint="请填写工作邮箱"
             android:paddingLeft="10dp"
-
             android:singleLine="true"
             android:textColorHint="#999"
             android:textSize="15sp"/>
@@ -67,11 +77,11 @@
             android:layout_height="30dip"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:minEms="5"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:background="@drawable/request_code_selector"
             android:gravity="center"
+            android:minEms="5"
             android:minWidth="85dip"
             android:paddingLeft="10dip"
             android:paddingRight="10dip"
@@ -101,10 +111,10 @@
         android:layout_marginTop="20dp"
         android:gravity="center"
         android:singleLine="true"
-        android:visibility="invisible"
         android:text="验证码已发送到你的邮箱中，请查收后填写 "
         android:textColor="#999"
-        android:textSize="12sp"/>
+        android:textSize="12sp"
+        android:visibility="invisible"/>
 
     <Button
         android:id="@+id/next"
