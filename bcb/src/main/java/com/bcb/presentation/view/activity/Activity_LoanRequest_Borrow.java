@@ -653,6 +653,8 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 			jsonObject.put("UseSubsidy", statusSubsidy); //是否申请福利补贴
 			jsonObject.put("Amount", getLoanAmount());//借款金额
 			jsonObject.put("LoanTimeType", durationStatus);//借款期限
+			jsonObject.put("Period", durationStatus);//******************************************************************************************这里有问题
+
 			//是否使用了利息抵扣券，存在利息抵扣券的时候才去提交
 			if (!TextUtils.isEmpty(CouponId)) jsonObject.put("CouponId", CouponId);
 			else jsonObject.put("CouponId", null);

@@ -222,10 +222,6 @@ public class Activity_LoanRequest_Job extends Activity_Base implements TextWatch
 						} else {
 							ToastUtil.alert(Activity_LoanRequest_Job.this, response.getString("message").equalsIgnoreCase("") ?
 									"服务器繁忙，请稍候再试" : response.getString("message"));
-							//判断是否是Token过期，如果过期则跳转至登陆界面
-							if (response.getInt("status") == -5) {
-								Activity_Login.launche(Activity_LoanRequest_Job.this);
-							}
 						}
 					} catch (Exception e) {
 						e.printStackTrace();
