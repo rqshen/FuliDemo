@@ -26,6 +26,8 @@ import org.json.JSONObject;
 
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -62,9 +64,8 @@ public class A_Email_Check extends Activity_Base {
 		}
 	};
 
-	public static void launche(Context ctx, String email) {
+	public static void launche(Context ctx) {
 		Intent intent = new Intent(ctx, A_Email_Check.class);
-		intent.putExtra("email", email);
 		ctx.startActivity(intent);
 	}
 
@@ -75,9 +76,9 @@ public class A_Email_Check extends Activity_Base {
 		ButterKnife.bind(this);
 		setLeftTitleVisible(true);
 		setTitleValue("非签约IT精英贷");
-		if (getIntent() != null && getIntent().getStringExtra("email") != null) {
-			tv_email_end.setText(getIntent().getStringExtra("email"));
-		}
+		//获取保存的email
+		String email = getSharedPreferences("email", Context.MODE_PRIVATE).getString("email", "");
+		tv_email_end.setText(email == null ? "" : email);
 	}
 
 	@OnClick({R.id.send, R.id.next})
@@ -105,27 +106,29 @@ public class A_Email_Check extends Activity_Base {
 	//检查邮箱
 	private boolean toGoBeforeCheck() {
 		//是否为空
-		String email = et_email.getText().toString().trim();
-		if (TextUtils.isEmpty(email)) {
+		String begin = et_email.getText().toString().trim();
+		if (TextUtils.isEmpty(begin)) {
 			Toast.makeText(A_Email_Check.this, "邮箱不能为空", Toast.LENGTH_SHORT).show();
 			return false;
 		}
-		//		//是否为邮箱
-		//		Pattern pattern = Pattern.compile("^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,
-		// }$");
-		//		Matcher m = pattern.matcher(email);
-		//		if (!m.matches()) {
-		//			Toast.makeText(A_Email_Check.this, "邮箱格式非法", Toast.LENGTH_SHORT).show();
-		//			return false;
-		//		}
-		//是否为指定后缀
-		//		boolean isContainEmail = false;
-		//		for (int i = 0 ; i < mListAll.size() ; i++) {
-		//			if (email.contains(mListAll.get(i).email)) {
-		//				isContainEmail = true;
-		//				break;
-		//			}
-		//		}
+		//获取保存的email
+		String end = getSharedPreferences("email", Context.MODE_PRIVATE).getString("email", "");
+		String email=begin+(end == null ? "" : end);
+		//是否为邮箱
+		Pattern pattern = Pattern.compile("^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$");
+		Matcher m = pattern.matcher(email);
+		if (!m.matches()) {
+			Toast.makeText(A_Email_Check.this, "邮箱格式非法", Toast.LENGTH_SHORT).show();
+			return false;
+		}
+//		//是否为指定后缀
+//		boolean isContainEmail = false;
+//		for (int i = 0 ; i < mListAll.size() ; i++) {
+//			if (email.contains(mListAll.get(i).email)) {
+//				isContainEmail = true;
+//				break;
+//			}
+//		}
 		//		//不包含
 		//		if (!isContainEmail) {
 		//			showDialog("您输入的邮箱后缀不是公司邮箱地址\n将导致您的借款审核不通过，请重新\n填写。");

@@ -10,7 +10,9 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -63,6 +65,8 @@ public class A_CompanyName extends Activity_Base implements TextWatcher {
 		super.onCreate(savedInstanceState);
 		MyActivityManager.getInstance().pushOneActivity(A_CompanyName.this);
 		setBaseContentView(R.layout.layout_pop);
+		findViewById(R.id.content).setBackgroundColor(0xffffffff);
+		 findViewById(R.id.rl_base_root).setBackgroundColor(0xffffffff);
 		ButterKnife.bind(this);
 
 		setLeftTitleVisible(true);
@@ -102,12 +106,8 @@ public class A_CompanyName extends Activity_Base implements TextWatcher {
 		if (!TextUtils.isEmpty(companyNam)) {
 			Intent intent = new Intent();
 			intent.putExtra("COMPANY_NAME", companyNam);
-			if (selectBean != null) {
-				intent.putExtra("email", selectBean.EmailSuffix);
-				SharedPreferences.Editor editor = getSharedPreferences("email", Context.MODE_PRIVATE).edit();
-				editor.putString("email", selectBean.EmailSuffix);
-				editor.commit();
-			}
+			if (selectBean != null) saveEmail();
+			else clearEmail();
 			setResult(100, intent);
 			finish();
 		} else Toast.makeText(A_CompanyName.this, "公司名称不能为空", Toast.LENGTH_SHORT).show();
@@ -121,6 +121,7 @@ public class A_CompanyName extends Activity_Base implements TextWatcher {
 		//如果选中后改变了内容，则清空已选中的公司
 		if (selectBean != null && !et_name.getText().toString().trim().equals(selectBean.Name)) {
 			selectBean = null;
+			LogUtil.i("bqt", "将selectBean置为空");
 		}
 	}
 
@@ -199,6 +200,19 @@ public class A_CompanyName extends Activity_Base implements TextWatcher {
 			}
 		});
 		App.getInstance().getRequestQueue().add(jsonRequest);
+	}
+
+	private void saveEmail() {
+		SharedPreferences.Editor editor = getSharedPreferences("email", Context.MODE_PRIVATE).edit();
+		editor.putString("email", selectBean.EmailSuffix);
+		editor.commit();
+	}
+
+	private void clearEmail() {
+		LogUtil.i("bqt", "清空email");
+		SharedPreferences.Editor editor = getSharedPreferences("email", Context.MODE_PRIVATE).edit();
+		editor.clear();
+		editor.commit();
 	}
 
 	private void saveData(JEnterprise jBean) {

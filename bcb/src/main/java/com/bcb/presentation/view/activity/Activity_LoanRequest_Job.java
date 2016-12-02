@@ -54,8 +54,7 @@ public class Activity_LoanRequest_Job extends Activity_Base implements TextWatch
 
 	//工作信息
 	private PersonInfoBean personInfoBean;
-	//邮箱
-	private String email;
+
 	private SimpleDateFormat dateFormater = new SimpleDateFormat("yyyy-MM-dd");
 
 	public static void launche(Context ctx, LoanKindBean bean, String personInfoBean) {
@@ -82,9 +81,6 @@ public class Activity_LoanRequest_Job extends Activity_Base implements TextWatch
 		//设置工作信息
 		setupJobMessage();
 		loan_work_experience.addTextChangedListener(this);
-
-		//自动填email
-		email = getSharedPreferences("email", Context.MODE_PRIVATE).getString("email", "");
 	}
 
 	@Override
@@ -167,7 +163,6 @@ public class Activity_LoanRequest_Job extends Activity_Base implements TextWatch
 		super.onActivityResult(requestCode, resultCode, data);
 		if (requestCode == 100 && resultCode == 100 && data != null) {
 			loan_office.setText(data.getStringExtra("COMPANY_NAME"));
-			if (data.getStringExtra("email") != null) email = data.getStringExtra("email");
 		}
 	}
 
@@ -220,7 +215,7 @@ public class Activity_LoanRequest_Job extends Activity_Base implements TextWatch
 					try {
 						if (response.getInt("status") == 1) {
 							Activity_Tips_FaileOrSuccess.launche(Activity_LoanRequest_Job.this, Activity_Tips_FaileOrSuccess
-									.JK_SUCCESS, email);
+									.JK_SUCCESS, "");
 							finish();
 							//清空暂存在本地的数据
 							(new LoanPersonalConfigUtil(Activity_LoanRequest_Job.this)).clear();

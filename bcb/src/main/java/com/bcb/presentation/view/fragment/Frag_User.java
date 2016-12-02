@@ -324,7 +324,6 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		if (v.getId() == R.id.ll_test) {
-			A_Email_Check.launche(ctx,"@100cb.cn");
 			return;
 		}
 		//除了专属客服和电话客服之外的职位都要在点击之前登陆

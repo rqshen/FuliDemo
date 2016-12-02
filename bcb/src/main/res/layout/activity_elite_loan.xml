@@ -10,21 +10,21 @@
         android:id="@+id/iv_brand"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="6dp"
         android:src="@drawable/loan_brand"/>
 
     <ImageView
         android:id="@+id/iv_it"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="3dp"
         android:src="@drawable/loan_it"/>
 
     <ImageView
         android:id="@+id/iv_signed"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="3dp"
         android:src="@drawable/loan_signed"/>
 
 </LinearLayout>

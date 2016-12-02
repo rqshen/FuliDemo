@@ -276,7 +276,7 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
 						break;
 					//借款
 					case JK_SUCCESS://校验邮箱
-						A_Email_Check.launche(this, message);
+						A_Email_Check.launche(this);
 						finish();
 						break;
 					//客服
