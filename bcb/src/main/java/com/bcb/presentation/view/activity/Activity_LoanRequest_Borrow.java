@@ -65,6 +65,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 	@BindView(R.id.layout_coupon_select) RelativeLayout layout_coupon_select;//申请福利补贴
 	@BindView(R.id.coupon_select_image) ImageView coupon_select_image;//申请福利补贴
 	@BindView(R.id.value_interest) TextView value_interest;//利息抵扣券
+	@BindView(R.id.loan_how) TextView loan_how;//如何获得补贴
 	@BindView(R.id.borrow_button) Button bottoButton;//提交申请
 	@BindView(R.id.refresh_view) PullToRefreshLayout refreshLayout;//刷新
 
@@ -136,7 +137,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 			case 1:
 				banner_image.setImageResource(R.drawable.loan_brand);
 				layout_coupon_select.setVisibility(View.GONE);
-
+				loan_how.setVisibility(View.INVISIBLE);
 				//这里可能有bug，卧槽
 				//				durationStatus=12;
 				//				loan_rate.setText("8.5%");
@@ -145,7 +146,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 			case 2:
 				banner_image.setImageResource(R.drawable.loan_it);
 				layout_coupon_select.setVisibility(View.GONE);
-
+				loan_how.setVisibility(View.INVISIBLE);
 				//				durationStatus=3;
 				//				loan_rate.setText("12%");
 				//				loan_duration.setText("3个月");
@@ -153,7 +154,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 			default:
 				banner_image.setImageResource(R.drawable.loan_signed);
 				layout_coupon_select.setVisibility(View.VISIBLE);
-
+				loan_how.setVisibility(View.VISIBLE);
 				//				durationStatus=12;
 				//				loan_rate.setText("7%");
 				//				loan_duration.setText("12个月");
@@ -445,7 +446,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 	}
 
 	@OnClick({R.id.rl_purposes, R.id.rl_duration, R.id.borrow_button, R.id.loan_protocol, R.id.layout_interest,//
-			R.id.layout_customer_service, R.id.layout_coupon_select,})
+			R.id.layout_customer_service, R.id.layout_coupon_select,R.id.loan_how})
 	public void onClick(View view) {
 		switch (view.getId()) {
 			//点击借款用途
@@ -497,6 +498,10 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 			//借款服务协议
 			case R.id.loan_protocol:
 				Activity_Browser.launche(Activity_LoanRequest_Borrow.this, "借款服务协议", UrlsOne.LoanProtocol);
+				break;
+			//如何获得补贴
+			case R.id.loan_how:
+				Activity_Browser.launche(Activity_LoanRequest_Borrow.this, "如何获得补贴", UrlsOne.How2GetSubsidy);
 				break;
 
 			//点击利息抵扣券
@@ -593,9 +598,9 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 			return;
 		}
 
-		//借款金额大于30W元，提示不能大于50W元
-		if (getLoanAmount() > 500000) {
-			ToastUtil.alert(Activity_LoanRequest_Borrow.this, "借款金额不能大于500000元");
+		//借款金额大于20W元，提示不能大于20W元
+		if (getLoanAmount() > 200000) {
+			ToastUtil.alert(Activity_LoanRequest_Borrow.this, "借款金额不能大于200000元");
 			return;
 		}
 		//已经选择了利息抵扣券

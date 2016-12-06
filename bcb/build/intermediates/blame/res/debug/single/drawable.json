@@ -464,12 +464,12 @@
         "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable\\umeng_fb_plus.png"
     },
     {
-        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable\\mq_selector_ic_camera.xml",
-        "source": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.meiqia\\meiqiasdk\\3.2.4\\res\\drawable\\mq_selector_ic_camera.xml"
-    },
-    {
         "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable\\right_btn_select.xml",
         "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable\\right_btn_select.xml"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable\\mq_selector_ic_camera.xml",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.meiqia\\meiqiasdk\\3.2.4\\res\\drawable\\mq_selector_ic_camera.xml"
     },
     {
         "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable\\mq_shape_bg_rich_text.xml",

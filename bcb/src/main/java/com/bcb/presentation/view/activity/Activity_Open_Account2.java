@@ -106,7 +106,8 @@ public class Activity_Open_Account2 extends Activity_Base {
 						LogUtil.d("bqt", "【Activity_Open_Account2】【OpenAccount】" + e.getMessage());
 					}
 				} else if (response != null) {
-					Toast.makeText(Activity_Open_Account2.this, response.optString("message"), Toast.LENGTH_SHORT).show();
+					String message = response.optString("message");
+					Activity_Open_Account3.launche(Activity_Open_Account2.this, message);
 				}
 			}
 
