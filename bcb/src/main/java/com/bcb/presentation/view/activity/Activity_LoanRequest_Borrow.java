@@ -24,6 +24,7 @@ import com.bcb.common.net.UrlsOne;
 import com.bcb.data.bean.UserExtraInfo;
 import com.bcb.data.bean.loan.LoanDurationListBean;
 import com.bcb.data.bean.loan.LoanKindBean;
+import com.bcb.data.bean.loan.LoanPeriodWithRateBean;
 import com.bcb.data.bean.loan.LoanRequestInfoBean;
 import com.bcb.data.util.DbUtil;
 import com.bcb.data.util.HttpUtils;
@@ -93,6 +94,13 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 	private int durationStatus = 1;//默认借款期限为1个月，借款期限为 1
 	private int durationIndex = 0;   //借款列表下标位置
 	private float rate = 0; //借款利率
+
+	//还款期数//******************************************************************************************
+	@BindView(R.id.loan_period) TextView loan_period;
+	private List<String> period_types;
+	List<LoanPeriodWithRateBean> periodList;
+	private int loanIndex = 0;//还款位置
+	private int periodStatus = 1;//默认还款期数为1
 
 	//借款申请信息
 	private LoanRequestInfoBean loanRequestInfo;
@@ -272,6 +280,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 	 */
 	private void initLoanRequestInfo() {
 		durationStatus = loanRequestInfo.LoanTimeType;
+		periodStatus = loanRequestInfo.Period;//******************************************************************************************
 		//判断是否申请了福利补贴，取反的原因是在requestSubsidy()里面又做了一次取反操作
 		statusSubsidy = !loanRequestInfo.UseSubsidy;
 		requestSubsidy();
@@ -287,6 +296,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 		setupLoanUsage();
 		//初始化借款期限
 		setupLoanDuration();
+		setupLoanPeriod();//******************************************************************************************
 		setupRate();
 		//借款金额大于0 时，要设置上一次的借款金额, 需要初始化借款页面的所有元素才可以换算金额
 		if (loanRequestInfo.Amount > 0) loan_amount.setText(loanRequestInfo.Amount + "");
@@ -406,6 +416,39 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 	}
 
 	/**
+	 * 初始化还款期数//******************************************************************************************
+	 */
+	private void setupLoanPeriod() {
+		period_types = new ArrayList<>();
+		//还款期数要从利率表里面查找，这尼玛简直就是坑爹
+		periodList = new ArrayList<>();
+		for (int i = 0 ; i < loanRequestInfo.RateTable.size() ; i++) {
+			//如果借款期限相同，则将期限加载到页面中去
+			if (loanRequestInfo.RateTable.get(i).getDuration() == durationStatus) {
+				LoanPeriodWithRateBean periodWithRate = new LoanPeriodWithRateBean(loanRequestInfo.RateTable.get(i).getPeriod(),
+						loanRequestInfo.RateTable.get(i).getRate());
+				periodList.add(periodWithRate);
+				period_types.add("" + periodWithRate.Period);
+			}
+		}
+		//设置还款位置
+		for (int i = 0 ; i < periodList.size() ; i++) {
+			if (loanRequestInfo.Period == periodList.get(i).Period) {
+				loanIndex = i;
+				break;
+			}
+		}
+		//获取初始的期数
+		periodStatus = Integer.valueOf(period_types.get(loanIndex));
+		LogUtil.d("初始化的还款期数", periodStatus + "");
+		//设置还款期数位置
+		loan_period.setText(period_types.get(loanIndex) + "期");
+
+		//设置完还款期数之后，就要开始算还款方案
+		calculateRepayProgramme();
+	}
+
+	/**
 	 * 计算利率
 	 */
 	private void setupRate() {
@@ -419,22 +462,73 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 		loan_rate.setText(new DecimalFormat("######0.##").format(rate * 100) + "%");
 	}
 
+//	/**
+//	 * 计算还款方案//******************************************************************************************
+//	 */
+//	private void calculateRepayProgramme() {
+//		String repayProgramme = "";
+//		//借款月数等于还款期数
+//		if (getLoanAmount() <= 0 || durationStatus == -1) repayProgramme = "0元";
+//		else {
+//			float amount = (getLoanAmount() + getLoanAmount() * durationStatus / 12 * rate) / durationStatus;
+//			String value = new DecimalFormat("######0.##").format(amount);
+//			//如果是一个月的时候，就是"到期还款XXX元"
+//			if (durationStatus == 1) repayProgramme = "到期还款" + value + "元";
+//			else repayProgramme = "每月还款" + value + "元";
+//		}
+//		loan_programme.setText(repayProgramme);
+//	}
+
 	/**
-	 * 计算还款方案
+	 * 计算还款方案//******************************************************************************************
 	 */
 	private void calculateRepayProgramme() {
+		DecimalFormat df = new DecimalFormat("######0.##");
+		float rate = 0;
+		//根据表查找利率
+		for (int i = 0 ; i < loanRequestInfo.RateTable.size() ; i++) {
+			if (durationStatus == loanRequestInfo.RateTable.get(i).getDuration() && periodStatus == loanRequestInfo.RateTable.get(i)
+					.getPeriod()) {
+				rate = loanRequestInfo.RateTable.get(i).Rate / 100;
+				break;
+			}
+		}
+
 		String repayProgramme = "";
+		if (getLoanAmount() <= 0) {
+			repayProgramme = "0元";
+		}
 		//借款月数等于还款期数
-		if (getLoanAmount() <= 0 || durationStatus == -1) repayProgramme = "0元";
-		else {
-			float amount = (getLoanAmount() + getLoanAmount() * durationStatus / 12 * rate) / durationStatus;
-			String value = new DecimalFormat("######0.##").format(amount);
+		else if (durationStatus == periodStatus && durationStatus != -1) {
+			float amount = (getLoanAmount() + getLoanAmount() * durationStatus / 12 * rate) / periodStatus;
+			String value = df.format(amount);
 			//如果是一个月的时候，就是"到期还款XXX元"
-			if (durationStatus == 1) repayProgramme = "到期还款" + value + "元";
-			else repayProgramme = "每月还款" + value + "元";
+			if (durationStatus == 1) {
+				repayProgramme = "到期还款" + value + "元";
+			} else {
+				repayProgramme = "每月还款" + value + "元";
+			}
+		}
+		//还款期数为2时
+		else if (periodStatus == 2) {
+			float amount = getLoanAmount() * (float) durationStatus / 12 * rate / durationStatus;
+			String value = df.format(amount);
+			String val = df.format(getLoanAmount() / periodStatus);
+			repayProgramme = "每月还利息" + value + "元" + "每12个月还本金" + val + "元";
+		}
+		//划款期数为3时
+		else if (periodStatus == 3) {
+			float amount = getLoanAmount() * (float) durationStatus / 12 * rate / durationStatus;
+			String value = df.format(amount);
+			String val1 = df.format(getLoanAmount() * 0.3);
+			String val2 = df.format(getLoanAmount() * 0.4);
+			repayProgramme = "每月还利息" + value + "每12个月还本金(" + val1 + "元," + val1 + "元," + val2 + "元)";
+		} else {
+			repayProgramme = "暂不支持该方案";
 		}
 		loan_programme.setText(repayProgramme);
 	}
+
 
 	/**
 	 * 获取借款金额
@@ -446,7 +540,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 	}
 
 	@OnClick({R.id.rl_purposes, R.id.rl_duration, R.id.borrow_button, R.id.loan_protocol, R.id.layout_interest,//
-			R.id.layout_customer_service, R.id.layout_coupon_select,R.id.loan_how})
+			R.id.layout_customer_service, R.id.layout_coupon_select, R.id.loan_how,R.id.rl_period})
 	public void onClick(View view) {
 		switch (view.getId()) {
 			//点击借款用途
@@ -489,7 +583,20 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 					}
 				});
 				break;
-
+			//选择还款期数//******************************************************************************************
+			case R.id.rl_period:
+				String[] array = period_types.toArray(new String[period_types.size()]);
+				SpinnerWheelUtil.getInstance().initSpinnerWheelDialog(this, array, loanIndex, new SpinnerWheelUtil
+						.OnDoneClickListener() {
+					@Override
+					public void onClick(int currentItem) {
+						periodStatus = periodList.get(currentItem).Period;
+						LogUtil.d("选中的还款期数", periodStatus + "");
+						loan_period.setText(period_types.get(currentItem) + "期");//设置还款期数
+						calculateRepayProgramme();
+					}
+				});
+				break;
 			//点击立即申请按钮
 			case R.id.borrow_button:
 				UmengUtil.eventById(Activity_LoanRequest_Borrow.this, R.string.loan_act);
@@ -632,6 +739,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 		} else if (purposeStatus != loanRequestInfo.LoanType           //借款用途不一致
 				|| getLoanAmount() != loanRequestInfo.Amount    //借款金额不一致
 				|| durationStatus != loanRequestInfo.LoanTimeType   //借款期限不一致
+				|| periodStatus != loanRequestInfo.Period           //还款期数不一致//*******************************************************************************
 				|| statusSubsidy != loanRequestInfo.UseSubsidy      //申请福利补贴不一致
 				|| statusSelectCoupon != loanRequestInfo.UseCoupon  //使用利息抵扣券不一致
 				) {
@@ -658,7 +766,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 			jsonObject.put("UseSubsidy", statusSubsidy); //是否申请福利补贴
 			jsonObject.put("Amount", getLoanAmount());//借款金额
 			jsonObject.put("LoanTimeType", durationStatus);//借款期限
-			jsonObject.put("Period", durationStatus);//******************************************************************************************这里有问题
+			jsonObject.put("Period", periodStatus);//还款期数	************************************************************************
 
 			//是否使用了利息抵扣券，存在利息抵扣券的时候才去提交
 			if (!TextUtils.isEmpty(CouponId)) jsonObject.put("CouponId", CouponId);

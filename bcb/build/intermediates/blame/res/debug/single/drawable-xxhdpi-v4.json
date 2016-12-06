@@ -16,12 +16,12 @@
         "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable-xxhdpi\\company_cross.png"
     },
     {
-        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\mq_ic_emoji_active.png",
-        "source": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.meiqia\\meiqiasdk\\3.2.4\\res\\drawable-xxhdpi-v4\\mq_ic_emoji_active.png"
-    },
-    {
         "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\mq_ic_file.png",
         "source": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.meiqia\\meiqiasdk\\3.2.4\\res\\drawable-xxhdpi-v4\\mq_ic_file.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\mq_ic_emoji_active.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.meiqia\\meiqiasdk\\3.2.4\\res\\drawable-xxhdpi-v4\\mq_ic_emoji_active.png"
     },
     {
         "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\ico_join_bonus.png",

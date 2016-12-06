@@ -200,6 +200,49 @@
                         android:layout_height="1dip"
                         android:background="@color/linegray"/>
 
+                    <!-- 还款期数 -->
+                    <RelativeLayout
+                        android:id="@+id/rl_period"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="47dp"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/title_period"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="18dp"
+                            android:layout_centerVertical="true"
+                            android:text="还款期数"
+                            android:textSize="@dimen/main_text_default"
+                            android:textColor="@color/txt_gray"/>
+                        <ImageView
+                            android:id="@+id/loan_period_arrow"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="16dp"
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentRight="true"
+                            android:background="@drawable/loan_request_arrow"/>
+                        <TextView
+                            android:id="@+id/loan_period"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_toRightOf="@id/title_period"
+                            android:layout_centerVertical="true"
+                            android:gravity="center_vertical|right"
+                            android:padding="0dip"
+                            android:layout_marginRight="40dp"
+                            android:layout_marginLeft="35dp"
+                            android:textColor="@color/txt_black"
+                            android:textSize="@dimen/main_text_default"
+                            android:singleLine="true"
+                            android:background="@drawable/edittext_none_background"/>
+                    </RelativeLayout>
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="1dip"
+                        android:background="@color/linegray"/>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
