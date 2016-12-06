@@ -39,3 +39,6 @@ captures/
 *.jks
 /.idea
 /.gradle
+/bcb/build
+/bcb/*.iml
+/volley/build
