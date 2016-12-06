@@ -215,6 +215,7 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
 				title_text.setText("提交成功");
 				setLeftTitleVisible(false);
 				iv_pic.setImageResource(R.drawable.success_open_hf);
+				tv_up.setSingleLine(false);
 				tv_up.setText("邮箱验证成功，请等待T+1工作日后\n" + "的审核结果");
 				tv_down.setVisibility(View.GONE);
 				tv_next.setText("完成");

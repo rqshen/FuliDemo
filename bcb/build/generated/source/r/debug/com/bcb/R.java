@@ -3031,7 +3031,7 @@ containing a value of this type.
         public static final int errortips_confirm=0x7f0d01f5;
         public static final int errortips_passwd=0x7f0d01f4;
         public static final int et_add_monery=0x7f0d00bb;
-        public static final int et_email=0x7f0d00e2;
+        public static final int et_email=0x7f0d00e1;
         public static final int et_evaluate_content=0x7f0d032e;
         public static final int et_idcard=0x7f0d01b8;
         public static final int et_name=0x7f0d02e6;
@@ -3597,7 +3597,7 @@ containing a value of this type.
         public static final int tv_day=0x7f0d02aa;
         public static final int tv_down=0x7f0d00ea;
         public static final int tv_email=0x7f0d00e0;
-        public static final int tv_email_end=0x7f0d00e1;
+        public static final int tv_email_end=0x7f0d00e2;
         public static final int tv_evaluate_cancel=0x7f0d032f;
         public static final int tv_evaluate_confirm=0x7f0d0330;
         public static final int tv_evaluate_tip=0x7f0d0329;

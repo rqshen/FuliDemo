@@ -181,7 +181,8 @@ public class A_Email_Check extends Activity_Base {
 		ProgressDialogrUtils.show(this, "正在提交…");
 		JSONObject obj = new org.json.JSONObject();
 		try {
-			obj.put("Email", et_email.getText().toString().trim());
+			String end = tv_email_end.getText().toString().trim();
+			obj.put("Email", et_email.getText().toString().trim() + (end == null ? "" : end));
 			obj.put("VerifyCode", et_yzm.getText().toString().trim());
 			BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.EDITMYBORROWEREMAIL, obj, TokenUtil.getEncodeToken(this), new
 					BcbRequest.BcbCallBack<JSONObject>() {

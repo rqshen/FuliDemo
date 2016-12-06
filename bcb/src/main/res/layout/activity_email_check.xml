@@ -22,32 +22,32 @@
             android:textColor="#333"
             android:textSize="16sp"/>
 
-        <TextView
-            android:id="@+id/tv_email_end"
-            android:layout_width="110dp"
-            android:layout_height="45dp"
-            android:layout_alignParentRight="true"
-            android:gravity="center_vertical"
-            android:paddingLeft="10dp"
-            android:singleLine="true"
-            android:textColor="#999"
-            android:textSize="16sp"/>
 
         <EditText
             android:id="@+id/et_email"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="45dp"
-            android:layout_toLeftOf="@+id/tv_email_end"
             android:layout_toRightOf="@+id/tv_email"
             android:background="@null"
+            android:minWidth="120dp"
+            android:digits="\@_.-0123456789abcdefghigklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
             android:gravity="center_vertical"
             android:hint="请填写工作邮箱"
             android:paddingLeft="10dp"
             android:singleLine="true"
-            android:digits="\@_.-0123456789abcdefghigklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
             android:textColorHint="#999"
             android:textSize="15sp"/>
 
+        <TextView
+            android:id="@+id/tv_email_end"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_toRightOf="@+id/et_email"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:textColor="#999"
+            android:paddingRight="10dp"
+            android:textSize="16sp"/>
 
     </RelativeLayout>
 
@@ -97,12 +97,12 @@
             android:layout_toLeftOf="@+id/send"
             android:layout_toRightOf="@+id/tv_yzm"
             android:background="@null"
+            android:digits="\@_.-$0123456789abcdefghigklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
             android:gravity="center_vertical"
             android:hint="请填写邮箱验证码"
             android:paddingLeft="10dp"
             android:singleLine="true"
             android:textColorHint="#999"
-            android:digits="\@_.-$0123456789abcdefghigklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
             android:textSize="15sp"/>
     </RelativeLayout>
 

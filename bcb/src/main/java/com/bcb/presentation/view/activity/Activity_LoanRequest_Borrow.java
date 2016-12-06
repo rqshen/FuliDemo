@@ -296,6 +296,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 		setupLoanUsage();
 		//初始化借款期限
 		setupLoanDuration();
+		//初始化默认的还款期数
 		setupLoanPeriod();//******************************************************************************************
 		setupRate();
 		//借款金额大于0 时，要设置上一次的借款金额, 需要初始化借款页面的所有元素才可以换算金额
@@ -578,6 +579,8 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 						}
 						//重新设置利率
 						loan_rate.setText(new DecimalFormat("######0.##").format(rate * 100) + "%");
+						//初始化默认的还款期数
+						setupLoanPeriod();//******************************************************************************************
 						//重新设置还款期数
 						calculateRepayProgramme();
 					}

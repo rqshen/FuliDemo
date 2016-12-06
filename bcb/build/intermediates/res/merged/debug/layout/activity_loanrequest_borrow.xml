@@ -520,7 +520,7 @@
                     android:paddingBottom="20dp"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:paddingTop="20dp"
+                    android:paddingTop="10dp"
                     android:text="产品介绍"
                     android:textColor="@color/txt_gray"
                     android:textSize="14sp"/>
