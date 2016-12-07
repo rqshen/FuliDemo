@@ -178,7 +178,6 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
 				tv_down.setText("还差一步即可完成借款申请");
 				tv_down.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
 				tv_next.setText("去校验邮箱");
-				setLeftTitleVisible(false);
 				break;
 			case ZR_SUCCESS:
 				title_text.setText("债权转让");

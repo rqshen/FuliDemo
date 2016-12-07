@@ -269,7 +269,6 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
 		for (int i = 0 ; i < personInfoBean.MaritalStatusList.size() ; i++) {
 			maritalList.add(i, personInfoBean.MaritalStatusList.get(i).Name);
 		}
-
 	}
 
 	/**
@@ -330,8 +329,10 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
 	 */
 	private void setupPersonalData() {
 		//婚姻状况
-		if (PersonInfo.MaritalStatus > 0) {
-			loan_marital_status.setText(maritalList.get(PersonInfo.MaritalStatus - 1));
+		for (int i = 0; i < PersonInfo.MaritalStatusList.size(); i++) {
+			if (PersonInfo.MaritalStatus ==PersonInfo.MaritalStatusList.get(i).Value) {
+				loan_marital_status.setText(PersonInfo.MaritalStatusList.get(i).Name);
+			}
 		}
 		//孩子情况
 		loan_children.setText(childrenList.get(PersonInfo.ChildrenStatus));
@@ -534,7 +535,24 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
 						.OnDoneClickListener() {
 					@Override
 					public void onClick(int currentItem) {
-						maritalStatus = currentItem + 1;
+						switch (currentItem) {
+						case 0:
+							maritalStatus =1;
+							break;
+						case 1:
+							maritalStatus =3;
+							break;
+						case 2:
+							maritalStatus =4;
+							break;
+						case 3:
+							maritalStatus =5;
+							break;
+						default:
+							maritalStatus =1;
+							break;
+						}
+
 						loan_marital_status.setText(maritalList.get(currentItem));
 					}
 				});

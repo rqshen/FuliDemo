@@ -568,12 +568,12 @@
         "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\layout\\umeng_fb_reply_item_audio.xml"
     },
     {
-        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\layout\\activity_city.xml",
-        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\layout\\activity_city.xml"
-    },
-    {
         "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\layout\\mq_dialog_loading.xml",
         "source": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.meiqia\\meiqiasdk\\3.2.4\\res\\layout\\mq_dialog_loading.xml"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\layout\\activity_city.xml",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\layout\\activity_city.xml"
     },
     {
         "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\layout\\mq_item_msg_evaluate.xml",
