@@ -15,12 +15,14 @@ import com.bcb.common.net.BcbRequestTag;
 import com.bcb.common.net.UrlsOne;
 import com.bcb.common.net.UrlsTwo;
 import com.bcb.data.bean.loan.LoanKindBean;
+import com.bcb.data.bean.loan.LoanRequestInfoBean;
 import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.PackageUtil;
 import com.bcb.data.util.ProgressDialogrUtils;
 import com.bcb.data.util.ToastUtil;
 import com.bcb.data.util.TokenUtil;
 import com.bcb.presentation.view.custom.AlertView.DialogBQT;
+import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
@@ -47,6 +49,8 @@ public class A_Elite_Loan extends Activity_Base {
 	//支持的企业类型集合
 	private ArrayList<LoanKindBean> list;
 	private LoanKindBean bean1, bean2, bean0;
+	//签约企业的借款申请信息
+	private LoanRequestInfoBean signedLoanRequestInfo;//**********************************************************
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -62,10 +66,15 @@ public class A_Elite_Loan extends Activity_Base {
 			}
 		});
 		requestOpenAccount();
+		//		getSingLoanCertification();		// 获取签约企业借款数据*****************************************************************
 	}
 	
 	@OnClick({R.id.iv_brand, R.id.iv_it, R.id.iv_signed})
 	public void onClickIv(View v) {
+		//		if (signedLoanRequestInfo == null) {
+		//			Toast.makeText(A_Elite_Loan.this, "数据出错了", Toast.LENGTH_SHORT).show();
+		//			return;
+		//		}
 		//请求是否可以申请贷款
 		switch (v.getId()) {
 			case R.id.iv_brand:
@@ -173,13 +182,13 @@ public class A_Elite_Loan extends Activity_Base {
 						} else {//否则跳转
 							switch (LoanKind) {
 								case 0:
-									Activity_LoanRequest_Borrow.launche(A_Elite_Loan.this, bean0);
+									Activity_LoanRequest_Borrow.launche(A_Elite_Loan.this, bean0, signedLoanRequestInfo);
 									break;
 								case 1:
-									Activity_LoanRequest_Borrow.launche(A_Elite_Loan.this, bean1);
+									Activity_LoanRequest_Borrow.launche(A_Elite_Loan.this, bean1, signedLoanRequestInfo);
 									break;
 								case 2:
-									Activity_LoanRequest_Borrow.launche(A_Elite_Loan.this, bean2);
+									Activity_LoanRequest_Borrow.launche(A_Elite_Loan.this, bean2, signedLoanRequestInfo);
 									break;
 							}
 						}
@@ -197,6 +206,33 @@ public class A_Elite_Loan extends Activity_Base {
 			}
 		});
 		jsonRequest.setTag(BcbRequestTag.BCB_LOAN_CERTIFICATION_REQUEST);
+		App.getInstance().getRequestQueue().add(jsonRequest);
+	}
+
+	//****************************************************************************************************************************************
+	//                                                                                                   获取签约企业借款数据
+	//****************************************************************************************************************************************
+	private void getSingLoanCertification() {
+		JSONObject obj = new org.json.JSONObject();
+		try {
+			obj.put("LoanKind", 0);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.LoanCertification, obj, TokenUtil.getEncodeToken(this), new
+				BcbRequest.BcbCallBack<JSONObject>() {
+			@Override
+			public void onResponse(JSONObject response) {
+				LogUtil.i("bqt", "签约企业借款信息" + response.toString());
+				if (response.optInt("status") == 1) {
+					signedLoanRequestInfo = new Gson().fromJson(response.optString("result"), LoanRequestInfoBean.class);
+				}
+			}
+
+			@Override
+			public void onErrorResponse(Exception error) {
+			}
+		});
 		App.getInstance().getRequestQueue().add(jsonRequest);
 	}
 }

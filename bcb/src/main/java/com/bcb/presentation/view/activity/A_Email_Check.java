@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -17,6 +18,7 @@ import com.bcb.common.net.BcbJsonRequest;
 import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.UrlsOne;
 import com.bcb.data.util.LogUtil;
+import com.bcb.data.util.MQCustomerManager;
 import com.bcb.data.util.ProgressDialogrUtils;
 import com.bcb.data.util.TokenUtil;
 import com.bcb.presentation.view.custom.AlertView.DialogBQT;
@@ -76,14 +78,29 @@ public class A_Email_Check extends Activity_Base {
 		ButterKnife.bind(this);
 		setLeftTitleVisible(true);
 		setTitleValue("非签约IT精英贷");
+		setLeftTitleVisible(false);
 		//获取保存的email
 		String email = getSharedPreferences("email", Context.MODE_PRIVATE).getString("email", "");
-		tv_email_end.setText(email == null ? "" : email);
+		if (!TextUtils.isEmpty(email)) {
+			tv_email_end.setText(email);
+			et_email.setHint("");
+		}
+		et_email.requestFocus();
+		final InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+		new Timer().schedule(new TimerTask() {
+			@Override
+			public void run() {
+				imm.toggleSoftInput(0, InputMethodManager.SHOW_FORCED);//切换软键盘的显示与隐藏状态
+			}
+		}, 500);
 	}
 
-	@OnClick({R.id.send, R.id.next})
+	@OnClick({R.id.customer_service, R.id.send, R.id.next, R.id.rl_email})
 	public void onClickIv(View v) {
 		switch (v.getId()) {
+			case R.id.customer_service:
+				MQCustomerManager.getInstance(this).showCustomer(null);
+				break;
 			case R.id.send:
 				//检查邮箱是否合法
 				if (toGoBeforeCheck()) {
@@ -100,6 +117,9 @@ public class A_Email_Check extends Activity_Base {
 					Toast.makeText(A_Email_Check.this, "验证码不能为空", Toast.LENGTH_SHORT).show();
 				} else pushVerificationCode();
 				break;
+			case R.id.rl_email:
+				et_email.requestFocus();
+				break;
 		}
 	}
 
@@ -113,7 +133,7 @@ public class A_Email_Check extends Activity_Base {
 		}
 		//获取保存的email
 		String end = getSharedPreferences("email", Context.MODE_PRIVATE).getString("email", "");
-		String email=begin+(end == null ? "" : end);
+		String email = begin + (end == null ? "" : end);
 		//是否为邮箱
 		Pattern pattern = Pattern.compile("^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$");
 		Matcher m = pattern.matcher(email);
@@ -121,14 +141,14 @@ public class A_Email_Check extends Activity_Base {
 			Toast.makeText(A_Email_Check.this, "邮箱格式非法", Toast.LENGTH_SHORT).show();
 			return false;
 		}
-//		//是否为指定后缀
-//		boolean isContainEmail = false;
-//		for (int i = 0 ; i < mListAll.size() ; i++) {
-//			if (email.contains(mListAll.get(i).email)) {
-//				isContainEmail = true;
-//				break;
-//			}
-//		}
+		//		//是否为指定后缀
+		//		boolean isContainEmail = false;
+		//		for (int i = 0 ; i < mListAll.size() ; i++) {
+		//			if (email.contains(mListAll.get(i).email)) {
+		//				isContainEmail = true;
+		//				break;
+		//			}
+		//		}
 		//		//不包含
 		//		if (!isContainEmail) {
 		//			showDialog("您输入的邮箱后缀不是公司邮箱地址\n将导致您的借款审核不通过，请重新\n填写。");

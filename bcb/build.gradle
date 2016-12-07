@@ -13,7 +13,7 @@ android {
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-rules.pro'), 'proguard-rules.pro'
+            //proguardFiles getDefaultProguardFile('proguard-rules.pro'), 'proguard-rules.pro'
         }
     }
     lintOptions {

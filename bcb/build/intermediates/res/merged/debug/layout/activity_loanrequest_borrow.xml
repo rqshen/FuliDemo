@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/background"
@@ -207,42 +206,47 @@
                         android:layout_height="wrap_content"
                         android:minHeight="47dp"
                         android:orientation="horizontal">
+
                         <TextView
                             android:id="@+id/title_period"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="18dp"
                             android:layout_centerVertical="true"
+                            android:layout_marginLeft="18dp"
                             android:text="还款期数"
-                            android:textSize="@dimen/main_text_default"
-                            android:textColor="@color/txt_gray"/>
+                            android:textColor="@color/txt_gray"
+                            android:textSize="@dimen/main_text_default"/>
+
                         <ImageView
                             android:id="@+id/loan_period_arrow"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginRight="16dp"
-                            android:layout_centerVertical="true"
                             android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="16dp"
                             android:background="@drawable/loan_request_arrow"/>
+
                         <TextView
                             android:id="@+id/loan_period"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_toRightOf="@id/title_period"
                             android:layout_centerVertical="true"
+                            android:layout_marginLeft="35dp"
+                            android:layout_marginRight="40dp"
+                            android:layout_toRightOf="@id/title_period"
+                            android:background="@drawable/edittext_none_background"
                             android:gravity="center_vertical|right"
                             android:padding="0dip"
-                            android:layout_marginRight="40dp"
-                            android:layout_marginLeft="35dp"
-                            android:textColor="@color/txt_black"
-                            android:textSize="@dimen/main_text_default"
                             android:singleLine="true"
-                            android:background="@drawable/edittext_none_background"/>
+                            android:textColor="@color/txt_black"
+                            android:textSize="@dimen/main_text_default"/>
                     </RelativeLayout>
+
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="1dip"
                         android:background="@color/linegray"/>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -266,17 +270,30 @@
                             android:layout_marginBottom="16dp"
                             android:layout_marginLeft="35dp"
                             android:layout_marginRight="40dp"
-                            android:layout_marginTop="16dp"
-                            >
-
+                            android:layout_marginTop="16dp">
+                            <TextView
+                                android:id="@+id/loan_rate_r"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:text="/年"
+                                android:textColor="@color/txt_black"
+                                android:textSize="@dimen/main_text_default"/>
                             <TextView
                                 android:id="@+id/loan_rate"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_alignParentRight="true"
-                                android:gravity="left"
+                                android:layout_toLeftOf="@+id/loan_rate_r"
                                 android:textColor="@color/txt_black"
                                 android:textSize="@dimen/main_text_default"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_toLeftOf="@+id/loan_rate"
+                                android:text="低至"
+                                android:textColor="@color/txt_black"
+                                android:textSize="@dimen/main_text_default"/>
+
                         </RelativeLayout>
                     </LinearLayout>
 
@@ -370,11 +387,24 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentRight="true"
-                                android:gravity="left"
-                                android:text=""
+                                android:gravity="right"
+                                android:text="每月还款"
                                 android:textColor="@color/txt_black"
                                 android:textSize="@dimen/main_text_default"/>
+                            <TextView
+                                android:id="@+id/loan_programme2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginTop="8dp"
+                                android:layout_below="@+id/loan_programme"
+                                android:gravity="right"
+                                android:text="每月还款"
+                                android:textColor="@color/txt_black"
+                                android:visibility="gone"
+                                android:textSize="@dimen/main_text_default"/>
                         </RelativeLayout>
+
                     </LinearLayout>
 
                     <ImageView
@@ -383,10 +413,21 @@
                         android:background="@color/linegray"/>
                 </LinearLayout>
 
+                <TextView
+                    android:id="@+id/tv_if"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:text="企业签约后，员工借贷费率低至7%"
+                    android:layout_marginRight="40dp"
+                    android:textColor="#666"
+                    android:layout_marginTop="10dp"
+                    android:textSize="13sp"
+                    android:visibility="visible"/>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_size_large"
+                    android:layout_marginTop="10dp"
                     android:background="@android:color/white"
                     android:orientation="vertical">
 
@@ -482,37 +523,42 @@
                         </LinearLayout>
                     </RelativeLayout>
 
+
+
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
                         android:background="@color/linegray"/>
                 </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:id="@+id/loan_how"
-                    android:layout_width="0dp"
-                    android:layout_weight="2"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="15dp"
-                    android:text="如何获得补贴？"
-                    android:textColor="@color/blue"
-                    android:visibility="invisible"
-                    android:textSize="@dimen/main_text_default"/>
-                <TextView
-                    android:id="@+id/loan_protocol"
-                    android:layout_width="0dp"
-                    android:layout_weight="3"
-                    android:layout_height="wrap_content"
-                    android:gravity="right"
-                    android:padding="10dp"
-                    android:text="《福利金融借款服务协议》"
-                    android:textColor="@color/blue"
-                    android:textSize="@dimen/main_text_default"/>
-            </LinearLayout>
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/loan_how"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:padding="15dp"
+                        android:text="如何获得补贴？"
+                        android:textColor="@color/blue"
+                        android:textSize="@dimen/main_text_default"
+                        android:visibility="invisible"/>
+
+                    <TextView
+                        android:id="@+id/loan_protocol"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:gravity="right"
+                        android:padding="10dp"
+                        android:text="《福利金融借款服务协议》"
+                        android:textColor="@color/blue"
+                        android:textSize="@dimen/main_text_default"/>
+                </LinearLayout>
+
                 <TextView
                     android:id="@+id/tv_explain"
                     android:layout_width="match_parent"

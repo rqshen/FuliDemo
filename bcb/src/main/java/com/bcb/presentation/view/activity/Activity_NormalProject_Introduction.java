@@ -42,7 +42,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * setTitleValue("产品详情"。setTitleValue("详情"。setTitleValue("项目详情"。
+ * setTitleValue("产品详情"。setTitleValue("详情"。setTitleValue("项目详情"。setTitleValue("立即购买"。setTitleValue("立即申购"。
  */
 public class Activity_NormalProject_Introduction extends Activity_Base implements View.OnClickListener {
 

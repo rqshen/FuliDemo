@@ -63,10 +63,12 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 	@BindView(R.id.loan_rate) TextView loan_rate;//执行利率
 	@BindView(R.id.tv_explain) TextView tv_explain;
 	@BindView(R.id.loan_programme) TextView loan_programme;    //还款方案
+	@BindView(R.id.loan_programme2) TextView loan_programme2;    //还款方案第二栏
 	@BindView(R.id.layout_coupon_select) RelativeLayout layout_coupon_select;//申请福利补贴
 	@BindView(R.id.coupon_select_image) ImageView coupon_select_image;//申请福利补贴
 	@BindView(R.id.value_interest) TextView value_interest;//利息抵扣券
 	@BindView(R.id.loan_how) TextView loan_how;//如何获得补贴
+	@BindView(R.id.tv_if) TextView tv_if;//企业签约后，员工借款费率可低至
 	@BindView(R.id.borrow_button) Button bottoButton;//提交申请
 	@BindView(R.id.refresh_view) PullToRefreshLayout refreshLayout;//刷新
 
@@ -104,14 +106,18 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 
 	//借款申请信息
 	private LoanRequestInfoBean loanRequestInfo;
+	//签约企业的借款申请信息
+	private LoanRequestInfoBean signedLoanRequestInfo;//******************************************************************
+
 	//不可申请时的状态信息
 	private String message;
 
 	private AlertView alertView;
 
-	public static void launche(Context ctx, LoanKindBean bean) {
+	public static void launche(Context ctx, LoanKindBean bean, LoanRequestInfoBean signedLoanRequestInfo) {
 		Intent intent = new Intent(ctx, Activity_LoanRequest_Borrow.class);
 		intent.putExtra("bean", bean);
+		intent.putExtra("signedLoanRequestInfo", signedLoanRequestInfo);
 		ctx.startActivity(intent);
 	}
 
@@ -134,6 +140,8 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 	//****************************************************************************************************************************************
 	private void initType() {
 		bean = (LoanKindBean) getIntent().getSerializableExtra("bean");
+		signedLoanRequestInfo = (LoanRequestInfoBean) getIntent().getSerializableExtra("signedLoanRequestInfo");
+
 		if (bean == null) {
 			Toast.makeText(Activity_LoanRequest_Borrow.this, "网络异常", Toast.LENGTH_SHORT).show();
 			finish();
@@ -145,6 +153,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 			case 1:
 				banner_image.setImageResource(R.drawable.loan_brand);
 				layout_coupon_select.setVisibility(View.GONE);
+				tv_if.setVisibility(View.VISIBLE);
 				loan_how.setVisibility(View.INVISIBLE);
 				//这里可能有bug，卧槽
 				//				durationStatus=12;
@@ -154,6 +163,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 			case 2:
 				banner_image.setImageResource(R.drawable.loan_it);
 				layout_coupon_select.setVisibility(View.GONE);
+				tv_if.setVisibility(View.VISIBLE);
 				loan_how.setVisibility(View.INVISIBLE);
 				//				durationStatus=3;
 				//				loan_rate.setText("12%");
@@ -162,6 +172,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 			default:
 				banner_image.setImageResource(R.drawable.loan_signed);
 				layout_coupon_select.setVisibility(View.VISIBLE);
+				tv_if.setVisibility(View.GONE);
 				loan_how.setVisibility(View.VISIBLE);
 				//				durationStatus=12;
 				//				loan_rate.setText("7%");
@@ -226,6 +237,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 			@Override
 			public void onResponse(JSONObject response) {
 				ProgressDialogrUtils.hide();
+
 				refreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
 				try {
 					if (null == response) {
@@ -280,7 +292,8 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 	 */
 	private void initLoanRequestInfo() {
 		durationStatus = loanRequestInfo.LoanTimeType;
-		periodStatus = loanRequestInfo.Period;//******************************************************************************************
+		periodStatus = loanRequestInfo.Period;
+		//******************************************************************************************
 		//判断是否申请了福利补贴，取反的原因是在requestSubsidy()里面又做了一次取反操作
 		statusSubsidy = !loanRequestInfo.UseSubsidy;
 		requestSubsidy();
@@ -455,35 +468,39 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 	private void setupRate() {
 		for (int i = 0 ; i < loanRequestInfo.RateTable.size() ; i++) {
 			String monthNum = loanRequestInfo.RateTable.get(i).getDuration() + "个月";
-			if (monthNum.equalsIgnoreCase(loan_duration.getText().toString().trim())) {
+			int periodNum = loanRequestInfo.RateTable.get(i).Period;
+			if (periodStatus==periodNum&&monthNum.equalsIgnoreCase(loan_duration.getText().toString().trim())) {
 				rate = loanRequestInfo.RateTable.get(i).Rate / 100;
 				break;
 			}
 		}
 		loan_rate.setText(new DecimalFormat("######0.##").format(rate * 100) + "%");
+		//企业签约后，员工借款费率可低至
+		//tv_if.setText("企业签约后，员工借款费率可低至" + new DecimalFormat("######0.##").format(signedRate * 100) + "%");
 	}
 
-//	/**
-//	 * 计算还款方案//******************************************************************************************
-//	 */
-//	private void calculateRepayProgramme() {
-//		String repayProgramme = "";
-//		//借款月数等于还款期数
-//		if (getLoanAmount() <= 0 || durationStatus == -1) repayProgramme = "0元";
-//		else {
-//			float amount = (getLoanAmount() + getLoanAmount() * durationStatus / 12 * rate) / durationStatus;
-//			String value = new DecimalFormat("######0.##").format(amount);
-//			//如果是一个月的时候，就是"到期还款XXX元"
-//			if (durationStatus == 1) repayProgramme = "到期还款" + value + "元";
-//			else repayProgramme = "每月还款" + value + "元";
-//		}
-//		loan_programme.setText(repayProgramme);
-//	}
+	//	/**
+	//	 * 计算还款方案//******************************************************************************************
+	//	 */
+	//	private void calculateRepayProgramme() {
+	//		String repayProgramme = "";
+	//		//借款月数等于还款期数
+	//		if (getLoanAmount() <= 0 || durationStatus == -1) repayProgramme = "0元";
+	//		else {
+	//			float amount = (getLoanAmount() + getLoanAmount() * durationStatus / 12 * rate) / durationStatus;
+	//			String value = new DecimalFormat("######0.##").format(amount);
+	//			//如果是一个月的时候，就是"到期还款XXX元"
+	//			if (durationStatus == 1) repayProgramme = "到期还款" + value + "元";
+	//			else repayProgramme = "每月还款" + value + "元";
+	//		}
+	//		loan_programme.setText(repayProgramme);
+	//	}
 
 	/**
 	 * 计算还款方案//******************************************************************************************
 	 */
 	private void calculateRepayProgramme() {
+		loan_programme2.setVisibility(View.GONE);
 		DecimalFormat df = new DecimalFormat("######0.##");
 		float rate = 0;
 		//根据表查找利率
@@ -507,7 +524,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 			if (durationStatus == 1) {
 				repayProgramme = "到期还款" + value + "元";
 			} else {
-				repayProgramme = "每月还款" + value + "元";
+				repayProgramme = "每月还款 低至" + value + "元";
 			}
 		}
 		//还款期数为2时
@@ -523,13 +540,14 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 			String value = df.format(amount);
 			String val1 = df.format(getLoanAmount() * 0.3);
 			String val2 = df.format(getLoanAmount() * 0.4);
-			repayProgramme = "每月还利息" + value + "每12个月还本金(" + val1 + "元," + val1 + "元," + val2 + "元)";
+			repayProgramme = "每月还息低至" + value + "元";
+			loan_programme2.setVisibility(View.VISIBLE);
+			loan_programme2.setText("每12个月还本金\n" +  val1 + "元、" + val1 +"元、" + val2 + "元");
 		} else {
 			repayProgramme = "暂不支持该方案";
 		}
 		loan_programme.setText(repayProgramme);
 	}
-
 
 	/**
 	 * 获取借款金额
@@ -541,7 +559,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 	}
 
 	@OnClick({R.id.rl_purposes, R.id.rl_duration, R.id.borrow_button, R.id.loan_protocol, R.id.layout_interest,//
-			R.id.layout_customer_service, R.id.layout_coupon_select, R.id.loan_how,R.id.rl_period})
+			R.id.layout_customer_service, R.id.layout_coupon_select, R.id.loan_how, R.id.rl_period})
 	public void onClick(View view) {
 		switch (view.getId()) {
 			//点击借款用途
@@ -569,17 +587,23 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 					public void onClick(int currentItem) {
 						durationIndex = currentItem;
 						loan_duration.setText(duration_types.get(currentItem));//设置借款期限
+						float signedRate = 0;
 						for (int i = 0 ; i < loanRequestInfo.RateTable.size() ; i++) {
 							String monthNum = loanRequestInfo.RateTable.get(i).getDuration() + "个月";
 							if (monthNum.equalsIgnoreCase(duration_types.get(currentItem))) {
 								durationStatus = loanRequestInfo.RateTable.get(i).getDuration();
 								rate = loanRequestInfo.RateTable.get(i).Rate / 100;
+								//signedRate = signedLoanRequestInfo.RateTable.get(i).Rate / 100;//***********************************
 								break;
 							}
 						}
 						//重新设置利率
-						loan_rate.setText(new DecimalFormat("######0.##").format(rate * 100) + "%");
+						//loan_rate.setText(new DecimalFormat("######0.##").format(rate * 100) + "%");
+						setupRate();
+						//企业签约后，员工借款费率可低至
+						//tv_if.setText("企业签约后，员工借款费率可低至" + new DecimalFormat("######0.##").format(signedRate * 100) + "%");
 						//初始化默认的还款期数
+						loanIndex=0;
 						setupLoanPeriod();//******************************************************************************************
 						//重新设置还款期数
 						calculateRepayProgramme();
@@ -596,6 +620,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 						periodStatus = periodList.get(currentItem).Period;
 						LogUtil.d("选中的还款期数", periodStatus + "");
 						loan_period.setText(period_types.get(currentItem) + "期");//设置还款期数
+						setupRate();
 						calculateRepayProgramme();
 					}
 				});
@@ -742,7 +767,8 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 		} else if (purposeStatus != loanRequestInfo.LoanType           //借款用途不一致
 				|| getLoanAmount() != loanRequestInfo.Amount    //借款金额不一致
 				|| durationStatus != loanRequestInfo.LoanTimeType   //借款期限不一致
-				|| periodStatus != loanRequestInfo.Period           //还款期数不一致//*******************************************************************************
+				|| periodStatus != loanRequestInfo.Period
+				//还款期数不一致//*******************************************************************************
 				|| statusSubsidy != loanRequestInfo.UseSubsidy      //申请福利补贴不一致
 				|| statusSelectCoupon != loanRequestInfo.UseCoupon  //使用利息抵扣券不一致
 				) {
