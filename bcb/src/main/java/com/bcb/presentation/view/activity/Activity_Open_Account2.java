@@ -99,7 +99,8 @@ public class Activity_Open_Account2 extends Activity_Base {
 								finish();
 							} else {
 								String message = response.getString("message");
-								Activity_Open_Account3.launche(Activity_Open_Account2.this, message);
+								Toast.makeText(Activity_Open_Account2.this, message, Toast.LENGTH_SHORT).show();
+//								Activity_Open_Account3.launche(Activity_Open_Account2.this, message);
 							}
 						}
 					} catch (Exception e) {
@@ -107,7 +108,8 @@ public class Activity_Open_Account2 extends Activity_Base {
 					}
 				} else if (response != null) {
 					String message = response.optString("message");
-					Activity_Open_Account3.launche(Activity_Open_Account2.this, message);
+//					Activity_Open_Account3.launche(Activity_Open_Account2.this, message);
+					Toast.makeText(Activity_Open_Account2.this, message, Toast.LENGTH_SHORT).show();
 				}
 			}
 

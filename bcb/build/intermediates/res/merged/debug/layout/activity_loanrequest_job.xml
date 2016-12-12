@@ -68,7 +68,7 @@
                         android:layout_toRightOf="@+id/company_title"
                         android:gravity="right|center_vertical"
                         android:hint="请输入公司名称"
-
+                        android:textColor="#333"
                         android:singleLine="true"
                         android:textColorHint="@color/txt_gray"
                         android:textSize="@dimen/main_text_default"/>
@@ -107,6 +107,7 @@
                         android:hint="请填写工作职位信息"
                         android:padding="5dip"
                         android:singleLine="true"
+                        android:textColor="#333"
                         android:textColorHint="@color/txt_gray"
                         android:textSize="@dimen/main_text_default"/>
                 </LinearLayout>
@@ -151,6 +152,7 @@
                         android:hint="请填写所在部门信息"
                         android:padding="5dip"
                         android:singleLine="true"
+                        android:textColor="#333"
                         android:textColorHint="@color/txt_gray"
                         android:textSize="@dimen/main_text_default"/>
                 </LinearLayout>
@@ -189,6 +191,7 @@
                         android:gravity="right|center_vertical"
                         android:hint="请选择工作时间"
                         android:singleLine="true"
+                        android:textColor="#333"
                         android:textColorHint="@color/txt_gray"
                         android:textSize="@dimen/main_text_default"/>
 
@@ -268,6 +271,7 @@
                         android:hint="请输入办公地点信息"
                         android:padding="5dip"
                         android:singleLine="true"
+                        android:textColor="#333"
                         android:textColorHint="@color/txt_gray"
                         android:textSize="@dimen/main_text_default"/>
                 </LinearLayout>
@@ -317,6 +321,7 @@
                         android:inputType="number"
                         android:padding="5dip"
                         android:singleLine="true"
+                        android:textColor="#333"
                         android:textColorHint="@color/txt_gray"
                         android:textSize="@dimen/main_text_default"/>
                 </RelativeLayout>
@@ -357,6 +362,7 @@
                         android:inputType="number"
                         android:padding="5dip"
                         android:singleLine="true"
+                        android:textColor="#333"
                         android:textColorHint="@color/txt_gray"
                         android:textSize="@dimen/main_text_default"/>
                 </RelativeLayout>

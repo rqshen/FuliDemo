@@ -489,7 +489,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 			//加载数据失败
 			if (loadingError) ToastUtil.alert(ctx, "获取用户数据失败，请刷新重试");
 				//获取用户数据过程中
-			else ToastUtil.alert(ctx, "正在获取用户数据");
+			else ToastUtil.alert(ctx, "您的网络不稳定，加载中");
 			return true;
 		}
 		return false;

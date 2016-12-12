@@ -78,7 +78,6 @@ public class A_Email_Check extends Activity_Base {
 		ButterKnife.bind(this);
 		setLeftTitleVisible(true);
 		setTitleValue("非签约IT精英贷");
-		setLeftTitleVisible(false);
 		//获取保存的email
 		String email = getSharedPreferences("email", Context.MODE_PRIVATE).getString("email", "");
 		if (!TextUtils.isEmpty(email)) {

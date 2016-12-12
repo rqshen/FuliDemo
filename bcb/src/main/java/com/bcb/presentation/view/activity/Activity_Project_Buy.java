@@ -491,6 +491,7 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 		try {
 			requestObj.put("Amount", inputMoney + "");
 			requestObj.put("ClaimConveyId", packageId);
+			requestObj.put("PackageToken", PackageToken);
 			LogUtil.i("bqt", "买债权标请求参数：" + requestObj.toString());
 		} catch (JSONException e) {
 			e.printStackTrace();

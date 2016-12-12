@@ -3,7 +3,7 @@
           xmlns:tools="http://schemas.android.com/tools"
           package="com.bcb"
           android:versionCode="54"
-          android:versionName="2.0.4">
+          android:versionName="2.1.0">
 
     <uses-sdk
         android:minSdkVersion="14"
