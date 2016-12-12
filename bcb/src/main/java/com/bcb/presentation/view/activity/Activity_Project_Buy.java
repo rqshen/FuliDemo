@@ -211,7 +211,10 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 	int number = 0;
 
 	//获取优惠券张数
+
+
 	private void getCouponCount() {
+		if (CouponType==0)  return;//********************转让标和正常标，CouponType>0才去请求我的赠券，跟之前正常标一样。
 		JSONObject obj = new JSONObject();
 		try {
 			obj.put("PageNow", 1);
@@ -492,6 +495,7 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 			requestObj.put("Amount", inputMoney + "");
 			requestObj.put("ClaimConveyId", packageId);
 			requestObj.put("PackageToken", PackageToken);
+			requestObj.put("CouponId", CouponId);
 			LogUtil.i("bqt", "买债权标请求参数：" + requestObj.toString());
 		} catch (JSONException e) {
 			e.printStackTrace();
