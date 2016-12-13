@@ -206,27 +206,26 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 			getCouponCount();
 			getUserBanlance();
 		}
-		if (auto) layout_coupon.setVisibility(View.GONE);
+//		if (auto) layout_coupon.setVisibility(View.GONE);
 	}
 
 	int number = 0;
 
 	//获取优惠券张数
-
-
 	private void getCouponCount() {
-		if (CouponType==0)  return;//********************转让标和正常标，CouponType>0才去请求我的赠券，跟之前正常标一样。
+		LogUtil.i("bqt", "【优惠券的类型】CouponType=" +CouponType);
+		//if (CouponType==0)  return;//********************转让标和正常标，CouponType>0才去请求我的赠券，跟之前正常标一样。
 		JSONObject obj = new JSONObject();
 		try {
 			obj.put("PageNow", 1);
 			obj.put("PageSize", 10);
 			obj.put("Status", 1);
 			//优先检查是否体验券(包括可能填错了，填了优惠券和体验券都有)
-			if ((CouponType & 1) == 1) {
-				obj.put("CouponType", 1);
-			} else {
-				obj.put("CouponType", CouponType);
-			}
+//			if ((CouponType & 1) == 1) {
+//				obj.put("CouponType", 1);
+//			} else {
+//				obj.put("CouponType", CouponType);
+//			}
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
