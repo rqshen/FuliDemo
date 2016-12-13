@@ -344,12 +344,12 @@
         "source": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.bigkoo\\alertview\\1.0.2\\res\\layout\\layout_alertview.xml"
     },
     {
-        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\layout\\activity_login.xml",
-        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\layout\\activity_login.xml"
-    },
-    {
         "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\layout\\notification_media_cancel_action.xml",
         "source": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\layout\\notification_media_cancel_action.xml"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\layout\\activity_login.xml",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\layout\\activity_login.xml"
     },
     {
         "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\layout\\activity_trading_record.xml",

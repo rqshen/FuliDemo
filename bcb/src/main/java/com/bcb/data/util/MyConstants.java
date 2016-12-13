@@ -12,7 +12,7 @@ public class MyConstants {
 	public static final String HOST_DEV_Static = "http://ttwap.100cb.cn";//测试
 	public static final String HOST_RELEASE_Static = "http://wap.fulijr.com";//正式
 
-	public static int TESTMODE = 2;// 0为本地，1为线下，2为正式
+	public static int TESTMODE = 1;// 0为本地，1为线下，2为正式
 
 	public static String getHost() {
 		switch (TESTMODE) {

@@ -185,6 +185,9 @@ public class UrlsOne {
 	//是否升级
 	public static final String VERSION = host_v2 + "/api/v1.0/a560012e859f";//获取版本号
 
+	//最后登陆
+	public static final String LAST_LOGIN = host_v2 + "/api/v2.0/a6d800aa41cc";//获取版本号
+
 	//参加每日福利
 	public static final String JoinDailyWelfare = host + "/api/v1.3.4/a60100aabccb";
 	//每日福利统计的数据

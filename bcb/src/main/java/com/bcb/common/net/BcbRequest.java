@@ -14,6 +14,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.bcb.common.app.App;
 import com.bcb.data.util.DESUtil;
+import com.bcb.data.util.IpUtils;
 import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MyConstants;
 
@@ -202,6 +203,7 @@ public abstract class BcbRequest<T> extends Request<T> {
             e.printStackTrace();
         }
         headers.put("platform", "2");
+        headers.put("ip", IpUtils.getIpAddressString());
         return headers;
 //        if (mEncodeToken != null) {
 //            Map<String, String> headers = new HashMap<String, String>();

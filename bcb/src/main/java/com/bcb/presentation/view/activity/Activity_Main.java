@@ -35,8 +35,10 @@ import com.bcb.common.net.BcbRequestTag;
 import com.bcb.common.net.UrlsOne;
 import com.bcb.data.bean.transaction.VersionBean;
 import com.bcb.data.util.DownloadUtils;
+import com.bcb.data.util.IpUtils;
 import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.PackageUtil;
+import com.bcb.data.util.TokenUtil;
 import com.bcb.data.util.UmengUtil;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
 import com.bcb.presentation.view.custom.CustomViewPager;
@@ -79,6 +81,7 @@ public class Activity_Main extends Activity_Base_Fragment {
 		App.instance.activity_main = this;
 		setContentView(R.layout.activity_main);
 		requestVersion();
+		requestLocation();
 		content = (CustomViewPager) findViewById(R.id.content);
 		//注册广播
 		registerBroadcast();
@@ -89,6 +92,22 @@ public class Activity_Main extends Activity_Base_Fragment {
 		if (!App.saveUserInfo.getGesturePassword().isEmpty() && App.saveUserInfo.getAccess_Token() != null) {
 			Activity_Gesture_Lock.launche(Activity_Main.this, false, true);
 		}
+	}
+
+	//记录最后登录的位置
+	private void requestLocation() {
+		BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.LAST_LOGIN, null, TokenUtil.getEncodeToken(this), new BcbRequest
+				.BcbCallBack<JSONObject>() {
+			@Override
+			public void onResponse(JSONObject response) {
+			}
+
+			@Override
+			public void onErrorResponse(Exception error) {
+			}
+		});
+		App.getInstance().getRequestQueue().add(jsonRequest);
+		LogUtil.i("bqt", "【ip】" + IpUtils.getIpAddressString());
 	}
 
 	//********************************************************************强制升级*******************************************************************

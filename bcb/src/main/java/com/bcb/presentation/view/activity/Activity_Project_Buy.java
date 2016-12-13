@@ -129,6 +129,7 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 			auto = getIntent().getBooleanExtra("auto", false);
 		}
 		setBaseContentView(R.layout.activity_project_buy);
+
 		setLeftTitleVisible(true);
 		setTitleValue(title);
 		setupView();//初始化页面
