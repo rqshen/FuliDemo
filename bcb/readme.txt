@@ -16,3 +16,7 @@
 三、遗留问题
 1极光推送与美洽客服在bug收集后台有不少崩溃bug，如有更新需要尽快升级SDK，只需要修改gradle。
 美洽SDK：https://github.com/Meiqia/MeiqiaSDK-Android
+
+
+ftr_update/dxs
+统一用ftr_功能点开头，写错绩效－分
