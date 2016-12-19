@@ -275,14 +275,24 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 		} else {
 			//总资产
 			value_earn.setText("0.00");
+
+
+
+
+
+
+
 			//账户余额
 			value_balance.setText("0.00");
 			//待收本息
+
 			value_back.setText("0.00");
 			//冻结金额
 			value_total.setText("0.00");
 		}
+
 	}
+
 
 	//加载用户加入公司的信息
 	private void setupJoinCompanyMessage() {
