@@ -15,6 +15,7 @@ import com.bcb.common.net.UrlsOne;
 import com.bcb.data.bean.UserDetailInfo;
 import com.bcb.data.bean.UserWallet;
 import com.bcb.data.bean.WelfareBean;
+import com.bcb.data.bean.transaction.VersionBean;
 import com.bcb.data.util.DbUtil;
 import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MapUtil;
@@ -43,6 +44,8 @@ public class App extends Application implements AMapLocationListener {
 	public static final String TAG = "App";
 	public static SaveUserInfoUtils saveUserInfo;
 	public static SaveConfigUtil saveConfigUtil;
+	public static boolean isNeedUpdate;
+	public static VersionBean versionBean;
 	public static Gson mGson;
 	public static App instance;
 	//存放银行卡信息

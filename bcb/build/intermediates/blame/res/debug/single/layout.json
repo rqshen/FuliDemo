@@ -576,6 +576,10 @@
         "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\layout\\activity_city.xml"
     },
     {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\layout\\dialog_update.xml",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\layout\\dialog_update.xml"
+    },
+    {
         "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\layout\\mq_item_msg_evaluate.xml",
         "source": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.meiqia\\meiqiasdk\\3.2.4\\res\\layout\\mq_item_msg_evaluate.xml"
     },

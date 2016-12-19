@@ -1,6 +1,7 @@
 package com.bcb.presentation.view.fragment;
 
 import android.annotation.SuppressLint;
+import android.app.DownloadManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -8,6 +9,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +33,7 @@ import com.bcb.common.net.UrlsTwo;
 import com.bcb.data.bean.UserBankCard;
 import com.bcb.data.bean.UserDetailInfo;
 import com.bcb.data.bean.UserWallet;
+import com.bcb.data.util.DownloadUtils;
 import com.bcb.data.util.HttpUtils;
 import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MQCustomerManager;
@@ -53,17 +56,24 @@ import com.bcb.presentation.view.activity.Activity_TuoGuan_HF;
 import com.bcb.presentation.view.activity.Activity_WebView;
 import com.bcb.presentation.view.activity.Activity_Withdraw;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
+import com.bcb.presentation.view.custom.AlertView.UpdateDialog;
 import com.bcb.presentation.view.custom.CustomDialog.DialogWidget;
 import com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout;
 import com.bcb.presentation.view.custom.PullableView.PullableScrollView;
 
 import org.json.JSONObject;
 
+import java.io.File;
+import java.util.List;
+
 import de.greenrobot.event.EventBus;
 
 public class Frag_User extends Frag_Base implements OnClickListener {
 	//标题
 	private TextView title_text;
+	ImageView layout_update_line;
+	RelativeLayout layout_update;
+	TextView tv_update;
 
 	private Context ctx;
 	private TextView value_earn, value_balance, value_back, value_total;
@@ -114,8 +124,10 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		this.ctx = view.getContext();
-		EventBus.getDefault().register(this);
-		requestQueue = App.getInstance().getRequestQueue();
+		EventBus.getDefault()
+				.register(this);
+		requestQueue = App.getInstance()
+				.getRequestQueue();
 		//注册监听器
 		receiver = new Receiver();
 		ctx.registerReceiver(receiver, new IntentFilter("com.bcb.update.company.joined"));
@@ -125,7 +137,19 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 		title_text = (TextView) view.findViewById(R.id.title_text);
 		title_text.setText("我");
 
-		view.findViewById(R.id.ll_test).setOnClickListener(this);
+		tv_update=(TextView)  view.findViewById(R.id.tv_update);
+		layout_update=(RelativeLayout) view.findViewById(R.id.layout_update);
+		layout_update_line= (ImageView) view.findViewById(R.id.layout_update_line);
+		if (App.isNeedUpdate&&App.versionBean!=null) {
+			tv_update.setText("发现新版本 V"+App.versionBean.Version);
+			layout_update.setOnClickListener(this);
+		}else {
+			layout_update.setVisibility(View.GONE);
+			layout_update_line.setVisibility(View.GONE);
+		}
+
+		view.findViewById(R.id.ll_test)
+				.setOnClickListener(this);
 		//加入公司
 		joinCompany = (ImageView) view.findViewById(R.id.join_company);
 		layout_scrollview = (PullableScrollView) view.findViewById(R.id.layout_scrollview);
@@ -148,26 +172,37 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 		// 冻结金额
 		value_total = (TextView) view.findViewById(R.id.value_total);
 		//叹号
-		view.findViewById(R.id.freeze_amount_image).setOnClickListener(this);
+		view.findViewById(R.id.freeze_amount_image)
+				.setOnClickListener(this);
 		//充值
-		view.findViewById(R.id.recharge_btn).setOnClickListener(this);
+		view.findViewById(R.id.recharge_btn)
+				.setOnClickListener(this);
 		//提现
-		view.findViewById(R.id.withdraw_btn).setOnClickListener(this);
+		view.findViewById(R.id.withdraw_btn)
+				.setOnClickListener(this);
 		//投资记录
-		view.findViewById(R.id.trading_record).setOnClickListener(this);
+		view.findViewById(R.id.trading_record)
+				.setOnClickListener(this);
 		//资金流水
-		view.findViewById(R.id.money_flow_water).setOnClickListener(this);
+		view.findViewById(R.id.money_flow_water)
+				.setOnClickListener(this);
 		//借款
-		view.findViewById(R.id.borrow_money).setOnClickListener(this);
+		view.findViewById(R.id.borrow_money)
+				.setOnClickListener(this);
 		//优惠券
-		view.findViewById(R.id.coupons).setOnClickListener(this);
+		view.findViewById(R.id.coupons)
+				.setOnClickListener(this);
 		//特权本金
-		view.findViewById(R.id.privilege_money).setOnClickListener(this);
+		view.findViewById(R.id.privilege_money)
+				.setOnClickListener(this);
 		//胜利包
-		view.findViewById(R.id.managed_slb).setOnClickListener(this);
-		view.findViewById(R.id.managed_funds).setOnClickListener(this);
+		view.findViewById(R.id.managed_slb)
+				.setOnClickListener(this);
+		view.findViewById(R.id.managed_funds)
+				.setOnClickListener(this);
 		//账号设置
-		view.findViewById(R.id.layout_account_settting).setOnClickListener(this);
+		view.findViewById(R.id.layout_account_settting)
+				.setOnClickListener(this);
 		//专属客服
 		layout_customer_service = (RelativeLayout) view.findViewById(R.id.layout_customer_service);
 		layout_customer_service.setOnClickListener(new OnClickListener() {
@@ -180,7 +215,8 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 				if (App.mUserDetailInfo != null) {
 					userId = App.mUserDetailInfo.getCustomerId();
 				}
-				MQCustomerManager.getInstance(ctx).showCustomer(userId);
+				MQCustomerManager.getInstance(ctx)
+						.showCustomer(userId);
 			}
 		});
 		//        //专属客服提示
@@ -276,12 +312,6 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 			//总资产
 			value_earn.setText("0.00");
 
-
-
-
-
-
-
 			//账户余额
 			value_balance.setText("0.00");
 			//待收本息
@@ -292,7 +322,6 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 		}
 
 	}
-
 
 	//加载用户加入公司的信息
 	private void setupJoinCompanyMessage() {
@@ -329,11 +358,84 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 	}
 
 	//******************************************************************************************
+	DownloadCompleteReceiver downloadCompleteReceiver;
+	String fileName;
+	File apkFile;
+
+	private void showVersionDialog2() {
+		UpdateDialog updateDialog = new UpdateDialog(ctx) {
+			@Override
+			public void onClick() {
+				super.onClick();
+				registerReceiver();
+				dismiss();
+			}
+		};
+		updateDialog.setValues(View.VISIBLE, false, getTips());
+		updateDialog.show();
+	}
+
+	public String getTips() {
+		StringBuilder sb = new StringBuilder("");
+		List<String> tips = App.versionBean.Tips;
+		if (tips != null && tips.size() > 0) {
+			for (int i = 0; i < tips.size(); i++) {
+				sb.append("    " + (i + 1) + "、" + tips.get(i) + "\n");
+			}
+		}
+		return sb.deleteCharAt(sb.length() - 1)
+				.toString();
+	}
+
+	private void registerReceiver() {
+		Toast.makeText(ctx, "正在下载新版本安装包", Toast.LENGTH_SHORT)
+				.show();
+		downloadCompleteReceiver = new DownloadCompleteReceiver();
+		IntentFilter intentFilter = new IntentFilter();
+		intentFilter.addAction(DownloadManager.ACTION_DOWNLOAD_COMPLETE);//下载完成的动作
+		ctx.registerReceiver(downloadCompleteReceiver, intentFilter);
+		fileName = "fljr-" + App.versionBean.Increment + ".apk";
+		apkFile = new File(Environment.getExternalStorageDirectory()
+				.getPath() + DownloadUtils.FILE_PATH + File.separator + fileName);
+		DownloadUtils.downLoadFile(ctx, App.versionBean.Url, fileName);//开始下载
+	}
+
+	class DownloadCompleteReceiver extends BroadcastReceiver {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			if (intent.getAction()
+					.equals(DownloadManager.ACTION_DOWNLOAD_COMPLETE)) {
+				LogUtil.i("bqt", "下载完毕");
+				installApk(context);
+				if (downloadCompleteReceiver != null) {
+					ctx.unregisterReceiver(downloadCompleteReceiver);
+					downloadCompleteReceiver = null;
+				}
+			}
+		}
+	}
+
+	private void installApk(Context context) {
+		Intent mIntent = new Intent(Intent.ACTION_VIEW);
+		mIntent.setDataAndType(Uri.fromFile(apkFile), "application/vnd.android.package-archive");
+		mIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		context.startActivity(mIntent);
+	}
+
+	//******************************************************************************************
 	//点击事件
 	@Override
 	public void onClick(View v) {
 		if (v.getId() == R.id.ll_test) {
-//			A_Email_Check.launche(ctx);
+
+			UpdateDialog updateDialog = new UpdateDialog(ctx);
+			updateDialog.setValues(View.INVISIBLE, false, "好好后拉低好后低好后拉低好后拉低后拉低了\n咖啡拉夫看来");
+
+			updateDialog.show();
+			return;
+		}
+		if (v.getId() == R.id.layout_update) {
+			showVersionDialog2();
 			return;
 		}
 		//除了专属客服和电话客服之外的职位都要在点击之前登陆
@@ -347,10 +449,10 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 				UmengUtil.eventById(ctx, R.string.self_auth_c);
 				toJoinCompany();
 				break;
-
 			//冻结金额提示
 			case R.id.freeze_amount_image:
-				Toast.makeText(ctx, "投资未计息本金、借款保证金等", Toast.LENGTH_SHORT).show();
+				Toast.makeText(ctx, "投资未计息本金、借款保证金等", Toast.LENGTH_SHORT)
+						.show();
 				break;
 
 			//点击充值按钮
@@ -539,14 +641,17 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			//加入公司
-			if (intent.getAction().equals("com.bcb.update.company.joined")) {
+			if (intent.getAction()
+					.equals("com.bcb.update.company.joined")) {
 				setupJoinCompanyMessage();
 			}
 			//登陆成功
-			else if (intent.getAction().equals("com.bcb.login.success")) {
+			else if (intent.getAction()
+					.equals("com.bcb.login.success")) {
 				refreshLayout.autoRefresh();
 			}        //注销成功
-			else if (intent.getAction().equals("com.bcb.logout.success")) {
+			else if (intent.getAction()
+					.equals("com.bcb.logout.success")) {
 				LogUtil.i("bqt", "【Receiver】【onReceive】注销");
 				joinCompany.setVisibility(View.VISIBLE);
 				user_company_layout.setVisibility(View.GONE);
@@ -559,7 +664,8 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 	public void onDestroy() {
 		super.onDestroy();
 		ctx.unregisterReceiver(receiver);
-		EventBus.getDefault().unregister(this);
+		EventBus.getDefault()
+				.unregister(this);
 	}
 
 	//提示对话框
@@ -615,28 +721,28 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 	private void requestUserWallet() {
 		BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.UserWalletMessage, null, TokenUtil.getEncodeToken(ctx), new
 				BcbRequest.BcbCallBack<JSONObject>() {
-			@Override
-			public void onResponse(JSONObject response) {
-				LogUtil.i("bqt", "请求用户资产账户返回：" + response.toString());
-				if (PackageUtil.getRequestStatus(response, ctx)) {
-					JSONObject data = PackageUtil.getResultObject(response);
-					if (data != null) {
-						//注意数据结构变了，2016-7-26
-						mUserWallet = App.mGson.fromJson(data.toString(), UserWallet.class);
-						App.mUserWallet = mUserWallet;
-						showData();
+					@Override
+					public void onResponse(JSONObject response) {
+						LogUtil.i("bqt", "请求用户资产账户返回：" + response.toString());
+						if (PackageUtil.getRequestStatus(response, ctx)) {
+							JSONObject data = PackageUtil.getResultObject(response);
+							if (data != null) {
+								//注意数据结构变了，2016-7-26
+								mUserWallet = App.mGson.fromJson(data.toString(), UserWallet.class);
+								App.mUserWallet = mUserWallet;
+								showData();
+							}
+						}
+						refreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
 					}
-				}
-				refreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
-			}
 
-			@Override
-			public void onErrorResponse(Exception error) {
-				ToastUtil.alert(ctx, "网络异常，请稍后重试");
-				refreshLayout.refreshFinish(PullToRefreshLayout.FAIL);
-				loadingError = true;
-			}
-		});
+					@Override
+					public void onErrorResponse(Exception error) {
+						ToastUtil.alert(ctx, "网络异常，请稍后重试");
+						refreshLayout.refreshFinish(PullToRefreshLayout.FAIL);
+						loadingError = true;
+					}
+				});
 		jsonRequest.setTag(BcbRequestTag.UserWalletMessageTag);
 		requestQueue.add(jsonRequest);
 	}
@@ -700,7 +806,8 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 						LogUtil.d("bqt", "【Activity_Open_Account】【OpenAccount】" + e.getMessage());
 					}
 				} else if (response != null) {
-					Toast.makeText(ctx, response.optString("message"), Toast.LENGTH_SHORT).show();
+					Toast.makeText(ctx, response.optString("message"), Toast.LENGTH_SHORT)
+							.show();
 				}
 			}
 
@@ -709,7 +816,9 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 				LogUtil.d("bqt", "【Activity_Charge_HF】【BandCard】网络异常，请稍后重试" + error.toString());
 			}
 		});
-		App.getInstance().getRequestQueue().add(jsonRequest);
+		App.getInstance()
+				.getRequestQueue()
+				.add(jsonRequest);
 	}
 
 	//***************************************************************************************************************************************

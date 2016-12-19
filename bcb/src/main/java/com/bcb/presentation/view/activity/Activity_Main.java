@@ -41,6 +41,7 @@ import com.bcb.data.util.PackageUtil;
 import com.bcb.data.util.TokenUtil;
 import com.bcb.data.util.UmengUtil;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
+import com.bcb.presentation.view.custom.AlertView.UpdateDialog;
 import com.bcb.presentation.view.custom.CustomViewPager;
 import com.bcb.presentation.view.fragment.Frag_Main;
 import com.bcb.presentation.view.fragment.Frag_Product;
@@ -87,9 +88,11 @@ public class Activity_Main extends Activity_Base_Fragment {
 		registerBroadcast();
 		init();
 		UmengUtil.update(Activity_Main.this);
-		EventBus.getDefault().register(this);
+		EventBus.getDefault()
+				.register(this);
 
-		if (!App.saveUserInfo.getGesturePassword().isEmpty() && App.saveUserInfo.getAccess_Token() != null) {
+		if (!App.saveUserInfo.getGesturePassword()
+				.isEmpty() && App.saveUserInfo.getAccess_Token() != null) {
 			Activity_Gesture_Lock.launche(Activity_Main.this, false, true);
 		}
 	}
@@ -106,7 +109,9 @@ public class Activity_Main extends Activity_Base_Fragment {
 			public void onErrorResponse(Exception error) {
 			}
 		});
-		App.getInstance().getRequestQueue().add(jsonRequest);
+		App.getInstance()
+				.getRequestQueue()
+				.add(jsonRequest);
 		LogUtil.i("bqt", "【ip】" + IpUtils.getIpAddressString());
 	}
 
@@ -125,11 +130,16 @@ public class Activity_Main extends Activity_Base_Fragment {
 				if (data != null) {
 					versionBean = App.mGson.fromJson(data.toString(), VersionBean.class);
 					//判断版本号！
-					if (versionBean != null && versionBean.Force && versionBean.Increment > getVersionCode(Activity_Main.this)) {
-						fileName = "fljr-" + versionBean.Increment + ".apk";
-						apkFile = new File(Environment.getExternalStorageDirectory().getPath() + DownloadUtils.FILE_PATH //
-								+ File.separator + fileName);
-						showVersionDialog();
+					if (versionBean != null && versionBean.Increment > getVersionCode(Activity_Main.this)) {
+						App.versionBean=versionBean;
+						if (versionBean.Force) {//强制升级
+							fileName = "fljr-v" + versionBean.Increment + ".apk";
+							apkFile = new File(Environment.getExternalStorageDirectory()
+									.getPath() + DownloadUtils.FILE_PATH + File.separator + fileName);
+							showVersionDialog2();
+						} else {//非强制升级
+							App.isNeedUpdate = true;
+						}
 					}
 				}
 			}
@@ -140,7 +150,36 @@ public class Activity_Main extends Activity_Base_Fragment {
 			}
 		});
 		jsonRequest.setTag(BcbRequestTag.UserWalletMessageTag);
-		App.getInstance().getRequestQueue().add(jsonRequest);
+		App.getInstance()
+				.getRequestQueue()
+				.add(jsonRequest);
+	}
+
+	private void showVersionDialog2() {
+		UpdateDialog updateDialog = new UpdateDialog(this) {
+			@Override
+			public void onClick() {
+				super.onClick();
+				boolean hasDoloaded = getSharedPreferences("version", 0).getBoolean(fileName, false);
+				if (hasDoloaded) {//已下载完毕
+					if (apkFile == null || !apkFile.exists()) {
+						SharedPreferences.Editor editor = getSharedPreferences("version", 0).edit();
+						editor.clear();
+						editor.commit();
+						registerReceiver();//被删了，重新下载
+					} else installApk(Activity_Main.this);//否则，安装
+				} else if (getIsFinishedWhenDownloading()) {//上次在下载过程中退出了，下次进入应用时重新下载
+					registerReceiver();//重新下载
+				} else if (apkFile != null && apkFile.exists()) {//正在下载
+					Toast.makeText(Activity_Main.this, "正在下载，请稍后", Toast.LENGTH_SHORT)
+							.show();
+				} else {//没下载过
+					registerReceiver();
+				}
+			}
+		};
+		updateDialog.setValues(View.INVISIBLE, false, getTips());
+		updateDialog.show();
 	}
 
 	private void showVersionDialog() {
@@ -169,7 +208,8 @@ public class Activity_Main extends Activity_Base_Fragment {
 						} else if (getIsFinishedWhenDownloading()) {//上次在下载过程中退出了，下次进入应用时重新下载
 							registerReceiver();//重新下载
 						} else if (apkFile != null && apkFile.exists()) {//正在下载
-							Toast.makeText(Activity_Main.this, "正在下载，请稍后", Toast.LENGTH_SHORT).show();
+							Toast.makeText(Activity_Main.this, "正在下载，请稍后", Toast.LENGTH_SHORT)
+									.show();
 						} else {//没下载过
 							registerReceiver();
 						}
@@ -185,7 +225,8 @@ public class Activity_Main extends Activity_Base_Fragment {
 	}
 
 	private void registerReceiver() {
-		Toast.makeText(Activity_Main.this, "正在下载新版本安装包", Toast.LENGTH_SHORT).show();
+		Toast.makeText(Activity_Main.this, "正在下载新版本安装包", Toast.LENGTH_SHORT)
+				.show();
 		downloadCompleteReceiver = new DownloadCompleteReceiver();
 		IntentFilter intentFilter = new IntentFilter();
 		intentFilter.addAction(DownloadManager.ACTION_DOWNLOAD_COMPLETE);//下载完成的动作
@@ -213,17 +254,19 @@ public class Activity_Main extends Activity_Base_Fragment {
 		StringBuilder sb = new StringBuilder("\n");
 		List<String> tips = versionBean.Tips;
 		if (tips != null && tips.size() > 0) {
-			for (int i = 0 ; i < tips.size() ; i++) {
+			for (int i = 0; i < tips.size(); i++) {
 				sb.append("    " + (i + 1) + "、" + tips.get(i) + "\n");
 			}
 		}
-		return sb.deleteCharAt(sb.length() - 1).toString();
+		return sb.deleteCharAt(sb.length() - 1)
+				.toString();
 	}
 
-	class DownloadCompleteReceiver extends BroadcastReceiver {
+	 class DownloadCompleteReceiver extends BroadcastReceiver {
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			if (intent.getAction().equals(DownloadManager.ACTION_DOWNLOAD_COMPLETE)) {
+			if (intent.getAction()
+					.equals(DownloadManager.ACTION_DOWNLOAD_COMPLETE)) {
 				LogUtil.i("bqt", "下载完毕" + apkFile.getPath());
 				SharedPreferences.Editor editor = getSharedPreferences("version", 0).edit();
 				editor.putBoolean(fileName, true);
@@ -247,7 +290,8 @@ public class Activity_Main extends Activity_Base_Fragment {
 	//获取VersionCode
 	private int getVersionCode(Context context) {
 		try {
-			PackageInfo packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
+			PackageInfo packageInfo = context.getPackageManager()
+					.getPackageInfo(context.getPackageName(), 0);
 			return packageInfo.versionCode;
 		} catch (PackageManager.NameNotFoundException e) {
 			e.printStackTrace();
@@ -344,9 +388,11 @@ public class Activity_Main extends Activity_Base_Fragment {
 
 	class Receiver extends BroadcastReceiver {
 		public void onReceive(Context context, Intent intent) {
-			if (intent.getAction().equals("com.bcb.update.mainui")) {
+			if (intent.getAction()
+					.equals("com.bcb.update.mainui")) {
 				setFragMain();
-			} else if (intent.getAction().equals("com.bcb.product.regular")) {
+			} else if (intent.getAction()
+					.equals("com.bcb.product.regular")) {
 				setFragProduct();
 			}
 		}
@@ -363,7 +409,8 @@ public class Activity_Main extends Activity_Base_Fragment {
 			}
 		} catch (Exception e) {
 		}
-		EventBus.getDefault().unregister(this);
+		EventBus.getDefault()
+				.unregister(this);
 	}
 	
 	//接收事件
