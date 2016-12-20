@@ -77,9 +77,12 @@
                             android:textSize="14sp"/>
 
                         <ImageView
-                            style="@style/forward_default"
+                            android:src="@drawable/forward_default"
                             android:layout_alignParentRight="true"
-                            android:padding="15dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="18dp"
                             android:layout_centerVertical="true"/>
                     </LinearLayout>
 
@@ -331,17 +334,21 @@
                         android:id="@+id/coupon_description"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="45dip"
+                        android:layout_marginRight="31dip"
                         android:gravity="right"
                         android:text="暂无可用券"
                         android:textColor="@color/txt_black"
                         android:textSize="@dimen/main_text_default"/>
                 </LinearLayout>
 
+
                 <ImageView
                     android:id="@+id/coupon_arrow"
-                    style="@style/forward_default"
+                    android:src="@drawable/forward_default"
                     android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="18dp"
                     android:layout_centerVertical="true"/>
             </RelativeLayout>
 

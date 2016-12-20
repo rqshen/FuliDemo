@@ -390,6 +390,8 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 		try {
 			requestObj.put("PackageToken", PackageToken);
 			requestObj.put("PackageId", packageId);
+			LogUtil.i("bqt", "【打包项目可投余额参数】"+PackageToken+"--"+packageId);
+
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
