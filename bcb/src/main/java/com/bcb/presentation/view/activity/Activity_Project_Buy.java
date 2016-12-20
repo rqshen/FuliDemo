@@ -50,11 +50,20 @@ import org.json.JSONObject;
 import java.text.DecimalFormat;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
+import static com.bcb.R.id.buy_all;
+
 /**
  * setTitleValue("买标"。setTitleValue("购买"。setTitleValue("立即购买"
  */
 public class Activity_Project_Buy extends Activity_Base implements View.OnClickListener, TextWatcher {
 
+	@BindView(R.id.more_value) TextView moreValue;
+	@BindView(buy_all) TextView buyAll;
+	@BindView(R.id.prospective_earning_yuan) TextView prospective_earning_yuan;
 	//标题
 	private String title;
 	//投资金额
@@ -99,17 +108,18 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 	//广播
 	private Receiver buySuccessReceiver;
 	private AlertView alertView;
-	private boolean auto = false;
+	private int type = 0;
+	private double amount;
 
 	//默认构造函数，用来传递普通标的数据
 	public static void launche2(Context ctx, String pid, String title, int CouponType, int countDate, SimpleProjectDetail
-			simpleProjectDetail, boolean auto) {
+			simpleProjectDetail, int type) {
 		Intent intent = new Intent(ctx, Activity_Project_Buy.class);
 		intent.putExtra("pid", pid);
 		intent.putExtra("title", title);
 		intent.putExtra("CouponType", CouponType);
 		intent.putExtra("countDate", countDate);
-		intent.putExtra("auto", auto);
+		intent.putExtra("type", type);
 		Bundle bundle = new Bundle();
 		bundle.putSerializable("SimpleProjectDetail", simpleProjectDetail);
 		intent.putExtras(bundle);
@@ -119,21 +129,28 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		MyActivityManager.getInstance().pushOneActivity(Activity_Project_Buy.this);
+		MyActivityManager.getInstance()
+				.pushOneActivity(Activity_Project_Buy.this);
 		if (getIntent() != null) {
-			packageId = this.getIntent().getStringExtra("pid");
-			title = this.getIntent().getStringExtra("title");
-			CouponType = this.getIntent().getIntExtra("CouponType", 0);
-			countDate = this.getIntent().getIntExtra("countDate", 0);
-			mSimpleProjectDetail = (SimpleProjectDetail) this.getIntent().getSerializableExtra("SimpleProjectDetail");
-			auto = getIntent().getBooleanExtra("auto", false);
+			packageId = this.getIntent()
+					.getStringExtra("pid");
+			title = this.getIntent()
+					.getStringExtra("title");
+			CouponType = this.getIntent()
+					.getIntExtra("CouponType", 0);
+			countDate = this.getIntent()
+					.getIntExtra("countDate", 0);
+			mSimpleProjectDetail = (SimpleProjectDetail) this.getIntent()
+					.getSerializableExtra("SimpleProjectDetail");
+			type = getIntent().getIntExtra("type", 0);
 		}
 		setBaseContentView(R.layout.activity_project_buy);
-
+		ButterKnife.bind(this);
 		setLeftTitleVisible(true);
 		setTitleValue(title);
 		setupView();//初始化页面
 		setupRegister();//注册广播
+		requestAmount();
 	}
 
 	//****************************************************************注册广播********************************************
@@ -150,16 +167,19 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 
 	//*************************************************************初始化页面 ************************************************
 	private void setupView() {
+		moreValue.setText(String.format("%.2f", mSimpleProjectDetail.Balance));
+		if (App.mUserWallet.BalanceAmount <= 0) buyAll.setEnabled(false);
 		PackageToken = mSimpleProjectDetail.PackageToken;
 		//投资金额
 		invest_money = (EditText) findViewById(R.id.invest_money);
 
 		//设置光标的位置，添加输入监听器
 		invest_money.addTextChangedListener(this);
-		invest_money.setSelection(invest_money.getText().length());
+		invest_money.setSelection(invest_money.getText()
+				.length());
 
 		//债券标，且可投金额含小数时，可输入小数。判断是否含小数部分【a % 1 != 0】或【a - (int) a != 0】
-		if (auto && mSimpleProjectDetail.Balance % 1 != 0) {
+		if ((type == 1 || type == 2) && mSimpleProjectDetail.Balance % 1 != 0) {
 			invest_money.setHint(String.format("%.2f", mSimpleProjectDetail.StartingAmount) + "元起投");
 			invest_money.setKeyListener(DigitsKeyListener.getInstance("0123456789."));
 		} else {//否则不可输入小数
@@ -194,7 +214,7 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 		error_tips = (TextView) findViewById(R.id.error_tips);
 		error_tips.setVisibility(View.GONE);
 		//债权标，剩余金额小于起投金额
-		if (auto && mSimpleProjectDetail.Balance < mSimpleProjectDetail.StartingAmount) {
+		if ((type == 1 || type == 2) && mSimpleProjectDetail.Balance < mSimpleProjectDetail.StartingAmount) {
 			invest_money.setText(mSimpleProjectDetail.StartingAmount + "");
 			invest_money.setEnabled(false);
 			invest_money.setKeyListener(null);
@@ -206,14 +226,13 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 			getCouponCount();
 			getUserBanlance();
 		}
-//		if (auto) layout_coupon.setVisibility(View.GONE);
 	}
 
 	int number = 0;
 
 	//获取优惠券张数
 	private void getCouponCount() {
-		LogUtil.i("bqt", "【优惠券的类型】CouponType=" +CouponType);
+		LogUtil.i("bqt", "【优惠券的类型】CouponType=" + CouponType);
 		//if (CouponType==0)  return;//********************转让标和正常标，CouponType>0才去请求我的赠券，跟之前正常标一样。
 		JSONObject obj = new JSONObject();
 		try {
@@ -244,8 +263,9 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 							//******************************************************************************************
 							List<CouponRecordsBean> Records = App.mGson.fromJson(obj.toString(), CouponListBean.class).Records;
 							number = 0;
-							for (int i = 0 ; i < Records.size() ; i++) {
-								if (Records.get(i).getCouponType() == 2) number++;
+							for (int i = 0; i < Records.size(); i++) {
+								if (Records.get(i)
+										.getCouponType() == 2) number++;
 							}
 							//******************************************************************************************
 							ShowCouponCount(number + "");
@@ -263,7 +283,9 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 			}
 		});
 		jsonRequest.setTag(BcbRequestTag.BCB_SELECT_COUPON_REQUEST);
-		App.getInstance().getRequestQueue().add(jsonRequest);
+		App.getInstance()
+				.getRequestQueue()
+				.add(jsonRequest);
 	}
 
 	//************************************************* 显示优惠券张数*******************************************************
@@ -316,7 +338,9 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 			}
 		});
 		jsonRequest.setTag(BcbRequestTag.UserBankMessageTag);
-		App.getInstance().getRequestQueue().add(jsonRequest);
+		App.getInstance()
+				.getRequestQueue()
+				.add(jsonRequest);
 	}
 
 	//****************************************************** 获取用户余额 *****************************************
@@ -324,48 +348,85 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 		showProgressBar("正在获取用户余额...");
 		BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.UserWalletMessage, null, TokenUtil.getEncodeToken(this), new
 				BcbRequest.BcbCallBack<JSONObject>() {
+					@Override
+					public void onResponse(JSONObject response) {
+						hideProgressBar();
+						try {
+							int status = response.getInt("status");
+							if (PackageUtil.getRequestStatus(response, Activity_Project_Buy.this)) {
+								JSONObject data = PackageUtil.getResultObject(response);
+								//判断JSON对象是否为空
+								if (data != null) {
+									mUserWallet = App.mGson.fromJson(data.toString(), UserWallet.class);
+								}
+								if (null != mUserWallet) {
+									App.mUserWallet = mUserWallet;
+									wallet_money.setText(String.format("%.2f", App.mUserWallet.BalanceAmount) + "元");
+									button_buy.setText("立即申购");
+								}
+							} else if (status == -5) {
+								startActivity(new Intent(Activity_Project_Buy.this, Activity_Login.class));
+							}
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+
+					@Override
+					public void onErrorResponse(Exception error) {
+						hideProgressBar();
+					}
+				});
+		jsonRequest.setTag(BcbRequestTag.UserWalletMessageTag);
+		App.getInstance()
+				.getRequestQueue()
+				.add(jsonRequest);
+	}
+
+	//*********************************************************获取打包项目可投余额*******************************************
+	private void requestAmount() {
+		String encodeToken = TokenUtil.getEncodeToken(Activity_Project_Buy.this);
+		JSONObject requestObj = new JSONObject();
+		try {
+			requestObj.put("PackageToken", PackageToken);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsTwo.MONKEYPACKAGEBALANCE, requestObj, encodeToken, true, new BcbRequest
+				.BcbCallBack<JSONObject>() {
 			@Override
 			public void onResponse(JSONObject response) {
-				hideProgressBar();
-				try {
-					int status = response.getInt("status");
-					if (PackageUtil.getRequestStatus(response, Activity_Project_Buy.this)) {
-						JSONObject data = PackageUtil.getResultObject(response);
-						//判断JSON对象是否为空
-						if (data != null) {
-							mUserWallet = App.mGson.fromJson(data.toString(), UserWallet.class);
-						}
-						if (null != mUserWallet) {
-							App.mUserWallet = mUserWallet;
-							wallet_money.setText(String.format("%.2f", App.mUserWallet.BalanceAmount) + "元");
-							button_buy.setText("立即申购");
-						}
-					} else if (status == -5) {
-						startActivity(new Intent(Activity_Project_Buy.this, Activity_Login.class));
-					}
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+				LogUtil.i("bqt", "【获取打包项目可投余额】" + response.toString());
+				amount = response.optDouble("result");
+				moreValue.setText(String.format("%.2f", amount));
 			}
 
 			@Override
 			public void onErrorResponse(Exception error) {
-				hideProgressBar();
+				LogUtil.d("bqt", "【Activity_Project_Buy】【Buy】网络异常，请稍后重试" + error.toString());
+				Toast.makeText(Activity_Project_Buy.this, error.toString(), Toast.LENGTH_SHORT)
+						.show();
 			}
 		});
-		jsonRequest.setTag(BcbRequestTag.UserWalletMessageTag);
-		App.getInstance().getRequestQueue().add(jsonRequest);
+		App.getInstance()
+				.getRequestQueue()
+				.add(jsonRequest);
 	}
 
 	//*********************************************************** 点击购买按钮 ******************************************
 	float inputMoney;
 
 	private void clickButton() {
-		if (invest_money.getText().toString().startsWith(".")) {
-			Toast.makeText(Activity_Project_Buy.this, "格式不对", Toast.LENGTH_SHORT).show();
+		if (invest_money.getText()
+				.toString()
+				.startsWith(".")) {
+			Toast.makeText(Activity_Project_Buy.this, "格式不对", Toast.LENGTH_SHORT)
+					.show();
 		}
 		//输入金额
-		inputMoney = Float.parseFloat(invest_money.getText().toString().replace(",", ""));
+		inputMoney = Float.parseFloat(invest_money.getText()
+				.toString()
+				.replace(",", ""));
 		// 用户是否登录
 		if (App.saveUserInfo.getAccess_Token() == null) {
 			ToastUtil.alert(Activity_Project_Buy.this, "请先登录");
@@ -396,8 +457,11 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 		}
 
 		// 判断是否输入金额
-		String input_moneyStr = invest_money.getText().toString().replace(",", "");
-		if (null == input_moneyStr || input_moneyStr.trim().equals("")) {
+		String input_moneyStr = invest_money.getText()
+				.toString()
+				.replace(",", "");
+		if (null == input_moneyStr || input_moneyStr.trim()
+				.equals("")) {
 			error_tips.setVisibility(View.VISIBLE);
 			error_tips.setText("请输入投资金额");
 			return;
@@ -416,7 +480,9 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 
 		// 判断输入金额是否超出单笔限额
 		if (mSimpleProjectDetail.SingletonAmount > 0) {
-			if (Float.parseFloat(invest_money.getText().toString().replace(",", "")) > mSimpleProjectDetail.SingletonAmount) {
+			if (Float.parseFloat(invest_money.getText()
+					.toString()
+					.replace(",", "")) > mSimpleProjectDetail.SingletonAmount) {
 				error_tips.setVisibility(View.VISIBLE);
 				error_tips.setText("当前输入超出单笔限额" + (int) mSimpleProjectDetail.SingletonAmount + "元");
 				return;
@@ -436,17 +502,30 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 			return;
 		}
 		//判断输入金额是否大于可投金额
-		float moneyf = Float.valueOf(invest_money.getText().toString().replace(",", ""));
+		float moneyf = Float.valueOf(invest_money.getText()
+				.toString()
+				.replace(",", ""));
 		if (moneyf > mSimpleProjectDetail.Balance) {
 			error_tips.setVisibility(View.VISIBLE);
 			error_tips.setText("超出项目可投金额");
 			return;
 		}
-		//买标
 		if (CouponMinAmount != null && moneyf < Float.valueOf(CouponMinAmount)) altDialog2();
 		else {
-			if (auto) requestBuy2();
-			else requestBuy();
+			//买标
+			switch (type) {
+				case 0:
+					requestBuy();
+					break;
+				case 1:
+					requestBuy2(UrlsTwo.RRECLAIMCONVEY);
+					break;
+				case 2:
+					requestBuy2(UrlsTwo.BOOKINGMONKEYPACKAGE);
+					break;
+				default:
+					break;
+			}
 		}
 	}
 
@@ -486,21 +565,29 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 	}
 
 	//***************************************************************买债权标*******************************************
-	private void requestBuy2() {
-		String requestUrl = UrlsTwo.RRECLAIMCONVEY;
+	private void requestBuy2(String url) {
 		String encodeToken = TokenUtil.getEncodeToken(Activity_Project_Buy.this);
-		LogUtil.i("bqt", "买债权标请求路径：" + requestUrl);
+		LogUtil.i("bqt", "买债权标请求路径：" + url);
 		JSONObject requestObj = new JSONObject();
 		try {
 			requestObj.put("Amount", inputMoney + "");
-			requestObj.put("ClaimConveyId", packageId);
+			switch (type) {
+				case 1:
+					requestObj.put("ClaimConveyId", packageId);
+					break;
+				case 2:
+					requestObj.put("PackageId", packageId);
+					break;
+				default:
+					break;
+			}
 			requestObj.put("PackageToken", PackageToken);
 			requestObj.put("CouponId", CouponId);
 			LogUtil.i("bqt", "买债权标请求参数：" + requestObj.toString());
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		BcbJsonRequest jsonRequest = new BcbJsonRequest(requestUrl, requestObj, encodeToken, true, new BcbRequest
+		BcbJsonRequest jsonRequest = new BcbJsonRequest(url, requestObj, encodeToken, true, new BcbRequest
 				.BcbCallBack<JSONObject>() {
 			@Override
 			public void onResponse(JSONObject response) {
@@ -516,10 +603,13 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 			@Override
 			public void onErrorResponse(Exception error) {
 				LogUtil.d("bqt", "【Activity_Project_Buy】【Buy】网络异常，请稍后重试" + error.toString());
-				Toast.makeText(Activity_Project_Buy.this, error.toString(), Toast.LENGTH_SHORT).show();
+				Toast.makeText(Activity_Project_Buy.this, error.toString(), Toast.LENGTH_SHORT)
+						.show();
 			}
 		});
-		App.getInstance().getRequestQueue().add(jsonRequest);
+		App.getInstance()
+				.getRequestQueue()
+				.add(jsonRequest);
 	}
 
 	//***************************************************************买平常标****************************
@@ -557,16 +647,20 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 					} catch (Exception e) {
 						LogUtil.d("bqt", "【Activity_Project_Buy】【Buy】" + e.getMessage());
 					}
-				} else Toast.makeText(Activity_Project_Buy.this, response.optString("message"), Toast.LENGTH_SHORT).show();
+				} else Toast.makeText(Activity_Project_Buy.this, response.optString("message"), Toast.LENGTH_SHORT)
+						.show();
 			}
 
 			@Override
 			public void onErrorResponse(Exception error) {
 				LogUtil.d("bqt", "【Activity_Project_Buy】【Buy】网络异常，请稍后重试" + error.toString());
-				Toast.makeText(Activity_Project_Buy.this, error.toString(), Toast.LENGTH_SHORT).show();
+				Toast.makeText(Activity_Project_Buy.this, error.toString(), Toast.LENGTH_SHORT)
+						.show();
 			}
 		});
-		App.getInstance().getRequestQueue().add(jsonRequest);
+		App.getInstance()
+				.getRequestQueue()
+				.add(jsonRequest);
 	}
 
 	//***********************************************转圈提示**************************************
@@ -641,7 +735,9 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 	//**************************************************** 跳转到选择优惠券页面**********************************
 	private void startupActivity(int couponType) {
 		Intent newIntent = new Intent(Activity_Project_Buy.this, Activity_Select_Coupon.class);
-		String newInput = invest_money.getText().toString().replace(",", "");
+		String newInput = invest_money.getText()
+				.toString()
+				.replace(",", "");
 		float newInvestAmount = 0;
 		if (!TextUtils.isEmpty(newInput)) {
 			newInvestAmount = Float.parseFloat(newInput);
@@ -683,7 +779,8 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 				certDialog.dismiss();
 				certDialog = null;
 			}
-		}).getView();
+		})
+				.getView();
 	}
 
 	//返回优惠券选择结果
@@ -725,13 +822,24 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 		}
 	}
 
+	@OnClick(buy_all)
+	public void onClick() {
+		double all = Math.min(mSimpleProjectDetail.Balance, App.mUserWallet.BalanceAmount);
+		if (type==2) {
+			all=Math.min(all,amount);
+		}
+		invest_money.setText(String.format("%.2f", all));
+	}
+
 	//注册广播，买标成功之后，刷新余额
 	class Receiver extends BroadcastReceiver {
 		public void onReceive(Context context, Intent intent) {
 			//充值成功
-			if (intent.getAction().equals("com.bcb.money.change.success")) getUserBanlance();//加载用户余额
+			if (intent.getAction()
+					.equals("com.bcb.money.change.success")) getUserBanlance();//加载用户余额
 				//设置交易密码成功
-			else if (intent.getAction().equals("com.bcb.passwd.setted")) loadUserDetailInfoData(); //更新用户信息
+			else if (intent.getAction()
+					.equals("com.bcb.passwd.setted")) loadUserDetailInfoData(); //更新用户信息
 		}
 	}
 
@@ -763,7 +871,8 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 
 	@Override
 	public void onTextChanged(CharSequence s, int start, int before, int count) {
-		String input = invest_money.getText().toString();
+		String input = invest_money.getText()
+				.toString();
 		if (!TextUtils.isEmpty(input)) {
 			error_tips.setVisibility(View.GONE);
 			//计算收益，在优惠那一栏中显示返现
@@ -782,7 +891,10 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 
 	@Override
 	public void afterTextChanged(Editable s) {
-		String text = invest_money.getText().toString().replace(",", "").trim();
+		String text = invest_money.getText()
+				.toString()
+				.replace(",", "")
+				.trim();
 		float monery = 0;
 		if (!TextUtils.isEmpty(text)) monery = Float.valueOf(text);
 
@@ -809,7 +921,7 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 			//如果输入金额为0时，不显示
 			if (moneyinput == 0) {
 				earnings_description.setText("预期收益");
-				prospective_earning.setText("0元");
+				prospective_earning.setText("0.00");
 			} else {
 				// 年化基本收益
 				float shouyi = moneyinput * mSimpleProjectDetail.PreInterest / 10000;
@@ -834,8 +946,10 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 	private String rewardDescription(String description, float shouyi, float jiangliamount) {
 		String valueText = "";
 		if (jiangliamount < 0.01) {
-			valueText = MyTextUtil.delFloat(shouyi) + "元";
+			prospective_earning_yuan.setVisibility(View.VISIBLE);
+			valueText = MyTextUtil.delFloat(shouyi);
 		} else {
+			prospective_earning_yuan.setVisibility(View.GONE);
 			if (!TextUtils.isEmpty(description)) {
 				valueText = MyTextUtil.delFloat(shouyi + jiangliamount) + "元" +
 						"(含" + MyTextUtil.delFloat(jiangliamount) + "元" + "奖励)";

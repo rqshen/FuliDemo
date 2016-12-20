@@ -366,13 +366,13 @@ public final class R {
 		public static final int abc_textfield_search_activated_mtrl_alpha = 0x7f020042;
 		public static final int abc_textfield_search_default_mtrl_alpha = 0x7f020043;
 		public static final int abc_textfield_search_material = 0x7f020044;
-		public static final int bg_actionsheet_cancel = 0x7f02005f;
-		public static final int bg_actionsheet_header = 0x7f020060;
-		public static final int bg_alertbutton_bottom = 0x7f020061;
-		public static final int bg_alertbutton_left = 0x7f020062;
-		public static final int bg_alertbutton_none = 0x7f020063;
-		public static final int bg_alertbutton_right = 0x7f020064;
-		public static final int bg_alertview_alert = 0x7f020065;
+		public static final int bg_actionsheet_cancel = 0x7f020060;
+		public static final int bg_actionsheet_header = 0x7f020061;
+		public static final int bg_alertbutton_bottom = 0x7f020062;
+		public static final int bg_alertbutton_left = 0x7f020063;
+		public static final int bg_alertbutton_none = 0x7f020064;
+		public static final int bg_alertbutton_right = 0x7f020065;
+		public static final int bg_alertview_alert = 0x7f020066;
 	}
 	public static final class id {
 		public static final int action_bar = 0x7f0d0043;
@@ -389,12 +389,12 @@ public final class R {
 		public static final int action_mode_bar_stub = 0x7f0d003f;
 		public static final int action_mode_close_button = 0x7f0d0025;
 		public static final int activity_chooser_view_content = 0x7f0d0026;
-		public static final int alertButtonListView = 0x7f0d02e5;
+		public static final int alertButtonListView = 0x7f0d02eb;
 		public static final int always = 0x7f0d001d;
 		public static final int beginning = 0x7f0d0018;
 		public static final int checkbox = 0x7f0d003b;
 		public static final int collapseActionView = 0x7f0d001e;
-		public static final int content_container = 0x7f0d02e4;
+		public static final int content_container = 0x7f0d02ea;
 		public static final int decor_content_parent = 0x7f0d0041;
 		public static final int default_activity_button = 0x7f0d0029;
 		public static final int disableHome = 0x7f0d000c;
@@ -410,13 +410,13 @@ public final class R {
 		public static final int image = 0x7f0d0028;
 		public static final int listMode = 0x7f0d0009;
 		public static final int list_item = 0x7f0d002a;
-		public static final int loAlertButtons = 0x7f0d02e9;
-		public static final int loAlertHeader = 0x7f0d02a6;
+		public static final int loAlertButtons = 0x7f0d02ef;
+		public static final int loAlertHeader = 0x7f0d02ac;
 		public static final int middle = 0x7f0d001a;
 		public static final int never = 0x7f0d0020;
 		public static final int none = 0x7f0d000e;
 		public static final int normal = 0x7f0d000a;
-		public static final int outmost_container = 0x7f0d02e3;
+		public static final int outmost_container = 0x7f0d02e9;
 		public static final int progress_circular = 0x7f0d0005;
 		public static final int progress_horizontal = 0x7f0d0006;
 		public static final int radio = 0x7f0d003d;
@@ -438,15 +438,15 @@ public final class R {
 		public static final int submit_area = 0x7f0d004e;
 		public static final int tabMode = 0x7f0d000b;
 		public static final int title = 0x7f0d002c;
-		public static final int tvAlert = 0x7f0d02ab;
-		public static final int tvAlertCancel = 0x7f0d02e6;
-		public static final int tvAlertMsg = 0x7f0d02a8;
-		public static final int tvAlertTitle = 0x7f0d02a7;
+		public static final int tvAlert = 0x7f0d02b1;
+		public static final int tvAlertCancel = 0x7f0d02ec;
+		public static final int tvAlertMsg = 0x7f0d02ae;
+		public static final int tvAlertTitle = 0x7f0d02ad;
 		public static final int up = 0x7f0d0008;
 		public static final int useLogo = 0x7f0d0012;
-		public static final int vDivier = 0x7f0d02aa;
-		public static final int viewStubHorizontal = 0x7f0d02e7;
-		public static final int viewStubVertical = 0x7f0d02e8;
+		public static final int vDivier = 0x7f0d02b0;
+		public static final int viewStubHorizontal = 0x7f0d02ed;
+		public static final int viewStubVertical = 0x7f0d02ee;
 		public static final int withText = 0x7f0d0021;
 		public static final int wrap_content = 0x7f0d0022;
 	}

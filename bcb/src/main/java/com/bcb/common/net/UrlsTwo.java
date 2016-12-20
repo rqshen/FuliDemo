@@ -16,6 +16,8 @@ public class UrlsTwo {
     public static String NormalProjectIntroduction = host + "/api/v2.0/a64b0102ddbd";
     //债权项目详情
     public static String CLAIMCONVEYPACKAGEDETAIL = host + "/api/v2.0/a6a300b390fe";
+    //福记包
+    public static String GETMONKEYPACKAGEDETAIL = host + "/api/v2.0/a6de0105e5df";
 
     // 获取会员信息
     public static String UserMessage = host + "/api/v2.0/a64300c7417c";
@@ -49,6 +51,11 @@ public class UrlsTwo {
     public static String UrlBuyProject = host + "/api/v2.0/a63c0109b86a";
     //预约购买债权转让标
     public static String RRECLAIMCONVEY = host + "/api/v2.0/a6a400e5ed86";
+    //福记包
+    public static String BOOKINGMONKEYPACKAGE = host + "/api/v2.0/a6de0115f478";
+
+    //获取打包项目可投余额
+    public static String MONKEYPACKAGEBALANCE = host + "/api/v2.0/a6de0114df3b";
 
     //支持的银行
     public static String UrlBanks = host + "/api/v2.0/a63e00b4e136";

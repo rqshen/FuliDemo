@@ -40,6 +40,7 @@ import org.json.JSONObject;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * setTitleValue("产品详情"。setTitleValue("详情"。setTitleValue("项目详情"。setTitleValue("立即购买"。setTitleValue("立即申购"。
@@ -90,14 +91,14 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
 	private int countDate = 0;
 
 	//初始化******************************************************************************************
+	//0正常标，1转让标，2福鸡包
+	private int type = 0;
 
-	private boolean auto = false;//是否是转让标
-
-	public static void launche2(Context ctx, String pid, int CouponType, boolean auto) {
+	public static void launche2(Context ctx, String pid, int CouponType, int type) {
 		Intent intent = new Intent();
 		intent.putExtra("pid", pid);
 		intent.putExtra("CouponType", CouponType);
-		intent.putExtra("auto", auto);
+		intent.putExtra("type", type);
 		intent.setClass(ctx, Activity_NormalProject_Introduction.class);
 		ctx.startActivity(intent);
 	}
@@ -105,11 +106,12 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		MyActivityManager.getInstance().pushOneActivity(Activity_NormalProject_Introduction.this);
+		MyActivityManager.getInstance()
+				.pushOneActivity(Activity_NormalProject_Introduction.this);
 		if (getIntent() != null) {
 			packageId = getIntent().getStringExtra("pid");
 			CouponType = getIntent().getIntExtra("CouponType", 0);
-			auto = getIntent().getBooleanExtra("auto", false);
+			type = getIntent().getIntExtra("type", 0);
 		}
 		setBaseContentView(R.layout.activity_normalproject_introduction);
 		setLeftTitleVisible(true);
@@ -133,9 +135,11 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
 		add_rate = (LinearLayout) findViewById(R.id.add_rate);
 		value_reward = (TextView) findViewById(R.id.value_reward);
 		//福袋数据
-		if (!TextUtils.isEmpty(App.getInstance().getWelfare())) {
+		if (!TextUtils.isEmpty(App.getInstance()
+				.getWelfare())) {
 			add_rate.setVisibility(View.VISIBLE);
-			value_reward.setText("+" + App.getInstance().getWelfare() + "%");
+			value_reward.setText("+" + App.getInstance()
+					.getWelfare() + "%");
 		} else add_rate.setVisibility(View.GONE);
 		//可投金额
 		total_money = (TextView) findViewById(R.id.value_total);
@@ -212,18 +216,29 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		//注意：债权标和普通标使用不同的接口
 		String url = UrlsTwo.NormalProjectIntroduction;//普通标
-		if (auto) url = UrlsTwo.CLAIMCONVEYPACKAGEDETAIL;//债权标
+		//注意：债权标和普通标使用不同的接口
+		switch (type) {
+			case 1:
+				url = UrlsTwo.CLAIMCONVEYPACKAGEDETAIL;//债权标
+				break;
+			case 2:
+				url = UrlsTwo.GETMONKEYPACKAGEDETAIL;//福鸡宝
+				break;
+		}
+
 		BcbJsonRequest jsonRequest = new BcbJsonRequest(url, jObject, TokenUtil.getEncodeToken(this), new BcbRequest
 				.BcbCallBack<JSONObject>() {
 			@Override
 			public void onResponse(JSONObject response) {
-				if (auto || PackageUtil.getRequestStatus(response, Activity_NormalProject_Introduction.this)) {
-					LogUtil.i("bqt", "普通标或债权标" + auto + "---" + response.toString());
+				if (type == 1 || type == 2 || PackageUtil.getRequestStatus(response, Activity_NormalProject_Introduction.this)) {
+					LogUtil.i("bqt", "【标详情】标类型" + type + "---" + response.toString());
 					try {
 						//先转义
-						String resultString = response.getString("result").replace("\\", "").replace("\"[", "[").replace("]\"", "]");
+						String resultString = response.getString("result")
+								.replace("\\", "")
+								.replace("\"[", "[")
+								.replace("]\"", "]");
 						JSONObject resultObject = new JSONObject(resultString);
 						//注意：不去掉会出现json解析语法错误
 						if (TextUtils.isEmpty(resultObject.getString("AssetAuditContent"))) resultObject.remove("AssetAuditContent");
@@ -232,7 +247,7 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
 						if (null != mSimpleProjectDetail) showProjectData();
 					} catch (Exception e) {
 						e.printStackTrace();
-						LogUtil.i("bqt", "【Activity_NormalProject_Introduction】【onResponse】" + e.toString());
+						LogUtil.i("bqt", "【标详情】" + e.toString());
 					}
 				}
 				hideProgressBar();
@@ -301,9 +316,11 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
 			Date ApplyEndTime = new SimpleDateFormat("yyyy-MM-dd").parse(mSimpleProjectDetail.ApplyEndTime);
 			Date InterestTakeDate = new SimpleDateFormat("yyyy-MM-dd").parse(mSimpleProjectDetail.InterestTakeDate);
 			//截止日期
-			end_time.setText(SimpleDateFormat.getDateInstance().format(ApplyEndTime));
+			end_time.setText(SimpleDateFormat.getDateInstance()
+					.format(ApplyEndTime));
 			//起息日
-			tv_qx.setText(SimpleDateFormat.getDateInstance().format(InterestTakeDate));
+			tv_qx.setText(SimpleDateFormat.getDateInstance()
+					.format(InterestTakeDate));
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -335,8 +352,9 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
 	//***********************************************设置按钮不可用时的颜色和可用状态*********************************************
 	private void setButtonColor() {
 		try {
-			Date beginTime = new SimpleDateFormat("yyyy-MM-dd").parse(mSimpleProjectDetail.ApplyBeginTime);
+			Date beginTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).parse(mSimpleProjectDetail.ApplyBeginTime);
 			Date nowTime = new Date();
+			LogUtil.i("bqt", "【允许购买时间-当前时间(小时)】" + ((beginTime.getTime() - nowTime.getTime()) / 1000 / 60 / 60));
 			if (nowTime.getTime() < beginTime.getTime() || mSimpleProjectDetail.Status != 20) {
 				button_buy.setBackgroundResource(R.drawable.button_project_gray);
 				button_buy.setTextColor(getResources().getColor(R.color.project_button_gray));
@@ -394,7 +412,9 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
 				LogUtil.d("bqt", "【Activity_TuoGuan_HF】【loginAccount】网络异常，请稍后重试" + error.toString());
 			}
 		});
-		App.getInstance().getRequestQueue().add(jsonRequest);
+		App.getInstance()
+				.getRequestQueue()
+				.add(jsonRequest);
 	}
 
 	@Override
@@ -445,7 +465,9 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
 				}
 			});
 			jsonRequest.setTag(BcbRequestTag.UserBankMessageTag);
-			App.getInstance().getRequestQueue().add(jsonRequest);
+			App.getInstance()
+					.getRequestQueue()
+					.add(jsonRequest);
 		}
 	}
 
@@ -480,7 +502,8 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
 				dialogWidget.dismiss();
 				dialogWidget = null;
 			}
-		}).getView();
+		})
+				.getView();
 	}
 
 	@Override
@@ -509,7 +532,8 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
 				if (App.mUserDetailInfo != null) {
 					userId = App.mUserDetailInfo.getCustomerId();
 				}
-				MQCustomerManager.getInstance(this).showCustomer(userId);
+				MQCustomerManager.getInstance(this)
+						.showCustomer(userId);
 				break;
 
 			//点击立即购买按钮
@@ -623,13 +647,13 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
 		}
 
 		//没有开通自动投标
-		if (auto && !App.mUserDetailInfo.AutoTenderPlanStatus) {
+		if ((type == 1 || type == 2) && !App.mUserDetailInfo.AutoTenderPlanStatus) {
 			altDialog();
 			return;
 		}
 
 		//跳转到购买页面
-		Activity_Project_Buy.launche2(this, packageId, mSimpleProjectDetail.Name, CouponType, countDate, mSimpleProjectDetail, auto);
+		Activity_Project_Buy.launche2(this, packageId, mSimpleProjectDetail.Name, CouponType, countDate, mSimpleProjectDetail, type);
 	}
 
 	AlertView alertView;

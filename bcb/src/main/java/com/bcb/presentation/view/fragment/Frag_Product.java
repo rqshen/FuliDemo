@@ -82,7 +82,8 @@ public class Frag_Product extends Frag_Base implements OnClickListener {
 
 	public Frag_Product() {
 		super();
-		EventBus.getDefault().register(this);
+		EventBus.getDefault()
+				.register(this);
 	}
 
 	@SuppressLint("ValidFragment")
@@ -104,7 +105,8 @@ public class Frag_Product extends Frag_Base implements OnClickListener {
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		this.ctx = view.getContext();
-		requestQueue = App.getInstance().getRequestQueue();
+		requestQueue = App.getInstance()
+				.getRequestQueue();
 		//注册广播
 		receiver = new Receiver();
 		ctx.registerReceiver(receiver, new IntentFilter("com.bcb.choose.company"));
@@ -274,8 +276,11 @@ public class Frag_Product extends Frag_Base implements OnClickListener {
 			} else {
 				UmengUtil.eventById(ctx, R.string.list_bid_unavi);
 			}
-			Activity_NormalProject_Introduction.launche2(ctx, recordsBeans.get(position).PackageId, 0, recordsBeans.get(position)
-					.Type.equals("claim_convey"));//标类型：prj_package则为普通标 claim_convey则为债权转让标
+			//0正常标，1转让标，2福鸡包
+			int type = 0;
+			if (recordsBeans.get(position).Type.equals("claim_convey")) type = 1;
+			else if (recordsBeans.get(position).Type.equals("mon_package")) type = 2;
+			Activity_NormalProject_Introduction.launche2(ctx, recordsBeans.get(position).PackageId, 0, type);//标类型
 		}
 	}
 
@@ -296,7 +301,8 @@ public class Frag_Product extends Frag_Base implements OnClickListener {
 			case R.id.dropdown:
 			case R.id.left_text:
 				UmengUtil.eventById(ctx, R.string.list_select);
-				Activity_Station_Change.launche(ctx, left_text.getText().toString());
+				Activity_Station_Change.launche(ctx, left_text.getText()
+						.toString());
 				break;
 		}
 	}
@@ -304,9 +310,11 @@ public class Frag_Product extends Frag_Base implements OnClickListener {
 	class Receiver extends BroadcastReceiver {
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			if (intent.getAction().equals("com.bcb.project.buy.success")) {
+			if (intent.getAction()
+					.equals("com.bcb.project.buy.success")) {
 				refreshLayout.autoRefresh();
-			} else if (intent.getAction().equals("com.bcb.choose.company")) {
+			} else if (intent.getAction()
+					.equals("com.bcb.choose.company")) {
 				CompanyId = intent.getStringExtra("CompanyId");
 				CompanyName = intent.getStringExtra("CompanyName");
 				left_text.setText(CompanyName.isEmpty() ? "全部公司" : CompanyName);
@@ -336,7 +344,8 @@ public class Frag_Product extends Frag_Base implements OnClickListener {
 	public void onDestroy() {
 		super.onDestroy();
 		ctx.unregisterReceiver(receiver);
-		EventBus.getDefault().unregister(this);
+		EventBus.getDefault()
+				.unregister(this);
 	}
 
 	@Override

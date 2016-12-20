@@ -25,5 +25,5 @@ public class ProductRecordsBean implements Serializable {
     public int DurationExchangeType;//天标（1）月标（2）
     public float ProcessPercent;//	融资进度（百分比）
     public int Status;//
-    public String Type;//标类型：prj_package则为普通标 claim_convey则为债权转让标
+    public String Type;//标类型：prj_package则为普通标 claim_convey则为债权转让标 mon_package为福鸡宝
 }
