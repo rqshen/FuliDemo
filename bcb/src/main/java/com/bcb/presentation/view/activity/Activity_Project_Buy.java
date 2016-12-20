@@ -279,7 +279,7 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 
 			@Override
 			public void onErrorResponse(Exception error) {
-				LogUtil.i("bqt", "【Activity_Project_Buy】【onErrorResponse】" + error.toString());
+				LogUtil.i("bqt", "【获取优惠券张数】" + error.toString());
 			}
 		});
 		jsonRequest.setTag(BcbRequestTag.BCB_SELECT_COUPON_REQUEST);
@@ -389,6 +389,7 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 		JSONObject requestObj = new JSONObject();
 		try {
 			requestObj.put("PackageToken", PackageToken);
+			requestObj.put("PackageId", packageId);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -403,7 +404,7 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 
 			@Override
 			public void onErrorResponse(Exception error) {
-				LogUtil.d("bqt", "【Activity_Project_Buy】【Buy】网络异常，请稍后重试" + error.toString());
+				LogUtil.d("bqt", "【获取打包项目可投余额】" + error.toString());
 				Toast.makeText(Activity_Project_Buy.this, error.toString(), Toast.LENGTH_SHORT)
 						.show();
 			}
@@ -602,7 +603,7 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 
 			@Override
 			public void onErrorResponse(Exception error) {
-				LogUtil.d("bqt", "【Activity_Project_Buy】【Buy】网络异常，请稍后重试" + error.toString());
+				LogUtil.d("bqt", "【买债权标】" + error.toString());
 				Toast.makeText(Activity_Project_Buy.this, error.toString(), Toast.LENGTH_SHORT)
 						.show();
 			}
@@ -653,7 +654,7 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 
 			@Override
 			public void onErrorResponse(Exception error) {
-				LogUtil.d("bqt", "【Activity_Project_Buy】【Buy】网络异常，请稍后重试" + error.toString());
+				LogUtil.d("bqt", "【买平常标】" + error.toString());
 				Toast.makeText(Activity_Project_Buy.this, error.toString(), Toast.LENGTH_SHORT)
 						.show();
 			}

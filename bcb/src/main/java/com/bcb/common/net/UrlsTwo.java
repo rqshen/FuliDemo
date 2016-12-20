@@ -12,7 +12,6 @@ public class UrlsTwo {
     public static String AboutExpiredProjectIntroduction = "http://ttwap.100cb.cn/static/specialgoldinfo.html";
 
     // 普通项目介绍
-//    public static String NormalProjectIntroduction = host + "/api/v1.0/9f568d457714";
     public static String NormalProjectIntroduction = host + "/api/v2.0/a64b0102ddbd";
     //债权项目详情
     public static String CLAIMCONVEYPACKAGEDETAIL = host + "/api/v2.0/a6a300b390fe";
