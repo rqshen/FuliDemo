@@ -150,7 +150,6 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 		setTitleValue(title);
 		setupView();//初始化页面
 		setupRegister();//注册广播
-		requestAmount();
 	}
 
 	//****************************************************************注册广播********************************************
@@ -167,7 +166,8 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 
 	//*************************************************************初始化页面 ************************************************
 	private void setupView() {
-		moreValue.setText(String.format("%.2f", mSimpleProjectDetail.Balance));
+		if(type==2) requestAmount();
+		else moreValue.setText(String.format("%.2f", mSimpleProjectDetail.Balance));
 		if (App.mUserWallet.BalanceAmount <= 0) buyAll.setEnabled(false);
 		PackageToken = mSimpleProjectDetail.PackageToken;
 		//投资金额
@@ -880,6 +880,7 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 			error_tips.setVisibility(View.GONE);
 			//计算收益，在优惠那一栏中显示返现
 			try {
+				if(input.startsWith(".")) return;
 				float money = Float.valueOf(input.replace(",", ""));
 				if (!TextUtils.isEmpty(CouponMinAmount) && money >= Float.parseFloat(CouponMinAmount)) {
 					prospective_earning.setText("投资满" + CouponMinAmount + "返现" + CouponAmount + "元");
@@ -899,8 +900,10 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 				.replace(",", "")
 				.trim();
 		float monery = 0;
-		if (!TextUtils.isEmpty(text)) monery = Float.valueOf(text);
-
+		if (!TextUtils.isEmpty(text)) {
+			if(text.startsWith(".")) return;
+			monery = Float.valueOf(text);
+		}
 		//大于起投金额
 		if (monery >= mSimpleProjectDetail.StartingAmount) {
 			button_buy.setBackgroundResource(R.drawable.button_solid_red);
