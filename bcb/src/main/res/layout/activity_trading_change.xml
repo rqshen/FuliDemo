@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1.0"
             android:gravity="center"
-            android:text="已转让"
+            android:text="已完结"
             android:textColor="@color/txt_gray"
             android:textSize="@dimen/main_text_large"/>
 

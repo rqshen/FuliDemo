@@ -156,6 +156,7 @@ public class Activity_Money_Item_Detail extends Activity_Base {
 		}
 	}
 
+	//【充值】
 	private void setupViewWithCZ() {
 		title1.setText("订单号");
 		value1.setText(moneyItemDetailBean.TransNo);
@@ -172,7 +173,7 @@ public class Activity_Money_Item_Detail extends Activity_Base {
 		layout5.setVisibility(View.GONE);
 	}
 
-	//还款
+	//【还款】
 	private void setupViewWithHK() {
 		title1.setText("还款本金");
 		value1.setText(String.format("-%.2f", moneyItemDetailBean.LoanerRepayExt.Principal));
@@ -228,7 +229,7 @@ public class Activity_Money_Item_Detail extends Activity_Base {
 		} else {
 			value4.setText(String.format("%.2f", moneyItemDetailBean.InvestorRepay.getServiceFeeAmount()));
 		}
-		title5.setText("订单时间");
+		title5.setText("回款时间");
 		value5.setText(moneyItemDetailBean.InvestorRepay.getPayDate());
 	}
 
@@ -249,7 +250,7 @@ public class Activity_Money_Item_Detail extends Activity_Base {
 		} else {
 			value3.setText(String.format("%.2f", moneyItemDetailBean.DebtExt.getServiceFeeAmount()));
 		}
-		title4.setText("订单时间");
+		title4.setText("放款时间");
 		value4.setText(moneyItemDetailBean.Time);//OK
 		layout5.setVisibility(View.GONE);
 	}

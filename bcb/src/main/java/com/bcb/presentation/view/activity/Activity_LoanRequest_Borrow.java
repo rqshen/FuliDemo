@@ -729,13 +729,13 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 
 		//借款金额小于5000元，提示不能小于5000元
 		if (getLoanAmount() < 5000) {
-			ToastUtil.alert(Activity_LoanRequest_Borrow.this, "借款金额必须大于5000元");
+			ToastUtil.alert(Activity_LoanRequest_Borrow.this, "借款金额必须超过5千");
 			return;
 		}
 
 		//借款金额大于20W元，提示不能大于20W元
 		if (getLoanAmount() > 200000) {
-			ToastUtil.alert(Activity_LoanRequest_Borrow.this, "借款金额不能大于200000元");
+			ToastUtil.alert(Activity_LoanRequest_Borrow.this, "借款金额不能超过20万");
 			return;
 		}
 		//已经选择了利息抵扣券

@@ -66,7 +66,7 @@ public class ZQZRadapter extends BaseAdapter {
 		if (null != data.get(pos)) {
 			mHolder.time.setText(data.get(pos).CreateDate);
 			mHolder.title.setText(data.get(pos).PackageName);
-			mHolder.status.setVisibility(View.GONE);
+			mHolder.status.setText(data.get(pos).Status);
 			mHolder.time_right.setText(data.get(pos).Duration);//+"个月"
 			mHolder.amount.setText(String.format("%.2f", data.get(pos).Amount) + "元");
 		}

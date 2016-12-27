@@ -35,7 +35,7 @@ import java.util.List;
  */
 public class Activity_Trading_Cancle extends Activity_Base {
 	private String OrderNo;
-	private int StatusCode;
+	private int StatusCode;// 0：不能申请转让 1：已完成 2：可以转让 3：转让中
 	CheckBox cbCheck;
 	ListView lv;
 	TextView tv, tv_text;
@@ -183,8 +183,12 @@ public class Activity_Trading_Cancle extends Activity_Base {
 			public void onResponse(JSONObject response) {
 				LogUtil.i("bqt", "【Activity_Trading_Cancle】【onResponse】申请债权转让" + response.toString());
 				if (response.optBoolean("result", false)) {
-					Activity_Tips_FaileOrSuccess.launche(Activity_Trading_Cancle.this, Activity_Tips_FaileOrSuccess.ZR_SUCCESS,
-							response.optString("message"));
+					if (StatusCode==2) {//申请转让
+						Activity_Tips_FaileOrSuccess.launche(Activity_Trading_Cancle.this, Activity_Tips_FaileOrSuccess.ZR_SUCCESS,
+								"您已成功申请债权转让");
+					}else
+						Activity_Tips_FaileOrSuccess.launche(Activity_Trading_Cancle.this, Activity_Tips_FaileOrSuccess.ZR_SUCCESS,
+								"成功取消债权转让");
 					Intent intent=new Intent();
 					intent.putExtra("rufush",true);
 					setResult(200,intent);

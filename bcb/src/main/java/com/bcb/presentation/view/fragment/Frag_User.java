@@ -44,6 +44,7 @@ import com.bcb.data.util.UmengUtil;
 import com.bcb.presentation.view.activity.A_Elite_Loan;
 import com.bcb.presentation.view.activity.A_Slb;
 import com.bcb.presentation.view.activity.Activity_Account_Setting;
+import com.bcb.presentation.view.activity.Activity_Browser;
 import com.bcb.presentation.view.activity.Activity_Charge_HF;
 import com.bcb.presentation.view.activity.Activity_Coupons;
 import com.bcb.presentation.view.activity.Activity_Join_Company;
@@ -74,8 +75,10 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 	ImageView layout_update_line;
 	RelativeLayout layout_update;
 	TextView tv_update;
-
 	private Context ctx;
+	//我的保险
+	RelativeLayout layout_security;
+
 	private TextView value_earn, value_balance, value_back, value_total;
 	private UserWallet mUserWallet;
 	private UserDetailInfo mUserDetailInfo;
@@ -137,13 +140,15 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 		title_text = (TextView) view.findViewById(R.id.title_text);
 		title_text.setText("我");
 
-		tv_update=(TextView)  view.findViewById(R.id.tv_update);
-		layout_update=(RelativeLayout) view.findViewById(R.id.layout_update);
-		layout_update_line= (ImageView) view.findViewById(R.id.layout_update_line);
-		if (App.isNeedUpdate&&App.versionBean!=null) {
-			tv_update.setText("发现新版本 V"+App.versionBean.Version);
+		tv_update = (TextView) view.findViewById(R.id.tv_update);
+		layout_update = (RelativeLayout) view.findViewById(R.id.layout_update);
+		layout_security = (RelativeLayout) view.findViewById(R.id.layout_security);
+		layout_security.setOnClickListener(this);
+		layout_update_line = (ImageView) view.findViewById(R.id.layout_update_line);
+		if (App.isNeedUpdate && App.versionBean != null) {
+			tv_update.setText("发现新版本 V" + App.versionBean.Version);
 			layout_update.setOnClickListener(this);
-		}else {
+		} else {
 			layout_update.setVisibility(View.GONE);
 			layout_update_line.setVisibility(View.GONE);
 		}
@@ -444,6 +449,12 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 			return;
 		}
 		switch (v.getId()) {
+			//我的保险
+			case R.id.layout_security:
+				if (App.mUserDetailInfo.TuanXianSSOUrl != null && !App.mUserDetailInfo.TuanXianSSOUrl.equals("")) {
+					Activity_Browser.launche(ctx, "我的保险", App.mUserDetailInfo.TuanXianSSOUrl);
+				} else Toast.makeText(ctx, "没获取到数据，或你还没有参保", Toast.LENGTH_SHORT).show();
+				break;
 			//加入公司
 			case R.id.join_company:
 				UmengUtil.eventById(ctx, R.string.self_auth_c);

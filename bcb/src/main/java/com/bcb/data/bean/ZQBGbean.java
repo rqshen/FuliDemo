@@ -36,5 +36,6 @@ public class ZQBGbean {
 		public String Id;
 		public float Amount;
 		public String Duration;
+		public String Status;
 	}
 }

@@ -534,6 +534,50 @@
                             android:layout_height="0.5dp"
                             android:background="@color/linegray"/>
                         <RelativeLayout
+                            android:id="@+id/layout_security"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical" >
+                            <ImageView
+                                android:id="@+id/iv_security"
+                                android:layout_width="21dp"
+                                android:layout_height="21dp"
+                                android:layout_alignParentLeft="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="22dp"
+                                android:src="@drawable/iv_security" />
+
+                            <TextView
+                                android:id="@+id/text_security"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginLeft="10dp"
+                                android:layout_toRightOf="@+id/iv_security"
+                                android:gravity="center"
+                                android:text="我的保险"
+                                android:textColor="@color/txt_gray"
+                                android:textSize="@dimen/main_text_small"/>
+                            <ImageView
+                                android:id="@+id/user_image_security"
+                                style="@style/image_indicator"
+                                android:layout_alignParentRight="true"/>
+                            <TextView
+                                android:id="@+id/service_security"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_toLeftOf="@id/user_image_security"
+                                android:layout_centerVertical="true"
+                                android:gravity="center"
+                                android:text=""
+                                android:textColor="@color/txt_gray"
+                                android:textSize="@dimen/main_text_small"/>
+                        </RelativeLayout>
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:background="@color/linegray" />
+                        <RelativeLayout
                             android:id="@+id/layout_customer_service"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -698,6 +742,7 @@
                             android:layout_height="0.5dp"
                             android:background="@color/linegray"/>
                     </LinearLayout>
+
                     <include layout="@layout/com_funds_trusteeship_tip" />
                 </LinearLayout>
             </FrameLayout>

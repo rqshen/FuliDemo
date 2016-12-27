@@ -13,7 +13,6 @@
         android:background="@color/white"
 
         android:divider="@null"
-
         android:scrollbars="none"/>
     <Button
         android:layout_below="@+id/lv"
