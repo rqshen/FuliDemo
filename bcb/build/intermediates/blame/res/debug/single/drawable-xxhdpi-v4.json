@@ -288,12 +288,12 @@
         "source": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.meiqia\\meiqiasdk\\3.2.4\\res\\drawable-xxhdpi-v4\\mq_ic_emoji_normal.png"
     },
     {
-        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\mq_redirect_queue_14.png",
-        "source": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.meiqia\\meiqiasdk\\3.2.4\\res\\drawable-xxhdpi-v4\\mq_redirect_queue_14.png"
-    },
-    {
         "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\mq_redirect_queue_09.png",
         "source": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.meiqia\\meiqiasdk\\3.2.4\\res\\drawable-xxhdpi-v4\\mq_redirect_queue_09.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\mq_redirect_queue_14.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.meiqia\\meiqiasdk\\3.2.4\\res\\drawable-xxhdpi-v4\\mq_redirect_queue_14.png"
     },
     {
         "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable-xxhdpi-v4\\mq_ic_download.png",

@@ -20,7 +20,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <LinearLayout
+                <RelativeLayout
                     android:id="@+id/layout_more"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -28,6 +28,7 @@
                     android:gravity="center_vertical">
 
                     <TextView
+                        android:id="@+id/tv_1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="18dip"
@@ -36,10 +37,12 @@
                         android:textSize="14sp"/>
 
                     <TextView
+                        android:layout_toRightOf="@+id/tv_1"
                         android:id="@+id/more_value"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:minWidth="20dp"
+                        android:text="0.00"
                         android:textColor="@color/txt_black"
                         android:textSize="14sp"/>
 
@@ -49,9 +52,20 @@
                         android:layout_marginLeft="5dp"
                         android:singleLine="true"
                         android:text="(不能申购本人持有债权，可投金额变小)"
+                        
                         android:textColor="@color/txt_gray"
+                        android:visibility="gone"
                         android:textSize="12sp"/>
-                </LinearLayout>
+                    <ImageView
+                    	android:id="@+id/iv_tips"
+                        android:layout_alignParentRight="true"
+                    	android:layout_width="wrap_content"
+                        android:layout_marginRight="18dp"
+                    	android:layout_height="wrap_content"
+                        android:visibility="gone"
+                    	android:src="@drawable/tips_about" />
+                    
+                </RelativeLayout>
                 <!-- 账户余额 -->
                 <RelativeLayout
                     android:id="@+id/layout_money"

@@ -5,6 +5,7 @@ public class MyConstants {
 
 	public static final String IDCARDTYPE = "01";
 
+	//192.168.1.108
 	public static final String HOST_DEV_LOCAL = "http://192.168.1.111:5071";//本地，"http://192.168.1.111:7071"
 	public static final String HOST_DEV = "http://ttgateway.100cb.cn";//线下"http://ttgateway.100cb.cn";
 	public static final String HOST_RELEASE = "https://app.fulijr.com";//正式"http://app.fulijr.com";

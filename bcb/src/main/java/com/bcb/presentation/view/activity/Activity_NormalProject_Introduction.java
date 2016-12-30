@@ -226,13 +226,15 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
 				url = UrlsTwo.GETMONKEYPACKAGEDETAIL;//福鸡宝
 				break;
 		}
+		LogUtil.i("bqt", "【请求地址】"+url+"【packageId】"+packageId);
 
 		BcbJsonRequest jsonRequest = new BcbJsonRequest(url, jObject, TokenUtil.getEncodeToken(this), new BcbRequest
 				.BcbCallBack<JSONObject>() {
 			@Override
 			public void onResponse(JSONObject response) {
+
 				if (type == 1 || type == 2 || PackageUtil.getRequestStatus(response, Activity_NormalProject_Introduction.this)) {
-					LogUtil.i("bqt", "【标详情】标类型" + type + "---" + response.toString());
+					LogUtil.i("bqt", "【标类型】" + type + "【返回内容】" + response.toString());
 					try {
 						//先转义
 						String resultString = response.getString("result")

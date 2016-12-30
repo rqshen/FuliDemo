@@ -424,12 +424,12 @@
         "source": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable\\abc_list_selector_holo_dark.xml"
     },
     {
-        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable\\dialog_red.xml",
-        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable\\dialog_red.xml"
-    },
-    {
         "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable\\rounded_edit_bg.xml",
         "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable\\rounded_edit_bg.xml"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable\\dialog_red.xml",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable\\dialog_red.xml"
     },
     {
         "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable\\keyboard_one_selector.xml",
@@ -536,16 +536,16 @@
         "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable\\bank_cgb.png"
     },
     {
-        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable\\right_btn.xml",
-        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable\\right_btn.xml"
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable\\pay_button_selector.xml",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable\\pay_button_selector.xml"
     },
     {
         "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_edit_text_material.xml",
         "source": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable\\abc_edit_text_material.xml"
     },
     {
-        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable\\pay_button_selector.xml",
-        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable\\pay_button_selector.xml"
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable\\right_btn.xml",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable\\right_btn.xml"
     },
     {
         "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable\\bg_sel_stroke_red.xml",
@@ -604,12 +604,12 @@
         "source": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\bcb_android\\spinnerwheel\\unspecified\\res\\drawable\\wheel_bg_ver.xml"
     },
     {
-        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_btn_borderless_material.xml",
-        "source": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable\\abc_btn_borderless_material.xml"
-    },
-    {
         "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable\\bank_cmb.png",
         "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable\\bank_cmb.png"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_btn_borderless_material.xml",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable\\abc_btn_borderless_material.xml"
     },
     {
         "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable\\pay_button_press.9.png",

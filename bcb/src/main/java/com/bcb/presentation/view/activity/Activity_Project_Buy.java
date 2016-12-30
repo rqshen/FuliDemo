@@ -52,7 +52,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 import static com.bcb.R.id.buy_all;
 
@@ -62,6 +61,7 @@ import static com.bcb.R.id.buy_all;
 public class Activity_Project_Buy extends Activity_Base implements View.OnClickListener, TextWatcher {
 
 	@BindView(R.id.more_value) TextView moreValue;
+	@BindView(R.id.iv_tips) ImageView iv_tips;
 	@BindView(buy_all) TextView buyAll;
 	@BindView(R.id.prospective_earning_yuan) TextView prospective_earning_yuan;
 	//标题
@@ -146,6 +146,8 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 		}
 		setBaseContentView(R.layout.activity_project_buy);
 		ButterKnife.bind(this);
+		buyAll.setOnClickListener(Activity_Project_Buy.this);
+		iv_tips.setOnClickListener(Activity_Project_Buy.this);
 		setLeftTitleVisible(true);
 		setTitleValue(title);
 		setupView();//初始化页面
@@ -166,8 +168,7 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 
 	//*************************************************************初始化页面 ************************************************
 	private void setupView() {
-		if(type==2) requestAmount();
-		else moreValue.setText(String.format("%.2f", mSimpleProjectDetail.Balance));
+
 		if (App.mUserWallet.BalanceAmount <= 0) buyAll.setEnabled(false);
 		PackageToken = mSimpleProjectDetail.PackageToken;
 		//投资金额
@@ -226,6 +227,9 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 			getCouponCount();
 			getUserBanlance();
 		}
+
+		if (type == 2) requestAmount();
+		else moreValue.setText(String.format("%.2f", mSimpleProjectDetail.Balance));
 	}
 
 	int number = 0;
@@ -390,8 +394,7 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 		try {
 			requestObj.put("PackageToken", PackageToken);
 			requestObj.put("PackageId", packageId);
-			LogUtil.i("bqt", "【打包项目可投余额参数】"+PackageToken+"--"+packageId);
-
+			LogUtil.i("bqt", "【打包项目可投余额参数】" + PackageToken + "--" + packageId);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -402,6 +405,9 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 				LogUtil.i("bqt", "【获取打包项目可投余额】" + response.toString());
 				amount = response.optDouble("result");
 				moreValue.setText(String.format("%.2f", amount));
+				if ((float) amount < mSimpleProjectDetail.Balance) {
+					iv_tips.setVisibility(View.VISIBLE);
+				}
 			}
 
 			@Override
@@ -443,7 +449,7 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 		}
 		//******************************************************************************************
 		//未绑卡或余额不足---2016-8-19更改：不管有没有绑卡都可以App.mUserDetailInfo.BankCard == null ||
-		if (App.mUserWallet.BalanceAmount < inputMoney) {
+		if ((float) App.mUserWallet.BalanceAmount < inputMoney) {
 			altDialog();
 			return;
 		}
@@ -493,7 +499,7 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 		}
 		//判断用户余额是否大于输入金额
 		if (App.mUserWallet != null) {
-			if (App.mUserWallet.getBalanceAmount() < inputMoney) {
+			if ((float) App.mUserWallet.getBalanceAmount() < inputMoney) {
 				UmengUtil.eventById(Activity_Project_Buy.this, R.string.bid_buy_n_money);
 				ToastUtil.alert(Activity_Project_Buy.this, "余额不足，请先充值");
 				Activity_Recharge_Second.launche(Activity_Project_Buy.this);
@@ -511,6 +517,11 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 		if (moneyf > mSimpleProjectDetail.Balance) {
 			error_tips.setVisibility(View.VISIBLE);
 			error_tips.setText("超出项目可投金额");
+			return;
+		}
+		//超出项目打包标自己可投的金额
+		if (type == 2 && moneyf > (float) amount) {
+			Toast.makeText(this, "购买金额不能大于可投金额", Toast.LENGTH_SHORT).show();
 			return;
 		}
 		if (CouponMinAmount != null && moneyf < Float.valueOf(CouponMinAmount)) altDialog2();
@@ -576,7 +587,7 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 			requestObj.put("Amount", inputMoney + "");
 			switch (type) {
 				case 1:
-					requestObj.put("ClaimConveyId", packageId);
+					requestObj.put("PackageId", packageId);//a6a400e5ed86这个接口中，ClaimConveyId参数改为PackageId
 					break;
 				case 2:
 					requestObj.put("PackageId", packageId);
@@ -687,6 +698,16 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 	@Override
 	public void onClick(View view) {
 		switch (view.getId()) {
+			case R.id.buy_all:
+				double all = Math.min(mSimpleProjectDetail.Balance, App.mUserWallet.BalanceAmount);
+				if (type == 2) {
+					all = Math.min(all, amount);
+				}
+				invest_money.setText(String.format("%.2f", all));
+				break;
+			case R.id.iv_tips:
+				Toast.makeText(this, "不能申购本人持有债权，可投金额变小", Toast.LENGTH_SHORT).show();
+				break;
 			//点击选择优惠券
 			case R.id.invest_money:
 			case R.id.layout_coupon:
@@ -825,15 +846,6 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 		}
 	}
 
-	@OnClick(buy_all)
-	public void onClick() {
-		double all = Math.min(mSimpleProjectDetail.Balance, App.mUserWallet.BalanceAmount);
-		if (type==2) {
-			all=Math.min(all,amount);
-		}
-		invest_money.setText(String.format("%.2f", all));
-	}
-
 	//注册广播，买标成功之后，刷新余额
 	class Receiver extends BroadcastReceiver {
 		public void onReceive(Context context, Intent intent) {
@@ -880,7 +892,7 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 			error_tips.setVisibility(View.GONE);
 			//计算收益，在优惠那一栏中显示返现
 			try {
-				if(input.startsWith(".")) return;
+				if (input.startsWith(".")) return;
 				float money = Float.valueOf(input.replace(",", ""));
 				if (!TextUtils.isEmpty(CouponMinAmount) && money >= Float.parseFloat(CouponMinAmount)) {
 					prospective_earning.setText("投资满" + CouponMinAmount + "返现" + CouponAmount + "元");
@@ -901,7 +913,7 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 				.trim();
 		float monery = 0;
 		if (!TextUtils.isEmpty(text)) {
-			if(text.startsWith(".")) return;
+			if (text.startsWith(".")) return;
 			monery = Float.valueOf(text);
 		}
 		//大于起投金额
