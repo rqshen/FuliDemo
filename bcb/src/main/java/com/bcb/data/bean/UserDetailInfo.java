@@ -22,8 +22,6 @@ public class UserDetailInfo {
     //判断是否投过标
     public boolean HasInvest;
     public boolean AutoTenderPlanStatus;//是否开启自动投标计划
-	//团险授权页面Url
-	public String TuanXianSSOUrl ;
 
 
     //美洽ID

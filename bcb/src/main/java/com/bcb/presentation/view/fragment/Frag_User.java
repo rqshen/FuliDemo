@@ -44,7 +44,6 @@ import com.bcb.data.util.UmengUtil;
 import com.bcb.presentation.view.activity.A_Elite_Loan;
 import com.bcb.presentation.view.activity.A_Slb;
 import com.bcb.presentation.view.activity.Activity_Account_Setting;
-import com.bcb.presentation.view.activity.Activity_Browser;
 import com.bcb.presentation.view.activity.Activity_Charge_HF;
 import com.bcb.presentation.view.activity.Activity_Coupons;
 import com.bcb.presentation.view.activity.Activity_Join_Company;
@@ -451,9 +450,6 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 		switch (v.getId()) {
 			//我的保险
 			case R.id.layout_security:
-				if (App.mUserDetailInfo.TuanXianSSOUrl != null && !App.mUserDetailInfo.TuanXianSSOUrl.equals("")) {
-					Activity_Browser.launche(ctx, "我的保险", App.mUserDetailInfo.TuanXianSSOUrl);
-				} else Toast.makeText(ctx, "您的网络不稳定，加载中", Toast.LENGTH_SHORT).show();
 				break;
 			//加入公司
 			case R.id.join_company:

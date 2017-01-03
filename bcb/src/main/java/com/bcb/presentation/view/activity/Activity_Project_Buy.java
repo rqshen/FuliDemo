@@ -426,20 +426,27 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 	float inputMoney;
 
 	private void clickButton() {
-		if (invest_money.getText()
-				.toString()
-				.startsWith(".")) {
-			Toast.makeText(Activity_Project_Buy.this, "格式不对", Toast.LENGTH_SHORT)
-					.show();
+		//无法获取买标数据
+		if (mSimpleProjectDetail == null) {
+			ToastUtil.alert(Activity_Project_Buy.this, "无法获取买标数据，请稍后重试");
+			return;
 		}
-		//输入金额
-		inputMoney = Float.parseFloat(invest_money.getText()
-				.toString()
-				.replace(",", ""));
-		// 用户是否登录
+		//项目可投金额是否大于0元
+		if (mSimpleProjectDetail.Balance <= 0) {
+			error_tips.setVisibility(View.VISIBLE);
+			error_tips.setText("可投金额为0，该标不能投");
+			return;
+		}
+		// 未登录
 		if (App.saveUserInfo.getAccess_Token() == null) {
 			ToastUtil.alert(Activity_Project_Buy.this, "请先登录");
 			startActivity(new Intent(Activity_Project_Buy.this, Activity_Login.class));
+			return;
+		}
+		//无法获取用户余额
+		if (App.mUserWallet == null) {
+			error_tips.setVisibility(View.VISIBLE);
+			error_tips.setText("暂时无法获取用户余额");
 			return;
 		}
 		//未开通托管
@@ -447,99 +454,75 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 			startActivity(new Intent(Activity_Project_Buy.this, Activity_Open_Account.class));
 			return;
 		}
-		//******************************************************************************************
-		//未绑卡或余额不足---2016-8-19更改：不管有没有绑卡都可以App.mUserDetailInfo.BankCard == null ||
-		if ((float) App.mUserWallet.BalanceAmount < inputMoney) {
-			altDialog();
-			return;
-		}
-
-		if (mSimpleProjectDetail == null) {
-			ToastUtil.alert(Activity_Project_Buy.this, "无法获取买标数据");
-			return;
-		}
-		//判断可投金额是否大于0元
-		if (mSimpleProjectDetail.Balance <= 0) {
-			error_tips.setVisibility(View.VISIBLE);
-			error_tips.setText("可投金额为0，该标不能投");
-			return;
-		}
-
-		// 判断是否输入金额
-		String input_moneyStr = invest_money.getText()
-				.toString()
-				.replace(",", "");
-		if (null == input_moneyStr || input_moneyStr.trim()
-				.equals("")) {
+		//未输入投资金额
+		if (TextUtils.isEmpty(invest_money.getText().toString())) {
 			error_tips.setVisibility(View.VISIBLE);
 			error_tips.setText("请输入投资金额");
 			return;
 		}
-
-		// 判断是否大于起投金额
-		if (mSimpleProjectDetail.StartingAmount > 0) {
-			//                if (inputMoney < mSimpleProjectDetail.StartingAmount) {
-			if (mSimpleProjectDetail.Balance > mSimpleProjectDetail.StartingAmount && inputMoney < mSimpleProjectDetail
-					.StartingAmount) {
-				error_tips.setVisibility(View.VISIBLE);
-				error_tips.setText("当前输入小于起投金额" + (int) mSimpleProjectDetail.StartingAmount + "元");
-				return;
-			}
-		}
-
-		// 判断输入金额是否超出单笔限额
-		if (mSimpleProjectDetail.SingletonAmount > 0) {
-			if (Float.parseFloat(invest_money.getText()
-					.toString()
-					.replace(",", "")) > mSimpleProjectDetail.SingletonAmount) {
-				error_tips.setVisibility(View.VISIBLE);
-				error_tips.setText("当前输入超出单笔限额" + (int) mSimpleProjectDetail.SingletonAmount + "元");
-				return;
-			}
-		}
-		//判断用户余额是否大于输入金额
-		if (App.mUserWallet != null) {
-			if ((float) App.mUserWallet.getBalanceAmount() < inputMoney) {
-				UmengUtil.eventById(Activity_Project_Buy.this, R.string.bid_buy_n_money);
-				ToastUtil.alert(Activity_Project_Buy.this, "余额不足，请先充值");
-				Activity_Recharge_Second.launche(Activity_Project_Buy.this);
-				return;
-			}
-		} else {
-			error_tips.setVisibility(View.VISIBLE);
-			error_tips.setText("暂时无法获取用户余额");
+		//输入金额格式错误
+		if (invest_money.getText().toString().startsWith(".")) {
+			Toast.makeText(Activity_Project_Buy.this, "您的输入有误", Toast.LENGTH_SHORT).show();
 			return;
 		}
-		//判断输入金额是否大于可投金额
-		float moneyf = Float.valueOf(invest_money.getText()
-				.toString()
-				.replace(",", ""));
-		if (moneyf > mSimpleProjectDetail.Balance) {
+		//输入金额
+		inputMoney = Float.parseFloat(invest_money.getText().toString().replace(",", ""));
+
+		//用户余额小于输入金额
+		if ((float) App.mUserWallet.BalanceAmount < inputMoney) {
+			altDialog();
+			//ToastUtil.alert(Activity_Project_Buy.this, "余额不足，请先充值");
+			//Activity_Recharge_Second.launche(Activity_Project_Buy.this);
+			return;
+		}
+		//输入金额超出单笔限额
+		if (inputMoney > mSimpleProjectDetail.SingletonAmount) {
+			error_tips.setVisibility(View.VISIBLE);
+			error_tips.setText("当前输入超出单笔限额" + (int) mSimpleProjectDetail.SingletonAmount + "元");
+			return;
+		}
+		//输入金额大于可投金额
+		if (inputMoney > mSimpleProjectDetail.Balance) {
 			error_tips.setVisibility(View.VISIBLE);
 			error_tips.setText("超出项目可投金额");
 			return;
 		}
-		//超出项目打包标自己可投的金额
-		if (type == 2 && moneyf > (float) amount) {
+		//可投金额大于起投金额（正常情况）
+		if (mSimpleProjectDetail.Balance >= mSimpleProjectDetail.StartingAmount) {
+			if (inputMoney < mSimpleProjectDetail.StartingAmount) {
+				error_tips.setVisibility(View.VISIBLE);
+				error_tips.setText("当前输入小于起投金额" + (int) mSimpleProjectDetail.StartingAmount + "元");
+				return;
+			}
+			//可投金额小于起投金额（尾标）
+		} else {
+			//不做处理，即可以正常购买
+		}
+
+		//打包标时，超出自己可投的金额
+		if (type == 2 && inputMoney > (float) amount) {
 			Toast.makeText(this, "购买金额不能大于可投金额", Toast.LENGTH_SHORT).show();
 			return;
 		}
-		if (CouponMinAmount != null && moneyf < Float.valueOf(CouponMinAmount)) altDialog2();
-		else {
-			//买标
-			switch (type) {
-				case 0:
-					requestBuy();
-					break;
-				case 1:
-					requestBuy2(UrlsTwo.RRECLAIMCONVEY);
-					break;
-				case 2:
-					requestBuy2(UrlsTwo.BOOKINGMONKEYPACKAGE);
-					break;
-				default:
-					break;
-			}
+		//不满足优惠券使用限额
+		if (CouponMinAmount != null && inputMoney < Float.valueOf(CouponMinAmount)) {
+			altDialog2();
+			return;
+		}
+
+		//满足所有条件后，请求买标
+		switch (type) {
+			case 0:
+				requestBuy();
+				break;
+			case 1:
+				requestBuy2(UrlsTwo.RRECLAIMCONVEY);
+				break;
+			case 2:
+				requestBuy2(UrlsTwo.BOOKINGMONKEYPACKAGE);
+				break;
+			default:
+				break;
 		}
 	}
 
