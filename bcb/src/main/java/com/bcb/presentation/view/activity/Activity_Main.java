@@ -257,7 +257,7 @@ public class Activity_Main extends Activity_Base_Fragment {
 		if (tips != null && tips.size() == 1) {
 			updateDialog.setTVGravity(Gravity.CENTER);
 			return tips.get(0);
-		} else if (tips != null && tips.size() > 0) {
+		} else if (tips != null && tips.size() > 1) {
 			updateDialog.setTVGravity(Gravity.LEFT);
 			for (int i = 0; i < tips.size(); i++) {
 				sb.append("    " + (i + 1) + "、" + tips.get(i) + "\n");
