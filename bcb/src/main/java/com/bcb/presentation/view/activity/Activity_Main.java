@@ -155,8 +155,9 @@ public class Activity_Main extends Activity_Base_Fragment {
 				.add(jsonRequest);
 	}
 
+	UpdateDialog updateDialog;
 	private void showVersionDialog2() {
-		UpdateDialog updateDialog = new UpdateDialog(this) {
+		 updateDialog = new UpdateDialog(this) {
 			@Override
 			public void onClick() {
 				super.onClick();
@@ -251,15 +252,18 @@ public class Activity_Main extends Activity_Base_Fragment {
 	}
 
 	public String getTips() {
-		StringBuilder sb = new StringBuilder("\n");
-		List<String> tips = versionBean.Tips;
-		if (tips != null && tips.size() > 0) {
+		StringBuilder sb = new StringBuilder("");
+		List<String> tips = App.versionBean.Tips;
+		if (tips != null && tips.size() == 1) {
+			updateDialog.setTVGravity(Gravity.CENTER);
+			return tips.get(0);
+		} else if (tips != null && tips.size() > 0) {
+			updateDialog.setTVGravity(Gravity.LEFT);
 			for (int i = 0; i < tips.size(); i++) {
 				sb.append("    " + (i + 1) + "、" + tips.get(i) + "\n");
 			}
-		}
-		return sb.deleteCharAt(sb.length() - 1)
-				.toString();
+			return sb.deleteCharAt(sb.length() - 1).toString();
+		} else return null;
 	}
 
 	 class DownloadCompleteReceiver extends BroadcastReceiver {

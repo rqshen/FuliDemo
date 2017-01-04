@@ -546,7 +546,7 @@
                                 android:layout_alignParentLeft="true"
                                 android:layout_centerVertical="true"
                                 android:layout_marginLeft="22dp"
-                                android:src="@drawable/iv_security" />
+                                />
 
                             <TextView
                                 android:id="@+id/text_security"
