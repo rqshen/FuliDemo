@@ -33,6 +33,7 @@ import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
 import com.bcb.common.net.UrlsOne;
+import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.TokenUtil;
 import com.bcb.presentation.adapter.MyFragmentPagerAdapter;
@@ -218,19 +219,7 @@ public class Activity_Coupons extends Activity_Base_Fragment {
 				if (!TextUtils.isEmpty(edit_code.getText().toString())) {
 					dialog_error_tips.setVisibility(View.GONE);
 				}
-				//当输入第五个字符时才在之前插入一个空格，而不能在输入第四个字符时在之后插入一个空格
-				//因为这样会导致最后的一个空格无法被删掉（因为删掉后又立即满足插入的条件了）
-				//计算时要先去除添加的空格
-				//插入空格时要去除空格后重新插入，而不是仅仅在最后插入一个空格，以防止用户在中间插入字符后空格变乱
-				String code = s.toString().trim().replace(" ", "");
-				StringBuilder sb = new StringBuilder(code);
-				int length = code.length();
-				for (int i = 0, j = 0; i < length; i += 4, j++) {
-					sb.insert(i + j, " ");
-				}
-					edit_code.setText(sb.toString().trim());
-				//要改变光标位置
-				edit_code.setSelection(sb.toString().trim().length());
+
 			}
 
 			@Override
@@ -240,14 +229,30 @@ public class Activity_Coupons extends Activity_Base_Fragment {
 
 			@Override
 			public void afterTextChanged(Editable s) {
-
+				//当输入第五个字符时才在之前插入一个空格，而不能在输入第四个字符时在之后插入一个空格
+				//因为这样会导致最后的一个空格无法被删掉（因为删掉后又立即满足插入的条件了）
+				//计算时要先去除添加的空格
+				//插入空格时要去除空格后重新插入，而不是仅仅在最后插入一个空格，以防止用户在中间插入字符后空格变乱
+				String code = edit_code.getText().toString().trim().replace(" ", "");
+				LogUtil.i("bqt", "【更改】+code");
+				StringBuilder sb = new StringBuilder(code);
+				int length = code.length();
+				for (int i = 0, j = 0; i < length; i += 4, j++) {
+					sb.insert(i + j, " ");
+					LogUtil.i("bqt", "【遍历】"+sb.toString().trim());
+				}
+				if (!edit_code.getText().toString().trim().equals(sb.toString().trim())) {
+					edit_code.setText(sb.toString().trim());
+					//要改变光标位置
+					edit_code.setSelection(sb.toString().trim().length());
+				}
 			}
 		});
 
 		bt_go.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				if (!TextUtils.isEmpty(edit_code.getText().toString())) {
-					exchangeCouponFromNumber(edit_code.getText().toString());
+				if (!TextUtils.isEmpty(edit_code.getText().toString().trim())) {
+					exchangeCouponFromNumber(edit_code.getText().toString().replace(" ", ""));
 				} else {
 					dialog_error_tips.setVisibility(View.VISIBLE);
 					dialog_error_tips.setText("请输入兑换码");
