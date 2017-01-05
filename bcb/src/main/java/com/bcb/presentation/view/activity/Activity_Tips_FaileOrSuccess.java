@@ -18,6 +18,7 @@ import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestTag;
 import com.bcb.common.net.UrlsOne;
 import com.bcb.common.net.UrlsTwo;
+import com.bcb.data.bean.StringEventBusBean;
 import com.bcb.data.bean.UserBankCard;
 import com.bcb.data.bean.UserDetailInfo;
 import com.bcb.data.bean.UserWallet;
@@ -251,7 +252,8 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
 			case R.id.tv_next://下一步
 				switch (type) {
 					case EMAIL_SUCCESS://借款列表
-						startActivity(new Intent(this, Activity_LoanList.class));
+						startActivity(new Intent(this, Activity_LoanList.class));//A_Elite_Loan
+						EventBus.getDefault().post(new StringEventBusBean("LoanFinish"));
 						finish();
 						break;
 					//托管
