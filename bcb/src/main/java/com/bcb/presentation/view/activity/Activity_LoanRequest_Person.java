@@ -17,6 +17,7 @@ import com.bcb.common.net.BcbJsonRequest;
 import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestTag;
 import com.bcb.common.net.UrlsOne;
+import com.bcb.data.bean.StringEventBusBean;
 import com.bcb.data.bean.loan.LoanKindBean;
 import com.bcb.data.bean.loan.PersonInfoBean;
 import com.bcb.data.util.LoanPersonalConfigUtil;
@@ -32,6 +33,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import de.greenrobot.event.EventBus;
 
 /**
  * Created by cain on 16/1/5.
@@ -113,6 +116,7 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		EventBus.getDefault().register(this);
 		MyActivityManager.getInstance().pushOneActivity(Activity_LoanRequest_Person.this);
 		setBaseContentView(R.layout.activity_loanrequest_personal);
 		bean = (LoanKindBean) getIntent().getSerializableExtra("bean");
@@ -122,7 +126,16 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
 		//请求数据
 		getPersonalLoanMessage();
 	}
-
+	public void onEventMainThread(StringEventBusBean event) {
+		if (event.getContent().equals("LoanFinish")) {
+			finish();
+		}
+	}
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		EventBus.getDefault().unregister(this);
+	}
 	/**
 	 * 初始化个人信息
 	 */

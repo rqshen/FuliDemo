@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -366,8 +367,9 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 	String fileName;
 	File apkFile;
 
+	UpdateDialog updateDialog;
 	private void showVersionDialog2() {
-		UpdateDialog updateDialog = new UpdateDialog(ctx) {
+		 updateDialog = new UpdateDialog(ctx) {
 			@Override
 			public void onClick() {
 				super.onClick();
@@ -382,13 +384,16 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 	public String getTips() {
 		StringBuilder sb = new StringBuilder("");
 		List<String> tips = App.versionBean.Tips;
-		if (tips != null && tips.size() > 0) {
+		if (tips != null && tips.size() == 1) {
+			updateDialog.setTVGravity(Gravity.CENTER);
+			return tips.get(0);
+		} else if (tips != null && tips.size() > 1) {
+			updateDialog.setTVGravity(Gravity.LEFT);
 			for (int i = 0; i < tips.size(); i++) {
 				sb.append("    " + (i + 1) + "、" + tips.get(i) + "\n");
 			}
-		}
-		return sb.deleteCharAt(sb.length() - 1)
-				.toString();
+			return sb.deleteCharAt(sb.length() - 1).toString();
+		} else return null;
 	}
 
 	private void registerReceiver() {
@@ -432,10 +437,6 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 	public void onClick(View v) {
 		if (v.getId() == R.id.ll_test) {
 
-			UpdateDialog updateDialog = new UpdateDialog(ctx);
-			updateDialog.setValues(View.INVISIBLE, false, "好好后拉低好后低好后拉低好后拉低后拉低了\n咖啡拉夫看来");
-
-			updateDialog.show();
 			return;
 		}
 		if (v.getId() == R.id.layout_update) {

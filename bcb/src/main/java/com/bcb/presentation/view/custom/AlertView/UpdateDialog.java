@@ -46,6 +46,10 @@ public class UpdateDialog extends Dialog {
 		setCanceledOnTouchOutside(cancleable);
 	}
 
+	public void setTVGravity(int gravity) {
+		tvTop.setGravity(gravity);
+	}
+
 	@OnClick(R.id.button)
 	public void onClick() {
 	}

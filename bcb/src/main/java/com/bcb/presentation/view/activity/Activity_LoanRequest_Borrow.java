@@ -21,6 +21,7 @@ import com.bcb.common.net.BcbJsonRequest;
 import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestTag;
 import com.bcb.common.net.UrlsOne;
+import com.bcb.data.bean.StringEventBusBean;
 import com.bcb.data.bean.UserExtraInfo;
 import com.bcb.data.bean.loan.LoanDurationListBean;
 import com.bcb.data.bean.loan.LoanKindBean;
@@ -53,6 +54,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import de.greenrobot.event.EventBus;
 
 /**
  * 借款
@@ -124,6 +126,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		EventBus.getDefault().register(this);
 		MyActivityManager.getInstance().pushOneActivity(this);
 		setBaseContentView(R.layout.activity_loanrequest_borrow);
 		ButterKnife.bind(this);
@@ -133,6 +136,21 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 		initViews();
 		//获取借款数据
 		getLoanCertification();
+	}
+
+	public void onEventMainThread(StringEventBusBean event) {
+		if (event.getContent().equals("LoanFinish")) {
+			finish();
+		}
+	}
+
+	//销毁广播
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		EventBus.getDefault().unregister(this);
+		App.getInstance().getRequestQueue().cancelAll(BcbRequestTag.BCB_SELECT_COUPON_REQUEST);
+		App.getInstance().getRequestQueue().cancelAll(BcbRequestTag.BCB_CREATE_LOAN_REQUEST_MESSAGE_REQUEST);
 	}
 
 	//****************************************************************************************************************************************
@@ -234,41 +252,41 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 		ProgressDialogrUtils.show(this, "正在验证借款信息...");
 		BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.LoanCertification, obj, TokenUtil.getEncodeToken(this), new
 				BcbRequest.BcbCallBack<JSONObject>() {
-			@Override
-			public void onResponse(JSONObject response) {
-				ProgressDialogrUtils.hide();
+					@Override
+					public void onResponse(JSONObject response) {
+						ProgressDialogrUtils.hide();
 
-				refreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
-				try {
-					if (null == response) {
-						ToastUtil.alert(Activity_LoanRequest_Borrow.this, "服务器返回数据为空，无法验证");
-						return;
+						refreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
+						try {
+							if (null == response) {
+								ToastUtil.alert(Activity_LoanRequest_Borrow.this, "服务器返回数据为空，无法验证");
+								return;
+							}
+							if (response.getInt("status") == -5) {
+								Activity_Login.launche(Activity_LoanRequest_Borrow.this);
+								finish();
+							}
+							LogUtil.i("bqt", "借款信息" + response.toString());
+							loanRequestInfo = new Gson().fromJson(response.getString("result"), LoanRequestInfoBean.class);
+							message = response.getString("message");
+							//没申请过
+							if (loanRequestInfo.Status == 0 && loanRequestInfo.AggregateId.equals("00000000-0000-0000-0000-000000000000")) {
+								//						initBean();
+							}
+							//初始化数据
+							initLoanRequestInfo();
+						} catch (Exception e) {
+							e.printStackTrace();
+							LogUtil.i("bqt", "借款信息出错" + e.getMessage());
+						}
 					}
-					if (response.getInt("status") == -5) {
-						Activity_Login.launche(Activity_LoanRequest_Borrow.this);
-						finish();
-					}
-					LogUtil.i("bqt", "借款信息" + response.toString());
-					loanRequestInfo = new Gson().fromJson(response.getString("result"), LoanRequestInfoBean.class);
-					message = response.getString("message");
-					//没申请过
-					if (loanRequestInfo.Status == 0 && loanRequestInfo.AggregateId.equals("00000000-0000-0000-0000-000000000000")) {
-						//						initBean();
-					}
-					//初始化数据
-					initLoanRequestInfo();
-				} catch (Exception e) {
-					e.printStackTrace();
-					LogUtil.i("bqt", "借款信息出错" + e.getMessage());
-				}
-			}
 
-			@Override
-			public void onErrorResponse(Exception error) {
-				ProgressDialogrUtils.hide();
-				ToastUtil.alert(Activity_LoanRequest_Borrow.this, "网络异常，请稍后重试");
-			}
-		});
+					@Override
+					public void onErrorResponse(Exception error) {
+						ProgressDialogrUtils.hide();
+						ToastUtil.alert(Activity_LoanRequest_Borrow.this, "网络异常，请稍后重试");
+					}
+				});
 		jsonRequest.setTag(BcbRequestTag.BCB_LOAN_CERTIFICATION_REQUEST);
 		App.getInstance().getRequestQueue().add(jsonRequest);
 	}
@@ -377,11 +395,11 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 	private void setupLoanUsage() {
 		//将元素添加到数组中
 		purposes_types = new ArrayList<>();
-		for (int i = 0 ; i < loanRequestInfo.LoanTypeTable.size() ; i++) {
+		for (int i = 0; i < loanRequestInfo.LoanTypeTable.size(); i++) {
 			LogUtil.d("借款用途", loanRequestInfo.LoanTypeTable.get(i).Name);
 			purposes_types.add(loanRequestInfo.LoanTypeTable.get(i).Name);
 		}
-		for (int i = 0 ; i < loanRequestInfo.LoanTypeTable.size() ; i++) {
+		for (int i = 0; i < loanRequestInfo.LoanTypeTable.size(); i++) {
 			//获取默认选中的借款用途
 			if (loanRequestInfo.LoanType == loanRequestInfo.LoanTypeTable.get(i).Value) {
 				purposeStatus = loanRequestInfo.LoanTypeTable.get(i).Value;
@@ -400,10 +418,10 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 		//将元素添加到数组中
 		duration_types = new ArrayList<>();
 		durationList = new ArrayList<>();
-		for (int i = 0 ; i < loanRequestInfo.RateTable.size() ; i++) {
+		for (int i = 0; i < loanRequestInfo.RateTable.size(); i++) {
 			//用于判断数组中是否存在对应的借款期限
 			boolean duration = false;
-			for (int j = 0 ; j < durationList.size() ; j++) {
+			for (int j = 0; j < durationList.size(); j++) {
 				if (durationList.get(j).Value == loanRequestInfo.RateTable.get(i).Duration) {
 					duration = true;
 					break;
@@ -419,7 +437,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 		}
 
 		//找到durationStatus对应的下表值
-		for (int i = 0 ; i < duration_types.size() ; i++) {
+		for (int i = 0; i < duration_types.size(); i++) {
 			if (new String(durationStatus + "个月").equalsIgnoreCase(duration_types.get(i))) {
 				durationIndex = i;
 				break;
@@ -436,7 +454,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 		period_types = new ArrayList<>();
 		//还款期数要从利率表里面查找，这尼玛简直就是坑爹
 		periodList = new ArrayList<>();
-		for (int i = 0 ; i < loanRequestInfo.RateTable.size() ; i++) {
+		for (int i = 0; i < loanRequestInfo.RateTable.size(); i++) {
 			//如果借款期限相同，则将期限加载到页面中去
 			if (loanRequestInfo.RateTable.get(i).getDuration() == durationStatus) {
 				LoanPeriodWithRateBean periodWithRate = new LoanPeriodWithRateBean(loanRequestInfo.RateTable.get(i).getPeriod(),
@@ -446,7 +464,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 			}
 		}
 		//设置还款位置
-		for (int i = 0 ; i < periodList.size() ; i++) {
+		for (int i = 0; i < periodList.size(); i++) {
 			if (loanRequestInfo.Period == periodList.get(i).Period) {
 				loanIndex = i;
 				break;
@@ -466,10 +484,10 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 	 * 计算利率
 	 */
 	private void setupRate() {
-		for (int i = 0 ; i < loanRequestInfo.RateTable.size() ; i++) {
+		for (int i = 0; i < loanRequestInfo.RateTable.size(); i++) {
 			String monthNum = loanRequestInfo.RateTable.get(i).getDuration() + "个月";
 			int periodNum = loanRequestInfo.RateTable.get(i).Period;
-			if (periodStatus==periodNum&&monthNum.equalsIgnoreCase(loan_duration.getText().toString().trim())) {
+			if (periodStatus == periodNum && monthNum.equalsIgnoreCase(loan_duration.getText().toString().trim())) {
 				rate = loanRequestInfo.RateTable.get(i).Rate / 100;
 				break;
 			}
@@ -504,7 +522,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 		DecimalFormat df = new DecimalFormat("######0.##");
 		float rate = 0;
 		//根据表查找利率
-		for (int i = 0 ; i < loanRequestInfo.RateTable.size() ; i++) {
+		for (int i = 0; i < loanRequestInfo.RateTable.size(); i++) {
 			if (durationStatus == loanRequestInfo.RateTable.get(i).getDuration() && periodStatus == loanRequestInfo.RateTable.get(i)
 					.getPeriod()) {
 				rate = loanRequestInfo.RateTable.get(i).Rate / 100;
@@ -542,7 +560,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 			String val2 = df.format(getLoanAmount() * 0.4);
 			repayProgramme = "每月还息低至" + value + "元";
 			loan_programme2.setVisibility(View.VISIBLE);
-			loan_programme2.setText("每12个月还本金\n" +  val1 + "元、" + val1 +"元、" + val2 + "元");
+			loan_programme2.setText("每12个月还本金\n" + val1 + "元、" + val1 + "元、" + val2 + "元");
 		} else {
 			repayProgramme = "暂不支持该方案";
 		}
@@ -588,7 +606,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 						durationIndex = currentItem;
 						loan_duration.setText(duration_types.get(currentItem));//设置借款期限
 						float signedRate = 0;
-						for (int i = 0 ; i < loanRequestInfo.RateTable.size() ; i++) {
+						for (int i = 0; i < loanRequestInfo.RateTable.size(); i++) {
 							String monthNum = loanRequestInfo.RateTable.get(i).getDuration() + "个月";
 							if (monthNum.equalsIgnoreCase(duration_types.get(currentItem))) {
 								durationStatus = loanRequestInfo.RateTable.get(i).getDuration();
@@ -603,7 +621,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 						//企业签约后，员工借款费率可低至
 						//tv_if.setText("企业签约后，员工借款费率可低至" + new DecimalFormat("######0.##").format(signedRate * 100) + "%");
 						//初始化默认的还款期数
-						loanIndex=0;
+						loanIndex = 0;
 						setupLoanPeriod();//******************************************************************************************
 						//重新设置还款期数
 						calculateRepayProgramme();
@@ -814,32 +832,32 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 			ProgressDialogrUtils.show(this, "正在验证借款信息...");
 			BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.PostRequestMessage, jsonObject, TokenUtil.getEncodeToken(this),
 					new BcbRequest.BcbCallBack<JSONObject>() {
-				@Override
-				public void onResponse(JSONObject response) {
-					LogUtil.i("bqt", "借款第一页【返回】的数据是" + response.toString());
-					ProgressDialogrUtils.hide();
-					try {
-						//提示申请成功，是否填写个人信息
-						if (response.getInt("status") == 1)
-							startActivity(new Intent(Activity_LoanRequest_Borrow.this, Activity_LoanRequest_Person.class));
-						else {
-							ToastUtil.alert(Activity_LoanRequest_Borrow.this, response.getString("message").equalsIgnoreCase("") ?
-									"服务器繁忙，请稍候再试" : response.getString("message"));
-							//判断是否是Token过期，如果过期则跳转至登陆界面
-							if (response.getInt("status") == -5) Activity_Login.launche(Activity_LoanRequest_Borrow.this);
+						@Override
+						public void onResponse(JSONObject response) {
+							LogUtil.i("bqt", "借款第一页【返回】的数据是" + response.toString());
+							ProgressDialogrUtils.hide();
+							try {
+								//提示申请成功，是否填写个人信息
+								if (response.getInt("status") == 1)
+									startActivity(new Intent(Activity_LoanRequest_Borrow.this, Activity_LoanRequest_Person.class));
+								else {
+									ToastUtil.alert(Activity_LoanRequest_Borrow.this, response.getString("message").equalsIgnoreCase("") ?
+											"服务器繁忙，请稍候再试" : response.getString("message"));
+									//判断是否是Token过期，如果过期则跳转至登陆界面
+									if (response.getInt("status") == -5) Activity_Login.launche(Activity_LoanRequest_Borrow.this);
+								}
+							} catch (Exception e) {
+								e.printStackTrace();
+								//数据出错重新登录
+								Activity_Login.launche(Activity_LoanRequest_Borrow.this);
+							}
 						}
-					} catch (Exception e) {
-						e.printStackTrace();
-						//数据出错重新登录
-						Activity_Login.launche(Activity_LoanRequest_Borrow.this);
-					}
-				}
 
-				@Override
-				public void onErrorResponse(Exception error) {
-					ProgressDialogrUtils.hide();
-				}
-			});
+						@Override
+						public void onErrorResponse(Exception error) {
+							ProgressDialogrUtils.hide();
+						}
+					});
 			jsonRequest.setTag(BcbRequestTag.BCB_CREATE_LOAN_REQUEST_MESSAGE_REQUEST);
 			App.getInstance().getRequestQueue().add(jsonRequest);
 		} catch (Exception e) {
@@ -879,14 +897,6 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 				} else setupCouponCount(false);
 				break;
 		}
-	}
-
-	//销毁广播
-	@Override
-	public void onDestroy() {
-		super.onDestroy();
-		App.getInstance().getRequestQueue().cancelAll(BcbRequestTag.BCB_SELECT_COUPON_REQUEST);
-		App.getInstance().getRequestQueue().cancelAll(BcbRequestTag.BCB_CREATE_LOAN_REQUEST_MESSAGE_REQUEST);
 	}
 
 	private void altDialog2() {
