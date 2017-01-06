@@ -537,13 +537,13 @@
                             android:id="@+id/layout_security"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:visibility="gone"
                             android:layout_gravity="center_vertical" >
                             <ImageView
                                 android:id="@+id/iv_security"
                                 android:layout_width="21dp"
                                 android:layout_height="21dp"
                                 android:layout_alignParentLeft="true"
+                                android:src="@drawable/iv_security"
                                 android:layout_centerVertical="true"
                                 android:layout_marginLeft="22dp"
                                 />

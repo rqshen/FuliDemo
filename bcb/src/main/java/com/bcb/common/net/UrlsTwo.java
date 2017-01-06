@@ -64,6 +64,8 @@ public class UrlsTwo {
     public static String UrlBandCard = host + "/api/v2.0/a63d00c46c0d";
     //用户银行卡
     public static String UrlUserBand = host + "/api/v2.0/a648009fe9f5";
+    //保险
+    public static String MYINSURANCE = host + "/api/v2.0/a6f300ade6f0";
     //生利宝，产品信息查询
     public static String UrlSlb = host + "/api/v2.0/a65c00f2ac02";
     //生利宝交易

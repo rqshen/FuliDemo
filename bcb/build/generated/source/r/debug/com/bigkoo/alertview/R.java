@@ -389,12 +389,12 @@ public final class R {
 		public static final int action_mode_bar_stub = 0x7f0d003f;
 		public static final int action_mode_close_button = 0x7f0d0025;
 		public static final int activity_chooser_view_content = 0x7f0d0026;
-		public static final int alertButtonListView = 0x7f0d02f1;
+		public static final int alertButtonListView = 0x7f0d0300;
 		public static final int always = 0x7f0d001d;
 		public static final int beginning = 0x7f0d0018;
 		public static final int checkbox = 0x7f0d003b;
 		public static final int collapseActionView = 0x7f0d001e;
-		public static final int content_container = 0x7f0d02f0;
+		public static final int content_container = 0x7f0d02ff;
 		public static final int decor_content_parent = 0x7f0d0041;
 		public static final int default_activity_button = 0x7f0d0029;
 		public static final int disableHome = 0x7f0d000c;
@@ -410,13 +410,13 @@ public final class R {
 		public static final int image = 0x7f0d0028;
 		public static final int listMode = 0x7f0d0009;
 		public static final int list_item = 0x7f0d002a;
-		public static final int loAlertButtons = 0x7f0d02f5;
-		public static final int loAlertHeader = 0x7f0d02b2;
+		public static final int loAlertButtons = 0x7f0d0304;
+		public static final int loAlertHeader = 0x7f0d02c1;
 		public static final int middle = 0x7f0d001a;
 		public static final int never = 0x7f0d0020;
 		public static final int none = 0x7f0d000e;
 		public static final int normal = 0x7f0d000a;
-		public static final int outmost_container = 0x7f0d02ef;
+		public static final int outmost_container = 0x7f0d02fe;
 		public static final int progress_circular = 0x7f0d0005;
 		public static final int progress_horizontal = 0x7f0d0006;
 		public static final int radio = 0x7f0d003d;
@@ -438,15 +438,15 @@ public final class R {
 		public static final int submit_area = 0x7f0d004e;
 		public static final int tabMode = 0x7f0d000b;
 		public static final int title = 0x7f0d002c;
-		public static final int tvAlert = 0x7f0d02b7;
-		public static final int tvAlertCancel = 0x7f0d02f2;
-		public static final int tvAlertMsg = 0x7f0d02b4;
-		public static final int tvAlertTitle = 0x7f0d02b3;
+		public static final int tvAlert = 0x7f0d02c6;
+		public static final int tvAlertCancel = 0x7f0d0301;
+		public static final int tvAlertMsg = 0x7f0d02c3;
+		public static final int tvAlertTitle = 0x7f0d02c2;
 		public static final int up = 0x7f0d0008;
 		public static final int useLogo = 0x7f0d0012;
-		public static final int vDivier = 0x7f0d02b6;
-		public static final int viewStubHorizontal = 0x7f0d02f3;
-		public static final int viewStubVertical = 0x7f0d02f4;
+		public static final int vDivier = 0x7f0d02c5;
+		public static final int viewStubHorizontal = 0x7f0d0302;
+		public static final int viewStubVertical = 0x7f0d0303;
 		public static final int withText = 0x7f0d0021;
 		public static final int wrap_content = 0x7f0d0022;
 	}
@@ -476,14 +476,14 @@ public final class R {
 		public static final int abc_screen_toolbar = 0x7f030015;
 		public static final int abc_search_dropdown_item_icons_2line = 0x7f030016;
 		public static final int abc_search_view = 0x7f030017;
-		public static final int include_alertheader = 0x7f030076;
-		public static final int item_alertbutton = 0x7f030078;
-		public static final int layout_alertview = 0x7f03008b;
-		public static final int layout_alertview_actionsheet = 0x7f03008c;
-		public static final int layout_alertview_alert = 0x7f03008d;
-		public static final int layout_alertview_alert_horizontal = 0x7f03008e;
-		public static final int layout_alertview_alert_vertical = 0x7f03008f;
-		public static final int support_simple_spinner_dropdown_item = 0x7f0300c7;
+		public static final int include_alertheader = 0x7f030078;
+		public static final int item_alertbutton = 0x7f03007a;
+		public static final int layout_alertview = 0x7f03008d;
+		public static final int layout_alertview_actionsheet = 0x7f03008e;
+		public static final int layout_alertview_alert = 0x7f03008f;
+		public static final int layout_alertview_alert_horizontal = 0x7f030090;
+		public static final int layout_alertview_alert_vertical = 0x7f030091;
+		public static final int support_simple_spinner_dropdown_item = 0x7f0300ca;
 	}
 	public static final class string {
 		public static final int abc_action_bar_home_description = 0x7f060000;

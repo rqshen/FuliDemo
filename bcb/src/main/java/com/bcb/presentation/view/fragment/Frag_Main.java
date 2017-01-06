@@ -23,7 +23,9 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bcb.R;
 import com.bcb.common.app.App;
@@ -85,6 +87,9 @@ import de.greenrobot.event.EventBus;
 
 public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPager.OnPageChangeListener {
 	private static final String TAG = "Frag_Main";
+	
+	//车险
+	RelativeLayout rl_car;
 
 	//刷新控件
 	private PullToRefreshLayout refreshLayout;
@@ -171,6 +176,8 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPa
 		//仅保留下拉刷新，隐藏上拉加载更多
 		//隐藏加载更多
 		(view.findViewById(R.id.loadmore_view)).setVisibility(View.GONE);
+		rl_car= ((RelativeLayout) view.findViewById(R.id.rl_car));
+		rl_car.setOnClickListener(this);
 		refreshLayout = ((PullToRefreshLayout) view.findViewById(R.id.refresh_view));
 		//不显示刷新结果
 		refreshLayout.setRefreshResultView(false);
@@ -811,6 +818,15 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPa
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
+			case R.id.rl_car:
+				if (App.saveUserInfo.getAccess_Token() == null) {
+					Activity_Login.launche(ctx);
+				} else if (App.mUserDetailInfo == null ||TextUtils.isEmpty(App.mUserDetailInfo.CarInsuranceIndexPage)) {
+					Toast.makeText(ctx, "网络异常，请刷新后重试", Toast.LENGTH_SHORT).show();
+				} else {
+					Activity_Browser.launche(ctx, "车险内购", App.mUserDetailInfo.CarInsuranceIndexPage);
+				}
+				break;
 			case R.id.ll_daily_welfare://每日福利
 				if (App.saveUserInfo.getAccess_Token() == null) {
 					Activity_Login.launche(ctx);

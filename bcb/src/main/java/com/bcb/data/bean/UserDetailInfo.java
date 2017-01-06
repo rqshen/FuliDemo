@@ -29,6 +29,10 @@ public class UserDetailInfo {
 	public boolean HasOpenCustody;//是否开通托管
 	public String CustodyAccount;//托管账户
 
+	public String CarInsuranceIndexPage;//车险内购访问地址
+	public String CarInsuranceMyOrderPage;//车险内购我的保单访问地址
+	public String GroupInsuranceUrl;//团险访问地址
+
 
 	public String getRealName() {
 		return UserName;

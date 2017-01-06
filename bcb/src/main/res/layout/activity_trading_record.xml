@@ -25,12 +25,12 @@
                 android:background="@color/red"
                 android:gravity="center"
                 android:paddingTop="15dp"
-                android:text="投资总额(元)"
+                android:text="在投总金额(元)"
                 android:textColor="@color/white"
                 android:textSize="13sp"/>
 
             <TextView
-                android:id="@+id/top_amount"
+                android:id="@+id/left"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/red"
@@ -58,12 +58,12 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="待收本金(元)"
+                        android:text="累计投资总额(元)"
                         android:textColor="@color/white"
                         android:textSize="13sp"/>
 
                     <TextView
-                        android:id="@+id/left"
+                        android:id="@+id/top_amount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingRight="20dp"

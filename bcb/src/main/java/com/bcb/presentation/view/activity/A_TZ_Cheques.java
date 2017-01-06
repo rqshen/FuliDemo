@@ -20,7 +20,7 @@ import java.util.List;
  * 回款计划
  */
 public class A_TZ_Cheques extends Activity_Base {
-
+	private TextView have, left;
 	private ListView mListView;
 	private List<Project_Investment_Details_Bean.Plar> mList;
 	private MyBaseAdapter mMyBaseAdapter;
@@ -34,20 +34,28 @@ public class A_TZ_Cheques extends Activity_Base {
 		setBaseContentView(R.layout.activity_tz__cheques);
 		null_data_layout = (LinearLayout) findViewById(R.id.null_data_layout);
 		mListView = (ListView) findViewById(R.id.lv);
+		have = (TextView) findViewById(R.id.have);
+		left = (TextView) findViewById(R.id.left);
 		Intent intent = getIntent();
-		if (intent != null && intent.getSerializableExtra("data") != null) {
-			mList = ((Project_Investment_Details_Bean) intent.getSerializableExtra("data")).getRepaymentPlan();
-			if (mList != null && mList.size() > 0) {
-				null_data_layout.setVisibility(View.GONE);
-				mListView.setVisibility(View.VISIBLE);
-				mListView.addHeaderView(LayoutInflater.from(this).inflate(R.layout.hk_head, null));
-				mMyBaseAdapter = new MyBaseAdapter();
-				mListView.setAdapter(mMyBaseAdapter);
-			} else {
-				null_data_layout.setVisibility(View.VISIBLE);
-				mListView.setVisibility(View.GONE);
+		if (intent != null ) {
+			Project_Investment_Details_Bean bean = (Project_Investment_Details_Bean) intent.getSerializableExtra("data");
+			if (bean != null) {
+				//已收本息，剩余本息
+				have.setText(String.format("%.2f", bean.ReceivedPrincipalAndInterest));
+				left.setText(String.format("%.2f", bean.WaitPrincipalAndInterest));
+				//列表
+				mList = bean.getRepaymentPlan();
+				if (mList != null && mList.size() > 0) {
+					null_data_layout.setVisibility(View.GONE);
+					mListView.setVisibility(View.VISIBLE);
+					mListView.addHeaderView(LayoutInflater.from(this).inflate(R.layout.hk_head, null));
+					mMyBaseAdapter = new MyBaseAdapter();
+					mListView.setAdapter(mMyBaseAdapter);
+				} else {
+					null_data_layout.setVisibility(View.VISIBLE);
+					mListView.setVisibility(View.GONE);
+				}
 			}
-
 		}
 		setLeftTitleVisible(true);
 		setTitleValue("回款计划");

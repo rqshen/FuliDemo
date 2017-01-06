@@ -43,6 +43,7 @@ import com.bcb.data.util.ToastUtil;
 import com.bcb.data.util.TokenUtil;
 import com.bcb.data.util.UmengUtil;
 import com.bcb.presentation.view.activity.A_Elite_Loan;
+import com.bcb.presentation.view.activity.A_MySecurity;
 import com.bcb.presentation.view.activity.A_Slb;
 import com.bcb.presentation.view.activity.Activity_Account_Setting;
 import com.bcb.presentation.view.activity.Activity_Charge_HF;
@@ -451,6 +452,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 		switch (v.getId()) {
 			//我的保险
 			case R.id.layout_security:
+				startActivity(new Intent(ctx, A_MySecurity.class));
 				break;
 			//加入公司
 			case R.id.join_company:
@@ -708,6 +710,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 						//将获取到的银行卡数据写入静态数据区中
 						App.mUserDetailInfo = mUserDetailInfo;
 						requestUserBankCard();
+						requestUserSecurity();
 						//加载用户加入公司的信息
 						setupJoinCompanyMessage();
 					}
@@ -784,7 +787,34 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 		jsonRequest.setTag(BcbRequestTag.UserWalletMessageTag);
 		requestQueue.add(jsonRequest);
 	}
+	/**
+	 * 保险
+	 */
+	private void requestUserSecurity() {
+		BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsTwo.MYINSURANCE, null, TokenUtil.getEncodeToken(ctx), new BcbRequest
+				.BcbCallBack<JSONObject>() {
+			@Override
+			public void onResponse(JSONObject response) {
+				LogUtil.i("bqt", "保险：" + response.toString());
+				if (PackageUtil.getRequestStatus(response, ctx)) {
+					App.mUserDetailInfo.CarInsuranceIndexPage=response.optJSONObject("result").optString("CarInsuranceIndexPage");
+					App.mUserDetailInfo.CarInsuranceMyOrderPage=response.optJSONObject("result").optString("CarInsuranceMyOrderPage");
+					App.mUserDetailInfo.GroupInsuranceUrl=response.optJSONObject("result").optString("GroupInsuranceUrl");
+				}
+				loadingStatus = false;
+				refreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
+			}
 
+			@Override
+			public void onErrorResponse(Exception error) {
+				ToastUtil.alert(ctx, "网络异常，请稍后重试");
+				refreshLayout.refreshFinish(PullToRefreshLayout.FAIL);
+				loadingError = true;
+			}
+		});
+		jsonRequest.setTag(BcbRequestTag.UserWalletMessageTag);
+		requestQueue.add(jsonRequest);
+	}
 	/**
 	 * 绑定提现卡
 	 */

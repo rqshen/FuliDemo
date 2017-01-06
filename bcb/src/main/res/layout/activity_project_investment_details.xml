@@ -7,7 +7,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
+        android:background="@color/background"
         android:orientation="vertical">
 
 
@@ -17,19 +17,21 @@
             android:background="@color/red"
             android:gravity="center"
             android:paddingTop="15dp"
-            android:text="购买金额(元)"
+            android:text="累计收益(元)"
             android:textColor="@color/white"
-            android:textSize="13sp"/>
+            android:textSize="13sp"
+            android:visibility="gone"/>
 
         <TextView
-            android:id="@+id/top_amount"
+            android:id="@+id/income_total"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/red"
             android:gravity="center"
             android:text="0.00"
             android:textColor="@color/white"
-            android:textSize="32sp"/>
+            android:textSize="32sp"
+            android:visibility="gone"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -49,12 +51,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="预期收益(元)"
+                    android:text="订单金额(元)"
                     android:textColor="@color/white"
                     android:textSize="13sp"/>
 
                 <TextView
-                    android:id="@+id/earning_expected"
+                    android:id="@+id/top_amount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingRight="20dp"
@@ -81,12 +83,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="累计收益(元)"
+                    android:text="应计收益(元)"
                     android:textColor="@color/white"
                     android:textSize="13sp"/>
 
                 <TextView
-                    android:id="@+id/income_total"
+                    android:id="@+id/earning_expected"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingTop="5dp"
@@ -102,6 +104,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/white"
             android:orientation="vertical">
 
             <com.bcb.presentation.view.custom.HorizontalProgressBarWithNumber
@@ -109,12 +112,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:progress="10"/>
+                android:progress="10"
+                android:visibility="gone"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
+                android:visibility="gone"
                 >
 
                 <TextView
@@ -127,7 +131,7 @@
                     android:textSize="13sp"/>
 
                 <TextView
-                    android:id="@+id/earningtime"
+                    android:id="@+id/earningtime222"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
@@ -152,6 +156,7 @@
                 android:layout_height="wrap_content"
                 android:paddingBottom="15dp"
                 android:paddingTop="5dp"
+                android:visibility="gone"
                 >
 
                 <TextView
@@ -196,6 +201,34 @@
                 android:paddingLeft="5dip"
                 android:paddingRight="5dp">
 
+                <LinearLayout
+                    android:id="@+id/ll_id_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="订单号"
+                        android:textColor="#666"
+                        android:textSize="@dimen/main_text_default"/>
+
+                    <TextView
+                        android:id="@+id/tv_id_number"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_marginLeft="20dp"
+                        android:gravity="right"
+                        android:textColor="#666"
+                        android:textSize="@dimen/main_text_default"/>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/linegray"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -206,7 +239,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="年化利率"
+                        android:text="年化收益"
                         android:textColor="#666"
                         android:textSize="@dimen/main_text_default"/>
 
@@ -220,6 +253,35 @@
                         android:textSize="@dimen/main_text_default"/>
 
 
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:background="@color/linegray"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="起息时间"
+                        android:textColor="#666"
+                        android:textSize="@dimen/main_text_default"/>
+
+                    <TextView
+                        android:id="@+id/earningtime"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_marginLeft="20dp"
+                        android:gravity="right"
+                        android:textColor="#666"
+                        android:text="----"
+                        android:textSize="@dimen/main_text_default"/>
                 </LinearLayout>
 
                 <View
@@ -255,34 +317,26 @@
                     android:layout_height="1px"
                     android:background="@color/linegray"/>
 
-                <LinearLayout
+                <RelativeLayout
+                    android:id="@+id/tourl"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:padding="10dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="已收本息"
+                        android:text="项目详情"
                         android:textColor="#666"
                         android:textSize="@dimen/main_text_default"/>
 
-                    <TextView
-                        android:id="@+id/have"
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:layout_marginLeft="20dp"
-                        android:gravity="right"
-                        android:textColor="#666"
-                        android:textSize="@dimen/main_text_default"/>
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:background="@color/linegray"/>
-
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/forward_default"/>
+                </RelativeLayout>
 
                 <View
                     android:layout_width="match_parent"
@@ -293,7 +347,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="10dp">
+                    android:padding="10dp"
+                    android:visibility="gone">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -312,7 +367,6 @@
                         android:textSize="@dimen/main_text_default"/>
                 </LinearLayout>
 
-
             </LinearLayout>
 
             <View
@@ -321,11 +375,12 @@
                 android:background="@color/linegray"/>
 
             <LinearLayout
+                android:id="@+id/ll_exit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/ll_exit"
                 android:orientation="horizontal"
-                android:padding="10dp">
+                android:padding="10dp"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -367,26 +422,56 @@
                     android:textSize="@dimen/main_text_default"/>
 
                 <ImageView
+                    android:id="@+id/iv_right_hk"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:src="@drawable/forward_default"/>
 
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/iv_right_hk"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="已还本息  "
+                        android:textColor="#666"
+                        android:textSize="@dimen/main_text_default"/>
+
+                    <TextView
+                        android:id="@+id/have"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:text="0.00"
+                        android:textColor="#666"
+                        android:textSize="@dimen/main_text_default"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" 元  "
+                        android:textColor="#666"
+                        android:textSize="@dimen/main_text_default"/>
+                </LinearLayout>
             </RelativeLayout>
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:layout_marginLeft="5dp"
+                android:layout_height="10dp"
                 android:background="@color/linegray"/>
 
             <RelativeLayout
                 android:id="@+id/rl_zr"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
-                android:padding="10dp">
+                android:padding="10dp"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -405,21 +490,51 @@
 
             </RelativeLayout>
 
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/state_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:text=""
+                android:textColor="@color/red"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:id="@+id/state_below"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/state_title"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:text=""
+                android:textColor="#666"
+                android:textSize="13sp"/>
+
             <Button
                 android:id="@+id/button"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/button_height"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="20dp"
-                android:layout_marginLeft="10dip"
-                android:layout_marginRight="10dip"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/button_red_selector"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@null"
+                android:drawableRight="@drawable/forward_default"
                 android:gravity="center"
-                android:text="取消转让"
-                android:textColor="@color/white"
-                android:textSize="@dimen/main_text_default"/>
-        </LinearLayout>
+                android:text="申请退出"
+                android:textColor="#999"
+                android:visibility="invisible"
+                android:textSize="16sp"/>
+        </RelativeLayout>
+
 
     </LinearLayout>
 </ScrollView>

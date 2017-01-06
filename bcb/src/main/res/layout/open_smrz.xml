@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:gravity="center">
+
+    <ImageView
+        android:id="@+id/iv_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/iv_update_close"/>
+
+    <LinearLayout
+        android:id="@+id/ll_container"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_close"
+        android:background="@drawable/dialog_bg"
+        android:orientation="vertical"
+        android:paddingBottom="25dp"
+        android:paddingTop="50dp">
+
+        <TextView
+            android:id="@+id/tv_top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingLeft="13dp"
+            android:paddingRight="13dp"
+            android:textColor="#333"
+            android:text="您尚未进行实名认证，暂无法\n查看员工团险"
+            android:textSize="15sp"/>
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="250dp"
+            android:layout_height="@dimen/button_height"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/button_solid_39f"
+            android:gravity="center"
+            android:text="去实名认证"
+            android:textColor="#fff"
+            android:textSize="15sp"/>
+    </LinearLayout>
+
+    <ImageView
+        android:layout_marginTop="28dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/iv_smrz"/>
+</RelativeLayout>

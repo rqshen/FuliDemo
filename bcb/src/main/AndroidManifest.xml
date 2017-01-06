@@ -524,6 +524,8 @@
         </activity>
         <activity android:name=".presentation.view.activity.Activity_Web_Normal">
         </activity>
+        <activity android:name=".presentation.view.activity.A_MySecurity">
+        </activity>
     </application>
 
 </manifest>

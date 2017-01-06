@@ -6,14 +6,14 @@ public class MyConstants {
 	public static final String IDCARDTYPE = "01";
 
 	//192.168.1.108
-	public static final String HOST_DEV_LOCAL = "http://192.168.1.111:5071";//本地，"http://192.168.1.111:7071"
-	public static final String HOST_DEV = "http://ttgateway.100cb.cn";//线下"http://ttgateway.100cb.cn";
+	public static final String HOST_DEV_LOCAL = "http://192.168.1.111:5071";//本地，内网。"http://192.168.1.111:7071"
+	public static final String HOST_DEV = "http://ttgateway.100cb.cn";//测试外网。线下"http://ttgateway.100cb.cn";
 	public static final String HOST_RELEASE = "https://app.fulijr.com";//正式"http://app.fulijr.com";
 
 	public static final String HOST_DEV_Static = "http://ttwap.100cb.cn";//测试
 	public static final String HOST_RELEASE_Static = "http://wap.fulijr.com";//正式
 
-	public static int TESTMODE = 1;// 0为本地，1为线下，2为正式
+	public static int TESTMODE = 2;// 0为本地，1为线下，2为正式
 
 	public static String getHost() {
 		switch (TESTMODE) {

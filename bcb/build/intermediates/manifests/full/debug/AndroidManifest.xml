@@ -525,6 +525,8 @@
         </activity>
         <activity android:name="com.bcb.presentation.view.activity.Activity_Web_Normal" >
         </activity>
+        <activity android:name="com.bcb.presentation.view.activity.A_MySecurity" >
+        </activity>
         <!-- 聊天界面 -->
         <activity
             android:name="com.meiqia.meiqiasdk.activity.MQConversationActivity"
