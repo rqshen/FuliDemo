@@ -35,6 +35,7 @@ public class Project_Investment_Details_Bean implements Serializable {
 	public float WaitPrincipalAndInterest;
 	private String Status;//状态
 	public String Duration;
+	public String ReturnType;//退出方式
 	public String ExpireDate;//年化利率
 	public int StatusCode;// 0：不能申请转让 1：已完成 2：可以转让 3：转让中
 	public int Phase;// 订单所处阶段 1：加入 5：加入后至开始计息前 10：开始计息 50：开始计息后至锁定到期前 100: 锁定到期

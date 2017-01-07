@@ -338,7 +338,7 @@
                             android:layout_marginRight="15dp"
                             android:gravity="center"
                             android:singleLine="true"
-                            android:text="优惠高达30% "
+                            android:text="优惠高达25% "
                             android:drawableRight="@drawable/ind"
                             android:drawablePadding="5dp"
                             android:textColor="#999"

@@ -76,6 +76,9 @@ public class UrlsTwo {
     public static String UrlSlbSY = host + "/api/v2.0/a65c00f5a8d0";
     //关于汇付
     public static String UrlAboutHF = hostStatic + "/static/HftxIntroduce.html";//http://ttwap.100cb.cn/
+
+    //转让协议http://192.168.20.14/static/CreditAgreement.html
+    public static String ZRXY = hostStatic + "/static/CreditAgreement.html";
     //解绑
     public static String UrlUnBand = "https://c.chinapnr.com/p2puser/";
     //解绑说明

@@ -18,6 +18,7 @@ import com.bcb.common.app.App;
 import com.bcb.common.net.BcbJsonRequest;
 import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.UrlsOne;
+import com.bcb.common.net.UrlsTwo;
 import com.bcb.data.bean.ClaimConveyBeanBQT;
 import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.TokenUtil;
@@ -64,7 +65,7 @@ public class Activity_Trading_Cancle extends Activity_Base {
 		tv_text.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Activity_Browser.launche(Activity_Trading_Cancle.this, "转让协议", "http://192.168.20.14/static/CreditAgreement.html");
+				Activity_Browser.launche(Activity_Trading_Cancle.this, "转让协议", UrlsTwo.ZRXY);
 			}
 		});
 		setLeftTitleVisible(true);

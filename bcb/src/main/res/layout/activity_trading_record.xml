@@ -45,7 +45,7 @@
                 android:background="@color/red"
                 android:orientation="horizontal"
                 android:paddingBottom="28dp"
-                android:paddingLeft="60dp"
+                android:paddingLeft="30dp"
                 android:paddingRight="10dp"
                 android:paddingTop="20dp">
                 <!-- 投资总额 -->

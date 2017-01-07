@@ -215,13 +215,13 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 		error_tips = (TextView) findViewById(R.id.error_tips);
 		error_tips.setVisibility(View.GONE);
 		//债权标，剩余金额小于起投金额
-		if ((type == 1 || type == 2) && mSimpleProjectDetail.Balance < mSimpleProjectDetail.StartingAmount) {
-			invest_money.setText(mSimpleProjectDetail.StartingAmount + "");
-			invest_money.setEnabled(false);
-			invest_money.setKeyListener(null);
-			button_buy.setClickable(true);
-			button_buy.setBackgroundResource(R.drawable.button_solid_red);
-		}
+//		if ((type == 1 || type == 2) && mSimpleProjectDetail.Balance < mSimpleProjectDetail.StartingAmount) {
+//			invest_money.setText(mSimpleProjectDetail.StartingAmount + "");
+//			//invest_money.setEnabled(false);
+//			invest_money.setKeyListener(null);
+//			button_buy.setClickable(true);
+//			button_buy.setBackgroundResource(R.drawable.button_solid_red);
+//		}
 		//获取优惠券张数
 		if (App.saveUserInfo.getAccess_Token() != null) {
 			getCouponCount();
@@ -589,10 +589,10 @@ public class Activity_Project_Buy extends Activity_Base implements View.OnClickL
 			@Override
 			public void onResponse(JSONObject response) {
 				LogUtil.i("bqt", "买债权标返回数据：" + response.toString());
-				if (!TextUtils.isEmpty(response.optString("result"))) {
+				if (response.optInt("result") != -3) {
 					Activity_Tips_FaileOrSuccess.launche(Activity_Project_Buy.this, Activity_Tips_FaileOrSuccess.BUY_HF_SUCCESS, "");
 				} else {
-					Activity_Tips_FaileOrSuccess.launche(Activity_Project_Buy.this, Activity_Tips_FaileOrSuccess.BUY_HF_FAILED, "");
+					Activity_Tips_FaileOrSuccess.launche(Activity_Project_Buy.this, Activity_Tips_FaileOrSuccess.BUY_HF_FAILED, response.optString("message"));
 				}
 				finish();
 			}

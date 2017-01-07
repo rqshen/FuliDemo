@@ -215,12 +215,17 @@ public class Activity_Project_Investment_Details extends Activity_Base implement
 										case 100://收益完成：“已于{债权交割日}{退出方式}”。
 											//退出方式：1、收益完成（包含完成正常还款、债权转让）2、	提前退出（借款人提前还款）
 											pb.setProgress(100);
-											state_below.setText("已于" + format.format(endDate) + "退出，退出方式由后台确定");
+											state_below.setText("已于" + format.format(endDate) + bean.ReturnType);
 											break;
 //										default:
 //											pb.setProgress(10);
 //											break;
 									}
+									//（5）收益中&不可申请推出“将于{债权交割日}退出并回收本息”
+									if (bean.Phase==50&&bean.StatusCode==0) {
+										state_below.setText("将于" + format.format(endDate) + "退出并回收本息");
+									}
+
 									//年化利率，锁定期限，已收本息，剩余本息
 									annual_yield.setText(String.format("%.2f", bean.getRate()) + "%");
 									earnings_end.setText(bean.getDuration());//封闭期 带单位【 "Duration": 3天】
