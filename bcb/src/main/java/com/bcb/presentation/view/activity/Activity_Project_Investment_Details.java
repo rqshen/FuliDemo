@@ -145,8 +145,9 @@ public class Activity_Project_Investment_Details extends Activity_Base implement
 									Date biddingDate = format.parse(bean.getPayTime());
 									Date endDate = format.parse(bean.getEndDate());
 									biddingtime.setText(format.format(biddingDate));
+									Date earningDate = null;
 									if (bean.getInterestTakeDate() != null && !bean.getInterestTakeDate().equals("")) {
-										Date earningDate = format.parse(bean.getInterestTakeDate());
+										earningDate = format.parse(bean.getInterestTakeDate());
 										earningtime.setText(format.format(earningDate));
 									}
 									endTime = format.format(endDate);
@@ -162,8 +163,8 @@ public class Activity_Project_Investment_Details extends Activity_Base implement
 									//							}
 									//退出时间
 									Date date = format.parse(bean.getEndDate());
-									Date dateFrom = new Date(date.getTime() - 14 * 1000 * 60 * 60 * 24);
-									Date dateTo = new Date(date.getTime() - 7 * 1000 * 60 * 60 * 24);
+									//Date dateFrom = new Date(date.getTime() - 14 * 1000 * 60 * 60 * 24);
+									Date dateTo = new Date(date.getTime() - 5 * 1000 * 60 * 60 * 24);
 									//left_time.setText(format.format(dateFrom) + "至" + format.format(dateTo));
 									SimpleDateFormat format2 = new SimpleDateFormat("yyyy.MM.dd");
 									switch (bean.StatusCode) {// 0：不能申请转让 1：已完成 2：可以转让 3：转让中
@@ -187,7 +188,8 @@ public class Activity_Project_Investment_Details extends Activity_Base implement
 											button.setText("申请退出");
 											ll_exit.setVisibility(View.GONE);
 											//可申请退出：{债权可退出起始日}~{债权可退出截止日}可申请退出
-											state_below.setText(format2.format(dateFrom) + "~" + format2.format(dateTo) + "可申请退出");
+											//{起息日InterestTakeDate​}~{交割日​EndDate​-5天}可申请退出
+											state_below.setText(format2.format(earningDate) + "~" + format2.format(dateTo) + "可申请退出");
 											break;
 										case 3:
 											button.setVisibility(View.VISIBLE);
@@ -195,7 +197,7 @@ public class Activity_Project_Investment_Details extends Activity_Base implement
 											button.setClickable(true);
 											button.setText("撤销退出");
 											//可撤销退出：{债权可退出起始日}~{债权可退出截止日}可撤销退出
-											state_below.setText(format2.format(dateFrom) + "~" + format2.format(dateTo) + "可撤销退出");
+											state_below.setText(format2.format(earningDate) + "~" + format2.format(dateTo) + "可撤销退出");
 											break;
 										default:
 											break;
@@ -222,7 +224,7 @@ public class Activity_Project_Investment_Details extends Activity_Base implement
 //											break;
 									}
 									//（5）收益中&不可申请推出“将于{债权交割日}退出并回收本息”
-									if (bean.Phase==50&&bean.StatusCode==0) {
+									if (bean.Phase == 50 && bean.StatusCode == 0) {
 										state_below.setText("将于" + format.format(endDate) + "退出并回收本息");
 									}
 
@@ -258,7 +260,7 @@ public class Activity_Project_Investment_Details extends Activity_Base implement
 	public void onClick(View v) {
 		switch (v.getId()) {
 			case R.id.tourl:
-				Activity_Browser.launche(this, "项目详情", "http://192.168.20.121/doku.php?id=api:doc2.0:investdetail");
+				Activity_Browser.launche(this, "项目详情", bean.PackageUrl);
 				break;
 			case R.id.ll_id_number:
 				ClipboardManager cm = (android.content.ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
@@ -290,7 +292,7 @@ public class Activity_Project_Investment_Details extends Activity_Base implement
 						dismiss();
 					}
 				};
-				dialogBQT2.getMessage().setText("1、本息预计在 " + endTime + " 回款，\n继续持有将获得更高收益哦\n\n2、本次退出费用为 0 元");
+				dialogBQT2.getMessage().setText("1、本息预计在 " + endTime + " 回款，继续持有将获得更高收益哦\n\n2、本次退出费用为 0 元");
 				dialogBQT2.show();
 				break;
 			case 3:
@@ -316,13 +318,13 @@ public class Activity_Project_Investment_Details extends Activity_Base implement
 			public void onResponse(JSONObject response) {
 				LogUtil.i("bqt", "申请债权转让" + response.toString());
 				if (response.optBoolean("result", false)) {
-					if (bean.StatusCode == 3) {//申请转让
+					if (bean.StatusCode == 3) {//撤销转让
 						Toast.makeText(Activity_Project_Investment_Details.this, "撤销成功！项目将继续持有并获得收益", Toast.LENGTH_SHORT).show();
+					} else {//申请转让，response.optString("message")
+						Activity_Tips_FaileOrSuccess.launche(Activity_Project_Investment_Details.this, Activity_Tips_FaileOrSuccess.ZR_SUCCESS,
+								"预计 "+ endTime +" 回款本息");
 					}
 					loadData();
-				} else {
-					Activity_Tips_FaileOrSuccess.launche(Activity_Project_Investment_Details.this, Activity_Tips_FaileOrSuccess.ZR_FAILED,
-							response.optString("message"));
 				}
 			}
 

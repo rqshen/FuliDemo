@@ -181,10 +181,10 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
 				tv_next.setText("去校验邮箱");
 				break;
 			case ZR_SUCCESS:
-				title_text.setText("债权转让");
+				title_text.setText("提交成功");
 				iv_pic.setImageResource(R.drawable.success_open_hf);
-				tv_up.setText(message);//【您已成功申请债权转让】【成功取消债权转让】
-				//tv_down.setText(message);
+				tv_up.setText("退出申请提交成功");//【您已成功申请债权转让】【成功取消债权转让】
+				tv_down.setText(message);
 				tv_next.setText("返回投资记录");
 				break;
 			case ZR_FAILED:
