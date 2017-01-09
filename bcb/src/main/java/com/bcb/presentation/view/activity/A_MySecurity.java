@@ -30,6 +30,9 @@ public class A_MySecurity extends Activity_Base {
 		ButterKnife.bind(this);
 		setLeftTitleVisible(true);
 		setTitleValue("我的保险");
+		if (App.mUserDetailInfo == null ||TextUtils.isEmpty(App.mUserDetailInfo.CarInsuranceMyOrderPage)){
+			layoutCar.setVisibility(View.GONE);
+		}
 	}
 
 	@OnClick({R.id.layout_car, R.id.layout_security})

@@ -188,6 +188,8 @@ public class Frag_Product extends Frag_Base implements OnClickListener {
 				.BcbCallBack<JSONObject>() {
 			@Override
 			public void onResponse(JSONObject response) {
+				LogUtil.i("bqt", PageNow + "-" + PageSize + "【地址】" + UrlsOne.MainpageProduct);
+
 				LogUtil.i("bqt", "产品列表" + response.toString());
 
 				try {

@@ -178,7 +178,10 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPa
 		(view.findViewById(R.id.loadmore_view)).setVisibility(View.GONE);
 		rl_car= ((RelativeLayout) view.findViewById(R.id.rl_car));
 		rl_car.setOnClickListener(this);
-		refreshLayout = ((PullToRefreshLayout) view.findViewById(R.id.refresh_view));
+		 if (App.mUserDetailInfo == null ||TextUtils.isEmpty(App.mUserDetailInfo.CarInsuranceIndexPage)){
+			 rl_car.setVisibility(View.GONE);
+		 }
+			refreshLayout = ((PullToRefreshLayout) view.findViewById(R.id.refresh_view));
 		//不显示刷新结果
 		refreshLayout.setRefreshResultView(false);
 		refreshLayout.setOnRefreshListener(new PullToRefreshLayout.OnRefreshListener() {
