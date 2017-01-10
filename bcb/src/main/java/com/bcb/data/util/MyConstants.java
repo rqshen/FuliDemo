@@ -7,6 +7,7 @@ public class MyConstants {
 
 	//192.168.1.108
 	public static final String HOST_DEV_LOCAL = "http://192.168.1.111:5071";//本地，内网。"http://192.168.1.111:7071"
+	//public static final String HOST_DEV_LOCAL = "http://120.25.59.63:5080";//临时测试
 	public static final String HOST_DEV = "http://ttgateway.100cb.cn";//测试外网。线下"http://ttgateway.100cb.cn";
 	public static final String HOST_RELEASE = "https://app.fulijr.com";//正式"http://app.fulijr.com";
 

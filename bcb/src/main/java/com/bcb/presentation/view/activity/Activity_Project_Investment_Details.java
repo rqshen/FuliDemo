@@ -189,7 +189,7 @@ public class Activity_Project_Investment_Details extends Activity_Base implement
 											ll_exit.setVisibility(View.GONE);
 											//可申请退出：{债权可退出起始日}~{债权可退出截止日}可申请退出
 											//{起息日InterestTakeDate​}~{交割日​EndDate​-5天}可申请退出
-											state_below.setText(format2.format(earningDate) + "~" + format2.format(dateTo) + "可申请退出");
+											//state_below.setText(format2.format(earningDate) + "~" + format2.format(dateTo) + "可申请退出");
 											break;
 										case 3:
 											button.setVisibility(View.VISIBLE);
@@ -197,7 +197,7 @@ public class Activity_Project_Investment_Details extends Activity_Base implement
 											button.setClickable(true);
 											button.setText("撤销退出");
 											//可撤销退出：{债权可退出起始日}~{债权可退出截止日}可撤销退出
-											state_below.setText(format2.format(earningDate) + "~" + format2.format(dateTo) + "可撤销退出");
+											//state_below.setText(format2.format(earningDate) + "~" + format2.format(dateTo) + "可撤销退出");
 											break;
 										default:
 											break;
@@ -206,7 +206,7 @@ public class Activity_Project_Investment_Details extends Activity_Base implement
 										case 1:
 										case 5://待起息。文案显示为“将于{起息日}开始计息”
 											pb.setProgress(30);
-											state_below.setText("将于 " + format.format(format.parse(bean.getInterestTakeDate())) + " 开始计息");
+											//state_below.setText("将于 " + format.format(format.parse(bean.getInterestTakeDate())) + " 开始计息");
 											break;
 										case 10:
 											pb.setProgress(50);
@@ -217,7 +217,7 @@ public class Activity_Project_Investment_Details extends Activity_Base implement
 										case 100://收益完成：“已于{债权交割日}{退出方式}”。
 											//退出方式：1、收益完成（包含完成正常还款、债权转让）2、	提前退出（借款人提前还款）
 											pb.setProgress(100);
-											state_below.setText("已于" + format.format(endDate) + bean.ReturnType);
+											//state_below.setText("已于" + format.format(endDate) + bean.ReturnType);
 											break;
 //										default:
 //											pb.setProgress(10);
@@ -225,9 +225,9 @@ public class Activity_Project_Investment_Details extends Activity_Base implement
 									}
 									//（5）收益中&不可申请推出“将于{债权交割日}退出并回收本息”
 									if (bean.Phase == 50 && bean.StatusCode == 0) {
-										state_below.setText("将于" + format.format(endDate) + "退出并回收本息");
+										//state_below.setText("将于" + format.format(endDate) + "退出并回收本息");
 									}
-
+									state_below.setText(bean.StatusTips);
 									//年化利率，锁定期限，已收本息，剩余本息
 									annual_yield.setText(String.format("%.2f", bean.getRate()) + "%");
 									earnings_end.setText(bean.getDuration());//封闭期 带单位【 "Duration": 3天】

@@ -35,6 +35,7 @@ public class Project_Investment_Details_Bean implements Serializable {
 	public float WaitPrincipalAndInterest;
 	private String Status;//状态
 	public String Duration;
+	public String StatusTips;
 	public String PackageUrl;//项目url
 	public String ReturnType;//退出方式
 	public String ExpireDate;//年化利率
