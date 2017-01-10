@@ -67,13 +67,13 @@ public class Activity_Trading_Record extends Activity_Base {
 		setBaseContentView(R.layout.activity_trading_record);
 		setLeftTitleVisible(true);
 		setTitleValue("投资记录");
-		setRightBtnVisiable(View.VISIBLE);
-		setRightTitleValue("债权变更", new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				startActivity(new Intent(Activity_Trading_Record.this, Activity_Trading_change.class));
-			}
-		});
+//		setRightBtnVisiable(View.INVISIBLE);
+//		setRightTitleValue("债权变更", new View.OnClickListener() {
+//			@Override
+//			public void onClick(View v) {
+//				startActivity(new Intent(Activity_Trading_Record.this, Activity_Trading_change.class));
+//			}
+//		});
 		init();
 	}
 

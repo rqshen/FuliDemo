@@ -42,6 +42,7 @@ import com.bcb.data.bean.BannerInfo;
 import com.bcb.data.bean.ExpiredRecordsBean;
 import com.bcb.data.bean.MainListBean;
 import com.bcb.data.bean.ProductRecordsBean;
+import com.bcb.data.bean.StringEventBusBean;
 import com.bcb.data.bean.UserDetailInfo;
 import com.bcb.data.bean.WelfareDto;
 import com.bcb.data.util.DialogUtil;
@@ -167,6 +168,8 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPa
 
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
+
+		
 		this.ctx = (Activity) view.getContext();
 		EventBus.getDefault().register(this);
 		requestQueue = App.getInstance().getRequestQueue();
@@ -178,10 +181,8 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPa
 		(view.findViewById(R.id.loadmore_view)).setVisibility(View.GONE);
 		rl_car= ((RelativeLayout) view.findViewById(R.id.rl_car));
 		rl_car.setOnClickListener(this);
-		 if (App.mUserDetailInfo == null ||TextUtils.isEmpty(App.mUserDetailInfo.CarInsuranceIndexPage)){
-			 rl_car.setVisibility(View.GONE);
-		 }
-			refreshLayout = ((PullToRefreshLayout) view.findViewById(R.id.refresh_view));
+
+		refreshLayout = ((PullToRefreshLayout) view.findViewById(R.id.refresh_view));
 		//不显示刷新结果
 		refreshLayout.setRefreshResultView(false);
 		refreshLayout.setOnRefreshListener(new PullToRefreshLayout.OnRefreshListener() {
@@ -993,8 +994,22 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPa
 		super.onResume();
 		showItemVisible();
 		if (App.saveUserInfo.getAccess_Token() == null && button_floating != null) button_floating.setVisibility(View.VISIBLE);
-
+		boolean che=App.mUserDetailInfo == null ||TextUtils.isEmpty(App.mUserDetailInfo.CarInsuranceIndexPage);
+		LogUtil.i("bqt", "【进入时是否没有获取到车险】"+che);
+		if (che){
+			rl_car.setVisibility(View.GONE);
+		}
 	}
+	public void onEventMainThread(StringEventBusBean event) {
+		if (event.getContent().equals("CXGONE")) {
+			rl_car.setVisibility(View.GONE);
+			LogUtil.i("bqt", "【隐藏车险】");
+		}else if (event.getContent().equals("CXVISIBLE")) {
+			rl_car.setVisibility(View.VISIBLE);
+			LogUtil.i("bqt", "【显示车险】");
+		}
+	}
+
 
 	@Override
 	public void onDestroy() {

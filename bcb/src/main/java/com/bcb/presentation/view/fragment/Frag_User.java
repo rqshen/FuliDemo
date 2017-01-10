@@ -31,6 +31,7 @@ import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
 import com.bcb.common.net.UrlsOne;
 import com.bcb.common.net.UrlsTwo;
+import com.bcb.data.bean.StringEventBusBean;
 import com.bcb.data.bean.UserBankCard;
 import com.bcb.data.bean.UserDetailInfo;
 import com.bcb.data.bean.UserWallet;
@@ -795,11 +796,15 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 				.BcbCallBack<JSONObject>() {
 			@Override
 			public void onResponse(JSONObject response) {
-				LogUtil.i("bqt", "保险：" + response.toString());
+				LogUtil.i("bqt", "【获取车险团险等数据】：" + response.toString());
 				if (PackageUtil.getRequestStatus(response, ctx)) {
 					App.mUserDetailInfo.CarInsuranceIndexPage=response.optJSONObject("result").optString("CarInsuranceIndexPage");
 					App.mUserDetailInfo.CarInsuranceMyOrderPage=response.optJSONObject("result").optString("CarInsuranceMyOrderPage");
 					App.mUserDetailInfo.GroupInsuranceUrl=response.optJSONObject("result").optString("GroupInsuranceUrl");
+					boolean che=TextUtils.isEmpty(App.mUserDetailInfo.CarInsuranceIndexPage);
+					LogUtil.i("bqt", "【刷新后是否没有获取到车险】"+che);
+					if (che) EventBus.getDefault().post(new StringEventBusBean("CXGONE"));
+					else EventBus.getDefault().post(new StringEventBusBean("CXVISIBLE"));
 				}
 				loadingStatus = false;
 				refreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
