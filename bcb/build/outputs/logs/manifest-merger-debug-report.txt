@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:2:1-531:12
+ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:2:1-533:12
 	package
 		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:4:11-28
 		INJECTED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml
@@ -143,7 +143,7 @@ ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:41:5-79
 	android:name
 		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:41:22-77
 application
-ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:43:5-529:19
+ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:43:5-531:19
 MERGED from [com.android.volley:volley:unspecified] E:\_code_bqt\bcb_android\bcb\build\intermediates\exploded-aar\com.android.volley\volley\unspecified\AndroidManifest.xml:9:5-20
 MERGED from [bcb_android:spinnerwheel:unspecified] E:\_code_bqt\bcb_android\bcb\build\intermediates\exploded-aar\bcb_android\spinnerwheel\unspecified\AndroidManifest.xml:11:5-15:19
 MERGED from [com.android.support:appcompat-v7:23.1.1] E:\_code_bqt\bcb_android\bcb\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.1.1\AndroidManifest.xml:22:5-20
@@ -961,6 +961,10 @@ activity#com.bcb.presentation.view.activity.A_MySecurity
 ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:527:9-528:20
 	android:name
 		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:527:19-74
+activity#com.bcb.presentation.view.activity.Activity_WebView_Upload
+ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:529:9-530:20
+	android:name
+		ADDED from E:\_code_bqt\bcb_android\bcb\src\main\AndroidManifest.xml:529:19-85
 uses-permission#android.permission.RECORD_AUDIO
 ADDED from [com.meiqia:meiqiasdk:3.2.4] E:\_code_bqt\bcb_android\bcb\build\intermediates\exploded-aar\com.meiqia\meiqiasdk\3.2.4\AndroidManifest.xml:14:5-71
 	android:name

@@ -65,6 +65,7 @@ import com.bcb.presentation.view.activity.Activity_Love;
 import com.bcb.presentation.view.activity.Activity_Main;
 import com.bcb.presentation.view.activity.Activity_NormalProject_Introduction;
 import com.bcb.presentation.view.activity.Activity_Privilege_Money;
+import com.bcb.presentation.view.activity.Activity_WebView_Upload;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
 import com.bcb.presentation.view.custom.CustomDialog.BasicDialog;
 import com.bcb.presentation.view.custom.CustomDialog.DialogWidget;
@@ -828,7 +829,7 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, ViewPa
 				} else if (App.mUserDetailInfo == null ||TextUtils.isEmpty(App.mUserDetailInfo.CarInsuranceIndexPage)) {
 					Toast.makeText(ctx, "网络异常，请刷新后重试", Toast.LENGTH_SHORT).show();
 				} else {
-					Activity_Browser.launche(ctx, "车险内购", App.mUserDetailInfo.CarInsuranceIndexPage);
+					Activity_WebView_Upload.launche(ctx, "车险内购", App.mUserDetailInfo.CarInsuranceIndexPage);
 				}
 				break;
 			case R.id.ll_daily_welfare://每日福利

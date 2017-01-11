@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools"
           package="com.bcb"
-          android:versionCode="61"
-          android:versionName="2.3.0">
+          android:versionCode="62"
+          android:versionName="2.3.1">
 
     <uses-sdk
         android:minSdkVersion="14"
@@ -525,6 +525,8 @@
         <activity android:name=".presentation.view.activity.Activity_Web_Normal">
         </activity>
         <activity android:name=".presentation.view.activity.A_MySecurity">
+        </activity>
+        <activity android:name=".presentation.view.activity.Activity_WebView_Upload">
         </activity>
     </application>
 

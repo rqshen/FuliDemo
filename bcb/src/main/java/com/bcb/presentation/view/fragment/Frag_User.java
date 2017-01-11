@@ -169,7 +169,6 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 		user_join_name.setText("");
 		user_comany_shortname = (TextView) view.findViewById(R.id.user_comany_shortname);
 		user_comany_shortname.setText("");
-
 		// 总资产
 		value_earn = (TextView) view.findViewById(R.id.value_earn);
 		// 用户余额
