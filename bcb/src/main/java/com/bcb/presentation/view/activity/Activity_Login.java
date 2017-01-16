@@ -72,11 +72,11 @@ public class Activity_Login extends Activity_Base implements Interface_Base, OnC
 
 		setBaseContentView(R.layout.activity_login);
         setLeftTitleVisible(true);
-        setTitleValue("用户登录");
-        setRightTitleValue("注册", new OnClickListener() {
+        setTitleValue("登录");
+        setRightTitleValue("联系客服", new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Activity_Register_First.launche(Activity_Login.this);
+	            MQCustomerManager.getInstance(Activity_Login.this).showCustomer(null);
             }
         });
 		init();
@@ -249,7 +249,7 @@ public class Activity_Login extends Activity_Base implements Interface_Base, OnC
 
             //客服
             case R.id.customer_service:
-                MQCustomerManager.getInstance(this).showCustomer(null);
+	            Activity_Register_First.launche(Activity_Login.this);
                 break;
         }
     }

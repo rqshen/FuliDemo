@@ -81,6 +81,7 @@ public class Activity_Main extends Activity_Base_Fragment {
 		super.onCreate(savedInstanceState);
 		App.instance.activity_main = this;
 		setContentView(R.layout.activity_main);
+
 		requestVersion();
 		requestLocation();
 		content = (CustomViewPager) findViewById(R.id.content);

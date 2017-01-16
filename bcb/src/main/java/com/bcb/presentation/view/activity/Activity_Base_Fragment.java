@@ -59,6 +59,11 @@ public class Activity_Base_Fragment extends FragmentActivity {
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = inflater.inflate(layoutResId, null);
         llContent.addView(v);
+//        if (v instanceof ViewGroup) {
+//            ((ViewGroup)v).setFitsSystemWindows(true);
+//            ((ViewGroup)v).setClipToPadding(true);
+//            LogUtil.i("bqt", "【卧槽】");
+//        }
     }
 
     @SuppressLint("NewApi")

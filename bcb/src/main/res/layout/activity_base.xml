@@ -3,13 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
                 android:id="@+id/rl_base_root"
-    android:background="@color/background"
+
+    android:background="@color/white"
     android:orientation="vertical">
     <LinearLayout
         android:id="@+id/layout_topbar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/status_hight"
         android:orientation="horizontal"
+
         android:background="@color/red"
         android:visibility="gone"/>
     <!-- 标题 -->
@@ -18,7 +20,8 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_below="@id/layout_topbar"
-        android:background="@color/red">
+
+        android:background="@color/white">
         <ImageView
             android:id="@+id/back_img"
             style="@style/btn_back"
@@ -40,7 +43,7 @@
                 android:layout_gravity="center_vertical"
                 android:gravity="center"
                 android:singleLine="true"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textSize="@dimen/main_text_default" />
             <ImageView
                 android:id="@+id/dropdown"
@@ -48,8 +51,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="5dip"
-                android:background="@drawable/dropdown"
-                android:visibility="gone" />
+                android:background="@drawable/r_back_3x"                 />
         </LinearLayout>
 
         <!-- 标题 -->
@@ -59,14 +61,14 @@
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
             android:gravity="center"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="@dimen/main_text_large" />
 
         <!-- 右边的标题 -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginRight="@dimen/margin_size_default"
+            android:layout_marginRight="15dp"
             android:layout_alignParentRight="true"
             android:gravity="center">
             <TextView
@@ -77,8 +79,8 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:text=""
-                android:textColor="@color/white"
-                android:textSize="@dimen/main_text_default" />
+                android:textColor="@color/black"
+                android:textSize="14sp" />
         </LinearLayout>
 
         <!-- 右边的图标 -->
@@ -93,7 +95,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/layout_title"
-        android:background="@color/background"
+        android:background="@color/white"
         android:orientation="vertical">
     </LinearLayout>
 </RelativeLayout>

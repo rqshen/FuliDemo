@@ -40,7 +40,7 @@
         <item name="android:layout_width">50dip</item>
         <item name="android:layout_height">50dip</item>
         <item name="android:padding">15dip</item>
-        <item name="android:src">@drawable/return_delault</item>
+        <item name="android:src">@drawable/r_back_3x</item>
     </style>
 
     <style name="btn_right">

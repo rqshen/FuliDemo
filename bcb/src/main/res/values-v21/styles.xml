@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="AppBaseTheme" parent="android:Theme.Material.Light.NoActionBar">
     </style>
+
+<!--
+    <style name="AppTheme" parent="AppBaseTheme">
+        &lt;!&ndash; 隐藏标题栏 &ndash;&gt;
+        <item name="android:windowNoTitle">true</item>
+        &lt;!&ndash; 窗口透明的状态栏 &ndash;&gt;
+        <item name="android:windowTranslucentStatus">true</item>
+        &lt;!&ndash; 窗口透明的导航栏 &ndash;&gt;
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>-->
 </resources>

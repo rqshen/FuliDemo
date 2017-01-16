@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bcb.R;
@@ -32,7 +33,8 @@ public class Activity_Base extends Activity {
 
 	private static final String FILE_NAME = "App_Enter_Background_Time";
 	private static final String ENTER_BACKGROUND_KEY = "AppOnBackGround";
-
+	LinearLayout llContent;
+	RelativeLayout rl_base_root;
 	private AlertView alertView;
 
 	@Override
@@ -41,14 +43,21 @@ public class Activity_Base extends Activity {
 		token = TokenUtil.getEncodeToken(this);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_base);
+		llContent = (LinearLayout) findViewById(R.id.content);
+		rl_base_root = (RelativeLayout) findViewById(R.id.rl_base_root);
 	}
 
 	@SuppressLint("NewApi")
 	public void setBaseContentView(int layoutResId) {
-		LinearLayout llContent = (LinearLayout) findViewById(R.id.content);
 		LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View v = inflater.inflate(layoutResId, null);
+//		if (v instanceof ViewGroup) {
+//			((ViewGroup)v).setFitsSystemWindows(true);
+//			((ViewGroup)v).setClipToPadding(true);
+//			LogUtil.i("bqt", "【卧槽】");
+//		}
 		llContent.addView(v);
+
 	}
 
 	@SuppressLint("NewApi")
