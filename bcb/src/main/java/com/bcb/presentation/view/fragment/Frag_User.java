@@ -2,22 +2,26 @@ package com.bcb.presentation.view.fragment;
 
 import android.annotation.SuppressLint;
 import android.app.DownloadManager;
+import android.app.ListActivity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.TextUtils;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -67,6 +71,8 @@ import com.bcb.presentation.view.custom.PullableView.PullableScrollView;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
@@ -80,7 +86,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 	private Context ctx;
 	//我的保险
 	RelativeLayout layout_security;
-
+ImageView iv_head;
 	private TextView value_earn, value_balance, value_back, value_total;
 	private UserWallet mUserWallet;
 	private UserDetailInfo mUserDetailInfo;
@@ -92,8 +98,8 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 	private boolean loadingError = false;
 
 	//加入公司
-	private LinearLayout user_company_layout;
-	private ImageView joinCompany;
+//	private LinearLayout user_company_layout;
+//	private ImageView joinCompany;
 	private TextView user_join_name;
 	private TextView user_comany_shortname;
 	//广播
@@ -143,6 +149,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 		title_text.setText("我");
 
 		tv_update = (TextView) view.findViewById(R.id.tv_update);
+		iv_head = (ImageView) view.findViewById(R.id.iv_head);
 		layout_update = (RelativeLayout) view.findViewById(R.id.layout_update);
 		layout_security = (RelativeLayout) view.findViewById(R.id.layout_security);
 		layout_security.setOnClickListener(this);
@@ -158,17 +165,16 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 		view.findViewById(R.id.ll_test)
 				.setOnClickListener(this);
 		//加入公司
-		joinCompany = (ImageView) view.findViewById(R.id.join_company);
+//		joinCompany = (ImageView) view.findViewById(R.id.join_company);
 		layout_scrollview = (PullableScrollView) view.findViewById(R.id.layout_scrollview);
-		joinCompany.setOnClickListener(this);
+//		joinCompany.setOnClickListener(this);
 
 		//已经加入公司的LinearLayout及其元素
-		user_company_layout = (LinearLayout) view.findViewById(R.id.user_company_layout);
-		user_company_layout.setVisibility(View.GONE);
+//		user_company_layout = (LinearLayout) view.findViewById(R.id.user_company_layout);
+//		user_company_layout.setVisibility(View.GONE);
 		user_join_name = (TextView) view.findViewById(R.id.user_join_name);
 		user_join_name.setText("");
 		user_comany_shortname = (TextView) view.findViewById(R.id.user_comany_shortname);
-		user_comany_shortname.setText("");
 		// 总资产
 		value_earn = (TextView) view.findViewById(R.id.value_earn);
 		// 用户余额
@@ -273,11 +279,11 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 		}
 		//Token不存在时，则表示没有登陆
 		else {
-			//设置banner
-			setupJoinCompanyMessage();
 			//初始化余额信息
 			showData();
 		}
+		//设置banner
+		setupJoinCompanyMessage();
 	}
 
 	@Override
@@ -333,32 +339,38 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 	private void setupJoinCompanyMessage() {
 		//如果mUserDetailInfo为空，则表示没有登陆
 		if (App.mUserDetailInfo == null) {
-			joinCompany.setVisibility(View.VISIBLE);
-			user_company_layout.setVisibility(View.GONE);
+			user_join_name.setText("您好，请登录/注册");
+			user_comany_shortname.setVisibility(View.GONE);
+			iv_head.setImageDrawable(getResources().getDrawable(R.drawable.iv_my_head2));
 			return;
 		}
+		user_comany_shortname.setVisibility(View.VISIBLE);
+		iv_head.setImageDrawable(getResources().getDrawable(R.drawable.iv_my_head));
 		//如果加入公司信息不为空并且状态值为10(通过)的时候，则显示用户名和加入公司的缩写
-		if (App.mUserDetailInfo.MyCompany != null) {
+//		if (App.mUserDetailInfo.MyCompany != null) {
 			//审核通过
-			if (!TextUtils.isEmpty(mUserDetailInfo.MyCompany.getShortName())) {
-				joinCompany.setVisibility(View.GONE);
-				user_company_layout.setVisibility(View.VISIBLE);
+			if (App.mUserDetailInfo.MyCompany != null&&!TextUtils.isEmpty(mUserDetailInfo.MyCompany.getShortName())) {
+//				joinCompany.setVisibility(View.GONE);
+//				user_company_layout.setVisibility(View.VISIBLE);
 				user_comany_shortname.setText(mUserDetailInfo.MyCompany.getShortName());
 				user_join_name.setText(mUserDetailInfo.UserName);
+				user_comany_shortname.setCompoundDrawables(getActivity().getResources().getDrawable(R.drawable.rz),null,null,null);
 			} else {
-				joinCompany.setVisibility(View.VISIBLE);
-
-				user_company_layout.setVisibility(View.GONE);
+				user_comany_shortname.setText("加入我的公司拿员工专属福利");
+				user_comany_shortname.setCompoundDrawables(null,null,null,null);
+				user_join_name.setText("您好"+App.saveUserInfo.getLocalPhone());
+//				joinCompany.setVisibility(View.VISIBLE);
+//				user_company_layout.setVisibility(View.GONE);
 			}
-		}
+//		}
 		//如果加入公司信息为空的时候，则要判断是否要隐藏Banner
-		else {
-			user_company_layout.setVisibility(View.GONE);
-			//根据标志为判断是否隐藏加入公司Banner
-			if (App.viewJoinBanner) {
-				joinCompany.setVisibility(View.VISIBLE);
-			} else joinCompany.setVisibility(View.GONE);
-		}
+//		else {
+//			user_company_layout.setVisibility(View.GONE);
+//		//根据标志为判断是否隐藏加入公司Banner
+//			if (App.viewJoinBanner) {
+//				joinCompany.setVisibility(View.VISIBLE);
+//			} else joinCompany.setVisibility(View.GONE);
+//		}
 		layout_scrollview.scrollTo(0, 0);
 		//        layout_scrollview.fullScroll(ScrollView.FOCUS_UP);
 	}
@@ -663,8 +675,8 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 			else if (intent.getAction()
 					.equals("com.bcb.logout.success")) {
 				LogUtil.i("bqt", "【Receiver】【onReceive】注销");
-				joinCompany.setVisibility(View.VISIBLE);
-				user_company_layout.setVisibility(View.GONE);
+//				joinCompany.setVisibility(View.VISIBLE);
+//				user_company_layout.setVisibility(View.GONE);
 				layout_scrollview.scrollTo(0, 0);
 			}
 		}
@@ -871,8 +883,8 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 			LogUtil.i("bqt", "【Frag_User】【onE  ventMainThread】状态：" + flag);
 			switch (flag) {
 				case BroadcastEvent.LOGOUT:
-					joinCompany.setVisibility(View.VISIBLE);
-					user_company_layout.setVisibility(View.GONE);
+//					joinCompany.setVisibility(View.VISIBLE);
+//					user_company_layout.setVisibility(View.GONE);
 					layout_scrollview.scrollTo(0, 0);
 					break;
 				case BroadcastEvent.LOGIN:
