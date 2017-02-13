@@ -41,7 +41,6 @@
                 android:hint="请输入手机号码"
                 android:inputType="phone"
                 android:maxLength="11"
-                android:paddingLeft="35dip"
                 android:singleLine="true"
                 android:textColor="#424954"
                 android:textColorHint="@color/txt_gray"
@@ -75,7 +74,6 @@
                 android:gravity="center"
                 android:hint="请输入登录密码"
                 android:inputType="textPassword"
-                android:paddingLeft="35dip"
                 android:singleLine="true"
                 android:textColor="#424954"
                 android:textColorHint="@color/txt_gray"
@@ -96,20 +94,21 @@
                 android:background="@drawable/r_lock_3x"/>
 
             <ImageView
+                android:id="@+id/im_visible"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/margin_size_default"
-                android:layout_marginRight="25dp"
-                android:background="@drawable/r_invisible_3x"/>
+                android:paddingLeft="@dimen/margin_size_default"
+                android:paddingRight="25dp"
+                android:src="@drawable/r_visible_3x"/>
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/localcode_layout"
             android:layout_width="fill_parent"
             android:layout_height="50.0dip"
-            android:layout_marginTop="15dip"
+            android:layout_marginTop="25dip"
             android:visibility="gone">
 
             <EditText
@@ -150,7 +149,7 @@
             android:layout_width="match_parent"
             android:layout_height="58dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="70dip"
+            android:layout_marginTop="35dip"
             android:background="@drawable/r_button"
             android:text="登录"
             android:textColor="@color/white"

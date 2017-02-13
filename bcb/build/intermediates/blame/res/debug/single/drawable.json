@@ -536,6 +536,10 @@
         "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable\\bank_cgb.png"
     },
     {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable\\bg_sel_stroke_red.xml",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable\\bg_sel_stroke_red.xml"
+    },
+    {
         "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable\\pay_button_selector.xml",
         "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable\\pay_button_selector.xml"
     },
@@ -546,10 +550,6 @@
     {
         "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable\\right_btn.xml",
         "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable\\right_btn.xml"
-    },
-    {
-        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable\\bg_sel_stroke_red.xml",
-        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable\\bg_sel_stroke_red.xml"
     },
     {
         "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable\\umeng_update_btn_check_on_pressed_holo_light.png",
@@ -664,12 +664,12 @@
         "source": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable\\abc_btn_radio_material.xml"
     },
     {
-        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable\\umeng_update_btn_check_off_pressed_holo_light.png",
-        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable\\umeng_update_btn_check_off_pressed_holo_light.png"
-    },
-    {
         "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_text_cursor_material.xml",
         "source": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.1.1\\res\\drawable\\abc_text_cursor_material.xml"
+    },
+    {
+        "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable\\umeng_update_btn_check_off_pressed_holo_light.png",
+        "source": "E:\\_code_bqt\\bcb_android\\bcb\\src\\main\\res\\drawable\\umeng_update_btn_check_off_pressed_holo_light.png"
     },
     {
         "merged": "E:\\_code_bqt\\bcb_android\\bcb\\build\\intermediates\\res\\merged\\debug\\drawable\\umeng_update_title_bg.xml",

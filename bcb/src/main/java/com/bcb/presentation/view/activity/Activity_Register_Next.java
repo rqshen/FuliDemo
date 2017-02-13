@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bcb.R;
 import com.bcb.data.util.LogUtil;
@@ -30,11 +31,11 @@ public class Activity_Register_Next extends Activity_Base implements Interface_V
     private static final String TAG = "Activity_Register_Next";
 
     private EditText userpwd, userpwdconfirm, regservicecode;
-    private Button send,next;//
+    private Button next;//
     private String phonenum;
     private int time;
     private Timer timer;
-    private TextView errortips_passwd, errortips_confirm;
+    private TextView send,login;
 
     //显示密码强度
     private TextView strength1, strength2, strength3;
@@ -45,8 +46,7 @@ public class Activity_Register_Next extends Activity_Base implements Interface_V
     //Presenter
     private IPresenter_Register iPresenterRegister;
 
-    //客服
-    private TextView customer_service;
+
     //是否成功获取了验证码
 //    private boolean isHasGetVerification = false;
 
@@ -65,6 +65,12 @@ public class Activity_Register_Next extends Activity_Base implements Interface_V
             }
         });
         setTitleValue("注册");
+        setRightTitleValue("联系客服", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MQCustomerManager.getInstance(Activity_Register_Next.this).showCustomer(null);
+            }
+        });
         //创建Presenter
         iPresenterRegister = new IPresenter_RegisterImpl(Activity_Register_Next.this, this);
         init();
@@ -75,18 +81,16 @@ public class Activity_Register_Next extends Activity_Base implements Interface_V
     private void init() {
         userpwd = (EditText) findViewById(R.id.userpwd);
         userpwdconfirm = (EditText) findViewById(R.id.userpwdconfirm);
-        errortips_passwd = (TextView) findViewById(R.id.errortips_passwd);
-        errortips_confirm = (TextView) findViewById(R.id.errortips_confirm);
+
         regservicecode = (EditText) findViewById(R.id.regservicecode);
-        customer_service = (TextView) findViewById(R.id.customer_service);
-        customer_service.setOnClickListener(this);
         strength1 = (TextView) findViewById(R.id.strength1);
         strength2 = (TextView) findViewById(R.id.strength2);
         strength3 = (TextView) findViewById(R.id.strength3);
 
-        send = (Button) findViewById(R.id.send);
+        send = (TextView) findViewById(R.id.send);
         next = (Button) findViewById(R.id.button_confirm);
-
+        login = (TextView) findViewById(R.id.login);
+        login.setOnClickListener(this);
         send.setOnClickListener(this);
         next.setOnClickListener(this);
         //获取到的手机号码
@@ -97,21 +101,27 @@ public class Activity_Register_Next extends Activity_Base implements Interface_V
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (true) {
+                    return;
+                }
                 // 判断密码是否规范
                 if (!RegexManager.isPasswordNum(userpwd.getText().toString())) {
-                    errortips_passwd.setVisibility(View.VISIBLE);
+                    Toast.makeText(Activity_Register_Next.this, "请输入8-15位登录密码", Toast.LENGTH_SHORT).show();
+//                    errortips_passwd.setVisibility(View.VISIBLE);
                     // 判断是否包含非法字符
                     if (!RegexManager.isRightCode(userpwd.getText().toString())) {
-                        errortips_passwd.setText("输入的密码包含非法字符");
+                        Toast.makeText(Activity_Register_Next.this, "输入的密码包含非法字符", Toast.LENGTH_SHORT).show();
+//                        errortips_passwd.setText("输入的密码包含非法字符");
                     } else {
-                        errortips_passwd.setText("请输入8-15位的密码");
+                        Toast.makeText(Activity_Register_Next.this, "请输入8-15位的密码", Toast.LENGTH_SHORT).show();
+//                        errortips_passwd.setText("请输入8-15位的密码");
                     }
                 } else {
-                    errortips_passwd.setVisibility(View.GONE);
-                    errortips_passwd.setText("");
+//                    errortips_passwd.setVisibility(View.GONE);
+//                    errortips_passwd.setText("");
                 }
-                errortips_confirm.setVisibility(View.GONE);
-                errortips_confirm.setText("");
+//                errortips_confirm.setVisibility(View.GONE);
+//                errortips_confirm.setText("");
 
                 //不能输入中文
                 String editable = userpwd.getText().toString();
@@ -178,25 +188,32 @@ public class Activity_Register_Next extends Activity_Base implements Interface_V
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (true) {
+                    return;
+                }
                 // 判断密码是否规范
                 if (!RegexManager.isPasswordNum(userpwdconfirm.getText().toString())) {
-                    errortips_passwd.setVisibility(View.VISIBLE);
+                    Toast.makeText(Activity_Register_Next.this, "请输入8-15位的密码", Toast.LENGTH_SHORT).show();
+//                    errortips_passwd.setVisibility(View.VISIBLE);
                     // 判断是否包含非法字符
                     if (!RegexManager.isRightCode(userpwdconfirm.getText().toString())) {
-                        errortips_passwd.setText("输入密码包含非法字符");
+                        Toast.makeText(Activity_Register_Next.this, "输入密码包含非法字符", Toast.LENGTH_SHORT).show();
+//                        errortips_passwd.setText("输入密码包含非法字符");
                     } else {
-                        errortips_passwd.setText("请输入8-15位的密码");
+                        Toast.makeText(Activity_Register_Next.this, "请输入8-15位的密码", Toast.LENGTH_SHORT).show();
+//                        errortips_passwd.setText("请输入8-15位的密码");
                     }
                 } else {
-                    errortips_passwd.setVisibility(View.GONE);
-                    errortips_passwd.setText("");
+//                    errortips_passwd.setVisibility(View.GONE);
+//                    errortips_passwd.setText("");
                     if (!userpwd.getText().toString().equals(userpwdconfirm.getText().toString())) {
-                        errortips_passwd.setVisibility(View.VISIBLE);
-                        errortips_passwd.setText("两次密码输入不一致");
+                        Toast.makeText(Activity_Register_Next.this, "两次密码输入不一致", Toast.LENGTH_SHORT).show();
+//                        errortips_passwd.setVisibility(View.VISIBLE);
+//                        errortips_passwd.setText("两次密码输入不一致");
                     }
                 }
-                errortips_confirm.setVisibility(View.GONE);
-                errortips_confirm.setText("");
+//                errortips_confirm.setVisibility(View.GONE);
+//                errortips_confirm.setText("");
             }
 
             @Override
@@ -214,12 +231,16 @@ public class Activity_Register_Next extends Activity_Base implements Interface_V
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (true) {
+                    return;
+                }
                 if (!RegexManager.isResizngCode(regservicecode.getText().toString())) {
-                    errortips_confirm.setVisibility(View.VISIBLE);
-                    errortips_confirm.setText("请输入6位验证码");
+                    Toast.makeText(Activity_Register_Next.this, "请输入6位验证码", Toast.LENGTH_SHORT).show();
+//                    errortips_confirm.setVisibility(View.VISIBLE);
+//                    errortips_confirm.setText("请输入6位验证码");
                 } else {
-                    errortips_confirm.setVisibility(View.GONE);
-                    errortips_confirm.setText("");
+//                    errortips_confirm.setVisibility(View.GONE);
+//                    errortips_confirm.setText("");
                 }
             }
 
@@ -242,13 +263,15 @@ public class Activity_Register_Next extends Activity_Base implements Interface_V
             if (userpwd.getText().toString().length() < 8 || userpwd.getText().toString().length() > 15) {
                 userpwd.requestFocus();
                 userpwd.setSelection(userpwd.getText().toString().length());
-                errortips_passwd.setVisibility(View.VISIBLE);
-                errortips_passwd.setText("请输入8-15位的密码");
+                Toast.makeText(Activity_Register_Next.this, "请输入8-15位的确认密码", Toast.LENGTH_SHORT).show();
+//                errortips_passwd.setVisibility(View.VISIBLE);
+//                errortips_passwd.setText("请输入8-15位的密码");
                 return false;
             } else {
                 if (!RegexManager.isResizngCode(userpwdconfirm.getText().toString())) {
-                    errortips_passwd.setVisibility(View.VISIBLE);
-                    errortips_passwd.setText("输入密码包含非法字符");
+                    Toast.makeText(Activity_Register_Next.this, "输入密码包含非法字符", Toast.LENGTH_SHORT).show();
+//                    errortips_passwd.setVisibility(View.VISIBLE);
+//                    errortips_passwd.setText("输入密码包含非法字符");
                     return false;
                 }
             }
@@ -256,34 +279,37 @@ public class Activity_Register_Next extends Activity_Base implements Interface_V
             if (userpwdconfirm.getText().toString().length() < 8 || userpwdconfirm.getText().toString().length() > 15) {
                 userpwdconfirm.requestFocus();
                 userpwdconfirm.setSelection(userpwdconfirm.getText().toString().length());
-                errortips_passwd.setVisibility(View.VISIBLE);
-                errortips_passwd.setText("请输入8-15位的确认密码");
+                Toast.makeText(Activity_Register_Next.this, "请输入8-15位的确认密码", Toast.LENGTH_SHORT).show();
+//                errortips_passwd.setVisibility(View.VISIBLE);
+//                errortips_passwd.setText("请输入8-15位的确认密码");
                 return false;
             } else {
                 if (!RegexManager.isResizngCode(userpwdconfirm.getText().toString())) {
-                    errortips_passwd.setVisibility(View.VISIBLE);
-                    errortips_passwd.setText("输入密码包含非法字符");
+                    Toast.makeText(Activity_Register_Next.this, "输入密码包含非法字符", Toast.LENGTH_SHORT).show();
+//                    errortips_passwd.setVisibility(View.VISIBLE);
+//                    errortips_passwd.setText("输入密码包含非法字符");
                     return false;
                 }
             }
             return false;
         } else {
-            errortips_passwd.setVisibility(View.GONE);
-            errortips_passwd.setText("");
-            errortips_confirm.setVisibility(View.GONE);
-            errortips_confirm.setText("");
+//            errortips_passwd.setVisibility(View.GONE);
+//            errortips_passwd.setText("");
+//            errortips_confirm.setVisibility(View.GONE);
+//            errortips_confirm.setText("");
         }
 
         //判断输入密码是否一致
         if (!judgePwdSame()) {
-            errortips_passwd.setVisibility(View.VISIBLE);
-            errortips_passwd.setText("两次密码输入不一致");
+            Toast.makeText(Activity_Register_Next.this, "两次密码输入不一致", Toast.LENGTH_SHORT).show();
+//            errortips_passwd.setVisibility(View.VISIBLE);
+//            errortips_passwd.setText("两次密码输入不一致");
             return false;
         } else {
-            errortips_passwd.setVisibility(View.GONE);
-            errortips_passwd.setText("");
-            errortips_confirm.setVisibility(View.GONE);
-            errortips_confirm.setText("");
+//            errortips_passwd.setVisibility(View.GONE);
+//            errortips_passwd.setText("");
+//            errortips_confirm.setVisibility(View.GONE);
+//            errortips_confirm.setText("");
         }
         return true;
     }
@@ -302,14 +328,14 @@ public class Activity_Register_Next extends Activity_Base implements Interface_V
         public void handleMessage(android.os.Message msg) {
             switch (msg.what) {
                 case 1:
-                    send.setText(time + "S 后可再次发送");
-                    send.setBackgroundResource(R.drawable.button_gray);
+                    send.setText(time + "s");
+//                    send.setBackgroundResource(R.drawable.button_gray);
                     break;
 
                 case 2:
                     // 设置获取验证码按钮为可以点击
                     send.setEnabled(true);
-                    send.setBackgroundResource(R.drawable.request_code_selector);
+//                    send.setBackgroundResource(R.drawable.request_code_selector);
                     send.setText("重新发送");
                     break;
             }
@@ -414,22 +440,23 @@ public class Activity_Register_Next extends Activity_Base implements Interface_V
             //发送验证码
             case R.id.send:
                 //检查是否输入了密码
-                if (toGoBeforeCheck()) {
+//                if (toGoBeforeCheck()) {
                     // 设置获取验证码按钮为不可点击，防止获取多条验证码
                     send.setEnabled(false);
-                    send.setBackgroundResource(R.drawable.button_shape_unenabled);
+//                    send.setBackgroundResource(R.drawable.button_shape_unenabled);
                     //发送验证码
                     UmengUtil.eventById(Activity_Register_Next.this, R.string.captcha_sent);
                     getVerificationCode();
-                }
+//                }
                 break;
 
             case R.id.button_confirm:
                 UmengUtil.eventById(Activity_Register_Next.this, R.string.reg3);
                 //检查密码是否正确
                 if (userpwdconfirm.getText().toString().length() < 8) {
-                    errortips_confirm.setVisibility(View.VISIBLE);
-                    errortips_confirm.setText("密码长度不够，请重新输入");
+                    Toast.makeText(Activity_Register_Next.this, "密码长度不够，请重新输入", Toast.LENGTH_SHORT).show();
+//                    errortips_confirm.setVisibility(View.VISIBLE);
+//                    errortips_confirm.setText("密码长度不够，请重新输入");
                     userpwd.requestFocus();
                     userpwd.setSelection(userpwd.getText().toString().length());
                     break;
@@ -437,8 +464,9 @@ public class Activity_Register_Next extends Activity_Base implements Interface_V
                 if (!toGoBeforeCheck()) {
                     //输入密码不一致
                     if (!judgePwdSame() && userpwdconfirm.getText().toString().length() > 0) {
-                        errortips_confirm.setVisibility(View.VISIBLE);
-                        errortips_confirm.setText("两次密码输入不一致");
+                        Toast.makeText(Activity_Register_Next.this, "两次密码输入不一致", Toast.LENGTH_SHORT).show();
+//                        errortips_confirm.setVisibility(View.VISIBLE);
+//                        errortips_confirm.setText("两次密码输入不一致");
                         userpwd.requestFocus();
                         userpwd.setSelection(userpwd.getText().toString().length());
                         break;
@@ -451,23 +479,24 @@ public class Activity_Register_Next extends Activity_Base implements Interface_V
 //                    return;
 //                }
                 if (regservicecode.getText().toString().length() != 6) {
-                    errortips_confirm.setVisibility(View.VISIBLE);
-                    errortips_confirm.setText("请输入6位验证码");
+                    Toast.makeText(Activity_Register_Next.this, "请输入6位验证码", Toast.LENGTH_SHORT).show();
+//                    errortips_confirm.setVisibility(View.VISIBLE);
+//                    errortips_confirm.setText("请输入6位验证码");
                     if (regservicecode.getText().toString().length() != 6) {
                         regservicecode.requestFocus();
                         regservicecode.setSelection(regservicecode.getText().toString().length());
                     }
                     break;
                 } else {
-                    errortips_confirm.setVisibility(View.GONE);
-                    errortips_confirm.setText("");
+//                    errortips_confirm.setVisibility(View.GONE);
+//                    errortips_confirm.setText("");
                 }
                 toNext();
                 break;
 
             //客服
-            case R.id.customer_service:
-                MQCustomerManager.getInstance(this).showCustomer(null);
+            case R.id.login:
+                startActivity(new Intent(this, Activity_Login.class));
                 break;
         }
     }
@@ -483,7 +512,7 @@ public class Activity_Register_Next extends Activity_Base implements Interface_V
             ToastUtil.alert(Activity_Register_Next.this, message);
             // 设置获取验证码按钮为可以点击
             send.setEnabled(true);
-            send.setBackgroundResource(R.drawable.request_code_selector);
+//            send.setBackgroundResource(R.drawable.request_code_selector);
         }
         //成功
         else {
@@ -493,8 +522,9 @@ public class Activity_Register_Next extends Activity_Base implements Interface_V
                 ToastUtil.alert(Activity_Register_Next.this, " 验证码已发送至 " + phonenum);
 //                isHasGetVerification = true;
             } else {
-                errortips_confirm.setVisibility(View.VISIBLE);
-                errortips_confirm.setText(message);
+                Toast.makeText(Activity_Register_Next.this, "请输入验证码", Toast.LENGTH_SHORT).show();
+//                errortips_confirm.setVisibility(View.VISIBLE);
+//                errortips_confirm.setText(message);
             }
         }
     }

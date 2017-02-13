@@ -1,70 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
-    android:orientation="vertical" >
-
+    android:background="@color/white"
+    android:paddingBottom="15dp">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dip"
-        android:orientation="vertical" >
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-
-            <EditText
-                android:id="@+id/phone"
-                android:layout_width="match_parent"
-                android:layout_height="50dip"
-                android:layout_marginLeft="28dip"
-                android:layout_marginRight="28dip"
-                android:background="@drawable/edit_bg"
-                android:hint="请输入手机号码"
-                android:inputType="phone"
-                android:maxLength="11"
-                android:paddingLeft="35.2dip"
-                android:singleLine="true"
-                android:textColorHint="@color/txt_gray"
-                android:textSize="@dimen/main_text_small" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/phone"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="11dp"
-                android:background="@drawable/phone" />
-        </RelativeLayout>
+        <ImageView
+            android:id="@+id/iv_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/r_logo_3x"/>
 
         <TextView
-            android:id="@+id/error_tips"
             android:layout_width="match_parent"
-            android:layout_height="45dip"
-            android:layout_marginLeft="28dip"
-            android:layout_marginRight="28dip"
-            android:layout_marginTop="15dip"
-            android:background="@drawable/error_tips"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
             android:gravity="center"
-            android:text="请输入正确的手机号码"
-            android:textColor="@color/red"
-            android:textSize="@dimen/main_text_default"
-            android:visibility="gone" />
+            android:singleLine="true"
+            android:text="注册福利金融账户享受理财"
+            android:textColor="#424954"
+            android:textSize="15sp"/>
 
-        <Button
-            android:id="@+id/button_confirm"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/button_height"
-            android:layout_margin="28dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="15dip"
-            android:background="@drawable/button_red_selector"
-            android:text="下一步"
-            android:textColor="@color/white"
-            android:textSize="@dimen/main_text_default" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dip"
+            android:layout_marginLeft="20dip"
+            android:layout_marginRight="20dip"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dip"
+
+                    android:background="@null"
+                    android:digits="0123456789"
+                    android:gravity="center"
+                    android:hint="请输入注册电话"
+                    android:inputType="phone"
+                    android:maxLength="11"
+                    android:paddingLeft="35dip"
+                    android:singleLine="true"
+                    android:textColor="#424954"
+                    android:textColorHint="@color/txt_gray"
+                    android:textSize="17sp"/>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1px"
+                    android:layout_below="@+id/phone"
+                    android:background="#e5e5e5"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/userphone"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/margin_size_default"
+                    android:background="@drawable/r_phone_3x"/>
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/error_tips"
+                android:layout_width="match_parent"
+                android:layout_height="45dip"
+                android:layout_marginLeft="28dip"
+                android:layout_marginRight="28dip"
+                android:layout_marginTop="25dip"
+                android:background="@drawable/error_tips"
+                android:gravity="center"
+                android:text="请输入正确的手机号码"
+                android:textColor="@color/red"
+                android:textSize="@dimen/main_text_default"
+                android:visibility="gone"/>
+
+            <Button
+                android:id="@+id/button_confirm"
+                android:layout_width="match_parent"
+                android:layout_height="58dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="35dip"
+                android:background="@drawable/r_button"
+                android:text="下一步"
+                android:textColor="@color/white"
+                android:textSize="@dimen/button_titlesize"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="已有账号？去登陆"
+            android:textColor="#424954"
+            android:textSize="15sp"/>
     </LinearLayout>
-</LinearLayout>
+
+    <include
+        layout="@layout/b_bottom"
+        />
+</RelativeLayout>

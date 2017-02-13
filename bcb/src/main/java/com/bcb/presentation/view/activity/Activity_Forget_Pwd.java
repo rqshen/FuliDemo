@@ -6,16 +6,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
-import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.bcb.R;
@@ -25,6 +26,7 @@ import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
 import com.bcb.common.net.BcbRequestTag;
 import com.bcb.common.net.UrlsOne;
+import com.bcb.data.util.MQCustomerManager;
 import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.PackageUtil;
 import com.bcb.data.util.RegexManager;
@@ -42,9 +44,9 @@ import java.util.TimerTask;
 public class Activity_Forget_Pwd extends Activity_Base {
 
 	private static final String TAG = "Activity_Forget_Pwd";
-	private TextView error_tips;
-	private Button send, next;
-	
+	private TextView send, error_tips;
+	private Button next;
+	private ImageView  im_visible;
 	private EditText id_card, phone, regservicecode, newpwd;
 	
 	private int time;
@@ -53,7 +55,7 @@ public class Activity_Forget_Pwd extends Activity_Base {
     private boolean isLogin;
 
 	private LinearLayout pwd_strength_layout;
-	private ScrollView scrollview;
+//	private ScrollView scrollview;
 	private TextView strength1, strength2, strength3;
 	private Handler mHandler = new Handler();
 	private ProgressDialog progressDialog;
@@ -82,17 +84,24 @@ public class Activity_Forget_Pwd extends Activity_Base {
 		isLogin = getIntent().getBooleanExtra("isLogin", true);
 		setBaseContentView(R.layout.activity_forget_pwd);
 		setLeftTitleVisible(true);
-		if (isLogin){
-			setTitleValue("找回登录密码");
-		} else {
-			setTitleValue("找回交易密码");
-		}
+		setTitleValue("找回密码");
+//		if (isLogin){
+//			setTitleValue("找回登录密码");
+//		} else {
+//			setTitleValue("找回交易密码");
+//		}
+		setRightTitleValue("联系客服", new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				MQCustomerManager.getInstance(Activity_Forget_Pwd.this).showCustomer(null);
+			}
+		});
         requestQueue = App.getInstance().getRequestQueue();
 		init();
 	}
 
 	private void init() {
-		scrollview = (ScrollView) findViewById(R.id.scrollview);
+//		scrollview = (ScrollView) findViewById(R.id.scrollview);
 		
 		id_card = (EditText) findViewById(R.id.id_card);		
 		phone = (EditText) findViewById(R.id.phone);
@@ -104,9 +113,10 @@ public class Activity_Forget_Pwd extends Activity_Base {
 			phone.setVisibility(View.GONE);
 		}
 		regservicecode = (EditText) findViewById(R.id.regservicecode);
-		send = (Button) findViewById(R.id.send);
+		send = (TextView) findViewById(R.id.send);
 		newpwd = (EditText) findViewById(R.id.newpwd);
 		error_tips = (TextView) findViewById(R.id.error_tips);
+		im_visible = (ImageView) findViewById(R.id.im_visible);
 
 		pwd_strength_layout = (LinearLayout) findViewById(R.id.pwd_strength_layout);
 		strength1 = (TextView) findViewById(R.id.strength1); 
@@ -115,17 +125,17 @@ public class Activity_Forget_Pwd extends Activity_Base {
 				
 		id_card.setRawInputType(InputType.TYPE_CLASS_NUMBER);
 			
-		if (isLogin) {
-			newpwd.setHint("请输入8-15位新密码");
-			newpwd.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
-			newpwd.setFilters(new InputFilter[]{new InputFilter.LengthFilter(15)});
-			pwd_strength_layout.setVisibility(View.VISIBLE);			
-		} else {
-			newpwd.setHint("请输入6位新密码");
-			newpwd.setInputType(InputType.TYPE_CLASS_NUMBER);
-			newpwd.setFilters(new InputFilter[]{new InputFilter.LengthFilter(6)});
-			pwd_strength_layout.setVisibility(View.GONE);
-		}	
+//		if (isLogin) {
+//			newpwd.setHint("请输入8-15位新密码");
+//			newpwd.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+//			newpwd.setFilters(new InputFilter[]{new InputFilter.LengthFilter(15)});
+//			pwd_strength_layout.setVisibility(View.VISIBLE);
+//		} else {
+//			newpwd.setHint("请输入6位新密码");
+//			newpwd.setInputType(InputType.TYPE_CLASS_NUMBER);
+//			newpwd.setFilters(new InputFilter[]{new InputFilter.LengthFilter(6)});
+//			pwd_strength_layout.setVisibility(View.GONE);
+//		}
 		
 		newpwd.setOnTouchListener(new OnTouchListener() {
 			
@@ -137,7 +147,7 @@ public class Activity_Forget_Pwd extends Activity_Base {
 		            @Override  
 		            public void run() {  
 		            	// 将ScrollView滚动到底  
-					    scrollview.fullScroll(View.FOCUS_DOWN); 
+//					    scrollview.fullScroll(View.FOCUS_DOWN);
 					    newpwd.requestFocus(); 
 		            }  
 		        }, 200); 				
@@ -301,11 +311,11 @@ public class Activity_Forget_Pwd extends Activity_Base {
 			}  
         }); 
 			
-		send = (Button) findViewById(R.id.send);
-		send.setOnClickListener(onClickListener);
+		findViewById(R.id.send).setOnClickListener(onClickListener);
 		
 		next = (Button) findViewById(R.id.button_confirm);
 		next.setOnClickListener(onClickListener);
+		im_visible.setOnClickListener(onClickListener);
 
 	}
 	//设置密码强度显示为灰色
@@ -314,13 +324,22 @@ public class Activity_Forget_Pwd extends Activity_Base {
     	strength2.setBackgroundResource(R.drawable.button_solid_gray);
     	strength3.setBackgroundResource(R.drawable.button_solid_gray);
 	}
-	   
+	private boolean isShow = true;//默认是隐藏
 	View.OnClickListener onClickListener = new View.OnClickListener() {
 
 		@Override
 		public void onClick(View v) {
 			switch (v.getId()) {
-
+				case R.id.im_visible:
+					if (isShow) {
+						newpwd.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+						im_visible.setImageResource(R.drawable.r_invisible_3x);
+					} else {
+						newpwd.setTransformationMethod(PasswordTransformationMethod.getInstance());
+						im_visible.setImageResource(R.drawable.r_visible_3x);
+					}
+					isShow = !isShow;
+					break;
 			case R.id.back_img:
 				finish();
 				break;
@@ -329,7 +348,7 @@ public class Activity_Forget_Pwd extends Activity_Base {
 				if (judgeInput()) {
 					// 设置获取验证码按钮为不可点击，防止获取多条验证码
 					send.setEnabled(false);	
-					send.setBackgroundResource(R.drawable.button_shape_unenabled);
+//					send.setBackgroundResource(R.drawable.button_shape_unenabled);
                     UmengUtil.eventById(Activity_Forget_Pwd.this, R.string.captcha_sent);
 					toSend();	
 				}
@@ -448,15 +467,15 @@ public class Activity_Forget_Pwd extends Activity_Base {
 		public void handleMessage(android.os.Message msg) {
 			switch(msg.what){
 			case 1:
-				send.setText(time + "S 后可再次发送");
-				send.setBackgroundResource(R.drawable.button_gray);
+				send.setText(time + "s");
+//				send.setBackgroundResource(R.drawable.button_gray);
 				break;
 				
 			case 2:
 				// 设置获取验证码按钮为可以点击
 				send.setEnabled(true);
 				
-				send.setBackgroundResource(R.drawable.request_code_selector);
+//				send.setBackgroundResource(R.drawable.request_code_selector);
 				send.setText("重新发送");
 				break;
 			}
@@ -539,7 +558,7 @@ public class Activity_Forget_Pwd extends Activity_Base {
                 ToastUtil.alert(Activity_Forget_Pwd.this, "网络好像有问题，请稍后重试");
                 // 设置获取验证码按钮为可以点击
                 send.setEnabled(true);
-                send.setBackgroundResource(R.drawable.request_code_selector);
+//                send.setBackgroundResource(R.drawable.request_code_selector);
                 hideProgressBar();
             }
         });
