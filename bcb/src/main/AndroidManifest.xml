@@ -100,8 +100,7 @@
         <activity
             android:name=".presentation.view.activity.Activity_Forget_Pwd"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"
->
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".presentation.view.activity.Activity_Account_Setting"
@@ -527,6 +526,12 @@
         <activity android:name=".presentation.view.activity.A_MySecurity">
         </activity>
         <activity android:name=".presentation.view.activity.Activity_WebView_Upload">
+        </activity>
+        <activity android:name=".presentation.view.activity.A_MyYE">
+        </activity>
+        <activity android:name=".presentation.view.activity.My_LC">
+        </activity>
+        <activity android:name=".presentation.view.activity.A_ZZC">
         </activity>
     </application>
 

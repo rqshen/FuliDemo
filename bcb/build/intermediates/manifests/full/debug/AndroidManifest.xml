@@ -528,6 +528,12 @@
         </activity>
         <activity android:name="com.bcb.presentation.view.activity.Activity_WebView_Upload" >
         </activity>
+        <activity android:name="com.bcb.presentation.view.activity.A_MyYE" >
+        </activity>
+        <activity android:name="com.bcb.presentation.view.activity.My_LC" >
+        </activity>
+        <activity android:name="com.bcb.presentation.view.activity.A_ZZC" >
+        </activity>
         <!-- 聊天界面 -->
         <activity
             android:name="com.meiqia.meiqiasdk.activity.MQConversationActivity"

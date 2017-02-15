@@ -73,4 +73,11 @@
     <color name="blue_7f379bd3">#7f379bd3</color>
     <color name="gray_333333">#333333</color>
     <color name="gray_7f333333">#7f333333</color>
+    <color name="pie_r">#ffcc0000</color>
+    <color name="pie_g">#ff00cc00</color>
+    <color name="pie_b">#ff0000cc</color>
+    <color name="pie_rg">#ff888800</color>
+    <color name="pie_gb">#ff008888</color>
+    <color name="pie_rb">#ff880088</color>
+    
 </resources>

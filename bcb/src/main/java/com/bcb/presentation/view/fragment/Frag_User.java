@@ -2,26 +2,21 @@ package com.bcb.presentation.view.fragment;
 
 import android.annotation.SuppressLint;
 import android.app.DownloadManager;
-import android.app.ListActivity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.TextUtils;
-import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -49,8 +44,11 @@ import com.bcb.data.util.TokenUtil;
 import com.bcb.data.util.UmengUtil;
 import com.bcb.presentation.view.activity.A_Elite_Loan;
 import com.bcb.presentation.view.activity.A_MySecurity;
+import com.bcb.presentation.view.activity.A_MyYE;
 import com.bcb.presentation.view.activity.A_Slb;
+import com.bcb.presentation.view.activity.A_ZZC;
 import com.bcb.presentation.view.activity.Activity_Account_Setting;
+import com.bcb.presentation.view.activity.Activity_Browser;
 import com.bcb.presentation.view.activity.Activity_Charge_HF;
 import com.bcb.presentation.view.activity.Activity_Coupons;
 import com.bcb.presentation.view.activity.Activity_Join_Company;
@@ -62,6 +60,7 @@ import com.bcb.presentation.view.activity.Activity_Trading_Record;
 import com.bcb.presentation.view.activity.Activity_TuoGuan_HF;
 import com.bcb.presentation.view.activity.Activity_WebView;
 import com.bcb.presentation.view.activity.Activity_Withdraw;
+import com.bcb.presentation.view.activity.My_LC;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
 import com.bcb.presentation.view.custom.AlertView.UpdateDialog;
 import com.bcb.presentation.view.custom.CustomDialog.DialogWidget;
@@ -71,8 +70,6 @@ import com.bcb.presentation.view.custom.PullableView.PullableScrollView;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
@@ -82,6 +79,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 	private TextView title_text;
 	ImageView layout_update_line;
 	RelativeLayout layout_update;
+	RelativeLayout rl_ye,rl_lc,rl_yhq,rl_about,rl_zzc;
 	TextView tv_update;
 	private Context ctx;
 	//我的保险
@@ -152,6 +150,16 @@ ImageView iv_head;
 		iv_head = (ImageView) view.findViewById(R.id.iv_head);
 		layout_update = (RelativeLayout) view.findViewById(R.id.layout_update);
 		layout_security = (RelativeLayout) view.findViewById(R.id.layout_security);
+		rl_zzc = (RelativeLayout) view.findViewById(R.id.rl_zzc);
+		rl_ye = (RelativeLayout) view.findViewById(R.id.rl_ye);
+		rl_lc = (RelativeLayout) view.findViewById(R.id.rl_lc);
+		rl_yhq = (RelativeLayout) view.findViewById(R.id.rl_yhq);
+		rl_about = (RelativeLayout) view.findViewById(R.id.rl_about);
+		rl_zzc.setOnClickListener(this);
+		rl_ye.setOnClickListener(this);
+		rl_lc.setOnClickListener(this);
+		rl_yhq.setOnClickListener(this);
+		rl_about.setOnClickListener(this);
 		layout_security.setOnClickListener(this);
 		layout_update_line = (ImageView) view.findViewById(R.id.layout_update_line);
 		if (App.isNeedUpdate && App.versionBean != null) {
@@ -462,6 +470,26 @@ ImageView iv_head;
 			return;
 		}
 		switch (v.getId()) {
+			//总资产
+			case R.id.rl_zzc:
+				startActivity(new Intent(ctx, A_ZZC.class));
+				break;
+			//余额
+			case R.id.rl_ye:
+				startActivity(new Intent(ctx, A_MyYE.class));
+				break;
+			//理财
+			case R.id.rl_lc:
+				startActivity(new Intent(ctx, My_LC.class));
+				break;
+			//优惠券
+			case R.id.rl_yhq:
+				startActivity(new Intent(ctx, A_MySecurity.class));
+				break;
+			//关于
+			case R.id.rl_about:
+				Activity_Browser.launche(ctx, "关于福利金融", UrlsOne.AboutConpany);
+				break;
 			//我的保险
 			case R.id.layout_security:
 				startActivity(new Intent(ctx, A_MySecurity.class));

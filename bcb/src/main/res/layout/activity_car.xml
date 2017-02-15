@@ -24,7 +24,7 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="22dp"
-            android:src="@drawable/iv_security_car"
+            android:src="@drawable/my_car"
             />
 
         <TextView
@@ -74,7 +74,7 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="22dp"
-            android:src="@drawable/iv_security_group"
+            android:src="@drawable/my_tx"
             />
 
         <TextView
