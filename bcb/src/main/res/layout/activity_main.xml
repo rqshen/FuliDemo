@@ -55,7 +55,7 @@
             <TextView
                 android:id="@+id/txt_product"
                 style="@style/txt_main_bottom"
-                android:text="产品" />
+                android:text="发现" />
         </RelativeLayout>
 
         <RelativeLayout

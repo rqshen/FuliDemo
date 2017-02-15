@@ -160,14 +160,16 @@ ImageView iv_head;
 		rl_lc.setOnClickListener(this);
 		rl_yhq.setOnClickListener(this);
 		rl_about.setOnClickListener(this);
+
 		layout_security.setOnClickListener(this);
 		layout_update_line = (ImageView) view.findViewById(R.id.layout_update_line);
 		if (App.isNeedUpdate && App.versionBean != null) {
 			tv_update.setText("发现新版本 V" + App.versionBean.Version);
 			layout_update.setOnClickListener(this);
 		} else {
-			layout_update.setVisibility(View.GONE);
-			layout_update_line.setVisibility(View.GONE);
+			tv_update.setText("已经是最新版本" );
+//			layout_update.setVisibility(View.GONE);
+//			layout_update_line.setVisibility(View.GONE);
 		}
 
 		view.findViewById(R.id.ll_test)
@@ -484,7 +486,9 @@ ImageView iv_head;
 				break;
 			//优惠券
 			case R.id.rl_yhq:
-				startActivity(new Intent(ctx, A_MySecurity.class));
+				if (isLoading()) return;
+				UmengUtil.eventById(ctx, R.string.self_coupon);
+				startActivityForResult(new Intent(ctx, Activity_Coupons.class), 1);
 				break;
 			//关于
 			case R.id.rl_about:

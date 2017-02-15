@@ -44,7 +44,7 @@ import com.bcb.presentation.view.custom.AlertView.AlertView;
 import com.bcb.presentation.view.custom.AlertView.UpdateDialog;
 import com.bcb.presentation.view.custom.CustomViewPager;
 import com.bcb.presentation.view.fragment.Frag_Main;
-import com.bcb.presentation.view.fragment.Frag_Product;
+import com.bcb.presentation.view.fragment.Frag_Find;
 import com.bcb.presentation.view.fragment.Frag_User;
 
 import org.json.JSONObject;
@@ -318,7 +318,7 @@ public class Activity_Main extends Activity_Base_Fragment {
 		Frag_Main frag_main = new Frag_Main();
 		mFragments = new ArrayList<>();
 		mFragments.add(frag_main);
-		mFragments.add(new Frag_Product());
+		mFragments.add(new Frag_Find());
 		mFragments.add(new Frag_User());
 		myFragmentPagerAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager(), mFragments);
 		content.setAdapter(myFragmentPagerAdapter);

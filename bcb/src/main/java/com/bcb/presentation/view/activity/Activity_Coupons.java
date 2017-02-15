@@ -37,7 +37,6 @@ import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.TokenUtil;
 import com.bcb.presentation.adapter.MyFragmentPagerAdapter;
-import com.bcb.presentation.view.fragment.Frag_ExpiredCoupon;
 import com.bcb.presentation.view.fragment.Frag_UnusedCoupon;
 import com.bcb.presentation.view.fragment.Frag_UsedCoupon;
 
@@ -55,7 +54,7 @@ public class Activity_Coupons extends Activity_Base_Fragment {
 	private ViewPager mPager;
 	private ArrayList<Fragment> fragmentsList;
 	private ImageView ivBottomLine;
-	private TextView unusedTextView, usedTextView, expiredTextView;
+	private TextView yhqTV, tqbjTV;
 	
 	private int currIndex = 0;
 	private int bottomLineWidth;
@@ -88,12 +87,10 @@ public class Activity_Coupons extends Activity_Base_Fragment {
 	}
 
 	private void InitTextView() {
-		unusedTextView = (TextView) findViewById(R.id.tv_unused);
-		usedTextView = (TextView) findViewById(R.id.tv_used);
-		expiredTextView = (TextView) findViewById(R.id.tv_expired);
-		unusedTextView.setOnClickListener(new MyOnClickListener(0));
-		usedTextView.setOnClickListener(new MyOnClickListener(1));
-		expiredTextView.setOnClickListener(new MyOnClickListener(2));
+		yhqTV = (TextView) findViewById(R.id.yhq);
+		tqbjTV = (TextView) findViewById(R.id.tqbj);
+		yhqTV.setOnClickListener(new MyOnClickListener(0));
+		tqbjTV.setOnClickListener(new MyOnClickListener(1));
 	}
 
 	private void InitViewPager() {
@@ -102,11 +99,9 @@ public class Activity_Coupons extends Activity_Base_Fragment {
 		fragmentsList = new ArrayList<Fragment>();
 		Fragment fragment01 = new Frag_UnusedCoupon(Activity_Coupons.this);
 		Fragment fragment02 = new Frag_UsedCoupon(Activity_Coupons.this);
-		Fragment fragment03 = new Frag_ExpiredCoupon(Activity_Coupons.this);
-		
+
 		fragmentsList.add(fragment01);
 		fragmentsList.add(fragment02);
-		fragmentsList.add(fragment03);
 
 		mPager.setAdapter(new MyFragmentPagerAdapter(getSupportFragmentManager(), fragmentsList));
 		mPager.setCurrentItem(0);
@@ -120,8 +115,8 @@ public class Activity_Coupons extends Activity_Base_Fragment {
 		DisplayMetrics dmDisplayMetrics = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(dmDisplayMetrics);
 		int screenW = dmDisplayMetrics.widthPixels;
-		offset = (int) ((screenW / 3.0 - bottomLineWidth) / 2);
-		position_one = (int) (screenW / 3.0);
+		offset = (int) ((screenW / 2.0 - bottomLineWidth) / 2);
+		position_one = (int) (screenW / 2.0);
 		LinearLayout.LayoutParams params = (LayoutParams) ivBottomLine.getLayoutParams();
 		params.leftMargin = offset;
 		params.rightMargin = 0;
@@ -162,17 +157,12 @@ public class Activity_Coupons extends Activity_Base_Fragment {
 			switch (arg0) {
 				case 0:
 					setTextColor();
-					unusedTextView.setTextColor(Color.RED);
+					yhqTV.setTextColor(Color.RED);
 					break;
 
 				case 1:
 					setTextColor();
-					usedTextView.setTextColor(Color.RED);
-					break;
-
-				case 2:
-					setTextColor();
-					expiredTextView.setTextColor(Color.RED);
+					tqbjTV.setTextColor(Color.RED);
 					break;
 			}
 			//将当前位置设置为目标位置
@@ -184,9 +174,8 @@ public class Activity_Coupons extends Activity_Base_Fragment {
 
 		//设置所有的字体颜色为灰色
 		private void setTextColor() {
-			unusedTextView.setTextColor(Color.GRAY);
-			usedTextView.setTextColor(Color.GRAY);
-			expiredTextView.setTextColor(Color.GRAY);
+			yhqTV.setTextColor(Color.GRAY);
+			tqbjTV.setTextColor(Color.GRAY);
 		}
 	}
 
