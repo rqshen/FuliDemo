@@ -94,9 +94,13 @@ public class CouponListAdapter extends BaseAdapter {
 			mHolder.rule.setText(data.get(pos).getConditionDescn());
 		} else mHolder.rule.setVisibility(View.GONE);
 
+		//1 未使用 10 冻结中  20 已使用  30 已回收  40 已过期
+
+		if (data.get(pos).getStatus() == 1) setupUsedCoupon(mHolder);
+		else setupUnusedCoupon(mHolder);
+
 		// 选择优惠券时，传递进来的值大于等于0******************************************************************************************
 		if (investAmount >= 0) {
-			setupUsedCoupon(mHolder);
 			mHolder.select.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -158,7 +162,9 @@ public class CouponListAdapter extends BaseAdapter {
 			});
 		}
 		// 已使用优惠券、已过期优惠券//******************************************************************************************
-		else if (investAmount == -2 || investAmount == -3) setupUnusedCoupon(mHolder);
+		else if (investAmount == -2 || investAmount == -3) {
+			mHolder.select.setOnClickListener(null);
+		}
 		return view;
 	}
 

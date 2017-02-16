@@ -29,6 +29,7 @@ public class A_MyYE extends Activity_Base {
 	
 	@BindView(R.id.layout_cz) RelativeLayout layoutcz;
 	@BindView(R.id.layout_tx) RelativeLayout layouttx;
+	@BindView(R.id.layout_mx) RelativeLayout layoutmx;
 	private Context ctx;
 	
 	@Override
@@ -41,7 +42,7 @@ public class A_MyYE extends Activity_Base {
 		setTitleValue("我的余额");
 	}
 	
-	@OnClick({R.id.layout_cz, R.id.layout_tx})
+	@OnClick({R.id.layout_cz, R.id.layout_tx,R.id.layout_mx})
 	public void onClick(View view) {
 		if (App.saveUserInfo.getAccess_Token() == null) Activity_Login.launche(ctx);
 		switch (view.getId()) {
@@ -50,6 +51,9 @@ public class A_MyYE extends Activity_Base {
 				break;
 			case R.id.layout_tx:
 				withdrawMoney();
+				break;
+			case R.id.layout_mx:
+				Activity_Trading_Record.launche(ctx);
 				break;
 		}
 	}

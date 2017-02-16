@@ -41,7 +41,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * 未使用的优惠券
+ * 所有优惠券
  */
 public class Frag_Coupon2 extends Frag_Base {
 
@@ -97,7 +97,7 @@ public class Frag_Coupon2 extends Frag_Base {
 		null_data_layout = (LinearLayout) view.findViewById(R.id.null_data_layout);
 
 		recordsBeans = new ArrayList<>();
-		mCouponListAdapter = new CouponListAdapter(ctx, recordsBeans, -1);
+		mCouponListAdapter = new CouponListAdapter(ctx, recordsBeans, 10086);
 		mCouponListView = (MyListView) view.findViewById(R.id.listview_data_layout);
 //        mCouponListView.setOnItemClickListener(new onClickViewCoupon());
 		mCouponListView.setAdapter(mCouponListAdapter);
@@ -166,7 +166,7 @@ public class Frag_Coupon2 extends Frag_Base {
 		try {
 			obj.put("PageNow", PageNow);
 			obj.put("PageSize", PageSize);
-			obj.put("Status", 1);
+//			obj.put("Status", 1);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}

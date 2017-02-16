@@ -9,7 +9,7 @@ public class CouponRecordsBean implements Comparable<CouponRecordsBean>{
 	private float Amount;
 	private String ExpireDate;
 	private float MinAmount;
-	private int Status;
+	public int Status;
 	private int CouponType;
 	private String CouponId;
 	private String ConditionDescn;

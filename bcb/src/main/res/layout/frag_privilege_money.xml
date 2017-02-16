@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/background"
+              android:orientation="vertical">
+
+    <com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout
+        android:id="@+id/refresh_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <!-- 下拉刷新控件-->
+        <include layout="@layout/refresh_head"/>
+
+        <com.bcb.presentation.view.custom.PullableView.PullableScrollView
+            android:id="@+id/layout_scrollview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/red"
+                    android:paddingBottom="10dp">
+
+                    <LinearLayout
+                        android:id="@+id/privilege_money"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="20dp"
+                        android:orientation="horizontal">
+
+
+
+                        <TextView
+                            android:id="@+id/tv_shouyi_all"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="6dp"
+                            android:text="0.00"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/main_text_xxxlarge"/>
+
+                        <!--为了使文字居中-->
+                        <Space
+                            android:layout_width="8dp"
+                            android:layout_height="match_parent"/>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/total_privilege_money"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/privilege_money"
+                        android:layout_centerHorizontal="true"
+                        android:padding="10dp"
+                        android:text="累计收益 >"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/main_text_small"/>
+
+                    <ImageView
+                        android:id="@+id/iv_about"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_alignParentRight="true"
+                        android:padding="15dp"
+                        android:src="@drawable/icon_privilege_info"/>
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:background="@color/white"
+                    android:orientation="horizontal"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="7dp"
+                        android:layout_marginTop="7dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:gravity="center"
+                            android:text="生效中本金(元)"
+                            android:textColor="@color/txt_middle_gray"
+                            android:textSize="13sp"/>
+
+                        <TextView
+                            android:id="@+id/tv_benjin"
+                            android:layout_width="match_parent"
+                            android:gravity="center"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="0.00"
+                            android:textColor="@color/red"
+                            android:textSize="25sp"/>
+
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/linegray"/>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="7dp"
+                        android:layout_marginTop="7dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:gravity="center"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="待发本金(元)"
+                            android:textColor="@color/txt_middle_gray"
+                            android:textSize="13sp"/>
+
+                        <TextView
+                            android:id="@+id/tv_shouyi"
+                            android:layout_width="match_parent"
+                            android:gravity="center"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="0.00"
+                            android:textColor="@color/red"
+                            android:textSize="25sp"/>
+
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <com.bcb.data.util.MyListView
+                    android:id="@+id/listview_data_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:cacheColorHint="@android:color/white"
+                    android:divider="@color/background"
+                    android:dividerHeight="10dp"
+                    android:fastScrollEnabled="false"
+                    android:listSelector="@drawable/list_selector"
+                    android:scrollbars="none"/>
+
+                <LinearLayout
+                    android:id="@+id/null_data_layout"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="84dip"
+                        android:src="@drawable/data_null"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="20dip"
+                        android:text="暂无特权本金"
+                        android:textSize="@dimen/main_text_default"/>
+                </LinearLayout>
+            </LinearLayout>
+        </com.bcb.presentation.view.custom.PullableView.PullableScrollView>
+        <!-- 上拉加载更多 -->
+        <include layout="@layout/load_more"/>
+    </com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout>
+
+</LinearLayout>

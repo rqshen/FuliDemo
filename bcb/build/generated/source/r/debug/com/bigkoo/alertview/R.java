@@ -476,14 +476,14 @@ public final class R {
 		public static final int abc_screen_toolbar = 0x7f030015;
 		public static final int abc_search_dropdown_item_icons_2line = 0x7f030016;
 		public static final int abc_search_view = 0x7f030017;
-		public static final int include_alertheader = 0x7f03007e;
-		public static final int item_alertbutton = 0x7f030080;
-		public static final int layout_alertview = 0x7f030093;
-		public static final int layout_alertview_actionsheet = 0x7f030094;
-		public static final int layout_alertview_alert = 0x7f030095;
-		public static final int layout_alertview_alert_horizontal = 0x7f030096;
-		public static final int layout_alertview_alert_vertical = 0x7f030097;
-		public static final int support_simple_spinner_dropdown_item = 0x7f0300d0;
+		public static final int include_alertheader = 0x7f03007f;
+		public static final int item_alertbutton = 0x7f030081;
+		public static final int layout_alertview = 0x7f030094;
+		public static final int layout_alertview_actionsheet = 0x7f030095;
+		public static final int layout_alertview_alert = 0x7f030096;
+		public static final int layout_alertview_alert_horizontal = 0x7f030097;
+		public static final int layout_alertview_alert_vertical = 0x7f030098;
+		public static final int support_simple_spinner_dropdown_item = 0x7f0300d1;
 	}
 	public static final class string {
 		public static final int abc_action_bar_home_description = 0x7f060000;

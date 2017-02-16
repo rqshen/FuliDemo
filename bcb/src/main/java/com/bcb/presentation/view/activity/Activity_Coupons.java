@@ -37,8 +37,8 @@ import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.TokenUtil;
 import com.bcb.presentation.adapter.MyFragmentPagerAdapter;
-import com.bcb.presentation.view.fragment.Frag_UnusedCoupon;
-import com.bcb.presentation.view.fragment.Frag_UsedCoupon;
+import com.bcb.presentation.view.fragment.Frag_Coupon2;
+import com.bcb.presentation.view.fragment.Frag_TQBJ;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -73,7 +73,7 @@ public class Activity_Coupons extends Activity_Base_Fragment {
 		myActivityManager.pushOneActivity(Activity_Coupons.this);
 		setBaseContentView(R.layout.activity_coupons);
 		setLeftTitleVisible(true);
-		setTitleValue("优惠券");
+		setTitleValue("我的优惠券");
 		setRightTitleValue("兑换", new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -97,8 +97,8 @@ public class Activity_Coupons extends Activity_Base_Fragment {
 		mPager = (ViewPager) findViewById(R.id.coupons_viewpager);
 		
 		fragmentsList = new ArrayList<Fragment>();
-		Fragment fragment01 = new Frag_UnusedCoupon(Activity_Coupons.this);
-		Fragment fragment02 = new Frag_UsedCoupon(Activity_Coupons.this);
+		Fragment fragment01 = new Frag_Coupon2(Activity_Coupons.this);
+		Fragment fragment02 = new Frag_TQBJ(Activity_Coupons.this);
 
 		fragmentsList.add(fragment01);
 		fragmentsList.add(fragment02);
