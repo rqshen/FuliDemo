@@ -41,6 +41,7 @@ public class Frag_Find extends Frag_Base {
 	@BindView(R.id.gjj) TextView gjj;
 	@BindView(R.id.zx) TextView zx;
 	@BindView(R.id.ja) TextView ja;
+
 	private Unbinder unbinder;
 	private Context ctx;
 

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bcb.R;
@@ -30,6 +31,7 @@ public class A_MyYE extends Activity_Base {
 	@BindView(R.id.layout_cz) RelativeLayout layoutcz;
 	@BindView(R.id.layout_tx) RelativeLayout layouttx;
 	@BindView(R.id.layout_mx) RelativeLayout layoutmx;
+	@BindView(R.id.value_ye) TextView value_ye;
 	private Context ctx;
 	
 	@Override
@@ -40,6 +42,7 @@ public class A_MyYE extends Activity_Base {
 		ButterKnife.bind(this);
 		setLeftTitleVisible(true);
 		setTitleValue("我的余额");
+		value_ye.setText(App.mUserWallet.getBalanceAmount()+"");
 	}
 	
 	@OnClick({R.id.layout_cz, R.id.layout_tx,R.id.layout_mx})

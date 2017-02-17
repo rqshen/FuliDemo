@@ -39,7 +39,15 @@ LeftInterest	float	待收利息
     /**
      * 累计收益
      */
-    public double TotalInterest;
+//    public double TotalInterest;
+
+    public double 	InvestAmount;//累计投资金额
+    public double 	InvestIncome ;//累计投资收益
+    public double 	RechargeAmount;//累计充值金额
+    public double 	WithdrawAmount;//累计提现金额
+    public double 	InvestingAmount ;//在投本金
+    public double 	SecurityAmount;//保证金
+
 
     public double getTotalAsset() {
         return TotalAsset;
@@ -96,13 +104,5 @@ LeftInterest	float	待收利息
 
     public void setLeftInterest(double leftInterest) {
         LeftInterest = leftInterest;
-    }
-
-    public double getTotalInterest() {
-        return TotalInterest;
-    }
-
-    public void setTotalInterest(double totalInterest) {
-        TotalInterest = totalInterest;
     }
 }

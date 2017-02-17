@@ -7,6 +7,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -17,6 +19,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,6 +37,7 @@ import com.bcb.data.bean.StringEventBusBean;
 import com.bcb.data.bean.UserBankCard;
 import com.bcb.data.bean.UserDetailInfo;
 import com.bcb.data.bean.UserWallet;
+import com.bcb.data.util.DbUtil;
 import com.bcb.data.util.DownloadUtils;
 import com.bcb.data.util.HttpUtils;
 import com.bcb.data.util.LogUtil;
@@ -51,6 +55,7 @@ import com.bcb.presentation.view.activity.Activity_Account_Setting;
 import com.bcb.presentation.view.activity.Activity_Browser;
 import com.bcb.presentation.view.activity.Activity_Charge_HF;
 import com.bcb.presentation.view.activity.Activity_Coupons;
+import com.bcb.presentation.view.activity.Activity_Daily_Welfare_Tip;
 import com.bcb.presentation.view.activity.Activity_Join_Company;
 import com.bcb.presentation.view.activity.Activity_Login;
 import com.bcb.presentation.view.activity.Activity_Money_Flowing_Water;
@@ -70,21 +75,25 @@ import com.bcb.presentation.view.custom.PullableView.PullableScrollView;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
 
 public class Frag_User extends Frag_Base implements OnClickListener {
 	//标题
-	private TextView title_text;
-	ImageView layout_update_line;
+	private TextView title_text, value_earn_all;
+	ImageView layout_update_line, iv_red;
 	RelativeLayout layout_update;
-	RelativeLayout rl_ye,rl_lc,rl_yhq,rl_about,rl_zzc;
-	TextView tv_update;
+	RelativeLayout rl_ye, rl_lc, rl_yhq, rl_about;
+	TextView tv_update, value_lc;
+	LinearLayout ll_qd;
 	private Context ctx;
 	//我的保险
 	RelativeLayout layout_security;
-ImageView iv_head;
+	ImageView iv_head;
 	private TextView value_earn, value_balance, value_back, value_total;
 	private UserWallet mUserWallet;
 	private UserDetailInfo mUserDetailInfo;
@@ -146,28 +155,32 @@ ImageView iv_head;
 		title_text = (TextView) view.findViewById(R.id.title_text);
 		title_text.setText("我");
 
+		iv_red = (ImageView) view.findViewById(R.id.iv_red);
+		ll_qd = (LinearLayout) view.findViewById(R.id.ll_qd);
 		tv_update = (TextView) view.findViewById(R.id.tv_update);
+		value_earn_all = (TextView) view.findViewById(R.id.value_earn_all);
+		value_lc = (TextView) view.findViewById(R.id.value_lc);
 		iv_head = (ImageView) view.findViewById(R.id.iv_head);
 		layout_update = (RelativeLayout) view.findViewById(R.id.layout_update);
 		layout_security = (RelativeLayout) view.findViewById(R.id.layout_security);
-		rl_zzc = (RelativeLayout) view.findViewById(R.id.rl_zzc);
 		rl_ye = (RelativeLayout) view.findViewById(R.id.rl_ye);
 		rl_lc = (RelativeLayout) view.findViewById(R.id.rl_lc);
 		rl_yhq = (RelativeLayout) view.findViewById(R.id.rl_yhq);
 		rl_about = (RelativeLayout) view.findViewById(R.id.rl_about);
-		rl_zzc.setOnClickListener(this);
 		rl_ye.setOnClickListener(this);
 		rl_lc.setOnClickListener(this);
 		rl_yhq.setOnClickListener(this);
 		rl_about.setOnClickListener(this);
+		iv_red.setOnClickListener(this);
 
+		ll_qd.setOnClickListener(this);
 		layout_security.setOnClickListener(this);
 		layout_update_line = (ImageView) view.findViewById(R.id.layout_update_line);
 		if (App.isNeedUpdate && App.versionBean != null) {
 			tv_update.setText("发现新版本 V" + App.versionBean.Version);
 			layout_update.setOnClickListener(this);
 		} else {
-			tv_update.setText("已经是最新版本" );
+			tv_update.setText("已经是最新版本");
 //			layout_update.setVisibility(View.GONE);
 //			layout_update_line.setVisibility(View.GONE);
 		}
@@ -294,6 +307,8 @@ ImageView iv_head;
 		}
 		//设置banner
 		setupJoinCompanyMessage();
+		initSoundPool();
+
 	}
 
 	@Override
@@ -324,15 +339,18 @@ ImageView iv_head;
 		if (App.mUserWallet != null) {
 			//总资产
 			value_earn.setText("" + String.format("%.2f", App.mUserWallet.getTotalAsset()));
+			//累计收益
+			value_earn_all.setText("累计收益" + String.format("%.2f", App.mUserWallet.InvestIncome) + "元");
 			//账户余额
-			value_balance.setText("" + String.format("%.2f", App.mUserWallet.getBalanceAmount()));
+			value_balance.setText("￥" + String.format("%.2f", App.mUserWallet.getBalanceAmount()));
 			//待收本息
-			value_back.setText("" + String.format("%.2f", App.mUserWallet.getIncomingMoney()));
+			value_lc.setText("￥" + String.format("%.2f", App.mUserWallet.getIncomingMoney()));
 			//冻结金额
 			value_total.setText("" + String.format("%.2f", App.mUserWallet.getFreezeAmount()));
 		} else {
 			//总资产
 			value_earn.setText("0.00");
+			value_earn_all.setText("累计收益0元");
 
 			//账户余额
 			value_balance.setText("0.00");
@@ -358,20 +376,20 @@ ImageView iv_head;
 		iv_head.setImageDrawable(getResources().getDrawable(R.drawable.iv_my_head));
 		//如果加入公司信息不为空并且状态值为10(通过)的时候，则显示用户名和加入公司的缩写
 //		if (App.mUserDetailInfo.MyCompany != null) {
-			//审核通过
-			if (App.mUserDetailInfo.MyCompany != null&&!TextUtils.isEmpty(mUserDetailInfo.MyCompany.getShortName())) {
+		//审核通过
+		if (App.mUserDetailInfo.MyCompany != null && !TextUtils.isEmpty(mUserDetailInfo.MyCompany.getShortName())) {
 //				joinCompany.setVisibility(View.GONE);
 //				user_company_layout.setVisibility(View.VISIBLE);
-				user_comany_shortname.setText(mUserDetailInfo.MyCompany.getShortName());
-				user_join_name.setText(mUserDetailInfo.UserName);
-				user_comany_shortname.setCompoundDrawables(getActivity().getResources().getDrawable(R.drawable.rz),null,null,null);
-			} else {
-				user_comany_shortname.setText("加入我的公司拿员工专属福利");
-				user_comany_shortname.setCompoundDrawables(null,null,null,null);
-				user_join_name.setText("您好"+App.saveUserInfo.getLocalPhone());
+			user_comany_shortname.setText(mUserDetailInfo.MyCompany.getShortName());
+			user_join_name.setText(mUserDetailInfo.UserName);
+			user_comany_shortname.setCompoundDrawables(getActivity().getResources().getDrawable(R.drawable.rz), null, null, null);
+		} else {
+			user_comany_shortname.setText("加入我的公司拿员工专属福利");
+			user_comany_shortname.setCompoundDrawables(null, null, null, null);
+			user_join_name.setText("您好" + App.saveUserInfo.getLocalPhone());
 //				joinCompany.setVisibility(View.VISIBLE);
 //				user_company_layout.setVisibility(View.GONE);
-			}
+		}
 //		}
 		//如果加入公司信息为空的时候，则要判断是否要隐藏Banner
 //		else {
@@ -391,8 +409,9 @@ ImageView iv_head;
 	File apkFile;
 
 	UpdateDialog updateDialog;
+
 	private void showVersionDialog2() {
-		 updateDialog = new UpdateDialog(ctx) {
+		updateDialog = new UpdateDialog(ctx) {
 			@Override
 			public void onClick() {
 				super.onClick();
@@ -472,8 +491,13 @@ ImageView iv_head;
 			return;
 		}
 		switch (v.getId()) {
+			//加息
+			case R.id.ll_qd:
+				if (mUserDetailInfo.HasOpenEgg) Toast.makeText(ctx, "已经加息过了", Toast.LENGTH_SHORT).show();
+				else jx();
+				break;
 			//总资产
-			case R.id.rl_zzc:
+			case R.id.ll_test:
 				startActivity(new Intent(ctx, A_ZZC.class));
 				break;
 			//余额
@@ -568,6 +592,100 @@ ImageView iv_head;
 				Activity_Account_Setting.launche(ctx);
 				break;
 		}
+	}
+
+	private long lastClickTime;//上次点击时间
+	private final long MIN_CLICK_DELAY_TIME = 500;//最小时间间隔
+
+	private void jx() {
+		//防止按钮多次点击
+		long currentTime = Calendar.getInstance().getTimeInMillis();
+		if (currentTime - lastClickTime > MIN_CLICK_DELAY_TIME) {
+			lastClickTime = currentTime;
+			getPackageData();
+		}
+	}
+
+	//短促音
+	private SoundPool soundPool;
+	private HashMap<Integer, Integer> soundID;
+
+	/**
+	 * 初始化音乐池
+	 */
+	public void initSoundPool() {//初始化声音池
+		soundPool = new SoundPool(
+				1,     //maxStreams参数，该参数为设置同时能够播放多少音效
+				AudioManager.STREAM_MUSIC,    //streamType参数，该参数设置音频类型，在游戏中通常设置为：STREAM_MUSIC
+				0    //srcQuality参数，该参数设置音频文件的质量，目前还没有效果，设置为0为默认值。
+		);
+
+		soundID = new HashMap<>();
+		try {
+			soundID.put(1, soundPool.load(ctx.getAssets().openFd("welfare.wav"), 1));  //需要捕获IO异常
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	/**
+	 * 请求福袋
+	 */
+	private void getPackageData() {
+		JSONObject obj = new JSONObject();
+		BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.JoinDailyWelfare, obj, TokenUtil.getEncodeToken(ctx), true, new BcbRequest.BcbCallBack<JSONObject>() {
+			@Override
+			public void onResponse(JSONObject response) {
+				try {
+					int status = response.getInt("status");
+					if (1 == status || -3 == status) {
+						//设置对应位置的数据
+						String value = response.getString("result");
+						LogUtil.d("福袋数据", value);
+						if (!TextUtils.isEmpty(value) && !value.equals("null")) {
+							//播放短促音
+							soundPool.play(soundID.get(1), 1, 1, 0, 0, 1);
+							//弹出金币
+							//Activity_Daily_Welfare_Result.launche(ctx, value, String.valueOf(totalInterest));
+
+							//保存到数据库
+							DbUtil.saveWelfare(value);
+							App.getInstance().setWelfare(value);
+
+							//通知刷新
+							EventBus.getDefault().post(new BroadcastEvent(BroadcastEvent.REFRESH));
+						}
+					} else if (-2 == status) {//领福利时间为每日 06：00-22：00
+						Activity_Daily_Welfare_Tip.launche(ctx);
+//                        finish();
+					} else if (-5 == status) {
+						App.saveUserInfo.clear();
+						Intent intent = new Intent(ctx, Activity_Login.class);
+						ctx.startActivity(intent);
+					} else {
+						//获取数据库缓存数据,若有数据就显示已经缓存的数据
+						if (TextUtils.isEmpty(App.getInstance().getWelfare())) {
+							ToastUtil.alert(ctx, response.getString("message"));
+							App.getInstance().requestWelfare();
+						} else {
+							//通知刷新
+							EventBus.getDefault().post(new BroadcastEvent(BroadcastEvent.REFRESH));
+							iv_red.setVisibility(View.INVISIBLE);
+						}
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+
+			@Override
+			public void onErrorResponse(Exception error) {
+
+			}
+		});
+		jsonRequest.setTag(BcbRequestTag.UrlJoinWelfareTag);
+		requestQueue.add(jsonRequest);
 	}
 
 	//加入公司
@@ -757,6 +875,8 @@ ImageView iv_head;
 						requestUserSecurity();
 						//加载用户加入公司的信息
 						setupJoinCompanyMessage();
+						if (mUserDetailInfo.HasOpenEgg) iv_red.setVisibility(View.INVISIBLE);
+						else iv_red.setVisibility(View.VISIBLE);
 					}
 				}
 			}
@@ -831,6 +951,7 @@ ImageView iv_head;
 		jsonRequest.setTag(BcbRequestTag.UserWalletMessageTag);
 		requestQueue.add(jsonRequest);
 	}
+
 	/**
 	 * 保险
 	 */
@@ -841,11 +962,11 @@ ImageView iv_head;
 			public void onResponse(JSONObject response) {
 				LogUtil.i("bqt", "【获取车险团险等数据】：" + response.toString());
 				if (PackageUtil.getRequestStatus(response, ctx)) {
-					App.mUserDetailInfo.CarInsuranceIndexPage=response.optJSONObject("result").optString("CarInsuranceIndexPage");
-					App.mUserDetailInfo.CarInsuranceMyOrderPage=response.optJSONObject("result").optString("CarInsuranceMyOrderPage");
-					App.mUserDetailInfo.GroupInsuranceUrl=response.optJSONObject("result").optString("GroupInsuranceUrl");
-					boolean che=TextUtils.isEmpty(App.mUserDetailInfo.CarInsuranceIndexPage);
-					LogUtil.i("bqt", "【刷新后是否没有获取到车险】"+che);
+					App.mUserDetailInfo.CarInsuranceIndexPage = response.optJSONObject("result").optString("CarInsuranceIndexPage");
+					App.mUserDetailInfo.CarInsuranceMyOrderPage = response.optJSONObject("result").optString("CarInsuranceMyOrderPage");
+					App.mUserDetailInfo.GroupInsuranceUrl = response.optJSONObject("result").optString("GroupInsuranceUrl");
+					boolean che = TextUtils.isEmpty(App.mUserDetailInfo.CarInsuranceIndexPage);
+					LogUtil.i("bqt", "【刷新后是否没有获取到车险】" + che);
 					if (che) EventBus.getDefault().post(new StringEventBusBean("CXGONE"));
 					else EventBus.getDefault().post(new StringEventBusBean("CXVISIBLE"));
 				}
@@ -863,6 +984,7 @@ ImageView iv_head;
 		jsonRequest.setTag(BcbRequestTag.UserWalletMessageTag);
 		requestQueue.add(jsonRequest);
 	}
+
 	/**
 	 * 绑定提现卡
 	 */

@@ -1659,6 +1659,7 @@ int id iv_mx 0x7f0d01b4
 int id iv_open 0x7f0d030b
 int id iv_pic 0x7f0d00f8
 int id iv_recorder_keyboard_anim 0x7f0d03d0
+int id iv_red 0x7f0d02d8
 int id iv_redirect_queue_anim 0x7f0d03ba
 int id iv_right_hk 0x7f0d020e
 int id iv_robot_avatar 0x7f0d03bf
@@ -2063,7 +2064,6 @@ int id rl_voice_container 0x7f0d03a5
 int id rl_ye 0x7f0d02dc
 int id rl_yhq 0x7f0d02e9
 int id rl_zr 0x7f0d0210
-int id rl_zzc 0x7f0d02d9
 int id root 0x7f0d0094
 int id root_ll 0x7f0d03d1
 int id rr 0x7f0d02de
@@ -2211,7 +2211,7 @@ int id tvAlert 0x7f0d0311
 int id tvAlertCancel 0x7f0d034c
 int id tvAlertMsg 0x7f0d030e
 int id tvAlertTitle 0x7f0d030d
-int id tv_ 0x7f0d02d8
+int id tv_ 0x7f0d02d9
 int id tv_1 0x7f0d01e6
 int id tv_account 0x7f0d024d
 int id tv_benjin 0x7f0d01e3

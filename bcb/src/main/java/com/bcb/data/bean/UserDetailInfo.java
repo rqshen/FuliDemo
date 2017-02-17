@@ -34,6 +34,9 @@ public class UserDetailInfo {
 	public String GroupInsuranceUrl;//团险访问地址
 
 
+	public boolean	HasOpenEgg;  //是否领取每日福利
+
+
 	public String getRealName() {
 		return UserName;
 	}

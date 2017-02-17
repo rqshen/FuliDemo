@@ -3193,6 +3193,7 @@ containing a value of this type.
         public static final int iv_open=0x7f0d030b;
         public static final int iv_pic=0x7f0d00f8;
         public static final int iv_recorder_keyboard_anim=0x7f0d03d0;
+        public static final int iv_red=0x7f0d02d8;
         public static final int iv_redirect_queue_anim=0x7f0d03ba;
         public static final int iv_right_hk=0x7f0d020e;
         public static final int iv_robot_avatar=0x7f0d03bf;
@@ -3597,7 +3598,6 @@ containing a value of this type.
         public static final int rl_ye=0x7f0d02dc;
         public static final int rl_yhq=0x7f0d02e9;
         public static final int rl_zr=0x7f0d0210;
-        public static final int rl_zzc=0x7f0d02d9;
         public static final int root=0x7f0d0094;
         public static final int root_ll=0x7f0d03d1;
         public static final int rr=0x7f0d02de;
@@ -3745,7 +3745,7 @@ containing a value of this type.
         public static final int tvAlertCancel=0x7f0d034c;
         public static final int tvAlertMsg=0x7f0d030e;
         public static final int tvAlertTitle=0x7f0d030d;
-        public static final int tv_=0x7f0d02d8;
+        public static final int tv_=0x7f0d02d9;
         public static final int tv_1=0x7f0d01e6;
         public static final int tv_account=0x7f0d024d;
         public static final int tv_benjin=0x7f0d01e3;
