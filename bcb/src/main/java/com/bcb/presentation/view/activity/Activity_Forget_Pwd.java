@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bcb.R;
 import com.bcb.common.app.App;
@@ -162,7 +163,7 @@ public class Activity_Forget_Pwd extends Activity_Base {
             public void onTextChanged(CharSequence s, int start, int before, int count) {  
 				if(!RegexManager.isSecondGenerationIDCardNum(id_card.getText().toString())) {
 					error_tips.setVisibility(View.VISIBLE);
-					error_tips.setText("请输入正确的身份证号码");						
+					error_tips.setText("请输入正确的身份证号码");
 				} else {
 					error_tips.setVisibility(View.GONE);
 					error_tips.setText("");
@@ -187,6 +188,7 @@ public class Activity_Forget_Pwd extends Activity_Base {
 				if (!RegexManager.isPhoneNum(phone.getText().toString())) {
 					error_tips.setVisibility(View.VISIBLE);
 					error_tips.setText("请输入正确的手机号码");
+//					Toast.makeText(Activity_Forget_Pwd.this, "请输入正确的手机号码", Toast.LENGTH_SHORT).show();
 				} else {
 					error_tips.setVisibility(View.GONE);
 					error_tips.setText("");
@@ -213,6 +215,7 @@ public class Activity_Forget_Pwd extends Activity_Base {
 					if(!RegexManager.isNum(regservicecode.getText().toString()))
 						error_tips.setText("验证码必须由数字组成");
 					error_tips.setText("请输入6位验证码");
+//					Toast.makeText(Activity_Forget_Pwd.this, "请输入6位验证码", Toast.LENGTH_SHORT).show();
 				} else {
 					error_tips.setVisibility(View.GONE);
 					error_tips.setText("");
@@ -242,8 +245,10 @@ public class Activity_Forget_Pwd extends Activity_Base {
 						//是否为合法的字符串
 						if(!RegexManager.isRightCode(newpwd.getText().toString())) {
 							error_tips.setText("密码必须由数字、字母、字符组成");
+							Toast.makeText(Activity_Forget_Pwd.this, "密码必须由数字、字母、字符组成", Toast.LENGTH_SHORT).show();
 						} else {
-							error_tips.setText("请输入8-15位新密码");		
+							error_tips.setText("请输入8-15位新密码");
+//							Toast.makeText(Activity_Forget_Pwd.this, "请输入8-15位新密码", Toast.LENGTH_SHORT).show();
 						}							
 					} else {
 						error_tips.setVisibility(View.GONE);
@@ -292,7 +297,8 @@ public class Activity_Forget_Pwd extends Activity_Base {
 				} else {
 					if (!RegexManager.isResizngCode(newpwd.getText().toString())) {
 						error_tips.setVisibility(View.VISIBLE);		
-						error_tips.setText("请输入6位数字密码");		
+						error_tips.setText("请输入6位数字密码");
+						Toast.makeText(Activity_Forget_Pwd.this,"请输入6位数字密码", Toast.LENGTH_SHORT).show();
 					} else {
 						error_tips.setVisibility(View.GONE);
 						error_tips.setText("");
@@ -349,19 +355,19 @@ public class Activity_Forget_Pwd extends Activity_Base {
 					// 设置获取验证码按钮为不可点击，防止获取多条验证码
 					send.setEnabled(false);	
 //					send.setBackgroundResource(R.drawable.button_shape_unenabled);
-                    UmengUtil.eventById(Activity_Forget_Pwd.this, R.string.captcha_sent);
-					toSend();	
+					toSend();
 				}
 				break;
 				
 			case R.id.button_confirm:
-                if (judgeNext() && verificationStatus) {
+                if (verificationStatus&&judgeNext()) {
                 	// 设置立即修改按钮为不可点击，防止请求多次
 					next.setEnabled(false);		
                 	toNext();	
 				} else if (!verificationStatus) {
 					error_tips.setVisibility(View.VISIBLE);
 					error_tips.setText("请先获取验证码");
+	                Toast.makeText(Activity_Forget_Pwd.this, "请先获取验证码", Toast.LENGTH_SHORT).show();
 				}
 				break;
 
@@ -370,21 +376,21 @@ public class Activity_Forget_Pwd extends Activity_Base {
 	};
 	
 	private boolean judgeInput() {
-		String idCardStr = id_card.getText().toString();
+//		String idCardStr = id_card.getText().toString();
 		String phoneStr = phone.getText().toString();
-		char[] str = idCardStr.toCharArray();
-		
+//		char[] str = idCardStr.toCharArray();
+
 		// 获取输入身份证、手机号的状态
 //		boolean idEmptyState = (idCardStr.length()== 0);
 //		boolean idEndState =  (idCardStr.length()==18 && str[17] == 'x');
 //		boolean idErrorState = (!RegexManager.isSecondGenerationIDCardNum(idCardStr));
 		boolean phoneEmptyState = isLogin && (phoneStr.length()  == 0);
 		boolean phoneErrorState = isLogin && (!RegexManager.isPhoneNum(phoneStr));
-		
+
 		// 判断身份证、手机号码是否正确
 //		if(idEmptyState ||  idEndState || idErrorState || phoneEmptyState || phoneErrorState) {
 		if(phoneEmptyState || phoneErrorState) {
-			String toastStr = "";
+			String toastStr = "请输入正确的手机号码和密码";
 //			if (idEmptyState)
 //				toastStr = "请先输入身份证号码";
 //			else if(idEndState)
@@ -404,9 +410,9 @@ public class Activity_Forget_Pwd extends Activity_Base {
 //			}
 			//提示
 			ToastUtil.alert(Activity_Forget_Pwd.this, toastStr);
-			id_card.requestFocus();
-			id_card.setSelection(id_card.getText().toString().length());
-			return false;	
+//			id_card.requestFocus();
+//			id_card.setSelection(id_card.getText().toString().length());
+			return false;
 		}
 		return true;
 	}
@@ -439,23 +445,27 @@ public class Activity_Forget_Pwd extends Activity_Base {
 			}
 			error_tips.setVisibility(View.VISIBLE);
 			error_tips.setText(errorText);
+			Toast.makeText(Activity_Forget_Pwd.this, errorText, Toast.LENGTH_SHORT).show();
 			return false;
 		}	
 		if (isLogin) {
 			if (!RegexManager.isPasswordNum(newpwd.getText().toString())) {
 				error_tips.setVisibility(View.VISIBLE);
 				// 如果不是数字、字母或者下划线
-				if(!RegexManager.isRightCode(newpwd.getText().toString()))
+				if(!RegexManager.isRightCode(newpwd.getText().toString())) {
 					error_tips.setText("密码必须由数字、字母、字符组成");
-				else
+					Toast.makeText(Activity_Forget_Pwd.this, "密码必须由数字、字母、字符组成", Toast.LENGTH_SHORT).show();
+				}else {
 					error_tips.setText("请输入8-15位新密码");
-				return false;
+					Toast.makeText(Activity_Forget_Pwd.this, "请输入8-15位新密码", Toast.LENGTH_SHORT).show();
+				}return false;
 			} 
 		} else {
 			// 如果密码不是有6位数字组成
 			if (!RegexManager.isResizngCode(newpwd.getText().toString())) {
 				error_tips.setVisibility(View.VISIBLE);		
-				error_tips.setText("请输入6位纯数字密码");		
+				error_tips.setText("请输入6位纯数字密码");
+				Toast.makeText(Activity_Forget_Pwd.this, "请输入6位纯数字密码", Toast.LENGTH_SHORT).show();
 				return false;
 			}
 		}
@@ -607,6 +617,7 @@ public class Activity_Forget_Pwd extends Activity_Base {
                     } else {
                         error_tips.setVisibility(View.VISIBLE);
                         error_tips.setText(message);
+	                    Toast.makeText(Activity_Forget_Pwd.this, message, Toast.LENGTH_SHORT).show();
                     }
 
                 } catch (JSONException e) {
