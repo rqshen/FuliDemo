@@ -336,7 +336,7 @@ public final class R {
 		public static final int redirect_human_tv = 0x7f0d036d;
 		public static final int rg_evaluate_content = 0x7f0d039b;
 		public static final int rl_voice_container = 0x7f0d03a7;
-		public static final int root = 0x7f0d0094;
+		public static final int root = 0x7f0d0095;
 		public static final int root_ll = 0x7f0d03d3;
 		public static final int send_state = 0x7f0d03ad;
 		public static final int send_text_btn = 0x7f0d0374;
@@ -370,7 +370,7 @@ public final class R {
 		public static final int us_avatar_iv = 0x7f0d03a3;
 		public static final int view_msg_evaluate_level = 0x7f0d03b3;
 		public static final int vp_emotion_keyboard_content = 0x7f0d03ce;
-		public static final int webview = 0x7f0d0228;
+		public static final int webview = 0x7f0d0229;
 	}
 	public static final class layout {
 		public static final int mq_activity_conversation = 0x7f0300a3;

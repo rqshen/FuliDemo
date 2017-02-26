@@ -12,7 +12,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.CompoundButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Switch;
@@ -37,11 +36,13 @@ import com.bcb.presentation.view.custom.CustomDialog.DialogWidget;
 
 import de.greenrobot.event.EventBus;
 
+import static com.bcb.common.app.App.mUserDetailInfo;
+
 public class Activity_Account_Setting extends Activity_Base implements OnClickListener, Interface_AccountSetting {
 	private RelativeLayout layout_username, layout_id_card, layout_bank_card, layout_phone;
 	private RelativeLayout layout_login_pwd, layout_logout, layout_update, layout_feedback, layout_guide, layout_aboutus;
 
-	private TextView username_text, id_card_text, bank_card_text, phone_text;
+	private TextView username_text, id_card_text, bank_card_text, phone_text,name;
 
 	private LinearLayout layout_name, layout_idcard, layout_bankcard;
 
@@ -52,9 +53,9 @@ public class Activity_Account_Setting extends Activity_Base implements OnClickLi
 	private boolean isFirstCreate = true;
 
 	//所在公司
-	private RelativeLayout layout_company;
+	private RelativeLayout layout_company,tg;
 	private TextView text_company;
-	private ImageView company_arrow;
+//	private ImageView company_arrow;
 
 	//APP的版本号
 	private TextView version;
@@ -97,6 +98,20 @@ public class Activity_Account_Setting extends Activity_Base implements OnClickLi
 		initView();
 		//获取用户信息
 		updateUserData();
+
+		if (App.saveUserInfo.getAccess_Token() == null||mUserDetailInfo == null) {
+			name.setText("");
+			layout_id_card.setVisibility(View.GONE);
+			layout_phone.setVisibility(View.GONE);
+		}else if (mUserDetailInfo.MyCompany != null && !TextUtils.isEmpty(mUserDetailInfo.MyCompany.getShortName())) {
+			name.setText("" + mUserDetailInfo.UserName);
+			layout_id_card.setVisibility(View.VISIBLE);
+			layout_phone.setVisibility(View.VISIBLE);
+		} else {
+			name.setText("" + App.saveUserInfo.getLocalPhone());
+			layout_id_card.setVisibility(View.GONE);
+			layout_phone.setVisibility(View.GONE);
+		}
 	}
 
 	@Override
@@ -131,12 +146,14 @@ public class Activity_Account_Setting extends Activity_Base implements OnClickLi
 	private void initView() {
 		//用户名
 		layout_username = (RelativeLayout) findViewById(R.id.layout_username);
+		tg = (RelativeLayout) findViewById(R.id.tg);
 		layout_name = (LinearLayout) findViewById(R.id.layout_name);
 		username_text = (TextView) findViewById(R.id.username_text);
 		//身份证号
 		layout_id_card = (RelativeLayout) findViewById(R.id.layout_id_card);
 		layout_idcard = (LinearLayout) findViewById(R.id.layout_idcard);
 		id_card_text = (TextView) findViewById(R.id.id_card_text);
+		name = (TextView) findViewById(R.id.name);
 		//银行卡号
 		layout_bank_card = (RelativeLayout) findViewById(R.id.layout_bank_card);
 		layout_bankcard = (LinearLayout) findViewById(R.id.layout_bankcard);
@@ -149,12 +166,13 @@ public class Activity_Account_Setting extends Activity_Base implements OnClickLi
 		layout_company = (RelativeLayout) findViewById(R.id.layout_company);
 		layout_company.setOnClickListener(this);
 		text_company = (TextView) findViewById(R.id.text_company);
-		company_arrow = (ImageView) findViewById(R.id.company_arrow);
-		company_arrow.setVisibility(View.VISIBLE);
+//		company_arrow = (ImageView) findViewById(company_arrow);
+//		company_arrow.setVisibility(View.VISIBLE);
 
 		//登陆密码
 		layout_login_pwd = (RelativeLayout) findViewById(R.id.layout_login_pwd);
 		layout_login_pwd.setOnClickListener(this);
+		tg.setOnClickListener(this);
 
 		isFirstCreate = false;
 		//检查升级
@@ -238,10 +256,16 @@ public class Activity_Account_Setting extends Activity_Base implements OnClickLi
 			case R.id.layout_phone:
 				changePhoneNumber();
 				break;
+			//手机号码
+			case R.id.tg:
+				if (App.mUserDetailInfo!=null&&App.mUserDetailInfo.HasOpenCustody) {//已开通托管
+					startActivity(new Intent(this, Activity_TuoGuan_HF.class));
+				} else startActivity(new Intent(this, Activity_Open_Account.class));
+				break;
 
 			//所在公司(加入公司)
 			case R.id.layout_company:
-				if (App.mUserDetailInfo == null || !App.mUserDetailInfo.HasOpenCustody) {
+				if (mUserDetailInfo == null || !mUserDetailInfo.HasOpenCustody) {
 					//                    Toast.makeText(Activity_Account_Setting.this, "公司认证需要先开通汇付账户", Toast.LENGTH_SHORT).show();
 					startActivity(new Intent(this, Activity_Open_Account.class));
 					return;
@@ -293,11 +317,11 @@ public class Activity_Account_Setting extends Activity_Base implements OnClickLi
 	//加入公司
 	private void joinCompany() {
 		UmengUtil.eventById(Activity_Account_Setting.this, R.string.self_auth_c2);
-		if (App.mUserDetailInfo.MyCompany == null) {
+		if (mUserDetailInfo.MyCompany == null) {
 			Activity_Join_Company.launche(Activity_Account_Setting.this);
-		} else if (App.mUserDetailInfo.MyCompany.Status == 5) {
+		} else if (mUserDetailInfo.MyCompany.Status == 5) {
 			companyDialog();
-		} else if (App.mUserDetailInfo.MyCompany.Status == 10) {
+		} else if (mUserDetailInfo.MyCompany.Status == 10) {
 			changeCompany();
 		}
 	}

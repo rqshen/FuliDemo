@@ -398,7 +398,7 @@ public final class R {
 		public static final int decor_content_parent = 0x7f0d0043;
 		public static final int default_activity_button = 0x7f0d002b;
 		public static final int disableHome = 0x7f0d000e;
-		public static final int dropdown = 0x7f0d0090;
+		public static final int dropdown = 0x7f0d0091;
 		public static final int edit_query = 0x7f0d0047;
 		public static final int end = 0x7f0d001b;
 		public static final int expand_activities_button = 0x7f0d0029;
@@ -411,7 +411,7 @@ public final class R {
 		public static final int listMode = 0x7f0d000b;
 		public static final int list_item = 0x7f0d002c;
 		public static final int loAlertButtons = 0x7f0d0351;
-		public static final int loAlertHeader = 0x7f0d030e;
+		public static final int loAlertHeader = 0x7f0d030f;
 		public static final int middle = 0x7f0d001c;
 		public static final int never = 0x7f0d0022;
 		public static final int none = 0x7f0d0010;
@@ -438,13 +438,13 @@ public final class R {
 		public static final int submit_area = 0x7f0d0050;
 		public static final int tabMode = 0x7f0d000d;
 		public static final int title = 0x7f0d002e;
-		public static final int tvAlert = 0x7f0d0313;
+		public static final int tvAlert = 0x7f0d0314;
 		public static final int tvAlertCancel = 0x7f0d034e;
-		public static final int tvAlertMsg = 0x7f0d0310;
-		public static final int tvAlertTitle = 0x7f0d030f;
+		public static final int tvAlertMsg = 0x7f0d0311;
+		public static final int tvAlertTitle = 0x7f0d0310;
 		public static final int up = 0x7f0d000a;
 		public static final int useLogo = 0x7f0d0014;
-		public static final int vDivier = 0x7f0d0312;
+		public static final int vDivier = 0x7f0d0313;
 		public static final int viewStubHorizontal = 0x7f0d034f;
 		public static final int viewStubVertical = 0x7f0d0350;
 		public static final int withText = 0x7f0d0023;

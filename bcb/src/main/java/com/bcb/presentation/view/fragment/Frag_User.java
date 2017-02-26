@@ -107,7 +107,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 	private boolean loadingError = false;
 
 	//加入公司
-//	private LinearLayout user_company_layout;
+	private LinearLayout join_company;
 //	private ImageView joinCompany;
 	private TextView user_join_name;
 	private TextView user_comany_shortname;
@@ -159,6 +159,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 
 		iv_red = (ImageView) view.findViewById(R.id.iv_red);
 		ll_qd = (LinearLayout) view.findViewById(R.id.ll_qd);
+		join_company = (LinearLayout) view.findViewById(R.id.join_company);
 		tv_update = (TextView) view.findViewById(R.id.tv_update);
 		value_yhq = (TextView) view.findViewById(R.id.value_yhq);
 		value_earn_all = (TextView) view.findViewById(R.id.value_earn_all);
@@ -175,6 +176,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 		rl_yhq.setOnClickListener(this);
 		rl_about.setOnClickListener(this);
 		iv_red.setOnClickListener(this);
+		join_company.setOnClickListener(this);
 
 		ll_qd.setOnClickListener(this);
 		layout_security.setOnClickListener(this);
@@ -341,6 +343,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 
 	//从静态数据区中取出数据
 	private void showData() {
+		setupJoinCompanyMessage();
 		if (App.mUserWallet != null) {
 			//总资产
 			value_earn.setText("" + String.format("%.2f", App.mUserWallet.getTotalAsset()));
@@ -369,6 +372,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 			//冻结金额
 			value_total.setText("0.00");
 			value_yhq.setText("0张");
+			value_lc.setText("0.00");
 		}
 
 	}
@@ -1042,4 +1046,5 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 				});
 		requestQueue.add(jsonRequest);
 	}
+
 }
