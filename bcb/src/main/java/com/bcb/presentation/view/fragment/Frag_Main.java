@@ -74,14 +74,13 @@ import java.util.Queue;
 
 import de.greenrobot.event.EventBus;
 
-import static com.bcb.R.id.tv_more;
 import static com.bcb.common.app.App.mUserDetailInfo;
 
 public class Frag_Main extends Frag_Base implements View.OnClickListener {
 	private static final String TAG = "Frag_Main";
 	UPMarqueeView tb;
 	//车险
-	View ll_car, ll_lb, ll_xj,iv_zc;
+	View ll_car, ll_lb, ll_xj,iv_zc,tv_more;
 
 	//刷新控件
 	private PullToRefreshLayout refreshLayout;
@@ -160,6 +159,8 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener {
 
 		iv_zc = view.findViewById(R.id.iv_zc);
 		iv_zc.setOnClickListener(this);
+		tv_more = view.findViewById(R.id.tv_more);
+		tv_more.setOnClickListener(this);
 
 		refreshLayout = ((PullToRefreshLayout) view.findViewById(R.id.refresh_view));
 		//不显示刷新结果
@@ -617,7 +618,7 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener {
 			case R.id.ll_xj:
 				Toast.makeText(ctx, "敬请期待", Toast.LENGTH_SHORT).show();
 				break;
-			case tv_more:
+			case R.id.tv_more:
 				Toast.makeText(ctx, "tv_more", Toast.LENGTH_SHORT).show();
 				break;
 			case R.id.iv_zc:
