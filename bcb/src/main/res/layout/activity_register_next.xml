@@ -44,7 +44,6 @@
                 android:background="@null"
                 android:gravity="center"
                 android:hint="请输入验证码"
-                android:inputType="textPassword"
                 android:singleLine="true"
                 android:textColor="#424954"
                 android:textColorHint="@color/txt_gray"
@@ -200,6 +199,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
+                android:visibility="invisible"
                 android:src="@drawable/r_error_3x"/>
         </RelativeLayout>
 

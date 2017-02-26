@@ -9,6 +9,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +37,7 @@ public class Activity_Register_Next extends Activity_Base implements Interface_V
     private int time;
     private Timer timer;
     private TextView send,login;
+    ImageView im_visible;
 
     //显示密码强度
     private TextView strength1, strength2, strength3;
@@ -81,6 +83,7 @@ public class Activity_Register_Next extends Activity_Base implements Interface_V
     private void init() {
         userpwd = (EditText) findViewById(R.id.userpwd);
         userpwdconfirm = (EditText) findViewById(R.id.userpwdconfirm);
+        im_visible = (ImageView) findViewById(R.id.im_visible);
 
         regservicecode = (EditText) findViewById(R.id.regservicecode);
         strength1 = (TextView) findViewById(R.id.strength1);
@@ -188,6 +191,10 @@ public class Activity_Register_Next extends Activity_Base implements Interface_V
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                im_visible.setVisibility(View.VISIBLE);
+                if (!userpwd.getText().toString().equals(userpwdconfirm.getText().toString())) {
+                    im_visible.setImageDrawable(getResources().getDrawable(R.drawable.r_error_3x));
+                }else im_visible.setImageDrawable(getResources().getDrawable(R.drawable.r_right_3x));
                 if (true) {
                     return;
                 }
@@ -214,6 +221,7 @@ public class Activity_Register_Next extends Activity_Base implements Interface_V
                 }
 //                errortips_confirm.setVisibility(View.GONE);
 //                errortips_confirm.setText("");
+
             }
 
             @Override
