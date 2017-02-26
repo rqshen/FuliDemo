@@ -52,7 +52,7 @@ public class Frag_Find extends Frag_Base {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.frag_find, container, false);
+		View view = inflater.inflate(R.layout.frag_find2, container, false);
 		unbinder = ButterKnife.bind(this, view);
 		((TextView) view.findViewById(title_text)).setText("发现");
 		return view;
