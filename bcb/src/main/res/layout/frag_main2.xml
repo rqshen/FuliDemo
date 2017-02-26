@@ -87,9 +87,9 @@
                     </LinearLayout>
 
                     <ImageView
-                        android:layout_marginTop="10dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
                         android:src="@drawable/main_ad"/>
 
                     <!-- 精品项目标题 -->
@@ -190,50 +190,147 @@
                         android:listSelector="@drawable/list_selector"
                         android:scrollbars="none"/>
 
-                    <RelativeLayout
-                        android:id="@+id/rl_car"
+                    <TextView
+                        android:id="@+id/tv_"
                         android:layout_width="match_parent"
-                        android:layout_height="45dp"
-                        android:layout_marginBottom="10dp"
-                        android:background="@color/white">
+                        android:layout_height="wrap_content"
+                        android:paddingTop="10dp"
+                        android:paddingLeft="15dp"
+                        android:text="福利精选"
+                        android:textColor="#424954"
+                        android:background="@color/white"
+                        android:textSize="15sp"/>
 
-                        <ImageView
-                            android:id="@+id/iv_car"
-                            android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:id="@+id/ll_fllc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:orientation="horizontal"
+                        android:paddingBottom="20dp"
+                        android:paddingTop="10dp">
+
+                        <LinearLayout
+                            android:id="@+id/ll_car"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
                             android:layout_marginLeft="15dp"
-                            android:src="@drawable/iv_car"/>
+                            android:layout_weight="1"
+                            android:background="@color/background"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/tv_car"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_marginLeft="15dp"
-                            android:layout_toRightOf="@+id/iv_car"
-                            android:gravity="center"
-                            android:singleLine="true"
-                            android:text="车险内购"
-                            android:textColor="#333"
-                            android:textSize="16sp"/>
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="15dp"
+                                android:src="@drawable/main_cx"/>
 
-                        <TextView
-                            android:id="@+id/tv_car_explain"
-                            android:layout_width="wrap_content"
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:singleLine="true"
+                                android:text="车险内购"
+                                android:textColor="#424954"
+                                android:textSize="14sp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="10dp"
+                                android:layout_marginTop="8dp"
+                                android:gravity="center"
+                                android:singleLine="true"
+                                android:text="优惠高达25%"
+                                android:textColor="#999"
+                                android:textSize="12sp"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_lb"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="10dp"
+                            android:layout_weight="1"
+                            android:background="@color/background"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="15dp"
+                                android:src="@drawable/main_lb"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:singleLine="true"
+                                android:text="百元礼包"
+                                android:textColor="#424954"
+                                android:textSize="14sp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="10dp"
+                                android:layout_marginTop="8dp"
+                                android:gravity="center"
+                                android:singleLine="true"
+                                android:text="申请加入公司"
+                                android:textColor="#999"
+                                android:textSize="12sp"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_xj"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
                             android:layout_marginRight="15dp"
-                            android:drawablePadding="5dp"
-                            android:drawableRight="@drawable/ind"
-                            android:gravity="center"
-                            android:singleLine="true"
-                            android:text="优惠高达25% "
-                            android:textColor="#999"
-                            android:textSize="15sp"/>
+                            android:layout_weight="1"
+                            android:background="@color/background"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical">
 
-                    </RelativeLayout>
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="15dp"
+                                android:src="@drawable/main_xj"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:singleLine="true"
+                                android:text="10元现金奖"
+                                android:textColor="#424954"
+                                android:textSize="14sp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="10dp"
+                                android:layout_marginTop="8dp"
+                                android:gravity="center"
+                                android:singleLine="true"
+                                android:text="敬请期待"
+                                android:textColor="#999"
+                                android:textSize="12sp"/>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/iv_below"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginBottom="30dp"
+                        android:layout_marginTop="30dp"
+                        android:src="@drawable/main_below"/>
 
                 </LinearLayout>
             </com.bcb.presentation.view.custom.PullableView.PullableScrollView>

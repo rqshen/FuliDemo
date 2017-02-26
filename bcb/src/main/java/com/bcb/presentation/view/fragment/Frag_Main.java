@@ -3,6 +3,7 @@ package com.bcb.presentation.view.fragment;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
@@ -14,7 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,8 +46,10 @@ import com.bcb.presentation.adapter.AnnounceAdapter;
 import com.bcb.presentation.adapter.ExpiredAdapter;
 import com.bcb.presentation.adapter.ProductAdapter;
 import com.bcb.presentation.view.activity.Activity_Browser;
+import com.bcb.presentation.view.activity.Activity_Join_Company;
 import com.bcb.presentation.view.activity.Activity_Login;
 import com.bcb.presentation.view.activity.Activity_NormalProject_Introduction;
+import com.bcb.presentation.view.activity.Activity_Open_Account;
 import com.bcb.presentation.view.activity.Activity_Privilege_Money;
 import com.bcb.presentation.view.activity.Activity_WebView_Upload;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
@@ -70,11 +72,13 @@ import java.util.Queue;
 
 import de.greenrobot.event.EventBus;
 
+import static com.bcb.common.app.App.mUserDetailInfo;
+
 public class Frag_Main extends Frag_Base implements View.OnClickListener {
 	private static final String TAG = "Frag_Main";
 
 	//车险
-	RelativeLayout rl_car;
+	View ll_car, ll_lb, ll_xj;
 
 	//刷新控件
 	private PullToRefreshLayout refreshLayout;
@@ -144,8 +148,12 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener {
 		//仅保留下拉刷新，隐藏上拉加载更多
 		//隐藏加载更多
 		(view.findViewById(R.id.loadmore_view)).setVisibility(View.GONE);
-		rl_car = ((RelativeLayout) view.findViewById(R.id.rl_car));
-		rl_car.setOnClickListener(this);
+		ll_car = view.findViewById(R.id.ll_car);
+		ll_car.setOnClickListener(this);
+		ll_lb = view.findViewById(R.id.ll_lb);
+		ll_lb.setOnClickListener(this);
+		ll_xj = view.findViewById(R.id.ll_xj);
+		ll_xj.setOnClickListener(this);
 
 		refreshLayout = ((PullToRefreshLayout) view.findViewById(R.id.refresh_view));
 		//不显示刷新结果
@@ -169,7 +177,6 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener {
 				refreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
 			}
 		});
-
 
 		//滚动广告
 		notice_text = (TextView) view.findViewById(R.id.notice_text);
@@ -600,17 +607,80 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener {
 
 	@Override
 	public void onClick(View v) {
+		if (App.saveUserInfo.getAccess_Token() == null) {
+			Activity_Login.launche(ctx);
+			return;
+		}
 		switch (v.getId()) {
-			case R.id.rl_car:
-				if (App.saveUserInfo.getAccess_Token() == null) {
-					Activity_Login.launche(ctx);
-				} else if (App.mUserDetailInfo == null || TextUtils.isEmpty(App.mUserDetailInfo.CarInsuranceIndexPage)) {
+			case R.id.ll_car:
+				if (mUserDetailInfo == null || TextUtils.isEmpty(mUserDetailInfo.CarInsuranceIndexPage)) {
 					Toast.makeText(ctx, "网络异常，请刷新后重试", Toast.LENGTH_SHORT).show();
 				} else {
-					Activity_WebView_Upload.launche(ctx, "车险内购", App.mUserDetailInfo.CarInsuranceIndexPage);
+					Activity_WebView_Upload.launche(ctx, "车险内购", mUserDetailInfo.CarInsuranceIndexPage);
 				}
 				break;
+			case R.id.ll_lb:
+				toJoinCompany();
+				break;
+			case R.id.ll_xj:
+				Toast.makeText(ctx, "敬请期待", Toast.LENGTH_SHORT).show();
+				break;
 		}
+	}
+
+	//加入公司
+	private void toJoinCompany() {
+		if (mUserDetailInfo == null || !mUserDetailInfo.HasOpenCustody) {
+			startActivity(new Intent(ctx, Activity_Open_Account.class));
+		}
+		//否则需要判断MyCompany字段
+		else {
+			//未申请
+			if (mUserDetailInfo.MyCompany == null) {
+				Activity_Join_Company.launche(ctx);
+			}
+			//审核中
+			else if (mUserDetailInfo.MyCompany.Status == 5) {
+				companyAlertView("您的认证申请正在审核", "预计2个工作日内完成，请耐心等候");
+			}
+			//拉黑
+			else if (mUserDetailInfo.MyCompany.Status == 15) {
+				companyAlertView("提示", "你已被拉入黑名单\n详情请咨询工作人员");
+			}else if (App.mUserDetailInfo.MyCompany.Status == 10) {
+				changeCompany();
+			}
+		}
+	}
+	private void changeCompany() {
+		showAlertView("提示", "您需要修改公司认证信息吗?", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				alertView.dismiss();
+				alertView = null;
+				Activity_Join_Company.launche(ctx);
+			}
+		});
+	}
+		//提示对话框
+	private void showAlertView(String titleName, String contentMessage, DialogInterface.OnClickListener onClickListener) {
+		AlertView.Builder ibuilder = new AlertView.Builder(ctx);
+		ibuilder.setTitle(titleName);
+		ibuilder.setMessage(contentMessage);
+		ibuilder.setPositiveButton("立即修改", onClickListener);
+		ibuilder.setNegativeButton("取消", null);
+		alertView = ibuilder.create();
+		alertView.show();
+	}
+	/***************************
+	 * 审核中
+	 *************************/
+	private void companyAlertView(String title, String contentMessage) {
+		AlertView.Builder ibuilder = new AlertView.Builder(ctx);
+		ibuilder.setTitle(title);
+		ibuilder.setMessage(contentMessage);
+		ibuilder.setPositiveButton("知道了", null);
+		alertView = ibuilder.create();
+		alertView.show();
 	}
 
 	//新手标项目点击事件
@@ -678,8 +748,8 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener {
 					//判断JSON对象是否为空
 					if (data != null) {
 						//将获取到的银行卡数据写入静态数据区中
-						App.mUserDetailInfo = App.mGson.fromJson(data.toString(), UserDetailInfo.class);
-						if (App.mUserDetailInfo != null && !App.mUserDetailInfo.HasOpenCustody) {
+						mUserDetailInfo = App.mGson.fromJson(data.toString(), UserDetailInfo.class);
+						if (mUserDetailInfo != null && !mUserDetailInfo.HasOpenCustody) {
 							alterHFOpen();
 						}
 					}
@@ -729,19 +799,19 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener {
 	public void onResume() {
 		super.onResume();
 		showItemVisible();
-		boolean che = App.mUserDetailInfo == null || TextUtils.isEmpty(App.mUserDetailInfo.CarInsuranceIndexPage);
+		boolean che = mUserDetailInfo == null || TextUtils.isEmpty(mUserDetailInfo.CarInsuranceIndexPage);
 		LogUtil.i("bqt", "【进入时是否没有获取到车险】" + che);
 		if (che) {
-			rl_car.setVisibility(View.GONE);
+			ll_car.setVisibility(View.GONE);
 		}
 	}
 
 	public void onEventMainThread(StringEventBusBean event) {
 		if (event.getContent().equals("CXGONE")) {
-			rl_car.setVisibility(View.GONE);
+			ll_car.setVisibility(View.GONE);
 			LogUtil.i("bqt", "【隐藏车险】");
 		} else if (event.getContent().equals("CXVISIBLE")) {
-			rl_car.setVisibility(View.VISIBLE);
+			ll_car.setVisibility(View.VISIBLE);
 			LogUtil.i("bqt", "【显示车险】");
 		}
 	}
@@ -759,8 +829,8 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener {
 
 	private void showItemVisible() {
 		//如果没有登录或者没有投资过的
-		if ((App.saveUserInfo == null || TextUtils.isEmpty(App.saveUserInfo.getAccess_Token())) || App.mUserDetailInfo == null ||
-				!App.mUserDetailInfo.HasInvest) {
+		if ((App.saveUserInfo == null || TextUtils.isEmpty(App.saveUserInfo.getAccess_Token())) || mUserDetailInfo == null ||
+				!mUserDetailInfo.HasInvest) {
 			setupBoutiqueVisible(View.GONE);
 			setupNewVisible(View.VISIBLE);
 		} else {

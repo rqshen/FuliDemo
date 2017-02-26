@@ -108,7 +108,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 
 	//加入公司
 	private LinearLayout join_company;
-//	private ImageView joinCompany;
+	//	private ImageView joinCompany;
 	private TextView user_join_name;
 	private TextView user_comany_shortname;
 	//广播
@@ -307,8 +307,8 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 		}
 		//Token不存在时，则表示没有登陆
 //		else {
-			//初始化余额信息
-			showData();
+		//初始化余额信息
+		showData();
 //		}
 		//设置banner
 		setupJoinCompanyMessage();
@@ -356,7 +356,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 			//冻结金额
 			value_total.setText("" + String.format("%.2f", App.mUserWallet.getFreezeAmount()));
 			value_yhq.setText("10086张");
-			if (App.mUserWallet.getBalanceAmount()==0) {
+			if (App.mUserWallet.getBalanceAmount() == 0) {
 				value_balance.setText("去充值");
 			}
 		} else {
@@ -647,10 +647,21 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 			//拉黑
 			else if (App.mUserDetailInfo.MyCompany.Status == 15) {
 				companyAlertView("提示", "你已被拉入黑名单\n详情请咨询工作人员");
+			} else if (App.mUserDetailInfo.MyCompany.Status == 10) {
+				changeCompany();
 			}
 		}
 	}
-
+	private void changeCompany() {
+		showAlertView2("提示", "您需要修改公司认证信息吗?", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				alertView.dismiss();
+				alertView = null;
+				Activity_Join_Company.launche(ctx);
+			}
+		});
+	}
 	//借款
 	private void loanMainPage() {
 		//已开通托管
@@ -787,6 +798,17 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 		ibuilder.setTitle(titleName);
 		ibuilder.setMessage(contentMessage);
 		ibuilder.setPositiveButton("立即设置", onClickListener);
+		ibuilder.setNegativeButton("取消", null);
+		alertView = ibuilder.create();
+		alertView.show();
+	}
+
+	//提示对话框
+	private void showAlertView2(String titleName, String contentMessage, DialogInterface.OnClickListener onClickListener) {
+		AlertView.Builder ibuilder = new AlertView.Builder(ctx);
+		ibuilder.setTitle(titleName);
+		ibuilder.setMessage(contentMessage);
+		ibuilder.setPositiveButton("立即修改", onClickListener);
 		ibuilder.setNegativeButton("取消", null);
 		alertView = ibuilder.create();
 		alertView.show();
