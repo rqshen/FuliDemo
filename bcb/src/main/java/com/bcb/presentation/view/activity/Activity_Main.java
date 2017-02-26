@@ -325,7 +325,7 @@ public class Activity_Main extends Activity_Base_Fragment {
 		content.setAdapter(myFragmentPagerAdapter);
 		content.setPagingEnabled(false);
 		content.setOffscreenPageLimit(3);
-		content.addOnPageChangeListener(frag_main);
+//		content.addOnPageChangeListener(frag_main);
 		addFirstFragment();
 	}
 	

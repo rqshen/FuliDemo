@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/background"
+              android:descendantFocusability="blocksDescendants"
+              android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <!--内容-->
+        <com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout
+            android:id="@+id/refresh_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <!-- 下拉刷新控件-->
+            <include layout="@layout/refresh_head"/>
+
+            <com.bcb.presentation.view.custom.PullableView.PullableScrollView
+                android:id="@+id/layout_scrollview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:orientation="vertical">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/white">
+
+                        <com.bcb.presentation.view.custom.PagerIndicator.AutoLoopViewPager
+                            android:id="@+id/autoLoop"
+                            android:layout_width="match_parent"
+                            android:layout_height="180dp"
+                            android:background="@drawable/banner01"/>
+
+                        <com.bcb.presentation.view.custom.PagerIndicator.CirclePageIndicator
+                            android:id="@+id/indy"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal|bottom"
+                            android:layout_marginBottom="5dip"
+                            app:fillColor="@color/white"
+                            app:pageColor="#e5e5e5"
+                            app:strokeColor="@android:color/transparent"/>
+                    </FrameLayout>
+
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:background="@color/divider"/>
+
+                    <!--滚动广告文字-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="37dp"
+                        android:background="@android:color/white"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingLeft="13dp"
+                        android:paddingRight="13dp">
+
+                        <ImageView
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:src="@drawable/ico_notice"/>
+
+                        <com.bcb.presentation.view.custom.MarqueeText
+                            android:id="@+id/notice_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:ellipsize="marquee"
+                            android:gravity="center_vertical"
+                            android:marqueeRepeatLimit="marquee_forever"
+                            android:singleLine="true"
+                            android:text="@string/default_notice_text"
+                            android:textColor="@color/txt_gray"/>
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_marginTop="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/main_ad"/>
+
+                    <!-- 精品项目标题 -->
+                    <LinearLayout
+                        android:id="@+id/boutique_layout"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="11dp"
+                        android:layout_marginTop="14dp"
+                        android:gravity="center_vertical">
+
+                        <ImageView
+                            android:layout_width="2dip"
+                            android:layout_height="@dimen/margin_size_large"
+                            android:layout_marginLeft="@dimen/margin_size_large"
+                            android:background="@drawable/line_red"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/margin_size_small"
+                            android:paddingBottom="1dip"
+                            android:text="精品项目"
+                            android:textColor="@color/txt_black"
+                            android:textSize="@dimen/main_text_small"/>
+
+                        <TextView
+                            android:id="@+id/JXPackageAdWord"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dip"
+                            android:text=""
+                            android:textColor="@color/txt_gray"
+                            android:textSize="@dimen/main_text_small"/>
+                    </LinearLayout>
+                    <!-- 体验标 -->
+                    <com.bcb.data.util.MyListView
+                        android:id="@+id/expired_listview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:cacheColorHint="@android:color/black"
+                        android:divider="@color/background"
+                        android:dividerHeight="10dp"
+                        android:fastScrollEnabled="false"
+                        android:listSelector="@drawable/list_selector"
+                        android:scrollbars="none"
+                        android:visibility="visible"/>
+                    <!-- 新手标 -->
+                    <com.bcb.data.util.MyListView
+                        android:id="@+id/new_listview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:cacheColorHint="@android:color/black"
+                        android:divider="@color/background"
+                        android:dividerHeight="10dp"
+                        android:fastScrollEnabled="false"
+                        android:listSelector="@drawable/list_selector"
+                        android:scrollbars="none"
+                        android:visibility="visible"/>
+                    <!-- 精品标 -->
+                    <com.bcb.data.util.MyListView
+                        android:id="@+id/boutique_listview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:cacheColorHint="@android:color/black"
+                        android:divider="@color/background"
+                        android:dividerHeight="10dp"
+                        android:fastScrollEnabled="false"
+                        android:listSelector="@drawable/list_selector"
+                        android:scrollbars="none"
+                        android:visibility="visible"/>
+                    <!-- 新标预告 -->
+                    <com.bcb.data.util.MyListView
+                        android:id="@+id/announce_listView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:cacheColorHint="@android:color/black"
+                        android:divider="@color/background"
+                        android:dividerHeight="10dp"
+                        android:fastScrollEnabled="false"
+                        android:listSelector="@drawable/list_selector"
+                        android:scrollbars="none"/>
+
+                    <!-- 如果新标预告不存在的时候才初始化该列表 -->
+                    <com.bcb.data.util.MyListView
+                        android:id="@+id/addition_listView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:cacheColorHint="@android:color/black"
+                        android:divider="@color/background"
+                        android:dividerHeight="10dp"
+                        android:fastScrollEnabled="false"
+                        android:listSelector="@drawable/list_selector"
+                        android:scrollbars="none"/>
+
+                    <RelativeLayout
+                        android:id="@+id/rl_car"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@color/white">
+
+                        <ImageView
+                            android:id="@+id/iv_car"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="15dp"
+                            android:src="@drawable/iv_car"/>
+
+                        <TextView
+                            android:id="@+id/tv_car"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="15dp"
+                            android:layout_toRightOf="@+id/iv_car"
+                            android:gravity="center"
+                            android:singleLine="true"
+                            android:text="车险内购"
+                            android:textColor="#333"
+                            android:textSize="16sp"/>
+
+                        <TextView
+                            android:id="@+id/tv_car_explain"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="15dp"
+                            android:drawablePadding="5dp"
+                            android:drawableRight="@drawable/ind"
+                            android:gravity="center"
+                            android:singleLine="true"
+                            android:text="优惠高达25% "
+                            android:textColor="#999"
+                            android:textSize="15sp"/>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+            </com.bcb.presentation.view.custom.PullableView.PullableScrollView>
+            <!-- 上拉加载更多 -->
+            <include layout="@layout/load_more"/>
+        </com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout>
+
+    </FrameLayout>
+</LinearLayout>
