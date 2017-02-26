@@ -513,7 +513,6 @@ public class Frag_Main3 extends Frag_Base implements View.OnClickListener, ViewP
 						}
 					}
 					initBanner();
-					initScrollText();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -555,22 +554,7 @@ public class Frag_Main3 extends Frag_Base implements View.OnClickListener, ViewP
 		indy.setViewPager(loopViewPager);
 	}
 
-	//初始化滚动广告
-	private void initScrollText() {
-		//如果为空，直接返回
-		if (null == mAdPhotoListBean || null == mAdPhotoListBean.InvestList || 0 == mAdPhotoListBean.InvestList.size()) {
-			return;
-		}
-		StringBuilder stringBuilder = new StringBuilder();
-		for (int i = 0 ; i < mAdPhotoListBean.InvestList.size() ; i++) {
-			if ((mAdPhotoListBean.InvestList.size() - 1) == i) {
-				stringBuilder.append(mAdPhotoListBean.InvestList.get(i));
-			} else {
-				stringBuilder.append(mAdPhotoListBean.InvestList.get(i)).append("，");
-			}
-		}
-		notice_text.setText(stringBuilder.toString());
-	}
+
 
 	@Override
 	public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

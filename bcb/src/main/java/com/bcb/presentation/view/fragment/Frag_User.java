@@ -248,7 +248,6 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 		layout_customer_service.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				//                showPopupWindow(false);
 				String userId = null;
 
 				//判断是否为空
@@ -259,13 +258,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 						.showCustomer(userId);
 			}
 		});
-		//        //专属客服提示
-		//        user_customer_tips.setOnClickListener(new OnClickListener() {
-		//            @Override
-		//            public void onClick(View v) {
-		//                showPopupWindow(false);
-		//            }
-		//        });
+
 		//第一次安装的时候才显示专属提示
 		if (!App.saveConfigUtil.isNotFirstRun()) {
 			//            showPopupWindow(true);
@@ -301,16 +294,8 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 			}
 		});
 
-		if (App.saveUserInfo.getAccess_Token() != null) {
-			requestUserDetailInfo();
-			requestUserWallet();
-		}
-		//Token不存在时，则表示没有登陆
-//		else {
-		//初始化余额信息
-		showData();
-//		}
-		//设置banner
+		requestUserDetailInfo();
+		requestUserWallet();
 		setupJoinCompanyMessage();
 		initSoundPool();
 	}

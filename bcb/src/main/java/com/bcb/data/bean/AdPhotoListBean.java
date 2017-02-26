@@ -1,8 +1,10 @@
 package com.bcb.data.bean;
 
+import com.bcb.presentation.view.custom.UPMarqueeViewData;
+
 import java.util.List;
 
 public class AdPhotoListBean {
 	public List<BannerInfo> BannerList;
-	public List<String> InvestList;
+	public List<UPMarqueeViewData> NoticeList;
 }

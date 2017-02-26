@@ -60,33 +60,29 @@
                     <!--滚动广告文字-->
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="37dp"
+                        android:layout_height="30dp"
                         android:background="@android:color/white"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
-                        android:paddingLeft="13dp"
-                        android:paddingRight="13dp">
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp">
 
                         <ImageView
-                            android:layout_width="18dp"
-                            android:layout_height="18dp"
-                            android:src="@drawable/ico_notice"/>
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/main_tb"/>
 
-                        <com.bcb.presentation.view.custom.MarqueeText
-                            android:id="@+id/notice_text"
+                        <com.bcb.presentation.view.custom.UPMarqueeView
+                            android:id="@+id/tb"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="5dp"
-                            android:ellipsize="marquee"
-                            android:gravity="center_vertical"
-                            android:marqueeRepeatLimit="marquee_forever"
-                            android:singleLine="true"
-                            android:text="@string/default_notice_text"
-                            android:textColor="@color/txt_gray"/>
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:gravity="center_vertical"/>
 
                     </LinearLayout>
 
                     <ImageView
+                        android:id="@+id/iv_zc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
@@ -94,35 +90,49 @@
 
                     <!-- 精品项目标题 -->
                     <LinearLayout
+                        android:layout_marginTop="10dp"
                         android:id="@+id/boutique_layout"
                         android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="11dp"
-                        android:layout_marginTop="14dp"
-                        android:gravity="center_vertical">
+                        android:layout_height="35dp"
+                        android:background="@color/white"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
-                        <ImageView
-                            android:layout_width="2dip"
-                            android:layout_height="@dimen/margin_size_large"
-                            android:layout_marginLeft="@dimen/margin_size_large"
-                            android:background="@drawable/line_red"/>
 
                         <TextView
+                            android:id="@+id/tv_lcjx"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="@dimen/margin_size_small"
-                            android:paddingBottom="1dip"
-                            android:text="精品项目"
-                            android:textColor="@color/txt_black"
-                            android:textSize="@dimen/main_text_small"/>
+                            android:paddingLeft="15dp"
+                            android:text="理财精选"
+                            android:textColor="#424954"
+                            android:textSize="15sp"/>
+
+                        <TextView
+                            android:id="@+id/tv_lcjx_gx"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="8dp"
+                            android:text="每天10:00/16:00更新"
+                            android:textColor="#999"
+                            android:paddingRight="30dp"
+                            android:textSize="12sp"/>
+                        <TextView
+                            android:id="@+id/tv_more"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="right"
+                            android:layout_marginRight="15dp"
+                            android:paddingLeft="8dp"
+                            android:text="更多理财产品>"
+                            android:textColor="#ff4c4c"
+                            android:textSize="12sp"/>
 
                         <TextView
                             android:id="@+id/JXPackageAdWord"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dip"
-                            android:text=""
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:text="1111"
                             android:textColor="@color/txt_gray"
                             android:textSize="@dimen/main_text_small"/>
                     </LinearLayout>
@@ -191,14 +201,14 @@
                         android:scrollbars="none"/>
 
                     <TextView
-                        android:id="@+id/tv_"
+                        android:id="@+id/tv_fljx"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingTop="10dp"
+                        android:background="@color/white"
                         android:paddingLeft="15dp"
+                        android:paddingTop="10dp"
                         android:text="福利精选"
                         android:textColor="#424954"
-                        android:background="@color/white"
                         android:textSize="15sp"/>
 
                     <LinearLayout

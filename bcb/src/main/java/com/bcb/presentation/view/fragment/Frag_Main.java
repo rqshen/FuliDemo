@@ -51,6 +51,7 @@ import com.bcb.presentation.view.activity.Activity_Login;
 import com.bcb.presentation.view.activity.Activity_NormalProject_Introduction;
 import com.bcb.presentation.view.activity.Activity_Open_Account;
 import com.bcb.presentation.view.activity.Activity_Privilege_Money;
+import com.bcb.presentation.view.activity.Activity_Register_First;
 import com.bcb.presentation.view.activity.Activity_WebView_Upload;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
 import com.bcb.presentation.view.custom.CustomDialog.BasicDialog;
@@ -60,6 +61,7 @@ import com.bcb.presentation.view.custom.PagerIndicator.AutoLoopViewPager;
 import com.bcb.presentation.view.custom.PagerIndicator.CirclePageIndicator;
 import com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout;
 import com.bcb.presentation.view.custom.PullableView.PullableScrollView;
+import com.bcb.presentation.view.custom.UPMarqueeView;
 import com.bumptech.glide.Glide;
 
 import org.json.JSONException;
@@ -72,13 +74,14 @@ import java.util.Queue;
 
 import de.greenrobot.event.EventBus;
 
+import static com.bcb.R.id.tv_more;
 import static com.bcb.common.app.App.mUserDetailInfo;
 
 public class Frag_Main extends Frag_Base implements View.OnClickListener {
 	private static final String TAG = "Frag_Main";
-
+	UPMarqueeView tb;
 	//车险
-	View ll_car, ll_lb, ll_xj;
+	View ll_car, ll_lb, ll_xj,iv_zc;
 
 	//刷新控件
 	private PullToRefreshLayout refreshLayout;
@@ -114,8 +117,6 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener {
 	private ArrayList<BannerInfo> listBanner;
 	private AutoLoopViewPager loopViewPager;
 
-	//滚动广告
-	private TextView notice_text;
 
 	private TextView JXPackageAdWord;
 	private int successConnectCount = 0;
@@ -155,6 +156,11 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener {
 		ll_xj = view.findViewById(R.id.ll_xj);
 		ll_xj.setOnClickListener(this);
 
+		tb = (UPMarqueeView) view.findViewById(R.id.tb);
+
+		iv_zc = view.findViewById(R.id.iv_zc);
+		iv_zc.setOnClickListener(this);
+
 		refreshLayout = ((PullToRefreshLayout) view.findViewById(R.id.refresh_view));
 		//不显示刷新结果
 		refreshLayout.setRefreshResultView(false);
@@ -178,8 +184,7 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener {
 			}
 		});
 
-		//滚动广告
-		notice_text = (TextView) view.findViewById(R.id.notice_text);
+
 
 		//体验标
 		expiredRecordsBeans = new ArrayList<>();
@@ -249,8 +254,10 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener {
 				return false;
 			}
 		});
-
 		refreshLayout.autoRefresh();
+		if (App.saveUserInfo.getAccess_Token() == null) {
+			iv_zc.setVisibility(View.VISIBLE);
+		}else iv_zc.setVisibility(View.GONE);
 	}
 
 	/**
@@ -307,7 +314,6 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener {
 					@Override
 					public void onResponse(JSONObject response) {
 						LogUtil.i("bqt", "首页：Banner" + response.toString());
-
 						successConnectCount = successConnectCount + 1;
 						try {
 							if (PackageUtil.getRequestStatus(response, ctx)) {
@@ -319,7 +325,6 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener {
 								}
 							}
 							initBanner();
-							initScrollText();
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
@@ -340,6 +345,8 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener {
 		if (null == mAdPhotoListBean || null == mAdPhotoListBean.BannerList || 0 == mAdPhotoListBean.BannerList.size()) {
 			return;
 		}
+		tb.setViews(mAdPhotoListBean.NoticeList);
+		tb.startFlipping();
 		//创建新的列表数据
 		listBanner = new ArrayList<>();
 		for (int i = 0; i < mAdPhotoListBean.BannerList.size(); i++) {
@@ -361,22 +368,7 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener {
 		indy.setViewPager(loopViewPager);
 	}
 
-	//初始化滚动广告
-	private void initScrollText() {
-		//如果为空，直接返回
-		if (null == mAdPhotoListBean || null == mAdPhotoListBean.InvestList || 0 == mAdPhotoListBean.InvestList.size()) {
-			return;
-		}
-		StringBuilder stringBuilder = new StringBuilder();
-		for (int i = 0; i < mAdPhotoListBean.InvestList.size(); i++) {
-			if ((mAdPhotoListBean.InvestList.size() - 1) == i) {
-				stringBuilder.append(mAdPhotoListBean.InvestList.get(i));
-			} else {
-				stringBuilder.append(mAdPhotoListBean.InvestList.get(i)).append("，");
-			}
-		}
-		notice_text.setText(stringBuilder.toString());
-	}
+
 
 	//Banner适配器
 	private class LoopImageAdapter extends PagerAdapter {
@@ -624,6 +616,12 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener {
 				break;
 			case R.id.ll_xj:
 				Toast.makeText(ctx, "敬请期待", Toast.LENGTH_SHORT).show();
+				break;
+			case tv_more:
+				Toast.makeText(ctx, "tv_more", Toast.LENGTH_SHORT).show();
+				break;
+			case R.id.iv_zc:
+				Activity_Register_First.launche(ctx);
 				break;
 		}
 	}
