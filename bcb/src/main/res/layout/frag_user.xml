@@ -65,7 +65,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
                                 android:gravity="center_vertical"
-                                android:text="您好，包青天"
+                                android:text="您好，请登录"
                                 android:textColor="#424954"
                                 android:textSize="15sp"/>
                             <!-- 公司缩写 -->
@@ -79,7 +79,7 @@
                                 android:ellipsize="end"
                                 android:gravity="center_vertical"
                                 android:maxLines="1"
-                                android:text="广州百财帮网络金融信息服务有限公司"
+                                android:text="加入我的公司拿员工专属福利>"
                                 android:textColor="#999"
                                 android:textSize="@dimen/main_text_small"/>
 

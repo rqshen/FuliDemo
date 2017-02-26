@@ -41,6 +41,7 @@ import com.bcb.data.util.PackageUtil;
 import com.bcb.data.util.TokenUtil;
 import com.bcb.data.util.UmengUtil;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
+import com.bcb.presentation.view.custom.AlertView.DLDialog;
 import com.bcb.presentation.view.custom.AlertView.UpdateDialog;
 import com.bcb.presentation.view.custom.CustomViewPager;
 import com.bcb.presentation.view.fragment.Frag_Main;
@@ -58,7 +59,7 @@ import de.greenrobot.event.EventBus;
 public class Activity_Main extends Activity_Base_Fragment {
 	
 	//viewpager
-	private CustomViewPager content;
+	public CustomViewPager content;
 	private List<Fragment> mFragments;
 	private MyFragmentPagerAdapter myFragmentPagerAdapter;
 	
@@ -379,8 +380,16 @@ public class Activity_Main extends Activity_Base_Fragment {
 		resetstatus(txt_user);
 		img_user.setImageResource(R.drawable.main_my_select);
 		content.setCurrentItem(3, false);
+		showDialog();
 	}
-	
+	private void showDialog() {
+		if (App.saveUserInfo.getAccess_Token() == null) {
+			DLDialog dialog = new DLDialog(this);
+			dialog.setCancelable(true);
+			dialog.setCanceledOnTouchOutside(true);
+			dialog.show();
+		}
+	}
 	private void resetstatus(TextView select) {
 		img_mainpage.setImageResource(R.drawable.main_home_page_default);
 		img_product.setImageResource(R.drawable.main_product_default);

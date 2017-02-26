@@ -194,6 +194,11 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowFrame">@null</item>
     </style>
+    <style name="DialogTheme2" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFrame">@null</item>
+    </style>
     <!--activity全屏dialog-->
     <style name="Dialog_Fullscreen">
         <item name="android:windowBackground">@color/transparent_background</item>

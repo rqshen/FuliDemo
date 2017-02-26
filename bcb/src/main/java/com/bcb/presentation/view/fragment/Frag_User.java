@@ -37,7 +37,6 @@ import com.bcb.data.bean.StringEventBusBean;
 import com.bcb.data.bean.UserBankCard;
 import com.bcb.data.bean.UserDetailInfo;
 import com.bcb.data.bean.UserWallet;
-import com.bcb.data.util.DbUtil;
 import com.bcb.data.util.DownloadUtils;
 import com.bcb.data.util.HttpUtils;
 import com.bcb.data.util.LogUtil;
@@ -55,7 +54,6 @@ import com.bcb.presentation.view.activity.Activity_Account_Setting;
 import com.bcb.presentation.view.activity.Activity_Browser;
 import com.bcb.presentation.view.activity.Activity_Charge_HF;
 import com.bcb.presentation.view.activity.Activity_Coupons;
-import com.bcb.presentation.view.activity.Activity_Daily_Welfare_Tip;
 import com.bcb.presentation.view.activity.Activity_Join_Company;
 import com.bcb.presentation.view.activity.Activity_Login;
 import com.bcb.presentation.view.activity.Activity_Money_Flowing_Water;
@@ -67,6 +65,7 @@ import com.bcb.presentation.view.activity.Activity_WebView;
 import com.bcb.presentation.view.activity.Activity_Withdraw;
 import com.bcb.presentation.view.activity.My_LC;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
+import com.bcb.presentation.view.custom.AlertView.DLDialog;
 import com.bcb.presentation.view.custom.AlertView.UpdateDialog;
 import com.bcb.presentation.view.custom.CustomDialog.DialogWidget;
 import com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout;
@@ -76,7 +75,6 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
@@ -196,7 +194,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 //		user_company_layout = (LinearLayout) view.findViewById(R.id.user_company_layout);
 //		user_company_layout.setVisibility(View.GONE);
 		user_join_name = (TextView) view.findViewById(R.id.user_join_name);
-		user_join_name.setText("");
+
 		user_comany_shortname = (TextView) view.findViewById(R.id.user_comany_shortname);
 		// 总资产
 		value_earn = (TextView) view.findViewById(R.id.value_earn);
@@ -308,14 +306,18 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 		//设置banner
 		setupJoinCompanyMessage();
 		initSoundPool();
-
 	}
+
+
 
 	@Override
 	public void onResume() {
-		showData();
 		super.onResume();
+		LogUtil.i("bqt", "【Frag_User--onResume】");
+		showData();
 	}
+
+
 
 	private void showPhoneService() {
 		AlertView.Builder ibuilder = new AlertView.Builder(ctx);
@@ -347,6 +349,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 			value_lc.setText("￥" + String.format("%.2f", App.mUserWallet.getIncomingMoney()));
 			//冻结金额
 			value_total.setText("" + String.format("%.2f", App.mUserWallet.getFreezeAmount()));
+
 		} else {
 			//总资产
 			value_earn.setText("0.00");
@@ -365,13 +368,14 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 
 	//加载用户加入公司的信息
 	private void setupJoinCompanyMessage() {
-		//如果mUserDetailInfo为空，则表示没有登陆
-		if (App.mUserDetailInfo == null) {
+		//没有登陆
+		if (App.saveUserInfo.getAccess_Token() == null) {
 			user_join_name.setText("您好，请登录/注册");
 			user_comany_shortname.setVisibility(View.GONE);
 			iv_head.setImageDrawable(getResources().getDrawable(R.drawable.iv_my_head2));
 			return;
 		}
+		if (App.mUserDetailInfo == null) return;
 		user_comany_shortname.setVisibility(View.VISIBLE);
 		iv_head.setImageDrawable(getResources().getDrawable(R.drawable.iv_my_head));
 		//如果加入公司信息不为空并且状态值为10(通过)的时候，则显示用户名和加入公司的缩写
@@ -384,7 +388,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 			user_join_name.setText(mUserDetailInfo.UserName);
 			user_comany_shortname.setCompoundDrawables(getActivity().getResources().getDrawable(R.drawable.rz), null, null, null);
 		} else {
-			user_comany_shortname.setText("加入我的公司拿员工专属福利");
+			user_comany_shortname.setText("加入我的公司拿员工专属福利>");
 			user_comany_shortname.setCompoundDrawables(null, null, null, null);
 			user_join_name.setText("您好" + App.saveUserInfo.getLocalPhone());
 //				joinCompany.setVisibility(View.VISIBLE);
@@ -477,10 +481,6 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 	//点击事件
 	@Override
 	public void onClick(View v) {
-		if (v.getId() == R.id.ll_test) {
-
-			return;
-		}
 		if (v.getId() == R.id.layout_update) {
 			showVersionDialog2();
 			return;
@@ -493,8 +493,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 		switch (v.getId()) {
 			//加息
 			case R.id.ll_qd:
-				if (mUserDetailInfo.HasOpenEgg) Toast.makeText(ctx, "已经加息过了", Toast.LENGTH_SHORT).show();
-				else jx();
+
 				break;
 			//总资产
 			case R.id.ll_test:
@@ -594,17 +593,6 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 		}
 	}
 
-	private long lastClickTime;//上次点击时间
-	private final long MIN_CLICK_DELAY_TIME = 500;//最小时间间隔
-
-	private void jx() {
-		//防止按钮多次点击
-		long currentTime = Calendar.getInstance().getTimeInMillis();
-		if (currentTime - lastClickTime > MIN_CLICK_DELAY_TIME) {
-			lastClickTime = currentTime;
-			getPackageData();
-		}
-	}
 
 	//短促音
 	private SoundPool soundPool;
@@ -629,64 +617,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 
 	}
 
-	/**
-	 * 请求福袋
-	 */
-	private void getPackageData() {
-		JSONObject obj = new JSONObject();
-		BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.JoinDailyWelfare, obj, TokenUtil.getEncodeToken(ctx), true, new BcbRequest.BcbCallBack<JSONObject>() {
-			@Override
-			public void onResponse(JSONObject response) {
-				try {
-					int status = response.getInt("status");
-					if (1 == status || -3 == status) {
-						//设置对应位置的数据
-						String value = response.getString("result");
-						LogUtil.d("福袋数据", value);
-						if (!TextUtils.isEmpty(value) && !value.equals("null")) {
-							//播放短促音
-							soundPool.play(soundID.get(1), 1, 1, 0, 0, 1);
-							//弹出金币
-							//Activity_Daily_Welfare_Result.launche(ctx, value, String.valueOf(totalInterest));
 
-							//保存到数据库
-							DbUtil.saveWelfare(value);
-							App.getInstance().setWelfare(value);
-
-							//通知刷新
-							EventBus.getDefault().post(new BroadcastEvent(BroadcastEvent.REFRESH));
-						}
-					} else if (-2 == status) {//领福利时间为每日 06：00-22：00
-						Activity_Daily_Welfare_Tip.launche(ctx);
-//                        finish();
-					} else if (-5 == status) {
-						App.saveUserInfo.clear();
-						Intent intent = new Intent(ctx, Activity_Login.class);
-						ctx.startActivity(intent);
-					} else {
-						//获取数据库缓存数据,若有数据就显示已经缓存的数据
-						if (TextUtils.isEmpty(App.getInstance().getWelfare())) {
-							ToastUtil.alert(ctx, response.getString("message"));
-							App.getInstance().requestWelfare();
-						} else {
-							//通知刷新
-							EventBus.getDefault().post(new BroadcastEvent(BroadcastEvent.REFRESH));
-							iv_red.setVisibility(View.INVISIBLE);
-						}
-					}
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-
-			@Override
-			public void onErrorResponse(Exception error) {
-
-			}
-		});
-		jsonRequest.setTag(BcbRequestTag.UrlJoinWelfareTag);
-		requestQueue.add(jsonRequest);
-	}
 
 	//加入公司
 	private void toJoinCompany() {
