@@ -48,10 +48,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="30dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="35dp"
         android:layout_marginBottom="35dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="35dp"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -100,11 +100,12 @@
                     android:textSize="12sp"/>
 
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_gravity="center_vertical">
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="15dp">
 
                 <ImageView
                     android:layout_width="12dp"
@@ -135,11 +136,12 @@
                     android:textSize="12sp"/>
 
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_gravity="center_vertical">
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="15dp">
 
                 <ImageView
                     android:layout_width="12dp"
@@ -169,11 +171,12 @@
                     android:textSize="12sp"/>
 
             </RelativeLayout>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_gravity="center_vertical">
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="15dp">
 
                 <ImageView
                     android:layout_width="12dp"
@@ -230,9 +233,12 @@
 
         <ImageView
             android:id="@+id/iv"
-            style="@style/image_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:paddingRight="0dp"/>
+            android:layout_centerVertical="true"
+            android:src="@drawable/r_error_3x"
+            />
 
     </RelativeLayout>
 
@@ -261,8 +267,8 @@
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
-                android:paddingBottom="25dp"
-                android:paddingTop="25dp">
+                android:paddingBottom="20dp"
+                android:paddingTop="20dp">
                 <!-- 待收本息 -->
                 <TextView
                     android:id="@+id/ljtz"
@@ -293,8 +299,8 @@
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
-                android:paddingBottom="25dp"
-                android:paddingTop="25dp">
+                android:paddingBottom="20dp"
+                android:paddingTop="20dp">
                 <!-- 待收本息 -->
                 <TextView
                     android:id="@+id/ljsy"
@@ -331,8 +337,8 @@
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
-                android:paddingBottom="25dp"
-                android:paddingTop="25dp">
+                android:paddingBottom="20dp"
+                android:paddingTop="20dp">
 
                 <TextView
                     android:id="@+id/ljtcz"
@@ -363,8 +369,8 @@
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
-                android:paddingBottom="25dp"
-                android:paddingTop="25dp">
+                android:paddingBottom="20dp"
+                android:paddingTop="20dp">
                 <!-- 待收本息 -->
                 <TextView
                     android:id="@+id/ljtx"
@@ -383,6 +389,8 @@
                     android:textColor="#424954"
                     android:textSize="12sp"/>
             </LinearLayout>
+
+
         </LinearLayout>
     </LinearLayout>
 
