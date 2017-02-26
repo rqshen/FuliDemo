@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
                 android:id="@+id/rl_base_root"
 
-    android:background="@color/white"
+                android:background="@color/white"
     android:orientation="vertical">
     <LinearLayout
         android:id="@+id/layout_topbar"
@@ -95,7 +95,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/layout_title"
-        android:background="@color/white"
+        android:background="@color/background"
         android:orientation="vertical">
     </LinearLayout>
 </RelativeLayout>

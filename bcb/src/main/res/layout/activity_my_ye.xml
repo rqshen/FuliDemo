@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/background"
     android:orientation="vertical">
 
     <LinearLayout
@@ -43,6 +43,7 @@
         android:id="@+id/layout_cz"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:background="@color/white"
         android:layout_gravity="center_vertical">
 
         <ImageView
@@ -93,6 +94,7 @@
         android:id="@+id/layout_tx"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:background="@color/white"
         android:layout_gravity="center_vertical">
 
         <ImageView
@@ -143,6 +145,7 @@
         android:id="@+id/layout_mx"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:background="@color/white"
         android:layout_gravity="center_vertical">
 
         <ImageView

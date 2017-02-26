@@ -1,6 +1,7 @@
 package com.bcb.presentation.view.fragment;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.app.DownloadManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -37,6 +38,8 @@ import com.bcb.data.bean.StringEventBusBean;
 import com.bcb.data.bean.UserBankCard;
 import com.bcb.data.bean.UserDetailInfo;
 import com.bcb.data.bean.UserWallet;
+import com.bcb.data.bean.WelfareDto;
+import com.bcb.data.util.DialogUtil;
 import com.bcb.data.util.DownloadUtils;
 import com.bcb.data.util.HttpUtils;
 import com.bcb.data.util.LogUtil;
@@ -54,6 +57,8 @@ import com.bcb.presentation.view.activity.Activity_Account_Setting;
 import com.bcb.presentation.view.activity.Activity_Browser;
 import com.bcb.presentation.view.activity.Activity_Charge_HF;
 import com.bcb.presentation.view.activity.Activity_Coupons;
+import com.bcb.presentation.view.activity.Activity_Daily_Welfare;
+import com.bcb.presentation.view.activity.Activity_Daily_Welfare_Static;
 import com.bcb.presentation.view.activity.Activity_Join_Company;
 import com.bcb.presentation.view.activity.Activity_Login;
 import com.bcb.presentation.view.activity.Activity_Money_Flowing_Water;
@@ -65,7 +70,6 @@ import com.bcb.presentation.view.activity.Activity_WebView;
 import com.bcb.presentation.view.activity.Activity_Withdraw;
 import com.bcb.presentation.view.activity.My_LC;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
-import com.bcb.presentation.view.custom.AlertView.DLDialog;
 import com.bcb.presentation.view.custom.AlertView.UpdateDialog;
 import com.bcb.presentation.view.custom.CustomDialog.DialogWidget;
 import com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout;
@@ -92,7 +96,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 	//我的保险
 	RelativeLayout layout_security;
 	ImageView iv_head;
-	private TextView value_earn, value_balance, value_back, value_total;
+	private TextView value_earn, value_balance, value_back, value_total, value_yhq;
 	private UserWallet mUserWallet;
 	private UserDetailInfo mUserDetailInfo;
 	PullableScrollView layout_scrollview;
@@ -156,6 +160,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 		iv_red = (ImageView) view.findViewById(R.id.iv_red);
 		ll_qd = (LinearLayout) view.findViewById(R.id.ll_qd);
 		tv_update = (TextView) view.findViewById(R.id.tv_update);
+		value_yhq = (TextView) view.findViewById(R.id.value_yhq);
 		value_earn_all = (TextView) view.findViewById(R.id.value_earn_all);
 		value_lc = (TextView) view.findViewById(R.id.value_lc);
 		iv_head = (ImageView) view.findViewById(R.id.iv_head);
@@ -174,9 +179,9 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 		ll_qd.setOnClickListener(this);
 		layout_security.setOnClickListener(this);
 		layout_update_line = (ImageView) view.findViewById(R.id.layout_update_line);
+		layout_update.setOnClickListener(this);
 		if (App.isNeedUpdate && App.versionBean != null) {
 			tv_update.setText("发现新版本 V" + App.versionBean.Version);
-			layout_update.setOnClickListener(this);
 		} else {
 			tv_update.setText("已经是最新版本");
 //			layout_update.setVisibility(View.GONE);
@@ -299,25 +304,23 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 			requestUserWallet();
 		}
 		//Token不存在时，则表示没有登陆
-		else {
+//		else {
 			//初始化余额信息
 			showData();
-		}
+//		}
 		//设置banner
 		setupJoinCompanyMessage();
 		initSoundPool();
 	}
-
-
 
 	@Override
 	public void onResume() {
 		super.onResume();
 		LogUtil.i("bqt", "【Frag_User--onResume】");
 		showData();
+		if (mUserDetailInfo != null && mUserDetailInfo.HasOpenEgg) iv_red.setVisibility(View.INVISIBLE);
+		else iv_red.setVisibility(View.VISIBLE);
 	}
-
-
 
 	private void showPhoneService() {
 		AlertView.Builder ibuilder = new AlertView.Builder(ctx);
@@ -349,7 +352,10 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 			value_lc.setText("￥" + String.format("%.2f", App.mUserWallet.getIncomingMoney()));
 			//冻结金额
 			value_total.setText("" + String.format("%.2f", App.mUserWallet.getFreezeAmount()));
-
+			value_yhq.setText("10086张");
+			if (App.mUserWallet.getBalanceAmount()==0) {
+				value_balance.setText("去充值");
+			}
 		} else {
 			//总资产
 			value_earn.setText("0.00");
@@ -362,6 +368,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 			value_back.setText("0.00");
 			//冻结金额
 			value_total.setText("0.00");
+			value_yhq.setText("0张");
 		}
 
 	}
@@ -385,12 +392,13 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 //				joinCompany.setVisibility(View.GONE);
 //				user_company_layout.setVisibility(View.VISIBLE);
 			user_comany_shortname.setText(mUserDetailInfo.MyCompany.getShortName());
-			user_join_name.setText(mUserDetailInfo.UserName);
-			user_comany_shortname.setCompoundDrawables(getActivity().getResources().getDrawable(R.drawable.rz), null, null, null);
+			user_join_name.setText("您好，" + mUserDetailInfo.UserName);
+			user_comany_shortname.setCompoundDrawablesWithIntrinsicBounds(//
+					getActivity().getResources().getDrawable(R.drawable.rz), null, null, null);
 		} else {
 			user_comany_shortname.setText("加入我的公司拿员工专属福利>");
 			user_comany_shortname.setCompoundDrawables(null, null, null, null);
-			user_join_name.setText("您好" + App.saveUserInfo.getLocalPhone());
+			user_join_name.setText("您好，" + App.saveUserInfo.getLocalPhone());
 //				joinCompany.setVisibility(View.VISIBLE);
 //				user_company_layout.setVisibility(View.GONE);
 		}
@@ -482,7 +490,8 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 		if (v.getId() == R.id.layout_update) {
-			showVersionDialog2();
+			if (App.isNeedUpdate && App.versionBean != null) showVersionDialog2();
+			else Toast.makeText(ctx, "已经是最新版本", Toast.LENGTH_SHORT).show();
 			return;
 		}
 		//除了专属客服和电话客服之外的职位都要在点击之前登陆
@@ -493,7 +502,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 		switch (v.getId()) {
 			//加息
 			case R.id.ll_qd:
-
+				getStatisticsData();
 				break;
 			//总资产
 			case R.id.ll_test:
@@ -593,7 +602,6 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 		}
 	}
 
-
 	//短促音
 	private SoundPool soundPool;
 	private HashMap<Integer, Integer> soundID;
@@ -616,8 +624,6 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 		}
 
 	}
-
-
 
 	//加入公司
 	private void toJoinCompany() {
@@ -977,5 +983,63 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 					break;
 			}
 		}
+	}
+
+	private WelfareDto welfareDto;//完整数据
+	Dialog loadingDialog;
+
+	/**
+	 * 请求统计数据
+	 */
+	private void getStatisticsData() {
+		loadingDialog = DialogUtil.createLoadingDialog(ctx);
+		loadingDialog.show();
+		JSONObject obj = new JSONObject();
+		BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.DailyWelfareData, obj, TokenUtil.getEncodeToken(ctx), true, new
+				BcbRequest.BcbCallBack<JSONObject>() {
+					@Override
+					public void onResponse(JSONObject response) {
+						LogUtil.i("bqt", "首页：请求统计数据" + response.toString());
+
+						loadingDialog.dismiss();
+						try {
+							boolean status = PackageUtil.getRequestStatus(response, ctx);
+							if (status) {
+								JSONObject resultObject = response.getJSONObject("result");
+								welfareDto = App.mGson.fromJson(resultObject.toString(), WelfareDto.class);
+								//更新UI
+								LogUtil.d("统计数据", welfareDto.toString());
+
+								//滚动文字
+								String[] rotateValues = new String[welfareDto.getJoinList().size()];
+								for (int i = 0; i < welfareDto.getJoinList().size(); i++) {
+									rotateValues[i] = welfareDto.getJoinList().get(i).get("Title");
+								}
+								//参与人数
+								String str = String.format("今天已有%s位用户获得加息", welfareDto.getTotalPopulation());
+								//加息数值大于0说明已经参加过直接跳转
+								if (welfareDto.getRate() > 0) {
+									Activity_Daily_Welfare_Static.launche(ctx, String.valueOf(welfareDto.getRate()), String.valueOf
+											(welfareDto.getTotalInterest()), str, rotateValues);
+								} else {
+									Activity_Daily_Welfare.launche(ctx, rotateValues, welfareDto.getTotalPopulation(), welfareDto
+											.getTotalInterest());
+								}
+							} else {
+								ToastUtil.alert(ctx, response.getString("message"));
+							}
+						} catch (Exception e) {
+							e.printStackTrace();
+							ToastUtil.alert(ctx, "请求失败，请稍后重试");
+						}
+					}
+
+					@Override
+					public void onErrorResponse(Exception error) {
+						loadingDialog.dismiss();
+						ToastUtil.alert(ctx, "请求失败，请稍后重试");
+					}
+				});
+		requestQueue.add(jsonRequest);
 	}
 }
