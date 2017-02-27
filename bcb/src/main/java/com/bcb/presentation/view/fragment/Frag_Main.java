@@ -28,10 +28,8 @@ import com.bcb.common.net.BcbRequestTag;
 import com.bcb.common.net.UrlsOne;
 import com.bcb.common.net.UrlsTwo;
 import com.bcb.data.bean.AdPhotoListBean;
-import com.bcb.data.bean.AnnounceRecordsBean;
 import com.bcb.data.bean.BannerInfo;
-import com.bcb.data.bean.MainListBean;
-import com.bcb.data.bean.ProductRecordsBean;
+import com.bcb.data.bean.MainListBean2;
 import com.bcb.data.bean.StringEventBusBean;
 import com.bcb.data.bean.UserDetailInfo;
 import com.bcb.data.util.HttpUtils;
@@ -41,8 +39,8 @@ import com.bcb.data.util.PackageUtil;
 import com.bcb.data.util.ToastUtil;
 import com.bcb.data.util.TokenUtil;
 import com.bcb.data.util.UmengUtil;
-import com.bcb.presentation.adapter.AnnounceAdapter;
-import com.bcb.presentation.adapter.ProductAdapter;
+import com.bcb.presentation.adapter.MainAdapter;
+import com.bcb.presentation.adapter.MainAdapter2;
 import com.bcb.presentation.view.activity.Activity_Browser;
 import com.bcb.presentation.view.activity.Activity_Join_Company;
 import com.bcb.presentation.view.activity.Activity_Login;
@@ -84,15 +82,16 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener {
 	private PullToRefreshLayout refreshLayout;
 	private PullableScrollView layout_scrollview;
 
+	MainListBean2 mainListBean2;
 	//新标预告
 	private MyListView announceListView;
-	private AnnounceAdapter announceAdapter;
-	private List<AnnounceRecordsBean> announceRecordsBeans;
+	private MainAdapter announceAdapter;
+	private List<MainListBean2.XbygBean> announceRecordsBeans;
 
 	//精品项目
 	private MyListView boutiqueListview;
-	private ProductAdapter mBoutiqueAdapter;
-	private List<ProductRecordsBean> boutqueRecordsBeans;
+	private MainAdapter2 mBoutiqueAdapter;
+	private List<MainListBean2.JpxmBean> boutqueRecordsBeans;
 
 	//Banner
 	private AdPhotoListBean mAdPhotoListBean;
@@ -169,13 +168,13 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener {
 
 		//新标预告
 		announceRecordsBeans = new ArrayList<>();
-		announceAdapter = new AnnounceAdapter(ctx, announceRecordsBeans);
+		announceAdapter = new MainAdapter(ctx, announceRecordsBeans);
 		announceListView = (MyListView) view.findViewById(R.id.announce_listView);
 		announceListView.setAdapter(announceAdapter);
 
 		//精品项目
 		boutqueRecordsBeans = new ArrayList<>();
-		mBoutiqueAdapter = new ProductAdapter(ctx, boutqueRecordsBeans);
+		mBoutiqueAdapter = new MainAdapter2(ctx, boutqueRecordsBeans);
 		JXPackageAdWord = (TextView) view.findViewById(R.id.JXPackageAdWord);
 		boutiqueListview = (MyListView) view.findViewById(R.id.boutique_listview);
 		boutiqueListview.setOnItemClickListener(new boutiqueItemClickListener());
@@ -386,37 +385,26 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener {
 	}
 
 	/**
-	 * 新接口同意获取新手推荐、新标预告、精品项目
+	 * 获取新标预告、精品项目
 	 */
 	private void loadMainListViewData() {
 		//首先要清空数据
 		clearAdapter();
-		JSONObject obj = new JSONObject();
-		try {
-			obj.put("IsRecommand", true);
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.MainFragmentListData, obj, TokenUtil.getEncodeToken(ctx), new
+		BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.MainFragmentListData2, null, TokenUtil.getEncodeToken(ctx), new
 				BcbRequest.BcbCallBack<JSONObject>() {
 					@Override
 					public void onResponse(JSONObject response) {
-						LogUtil.i("bqt", "首页：精品项目" + response.toString());
-
+						LogUtil.i("bqt", "首页项目" + response.toString());
 						try {
 							if (PackageUtil.getRequestStatus(response, ctx)) {
 								JSONObject obj = PackageUtil.getResultObject(response);
-								MainListBean mainListBean = null;
-								//判断JSON对象是否为空, 不为空则分别获取数据
 								if (obj != null) {
 									//******************************************************************************************
-									mainListBean = App.mGson.fromJson(obj.toString(), MainListBean.class);
+									mainListBean2 = App.mGson.fromJson(obj.toString(), MainListBean2.class);
 									//设置新标预告
-									setupAnnounceView(mainListBean);
+									setupAnnounceView();
 									//设置精品项目
-									setupBoutiqueView(mainListBean);
-									//显示新手标还是精品标
-									showItemVisible();
+									setupBoutiqueView();
 								}
 							}
 						} catch (Exception e) {
@@ -432,16 +420,15 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener {
 						setupBoutiqueVisible(View.GONE);
 					}
 				});
-		jsonRequest.setTag(BcbRequestTag.MainFragmentListDataTag);
 		requestQueue.add(jsonRequest);
 	}
 
 	//设置新标预告
-	private void setupAnnounceView(MainListBean mainListBean) {
+	private void setupAnnounceView() {
 		announceRecordsBeans.clear();
 		//如果数据存在的时候
-		if (null != mainListBean && null != mainListBean.Xbyg && mainListBean.Xbyg.size() > 0) {
-			announceRecordsBeans.addAll(mainListBean.Xbyg);
+		if (null != mainListBean2 && null != mainListBean2.Xbyg && mainListBean2.Xbyg.size() > 0) {
+			announceRecordsBeans.addAll(mainListBean2.Xbyg);
 			//刷新适配器，如果适配器没有则创建新的适配器
 			if (announceAdapter != null) {
 				announceAdapter.notifyDataSetChanged();
@@ -460,12 +447,12 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener {
 	}
 
 	//设置精品项目
-	private void setupBoutiqueView(MainListBean mainListBean) {
+	private void setupBoutiqueView() {
 		//清空原来的数据
 		boutqueRecordsBeans.clear();
 		//如果数据存在的时候
-		if (null != mainListBean && null != mainListBean.Jpxm && mainListBean.Jpxm.size() > 0) {
-			boutqueRecordsBeans.addAll(mainListBean.Jpxm);
+		if (null != mainListBean2 && null != mainListBean2.Jpxm && mainListBean2.Jpxm.size() > 0) {
+			boutqueRecordsBeans.addAll(mainListBean2.Jpxm);
 			//刷新适配器，如果适配器没有则创建新的适配器
 			if (mBoutiqueAdapter != null) {
 				mBoutiqueAdapter.notifyDataSetChanged();
@@ -683,7 +670,23 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener {
 			ll_car.setVisibility(View.GONE);
 		}
 	}
+	/**
+	 * 判断是否显示列表数据
+	 */
 
+	private void showItemVisible() {
+		//如果没有登录或者没有投资过的
+		if ((App.saveUserInfo == null || TextUtils.isEmpty(App.saveUserInfo.getAccess_Token())) || App.mUserDetailInfo == null ||
+				!App.mUserDetailInfo.HasInvest) {
+			setupBoutiqueVisible(View.GONE);
+		} else {
+			setupBoutiqueVisible(View.VISIBLE);
+		}
+		//如果新标预告或者新手标为空的时候就显示列表
+		if (announceRecordsBeans == null || announceRecordsBeans.size() <= 0) {
+			setupBoutiqueVisible(View.VISIBLE);
+		}
+	}
 	public void onEventMainThread(StringEventBusBean event) {
 		if (event.getContent().equals("CXGONE")) {
 			ll_car.setVisibility(View.GONE);
@@ -699,24 +702,6 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener {
 		super.onDestroy();
 		ctx.unregisterReceiver(mReceiver);
 		EventBus.getDefault().unregister(this);
-	}
-
-	/**
-	 * 判断是否显示列表数据
-	 */
-
-	private void showItemVisible() {
-		//如果没有登录或者没有投资过的
-		if ((App.saveUserInfo == null || TextUtils.isEmpty(App.saveUserInfo.getAccess_Token())) || mUserDetailInfo == null ||
-				!mUserDetailInfo.HasInvest) {
-			setupBoutiqueVisible(View.GONE);
-		} else {
-			setupBoutiqueVisible(View.VISIBLE);
-		}
-		//如果新标预告或者新手标为空的时候就显示列表
-		if (announceRecordsBeans == null || announceRecordsBeans.size() <= 0) {
-			setupBoutiqueVisible(View.VISIBLE);
-		}
 	}
 
 	//显示送体验金对话框
@@ -756,5 +741,4 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener {
 			}
 		}
 	}
-
 }

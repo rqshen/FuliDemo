@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bqt="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="90dp"
+    android:background="@color/white">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#e5e5e5"/>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="15dp">
+
+        <TextView
+            android:id="@+id/tv_rate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5.5"
+            android:textColor="#ff4c4c"
+            android:textSize="30sp"/>
+
+        <TextView
+            android:id="@+id/tv_rate_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/tv_rate"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="2dp"
+            android:layout_toRightOf="@+id/tv_rate"
+            android:text="%+0.5%"
+            android:textColor="#ff4c4c"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_rate"
+            android:text="年化收益率"
+            android:textColor="#999"
+            android:textSize="12sp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5"
+            android:textColor="#424954"
+            android:textSize="30sp"/>
+
+        <TextView
+            android:id="@+id/tv_dw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/tv_time"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="2dp"
+            android:layout_toRightOf="@+id/tv_time"
+            android:text="个月"
+            android:textColor="#424954"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/tv_je"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_time"
+            android:text="融资金额10086元"
+            android:textColor="#999"
+            android:textSize="12sp"/>
+    </RelativeLayout>
+
+    <com.bcb.presentation.view.custom.RoundProgressBar
+        android:id="@+id/pb"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="15dp"
+        bqt:progress_reached_bar_height="1dp"
+        bqt:progress_reached_color="#4499f8"
+        bqt:progress_text_size="12sp"
+        bqt:progress_unreached_bar_height="1dp"
+        bqt:progress_unreached_color="#999"/>
+
+</RelativeLayout>

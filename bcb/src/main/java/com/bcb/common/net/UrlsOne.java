@@ -169,6 +169,7 @@ public class UrlsOne {
 	//首页标的数据(v1.3.4)
 	//    public static final String MainFragmentListData = host + "/api/v1.3.4/af3af1b08768";
 	public static final String MainFragmentListData = host + "/api/v2.0/a64b00ed48a0";
+	public static final String MainFragmentListData2 = host + "/api/v2.5/a71b0110b729";
 
 	//预约新标预告
 	public static final String RequestAnnounce = host + "/api/v1.3/075c12497971";

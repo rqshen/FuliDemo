@@ -3,7 +3,19 @@
     <declare-styleable name="MultiSwipeRefreshLayout">
         <attr name="foreground" format="reference"/>
     </declare-styleable>
-
+    <declare-styleable name="HorizontalPB">
+        <attr name="progress_reached_color" format="color" />
+        <attr name="progress_reached_bar_height" format="dimension" />
+        <attr name="progress_unreached_color" format="color" />
+        <attr name="progress_unreached_bar_height" format="dimension" />
+        <attr name="progress_text_size" format="dimension" />
+        <attr name="progress_text_color" format="color" />
+        <attr name="progress_text_offset" format="dimension" />
+        <attr name="progress_text_visibility" format="boolean" />
+    </declare-styleable>
+    <declare-styleable name="RoundPB">
+        <attr name="progress_radius" format="dimension" />
+    </declare-styleable>
     <declare-styleable name="ViewPagerIndicator">
         <!-- Style of the circle indicator. -->
         <attr name="vpiCirclePageIndicatorStyle" format="reference"/>
