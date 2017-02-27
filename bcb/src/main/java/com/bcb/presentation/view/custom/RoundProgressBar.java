@@ -62,11 +62,11 @@ public class RoundProgressBar extends HorizontalProgressBar {
 		if (getProgress() < 100) mPaint.setColor(mReachedBarColor);
 		else mPaint.setColor(mUnReachedBarColor);
 		mPaint.setStrokeWidth(mReachedPBHeight);
-		canvas.drawArc(getRectF(mReachedPBHeight), 0, angle, false, mPaint);
+		canvas.drawArc(getRectF(mReachedPBHeight), -90, angle, false, mPaint);
 		//绘制未完成的进度
 		mPaint.setColor(mUnReachedBarColor);
 		mPaint.setStrokeWidth(mUnReachedPBHeight);
-		canvas.drawArc(getRectF(mUnReachedPBHeight), angle, 360 - angle, false, mPaint);//当为false时为不经过圆心的弓形，为true时为经过圆心的扇形。起始角度、旋转角度，顺时针为正
+		canvas.drawArc(getRectF(mUnReachedPBHeight), angle-90, 360 - angle, false, mPaint);//当为false时为不经过圆心的弓形，为true时为经过圆心的扇形。起始角度、旋转角度，顺时针为正
 		//绘制中间的文字
 		if (mIfDrawText) {
 			mPaint.setColor(mTextColor);

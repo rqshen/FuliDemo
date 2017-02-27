@@ -2,11 +2,13 @@ package com.bcb.presentation.adapter;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bcb.R;
 import com.bcb.common.app.App;
@@ -47,7 +49,7 @@ public class MainAdapter extends BaseAdapter {
 	public View getView(final int pos, View view, ViewGroup arg2) {
 		ViewHolder viewHolder;
 		if (null == view) {
-			view = View.inflate(ctx, R.layout.item_main_yy, null);
+			view = LayoutInflater.from(ctx).inflate(R.layout.item_main_yy, arg2, false);
 			viewHolder = new ViewHolder(view);
 			view.setTag(viewHolder);
 		} else viewHolder = (ViewHolder) view.getTag();
@@ -76,17 +78,24 @@ public class MainAdapter extends BaseAdapter {
 		viewHolder.tvJe.setText("融资金额" + bean.Amount + "元");
 
 		//是否已预约
-		if (bean.PackageStatus==1) {//0 未预约    1 已预约
+		if (bean.PackageStatus == 1) {//0 未预约    1 已预约
 			viewHolder.tvUp.setText("已预约");
 			viewHolder.tvUp.setTextColor(0xff424954);
 			viewHolder.tvDown.setVisibility(View.VISIBLE);
 			viewHolder.tvDown.setText(bean.PredictCount + "人");
 			viewHolder.rlYy.setBackgroundColor(0x00110011);//透明
+			viewHolder.rlYy.setOnClickListener(null);
 		} else {
 			viewHolder.tvUp.setText("预约");
 			viewHolder.tvUp.setTextColor(0xff4499f8);
 			viewHolder.tvDown.setVisibility(View.GONE);
 			viewHolder.rlYy.setBackgroundResource(R.drawable.bg_circle);
+			viewHolder.rlYy.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					Toast.makeText(ctx, "预约", Toast.LENGTH_SHORT).show();
+				}
+			});
 		}
 	}
 	

@@ -26,7 +26,7 @@ public class MainListBean2 implements Serializable {
 		 * Type : mon_package
 		 */
 
-		public float Amount;
+		public String Amount;
 		public float Balance;
 		public int Duration;
 		public int DurationExchangeType;

@@ -50,7 +50,8 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true">
+        android:layout_centerInParent="true"
+        android:paddingLeft="30dp">
 
         <TextView
             android:id="@+id/tv_time"
@@ -89,10 +90,10 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="15dp"
-        bqt:progress_reached_bar_height="1dp"
+        bqt:progress_reached_bar_height="2dp"
         bqt:progress_reached_color="#4499f8"
-        bqt:progress_text_size="12sp"
-        bqt:progress_unreached_bar_height="1dp"
+        bqt:progress_text_size="10sp"
+        bqt:progress_unreached_bar_height="2dp"
         bqt:progress_unreached_color="#999"/>
 
 </RelativeLayout>

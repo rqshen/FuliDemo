@@ -2,6 +2,7 @@ package com.bcb.presentation.adapter;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -47,7 +48,7 @@ public class MainAdapter2 extends BaseAdapter {
 	public View getView(final int pos, View view, ViewGroup arg2) {
 		ViewHolder viewHolder;
 		if (null == view) {
-			view = View.inflate(ctx, R.layout.item_main, null);
+			view = LayoutInflater.from(ctx).inflate(R.layout.item_main, arg2, false);
 			viewHolder = new ViewHolder(view);
 			view.setTag(viewHolder);
 		} else viewHolder = (ViewHolder) view.getTag();

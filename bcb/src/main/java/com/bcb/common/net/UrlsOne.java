@@ -125,6 +125,11 @@ public class UrlsOne {
 	//债权转让列表
 	public static final String SEARCHCLAIMCONVEY = host + "/api/v2.0/a69a00bc546d";
 
+	//稳赢宝
+	public static final String WYB = host + "/api/v2.5/a71b011df7f7";//打包
+	//zhangxinbao
+	public static final String ZXB = host + "/api/v2.5/a71b011d974a";//散
+
 	// 兑换优惠劵
 	public static final String Convert_Coupon = host + "/api/v1.0/95aabaaae186";
 

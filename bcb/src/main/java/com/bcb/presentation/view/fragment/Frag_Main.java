@@ -42,6 +42,7 @@ import com.bcb.data.util.UmengUtil;
 import com.bcb.presentation.adapter.MainAdapter;
 import com.bcb.presentation.adapter.MainAdapter2;
 import com.bcb.presentation.view.activity.Activity_Browser;
+import com.bcb.presentation.view.activity.Activity_CP;
 import com.bcb.presentation.view.activity.Activity_Join_Company;
 import com.bcb.presentation.view.activity.Activity_Login;
 import com.bcb.presentation.view.activity.Activity_NormalProject_Introduction;
@@ -72,7 +73,7 @@ import de.greenrobot.event.EventBus;
 
 import static com.bcb.common.app.App.mUserDetailInfo;
 
-public class Frag_Main extends Frag_Base implements View.OnClickListener {
+public class Frag_Main extends Frag_Base implements View.OnClickListener, AdapterView.OnItemClickListener {
 	private static final String TAG = "Frag_Main";
 	UPMarqueeView tb;
 	//车险
@@ -177,7 +178,7 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener {
 		mBoutiqueAdapter = new MainAdapter2(ctx, boutqueRecordsBeans);
 		JXPackageAdWord = (TextView) view.findViewById(R.id.JXPackageAdWord);
 		boutiqueListview = (MyListView) view.findViewById(R.id.boutique_listview);
-		boutiqueListview.setOnItemClickListener(new boutiqueItemClickListener());
+		boutiqueListview.setOnItemClickListener(this);
 		boutiqueListview.setAdapter(mBoutiqueAdapter);
 
 		//文案配置
@@ -494,7 +495,7 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener {
 				Toast.makeText(ctx, "敬请期待", Toast.LENGTH_SHORT).show();
 				break;
 			case R.id.tv_more:
-				Toast.makeText(ctx, "tv_more", Toast.LENGTH_SHORT).show();
+				startActivity(new Intent(ctx, Activity_CP.class));
 				break;
 			case R.id.iv_zc:
 				Activity_Register_First.launche(ctx);
@@ -571,23 +572,17 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener {
 	}
 
 	//精品项目的点击事件
-	class boutiqueItemClickListener implements AdapterView.OnItemClickListener {
-		public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3) {
-			//判断是否属于新标预告的状态，根据状态来判断是否可点击
-			if (boutqueRecordsBeans.get(position).Status == 10) {
-				return;
-			}
-			//判断是否可投标的
-			if (boutqueRecordsBeans.get(position).Status == 20) {
-				UmengUtil.eventById(ctx, R.string.bid_avi);
-			} else {
-				UmengUtil.eventById(ctx, R.string.bid_unavi);
-			}
-			int type = 0;
-			if (boutqueRecordsBeans.get(position).Type.equals("claim_convey")) type = 1;
-			else if (boutqueRecordsBeans.get(position).Type.equals("mon_package")) type = 2;
-			Activity_NormalProject_Introduction.launche2(ctx, boutqueRecordsBeans.get(position).PackageId, 0, type);//标类型：prj_package则为普通标，claim_convey则为债权转让标
-		}
+
+	public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3) {
+		MainListBean2.JpxmBean jpxm = boutqueRecordsBeans.get(position);
+		//判断是否属于新标预告的状态，根据状态来判断是否可点击
+		if (jpxm.Status == 10) Toast.makeText(ctx, "Status == 10，不可购买", Toast.LENGTH_SHORT).show();
+		//0正常标，1转让标，2福鸡包
+		int type = 0;//prj_package则为普通标
+		if (jpxm.Type.equals("claim_convey")) type = 1;//claim_convey则为债权转让标
+		else if (jpxm.Type.equals("mon_package")) type = 2;//mon_package为福鸡宝
+		if (jpxm.Old) Activity_NormalProject_Introduction.launche2(ctx, jpxm.PackageId, 0, type);
+		else Activity_NormalProject_Introduction.launche2(ctx, jpxm.PackageId, 0, type);
 	}
 
 	//注册广播，用于接收广播之后更新精品项目的数据
@@ -670,6 +665,7 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener {
 			ll_car.setVisibility(View.GONE);
 		}
 	}
+
 	/**
 	 * 判断是否显示列表数据
 	 */
@@ -687,6 +683,7 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener {
 			setupBoutiqueVisible(View.VISIBLE);
 		}
 	}
+
 	public void onEventMainThread(StringEventBusBean event) {
 		if (event.getContent().equals("CXGONE")) {
 			ll_car.setVisibility(View.GONE);

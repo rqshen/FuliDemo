@@ -20,19 +20,6 @@ import java.util.List;
  * 时间：2017/2/26 21:19
  */
 public class UPMarqueeView extends ViewFlipper {
-	private Context mContext;
-	/**
-	 * 是否开启动画
-	 */
-	private boolean isSetAnimDuration = true;
-	/**
-	 * 时间间隔
-	 */
-	private int interval = 3000;
-	/**
-	 * 动画时间
-	 */
-	private int animDuration = 500;
 
 	public UPMarqueeView(Context context) {
 		super(context);
@@ -45,16 +32,13 @@ public class UPMarqueeView extends ViewFlipper {
 	}
 
 	private void init(Context context, AttributeSet attrs, int defStyleAttr) {
-		this.mContext = context;
-		setFlipInterval(interval);
-		if (isSetAnimDuration) {
-			Animation animIn = AnimationUtils.loadAnimation(mContext, R.anim.anim_marquee_in);
-			animIn.setDuration(animDuration);
-			setInAnimation(animIn);
-			Animation animOut = AnimationUtils.loadAnimation(mContext, R.anim.anim_marquee_out);
-			animOut.setDuration(animDuration);
-			setOutAnimation(animOut);
-		}
+		setFlipInterval(3000);
+		Animation animIn = AnimationUtils.loadAnimation(getContext(), R.anim.anim_marquee_in);
+		animIn.setDuration(500);
+		setInAnimation(animIn);
+		Animation animOut = AnimationUtils.loadAnimation(getContext(), R.anim.anim_marquee_out);
+		animOut.setDuration(500);
+		setOutAnimation(animOut);
 	}
 
 	/**
@@ -79,5 +63,4 @@ public class UPMarqueeView extends ViewFlipper {
 			addView(tv);
 		}
 	}
-
 }
