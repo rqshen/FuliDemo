@@ -136,31 +136,7 @@
                             android:textColor="@color/txt_gray"
                             android:textSize="@dimen/main_text_small"/>
                     </LinearLayout>
-                    <!-- 体验标 -->
-                    <com.bcb.data.util.MyListView
-                        android:id="@+id/expired_listview"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:cacheColorHint="@android:color/black"
-                        android:divider="@color/background"
-                        android:dividerHeight="10dp"
-                        android:fastScrollEnabled="false"
-                        android:listSelector="@drawable/list_selector"
-                        android:scrollbars="none"
-                        android:visibility="visible"/>
-                    <!-- 新手标 -->
-                    <com.bcb.data.util.MyListView
-                        android:id="@+id/new_listview"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:cacheColorHint="@android:color/black"
-                        android:divider="@color/background"
-                        android:dividerHeight="10dp"
-                        android:fastScrollEnabled="false"
-                        android:listSelector="@drawable/list_selector"
-                        android:scrollbars="none"
-                        android:visibility="visible"/>
+
                     <!-- 精品标 -->
                     <com.bcb.data.util.MyListView
                         android:id="@+id/boutique_listview"

@@ -30,7 +30,6 @@ import com.bcb.common.net.UrlsTwo;
 import com.bcb.data.bean.AdPhotoListBean;
 import com.bcb.data.bean.AnnounceRecordsBean;
 import com.bcb.data.bean.BannerInfo;
-import com.bcb.data.bean.ExpiredRecordsBean;
 import com.bcb.data.bean.MainListBean;
 import com.bcb.data.bean.ProductRecordsBean;
 import com.bcb.data.bean.StringEventBusBean;
@@ -43,7 +42,6 @@ import com.bcb.data.util.ToastUtil;
 import com.bcb.data.util.TokenUtil;
 import com.bcb.data.util.UmengUtil;
 import com.bcb.presentation.adapter.AnnounceAdapter;
-import com.bcb.presentation.adapter.ExpiredAdapter;
 import com.bcb.presentation.adapter.ProductAdapter;
 import com.bcb.presentation.view.activity.Activity_Browser;
 import com.bcb.presentation.view.activity.Activity_Join_Company;
@@ -80,42 +78,26 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener {
 	private static final String TAG = "Frag_Main";
 	UPMarqueeView tb;
 	//车险
-	View ll_car, ll_lb, ll_xj,iv_zc,tv_more;
+	View ll_car, ll_lb, ll_xj, iv_zc, tv_more;
 
 	//刷新控件
 	private PullToRefreshLayout refreshLayout;
 	private PullableScrollView layout_scrollview;
-
-	//体验标
-	private MyListView expiredListview;
-	private ExpiredAdapter expiredAdapter;
-	private List<ExpiredRecordsBean> expiredRecordsBeans;
 
 	//新标预告
 	private MyListView announceListView;
 	private AnnounceAdapter announceAdapter;
 	private List<AnnounceRecordsBean> announceRecordsBeans;
 
-	//新手标
-	private MyListView newListView;
-	private ProductAdapter newAdapter;
-	private List<ProductRecordsBean> newRecordsBeans;
-
 	//精品项目
 	private MyListView boutiqueListview;
 	private ProductAdapter mBoutiqueAdapter;
 	private List<ProductRecordsBean> boutqueRecordsBeans;
 
-	//从产品列表中获取数据
-	private MyListView additionListview;
-	private ProductAdapter mAdditionAdapter;
-	private List<ProductRecordsBean> additionRecordsBeans;
-
 	//Banner
 	private AdPhotoListBean mAdPhotoListBean;
 	private ArrayList<BannerInfo> listBanner;
 	private AutoLoopViewPager loopViewPager;
-
 
 	private TextView JXPackageAdWord;
 	private int successConnectCount = 0;
@@ -185,21 +167,6 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener {
 			}
 		});
 
-
-
-		//体验标
-		expiredRecordsBeans = new ArrayList<>();
-		expiredAdapter = new ExpiredAdapter(ctx, expiredRecordsBeans);
-		expiredListview = (MyListView) view.findViewById(R.id.expired_listview);
-		expiredListview.setAdapter(expiredAdapter);
-
-		//新手标(数据格式跟精品项目的一样，只是多了一个新手专享的图片)
-		newRecordsBeans = new ArrayList<>();
-		newAdapter = new ProductAdapter(ctx, newRecordsBeans, true);
-		newListView = (MyListView) view.findViewById(R.id.new_listview);
-		newListView.setOnItemClickListener(new newItemClickListener());
-		newListView.setAdapter(newAdapter);
-
 		//新标预告
 		announceRecordsBeans = new ArrayList<>();
 		announceAdapter = new AnnounceAdapter(ctx, announceRecordsBeans);
@@ -213,13 +180,6 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener {
 		boutiqueListview = (MyListView) view.findViewById(R.id.boutique_listview);
 		boutiqueListview.setOnItemClickListener(new boutiqueItemClickListener());
 		boutiqueListview.setAdapter(mBoutiqueAdapter);
-
-		//从产品列表中获取回来的列表
-		additionListview = (MyListView) view.findViewById(R.id.addition_listView);
-		additionListview.setOnItemClickListener(new boutiqueItemClickListener());
-		additionRecordsBeans = new ArrayList<>();
-		mAdditionAdapter = new ProductAdapter(ctx, additionRecordsBeans);
-		additionListview.setAdapter(mAdditionAdapter);
 
 		//文案配置
 		loadCopyWriter();
@@ -258,7 +218,7 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener {
 		refreshLayout.autoRefresh();
 		if (App.saveUserInfo.getAccess_Token() == null) {
 			iv_zc.setVisibility(View.VISIBLE);
-		}else iv_zc.setVisibility(View.GONE);
+		} else iv_zc.setVisibility(View.GONE);
 	}
 
 	/**
@@ -369,8 +329,6 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener {
 		indy.setViewPager(loopViewPager);
 	}
 
-
-
 	//Banner适配器
 	private class LoopImageAdapter extends PagerAdapter {
 		private int count = 100;
@@ -453,10 +411,6 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener {
 								if (obj != null) {
 									//******************************************************************************************
 									mainListBean = App.mGson.fromJson(obj.toString(), MainListBean.class);
-									//设置体验标
-									setupExpiredView(mainListBean);
-									//设置新手标
-									setupNewView(mainListBean);
 									//设置新标预告
 									setupAnnounceView(mainListBean);
 									//设置精品项目
@@ -474,71 +428,12 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener {
 					@Override
 					public void onErrorResponse(Exception error) {
 						refreshLayout.refreshFinish(PullToRefreshLayout.FAIL);
-						setupExpiredVisible(View.GONE);
 						setupAnnounceVisible(View.GONE);
 						setupBoutiqueVisible(View.GONE);
-						setupAdditionVisible(View.GONE);
 					}
 				});
 		jsonRequest.setTag(BcbRequestTag.MainFragmentListDataTag);
 		requestQueue.add(jsonRequest);
-	}
-
-	//设置体验标数据
-	private void setupExpiredView(MainListBean mainListBean) {
-		//清空原来的数据
-		expiredRecordsBeans.clear();
-		//如果数据存在的时候
-		if (null != mainListBean && null != mainListBean.Tyb && mainListBean.Tyb.size() > 0) {
-			synchronized (this) {
-				expiredRecordsBeans.addAll(mainListBean.Tyb);
-			}
-			if (expiredAdapter != null) {
-				expiredAdapter.notifyDataSetChanged();
-			}
-			//将精品项目所在的listview显示出来
-			setupExpiredVisible(View.VISIBLE);
-		}
-		//新手推荐不存在的时候，隐藏列表
-		else {
-			//将listView 隐藏
-			setupExpiredVisible(View.GONE);
-		}
-	}
-
-	//设置体验标显示状态
-	private void setupExpiredVisible(int visible) {
-		if (expiredListview != null) {
-			expiredListview.setVisibility(visible);
-		}
-	}
-
-	//设置新手标
-	private void setupNewView(MainListBean mainListBean) {
-		//清空原来的数据
-		newRecordsBeans.clear();
-		//如果数据存在的时候
-		if (null != mainListBean && null != mainListBean.Xszx && mainListBean.Xszx.size() > 0) {
-			newRecordsBeans.addAll(mainListBean.Xszx);
-			//刷新适配器，如果适配器没有则创建新的适配器
-			if (newAdapter != null) {
-				newAdapter.notifyDataSetChanged();
-			}
-			//将精品项目所在的listview显示出来
-			setupNewVisible(View.VISIBLE);
-		}
-		//精品项目不存在的时候，隐藏列表
-		else {
-			//将listView 隐藏
-			setupNewVisible(View.GONE);
-		}
-	}
-
-	//设置新手标的显示状态
-	private void setupNewVisible(int visible) {
-		if (newListView != null) {
-			newListView.setVisibility(visible);
-		}
 	}
 
 	//设置新标预告
@@ -591,13 +486,6 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener {
 		}
 	}
 
-	//从产品列表获取过来的数据
-	private void setupAdditionVisible(int visible) {
-		if (additionListview != null) {
-			additionListview.setVisibility(visible);
-		}
-	}
-
 	@Override
 	public void onClick(View v) {
 		if (App.saveUserInfo.getAccess_Token() == null) {
@@ -645,11 +533,12 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener {
 			//拉黑
 			else if (mUserDetailInfo.MyCompany.Status == 15) {
 				companyAlertView("提示", "你已被拉入黑名单\n详情请咨询工作人员");
-			}else if (App.mUserDetailInfo.MyCompany.Status == 10) {
+			} else if (App.mUserDetailInfo.MyCompany.Status == 10) {
 				changeCompany();
 			}
 		}
 	}
+
 	private void changeCompany() {
 		showAlertView("提示", "您需要修改公司认证信息吗?", new DialogInterface.OnClickListener() {
 			@Override
@@ -660,7 +549,8 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener {
 			}
 		});
 	}
-		//提示对话框
+
+	//提示对话框
 	private void showAlertView(String titleName, String contentMessage, DialogInterface.OnClickListener onClickListener) {
 		AlertView.Builder ibuilder = new AlertView.Builder(ctx);
 		ibuilder.setTitle(titleName);
@@ -670,6 +560,7 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener {
 		alertView = ibuilder.create();
 		alertView.show();
 	}
+
 	/***************************
 	 * 审核中
 	 *************************/
@@ -772,25 +663,13 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener {
 
 	//清空首页标的数据
 	private void clearAdapter() {
-		expiredRecordsBeans.clear();
-		newRecordsBeans.clear();
 		boutqueRecordsBeans.clear();
 		announceRecordsBeans.clear();
-		additionRecordsBeans.clear();
-		if (expiredAdapter != null) {
-			expiredAdapter.notifyDataSetChanged();
-		}
-		if (newAdapter != null) {
-			newAdapter.notifyDataSetChanged();
-		}
 		if (mBoutiqueAdapter != null) {
 			mBoutiqueAdapter.notifyDataSetChanged();
 		}
 		if (announceAdapter != null) {
 			announceAdapter.notifyDataSetChanged();
-		}
-		if (mAdditionAdapter != null) {
-			mAdditionAdapter.notifyDataSetChanged();
 		}
 	}
 
@@ -831,16 +710,12 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener {
 		if ((App.saveUserInfo == null || TextUtils.isEmpty(App.saveUserInfo.getAccess_Token())) || mUserDetailInfo == null ||
 				!mUserDetailInfo.HasInvest) {
 			setupBoutiqueVisible(View.GONE);
-			setupNewVisible(View.VISIBLE);
 		} else {
 			setupBoutiqueVisible(View.VISIBLE);
-			setupNewVisible(View.GONE);
 		}
 		//如果新标预告或者新手标为空的时候就显示列表
-		if (announceRecordsBeans == null || announceRecordsBeans.size() <= 0 || newRecordsBeans == null || newRecordsBeans.size() <=
-				0) {
+		if (announceRecordsBeans == null || announceRecordsBeans.size() <= 0) {
 			setupBoutiqueVisible(View.VISIBLE);
-			setupNewVisible(View.GONE);
 		}
 	}
 
