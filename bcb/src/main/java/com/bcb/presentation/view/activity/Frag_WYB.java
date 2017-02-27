@@ -230,9 +230,9 @@ public class Frag_WYB extends Frag_Base implements AdapterView.OnItemClickListen
 		if (jpxm.Status == 10) Toast.makeText(ctx, "Status == 10，不可购买", Toast.LENGTH_SHORT).show();
 		//0正常标，1转让标，2福鸡包
 		int type = 0;//prj_package则为普通标
-		if (jpxm.Type.equals("claim_convey")) type = 1;//claim_convey则为债权转让标
-		else if (jpxm.Type.equals("mon_package")) type = 2;//mon_package为福鸡宝
+		if (jpxm.Type != null && jpxm.Type.equals("claim_convey")) type = 1;//claim_convey则为债权转让标
+		else if (jpxm.Type != null && jpxm.Type.equals("mon_package")) type = 2;//mon_package为福鸡宝
 		if (jpxm.Old) Activity_NormalProject_Introduction.launche2(ctx, jpxm.PackageId, 0, type);
-		else Activity_NormalProject_Introduction.launche2(ctx, jpxm.PackageId, 0, type);
+		else Activity_CPXQ.launche2(ctx, jpxm.PackageId, type);
 	}
 }

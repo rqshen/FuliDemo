@@ -28,9 +28,10 @@ import java.util.Date;
 import java.util.List;
 
 public class Activity_Base extends Activity {
-
+	public RelativeLayout layout_title;
 	public String token;
-
+	public ImageView dropdown;
+	public  TextView title_text;
 	private static final String FILE_NAME = "App_Enter_Background_Time";
 	private static final String ENTER_BACKGROUND_KEY = "AppOnBackGround";
 	LinearLayout llContent;
@@ -43,8 +44,11 @@ public class Activity_Base extends Activity {
 		token = TokenUtil.getEncodeToken(this);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_base);
+		layout_title = (RelativeLayout) findViewById(R.id.layout_title);
 		llContent = (LinearLayout) findViewById(R.id.content);
 		rl_base_root = (RelativeLayout) findViewById(R.id.rl_base_root);
+		dropdown = (ImageView) findViewById(R.id.dropdown);
+		title_text = (TextView) findViewById(R.id.title_text);
 	}
 
 	@SuppressLint("NewApi")

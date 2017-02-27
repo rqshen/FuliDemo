@@ -51,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="5dip"
-                android:background="@drawable/r_back_3x"                 />
+                android:src="@drawable/r_back_3x"                 />
         </LinearLayout>
 
         <!-- 标题 -->

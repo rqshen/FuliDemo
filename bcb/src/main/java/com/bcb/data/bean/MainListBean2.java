@@ -51,7 +51,7 @@ public class MainListBean2 implements Serializable {
 		 * Source : 来源
 		 */
 
-		public float Amount;
+		public String Amount;
 		public int Duration;
 		public int DurationExchangeType;
 		public String Name;

@@ -43,6 +43,7 @@ import com.bcb.presentation.adapter.MainAdapter;
 import com.bcb.presentation.adapter.MainAdapter2;
 import com.bcb.presentation.view.activity.Activity_Browser;
 import com.bcb.presentation.view.activity.Activity_CP;
+import com.bcb.presentation.view.activity.Activity_CPXQ;
 import com.bcb.presentation.view.activity.Activity_Join_Company;
 import com.bcb.presentation.view.activity.Activity_Login;
 import com.bcb.presentation.view.activity.Activity_NormalProject_Introduction;
@@ -579,10 +580,10 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, Adapte
 		if (jpxm.Status == 10) Toast.makeText(ctx, "Status == 10，不可购买", Toast.LENGTH_SHORT).show();
 		//0正常标，1转让标，2福鸡包
 		int type = 0;//prj_package则为普通标
-		if (jpxm.Type.equals("claim_convey")) type = 1;//claim_convey则为债权转让标
-		else if (jpxm.Type.equals("mon_package")) type = 2;//mon_package为福鸡宝
+		if (jpxm.Type != null && jpxm.Type.equals("claim_convey")) type = 1;//claim_convey则为债权转让标
+		else if (jpxm.Type != null && jpxm.Type.equals("mon_package")) type = 2;//mon_package为福鸡宝
 		if (jpxm.Old) Activity_NormalProject_Introduction.launche2(ctx, jpxm.PackageId, 0, type);
-		else Activity_NormalProject_Introduction.launche2(ctx, jpxm.PackageId, 0, type);
+		else Activity_CPXQ.launche2(ctx, jpxm.PackageId, type);
 	}
 
 	//注册广播，用于接收广播之后更新精品项目的数据

@@ -103,6 +103,11 @@
             android:screenOrientation="portrait">
         </activity>
         <activity
+            android:name=".presentation.view.activity.Activity_CPXQ"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
             android:name=".presentation.view.activity.Activity_Forget_Pwd"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
