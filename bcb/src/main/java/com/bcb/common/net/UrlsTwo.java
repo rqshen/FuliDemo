@@ -19,7 +19,7 @@ public class UrlsTwo {
     public static String GETMONKEYPACKAGEDETAIL = host + "/api/v2.0/a6de0105e5df";
     //打包标
     public static String DBB_WYB = host + "/api/v2.5/a6de0105e5df";
-    //打包标
+    //三标
     public static String SB_ZXB = host + "/api/v2.5/a71b011dbf16";
 
     // 获取会员信息

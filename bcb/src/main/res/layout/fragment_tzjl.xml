@@ -3,22 +3,26 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:background="@color/background"
-              android:orientation="vertical" >
+              android:orientation="vertical">
+
     <com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout
         android:id="@+id/refresh_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <!-- 下拉刷新控件-->
-        <include layout="@layout/refresh_head" />
+        <include layout="@layout/refresh_head"/>
+
         <com.bcb.presentation.view.custom.PullableView.PullableScrollView
             android:id="@+id/layout_scrollview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbars="none">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
+
                 <com.bcb.data.util.MyListView
                     android:id="@+id/listview_data_layout"
                     android:layout_width="match_parent"
@@ -29,29 +33,44 @@
                     android:listSelector="@drawable/list_selector"
                     android:scrollbars="none"
                     android:visibility="gone"/>
+
                 <LinearLayout
                     android:id="@+id/null_data_layout"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
+
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="84dip"
-                        android:src="@drawable/no_coupons" />
+                        android:layout_marginTop="54dip"
+                        android:src="@drawable/tzjl"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="20dip"
-                        android:text="暂无记录"
-                        android:textSize="@dimen/main_text_default" />
+                        android:gravity="center"
+                        android:text="暂无投资记录\n尝试购买项目，赚取收益吧"
+                        android:textSize="@dimen/main_text_default"/>
+
+
+                    <Button
+                        android:id="@+id/button_confirm"
+                        android:layout_width="180dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="25dip"
+                        android:background="@drawable/r_button"
+                        android:text="去理财"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"/>
                 </LinearLayout>
             </LinearLayout>
         </com.bcb.presentation.view.custom.PullableView.PullableScrollView>
         <!-- 上拉加载更多 -->
-        <include layout="@layout/load_more" />
+        <include layout="@layout/load_more"/>
     </com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout>
 </LinearLayout>

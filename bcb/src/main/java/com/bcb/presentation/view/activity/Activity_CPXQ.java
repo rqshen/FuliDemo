@@ -98,7 +98,7 @@ public class Activity_CPXQ extends Activity_Base {
 		title_text.setTextColor(getResources().getColor(R.color.white));
 		dropdown.setImageDrawable(getResources().getDrawable(R.drawable.right_more));
 		requestCPInfo();
-		ProgressDialogrUtils.show(this,"请稍后…");
+		ProgressDialogrUtils.show(this,"正在获取数据，请稍后…");
 	}
 
 	private void showData() {
@@ -117,7 +117,7 @@ public class Activity_CPXQ extends Activity_Base {
 			buy.setText("售罄");
 			buy.setTextColor(0xff999999);
 			buy.setEnabled(false);
-			buy.setBackgroundColor(0xdbdbdb);
+			buy.setBackgroundColor(0xccdbdbdb);
 		} else {
 			buy.setText("立即购买");
 			buy.setEnabled(false);

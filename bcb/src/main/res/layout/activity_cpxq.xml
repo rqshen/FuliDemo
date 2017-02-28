@@ -20,11 +20,9 @@
         android:id="@+id/layout_scrollview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbars="none"
+        android:layout_above="@+id/buy"
         android:background="@color/background"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -182,11 +180,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="35dp"
                 android:layout_marginRight="35dp"
+                android:progress="2"
                 bqt:progress_reached_bar_height="2dp"
                 bqt:progress_reached_color="#ff4c4c"
                 bqt:progress_unreached_bar_height="2dp"
-                bqt:progress_unreached_color="#33ff4c4c"
-                android:progress="2"/>
+                bqt:progress_unreached_color="#33ff4c4c"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -280,10 +278,10 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/right_more"
                     android:gravity="right"
                     android:paddingRight="15dp"
                     android:singleLine="true"
-                    android:drawableRight="@drawable/right_more"
                     android:textColor="#333"
                     android:textSize="20sp"/>
 
@@ -314,9 +312,9 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/right_more"
                     android:gravity="right"
                     android:paddingRight="15dp"
-                    android:drawableRight="@drawable/right_more"
                     android:textColor="#333"
                     android:textSize="20sp"/>
 

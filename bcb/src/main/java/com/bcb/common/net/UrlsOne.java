@@ -129,6 +129,14 @@ public class UrlsOne {
 	public static final String WYB = host + "/api/v2.5/a71b011df7f7";//打包
 	//zhangxinbao
 	public static final String ZXB = host + "/api/v2.5/a71b011d974a";//散
+	//稳赢宝
+	public static final String WYB_JL = host + "/api/v2.5/a71c00f5bd72";//打包
+	//zhangxinbao
+	public static final String ZXB_JL = host + "/api/v2.5/a6fd011ee788";//散
+	//稳赢宝
+	public static final String WYB_XQ = host + "/api/v2.5/a71c00f5f9ff";//打包
+	//zhangxinbao
+	public static final String ZXB_XQ = host + "/api/v2.5/a6fd011f5ca5";//散
 
 	// 兑换优惠劵
 	public static final String Convert_Coupon = host + "/api/v1.0/95aabaaae186";
