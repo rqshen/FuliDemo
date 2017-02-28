@@ -15,7 +15,7 @@ public class HorizontalProgressBar extends ProgressBar {
 	/**中间文字颜色*/
 	protected int mTextColor = 0XFFFC00D1;
 	/**中间文字大小*/
-	protected int mTextSize = DensityUtils.sp2px(getContext(), 20);
+	protected int mTextSize = DensityUtils.sp2px(getContext(), 12);
 	/**是否显示中间的文字*/
 	protected boolean mIfDrawText = true;
 	/**中间文字和左右两边进度之间的距离*/

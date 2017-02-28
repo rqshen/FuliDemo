@@ -1,14 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bqt="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/buy"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/red"
+        android:gravity="center"
+        android:text="立即购买"
+        android:textColor="@color/white"
+        android:textSize="16sp"/>
 
     <ScrollView
         android:id="@+id/layout_scrollview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbars="none">
+        android:scrollbars="none"
+        android:background="@color/background"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -39,7 +55,6 @@
                         android:id="@+id/tv_rate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="5.5"
                         android:textColor="@color/white"
                         android:textSize="45sp"/>
 
@@ -51,7 +66,6 @@
                         android:layout_marginBottom="5dp"
                         android:layout_marginLeft="2dp"
                         android:layout_toRightOf="@+id/tv_rate"
-                        android:text="%+0.5%"
                         android:textColor="@color/white"
                         android:textSize="15sp"/>
                 </RelativeLayout>
@@ -78,12 +92,12 @@
                             android:textSize="12sp"/>
 
                         <TextView
-                            android:id="@+id/top_amount"
+                            android:id="@+id/sdq"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:paddingTop="8dp"
                             android:singleLine="true"
-                            android:text="3个月"
+                            android:text=""
                             android:textColor="@color/white"
                             android:textSize="18sp"/>
                     </LinearLayout>
@@ -109,12 +123,11 @@
                             android:textSize="12sp"/>
 
                         <TextView
-                            android:id="@+id/right"
+                            android:id="@+id/ktje"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:paddingTop="8dp"
                             android:singleLine="true"
-                            android:text="0.00"
                             android:textColor="@color/white"
                             android:textSize="18sp"/>
                     </LinearLayout>
@@ -127,7 +140,6 @@
                 android:layout_height="60dp"
                 android:gravity="center"
                 android:singleLine="true"
-                android:text="最少持有3个月，按月续期，最长36个月"
                 android:textColor="#424954"
                 android:textSize="15sp"/>
 
@@ -136,13 +148,44 @@
                 android:layout_height="1dp"
                 android:background="#dbdbdb"/>
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="40dp"
+                >
+
+                <TextView
+                    android:id="@+id/tv_u1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="75dp"
+                    android:text="锁定期"
+                    android:textColor="#ff4c4c"
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:id="@+id/tv_u2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="180dp"
+                    android:text="持续收益，按月退出"
+                    android:textColor="#ff4c4c"
+                    android:textSize="12sp"/>
+
+
+            </RelativeLayout>
+
             <com.bcb.presentation.view.custom.HorizontalProgressBarWithNumber
                 android:id="@+id/pb"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginLeft="35dp"
+                android:layout_marginRight="35dp"
+                bqt:progress_reached_bar_height="2dp"
+                bqt:progress_reached_color="#ff4c4c"
+                bqt:progress_unreached_bar_height="2dp"
+                bqt:progress_unreached_color="#33ff4c4c"
                 android:progress="2"/>
 
             <RelativeLayout
@@ -150,8 +193,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp">
 
+
                 <TextView
-                    android:id="@+id/tv_u1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
@@ -160,7 +203,6 @@
                     android:textSize="12sp"/>
 
                 <TextView
-                    android:id="@+id/tv_u2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="120dp"
@@ -169,7 +211,6 @@
                     android:textSize="12sp"/>
 
                 <TextView
-                    android:id="@+id/tv_u3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -187,30 +228,27 @@
                 android:layout_marginTop="7dp">
 
                 <TextView
-                    android:id="@+id/tv_d1"
+                    android:id="@+id/qxr"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="14dp"
-                    android:text="2017-2-27"
+                    android:layout_marginLeft="11dp"
                     android:textColor="#424954"
                     android:textSize="12sp"/>
 
                 <TextView
-                    android:id="@+id/tv_d2"
+                    android:id="@+id/tc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="124dp"
-                    android:text="2017-2-27"
+                    android:layout_marginLeft="121dp"
                     android:textColor="#424954"
                     android:textSize="12sp"/>
 
                 <TextView
-                    android:id="@+id/tv_d3"
+                    android:id="@+id/cy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="25dp"
-                    android:text="36个月"
+                    android:layout_marginRight="26dp"
                     android:textColor="#424954"
                     android:textSize="12sp"/>
 
@@ -230,13 +268,12 @@
 
 
                 <TextView
-                    android:id="@+id/tv_buy1"
+                    android:id="@+id/buy1"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:layout_marginLeft="15dp"
                     android:gravity="center_vertical"
                     android:singleLine="true"
-                    android:text="购买 10000 元，3个月可收益 10086 元"
                     android:textColor="#424954"
                     android:textSize="16sp"/>
 
@@ -246,7 +283,7 @@
                     android:gravity="right"
                     android:paddingRight="15dp"
                     android:singleLine="true"
-                    android:text=">"
+                    android:drawableRight="@drawable/right_more"
                     android:textColor="#333"
                     android:textSize="20sp"/>
 
@@ -265,13 +302,12 @@
 
 
                 <TextView
-                    android:id="@+id/tv_buy2"
+                    android:id="@+id/buy2"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:layout_marginLeft="15dp"
                     android:gravity="center_vertical"
                     android:singleLine="true"
-                    android:text="购买 10000 元，36个月可收益 10086 元"
                     android:textColor="#424954"
                     android:textSize="16sp"/>
 
@@ -280,35 +316,23 @@
                     android:layout_height="wrap_content"
                     android:gravity="right"
                     android:paddingRight="15dp"
-                    android:text=">"
+                    android:drawableRight="@drawable/right_more"
                     android:textColor="#333"
                     android:textSize="20sp"/>
 
             </LinearLayout>
 
             <TextView
-                android:id="@+id/tv_more"
+                android:id="@+id/more"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginBottom="50dp"
                 android:background="#dbdbdb"
                 android:gravity="center"
                 android:padding="15dp"
                 android:singleLine="true"
-                android:text="上拉/点击查看更多"
+                android:text="点击查看更多"
                 android:textColor="#999"
                 android:textSize="12sp"/>
         </LinearLayout>
     </ScrollView>
-
-    <TextView
-        android:id="@+id/tv_buy"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:background="@color/red"
-        android:gravity="center"
-        android:text="立即购买"
-        android:textColor="@color/white"
-        android:textSize="16sp"/>
 </RelativeLayout>
