@@ -9,6 +9,7 @@ import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -42,7 +43,7 @@ import butterknife.OnClick;
 /**
  * setTitleValue("产品详情"。setTitleValue("详情"。setTitleValue("项目详情"。setTitleValue("立即购买"。setTitleValue("立即申购"。
  */
-public class Activity_CPXQ extends Activity_Base {
+public class Activity_CPXQ extends Activity_Base implements View.OnTouchListener {
 	Context ctx;
 	@BindView(R.id.tv_rate) TextView tvRate;
 	@BindView(R.id.tv_rate_add) TextView tvRateAdd;
@@ -62,7 +63,6 @@ public class Activity_CPXQ extends Activity_Base {
 	@BindView(R.id.more) TextView more;
 	@BindView(R.id.layout_scrollview) ScrollView layoutScrollview;
 	@BindView(R.id.buy) TextView buy;
-
 
 	private String packageId = "";
 
@@ -98,7 +98,7 @@ public class Activity_CPXQ extends Activity_Base {
 		title_text.setTextColor(getResources().getColor(R.color.white));
 		dropdown.setImageDrawable(getResources().getDrawable(R.drawable.right_more));
 		requestCPInfo();
-		ProgressDialogrUtils.show(this,"正在获取数据，请稍后…");
+		ProgressDialogrUtils.show(this, "正在获取数据，请稍后…");
 	}
 
 	private void showData() {
@@ -177,6 +177,7 @@ public class Activity_CPXQ extends Activity_Base {
 				.append(getSSpannableString2(string2)).append(" 元");
 		return needStartSSB;
 	}
+
 	@OnClick({R.id.ll_buy1, R.id.ll_buy2, R.id.more, R.id.buy})
 	public void onClick(View view) {
 		switch (view.getId()) {
@@ -187,7 +188,7 @@ public class Activity_CPXQ extends Activity_Base {
 				Activity_Project_Buy2.launche2(this, packageId, bean.Name, CouponType, countDate, bean, type);
 				break;
 			case R.id.more:
-				Activity_Browser.launche(this,bean.Name,bean.PageUrl);
+				Activity_Browser.launche(this, bean.Name, bean.PageUrl);
 				break;
 		}
 	}
@@ -239,4 +240,8 @@ public class Activity_CPXQ extends Activity_Base {
 		App.getInstance().getRequestQueue().add(jsonRequest);
 	}
 
+	@Override
+	public boolean onTouch(View v, MotionEvent event) {
+		return false;
+	}
 }

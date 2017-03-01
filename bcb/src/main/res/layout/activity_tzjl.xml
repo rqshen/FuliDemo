@@ -17,7 +17,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="30dp">
+            android:layout_height="40dp">
 
             <ImageView
                 android:id="@+id/iv_left"
@@ -30,8 +30,9 @@
 
             <LinearLayout
                 android:id="@+id/ll_top"
+                android:layout_margin="5dp"
                 android:layout_width="150dp"
-                android:layout_height="30dp"
+                android:layout_height="35dp"
                 android:layout_centerHorizontal="true"
                 android:background="@drawable/button_stroke_white2"
                 android:orientation="horizontal">
@@ -40,9 +41,9 @@
                     android:id="@+id/wyb"
                     android:layout_width="75dp"
                     android:layout_height="match_parent"
-                    android:background="@color/white"
                     android:gravity="center"
                     android:text="稳盈宝"
+                    android:background="@drawable/stroke_l"
                     android:textColor="@color/red"
                     android:textSize="14sp"/>
 
@@ -50,9 +51,9 @@
                     android:id="@+id/zyb"
                     android:layout_width="75dp"
                     android:layout_height="match_parent"
-                    android:background="@color/red"
                     android:gravity="center"
                     android:text="涨薪宝"
+                    android:background="@drawable/stroke_r"
                     android:textColor="@color/white"
                     android:textSize="14sp"/>
             </LinearLayout>

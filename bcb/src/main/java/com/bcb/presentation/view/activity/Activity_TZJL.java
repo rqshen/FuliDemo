@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.bcb.R;
 import com.bcb.data.util.MyActivityManager;
 import com.bcb.presentation.adapter.MyFragmentPagerAdapter;
+import com.bcb.presentation.view.custom.CustomViewPager;
 
 import java.util.ArrayList;
 
@@ -27,7 +28,7 @@ import butterknife.ButterKnife;
  */
 public class Activity_TZJL extends FragmentActivity implements View.OnClickListener {
 	Context ctx;
-	private ViewPager vp;
+	private CustomViewPager vp;
 	private ArrayList<Fragment> fragmentsList;
 	public TextView ztbj;
 	public TextView yjsy;
@@ -46,7 +47,7 @@ public class Activity_TZJL extends FragmentActivity implements View.OnClickListe
 	}
 
 	private void InitViewPager() {
-		vp = (ViewPager) findViewById(R.id.vp);
+		vp = (CustomViewPager) findViewById(R.id.vp);
 		fragmentsList = new ArrayList<Fragment>();
 		fragmentsList.add(Frag_TZJL_.newInstance(0, 1));
 		fragmentsList.add(Frag_TZJL_.newInstance(0, 2));
