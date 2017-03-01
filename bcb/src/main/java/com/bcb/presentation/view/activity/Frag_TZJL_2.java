@@ -56,7 +56,7 @@ public class Frag_TZJL_2 extends Frag_Base implements AdapterView.OnItemClickLis
 	/**
 	 * 构造时把传入的参数带进来，
 	 */
-	public static Frag_TZJL_2 newInstance(int Status,int Tab) {
+	public static Frag_TZJL_2 newInstance(int Status, int Tab) {
 		Bundle bundle = new Bundle();
 		bundle.putInt("Status", Status);
 		bundle.putInt("Tab", Tab);
@@ -160,7 +160,7 @@ public class Frag_TZJL_2 extends Frag_Base implements AdapterView.OnItemClickLis
 						if (obj != null) {
 							tzjLbean = App.mGson.fromJson(obj.toString(), TZJLbean.class);
 							if (Status == 0) {
-								 ((Frag_TZJL_1) getParentFragment()).yjsy.setText(String.format("%.2f", tzjLbean.PackInterest));
+								((Frag_TZJL_1) getParentFragment()).yjsy.setText(String.format("%.2f", tzjLbean.PackInterest));
 								((Frag_TZJL_1) getParentFragment()).ztbj.setText(String.format("%.2f", tzjLbean.PackPrincipal));
 							} else {
 								((Frag_TZJL_1) getParentFragment()).yjsy.setText(String.format("%.2f", tzjLbean.OriginalInterest));
@@ -239,6 +239,6 @@ public class Frag_TZJL_2 extends Frag_Base implements AdapterView.OnItemClickLis
 	//******************************************************************************************
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+//投资详情
 	}
 }
