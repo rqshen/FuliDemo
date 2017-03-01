@@ -4,10 +4,11 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
@@ -15,46 +16,67 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bcb.R;
-import com.bcb.data.util.MyActivityManager;
 import com.bcb.presentation.adapter.MyFragmentPagerAdapter;
-import com.bcb.presentation.view.custom.CustomViewPager;
+import com.bcb.presentation.view.fragment.Frag_Base;
 
 import java.util.ArrayList;
 
-import butterknife.ButterKnife;
-
-/**
- * setTitleValue("投资记录"。
- */
-public class Activity_TZJL extends FragmentActivity implements View.OnClickListener {
-	Context ctx;
-	private CustomViewPager vp;
-	private ArrayList<Fragment> fragmentsList;
+public class Frag_TZJL_1 extends Frag_Base implements View.OnClickListener {
+	private Context ctx;
 	public TextView ztbj;
 	public TextView yjsy;
+	private ViewPager vp;
+	private ArrayList<Fragment> fragmentsList;
+	private int Status;//	【 0稳赢，打包】【1涨薪宝，三标】
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		ctx = this;
-		MyActivityManager.getInstance().pushOneActivity(Activity_TZJL.this);
-		setContentView(R.layout.activity_tzjl);
-		ztbj = (TextView) findViewById(R.id.ztbj);
-		yjsy = (TextView) findViewById(R.id.yjsy);
-		ButterKnife.bind(this);// ButterKnife.inject(this) should be called after setContentView()
-		initUnderLine();
-		InitViewPager();
+	//******************************************************************************************
+
+	/**
+	 * 构造时把传入的参数带进来，
+	 */
+	public static Frag_TZJL_1 newInstance(int Status) {
+		Bundle bundle = new Bundle();
+		bundle.putInt("Status", Status);
+		Frag_TZJL_1 fragment = new Frag_TZJL_1();
+		fragment.setArguments(bundle);
+		return fragment;
 	}
 
-	private void InitViewPager() {
-		vp = (CustomViewPager) findViewById(R.id.vp);
-		fragmentsList = new ArrayList<Fragment>();
-		fragmentsList.add(Frag_TZJL_2.newInstance(0, 1));
-		fragmentsList.add(Frag_TZJL_2.newInstance(0, 2));
-		fragmentsList.add(Frag_TZJL_2.newInstance(1, 1));
-		fragmentsList.add(Frag_TZJL_2.newInstance(1, 2));
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		Bundle bundle = getArguments();
+		if (bundle != null) {
+			Status = bundle.getInt("Status");
+		}
+	}
+	//******************************************************************************************
 
-		vp.setAdapter(new MyFragmentPagerAdapter(getSupportFragmentManager(), fragmentsList));
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		return inflater.inflate(R.layout.fragment_tzjl_1, container, false);
+	}
+
+	@Override
+	public void onViewCreated(View view, Bundle savedInstanceState) {
+		this.ctx = view.getContext();
+		ztbj = (TextView) view.findViewById(R.id.ztbj);
+		yjsy = (TextView) view.findViewById(R.id.yjsy);
+		initUnderLine(view);
+		InitViewPager(view);
+	}
+
+	private void InitViewPager(View view) {
+		vp = (ViewPager) view.findViewById(R.id.vp);
+		fragmentsList = new ArrayList<Fragment>();
+		if (Status == 0) {
+			fragmentsList.add(Frag_TZJL_2.newInstance(0, 1));
+			fragmentsList.add(Frag_TZJL_2.newInstance(0, 2));
+		} else {
+			fragmentsList.add(Frag_TZJL_2.newInstance(1, 1));
+			fragmentsList.add(Frag_TZJL_2.newInstance(1, 2));
+		}
+		vp.setAdapter(new MyFragmentPagerAdapter(getActivity().getSupportFragmentManager(), fragmentsList));
 		vp.setCurrentItem(0);
 		vp.setOffscreenPageLimit(2);
 		vp.setOnPageChangeListener(new MyOnPageChangeListener());
@@ -81,15 +103,15 @@ public class Activity_TZJL extends FragmentActivity implements View.OnClickListe
 	private int position_one;
 	private ImageView ivBottomLine;
 
-	private void initUnderLine() {
-		unusedTextView = (TextView) findViewById(R.id.tv_unused);
-		usedTextView = (TextView) findViewById(R.id.tv_used);
+	private void initUnderLine(View view) {
+		unusedTextView = (TextView) view.findViewById(R.id.tv_unused);
+		usedTextView = (TextView) view.findViewById(R.id.tv_used);
 		unusedTextView.setOnClickListener(this);
 		usedTextView.setOnClickListener(this);
-		ivBottomLine = (ImageView) findViewById(R.id.red);
+		ivBottomLine = (ImageView) view.findViewById(R.id.red);
 		bottomLineWidth = ivBottomLine.getLayoutParams().width;
 		DisplayMetrics dmDisplayMetrics = new DisplayMetrics();
-		getWindowManager().getDefaultDisplay().getMetrics(dmDisplayMetrics);
+		getActivity().getWindowManager().getDefaultDisplay().getMetrics(dmDisplayMetrics);
 		int screenW = dmDisplayMetrics.widthPixels;
 		offset = (int) ((screenW / 2.0 - bottomLineWidth) / 2);
 		position_one = (int) (screenW / 2.0);

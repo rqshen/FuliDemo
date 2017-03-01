@@ -64,7 +64,7 @@ import com.bcb.presentation.view.activity.Activity_Login;
 import com.bcb.presentation.view.activity.Activity_Money_Flowing_Water;
 import com.bcb.presentation.view.activity.Activity_Open_Account;
 import com.bcb.presentation.view.activity.Activity_Privilege_Money;
-import com.bcb.presentation.view.activity.Activity_TZJL;
+import com.bcb.presentation.view.activity.Activity_TZJL_1;
 import com.bcb.presentation.view.activity.Activity_Trading_Record;
 import com.bcb.presentation.view.activity.Activity_TuoGuan_HF;
 import com.bcb.presentation.view.activity.Activity_WebView;
@@ -503,7 +503,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 				break;
 			//理财
 			case R.id.rl_lc:
-				startActivity(new Intent(ctx, Activity_TZJL.class));
+				startActivity(new Intent(ctx, Activity_TZJL_1.class));
 				break;
 			//优惠券
 			case R.id.rl_yhq:

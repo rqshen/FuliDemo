@@ -32,7 +32,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Frag_TZJL_ extends Frag_Base implements AdapterView.OnItemClickListener {
+public class Frag_TZJL_2 extends Frag_Base implements AdapterView.OnItemClickListener {
 	private Context ctx;
 
 	private MyListView lv;
@@ -56,10 +56,11 @@ public class Frag_TZJL_ extends Frag_Base implements AdapterView.OnItemClickList
 	/**
 	 * 构造时把传入的参数带进来，
 	 */
-	public static Frag_TZJL_ newInstance(int Status) {
+	public static Frag_TZJL_2 newInstance(int Status,int Tab) {
 		Bundle bundle = new Bundle();
 		bundle.putInt("Status", Status);
-		Frag_TZJL_ fragment = new Frag_TZJL_();
+		bundle.putInt("Tab", Tab);
+		Frag_TZJL_2 fragment = new Frag_TZJL_2();
 		fragment.setArguments(bundle);
 		return fragment;
 	}
@@ -70,6 +71,7 @@ public class Frag_TZJL_ extends Frag_Base implements AdapterView.OnItemClickList
 		Bundle bundle = getArguments();
 		if (bundle != null) {
 			Status = bundle.getInt("Status");
+			Tab = bundle.getInt("Tab");
 		}
 	}
 	//******************************************************************************************

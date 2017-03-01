@@ -24,8 +24,8 @@ public class Activity_TZJL_1 extends FragmentActivity {
 	@BindView(R.id.container) FrameLayout container;
 	@BindView(R.id.wyb) TextView wyb;
 	@BindView(R.id.zyb) TextView zyb;
-	Frag_TZJL_ wyb_f;
-	Frag_TZJL_ zxb_f;
+	Frag_TZJL_1 wyb_f;
+	Frag_TZJL_1 zxb_f;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -42,10 +42,12 @@ public class Activity_TZJL_1 extends FragmentActivity {
 				finish();
 				break;
 			case R.id.wyb:
+				wyb.setTextColor(getResources().getColor(R.color.red));
+				zyb.setTextColor(getResources().getColor(R.color.white));
 				wyb.setBackground(getResources().getDrawable(R.drawable.stroke_l));
 				zyb.setBackground(null);
 				if (wyb_f == null) {
-					wyb_f = Frag_TZJL_.newInstance(0);
+					wyb_f = Frag_TZJL_1.newInstance(0);
 					getSupportFragmentManager().beginTransaction().add(R.id.container, wyb_f, "AA").commit();
 				} else {
 					hideFrags();
@@ -55,8 +57,10 @@ public class Activity_TZJL_1 extends FragmentActivity {
 			case R.id.zyb:
 				zyb.setBackground(getResources().getDrawable(R.drawable.stroke_r));
 				wyb.setBackground(null);
+				wyb.setTextColor(getResources().getColor(R.color.white));
+				zyb.setTextColor(getResources().getColor(R.color.red));
 				if (zxb_f == null) {
-					zxb_f = Frag_TZJL_.newInstance(1);
+					zxb_f = Frag_TZJL_1.newInstance(1);
 					getSupportFragmentManager().beginTransaction().add(R.id.container, zxb_f, "AA").commit();
 				} else {
 					hideFrags();

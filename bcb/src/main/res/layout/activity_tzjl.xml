@@ -51,7 +51,6 @@
                     android:id="@+id/zyb"
                     android:layout_width="75dp"
                     android:layout_height="match_parent"
-                    android:background="@drawable/stroke_r"
                     android:gravity="center"
                     android:text="涨薪宝"
                     android:textColor="@color/white"
