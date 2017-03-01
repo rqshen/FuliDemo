@@ -106,7 +106,7 @@
                 android:layout_height="wrap_content"
                 android:text="已预约"
                 android:textColor="#424954"
-                android:textSize="14sp"/>
+                android:textSize="12sp"/>
 
 
             <TextView

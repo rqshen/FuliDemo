@@ -33,6 +33,7 @@ public class Activity_TZJL_1 extends FragmentActivity {
 		MyActivityManager.getInstance().pushOneActivity(Activity_TZJL_1.this);
 		setContentView(R.layout.activity_tzjl);
 		ButterKnife.bind(this);// ButterKnife.inject(this) should be called after setContentView()
+		showWYB();
 	}
 
 	@OnClick({R.id.iv_left, R.id.wyb, R.id.zyb})
@@ -42,31 +43,40 @@ public class Activity_TZJL_1 extends FragmentActivity {
 				finish();
 				break;
 			case R.id.wyb:
-				wyb.setTextColor(getResources().getColor(R.color.red));
-				zyb.setTextColor(getResources().getColor(R.color.white));
-				wyb.setBackground(getResources().getDrawable(R.drawable.stroke_l));
-				zyb.setBackground(null);
-				if (wyb_f == null) {
-					wyb_f = Frag_TZJL_1.newInstance(0);
-					getSupportFragmentManager().beginTransaction().add(R.id.container, wyb_f, "AA").commit();
-				} else {
-					hideFrags();
-					getSupportFragmentManager().beginTransaction().show(wyb_f).commit();
-				}
+				showWYB();
 				break;
 			case R.id.zyb:
-				zyb.setBackground(getResources().getDrawable(R.drawable.stroke_r));
-				wyb.setBackground(null);
-				wyb.setTextColor(getResources().getColor(R.color.white));
-				zyb.setTextColor(getResources().getColor(R.color.red));
-				if (zxb_f == null) {
-					zxb_f = Frag_TZJL_1.newInstance(1);
-					getSupportFragmentManager().beginTransaction().add(R.id.container, zxb_f, "AA").commit();
-				} else {
-					hideFrags();
-					getSupportFragmentManager().beginTransaction().show(zxb_f).commit();
-				}
+				showZYB();
+
 				break;
+		}
+	}
+
+	private void showZYB() {
+		zyb.setBackground(getResources().getDrawable(R.drawable.stroke_r));
+		wyb.setBackground(null);
+		wyb.setTextColor(getResources().getColor(R.color.white));
+		zyb.setTextColor(getResources().getColor(R.color.red));
+		if (zxb_f == null) {
+			zxb_f = Frag_TZJL_1.newInstance(1);
+			getSupportFragmentManager().beginTransaction().add(R.id.container, zxb_f, "AA").commit();
+		} else {
+			hideFrags();
+			getSupportFragmentManager().beginTransaction().show(zxb_f).commit();
+		}
+	}
+
+	private void showWYB() {
+		wyb.setTextColor(getResources().getColor(R.color.red));
+		zyb.setTextColor(getResources().getColor(R.color.white));
+		wyb.setBackground(getResources().getDrawable(R.drawable.stroke_l));
+		zyb.setBackground(null);
+		if (wyb_f == null) {
+			wyb_f = Frag_TZJL_1.newInstance(0);
+			getSupportFragmentManager().beginTransaction().add(R.id.container, wyb_f, "AA").commit();
+		} else {
+			hideFrags();
+			getSupportFragmentManager().beginTransaction().show(wyb_f).commit();
 		}
 	}
 

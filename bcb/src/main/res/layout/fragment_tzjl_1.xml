@@ -84,7 +84,7 @@
             android:gravity="center"
             android:text="持有中"
             android:textColor="@color/red"
-            android:textSize="@dimen/main_text_large"/>
+            android:textSize="15sp"/>
 
         <TextView
             android:id="@+id/tv_used"
@@ -94,7 +94,7 @@
             android:gravity="center"
             android:text="已结束"
             android:textColor="@color/txt_gray"
-            android:textSize="@dimen/main_text_large"/>
+            android:textSize="15sp"/>
 
     </LinearLayout>
     <!-- 标签底部指示图片 -->

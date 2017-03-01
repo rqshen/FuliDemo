@@ -90,10 +90,10 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="15dp"
-        bqt:progress_reached_bar_height="2dp"
+        bqt:progress_reached_bar_height="1px"
         bqt:progress_reached_color="#4499f8"
         bqt:progress_text_size="10sp"
-        bqt:progress_unreached_bar_height="2dp"
+        bqt:progress_unreached_bar_height="1px"
         bqt:progress_unreached_color="#999"/>
 
 </RelativeLayout>

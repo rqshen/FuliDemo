@@ -75,7 +75,7 @@ public class MainAdapter extends BaseAdapter {
 				viewHolder.tvDw.setText("个月");
 				break;
 		}
-		viewHolder.tvJe.setText("融资金额" + bean.Amount + "元");
+		viewHolder.tvJe.setText("融资金额 " + bean.Amount + "");
 
 		//是否已预约
 		if (bean.PackageStatus == 1) {//0 未预约    1 已预约

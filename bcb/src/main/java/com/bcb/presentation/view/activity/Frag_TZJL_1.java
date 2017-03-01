@@ -76,7 +76,7 @@ public class Frag_TZJL_1 extends Frag_Base implements View.OnClickListener {
 			fragmentsList.add(Frag_TZJL_2.newInstance(1, 1));
 			fragmentsList.add(Frag_TZJL_2.newInstance(1, 2));
 		}
-		vp.setAdapter(new MyFragmentPagerAdapter(getActivity().getSupportFragmentManager(), fragmentsList));
+		vp.setAdapter(new MyFragmentPagerAdapter(getChildFragmentManager(), fragmentsList));
 		vp.setCurrentItem(0);
 		vp.setOffscreenPageLimit(2);
 		vp.setOnPageChangeListener(new MyOnPageChangeListener());

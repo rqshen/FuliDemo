@@ -160,11 +160,11 @@ public class Frag_TZJL_2 extends Frag_Base implements AdapterView.OnItemClickLis
 						if (obj != null) {
 							tzjLbean = App.mGson.fromJson(obj.toString(), TZJLbean.class);
 							if (Status == 0) {
-								((Activity_TZJL) getActivity()).yjsy.setText(String.format("%.2f", tzjLbean.PackInterest));
-								((Activity_TZJL) getActivity()).ztbj.setText(String.format("%.2f", tzjLbean.PackPrincipal));
+								 ((Frag_TZJL_1) getParentFragment()).yjsy.setText(String.format("%.2f", tzjLbean.PackInterest));
+								((Frag_TZJL_1) getParentFragment()).ztbj.setText(String.format("%.2f", tzjLbean.PackPrincipal));
 							} else {
-								((Activity_TZJL) getActivity()).yjsy.setText(String.format("%.2f", tzjLbean.OriginalInterest));
-								((Activity_TZJL) getActivity()).ztbj.setText(String.format("%.2f", tzjLbean.OriginalPrincipal));
+								((Frag_TZJL_1) getParentFragment()).yjsy.setText(String.format("%.2f", tzjLbean.OriginalInterest));
+								((Frag_TZJL_1) getParentFragment()).ztbj.setText(String.format("%.2f", tzjLbean.OriginalPrincipal));
 							}
 						}
 
