@@ -56,10 +56,9 @@ public class Frag_TZJL_ extends Frag_Base implements AdapterView.OnItemClickList
 	/**
 	 * 构造时把传入的参数带进来，
 	 */
-	public static Frag_TZJL_ newInstance(int Status, int Tab) {
+	public static Frag_TZJL_ newInstance(int Status) {
 		Bundle bundle = new Bundle();
 		bundle.putInt("Status", Status);
-		bundle.putInt("Tab", Tab);
 		Frag_TZJL_ fragment = new Frag_TZJL_();
 		fragment.setArguments(bundle);
 		return fragment;
@@ -71,7 +70,6 @@ public class Frag_TZJL_ extends Frag_Base implements AdapterView.OnItemClickList
 		Bundle bundle = getArguments();
 		if (bundle != null) {
 			Status = bundle.getInt("Status");
-			Tab = bundle.getInt("Tab");
 		}
 	}
 	//******************************************************************************************
