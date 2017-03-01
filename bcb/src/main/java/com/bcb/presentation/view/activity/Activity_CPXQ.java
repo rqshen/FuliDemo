@@ -40,6 +40,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.bcb.R.id.back_img;
+
 /**
  * setTitleValue("产品详情"。setTitleValue("详情"。setTitleValue("项目详情"。setTitleValue("立即购买"。setTitleValue("立即申购"。
  */
@@ -96,7 +98,8 @@ public class Activity_CPXQ extends Activity_Base implements View.OnTouchListener
 		setTitleValue("产品详情");
 		layout_title.setBackgroundColor(getResources().getColor(R.color.red));
 		title_text.setTextColor(getResources().getColor(R.color.white));
-		dropdown.setImageDrawable(getResources().getDrawable(R.drawable.right_more));
+		dropdown.setImageResource(R.drawable.return_delault);
+		(findViewById(back_img)).setVisibility(View.GONE);
 		requestCPInfo();
 		ProgressDialogrUtils.show(this, "正在获取数据，请稍后…");
 	}
@@ -120,7 +123,7 @@ public class Activity_CPXQ extends Activity_Base implements View.OnTouchListener
 			buy.setBackgroundColor(0xccdbdbdb);
 		} else {
 			buy.setText("立即购买");
-			buy.setEnabled(false);
+			buy.setEnabled(true);
 			buy.setBackgroundColor(getResources().getColor(R.color.red));
 			buy.setTextColor(getResources().getColor(R.color.white));
 		}

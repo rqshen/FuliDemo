@@ -19,6 +19,6 @@ public class My_LC extends Activity_Base {
 		setBaseContentView(R.layout.activity_my_lc);
 		ButterKnife.bind(this);
 		setLeftTitleVisible(true);
-		setTitleValue("我的理财");
+		setTitleValue("我的理财--没用");
 	}
 }

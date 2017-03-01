@@ -22,11 +22,11 @@
             <ImageView
                 android:id="@+id/iv_left"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
-                android:src="@drawable/right_more"/>
+                android:src="@drawable/return_delault"/>
 
             <LinearLayout
                 android:id="@+id/ll_top"

@@ -25,13 +25,14 @@ import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.PackageUtil;
 import com.bcb.data.util.TokenUtil;
 import com.bcb.presentation.view.custom.AlertView.DialogBQT2;
-import com.bcb.presentation.view.custom.HorizontalProgressBarWithNumber;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import static com.bcb.R.id.back_img;
 
 /**
  * 2、投资详情
@@ -40,21 +41,27 @@ public class Activity_Project_Investment_Details extends Activity_Base implement
 
 	private static final String TAG = "bqt";
 	private String OrderNo;
-	private TextView top_amount, earning_expected, income_total, tv_id_number, state_title, state_below;
-	private TextView biddingtime, earningtime, endtime;
-	private TextView annual_yield, earnings_end, have, left, left_time;
+	private TextView top_amount, earning_expected, tv_id_number, state_title, state_below;
+	private TextView  earningtime;
+	private TextView annual_yield, earnings_end, have, left;
 	LinearLayout ll_id_number;
-	HorizontalProgressBarWithNumber pb;
 	private RelativeLayout rl_hk, rl_zr, tourl;
-	private LinearLayout ll_exit;
 	private Button button;
-
+	int Status = 1;
 	private Project_Investment_Details_Bean bean;
 
 	public static void launche(Context ctx, String OrderNo) {
 		Intent intent = new Intent();
 		intent.setClass(ctx, Activity_Project_Investment_Details.class);
 		intent.putExtra("OrderNo", OrderNo);
+		ctx.startActivity(intent);
+	}
+
+	public static void launche(Context ctx, String OrderNo, int Status) {
+		Intent intent = new Intent();
+		intent.setClass(ctx, Activity_Project_Investment_Details.class);
+		intent.putExtra("OrderNo", OrderNo);
+		intent.putExtra("Status", Status);
 		ctx.startActivity(intent);
 	}
 
@@ -65,46 +72,33 @@ public class Activity_Project_Investment_Details extends Activity_Base implement
 		setBaseContentView(R.layout.activity_project_investment_details);
 		setLeftTitleVisible(true);
 		setTitleValue("投资详情");
-//		setRightBtnVisiable(View.VISIBLE);
-//		setRightBtnImg(R.drawable.ico_info, new View.OnClickListener() {
-//			@Override
-//			public void onClick(View v) {
-//				if (bean != null && bean.PackageId != null && bean.Type != null) {
-//					int type = 0;
-//					if (bean.Type.equals("claim_convey") || bean.Type.equals("mon_package")) type = 1;
-//					//else if (bean.Type.equals("mon_package")) type = 2;//monkey_package
-//					Activity_NormalProject_Introduction.launche2(Activity_Project_Investment_Details.this, bean.PackageId, 0, type);//标类型：prj_package则为普通标 claim_convey则为债权转让标
-//				} else Toast.makeText(Activity_Project_Investment_Details.this, "获取数据失败", Toast.LENGTH_SHORT).show();
-//			}
-//		});
+		layout_title.setBackgroundColor(getResources().getColor(R.color.red));
+		title_text.setTextColor(getResources().getColor(R.color.white));
+		dropdown.setImageResource(R.drawable.return_delault);
+		(findViewById(back_img)).setVisibility(View.GONE);
 		OrderNo = getIntent().getStringExtra("OrderNo");
+		Status = getIntent().getIntExtra("Status", 1);
 		initView();
 		loadData();
 	}
 
 	private void initView() {
-		pb = (HorizontalProgressBarWithNumber) findViewById(R.id.pb);
 		top_amount = (TextView) findViewById(R.id.top_amount);
 		earning_expected = (TextView) findViewById(R.id.earning_expected);
-		income_total = (TextView) findViewById(R.id.income_total);
 		tv_id_number = (TextView) findViewById(R.id.tv_id_number);
 		ll_id_number = (LinearLayout) findViewById(R.id.ll_id_number);
 		ll_id_number.setOnClickListener(this);
-		biddingtime = (TextView) findViewById(R.id.biddingtime);
 		earningtime = (TextView) findViewById(R.id.earningtime);
-		endtime = (TextView) findViewById(R.id.endtime);
 		annual_yield = (TextView) findViewById(R.id.annual_yield);
 		earnings_end = (TextView) findViewById(R.id.earnings_end);
 		state_title = (TextView) findViewById(R.id.state_title);
 		state_below = (TextView) findViewById(R.id.state_below);
 		have = (TextView) findViewById(R.id.have);
 		left = (TextView) findViewById(R.id.left);
-		left_time = (TextView) findViewById(R.id.left_time);
 		button = (Button) findViewById(R.id.button);
 		rl_hk = (RelativeLayout) findViewById(R.id.rl_hk);
 		rl_zr = (RelativeLayout) findViewById(R.id.rl_zr);
 		tourl = (RelativeLayout) findViewById(R.id.tourl);
-		ll_exit = (LinearLayout) findViewById(R.id.ll_exit);
 		rl_hk.setOnClickListener(this);
 		rl_zr.setOnClickListener(this);
 		button.setOnClickListener(this);
@@ -120,11 +114,16 @@ public class Activity_Project_Investment_Details extends Activity_Base implement
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.TradingRecordDetail, obj, TokenUtil.getEncodeToken(this), new
+
+		String url = UrlsOne.ZXB_XQ;
+		if (Status == 0) url = UrlsOne.WYB_XQ;//打包，稳赢
+		LogUtil.i("bqt", "【地址】"+url);
+
+		BcbJsonRequest jsonRequest = new BcbJsonRequest(url, obj, TokenUtil.getEncodeToken(this), new
 				BcbRequest.BcbCallBack<JSONObject>() {
 					@Override
 					public void onResponse(JSONObject response) {
-						LogUtil.i("bqt", "【Activity_Project_Investment_Details】【onResponse】投资详情" + response.toString());
+						LogUtil.i("bqt", "【投资详情】" + response.toString());
 						try {
 							boolean flag = PackageUtil.getRequestStatus(response, Activity_Project_Investment_Details.this);
 							if (flag) {
@@ -134,46 +133,24 @@ public class Activity_Project_Investment_Details extends Activity_Base implement
 									//订单号
 									tv_id_number.setText(OrderNo);
 									//状态
-									state_title.setText(bean.getStatus());
+									state_title.setText(bean.StatusName+"");
 									//在投本金，预期收益，已获收益
-									top_amount.setText(String.format("%.2f", bean.getOrderAmount()));
-									earning_expected.setText(String.format("%.2f", bean.getPreInterest()));
-									income_total.setText(String.format("%.2f", bean.getInterest()));
-
+									top_amount.setText(String.format("%.2f", bean.OrderAmount));
+									earning_expected.setText(String.format("%.2f", bean.TotalInterest));
 									//加入时间，起息时间，锁定到期
 									SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-									Date biddingDate = format.parse(bean.getPayTime());
-									Date endDate = format.parse(bean.getEndDate());
-									biddingtime.setText(format.format(biddingDate));
 									Date earningDate = null;
-									if (bean.getInterestTakeDate() != null && !bean.getInterestTakeDate().equals("")) {
-										earningDate = format.parse(bean.getInterestTakeDate());
+									if (bean.InterestTakeDate != null && !bean.InterestTakeDate.equals("")) {
+										earningDate = format.parse(bean.InterestTakeDate);
 										earningtime.setText(format.format(earningDate));
 									}
-									endTime = format.format(endDate);
-									endtime.setText(format.format(endDate));
-									//进度
-									//							Date dateNow = new Date();
-									//							if (dateNow.getTime() < earningDate.getTime()) {//未到起息时间
-									//								pb.setProgress(10);
-									//							} else if (dateNow.getTime() >= endDate.getTime()) {//已到锁定期
-									//								pb.setProgress(100);
-									//							} else {
-									//								pb.setProgress(50);
-									//							}
-									//退出时间
-									Date date = format.parse(bean.getEndDate());
-									//Date dateFrom = new Date(date.getTime() - 14 * 1000 * 60 * 60 * 24);
-									Date dateTo = new Date(date.getTime() - 5 * 1000 * 60 * 60 * 24);
-									//left_time.setText(format.format(dateFrom) + "至" + format.format(dateTo));
-									SimpleDateFormat format2 = new SimpleDateFormat("yyyy.MM.dd");
+
 									switch (bean.StatusCode) {// 0：不能申请转让 1：已完成 2：可以转让 3：转让中
 										case 0:
 											button.setVisibility(View.INVISIBLE);
 											button.setClickable(false);
 											button.setText("申请退出");
 											button.setEnabled(false);
-											ll_exit.setVisibility(View.GONE);
 											break;
 										case 1:
 											button.setVisibility(View.INVISIBLE);
@@ -186,56 +163,23 @@ public class Activity_Project_Investment_Details extends Activity_Base implement
 											button.setEnabled(true);
 											button.setClickable(true);
 											button.setText("申请退出");
-											ll_exit.setVisibility(View.GONE);
-											//可申请退出：{债权可退出起始日}~{债权可退出截止日}可申请退出
-											//{起息日InterestTakeDate​}~{交割日​EndDate​-5天}可申请退出
-											//state_below.setText(format2.format(earningDate) + "~" + format2.format(dateTo) + "可申请退出");
 											break;
 										case 3:
 											button.setVisibility(View.VISIBLE);
 											button.setEnabled(true);
 											button.setClickable(true);
 											button.setText("撤销退出");
-											//可撤销退出：{债权可退出起始日}~{债权可退出截止日}可撤销退出
-											//state_below.setText(format2.format(earningDate) + "~" + format2.format(dateTo) + "可撤销退出");
 											break;
 										default:
 											break;
 									}
-									switch (bean.Phase) {//订单所处阶段 1：加入；5：加入后至开始计息前；10：开始计息；50：开始计息后至锁定到期前；100: 锁定到期
-										case 1:
-										case 5://待起息。文案显示为“将于{起息日}开始计息”
-											pb.setProgress(30);
-											//state_below.setText("将于 " + format.format(format.parse(bean.getInterestTakeDate())) + " 开始计息");
-											break;
-										case 10:
-											pb.setProgress(50);
-											break;
-										case 50:
-											pb.setProgress(70);
-											break;
-										case 100://收益完成：“已于{债权交割日}{退出方式}”。
-											//退出方式：1、收益完成（包含完成正常还款、债权转让）2、	提前退出（借款人提前还款）
-											pb.setProgress(100);
-											//state_below.setText("已于" + format.format(endDate) + bean.ReturnType);
-											break;
-//										default:
-//											pb.setProgress(10);
-//											break;
-									}
-									//（5）收益中&不可申请推出“将于{债权交割日}退出并回收本息”
-									if (bean.Phase == 50 && bean.StatusCode == 0) {
-										//state_below.setText("将于" + format.format(endDate) + "退出并回收本息");
-									}
+
 									state_below.setText(bean.StatusTips);
 									//年化利率，锁定期限，已收本息，剩余本息
-									annual_yield.setText(String.format("%.2f", bean.getRate()) + "%");
-									earnings_end.setText(bean.getDuration());//封闭期 带单位【 "Duration": 3天】
-									have.setText(String.format("%.2f", bean.ReceivedPrincipalAndInterest));
-									left.setText(String.format("%.2f", bean.WaitPrincipalAndInterest));
-
-									left_time.setText(format.format(format.parse(bean.getEndDate())));
-
+									annual_yield.setText(String.format("%.2f", bean.Rate) + "%");
+									earnings_end.setText(bean.Duration);//封闭期 带单位【 "Duration": 3天】
+									//have.setText(String.format("%.2f", bean.ReceivedPrincipalAndInterest));
+									//left.setText(String.format("%.2f", bean.WaitPrincipalAndInterest));
 								} else {
 									LogUtil.e(TAG, "请求项目详情出现错误");
 								}
@@ -322,7 +266,7 @@ public class Activity_Project_Investment_Details extends Activity_Base implement
 						Toast.makeText(Activity_Project_Investment_Details.this, "撤销成功！项目将继续持有并获得收益", Toast.LENGTH_SHORT).show();
 					} else {//申请转让，response.optString("message")
 						Activity_Tips_FaileOrSuccess.launche(Activity_Project_Investment_Details.this, Activity_Tips_FaileOrSuccess.ZR_SUCCESS,
-								"预计 "+ endTime +" 回款本息");
+								"预计 " + endTime + " 回款本息");
 					}
 					loadData();
 				}

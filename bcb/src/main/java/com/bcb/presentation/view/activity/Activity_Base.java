@@ -27,6 +27,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import static com.bcb.R.id.back_img;
+
 public class Activity_Base extends Activity {
 	public RelativeLayout layout_title;
 	public String token;
@@ -67,22 +69,22 @@ public class Activity_Base extends Activity {
 	@SuppressLint("NewApi")
 	public void setLeftTitleVisible(boolean visible) {
 		if (visible) {
-			(findViewById(R.id.back_img)).setVisibility(View.VISIBLE);
-			(findViewById(R.id.back_img)).setOnClickListener(new View.OnClickListener() {
+			(findViewById(back_img)).setVisibility(View.VISIBLE);
+			(findViewById(back_img)).setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					finish();
 				}
 			});
 		} else {
-			(findViewById(R.id.back_img)).setVisibility(View.GONE);
+			(findViewById(back_img)).setVisibility(View.GONE);
 		}
 	}
 
 	@SuppressLint("NewApi")
 	public void setLeftTitleListener(View.OnClickListener onClickListener) {
-		(findViewById(R.id.back_img)).setVisibility(View.VISIBLE);
-		(findViewById(R.id.back_img)).setOnClickListener(onClickListener);
+		(findViewById(back_img)).setVisibility(View.VISIBLE);
+		(findViewById(back_img)).setOnClickListener(onClickListener);
 	}
 
 	@SuppressLint("NewApi")

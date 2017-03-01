@@ -26,6 +26,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.bcb.R.id.back_img;
+
 public class A_MyYE extends Activity_Base {
 	
 	@BindView(R.id.layout_cz) RelativeLayout layoutcz;
@@ -42,6 +44,10 @@ public class A_MyYE extends Activity_Base {
 		ButterKnife.bind(this);
 		setLeftTitleVisible(true);
 		setTitleValue("我的余额");
+		layout_title.setBackgroundColor(getResources().getColor(R.color.red));
+		title_text.setTextColor(getResources().getColor(R.color.white));
+		dropdown.setImageResource(R.drawable.return_delault);
+		(findViewById(back_img)).setVisibility(View.GONE);
 		value_ye.setText(App.mUserWallet.getBalanceAmount()+"");
 	}
 	

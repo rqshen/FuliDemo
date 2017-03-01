@@ -33,6 +33,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.bcb.R.id.back_img;
+
 /**
  * 1、投资记录OK
  */
@@ -67,13 +69,10 @@ public class Activity_Trading_Record extends Activity_Base {
 		setBaseContentView(R.layout.activity_trading_record);
 		setLeftTitleVisible(true);
 		setTitleValue("投资记录");
-//		setRightBtnVisiable(View.INVISIBLE);
-//		setRightTitleValue("债权变更", new View.OnClickListener() {
-//			@Override
-//			public void onClick(View v) {
-//				startActivity(new Intent(Activity_Trading_Record.this, Activity_Trading_change.class));
-//			}
-//		});
+		layout_title.setBackgroundColor(getResources().getColor(R.color.red));
+		title_text.setTextColor(getResources().getColor(R.color.white));
+		dropdown.setImageResource(R.drawable.return_delault);
+		(findViewById(back_img)).setVisibility(View.GONE);
 		init();
 	}
 

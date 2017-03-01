@@ -16,6 +16,8 @@ import com.bcb.data.util.MyActivityManager;
 
 import java.util.List;
 
+import static com.bcb.R.id.back_img;
+
 /**
  * 回款计划
  */
@@ -37,14 +39,16 @@ public class A_TZ_Cheques extends Activity_Base {
 		have = (TextView) findViewById(R.id.have);
 		left = (TextView) findViewById(R.id.left);
 		Intent intent = getIntent();
-		if (intent != null ) {
+		if (intent != null) {
 			Project_Investment_Details_Bean bean = (Project_Investment_Details_Bean) intent.getSerializableExtra("data");
 			if (bean != null) {
 				//已收本息，剩余本息
-				have.setText(String.format("%.2f", bean.ReceivedPrincipalAndInterest));
-				left.setText(String.format("%.2f", bean.WaitPrincipalAndInterest));
+//				have.setText(String.format("%.2f", bean.ReceivedPrincipalAndInterest));
+//				left.setText(String.format("%.2f", bean.WaitPrincipalAndInterest));
+				have.setText("算法还在想");//有个叫Repayed值来区分已还和待还的。
+				left.setText("让后台算吧");
 				//列表
-				mList = bean.getRepaymentPlan();
+				mList = bean.RepaymentPlan;
 				if (mList != null && mList.size() > 0) {
 					null_data_layout.setVisibility(View.GONE);
 					mListView.setVisibility(View.VISIBLE);
@@ -59,6 +63,10 @@ public class A_TZ_Cheques extends Activity_Base {
 		}
 		setLeftTitleVisible(true);
 		setTitleValue("回款计划");
+		layout_title.setBackgroundColor(getResources().getColor(R.color.red));
+		title_text.setTextColor(getResources().getColor(R.color.white));
+		dropdown.setImageResource(R.drawable.return_delault);
+		(findViewById(back_img)).setVisibility(View.GONE);
 	}
 
 	class MyBaseAdapter extends BaseAdapter {
@@ -96,7 +104,7 @@ public class A_TZ_Cheques extends Activity_Base {
 				// (bean.PayDate));
 				mViewHolder.tv_name.setText(bean.Description.replaceFirst("期", "期\n"));
 				mViewHolder.tv_time.setText(String.format("%.2f", bean.Principal));
-				mViewHolder.tv_monery.setText(String.format("%.2f", bean.Inverest));
+				mViewHolder.tv_monery.setText(String.format("%.2f", bean.Interest));
 			}
 			return convertView;
 		}

@@ -239,6 +239,7 @@ public class Frag_TZJL_2 extends Frag_Base implements AdapterView.OnItemClickLis
 	//******************************************************************************************
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//投资详情
+		//投资详情
+		Activity_Project_Investment_Details.launche(ctx, recordsBeans.get(position).OrderNo + "", Status);
 	}
 }

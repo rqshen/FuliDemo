@@ -100,11 +100,11 @@ public class A_ZZC extends Activity_Base {
 	@OnClick(R.id.iv)
 	public void trans(View view) {
 		if (isShow) {
-			iv.setImageResource(R.drawable.r_error_3x);
+			iv.setImageResource(R.drawable.zzc_up);
 			lj.setVisibility(View.VISIBLE);
 		} else {
 			lj.setVisibility(View.GONE);
-			iv.setImageResource(R.drawable.r_right_3x);
+			iv.setImageResource(R.drawable.zzc_down);
 		}
 		isShow = !isShow;
 	}
