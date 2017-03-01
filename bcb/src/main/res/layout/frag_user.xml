@@ -145,8 +145,8 @@
                         android:layout_height="wrap_content"
                         android:gravity="center_horizontal"
                         android:orientation="vertical"
-                        android:paddingBottom="25dp"
-                        android:paddingTop="25dp">
+                        android:paddingBottom="20dp"
+                        android:paddingTop="20dp">
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -173,7 +173,7 @@
                             android:id="@+id/value_earn"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="20dp"
+                            android:layout_marginTop="10dp"
                             android:gravity="center"
                             android:text="@string/value_zero"
                             android:textColor="#424954"
@@ -183,7 +183,7 @@
                             android:id="@+id/value_earn_all"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="20dp"
+                            android:layout_marginTop="10dp"
                             android:gravity="center"
                             android:text="累计收益0.00元"
                             android:textColor="#ff4c4c"
@@ -581,6 +581,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
+                            android:layout_marginRight="8dp"
                             android:layout_toLeftOf="@id/user_image_ind01"
                             android:gravity="center"
                             android:text="@string/value_qqvip"
