@@ -99,6 +99,12 @@ public class Activity_CPXQ extends Activity_Base implements View.OnTouchListener
 		layout_title.setBackgroundColor(getResources().getColor(R.color.red));
 		title_text.setTextColor(getResources().getColor(R.color.white));
 		dropdown.setImageResource(R.drawable.return_delault);
+		dropdown.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				finish();
+			}
+		});
 		(findViewById(back_img)).setVisibility(View.GONE);
 		requestCPInfo();
 		ProgressDialogrUtils.show(this, "正在获取数据，请稍后…");

@@ -75,6 +75,12 @@ public class Activity_Project_Investment_Details extends Activity_Base implement
 		layout_title.setBackgroundColor(getResources().getColor(R.color.red));
 		title_text.setTextColor(getResources().getColor(R.color.white));
 		dropdown.setImageResource(R.drawable.return_delault);
+		dropdown.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				finish();
+			}
+		});
 		(findViewById(back_img)).setVisibility(View.GONE);
 		OrderNo = getIntent().getStringExtra("OrderNo");
 		Status = getIntent().getIntExtra("Status", 1);

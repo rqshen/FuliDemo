@@ -66,6 +66,12 @@ public class A_TZ_Cheques extends Activity_Base {
 		layout_title.setBackgroundColor(getResources().getColor(R.color.red));
 		title_text.setTextColor(getResources().getColor(R.color.white));
 		dropdown.setImageResource(R.drawable.return_delault);
+		dropdown.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				finish();
+			}
+		});
 		(findViewById(back_img)).setVisibility(View.GONE);
 	}
 
