@@ -42,7 +42,7 @@ public class Activity_Project_Investment_Details extends Activity_Base implement
 	private static final String TAG = "bqt";
 	private String OrderNo;
 	private TextView top_amount, earning_expected, tv_id_number, state_title, state_below;
-	private TextView  earningtime;
+	private TextView earningtime;
 	private TextView annual_yield, earnings_end, have, left;
 	LinearLayout ll_id_number;
 	private RelativeLayout rl_hk, rl_zr, tourl;
@@ -123,7 +123,7 @@ public class Activity_Project_Investment_Details extends Activity_Base implement
 
 		String url = UrlsOne.ZXB_XQ;
 		if (Status == 0) url = UrlsOne.WYB_XQ;//打包，稳赢
-		LogUtil.i("bqt", "【地址】"+url);
+		LogUtil.i("bqt", "【地址】" + url);
 
 		BcbJsonRequest jsonRequest = new BcbJsonRequest(url, obj, TokenUtil.getEncodeToken(this), new
 				BcbRequest.BcbCallBack<JSONObject>() {
@@ -139,7 +139,7 @@ public class Activity_Project_Investment_Details extends Activity_Base implement
 									//订单号
 									tv_id_number.setText(OrderNo);
 									//状态
-									state_title.setText(bean.StatusName+"");
+									state_title.setText(bean.StatusName + "");
 									//在投本金，预期收益，已获收益
 									top_amount.setText(String.format("%.2f", bean.OrderAmount));
 									earning_expected.setText(String.format("%.2f", bean.TotalInterest));
@@ -220,13 +220,15 @@ public class Activity_Project_Investment_Details extends Activity_Base implement
 			case R.id.rl_hk:
 				Intent intent = new Intent(Activity_Project_Investment_Details.this, A_TZ_Cheques.class);
 				intent.putExtra("data", bean);
+				intent.putExtra("Status", Status);
 				startActivity(intent);
 				break;
 			case R.id.rl_zr:
 				Activity_Rading_Record.launche(this, OrderNo);
 				break;
 			case R.id.button:
-				showDialog();
+				if (Status == 0) requestZR(UrlsOne.WYB_ZR);
+				else showDialog();
 				break;
 		}
 	}
@@ -252,7 +254,7 @@ public class Activity_Project_Investment_Details extends Activity_Base implement
 	}
 
 	/**
-	 * 申请或取消转让
+	 * 申请或取消转让=====================打开打包标后点击退出续约的接口和之前的不一样！
 	 */
 	private void requestZR(String url) {
 		LogUtil.i("bqt", "【Activity_Trading_Cancle】【onResponse】路径" + url);

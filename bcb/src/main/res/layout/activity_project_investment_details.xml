@@ -173,7 +173,6 @@
                         android:layout_height="fill_parent"
                         android:layout_marginLeft="20dp"
                         android:gravity="right"
-                        android:text="----"
                         android:textColor="#666"
                         android:textSize="@dimen/main_text_default"/>
                 </LinearLayout>

@@ -43,6 +43,8 @@ public class Project_Investment_Details_Bean implements Serializable {
 	public String ExpireDate;//年化利率
 	public int StatusCode;// 0：不能申请转让 1：已完成 2：可以转让 3：转让中
 	public int Phase;// 订单所处阶段 1：加入 5：加入后至开始计息前 10：开始计息 50：开始计息后至锁定到期前 100: 锁定到期
+	public String RepaymentHadPeriod;//已收益期数
+	public String RepaymentAllPeriod;//总收益期数
 	public List<Plar> RepaymentPlan;
 	
 	public static class Plar implements Serializable {
@@ -60,7 +62,6 @@ public class Project_Investment_Details_Bean implements Serializable {
 		public int Period;//期数
 		public float Principal;//本金
 		public int Repayed;//1为已还，0为未还
-
 	}
 
 }

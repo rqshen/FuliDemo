@@ -8,8 +8,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.media.AudioManager;
-import android.media.SoundPool;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -78,8 +76,6 @@ import com.bcb.presentation.view.custom.PullableView.PullableScrollView;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 
 import de.greenrobot.event.EventBus;
@@ -193,13 +189,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 		view.findViewById(R.id.ll_test)
 				.setOnClickListener(this);
 		//加入公司
-//		joinCompany = (ImageView) view.findViewById(R.id.join_company);
 		layout_scrollview = (PullableScrollView) view.findViewById(R.id.layout_scrollview);
-//		joinCompany.setOnClickListener(this);
-
-		//已经加入公司的LinearLayout及其元素
-//		user_company_layout = (LinearLayout) view.findViewById(R.id.user_company_layout);
-//		user_company_layout.setVisibility(View.GONE);
 		user_join_name = (TextView) view.findViewById(R.id.user_join_name);
 
 		user_comany_shortname = (TextView) view.findViewById(R.id.user_comany_shortname);
@@ -293,18 +283,13 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 				refreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
 			}
 		});
-
-		requestUserDetailInfo();
-		requestUserWallet();
-		setupJoinCompanyMessage();
-		initSoundPool();
+		refreshLayout.autoRefresh();
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
 		LogUtil.i("bqt", "【Frag_User--onResume】");
-		showData();
 		if (mUserDetailInfo != null && mUserDetailInfo.HasOpenEgg) iv_red.setVisibility(View.INVISIBLE);
 		else iv_red.setVisibility(View.VISIBLE);
 	}
@@ -374,12 +359,8 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 		if (App.mUserDetailInfo == null) return;
 		user_comany_shortname.setVisibility(View.VISIBLE);
 		iv_head.setImageDrawable(getResources().getDrawable(R.drawable.iv_my_head));
-		//如果加入公司信息不为空并且状态值为10(通过)的时候，则显示用户名和加入公司的缩写
-//		if (App.mUserDetailInfo.MyCompany != null) {
 		//审核通过
 		if (App.mUserDetailInfo.MyCompany != null && !TextUtils.isEmpty(mUserDetailInfo.MyCompany.getShortName())) {
-//				joinCompany.setVisibility(View.GONE);
-//				user_company_layout.setVisibility(View.VISIBLE);
 			user_comany_shortname.setText(mUserDetailInfo.MyCompany.getShortName());
 			user_join_name.setText("您好，" + mUserDetailInfo.UserName);
 			user_comany_shortname.setCompoundDrawablesWithIntrinsicBounds(//
@@ -388,20 +369,8 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 			user_comany_shortname.setText("加入我的公司拿员工专属福利>");
 			user_comany_shortname.setCompoundDrawables(null, null, null, null);
 			user_join_name.setText("您好，" + App.saveUserInfo.getLocalPhone());
-//				joinCompany.setVisibility(View.VISIBLE);
-//				user_company_layout.setVisibility(View.GONE);
 		}
-//		}
-		//如果加入公司信息为空的时候，则要判断是否要隐藏Banner
-//		else {
-//			user_company_layout.setVisibility(View.GONE);
-//		//根据标志为判断是否隐藏加入公司Banner
-//			if (App.viewJoinBanner) {
-//				joinCompany.setVisibility(View.VISIBLE);
-//			} else joinCompany.setVisibility(View.GONE);
-//		}
 		layout_scrollview.scrollTo(0, 0);
-		//        layout_scrollview.fullScroll(ScrollView.FOCUS_UP);
 	}
 
 	//******************************************************************************************
@@ -591,28 +560,6 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 		}
 	}
 
-	//短促音
-	private SoundPool soundPool;
-	private HashMap<Integer, Integer> soundID;
-
-	/**
-	 * 初始化音乐池
-	 */
-	public void initSoundPool() {//初始化声音池
-		soundPool = new SoundPool(
-				1,     //maxStreams参数，该参数为设置同时能够播放多少音效
-				AudioManager.STREAM_MUSIC,    //streamType参数，该参数设置音频类型，在游戏中通常设置为：STREAM_MUSIC
-				0    //srcQuality参数，该参数设置音频文件的质量，目前还没有效果，设置为0为默认值。
-		);
-
-		soundID = new HashMap<>();
-		try {
-			soundID.put(1, soundPool.load(ctx.getAssets().openFd("welfare.wav"), 1));  //需要捕获IO异常
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-	}
 
 	//加入公司
 	private void toJoinCompany() {

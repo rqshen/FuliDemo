@@ -74,6 +74,10 @@ public class UrlsOne {
 	public static final String REQUESTZR = host + "/api/v2.0/a69000ac1b78";//申请债权转让
 	public static final String UNREQUESTZR = host + "/api/v2.0/a69100a6d8a4";//取消债权转让
 
+	public static final String WYB_ZR = host + "/api/v2.5/a71d01130432";//转让
+
+
+
 	//债权转让信息
 	public static final String CLAIMCONVEYDETAIL = host + "/api/v2.0/a69a00bc7e0f";
 
