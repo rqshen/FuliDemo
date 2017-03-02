@@ -155,6 +155,9 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, Adapte
 				if (HttpUtils.isNetworkConnected(ctx)) {
 					loadBanner();
 					loadMainListViewData();
+					if (App.saveUserInfo.getAccess_Token() == null) {
+						iv_zc.setVisibility(View.VISIBLE);
+					} else iv_zc.setVisibility(View.GONE);
 				} else {
 					ToastUtil.alert(ctx, "网络异常，请稍后再试");
 					refreshLayout.refreshFinish(PullToRefreshLayout.FAIL);
