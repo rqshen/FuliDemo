@@ -65,8 +65,8 @@
             android:layout_toRightOf="@+id/iv_cz"
             android:gravity="center"
             android:text="充值"
-            android:textColor="@color/txt_gray"
-            android:textSize="@dimen/main_text_small"/>
+            android:textColor="#424954"
+            android:textSize="16sp"/>
 
         <ImageView
             android:id="@+id/user_image_cz"
@@ -116,8 +116,8 @@
             android:layout_toRightOf="@+id/iv_tx"
             android:gravity="center"
             android:text="提现"
-            android:textColor="@color/txt_gray"
-            android:textSize="@dimen/main_text_small"/>
+            android:textColor="#424954"
+            android:textSize="16sp"/>
 
         <ImageView
             android:id="@+id/user_image_tx"
@@ -131,9 +131,8 @@
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@id/user_image_tx"
             android:gravity="center"
-            android:text=""
-            android:textColor="@color/txt_gray"
-            android:textSize="@dimen/main_text_small"/>
+            android:textColor="#424954"
+            android:textSize="16sp"/>
     </RelativeLayout>
 
     <View
@@ -167,8 +166,8 @@
             android:layout_toRightOf="@+id/iv_mx"
             android:gravity="center"
             android:text="账单明细"
-            android:textColor="@color/txt_gray"
-            android:textSize="@dimen/main_text_small"/>
+            android:textColor="#424954"
+            android:textSize="16sp"/>
 
         <ImageView
             android:id="@+id/user_image_mx"
@@ -183,7 +182,7 @@
             android:layout_toLeftOf="@id/user_image_mx"
             android:gravity="center"
             android:text=""
-            android:textColor="@color/txt_gray"
-            android:textSize="@dimen/main_text_small"/>
+            android:textColor="#424954"
+            android:textSize="16sp"/>
     </RelativeLayout>
 </LinearLayout>

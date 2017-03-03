@@ -37,8 +37,8 @@
             android:layout_toRightOf="@+id/iv_car"
             android:gravity="center"
             android:text="我的车险"
-            android:textColor="@color/txt_gray"
-            android:textSize="@dimen/main_text_small"/>
+            android:textColor="#424954"
+            android:textSize="16sp"/>
 
         <ImageView
             android:id="@+id/user_image_car"
@@ -88,8 +88,8 @@
             android:layout_toRightOf="@+id/iv_security"
             android:gravity="center"
             android:text="员工团险"
-            android:textColor="@color/txt_gray"
-            android:textSize="@dimen/main_text_small"/>
+            android:textColor="#424954"
+            android:textSize="16sp"/>
 
         <ImageView
             android:id="@+id/user_image_security"
