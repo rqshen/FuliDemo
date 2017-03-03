@@ -8,8 +8,8 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="#e5e5e5"/>
+        android:layout_height="0.5dp"
+        android:background="#eee"/>
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -93,7 +93,8 @@
         bqt:progress_reached_bar_height="1dp"
         bqt:progress_reached_color="#4499f8"
         bqt:progress_text_size="12sp"
+        android:progress="50"
         bqt:progress_unreached_bar_height="1dp"
-        bqt:progress_unreached_color="#999"/>
+        bqt:progress_unreached_color="#f5f6f8"/>
 
 </RelativeLayout>

@@ -37,7 +37,7 @@
                         <com.bcb.presentation.view.custom.PagerIndicator.AutoLoopViewPager
                             android:id="@+id/autoLoop"
                             android:layout_width="match_parent"
-                            android:layout_height="155dp"
+                            android:layout_height="150dp"
                             android:background="@drawable/banner01"/>
 
                         <com.bcb.presentation.view.custom.PagerIndicator.CirclePageIndicator
@@ -143,8 +143,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:cacheColorHint="@android:color/black"
-                        android:divider="@color/background"
-                        android:dividerHeight="1px"
+
                         android:fastScrollEnabled="false"
                         android:listSelector="@drawable/list_selector"
                         android:scrollbars="none"
@@ -154,10 +153,9 @@
                         android:id="@+id/announce_listView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="1px"
+
                         android:cacheColorHint="@android:color/black"
-                        android:divider="@color/background"
-                        android:dividerHeight="1px"
+
                         android:fastScrollEnabled="false"
                         android:listSelector="@drawable/list_selector"
                         android:scrollbars="none"/>
