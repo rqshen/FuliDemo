@@ -28,7 +28,7 @@
             android:layout_marginTop="15dp"
             android:gravity="center"
             android:singleLine="true"
-            android:text="注册福利金融账户享受理财"
+            android:text="注册福利金融账户"
             android:textColor="#424954"
             android:textSize="15sp"/>
 
@@ -256,7 +256,7 @@
             android:gravity="center"
             android:singleLine="true"
             android:text="已有账号？去登陆"
-            android:textColor="#424954"
+            android:textColor="#999"
             android:textSize="15sp"/>
 
     </LinearLayout>

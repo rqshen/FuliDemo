@@ -48,19 +48,18 @@
 
                         <!-- 用户名 -->
                         <TextView
-
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:text="福利借款"
                             android:textColor="#424954"
-                            android:textSize="15sp"/>
+                            android:textSize="16sp"/>
                         <!-- 公司缩写 -->
                         <TextView
                             android:id="@+id/jk"
                             android:layout_width="180dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="11dp"
+                            android:layout_marginTop="8dp"
                             android:gravity="center_vertical"
                             android:maxLines="1"
                             android:text="广州百财帮网络金融信息服务有限公司"
@@ -108,13 +107,13 @@
                             android:layout_gravity="center_vertical"
                             android:text="车险内购"
                             android:textColor="#424954"
-                            android:textSize="15sp"/>
+                            android:textSize="16sp"/>
                         <!-- 公司缩写 -->
                         <TextView
                             android:id="@+id/cx"
                             android:layout_width="180dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="11dp"
+                            android:layout_marginTop="8dp"
                             android:gravity="center_vertical"
                             android:maxLines="1"
                             android:text="广州百财帮网络金融信息服务有限公司"
@@ -161,13 +160,13 @@
                             android:layout_gravity="center_vertical"
                             android:text="福利理财"
                             android:textColor="#424954"
-                            android:textSize="15sp"/>
+                            android:textSize="16sp"/>
                         <!-- 公司缩写 -->
                         <TextView
                             android:id="@+id/lc"
                             android:layout_width="180dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="11dp"
+                            android:layout_marginTop="8dp"
                             android:gravity="center_vertical"
                             android:maxLines="1"
                             android:text="广州百财帮网络金融信息服务有限公司"
@@ -214,13 +213,13 @@
                             android:layout_gravity="center_vertical"
                             android:text="社保/公积金查询"
                             android:textColor="#424954"
-                            android:textSize="15sp"/>
+                            android:textSize="16sp"/>
                         <!-- 公司缩写 -->
                         <TextView
                             android:id="@+id/gjj"
                             android:layout_width="180dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="11dp"
+                            android:layout_marginTop="8dp"
                             android:gravity="center_vertical"
                             android:maxLines="1"
                             android:text="广州百财帮网络金融信息服务有限公司"
@@ -268,13 +267,13 @@
                             android:layout_gravity="center_vertical"
                             android:text="个人征信记录查询"
                             android:textColor="#424954"
-                            android:textSize="15sp"/>
+                            android:textSize="16sp"/>
                         <!-- 公司缩写 -->
                         <TextView
                             android:id="@+id/zx"
                             android:layout_width="180dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="11dp"
+                            android:layout_marginTop="8dp"
                             android:gravity="center_vertical"
                             android:maxLines="1"
                             android:text="广州百财帮网络金融信息服务有限公司"
@@ -321,13 +320,13 @@
                             android:layout_gravity="center_vertical"
                             android:text="聚爱公益"
                             android:textColor="#424954"
-                            android:textSize="15sp"/>
+                            android:textSize="16sp"/>
                         <!-- 公司缩写 -->
                         <TextView
                             android:id="@+id/ja"
                             android:layout_width="180dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="11dp"
+                            android:layout_marginTop="8dp"
                             android:gravity="center_vertical"
                             android:maxLines="1"
                             android:text="广州百财帮网络金融信息服务有限公司"

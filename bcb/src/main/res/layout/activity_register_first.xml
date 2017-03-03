@@ -26,7 +26,7 @@
             android:layout_marginTop="15dp"
             android:gravity="center"
             android:singleLine="true"
-            android:text="注册福利金融账户享受理财"
+            android:text="注册福利金融账户"
             android:textColor="#424954"
             android:textSize="15sp"/>
 
@@ -50,10 +50,9 @@
                     android:background="@null"
                     android:digits="0123456789"
                     android:gravity="center"
-                    android:hint="请输入注册电话"
+                    android:hint="请输入您的手机号码"
                     android:inputType="phone"
                     android:maxLength="11"
-                    android:paddingLeft="35dip"
                     android:singleLine="true"
                     android:textColor="#424954"
                     android:textColorHint="@color/txt_gray"
@@ -110,7 +109,7 @@
             android:gravity="center"
             android:singleLine="true"
             android:text="已有账号？去登陆"
-            android:textColor="#424954"
+            android:textColor="#999"
             android:textSize="15sp"/>
     </LinearLayout>
 

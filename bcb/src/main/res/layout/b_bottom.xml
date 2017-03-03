@@ -20,7 +20,7 @@
         android:layout_below="@+id/iv_b_1"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:text="上市公司、互联网金融专项资金战略入股"
+        android:text="上市公司、互联网金融专项基金战略投资"
         android:textColor="#999"
         android:textSize="12sp"/>
 

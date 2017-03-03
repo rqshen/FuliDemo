@@ -17,12 +17,12 @@ android:layout_centerInParent="true"
 
         <ImageView
             android:id="@+id/iv_1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
             android:layout_marginBottom="10dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="40dp"
             android:background="@drawable/r_logo_3x"/>
 
         <TextView
@@ -41,13 +41,15 @@ android:layout_centerInParent="true"
             android:layout_below="@+id/iv_b_1"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="15dp"
-            android:text="上市公司、互联网金融专项资金战略入股"
+            android:drawableLeft="@drawable/r_ren_zheng"
+            android:drawablePadding="5dp"
+            android:text="有米科技、七煋瓢虫互联网金融专项基金战略投资"
             android:textColor="#999"
             android:textSize="12sp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="58dp"
+            android:layout_height="68dp"
             android:layout_margin="10dp"
             android:orientation="horizontal">
 
@@ -55,7 +57,7 @@ android:layout_centerInParent="true"
                 android:id="@+id/dl"
                 android:layout_width="0dp"
                 android:layout_height="58dp"
-                android:layout_weight="1"
+                android:layout_weight="50"
                 android:background="@drawable/r_button"
                 android:text="登录"
                 android:textColor="@color/white"
@@ -65,8 +67,8 @@ android:layout_centerInParent="true"
                 android:id="@+id/zc"
                 android:layout_width="0dp"
                 android:layout_height="45dp"
-                android:layout_marginLeft="20dp"
-                android:layout_weight="1"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="45"
                 android:background="@drawable/button_stroke_red2"
                 android:text="注册"
                 android:textColor="@color/red"
