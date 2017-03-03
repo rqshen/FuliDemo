@@ -487,7 +487,7 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, Adapte
 		switch (v.getId()) {
 			case R.id.ll_car:
 				if (mUserDetailInfo == null || TextUtils.isEmpty(mUserDetailInfo.CarInsuranceIndexPage)) {
-					Toast.makeText(ctx, "网络异常，请刷新后重试", Toast.LENGTH_SHORT).show();
+					Toast.makeText(ctx, "您尚未注册", Toast.LENGTH_SHORT).show();
 				} else {
 					Activity_WebView_Upload.launche(ctx, "车险内购", mUserDetailInfo.CarInsuranceIndexPage);
 				}
@@ -663,11 +663,11 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, Adapte
 	public void onResume() {
 		super.onResume();
 		showItemVisible();
-		boolean che = mUserDetailInfo == null || TextUtils.isEmpty(mUserDetailInfo.CarInsuranceIndexPage);
-		LogUtil.i("bqt", "【进入时是否没有获取到车险】" + che);
-		if (che) {
-			ll_car.setVisibility(View.GONE);
-		}
+//		boolean che = mUserDetailInfo == null || TextUtils.isEmpty(mUserDetailInfo.CarInsuranceIndexPage);
+//		LogUtil.i("bqt", "【进入时是否没有获取到车险】" + che);
+//		if (che) {
+//			ll_car.setVisibility(View.GONE);
+//		}
 	}
 
 	/**
@@ -689,13 +689,13 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, Adapte
 	}
 
 	public void onEventMainThread(StringEventBusBean event) {
-		if (event.getContent().equals("CXGONE")) {
-			ll_car.setVisibility(View.GONE);
-			LogUtil.i("bqt", "【隐藏车险】");
-		} else if (event.getContent().equals("CXVISIBLE")) {
-			ll_car.setVisibility(View.VISIBLE);
-			LogUtil.i("bqt", "【显示车险】");
-		}
+//		if (event.getContent().equals("CXGONE")) {
+//			ll_car.setVisibility(View.GONE);
+//			LogUtil.i("bqt", "【隐藏车险】");
+//		} else if (event.getContent().equals("CXVISIBLE")) {
+//			ll_car.setVisibility(View.VISIBLE);
+//			LogUtil.i("bqt", "【显示车险】");
+//		}
 	}
 
 	@Override
