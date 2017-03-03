@@ -73,6 +73,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:paddingBottom="20dp"
+                    android:gravity="center_vertical"
                     android:paddingTop="20dp">
                     <!-- 投资总额 -->
                     <LinearLayout
@@ -95,14 +96,14 @@
                             android:layout_height="wrap_content"
                             android:paddingTop="8dp"
                             android:singleLine="true"
-                            android:text=""
+                            android:text="1111"
                             android:textColor="@color/white"
                             android:textSize="18sp"/>
                     </LinearLayout>
 
                     <View
                         android:layout_width="1px"
-                        android:layout_height="match_parent"
+                        android:layout_height="20dp"
                         android:background="@color/white"/>
 
                     <!-- 累计收益 -->

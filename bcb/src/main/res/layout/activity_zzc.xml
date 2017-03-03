@@ -238,7 +238,7 @@
             android:layout_centerVertical="true"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
-            android:src="@drawable/zzc_up"
+            android:src="@drawable/zzc_down"
             />
 
     </RelativeLayout>
@@ -253,6 +253,7 @@
         android:id="@+id/lj"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         android:orientation="vertical">
 
 

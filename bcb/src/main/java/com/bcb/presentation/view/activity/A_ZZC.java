@@ -67,7 +67,7 @@ public class A_ZZC extends Activity_Base {
 	 */
 	private void initPieChart() {
 		//柱状图数据类
-		int[] mColors = {0xFFCC0000, 0xFF00CC00, 0xFF0000CC, 0xFF888800,};//, 0xFF880088, 0xFF008888
+		int[] mColors = {0xFFfb4977, 0xFFffc760, 0xFF6fe621, 0xFF4fccff,};//, 0xFF880088, 0xFF008888
 		double[] values = {App.mUserWallet.BalanceAmount, App.mUserWallet.LeftPrincipal,//
 				App.mUserWallet.LeftInterest, App.mUserWallet.SecurityAmount,};
 		String[] mNames = {"账户余额", "在投本金", "应计收益", "借款保证金",};
@@ -95,7 +95,7 @@ public class A_ZZC extends Activity_Base {
 		pieChart.setAxisColor(Color.WHITE);//设置扇形图上文字颜色
 	}
 
-	boolean isShow = false;
+	boolean isShow = true;
 
 	@OnClick(R.id.iv)
 	public void trans(View view) {
