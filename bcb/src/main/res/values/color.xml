@@ -45,7 +45,8 @@
     <!-- 公司名称黄色 -->
     <color name="company_name">#FF8E3A</color>
     <!-- 整体的红色值 -->
-    <color name="red">#DB3838</color>
+    <color name="red">#ff4c4c</color>
+    <color name="red2">#DB3838</color>
     <!-- 买标简介页面的绿色 -->
     <color name="project_green">#00B700</color>
     <color name="project_button_gray">#888888</color>

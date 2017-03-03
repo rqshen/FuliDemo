@@ -71,9 +71,9 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal"
                     android:paddingBottom="20dp"
-                    android:gravity="center_vertical"
                     android:paddingTop="20dp">
                     <!-- 投资总额 -->
                     <LinearLayout
@@ -94,9 +94,8 @@
                             android:id="@+id/sdq"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:paddingTop="8dp"
+                            android:paddingTop="4dp"
                             android:singleLine="true"
-                            android:text="1111"
                             android:textColor="@color/white"
                             android:textSize="18sp"/>
                     </LinearLayout>
@@ -125,7 +124,7 @@
                             android:id="@+id/ktje"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:paddingTop="8dp"
+                            android:paddingTop="4dp"
                             android:singleLine="true"
                             android:textColor="@color/white"
                             android:textSize="18sp"/>
@@ -144,8 +143,8 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#dbdbdb"/>
+                android:layout_height="0.5dp"
+                android:background="@color/linegray"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -224,7 +223,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="7dp">
+                android:layout_marginTop="3dp">
 
                 <TextView
                     android:id="@+id/qxr"
@@ -290,8 +289,8 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:background="#dbdbdb"/>
+                android:layout_height="0.5dp"
+                android:background="@color/linegray"/>
 
             <LinearLayout
                 android:id="@+id/ll_buy2"

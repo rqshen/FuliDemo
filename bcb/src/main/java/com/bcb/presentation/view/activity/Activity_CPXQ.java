@@ -126,7 +126,7 @@ public class Activity_CPXQ extends Activity_Base implements View.OnTouchListener
 			buy.setText("售罄");
 			buy.setTextColor(0xff999999);
 			buy.setEnabled(false);
-			buy.setBackgroundColor(0xccdbdbdb);
+			buy.setBackgroundColor(0xffe5e5e5);
 		} else {
 			buy.setText("立即购买");
 			buy.setEnabled(true);
