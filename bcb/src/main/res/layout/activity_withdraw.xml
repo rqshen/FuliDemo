@@ -403,6 +403,7 @@
                 android:gravity="center"
                 android:text="立即提现"
                 android:textColor="@color/white"
+                style="?android:attr/borderlessButtonStyle"
                 android:textSize="@dimen/main_text_default"/>
 
             <RelativeLayout
