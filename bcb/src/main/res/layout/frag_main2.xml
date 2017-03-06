@@ -90,10 +90,10 @@
 
                     <!-- 精品项目标题 -->
                     <LinearLayout
-                        android:layout_marginTop="10dp"
                         android:id="@+id/boutique_layout"
                         android:layout_width="fill_parent"
                         android:layout_height="35dp"
+                        android:layout_marginTop="10dp"
                         android:background="@color/white"
                         android:gravity="center_vertical"
                         android:orientation="horizontal">
@@ -113,16 +113,17 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:paddingLeft="8dp"
+                            android:paddingRight="30dp"
                             android:text="每天10:00/16:00更新"
                             android:textColor="#999"
-                            android:paddingRight="30dp"
                             android:textSize="12sp"/>
+
                         <TextView
                             android:id="@+id/tv_more"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="right"
                             android:layout_marginRight="15dp"
+                            android:gravity="right"
                             android:paddingLeft="8dp"
                             android:text="更多理财产品>"
                             android:textColor="#ff4c4c"
@@ -136,28 +137,35 @@
                             android:textColor="@color/txt_gray"
                             android:textSize="@dimen/main_text_small"/>
                     </LinearLayout>
-
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1px"
+                        android:background="#eee"/>
                     <!-- 精品标 -->
                     <com.bcb.data.util.MyListView
                         android:id="@+id/boutique_listview"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:cacheColorHint="@android:color/black"
 
+                        android:divider="#eee"
+
+                        android:dividerHeight="0.5dp"
                         android:fastScrollEnabled="false"
-                        android:listSelector="@drawable/list_selector"
                         android:scrollbars="none"
                         android:visibility="visible"/>
+
                     <!-- 新标预告 -->
                     <com.bcb.data.util.MyListView
                         android:id="@+id/announce_listView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
 
-                        android:cacheColorHint="@android:color/black"
+                        android:divider="#eee"
+
+                        android:dividerHeight="0.5dp"
 
                         android:fastScrollEnabled="false"
-                        android:listSelector="@drawable/list_selector"
+
                         android:scrollbars="none"/>
 
                     <!-- 如果新标预告不存在的时候才初始化该列表 -->
@@ -167,7 +175,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:cacheColorHint="@android:color/black"
-                        android:divider="@color/background"
+                        android:divider="#0000"
                         android:dividerHeight="10dp"
                         android:fastScrollEnabled="false"
                         android:listSelector="@drawable/list_selector"
