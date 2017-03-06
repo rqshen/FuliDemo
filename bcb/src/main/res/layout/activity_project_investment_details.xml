@@ -265,7 +265,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
-                android:background="@color/linegray"/>
+                android:background="@color/background"/>
 
 
 
@@ -334,7 +334,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
-                android:background="@color/linegray"/>
+                android:background="@color/background"/>
 
             <RelativeLayout
                 android:id="@+id/rl_zr"

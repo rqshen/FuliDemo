@@ -21,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/buy"
-        android:background="@color/background"
+        android:background="@color/white"
         android:scrollbars="none">
 
         <LinearLayout
@@ -256,7 +256,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
                 android:layout_marginTop="40dp"
-                android:background="#dbdbdb"/>
+                android:background="@color/background"/>
 
             <LinearLayout
                 android:id="@+id/ll_buy1"
@@ -324,7 +324,7 @@
                 android:id="@+id/more"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:background="#dbdbdb"
+                android:background="@color/background"
                 android:gravity="center"
                 android:padding="15dp"
                 android:singleLine="true"

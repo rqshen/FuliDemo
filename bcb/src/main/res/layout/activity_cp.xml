@@ -3,35 +3,38 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/white">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#eee"/>
     <!-- Tab标签 -->
     <LinearLayout
         android:id="@+id/ll_viewpager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="36dp"
         android:layout_alignParentTop="true"
-        android:orientation="horizontal"
-        android:paddingBottom="5dip"
-        android:paddingTop="10dip">
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/tv_unused"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1.0"
             android:gravity="center"
             android:text="稳盈宝"
             android:textColor="@color/red"
-            android:textSize="@dimen/main_text_large"/>
+            android:textSize="14sp"/>
 
         <TextView
             android:id="@+id/tv_used"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1.0"
             android:gravity="center"
             android:text="涨薪宝"
             android:textColor="@color/txt_gray"
-            android:textSize="@dimen/main_text_large"/>
+            android:textSize="14sp"/>
 
     </LinearLayout>
     <!-- 标签底部指示图片 -->
@@ -40,7 +43,8 @@
         android:id="@+id/ll_cursor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/ll_viewpager">
+        android:layout_below="@id/ll_viewpager"
+        android:orientation="vertical">
 
         <ImageView
             android:id="@+id/red"
@@ -49,7 +53,12 @@
             android:scaleType="matrix"
             android:src="@color/red"/>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#eee"/>
     </LinearLayout>
+
 
     <android.support.v4.view.ViewPager
         android:id="@+id/vp"

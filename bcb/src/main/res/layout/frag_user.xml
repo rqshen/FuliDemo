@@ -34,7 +34,7 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
-                        android:background="@color/background"/>
+                        android:background="@color/linegray"/>
                     <!-- 已经加入公司显示的信息 -->
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -134,7 +134,7 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
-                        android:background="@color/background"/>
+                        android:background="@color/linegray"/>
 
 
                     <!-- 总资产,累计收益 -->
@@ -306,7 +306,7 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
-                        android:background="@color/background"/>
+                        android:background="@color/linegray"/>
 
                     <RelativeLayout
                         android:id="@+id/borrow_money"
@@ -346,7 +346,7 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
-                        android:background="@color/background"/>
+                        android:background="@color/linegray"/>
 
                     <RelativeLayout
                         android:id="@+id/layout_security"
@@ -441,7 +441,7 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
-                        android:background="@color/background"/>
+                        android:background="@color/linegray"/>
 
                     <RelativeLayout
                         android:id="@+id/layout_update"
@@ -542,7 +542,7 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
-                        android:background="@color/background"/>
+                        android:background="@color/linegray"/>
 
                     <RelativeLayout
                         android:id="@+id/layout_customer_service"
@@ -611,7 +611,7 @@
                             android:layout_alignParentLeft="true"
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="22dp"
-                            android:src="@drawable/iv_my_kf"/>
+                            android:src="@drawable/iv_my_about"/>
 
                         <TextView
                             android:layout_width="wrap_content"

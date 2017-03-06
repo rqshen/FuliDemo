@@ -11,6 +11,7 @@
         android:background="@color/red"
         android:orientation="horizontal"
         android:paddingBottom="20dp"
+        android:gravity="center_vertical"
         android:paddingTop="26dp">
         <!-- 投资总额 -->
         <LinearLayout
@@ -31,7 +32,7 @@
                 android:id="@+id/ztbj"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="15dp"
+                android:paddingTop="5dp"
                 android:text="0.00"
                 android:textColor="@color/white"
                 android:textSize="18sp"/>
@@ -39,7 +40,7 @@
 
         <View
             android:layout_width="1px"
-            android:layout_height="match_parent"
+            android:layout_height="18dp"
             android:background="@color/white"/>
 
         <!-- 累计收益 -->
@@ -61,7 +62,7 @@
                 android:id="@+id/yjsy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="15dp"
+                android:paddingTop="5dp"
                 android:text="0.00"
                 android:textColor="@color/white"
                 android:textSize="18sp"/>
@@ -71,15 +72,16 @@
     <LinearLayout
         android:id="@+id/ll_viewpager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:orientation="horizontal"
-        android:paddingBottom="5dip"
-        android:paddingTop="10dip">
+        android:background="@color/white"
+        android:gravity="center_vertical"
+>
 
         <TextView
             android:id="@+id/tv_unused"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1.0"
             android:gravity="center"
             android:text="持有中"
@@ -89,7 +91,7 @@
         <TextView
             android:id="@+id/tv_used"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1.0"
             android:gravity="center"
             android:text="已结束"
@@ -98,6 +100,7 @@
 
     </LinearLayout>
     <!-- 标签底部指示图片 -->
+
 
     <LinearLayout
         android:id="@+id/ll_cursor"
@@ -112,7 +115,10 @@
             android:src="@color/red"/>
 
     </LinearLayout>
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/background" />
     <android.support.v4.view.ViewPager
         android:id="@+id/vp"
         android:layout_width="match_parent"

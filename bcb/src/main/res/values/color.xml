@@ -3,7 +3,7 @@
     <!-- 文本绿 -->
     <color name="txt_green">#93c52e</color>
     <!-- 背景色 -->
-    <color name="background">#F0F0F0</color>
+    <color name="background">#f8f8f8</color>
     <!-- 背景白 -->
     <color name="background_white">#FDFDFE</color>
     <!-- 背景灰 -->

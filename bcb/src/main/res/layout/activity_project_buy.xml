@@ -52,7 +52,7 @@
                         android:layout_marginLeft="5dp"
                         android:singleLine="true"
                         android:text="(不能申购本人持有债权，可投金额变小)"
-                        
+
                         android:textColor="@color/txt_gray"
                         android:visibility="gone"
                         android:textSize="12sp"/>
@@ -64,7 +64,7 @@
                     	android:layout_height="wrap_content"
                         android:visibility="gone"
                     	android:src="@drawable/tips_about" />
-                    
+
                 </RelativeLayout>
                 <!-- 账户余额 -->
                 <RelativeLayout
@@ -384,6 +384,7 @@
                     android:paddingBottom="0dip"
                     android:paddingTop="0dip"
                     android:text="立即申购"
+                    style="?android:attr/borderlessButtonStyle"
                     android:textColor="@color/white"
                     android:textSize="@dimen/main_text_default"/>
 
