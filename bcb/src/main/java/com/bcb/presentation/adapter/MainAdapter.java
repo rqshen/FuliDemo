@@ -20,6 +20,7 @@ import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.ProgressDialogrUtils;
 import com.bcb.data.util.ToastUtil;
 import com.bcb.data.util.TokenUtil;
+import com.bcb.presentation.view.activity.Activity_Login;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -107,7 +108,8 @@ public class MainAdapter extends BaseAdapter {
 					if (TokenUtil.getEncodeToken(ctx) != null) {
 						requestAnnounce(pos);
 					} else {
-						ToastUtil.alert(ctx, "请登录后再操作");
+						Activity_Login.launche(ctx);
+//						ToastUtil.alert(ctx, "请登录后再操作");
 					}
 				}
 			});
