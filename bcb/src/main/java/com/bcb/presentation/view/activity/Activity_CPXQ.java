@@ -27,7 +27,6 @@ import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.PackageUtil;
 import com.bcb.data.util.ProgressDialogrUtils;
 import com.bcb.data.util.TokenUtil;
-import com.bcb.presentation.view.custom.HorizontalProgressBarWithNumber;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -52,7 +51,6 @@ public class Activity_CPXQ extends Activity_Base implements View.OnTouchListener
 	@BindView(R.id.sdq) TextView sdq;
 	@BindView(R.id.ktje) TextView ktje;
 	@BindView(R.id.tv_limite) TextView tvLimite;
-	@BindView(R.id.pb) HorizontalProgressBarWithNumber pb;
 	@BindView(R.id.tv_u1) TextView tvU1;
 	@BindView(R.id.tv_u2) TextView tvU2;
 	@BindView(R.id.qxr) TextView qxr;
@@ -119,8 +117,8 @@ public class Activity_CPXQ extends Activity_Base implements View.OnTouchListener
 		ktje.setText(String.format("%.2f", bean.Balance));
 		tvLimite.setText(getSpan(bean.MixDuration + "", bean.MaxDuration + ""));
 		cy.setText(bean.MaxDuration + "个月");
-		buy1.setText(getSpan2(3, String.format("%.2f", bean.MinPreInterest)));
-		buy2.setText(getSpan2(3, String.format("%.2f", bean.MaxPreInterest)));
+		buy1.setText(getSpan2(10000,bean.MixDuration, String.format("%.2f", bean.MinPreInterest)));//
+		buy2.setText(getSpan2(10000,bean.MaxDuration, String.format("%.2f", bean.MaxPreInterest)));
 		setTitleValue(bean.Name);
 		if (bean.Balance <= 0) {
 			buy.setText("售罄");
@@ -136,16 +134,17 @@ public class Activity_CPXQ extends Activity_Base implements View.OnTouchListener
 		//加入时间，起息时间，锁定到期
 		try {
 			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+			SimpleDateFormat format2 = new SimpleDateFormat("yyyy.MM.dd");
 			Date qxr_ = format.parse(bean.InterestTakeDate);
 			Date tc_ = format.parse(bean.HoldingDate);
 
-			qxr.setText(format.format(qxr_));
-			tc.setText(format.format(tc_));
+			qxr.setText(format2.format(qxr_));
+			tc.setText(format2.format(tc_));
 			//进度
 			Date dateNow = new Date();
-			if (dateNow.getTime() < qxr_.getTime()) {//未到起息时间
-				pb.setProgress(2);
-			} else pb.setProgress(30);
+//			if (dateNow.getTime() < qxr_.getTime()) {//未到起息时间
+//				pb.setProgress(2);
+//			} else pb.setProgress(30);
 
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -180,9 +179,9 @@ public class Activity_CPXQ extends Activity_Base implements View.OnTouchListener
 		return mSpannableString;
 	}
 
-	private SpannableStringBuilder getSpan2(int time, String string2) {
+	private SpannableStringBuilder getSpan2(int money,int time, String string2) {
 		SpannableStringBuilder needStartSSB = new SpannableStringBuilder("购买");
-		needStartSSB.append(getSSpannableString2(" 10000 ")).append("元，" + time + "个月可收益 ")//
+		needStartSSB.append(getSSpannableString2(" "+money)).append(" 元，" + time + "个月可收益 ")//
 				.append(getSSpannableString2(string2)).append(" 元");
 		return needStartSSB;
 	}

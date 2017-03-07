@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:bqt="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -157,7 +156,7 @@
                     android:id="@+id/tv_u1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="75dp"
+                    android:layout_marginLeft="80dp"
                     android:text="锁定期"
                     android:textColor="#ff4c4c"
                     android:textSize="12sp"/>
@@ -174,83 +173,122 @@
 
             </RelativeLayout>
 
-            <com.bcb.presentation.view.custom.HorizontalProgressBarWithNumber
-                android:id="@+id/pb"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="35dp"
-                android:layout_marginRight="35dp"
-                android:progress="2"
-                bqt:progress_reached_bar_height="2dp"
-                bqt:progress_reached_color="#ff4c4c"
-                bqt:progress_unreached_bar_height="2dp"
-                bqt:progress_unreached_color="#33ff4c4c"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                >
+                <View
+                    android:layout_width="100dp"
+                    android:layout_height="4dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginLeft="45dp"
+                    android:background="@color/pie_r" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginLeft="155dp"
+                    android:layout_marginRight="45dp"
+                    android:background="#ffdfdf" />
 
-
-                <TextView
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
-                    android:text="起息日"
-                    android:textColor="#424954"
-                    android:textSize="12sp"/>
 
-                <TextView
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:src="@drawable/pie_r"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="起息日"
+                        android:textColor="#424954"
+                        android:textSize="12sp"/>
+
+                    <TextView
+                        android:id="@+id/qxr"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:text="2017-3-7"
+                        android:textColor="#424954"
+                        android:textSize="12sp"/>
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="120dp"
-                    android:text="退出截止日"
-                    android:textColor="#424954"
-                    android:textSize="12sp"/>
 
-                <TextView
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:src="@drawable/pie_r"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="退出截止日"
+                        android:textColor="#424954"
+                        android:textSize="12sp"/>
+
+                    <TextView
+                        android:id="@+id/tc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:textColor="#424954"
+                        android:textSize="12sp"/>
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="20dp"
-                    android:text="最长持有"
-                    android:textColor="#424954"
-                    android:textSize="12sp"/>
+
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:src="@drawable/pie_r"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:layout_marginTop="10dp"
+                        android:text="最长持有"
+                        android:textColor="#424954"
+                        android:textSize="12sp"/>
+
+                    <TextView
+                        android:id="@+id/cy"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:textColor="#424954"
+                        android:textSize="12sp"/>
+                </LinearLayout>
 
             </RelativeLayout>
 
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="3dp">
-
-                <TextView
-                    android:id="@+id/qxr"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="11dp"
-                    android:textColor="#424954"
-                    android:textSize="12sp"/>
-
-                <TextView
-                    android:id="@+id/tc"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="121dp"
-                    android:textColor="#424954"
-                    android:textSize="12sp"/>
-
-                <TextView
-                    android:id="@+id/cy"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="26dp"
-                    android:textColor="#424954"
-                    android:textSize="12sp"/>
-
-            </RelativeLayout>
 
             <View
                 android:layout_width="match_parent"
