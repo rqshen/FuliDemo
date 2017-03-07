@@ -32,7 +32,8 @@ public class Activity_CP extends Activity_Base_Fragment implements View.OnClickL
 		MyActivityManager.getInstance().pushOneActivity(Activity_CP.this);
 		setBaseContentView(R.layout.activity_cp);
 		setLeftTitleVisible(true);
-		setTitleValue("产品列表");
+		setTitleValue("福利理财");
+//		setTitleValue("产品列表");
 		initUnderLine();
 		InitViewPager();
 	}

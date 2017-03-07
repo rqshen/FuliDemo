@@ -68,7 +68,7 @@ public class A_MyYE extends Activity_Base {
 				withdrawMoney();
 				break;
 			case R.id.layout_mx:
-				Activity_Trading_Record.launche(ctx);
+				Activity_Money_Flowing_Water.launche(ctx);
 				break;
 		}
 	}

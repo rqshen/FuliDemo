@@ -181,7 +181,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 		if (App.isNeedUpdate && App.versionBean != null) {
 			tv_update.setText("发现新版本 V" + App.versionBean.Version);
 		} else {
-			tv_update.setText("已经是最新版本");
+			tv_update.setText("");
 //			layout_update.setVisibility(View.GONE);
 //			layout_update_line.setVisibility(View.GONE);
 		}
@@ -449,7 +449,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 	public void onClick(View v) {
 		if (v.getId() == R.id.layout_update) {
 			if (App.isNeedUpdate && App.versionBean != null) showVersionDialog2();
-			else Toast.makeText(ctx, "已经是最新版本", Toast.LENGTH_SHORT).show();
+			else Toast.makeText(ctx, "已是最新版本", Toast.LENGTH_SHORT).show();
 			return;
 		}
 		//除了专属客服和电话客服之外的职位都要在点击之前登陆

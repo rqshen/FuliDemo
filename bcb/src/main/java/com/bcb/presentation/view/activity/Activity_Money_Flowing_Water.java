@@ -66,7 +66,8 @@ public class Activity_Money_Flowing_Water extends Activity_Base {
         myActivityManager.pushOneActivity(Activity_Money_Flowing_Water.this);
 		setBaseContentView(R.layout.activity_money_flowing_water);
 		setLeftTitleVisible(true);
-		setTitleValue("交易明细");
+		//setTitleValue("交易明细");
+		setTitleValue("账单明细");
         requestQueue = App.getInstance().getRequestQueue();
 		init();
 		UmengUtil.eventById(this, R.string.sel_zjmx);

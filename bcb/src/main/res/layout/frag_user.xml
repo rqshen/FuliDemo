@@ -483,7 +483,7 @@
                             android:layout_toLeftOf="@+id/ra"
                             android:gravity="center"
                             android:singleLine="true"
-                            android:text="发现新版本 V0.00"
+                            android:text=""
                             android:textColor="@color/red"
                             android:textSize="16sp"/>
 

@@ -42,6 +42,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import static com.bcb.R.id.back_img;
+
 /**
  * setTitleValue("产品详情"。setTitleValue("详情"。setTitleValue("项目详情"。setTitleValue("立即购买"。setTitleValue("立即申购"。
  */
@@ -115,6 +117,18 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
 		}
 		setBaseContentView(R.layout.activity_normalproject_introduction);
 		setLeftTitleVisible(true);
+		layout_title.setBackgroundColor(getResources().getColor(R.color.red));
+		title_text.setTextColor(getResources().getColor(R.color.white));
+		dropdown.setImageResource(R.drawable.return_delault);
+		dropdown.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				finish();
+			}
+		});
+		(findViewById(back_img)).setVisibility(View.GONE);
+
+
 		UmengUtil.eventById(Activity_NormalProject_Introduction.this, R.string.buy_home);
 		//初始化界面
 		setupView();
