@@ -1,6 +1,7 @@
 package com.bcb.presentation.view.activity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Spannable;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bcb.R;
 import com.bcb.common.app.App;
@@ -22,11 +24,13 @@ import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.UrlsTwo;
 import com.bcb.data.bean.CPXQbean;
 import com.bcb.data.util.DensityUtils;
+import com.bcb.data.util.HttpUtils;
 import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.PackageUtil;
 import com.bcb.data.util.ProgressDialogrUtils;
 import com.bcb.data.util.TokenUtil;
+import com.bcb.presentation.view.custom.AlertView.AlertView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -196,6 +200,11 @@ public class Activity_CPXQ extends Activity_Base implements View.OnTouchListener
 			case R.id.ll_buy1:
 			case R.id.ll_buy2:
 			case R.id.buy:
+				//没有开通自动投标
+				if ( !App.mUserDetailInfo.AutoTenderPlanStatus) {//(type == 1 || type == 2) &&
+					altDialog();
+					return;
+				}
 				//跳转到购买页面
 				Activity_Project_Buy2.launche2(this, packageId, bean.Name, CouponType, countDate, bean, type);
 				break;
@@ -255,5 +264,74 @@ public class Activity_CPXQ extends Activity_Base implements View.OnTouchListener
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {
 		return false;
+	}
+
+	AlertView alertView;
+
+	private void altDialog() {
+		AlertView.Builder ibuilder = new AlertView.Builder(this);
+		ibuilder.setTitle("开启份额锁，100%成功买入");
+		ibuilder.setMessage("锁定份额，自动买入");
+		ibuilder.setPositiveButton("开启", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				autoOpen();
+				alertView.dismiss();
+			}
+		});
+		ibuilder.setNegativeButton("取消", null);
+		alertView = ibuilder.create();
+		alertView.show();
+	}
+	//******************************************************************************************
+
+	/**
+	 * APP自动投标流程：
+	 * 1、新用户买标，没有开通托管账户的引导到汇付开通托管账户。
+	 * 2、已开通托管账户用户买标没开通自动买标的，引导到汇付开通自动投标。
+	 * 3、开通自动投标完毕，手动买入理财标。
+	 */
+	private void autoOpen() {
+		String requestUrl = UrlsTwo.OPENAUTOTENDERPLAN;
+		String encodeToken = TokenUtil.getEncodeToken(ctx);
+		JSONObject obj = new JSONObject();
+		try {
+			obj.put("Platform", 2);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		BcbJsonRequest jsonRequest = new BcbJsonRequest(requestUrl, obj, encodeToken, true, new BcbRequest.BcbCallBack<JSONObject>() {
+			@Override
+			public void onResponse(JSONObject response) {
+				LogUtil.i("bqt", "开通自动投标" + response.toString());
+				if (PackageUtil.getRequestStatus(response, ctx)) {
+					try {
+						/** 后台返回的JSON对象，也是要转发给汇付的对象 */
+						JSONObject result = PackageUtil.getResultObject(response);
+						if (result != null) {
+							//网页地址
+							String postUrl = result.optString("PostUrl");
+							result.remove("PostUrl");//移除这个参数
+							//传递的参数
+							String postData = HttpUtils.jsonToStr(result.toString()); //跳转到webview
+							Activity_WebView.launche(ctx, "开启份额锁", postUrl, postData);
+						}
+					} catch (Exception e) {
+						LogUtil.d("bqt", "开通自动投标2" + e.getMessage());
+					}
+				} else if (response != null) {
+					Toast.makeText(ctx, response.optString("message"), Toast.LENGTH_SHORT)
+							.show();
+				}
+			}
+
+			@Override
+			public void onErrorResponse(Exception error) {
+				LogUtil.d("bqt", "【Activity_TuoGuan_HF】【loginAccount】网络异常，请稍后重试" + error.toString());
+			}
+		});
+		App.getInstance()
+				.getRequestQueue()
+				.add(jsonRequest);
 	}
 }

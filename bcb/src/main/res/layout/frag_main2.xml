@@ -139,7 +139,7 @@
                     </LinearLayout>
                     <View
                         android:layout_width="match_parent"
-                        android:layout_height="1px"
+                        android:layout_height="0.5dp"
                         android:background="#eee"/>
                     <!-- 精品标 -->
                     <com.bcb.data.util.MyListView
@@ -153,7 +153,10 @@
                         android:fastScrollEnabled="false"
                         android:scrollbars="none"
                         android:visibility="visible"/>
-
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="#eee"/>
                     <!-- 新标预告 -->
                     <com.bcb.data.util.MyListView
                         android:id="@+id/announce_listView"

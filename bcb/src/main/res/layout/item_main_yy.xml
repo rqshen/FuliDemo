@@ -5,10 +5,6 @@
     android:layout_height="90dp"
     android:background="@color/white">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="#eee"/>
 
     <RelativeLayout
         android:layout_width="wrap_content"
