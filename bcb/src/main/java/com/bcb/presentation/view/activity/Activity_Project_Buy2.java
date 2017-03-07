@@ -871,6 +871,7 @@ public class Activity_Project_Buy2 extends Activity_Base implements View.OnClick
 	public void onTextChanged(CharSequence s, int start, int before, int count) {
 		String input = invest_money.getText()
 				.toString();
+
 		if (!TextUtils.isEmpty(input)) {
 			error_tips.setVisibility(View.GONE);
 			//计算收益，在优惠那一栏中显示返现
@@ -915,18 +916,22 @@ public class Activity_Project_Buy2 extends Activity_Base implements View.OnClick
 
 	//*********************************************************************** 计算收益***********************************
 	private void countEarnMoney(float moneyinput) {
-//		// 如果传错了月标(1)、天标(2)，则不显示收益
+		// 如果传错了月标(1)、天标(2)，则不显示收益
 //		if (countDate != 0) {
-//			//显示值
-//			prospective_earning.setVisibility(View.VISIBLE);
-//			//如果输入金额为0时，不显示
-//			if (moneyinput == 0) {
-//				earnings_description.setText("预期收益");
-//				prospective_earning.setText("0.00");
-//			} else {
-//				// 年化基本收益
-//				float shouyi = moneyinput * mSimpleProjectDetail.PreInterest / 10000;
-//				//计算奖励收益
+			//显示值
+			prospective_earning.setVisibility(View.VISIBLE);
+			LogUtil.i("bqt", "【金额】"+moneyinput);
+			//如果输入金额为0时，不显示
+			if (moneyinput == 0) {
+				earnings_description.setText("预期收益");
+				prospective_earning.setText("0.00");
+				LogUtil.i("bqt", "【金额2】"+moneyinput);
+			} else {
+				// 年化基本收益
+				float shouyi = moneyinput * mSimpleProjectDetail.MinPreInterest / 10000;
+				LogUtil.i("bqt", "【收益】"+shouyi);
+
+				//计算奖励收益
 //				float jiangliamount = ((moneyinput * mSimpleProjectDetail.RewardRate) / countDate * 0.01f) * mSimpleProjectDetail
 //						.Duration;
 //				//奖励描述
@@ -937,7 +942,8 @@ public class Activity_Project_Buy2 extends Activity_Base implements View.OnClick
 //				}
 //				//设置奖励描述
 //				prospective_earning.setText(rewardDescription(description, shouyi, jiangliamount));
-//			}
+				prospective_earning.setText(String.format("%.2f", shouyi));
+			}
 //		} else {
 //			prospective_earning.setVisibility(View.GONE);
 //		}

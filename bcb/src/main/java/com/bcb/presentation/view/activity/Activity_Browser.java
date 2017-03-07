@@ -57,6 +57,8 @@ import com.tencent.smtt.sdk.WebViewClient;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
+import static com.bcb.R.id.back_img;
+
 public class Activity_Browser extends Activity_Base {
 
 	private X5WebView mWebView;
@@ -198,6 +200,21 @@ public class Activity_Browser extends Activity_Base {
 		setLeftTitleVisible(true);
 		setTitleVisiable(View.VISIBLE);
 		setTitleValue(title);
+
+
+		if (type==20095) {
+			//红色标题栏
+			layout_title.setBackgroundColor(getResources().getColor(R.color.red));
+			title_text.setTextColor(getResources().getColor(R.color.white));
+			dropdown.setImageResource(R.drawable.return_delault);
+			dropdown.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					finish();
+				}
+			});
+			(findViewById(back_img)).setVisibility(View.GONE);
+		}
 
 		mViewParent = (ViewGroup) findViewById(R.id.layout_webview);
 		root = (RelativeLayout) findViewById(R.id.root);

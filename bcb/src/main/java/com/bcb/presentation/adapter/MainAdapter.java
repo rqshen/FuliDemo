@@ -11,10 +11,12 @@ import android.widget.TextView;
 
 import com.bcb.R;
 import com.bcb.common.app.App;
+import com.bcb.common.event.BroadcastEvent;
 import com.bcb.common.net.BcbJsonRequest;
 import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.UrlsOne;
 import com.bcb.data.bean.MainListBean2;
+import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.ProgressDialogrUtils;
 import com.bcb.data.util.ToastUtil;
 import com.bcb.data.util.TokenUtil;
@@ -26,6 +28,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import de.greenrobot.event.EventBus;
 
 public class MainAdapter extends BaseAdapter {
 	
@@ -138,6 +141,8 @@ public class MainAdapter extends BaseAdapter {
 		BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.RequestAnnounce, obj, TokenUtil.getEncodeToken(ctx), pos, new BcbRequest.BcbIndexCallBack<JSONObject>() {
 			@Override
 			public void onResponse(JSONObject response, int index) {
+				LogUtil.i("bqt", "【预约】"+index+"---"+response.toString());
+
 				try {
 					if (response.getInt("status") == 1) {
 						//设置对应位置的数据
@@ -146,6 +151,7 @@ public class MainAdapter extends BaseAdapter {
 							App.saveUserInfo.setPreviewInvest(data.get(pos).PackageId);
 							//更新数据
 							notifyDataSetChanged();
+							EventBus.getDefault().post(new BroadcastEvent(BroadcastEvent.REFRESH));
 						}
 					} else {
 						ToastUtil.alert(ctx, response.getString("message").isEmpty() ? "预约失败" : response.getString("message"));

@@ -327,7 +327,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 			value_total.setText("0.00");
 			value_yhq.setText("0张");
 			value_lc.setText("0.00");
-		} else {
+		} else if (App.mUserWallet != null) {
 			//总资产
 			value_earn.setText("" + String.format("%.2f", App.mUserWallet.getTotalAsset()));
 			//累计收益
@@ -338,7 +338,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 			value_lc.setText("￥" + String.format("%.2f", App.mUserWallet.getIncomingMoney()));
 			//冻结金额
 			value_total.setText("" + String.format("%.2f", App.mUserWallet.getFreezeAmount()));
-			value_yhq.setText(App.mUserDetailInfo.CouponCount+"张");
+			value_yhq.setText(App.mUserDetailInfo.CouponCount + "张");
 			if (App.mUserWallet.getBalanceAmount() == 0) value_balance.setText("去充值");
 		}
 	}

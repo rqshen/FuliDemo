@@ -594,8 +594,8 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
 				}
 				if (null != mSimpleProjectDetail && !TextUtils.isEmpty(mSimpleProjectDetail.PageUrl)) {
 					Activity_Browser.launche2(Activity_NormalProject_Introduction.this, mSimpleProjectDetail.Name,
-							mSimpleProjectDetail.PageUrl + "&tab=0", 20094);
-					//							"http://192.168.1.200:7073/", 20094);
+							mSimpleProjectDetail.PageUrl + "&tab=0", 20095);
+					//							"http://192.168.1.200:7073/", 20095);
 				}
 				break;
 			//保障信息
@@ -605,8 +605,8 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
 				}
 				if (null != mSimpleProjectDetail && !TextUtils.isEmpty(mSimpleProjectDetail.PageUrl)) {
 					Activity_Browser.launche2(Activity_NormalProject_Introduction.this, mSimpleProjectDetail.Name,
-							mSimpleProjectDetail.PageUrl + "&tab=1", 20094);
-					//							"http://192.168.1.200:7073/", 20094);
+							mSimpleProjectDetail.PageUrl + "&tab=1", 20095);
+					//							"http://192.168.1.200:7073/", 20095);
 				}
 				break;
 			//证明文件
@@ -616,8 +616,8 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
 				}
 				if (null != mSimpleProjectDetail && !TextUtils.isEmpty(mSimpleProjectDetail.PageUrl)) {
 					Activity_Browser.launche2(Activity_NormalProject_Introduction.this, mSimpleProjectDetail.Name,
-							mSimpleProjectDetail.PageUrl + "&tab=3", 20094);
-					//							"http://192.168.1.200:7073/", 20094);
+							mSimpleProjectDetail.PageUrl + "&tab=3", 20095);
+					//							"http://192.168.1.200:7073/", 20095);
 				}
 				break;
 			//投资列表
@@ -627,8 +627,8 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
 				}
 				if (null != mSimpleProjectDetail && !TextUtils.isEmpty(mSimpleProjectDetail.PageUrl)) {
 					Activity_Browser.launche2(Activity_NormalProject_Introduction.this, mSimpleProjectDetail.Name,
-							mSimpleProjectDetail.PageUrl + "&tab=2", 20094);
-					//							"http://192.168.1.200:7073/", 20094);
+							mSimpleProjectDetail.PageUrl + "&tab=2", 20095);
+					//							"http://192.168.1.200:7073/", 20095);
 				}
 				break;
 		}

@@ -663,7 +663,7 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, Adapte
 	@Override
 	public void onResume() {
 		super.onResume();
-		showItemVisible();
+//		showItemVisible();
 //		boolean che = mUserDetailInfo == null || TextUtils.isEmpty(mUserDetailInfo.CarInsuranceIndexPage);
 //		LogUtil.i("bqt", "【进入时是否没有获取到车险】" + che);
 //		if (che) {

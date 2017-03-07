@@ -200,7 +200,7 @@ public class Activity_CPXQ extends Activity_Base implements View.OnTouchListener
 				Activity_Project_Buy2.launche2(this, packageId, bean.Name, CouponType, countDate, bean, type);
 				break;
 			case R.id.more:
-				Activity_Browser.launche(this, bean.Name, bean.PageUrl);
+				Activity_Browser.launche2(this, bean.Name, bean.PageUrl,20095);
 				break;
 		}
 	}
