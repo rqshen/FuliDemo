@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.bcb.R;
 import com.bcb.common.app.App;
 import com.bcb.presentation.view.activity.A_Elite_Loan;
+import com.bcb.presentation.view.activity.Activity_CP;
 import com.bcb.presentation.view.activity.Activity_Login;
 import com.bcb.presentation.view.activity.Activity_Love;
 import com.bcb.presentation.view.activity.Activity_Open_Account;
@@ -73,7 +74,7 @@ public class Frag_Find extends Frag_Base {
 				cheXian();
 				break;
 			case R.id.ll_lc:
-				Toast.makeText(ctx, "敬请期待", Toast.LENGTH_SHORT).show();
+				startActivity(new Intent(ctx, Activity_CP.class));
 				break;
 			case R.id.ll_gjj:
 				Toast.makeText(ctx, "敬请期待", Toast.LENGTH_SHORT).show();

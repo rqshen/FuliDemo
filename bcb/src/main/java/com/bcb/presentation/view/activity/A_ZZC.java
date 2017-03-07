@@ -20,6 +20,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.bcb.common.app.App.mUserWallet;
+
 public class A_ZZC extends Activity_Base {
 
 	@BindView(R.id.pie) PieChart pieChart;
@@ -48,18 +50,16 @@ public class A_ZZC extends Activity_Base {
 		ButterKnife.bind(this);
 		setLeftTitleVisible(true);
 		setTitleValue("总资产");
+		service_cz.setText(String.format("%.2f", mUserWallet.TotalAsset));
+		ye.setText(String.format("%.2f", mUserWallet.BalanceAmount));
+		bj.setText(String.format("%.2f", mUserWallet.LeftPrincipal));
+		sy.setText(String.format("%.2f", mUserWallet.LeftInterest));
+		bzj.setText(String.format("%.2f", mUserWallet.SecurityAmount));
+		ljtz.setText(String.format("%.2f", mUserWallet.InvestAmount));
+		ljsy.setText(String.format("%.2f", mUserWallet.InvestIncome));
+		ljtcz.setText(String.format("%.2f", mUserWallet.RechargeAmount));
+		ljtx.setText(String.format("%.2f", mUserWallet.WithdrawAmount));
 		initPieChart();
-		if (App.mUserWallet != null) {
-			service_cz.setText(String.format("%.2f", App.mUserWallet.TotalAsset));
-			ye.setText(String.format("%.2f", App.mUserWallet.BalanceAmount));
-			bj.setText(String.format("%.2f", App.mUserWallet.LeftPrincipal));
-			sy.setText(String.format("%.2f", App.mUserWallet.LeftInterest));
-			bzj.setText(String.format("%.2f", App.mUserWallet.SecurityAmount));
-			ljtz.setText(String.format("%.2f", App.mUserWallet.InvestAmount));
-			ljsy.setText(String.format("%.2f", App.mUserWallet.InvestIncome));
-			ljtcz.setText(String.format("%.2f", App.mUserWallet.RechargeAmount));
-			ljtx.setText(String.format("%.2f", App.mUserWallet.WithdrawAmount));
-		}
 	}
 
 	/**
@@ -67,16 +67,25 @@ public class A_ZZC extends Activity_Base {
 	 */
 	private void initPieChart() {
 		//柱状图数据类
-		int[] mColors = {0xFFfb4977, 0xFFffc760, 0xFF6fe621, 0xFF4fccff,};//, 0xFF880088, 0xFF008888
-		double[] values = {App.mUserWallet.BalanceAmount, App.mUserWallet.LeftPrincipal,//
-				App.mUserWallet.LeftInterest, App.mUserWallet.SecurityAmount,};
-		String[] mNames = {"账户余额", "在投本金", "应计收益", "借款保证金",};
 		ArrayList<IPieData> mPieDataList = new ArrayList<>();
+		int[] mColors = {0xFFfb4977, 0xFFffc760, 0xFF6fe621, 0xFF4fccff, 0xfff8f8f8, 0xfff8f8f8};//0xfff8f8f8
+		String[] mNames = {"账户余额", "在投本金", "应计收益", "借款保证金", "", ""};
+		float[] values = {0, 0, 0, 0, 0, 0};
+		if (mUserWallet.BalanceAmount <= 0f && mUserWallet.LeftPrincipal <= 0f //
+				&& mUserWallet.LeftInterest <= 0f && mUserWallet.SecurityAmount <= 0f) {
+			values[4] = 100;
+			values[5] = 1;
+		}
+		values[0] = (float) App.mUserWallet.BalanceAmount;
+		values[1] = (float) App.mUserWallet.LeftPrincipal;
+		values[2] = (float) App.mUserWallet.LeftInterest;
+		values[3] = (float) App.mUserWallet.SecurityAmount;
+
 		for (int i = 0; i < mColors.length; i++) {
 			PieData pieData = new PieData();
 			pieData.setColor(mColors[i]);
 			pieData.setName(mNames[i]);
-			pieData.setValue((float) values[i]);
+			pieData.setValue(values[i]);
 			mPieDataList.add(pieData);
 		}
 
