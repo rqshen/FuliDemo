@@ -19,7 +19,6 @@ import android.widget.TextView;
 
 import com.bcb.R;
 import com.bcb.common.app.App;
-import com.bcb.common.event.BroadcastEvent;
 import com.bcb.common.net.UrlsOne;
 import com.bcb.data.util.LogUtil;
 import com.bcb.data.util.MyActivityManager;
@@ -33,8 +32,6 @@ import com.bcb.presentation.presenter.IPresenter_AccountSettingImpl;
 import com.bcb.presentation.view.activity_interface.Interface_AccountSetting;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
 import com.bcb.presentation.view.custom.CustomDialog.DialogWidget;
-
-import de.greenrobot.event.EventBus;
 
 import static com.bcb.common.app.App.mUserDetailInfo;
 
@@ -257,7 +254,6 @@ public class Activity_Account_Setting extends Activity_Base implements OnClickLi
 
 			//手机号码
 			case R.id.layout_phone:
-				changePhoneNumber();
 				break;
 			//手机号码
 			case R.id.tg:
@@ -312,10 +308,7 @@ public class Activity_Account_Setting extends Activity_Base implements OnClickLi
 
 	}
 
-	//修改手机号
-	private void changePhoneNumber() {
-		ToastUtil.alert(Activity_Account_Setting.this, "手机号码请到电脑版账户中心修改");
-	}
+
 
 	//加入公司
 	private void joinCompany() {
@@ -372,7 +365,6 @@ public class Activity_Account_Setting extends Activity_Base implements OnClickLi
 				//退出登录
 				iPresenterAccountSetting.updateUserInfo(2);
 				App.getInstance().setWelfare("");
-				EventBus.getDefault().post(new BroadcastEvent(BroadcastEvent.LOGOUT));
 			}
 		});
 	}

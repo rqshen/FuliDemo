@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.bcb.common.app.App;
 import com.bcb.data.bean.UserDetailInfo;
+import com.bcb.data.util.LogUtil;
 
 /**
  * Created by cain on 16/3/18.
@@ -15,6 +16,7 @@ public class IModel_UserAccountImpl implements IModel_UserAccount {
         App.mUserDetailInfo = null;
         App.mUserWallet = null;
         App.viewJoinBanner = true;
+        LogUtil.i("bqt", "【clearAccount】"+App.saveUserInfo.getAccess_Token());
     }
 
     @Override

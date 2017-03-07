@@ -140,10 +140,8 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		this.ctx = view.getContext();
-		EventBus.getDefault()
-				.register(this);
-		requestQueue = App.getInstance()
-				.getRequestQueue();
+		EventBus.getDefault().register(this);
+		requestQueue = App.getInstance().getRequestQueue();
 		//注册监听器
 		receiver = new Receiver();
 		ctx.registerReceiver(receiver, new IntentFilter("com.bcb.update.company.joined"));
@@ -313,23 +311,9 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 
 	//从静态数据区中取出数据
 	private void showData() {
-		setupJoinCompanyMessage();
-		if (App.mUserWallet != null) {
-			//总资产
-			value_earn.setText("" + String.format("%.2f", App.mUserWallet.getTotalAsset()));
-			//累计收益
-			value_earn_all.setText("累计收益" + String.format("%.2f", App.mUserWallet.InvestIncome) + "元");
-			//账户余额
-			value_balance.setText("￥" + String.format("%.2f", App.mUserWallet.getBalanceAmount()));
-			//待收本息
-			value_lc.setText("￥" + String.format("%.2f", App.mUserWallet.getIncomingMoney()));
-			//冻结金额
-			value_total.setText("" + String.format("%.2f", App.mUserWallet.getFreezeAmount()));
-			value_yhq.setText("10086张");
-			if (App.mUserWallet.getBalanceAmount() == 0) {
-				value_balance.setText("去充值");
-			}
-		} else {
+		LogUtil.i("bqt", "【】" + App.saveUserInfo.getAccess_Token());
+
+		if (App.saveUserInfo.getAccess_Token() == null) {
 			//总资产
 			value_earn.setText("0.00");
 			value_earn_all.setText("累计收益0元");
@@ -343,8 +327,20 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 			value_total.setText("0.00");
 			value_yhq.setText("0张");
 			value_lc.setText("0.00");
+		} else {
+			//总资产
+			value_earn.setText("" + String.format("%.2f", App.mUserWallet.getTotalAsset()));
+			//累计收益
+			value_earn_all.setText("累计收益" + String.format("%.2f", App.mUserWallet.InvestIncome) + "元");
+			//账户余额
+			value_balance.setText("￥" + String.format("%.2f", App.mUserWallet.getBalanceAmount()));
+			//待收本息
+			value_lc.setText("￥" + String.format("%.2f", App.mUserWallet.getIncomingMoney()));
+			//冻结金额
+			value_total.setText("" + String.format("%.2f", App.mUserWallet.getFreezeAmount()));
+			value_yhq.setText("10086张");
+			if (App.mUserWallet.getBalanceAmount() == 0) value_balance.setText("去充值");
 		}
-
 	}
 
 	//加载用户加入公司的信息
@@ -560,7 +556,6 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 		}
 	}
 
-
 	//加入公司
 	private void toJoinCompany() {
 		if (mUserDetailInfo == null || !mUserDetailInfo.HasOpenCustody) {
@@ -584,6 +579,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 			}
 		}
 	}
+
 	private void changeCompany() {
 		showAlertView2("提示", "您需要修改公司认证信息吗?", new DialogInterface.OnClickListener() {
 			@Override
@@ -594,6 +590,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 			}
 		});
 	}
+
 	//借款
 	private void loanMainPage() {
 		//已开通托管
@@ -709,8 +706,8 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 			else if (intent.getAction()
 					.equals("com.bcb.logout.success")) {
 				LogUtil.i("bqt", "【Receiver】【onReceive】注销");
-//				joinCompany.setVisibility(View.VISIBLE);
-//				user_company_layout.setVisibility(View.GONE);
+				showData();
+				setupJoinCompanyMessage();
 				layout_scrollview.scrollTo(0, 0);
 			}
 		}
@@ -720,8 +717,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 	public void onDestroy() {
 		super.onDestroy();
 		ctx.unregisterReceiver(receiver);
-		EventBus.getDefault()
-				.unregister(this);
+		EventBus.getDefault().unregister(this);
 	}
 
 	//提示对话框
@@ -929,15 +925,20 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 	public void onEventMainThread(BroadcastEvent event) {
 		String flag = event.getFlag();
 		if (!TextUtils.isEmpty(flag)) {
-			LogUtil.i("bqt", "【Frag_User】【onE  ventMainThread】状态：" + flag);
+			LogUtil.i("bqt", "【Frag_User】【onEventMainThread】状态：" + flag);
 			switch (flag) {
 				case BroadcastEvent.LOGOUT:
 //					joinCompany.setVisibility(View.VISIBLE);
 //					user_company_layout.setVisibility(View.GONE);
+//					layout_scrollview.scrollTo(0, 0);
+					LogUtil.i("bqt", "【wocao】");
+					showData();
+					setupJoinCompanyMessage();
 					layout_scrollview.scrollTo(0, 0);
 					break;
 				case BroadcastEvent.LOGIN:
 				case BroadcastEvent.REFRESH:
+					refreshLayout.autoRefresh();
 					break;
 			}
 		}

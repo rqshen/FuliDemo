@@ -4,6 +4,7 @@ import android.content.Context;
 import android.text.TextUtils;
 
 import com.bcb.common.app.App;
+import com.bcb.common.event.BroadcastEvent;
 import com.bcb.common.net.BcbJsonRequest;
 import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
@@ -16,6 +17,8 @@ import com.bcb.presentation.model.IModel_UserAccountImpl;
 import com.bcb.presentation.view.activity_interface.Interface_AccountSetting;
 
 import org.json.JSONObject;
+
+import de.greenrobot.event.EventBus;
 
 /**
  * Created by cain on 16/3/28.
@@ -67,6 +70,8 @@ public class IPresenter_AccountSettingImpl implements IPresenter_AccountSetting 
         BcbJsonRequest bcbJsonRequest = new BcbJsonRequest(UrlsOne.UserDoLogout, null, TokenUtil.getEncodeToken(context), new BcbRequest.BcbCallBack<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
+                LogUtil.i("bqt", "【退出登录】"+response.toString());
+
                 try{
                     //如果返回成功清空数据
                     if (response.getInt("status") == 1) {
@@ -79,6 +84,7 @@ public class IPresenter_AccountSettingImpl implements IPresenter_AccountSetting 
                     else {
                         interfaceBase.onRequestResult(response.getInt("status"), response.getString("message"));
                     }
+                    EventBus.getDefault().post(new BroadcastEvent(BroadcastEvent.LOGOUT));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
