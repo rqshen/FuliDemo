@@ -42,7 +42,7 @@ public class Activity_Account_Setting extends Activity_Base implements OnClickLi
 	private RelativeLayout layout_username, layout_id_card, layout_bank_card, layout_phone;
 	private RelativeLayout layout_login_pwd, layout_logout, layout_update, layout_feedback, layout_guide, layout_aboutus;
 
-	private TextView username_text, id_card_text, bank_card_text, phone_text,name;
+	private TextView username_text, id_card_text, bank_card_text, phone_text,name,text_tg;
 
 	private LinearLayout layout_name, layout_idcard, layout_bankcard;
 
@@ -106,11 +106,13 @@ public class Activity_Account_Setting extends Activity_Base implements OnClickLi
 		}else if (mUserDetailInfo.MyCompany != null && !TextUtils.isEmpty(mUserDetailInfo.MyCompany.getShortName())) {
 			name.setText("" + mUserDetailInfo.UserName);
 			layout_id_card.setVisibility(View.VISIBLE);
-			layout_phone.setVisibility(View.VISIBLE);
+			layout_username.setVisibility(View.VISIBLE);
+			text_tg.setText("银行卡/资金账户/交易密码");
 		} else {
 			name.setText("" + App.saveUserInfo.getLocalPhone());
 			layout_id_card.setVisibility(View.GONE);
-			layout_phone.setVisibility(View.GONE);
+			layout_username.setVisibility(View.GONE);
+			text_tg.setText("去开通");
 		}
 	}
 
@@ -149,6 +151,7 @@ public class Activity_Account_Setting extends Activity_Base implements OnClickLi
 		tg = (RelativeLayout) findViewById(R.id.tg);
 		layout_name = (LinearLayout) findViewById(R.id.layout_name);
 		username_text = (TextView) findViewById(R.id.username_text);
+		text_tg = (TextView) findViewById(R.id.text_tg);
 		//身份证号
 		layout_id_card = (RelativeLayout) findViewById(R.id.layout_id_card);
 		layout_idcard = (LinearLayout) findViewById(R.id.layout_idcard);
