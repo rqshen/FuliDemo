@@ -143,7 +143,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:background="#dbdbdb"/>
+                android:background="#eee"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -328,7 +328,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:background="#dbdbdb"/>
+                android:background="#eee"/>
 
             <LinearLayout
                 android:id="@+id/ll_buy2"
