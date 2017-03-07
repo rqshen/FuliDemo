@@ -8,11 +8,19 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bcb.R;
 import com.bcb.common.app.App;
+import com.bcb.common.net.BcbJsonRequest;
+import com.bcb.common.net.BcbRequest;
+import com.bcb.common.net.UrlsOne;
 import com.bcb.data.bean.MainListBean2;
+import com.bcb.data.util.ProgressDialogrUtils;
+import com.bcb.data.util.ToastUtil;
+import com.bcb.data.util.TokenUtil;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -59,7 +67,7 @@ public class MainAdapter extends BaseAdapter {
 	}
 	
 	//设置ViewHolder数据
-	private void setDataWithViewHolder(ViewHolder viewHolder, int pos) {
+	private void setDataWithViewHolder(ViewHolder viewHolder, final int pos) {
 		MainListBean2.XbygBean bean = data.get(pos);
 		viewHolder.tvRate.setText(String.valueOf(bean.Rate));
 		//福袋利率
@@ -93,7 +101,11 @@ public class MainAdapter extends BaseAdapter {
 			viewHolder.rlYy.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					Toast.makeText(ctx, "预约", Toast.LENGTH_SHORT).show();
+					if (TokenUtil.getEncodeToken(ctx) != null) {
+						requestAnnounce(pos);
+					} else {
+						ToastUtil.alert(ctx, "请登录后再操作");
+					}
 				}
 			});
 		}
@@ -113,5 +125,44 @@ public class MainAdapter extends BaseAdapter {
 			ButterKnife.bind(this, view);
 		}
 	}
+
+	//点击请求预约
+	private void requestAnnounce(final int pos) {
+		JSONObject obj = new JSONObject();
+		try {
+			ProgressDialogrUtils.show(ctx,"正在加载数据...");
+			obj.put("UniqueId", data.get(pos).PackageId);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.RequestAnnounce, obj, TokenUtil.getEncodeToken(ctx), pos, new BcbRequest.BcbIndexCallBack<JSONObject>() {
+			@Override
+			public void onResponse(JSONObject response, int index) {
+				try {
+					if (response.getInt("status") == 1) {
+						//设置对应位置的数据
+						if (response.getJSONObject("result").getInt("PredictCount") > 0) {
+							data.get(index).PredictCount=response.getJSONObject("result").getInt("PredictCount");
+							App.saveUserInfo.setPreviewInvest(data.get(pos).PackageId);
+							//更新数据
+							notifyDataSetChanged();
+						}
+					} else {
+						ToastUtil.alert(ctx, response.getString("message").isEmpty() ? "预约失败" : response.getString("message"));
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				ProgressDialogrUtils.hide();
+			}
+
+			@Override
+			public void onErrorResponse(Exception error) {
+				ProgressDialogrUtils.hide();
+			}
+		});
+		App.getInstance().getRequestQueue().add(jsonRequest);
+	}
+
 }
 

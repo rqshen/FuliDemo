@@ -338,7 +338,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 			value_lc.setText("￥" + String.format("%.2f", App.mUserWallet.getIncomingMoney()));
 			//冻结金额
 			value_total.setText("" + String.format("%.2f", App.mUserWallet.getFreezeAmount()));
-			value_yhq.setText("10086张");
+			value_yhq.setText(App.mUserDetailInfo.CouponCount+"张");
 			if (App.mUserWallet.getBalanceAmount() == 0) value_balance.setText("去充值");
 		}
 	}
@@ -764,6 +764,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 						App.mUserDetailInfo = mUserDetailInfo;
 						requestUserBankCard();
 						requestUserSecurity();
+						showData();
 						//加载用户加入公司的信息
 						setupJoinCompanyMessage();
 						if (mUserDetailInfo.HasOpenEgg) iv_red.setVisibility(View.INVISIBLE);
@@ -826,6 +827,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 					JSONObject data = PackageUtil.getResultObject(response);
 					if (data != null && App.mUserDetailInfo != null) {
 						App.mUserDetailInfo.BankCard = App.mGson.fromJson(data.toString(), UserBankCard.class);
+						showData();
 					}
 				}
 				loadingStatus = false;
@@ -860,6 +862,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 					LogUtil.i("bqt", "【刷新后是否没有获取到车险】" + che);
 					if (che) EventBus.getDefault().post(new StringEventBusBean("CXGONE"));
 					else EventBus.getDefault().post(new StringEventBusBean("CXVISIBLE"));
+					showData();
 				}
 				loadingStatus = false;
 				refreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);

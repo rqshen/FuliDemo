@@ -121,7 +121,7 @@ public class Activity_CPXQ extends Activity_Base implements View.OnTouchListener
 		buy2.setText(getSpan2(10000,bean.MaxDuration, String.format("%.2f", bean.MaxPreInterest)));
 		setTitleValue(bean.Name);
 		if (bean.Balance <= 0) {
-			buy.setText("售罄");
+			buy.setText("已售罄");
 			buy.setTextColor(0xff999999);
 			buy.setEnabled(false);
 			buy.setBackgroundColor(0xffd0d0d0);

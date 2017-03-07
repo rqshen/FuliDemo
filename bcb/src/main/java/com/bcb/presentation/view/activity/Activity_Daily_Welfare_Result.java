@@ -18,11 +18,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bcb.R;
-import com.bcb.common.event.BroadcastEvent;
 import com.bcb.data.util.MyActivityManager;
 import com.bcb.data.util.UmengUtil;
-
-import de.greenrobot.event.EventBus;
 
 /**
  * Created by Ray on 2016/5/11.
@@ -130,10 +127,11 @@ public class Activity_Daily_Welfare_Result extends Activity_Base implements View
                 overridePendingTransition(0, 0);
                 break;
             case R.id.btn_welfare_check://跳转到首页产品列表
-                EventBus.getDefault().post(new BroadcastEvent(BroadcastEvent.PRODUCT));
+                //EventBus.getDefault().post(new BroadcastEvent(BroadcastEvent.PRODUCT));
+                startActivity(new Intent(ctx, Activity_CP.class));
                 finish();
                 overridePendingTransition(0, 0);
-                handler.sendEmptyMessageDelayed(destroy, 50);
+                //handler.sendEmptyMessageDelayed(destroy, 50);
                 break;
             case R.id.activity_close:
                 finish();

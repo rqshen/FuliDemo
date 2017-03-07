@@ -22,6 +22,7 @@ public class UserDetailInfo {
     //判断是否投过标
     public boolean HasInvest;
     public boolean AutoTenderPlanStatus;//是否开启自动投标计划
+    public int CouponCount;//
 
 
     //美洽ID
