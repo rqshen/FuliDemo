@@ -437,7 +437,110 @@
 
                     </RelativeLayout>
 
+                    <!--理财客服、设置-->
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="@color/linegray"/>
 
+                    <RelativeLayout
+                        android:id="@+id/layout_account_settting"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical">
+
+                        <ImageView
+                            android:id="@+id/optionicon_04"
+                            android:layout_width="21dp"
+                            android:layout_height="21dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="22dp"
+                            android:src="@drawable/iv_my_sz"/>
+
+                        <TextView
+                            android:id="@+id/textView4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="15dp"
+                            android:layout_toRightOf="@+id/optionicon_04"
+                            android:gravity="center"
+                            android:text="@string/account_setting"
+                            android:textColor="#424954"
+                            android:textSize="16sp"/>
+
+                        <ImageView
+                            android:id="@+id/user_image_ind03"
+                            style="@style/image_indicator"
+
+                            android:layout_alignParentRight="true"/>
+                    </RelativeLayout>
+
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="10dp"
+                        android:background="@color/background"/>
+
+
+
+
+
+                    <ImageView
+                        android:id="@+id/layout_update_line"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:background="@color/background"/>
+
+
+
+
+
+                    <RelativeLayout
+                        android:id="@+id/layout_customer_service"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical">
+
+                        <ImageView
+                            android:id="@+id/optionicon_01"
+                            android:layout_width="21dp"
+                            android:layout_height="21dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="22dp"
+                            android:src="@drawable/iv_my_kf"/>
+
+                        <TextView
+                            android:id="@+id/text_customer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="15dp"
+                            android:layout_toRightOf="@+id/optionicon_01"
+                            android:gravity="center"
+                            android:text="理财客服"
+                            android:textColor="#424954"
+                            android:textSize="16sp"/>
+
+                        <ImageView
+                            android:id="@+id/user_image_ind01"
+                            style="@style/image_indicator"
+                            android:layout_alignParentRight="true"/>
+
+                        <TextView
+                            android:id="@+id/service_text_01"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="8dp"
+                            android:layout_toLeftOf="@id/user_image_ind01"
+                            android:gravity="center"
+                            android:text="@string/value_qqvip"
+                            android:textColor="#999"
+                            android:textSize="16sp"/>
+                    </RelativeLayout>
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
@@ -488,105 +591,6 @@
                             android:textSize="16sp"/>
 
 
-                    </RelativeLayout>
-
-                    <ImageView
-                        android:id="@+id/layout_update_line"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:background="@color/background"/>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="10dp"
-                        android:background="@color/background"/>
-
-
-                    <!--理财客服、设置-->
-
-
-                    <RelativeLayout
-                        android:id="@+id/layout_account_settting"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical">
-
-                        <ImageView
-                            android:id="@+id/optionicon_04"
-                            android:layout_width="21dp"
-                            android:layout_height="21dp"
-                            android:layout_alignParentLeft="true"
-                            android:layout_centerVertical="true"
-                            android:layout_marginLeft="22dp"
-                            android:src="@drawable/iv_my_sz"/>
-
-                        <TextView
-                            android:id="@+id/textView4"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_marginLeft="15dp"
-                            android:layout_toRightOf="@+id/optionicon_04"
-                            android:gravity="center"
-                            android:text="@string/account_setting"
-                            android:textColor="#424954"
-                            android:textSize="16sp"/>
-
-                        <ImageView
-                            android:id="@+id/user_image_ind03"
-                            style="@style/image_indicator"
-
-                            android:layout_alignParentRight="true"/>
-                    </RelativeLayout>
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="0.5dp"
-                        android:background="@color/linegray"/>
-
-                    <RelativeLayout
-                        android:id="@+id/layout_customer_service"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical">
-
-                        <ImageView
-                            android:id="@+id/optionicon_01"
-                            android:layout_width="21dp"
-                            android:layout_height="21dp"
-                            android:layout_alignParentLeft="true"
-                            android:layout_centerVertical="true"
-                            android:layout_marginLeft="22dp"
-                            android:src="@drawable/iv_my_kf"/>
-
-                        <TextView
-                            android:id="@+id/text_customer"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_marginLeft="15dp"
-                            android:layout_toRightOf="@+id/optionicon_01"
-                            android:gravity="center"
-                            android:text="理财客服"
-                            android:textColor="#424954"
-                            android:textSize="16sp"/>
-
-                        <ImageView
-                            android:id="@+id/user_image_ind01"
-                            style="@style/image_indicator"
-                            android:layout_alignParentRight="true"/>
-
-                        <TextView
-                            android:id="@+id/service_text_01"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_marginRight="8dp"
-                            android:layout_toLeftOf="@id/user_image_ind01"
-                            android:gravity="center"
-                            android:text="@string/value_qqvip"
-                            android:textColor="#999"
-                            android:textSize="16sp"/>
                     </RelativeLayout>
 
                     <ImageView
