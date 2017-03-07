@@ -201,7 +201,6 @@ public class Activity_Browser extends Activity_Base {
 		setTitleVisiable(View.VISIBLE);
 		setTitleValue(title);
 
-
 		if (type==20095) {
 			//红色标题栏
 			layout_title.setBackgroundColor(getResources().getColor(R.color.red));
