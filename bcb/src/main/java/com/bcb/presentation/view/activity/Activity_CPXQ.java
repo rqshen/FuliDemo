@@ -189,6 +189,10 @@ public class Activity_CPXQ extends Activity_Base implements View.OnTouchListener
 
 	@OnClick({R.id.ll_buy1, R.id.ll_buy2, R.id.more, R.id.buy})
 	public void onClick(View view) {
+		if (App.saveUserInfo.getAccess_Token() == null && view.getId() != R.id.more) {
+			Activity_Login.launche(ctx);
+			return;
+		}
 		switch (view.getId()) {
 			case R.id.ll_buy1:
 			case R.id.ll_buy2:

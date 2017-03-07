@@ -480,7 +480,7 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, Adapte
 
 	@Override
 	public void onClick(View v) {
-		if (App.saveUserInfo.getAccess_Token() == null) {
+		if (App.saveUserInfo.getAccess_Token() == null && v.getId() != R.id.tv_more) {
 			Activity_Login.launche(ctx);
 			return;
 		}
