@@ -114,7 +114,7 @@
                             android:layout_height="wrap_content"
                             android:paddingLeft="8dp"
                             android:paddingRight="30dp"
-                            android:text="每天10:00/16:00更新"
+                            android:text="10:00发布项目"
                             android:textColor="#999"
                             android:textSize="12sp"/>
 
