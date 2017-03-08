@@ -555,6 +555,7 @@ public class Activity_Forget_Pwd extends Activity_Base {
                         setTimer();
                     } else {
                         ToastUtil.alert(Activity_Forget_Pwd.this, message);
+	                    send.setEnabled(true);
                     }
 
                 } catch (JSONException e) {

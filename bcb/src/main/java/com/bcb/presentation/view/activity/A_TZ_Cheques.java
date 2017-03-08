@@ -67,8 +67,8 @@ public class A_TZ_Cheques extends Activity_Base {
 //				left.setText(String.format("%.2f", bean.WaitPrincipalAndInterest));
 					float v_have = 0, v_left = 0;
 					for (int i = 0; i < mList.size(); i++) {
-						if (mList.get(i).Repayed == 1) v_have += mList.get(i).Interest;
-						else v_left += mList.get(i).Interest;
+						if (mList.get(i).Repayed == 1) v_have += (mList.get(i).Interest+mList.get(i).Principal);
+						else v_left += (mList.get(i).Interest+mList.get(i).Principal);
 					}
 					have.setText(String.format("%.2f", v_have));//有个叫Repayed值来区分已还和待还的。
 					left.setText(String.format("%.2f", v_left));

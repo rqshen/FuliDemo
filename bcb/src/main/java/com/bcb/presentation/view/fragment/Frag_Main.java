@@ -585,9 +585,12 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, Adapte
 		int type = 0;//prj_package则为普通标
 		if (jpxm.Type != null && jpxm.Type.equals("claim_convey")) type = 1;//claim_convey则为债权转让标
 		else if (jpxm.Type != null && jpxm.Type.equals("mon_package")) type = 2;//mon_package为福鸡宝
-		if (type == 1 || type == 2) Activity_CPXQ.launche2(ctx, jpxm.PackageId, type);
-		else if (jpxm.Old) Activity_NormalProject_Introduction.launche2(ctx, jpxm.PackageId, 0, type);
-		else Activity_CPXQ.launche2(ctx, jpxm.PackageId, type);
+//		if (type == 1 || type == 2) Activity_CPXQ.launche2(ctx, jpxm.PackageId, type);
+//		else if (jpxm.Old) Activity_NormalProject_Introduction.launche2(ctx, jpxm.PackageId, 0, type);
+//		else Activity_CPXQ.launche2(ctx, jpxm.PackageId, type);
+
+		if (type == 2) Activity_CPXQ.launche2(ctx, jpxm.PackageId, type);
+		 else Activity_NormalProject_Introduction.launche2(ctx, jpxm.PackageId, 0, type);
 	}
 
 	//注册广播，用于接收广播之后更新精品项目的数据

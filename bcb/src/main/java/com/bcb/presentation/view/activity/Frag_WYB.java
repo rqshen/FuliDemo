@@ -239,6 +239,5 @@ public class Frag_WYB extends Frag_Base implements AdapterView.OnItemClickListen
 		//	【 0稳赢】【1涨薪宝】
 		if (Status == 0) Activity_CPXQ.launche2(ctx, jpxm.PackageId, type);
 		else Activity_NormalProject_Introduction.launche2(ctx, jpxm.PackageId, 0, type);
-
 	}
 }
