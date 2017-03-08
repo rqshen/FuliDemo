@@ -77,7 +77,7 @@ public class MainAdapter2 extends BaseAdapter {
 		viewHolder.tvJe.setText("融资金额" + bean.Amount );
 
 		//百分比
-		if (bean.Balance <= 0 || bean.ProcessPercent >= 100.0f) viewHolder.pb.setProgress(100);
+		if (bean.Balance <= 0) viewHolder.pb.setProgress(100);// || bean.ProcessPercent >= 100.0f
 		else viewHolder.pb.setProgress((int) bean.ProcessPercent);
 	}
 	
