@@ -141,22 +141,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
                         android:background="#eee"/>
-                    <!-- 精品标 -->
-                    <com.bcb.data.util.MyListView
-                        android:id="@+id/boutique_listview"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
 
-                        android:divider="#eee"
 
-                        android:dividerHeight="0.5dp"
-                        android:fastScrollEnabled="false"
-                        android:scrollbars="none"
-                        android:visibility="visible"/>
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="0.5dp"
-                        android:background="#eee"/>
                     <!-- 新标预告 -->
                     <com.bcb.data.util.MyListView
                         android:id="@+id/announce_listView"
@@ -170,6 +156,22 @@
                         android:fastScrollEnabled="false"
 
                         android:scrollbars="none"/>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="#eee"/>
+                    <!-- 精品标 -->
+                    <com.bcb.data.util.MyListView
+                        android:id="@+id/boutique_listview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:divider="#eee"
+
+                        android:dividerHeight="0.5dp"
+                        android:fastScrollEnabled="false"
+                        android:scrollbars="none"
+                        android:visibility="visible"/>
 
                     <!-- 如果新标预告不存在的时候才初始化该列表 -->
                     <com.bcb.data.util.MyListView
