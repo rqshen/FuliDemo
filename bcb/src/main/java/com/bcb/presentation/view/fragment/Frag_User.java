@@ -335,7 +335,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 			//账户余额
 			value_balance.setText("￥" + String.format("%.2f", App.mUserWallet.BalanceAmount));
 			//待收本息
-			value_lc.setText("￥" + String.format("%.2f", App.mUserWallet.InvestingAmount+App.mUserWallet.LeftInterest));
+			value_lc.setText("￥" + String.format("%.2f", App.mUserWallet.InvestingAmount + App.mUserWallet.LeftInterest));
 			//冻结金额
 			value_total.setText("" + String.format("%.2f", App.mUserWallet.getFreezeAmount()));
 			value_yhq.setText(App.mUserDetailInfo.CouponCount + "张");
@@ -357,15 +357,20 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 		iv_head.setImageDrawable(getResources().getDrawable(R.drawable.iv_my_head));
 		//审核通过
 		if (App.mUserDetailInfo != null && !TextUtils.isEmpty(mUserDetailInfo.UserName)) {
-			user_comany_shortname.setText(mUserDetailInfo.MyCompany.getShortName());
 			user_join_name.setText("您好，" + mUserDetailInfo.UserName);
+		} else {
+			user_join_name.setText("您好，" + App.saveUserInfo.getLocalPhone());
+		}
+
+		if (App.mUserDetailInfo.MyCompany != null && !TextUtils.isEmpty(mUserDetailInfo.MyCompany.ShortName)) {
+			user_comany_shortname.setText(mUserDetailInfo.MyCompany.ShortName);
 			user_comany_shortname.setCompoundDrawablesWithIntrinsicBounds(//
 					getActivity().getResources().getDrawable(R.drawable.rz), null, null, null);
 		} else {
 			user_comany_shortname.setText("加入我的公司拿员工专属福利>");
 			user_comany_shortname.setCompoundDrawables(null, null, null, null);
-			user_join_name.setText("您好，" + App.saveUserInfo.getLocalPhone());
 		}
+
 		layout_scrollview.scrollTo(0, 0);
 	}
 
