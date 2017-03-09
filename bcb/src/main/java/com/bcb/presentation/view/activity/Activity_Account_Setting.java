@@ -100,7 +100,7 @@ public class Activity_Account_Setting extends Activity_Base implements OnClickLi
 			name.setText("");
 			layout_id_card.setVisibility(View.GONE);
 			layout_phone.setVisibility(View.GONE);
-		}else if (mUserDetailInfo.MyCompany != null && !TextUtils.isEmpty(mUserDetailInfo.MyCompany.getShortName())) {
+		}else if (mUserDetailInfo.HasOpenCustody) {
 			name.setText("" + mUserDetailInfo.UserName);
 			layout_id_card.setVisibility(View.VISIBLE);
 			layout_username.setVisibility(View.VISIBLE);

@@ -356,7 +356,7 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 		user_comany_shortname.setVisibility(View.VISIBLE);
 		iv_head.setImageDrawable(getResources().getDrawable(R.drawable.iv_my_head));
 		//审核通过
-		if (App.mUserDetailInfo.MyCompany != null && !TextUtils.isEmpty(mUserDetailInfo.MyCompany.getShortName())) {
+		if (App.mUserDetailInfo != null && !TextUtils.isEmpty(mUserDetailInfo.UserName)) {
 			user_comany_shortname.setText(mUserDetailInfo.MyCompany.getShortName());
 			user_join_name.setText("您好，" + mUserDetailInfo.UserName);
 			user_comany_shortname.setCompoundDrawablesWithIntrinsicBounds(//
@@ -699,12 +699,10 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 				setupJoinCompanyMessage();
 			}
 			//登陆成功
-			else if (intent.getAction()
-					.equals("com.bcb.login.success")) {
-				refreshLayout.autoRefresh();
+			else if (intent.getAction().equals("com.bcb.login.success")) {
+//				refreshLayout.autoRefresh();
 			}        //注销成功
-			else if (intent.getAction()
-					.equals("com.bcb.logout.success")) {
+			else if (intent.getAction().equals("com.bcb.logout.success")) {
 				LogUtil.i("bqt", "【Receiver】【onReceive】注销");
 				showData();
 				setupJoinCompanyMessage();
