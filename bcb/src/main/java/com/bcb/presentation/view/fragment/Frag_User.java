@@ -333,9 +333,9 @@ public class Frag_User extends Frag_Base implements OnClickListener {
 			//累计收益
 			value_earn_all.setText("累计收益" + String.format("%.2f", App.mUserWallet.InvestIncome) + "元");
 			//账户余额
-			value_balance.setText("￥" + String.format("%.2f", App.mUserWallet.getBalanceAmount()));
+			value_balance.setText("￥" + String.format("%.2f", App.mUserWallet.BalanceAmount));
 			//待收本息
-			value_lc.setText("￥" + String.format("%.2f", App.mUserWallet.getIncomingMoney()));
+			value_lc.setText("￥" + String.format("%.2f", App.mUserWallet.InvestingAmount+App.mUserWallet.LeftInterest));
 			//冻结金额
 			value_total.setText("" + String.format("%.2f", App.mUserWallet.getFreezeAmount()));
 			value_yhq.setText(App.mUserDetailInfo.CouponCount + "张");

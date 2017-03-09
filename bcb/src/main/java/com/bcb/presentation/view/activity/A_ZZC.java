@@ -52,7 +52,7 @@ public class A_ZZC extends Activity_Base {
 		setTitleValue("总资产");
 		service_cz.setText(String.format("%.2f", mUserWallet.TotalAsset));
 		ye.setText(String.format("%.2f", mUserWallet.BalanceAmount));
-		bj.setText(String.format("%.2f", mUserWallet.LeftPrincipal));
+		bj.setText(String.format("%.2f", mUserWallet.InvestingAmount));
 		sy.setText(String.format("%.2f", mUserWallet.LeftInterest));
 		bzj.setText(String.format("%.2f", mUserWallet.SecurityAmount));
 		ljtz.setText(String.format("%.2f", mUserWallet.InvestAmount));
