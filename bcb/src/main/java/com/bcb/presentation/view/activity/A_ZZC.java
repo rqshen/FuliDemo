@@ -71,12 +71,12 @@ public class A_ZZC extends Activity_Base {
 		int[] mColors = {0xFFfb4977, 0xFFffc760, 0xFF6fe621, 0xFF4fccff, 0xffffffff, 0xfff8f8f8};//0xfff8f8f8
 		String[] mNames = {"账户余额", "在投本金", "应计收益", "借款保证金", "", ""};
 		float[] values = {0, 0, 0, 0, 0.1f, 0};
-		if (mUserWallet.BalanceAmount <= 0f && mUserWallet.LeftPrincipal <= 0f //
+		if (mUserWallet.BalanceAmount <= 0f && mUserWallet.InvestingAmount <= 0f //
 				&& mUserWallet.LeftInterest <= 0f && mUserWallet.SecurityAmount <= 0f) {
 			values[5] = 1;
 		}
 		values[0] = (float) App.mUserWallet.BalanceAmount;
-		values[1] = (float) App.mUserWallet.LeftPrincipal;
+		values[1] = (float) App.mUserWallet.InvestingAmount;
 		values[2] = (float) App.mUserWallet.LeftInterest;
 		values[3] = (float) App.mUserWallet.SecurityAmount;
 

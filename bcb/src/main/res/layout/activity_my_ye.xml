@@ -165,7 +165,7 @@
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@+id/iv_mx"
             android:gravity="center"
-            android:text="账单明细"
+            android:text="交易明细"
             android:textColor="#424954"
             android:textSize="16sp"/>
 
