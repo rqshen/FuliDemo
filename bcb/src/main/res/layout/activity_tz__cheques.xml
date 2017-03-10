@@ -112,7 +112,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dip"
-            android:text="暂无回款计划"
+            android:text="您的项目待起息，暂无回款计划\n请起息后查询"
             android:textSize="@dimen/main_text_default"/>
     </LinearLayout>
 </LinearLayout>

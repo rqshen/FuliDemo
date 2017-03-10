@@ -3,6 +3,7 @@ package com.bcb.presentation.presenter;
 import android.content.Context;
 
 import com.bcb.common.app.App;
+import com.bcb.common.event.BroadcastEvent;
 import com.bcb.common.net.BcbJsonRequest;
 import com.bcb.common.net.BcbRequest;
 import com.bcb.common.net.BcbRequestQueue;
@@ -15,6 +16,8 @@ import com.bcb.presentation.view.activity_interface.Interface_Verification;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import de.greenrobot.event.EventBus;
 
 /**
  * Created by cain on 16/3/18.
@@ -94,6 +97,7 @@ public class IPresenter_RegisterImpl implements IPresenter_Register {
                             iModelUserAccount.saveAccessToken(response.getJSONObject("result").getString("Access_Token"));
                             App.saveUserInfo.setLocalPhone(phoneNumber);
                             iModelUserAccount.setFirstLogin(true);
+                            EventBus.getDefault().post(new BroadcastEvent(BroadcastEvent.LOGIN));//通知刷新
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();

@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bcb.R;
 import com.bcb.common.app.App;
@@ -135,7 +136,7 @@ public class MainAdapter extends BaseAdapter {
 	private void requestAnnounce(final int pos) {
 		JSONObject obj = new JSONObject();
 		try {
-			ProgressDialogrUtils.show(ctx,"正在加载数据...");
+			ProgressDialogrUtils.show(ctx, "正在加载数据...");
 			obj.put("UniqueId", data.get(pos).PackageId);
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -143,17 +144,18 @@ public class MainAdapter extends BaseAdapter {
 		BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.RequestAnnounce, obj, TokenUtil.getEncodeToken(ctx), pos, new BcbRequest.BcbIndexCallBack<JSONObject>() {
 			@Override
 			public void onResponse(JSONObject response, int index) {
-				LogUtil.i("bqt", "【预约】"+index+"---"+response.toString());
+				LogUtil.i("bqt", "【预约】" + index + "---" + response.toString());
 
 				try {
 					if (response.getInt("status") == 1) {
 						//设置对应位置的数据
 						if (response.getJSONObject("result").getInt("PredictCount") > 0) {
-							data.get(index).PredictCount=response.getJSONObject("result").getInt("PredictCount");
+							data.get(index).PredictCount = response.getJSONObject("result").getInt("PredictCount");
 							App.saveUserInfo.setPreviewInvest(data.get(pos).PackageId);
 							//更新数据
 							notifyDataSetChanged();
 							EventBus.getDefault().post(new BroadcastEvent(BroadcastEvent.REFRESH));
+							Toast.makeText(ctx, "预约成功", Toast.LENGTH_SHORT).show();
 						}
 					} else {
 						ToastUtil.alert(ctx, response.getString("message").isEmpty() ? "预约失败" : response.getString("message"));
