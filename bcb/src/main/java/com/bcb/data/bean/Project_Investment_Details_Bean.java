@@ -45,6 +45,8 @@ public class Project_Investment_Details_Bean implements Serializable {
 	public int Phase;// 订单所处阶段 1：加入 5：加入后至开始计息前 10：开始计息 50：开始计息后至锁定到期前 100: 锁定到期
 	public String RepaymentHadPeriod;//已收益期数
 	public String RepaymentAllPeriod;//总收益期数
+	public  float PrePrincipalInterest;//待收益本息
+	public  float DonePrincipalInterest;//已收益本息
 	public List<Plar> RepaymentPlan;
 	
 	public static class Plar implements Serializable {

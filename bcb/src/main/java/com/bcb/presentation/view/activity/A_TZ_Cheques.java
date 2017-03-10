@@ -63,15 +63,15 @@ public class A_TZ_Cheques extends Activity_Base {
 					}
 					mListView.setAdapter(mMyBaseAdapter);
 					//已收本息，剩余本息
-//				have.setText(String.format("%.2f", bean.ReceivedPrincipalAndInterest));
-//				left.setText(String.format("%.2f", bean.WaitPrincipalAndInterest));
-					float v_have = 0, v_left = 0;
-					for (int i = 0; i < mList.size(); i++) {
-						if (mList.get(i).Repayed == 1) v_have += (mList.get(i).Interest+mList.get(i).Principal);
-						else v_left += (mList.get(i).Interest+mList.get(i).Principal);
-					}
-					have.setText(String.format("%.2f", v_have));//有个叫Repayed值来区分已还和待还的。
-					left.setText(String.format("%.2f", v_left));
+				have.setText(String.format("%.2f", bean.DonePrincipalInterest));
+				left.setText(String.format("%.2f", bean.PrePrincipalInterest));
+//					float v_have = 0, v_left = 0;
+//					for (int i = 0; i < mList.size(); i++) {
+//						if (mList.get(i).Repayed == 1) v_have += (mList.get(i).Interest+mList.get(i).Principal);
+//						else v_left += (mList.get(i).Interest+mList.get(i).Principal);
+//					}
+//					have.setText(String.format("%.2f", v_have));//有个叫Repayed值来区分已还和待还的。
+//					left.setText(String.format("%.2f", v_left));
 				} else {
 					null_data_layout.setVisibility(View.VISIBLE);
 					mListView.setVisibility(View.GONE);
