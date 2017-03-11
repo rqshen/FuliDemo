@@ -37,7 +37,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -190,7 +189,7 @@ public class Frag_Coupon2 extends Frag_Base {
 							setupListViewVisible(true);
 							synchronized (this) {
 								recordsBeans.addAll(mCouponList.Records);
-								Collections.sort(recordsBeans);
+//								Collections.sort(recordsBeans);
 							}
 							if (null != mCouponListAdapter) {
 								mCouponListAdapter.notifyDataSetChanged();
