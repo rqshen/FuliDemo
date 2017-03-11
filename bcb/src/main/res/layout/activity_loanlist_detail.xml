@@ -32,7 +32,7 @@
             android:layout_weight="1.0"
             android:gravity="center"
             android:text="还款计划"
-            android:textColor="@color/txt_gray"
+            android:textColor="#aaffffff"
             android:textSize="@dimen/main_text_large" />
     </LinearLayout>
     <!-- 标签底部指示图片 -->

@@ -146,11 +146,11 @@ public class Activity_LoanList_Detail extends Activity_Base_Fragment {
             switch (arg0) {
                 case 0:
                     detailTextView.setTextColor(getResources().getColor(R.color.white));
-                    paymentTextView.setTextColor(getResources().getColor(R.color.txt_gray));
+                    paymentTextView.setTextColor(0xaaffffff);
                     break;
 
                 case 1:
-                    detailTextView.setTextColor(getResources().getColor(R.color.txt_gray));
+                    detailTextView.setTextColor(0xaaffffff);
                     paymentTextView.setTextColor(getResources().getColor(R.color.white));
                     break;
             }

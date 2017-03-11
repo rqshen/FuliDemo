@@ -102,6 +102,7 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, Adapte
 
 	private TextView JXPackageAdWord;
 	private int successConnectCount = 0;
+	View line_yg;
 
 	private Activity ctx;
 
@@ -136,6 +137,7 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, Adapte
 		ll_lb = view.findViewById(R.id.ll_lb);
 		ll_lb.setOnClickListener(this);
 		ll_xj = view.findViewById(R.id.ll_xj);
+		line_yg = view.findViewById(R.id.line_yg);
 		ll_xj.setOnClickListener(this);
 
 		tb = (UPMarqueeView) view.findViewById(R.id.tb);
@@ -448,6 +450,7 @@ public class Frag_Main extends Frag_Base implements View.OnClickListener, Adapte
 	private void setupAnnounceVisible(int visible) {
 		if (announceListView != null) {
 			announceListView.setVisibility(visible);
+			line_yg.setVisibility(visible);
 		}
 	}
 
