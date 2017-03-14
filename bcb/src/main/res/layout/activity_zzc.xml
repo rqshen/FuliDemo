@@ -211,12 +211,12 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="10dp"
+        android:layout_height="0dp"
         android:background="@color/background"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="0dp"
         android:layout_gravity="center_vertical"
         android:paddingLeft="15dp">
 
@@ -245,14 +245,14 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="0dp"
         android:background="@color/linegray"/>
 
     <!--下面四个东西-->
     <LinearLayout
         android:id="@+id/lj"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:visibility="gone"
         android:orientation="vertical">
 

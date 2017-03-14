@@ -71,16 +71,23 @@ public class A_ZZC extends Activity_Base {
 		int[] mColors = {0xFFfb4977, 0xFFffc760, 0xFF6fe621, 0xFF4fccff, 0xffffffff, 0xfff8f8f8};//0xfff8f8f8
 		String[] mNames = {"账户余额", "在投本金", "应计收益", "借款保证金", "", ""};
 		float[] values = {0, 0, 0, 0, 0.01f, 0};
-		if (mUserWallet.BalanceAmount <= 0f && mUserWallet.InvestingAmount <= 0f //
-				&& mUserWallet.LeftInterest <= 0f && mUserWallet.SecurityAmount <= 0f) {
-			mColors[4] = 0xfff8f8f8;
-			values[5] = 1;
-		}
+
 		values[0] = (float) App.mUserWallet.BalanceAmount;
 		values[1] = (float) App.mUserWallet.InvestingAmount;
 		values[2] = (float) App.mUserWallet.LeftInterest;
 		values[3] = (float) App.mUserWallet.SecurityAmount;
-
+		if (values[0] >= 0.01f) {
+			mColors[4] = mColors[0];
+		} else if (values[1] >= 0.01f) {
+			mColors[4] = mColors[1];
+		} else if (values[2] >= 0.01f) {
+			mColors[4] = mColors[2];
+		} else if (values[3] >= 0.01f) {
+			mColors[4] = mColors[3];
+		} else {
+			mColors[4] = mColors[5];
+			values[5] = 1;
+		}
 		for (int i = 0; i < mColors.length; i++) {
 			PieData pieData = new PieData();
 			pieData.setColor(mColors[i]);

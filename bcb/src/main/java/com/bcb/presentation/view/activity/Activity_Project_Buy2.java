@@ -904,13 +904,16 @@ public class Activity_Project_Buy2 extends Activity_Base implements View.OnClick
 		if (monery >= mSimpleProjectDetail.StartingAmount) {
 			button_buy.setBackgroundResource(R.drawable.button_solid_red);
 			button_buy.setClickable(true);
+			button_buy.setTextColor(getResources().getColor(R.color.white));
 			//尾标
 		} else if (mSimpleProjectDetail.Balance < mSimpleProjectDetail.StartingAmount && monery == mSimpleProjectDetail.Balance) {
 			button_buy.setBackgroundResource(R.drawable.button_solid_red);
 			button_buy.setClickable(true);
+			button_buy.setTextColor(getResources().getColor(R.color.white));
 		} else {
-			button_buy.setBackgroundResource(R.drawable.button_solid_black);
+			button_buy.setBackgroundResource(R.drawable.button_solid_xy);
 			button_buy.setClickable(false);
+			button_buy.setTextColor(0xff999999);
 		}
 	}
 
