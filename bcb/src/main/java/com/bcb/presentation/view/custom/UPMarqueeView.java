@@ -57,7 +57,7 @@ public class UPMarqueeView extends ViewFlipper {
 			tv.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					Activity_Browser.launche(getContext(), "移动端公告", datas.get(num).PageUrl);
+					Activity_Browser.launche(getContext(), "公告", datas.get(num).PageUrl);
 				}
 			});
 			addView(tv);
