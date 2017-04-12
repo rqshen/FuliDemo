@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.bcb.R;
 import com.bcb.base.Activity_Base;
+import com.bcb.module.homepager.morefinance.MoreFinanceActivity;
 import com.bcb.utils.MyActivityManager;
 import com.bcb.utils.UmengUtil;
 
@@ -129,7 +130,7 @@ public class Activity_Daily_Welfare_Result extends Activity_Base implements View
                 break;
             case R.id.btn_welfare_check://跳转到首页产品列表
                 //EventBus.getDefault().post(new BroadcastEvent(BroadcastEvent.PRODUCT));
-                startActivity(new Intent(ctx, _CP.class));
+                startActivity(new Intent(ctx, MoreFinanceActivity.class));
                 finish();
                 overridePendingTransition(0, 0);
                 //handler.sendEmptyMessageDelayed(destroy, 50);

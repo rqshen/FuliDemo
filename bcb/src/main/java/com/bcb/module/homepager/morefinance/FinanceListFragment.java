@@ -1,7 +1,6 @@
-package com.bcb.module.myinfo.financial.financiallist;
+package com.bcb.module.homepager.morefinance;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,25 +8,26 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
+import com.bcb.MyApplication;
 import com.bcb.R;
 import com.bcb.base.BaseFragment;
-import com.bcb.MyApplication;
+import com.bcb.data.bean.MainListBean2;
+import com.bcb.data.bean.WYBbean;
 import com.bcb.network.BcbJsonRequest;
 import com.bcb.network.BcbRequest;
 import com.bcb.network.UrlsOne;
-import com.bcb.data.bean.TZJLbean;
+import com.bcb.presentation.adapter.MainAdapter2;
+import com.bcb.presentation.view.activity.Activity_CPXQ;
+import com.bcb.presentation.view.activity.Activity_NormalProject_Introduction;
+import com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout;
 import com.bcb.utils.HttpUtils;
 import com.bcb.utils.LogUtil;
 import com.bcb.utils.MyListView;
 import com.bcb.utils.PackageUtil;
 import com.bcb.utils.ToastUtil;
 import com.bcb.utils.TokenUtil;
-import com.bcb.module.myinfo.financial.financiallist.adapter.FinancialListAdapter;
-import com.bcb.module.myinfo.financial.financialstate.FinancialStateFragment;
-import com.bcb.module.myinfo.financial.financialdetail.FinancialDetailActivity;
-import com.bcb.module.homepager.morefinance.MoreFinanceActivity;
-import com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,24 +36,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 投资理财 持有中， 已结束的 订单列表
- * 通过status和tab来区分
- * status表示稳盈宝和涨薪宝 0 稳赢  1涨薪
- * tab表示持有中和已结束  1为持有中，2为已结束
+ * 描述：产品列表
+ * 作者：baicaibang
+ * 时间：2017/2/27 17:05
  */
-public class FinancialListFragment extends BaseFragment implements AdapterView.OnItemClickListener {
+public class FinanceListFragment extends BaseFragment implements AdapterView.OnItemClickListener {
     private Context ctx;
 
     private MyListView lv;
-    private int Status;//	【 0稳赢，打包】【1涨薪宝，三标】
-    private int Tab;//	1为持有中，2为已结束
-
+    private int Status;//	【 0稳赢】【1涨薪宝】
     private int PageNow = 1;
     private int PageSize = 10;
 
-    TZJLbean tzjLbean;
-    private List<TZJLbean.InvetDetailBean.RecordsBean> recordsBeans;
-    private FinancialListAdapter mCouponListAdapter;
+    private List<MainListBean2.JpxmBean> recordsBeans;
+    private MainAdapter2 mCouponListAdapter;
 
     private LinearLayout null_data_layout;
     private boolean canLoadmore = true;
@@ -65,11 +61,10 @@ public class FinancialListFragment extends BaseFragment implements AdapterView.O
     /**
      * 构造时把传入的参数带进来，
      */
-    public static FinancialListFragment newInstance(int Status, int Tab) {
+    public static FinanceListFragment newInstance(int Status) {
         Bundle bundle = new Bundle();
         bundle.putInt("Status", Status);
-        bundle.putInt("Tab", Tab);
-        FinancialListFragment fragment = new FinancialListFragment();
+        FinanceListFragment fragment = new FinanceListFragment();
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -80,14 +75,13 @@ public class FinancialListFragment extends BaseFragment implements AdapterView.O
         Bundle bundle = getArguments();
         if (bundle != null) {
             Status = bundle.getInt("Status");
-            Tab = bundle.getInt("Tab");
         }
     }
     //******************************************************************************************
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_tzjl, container, false);
+        return inflater.inflate(R.layout.fragment_wyb, container, false);
     }
 
     @Override
@@ -95,14 +89,8 @@ public class FinancialListFragment extends BaseFragment implements AdapterView.O
         this.ctx = view.getContext();
         null_data_layout = (LinearLayout) view.findViewById(R.id.null_data_layout);
         recordsBeans = new ArrayList<>();
-        mCouponListAdapter = new FinancialListAdapter(ctx, recordsBeans);
+        mCouponListAdapter = new MainAdapter2(ctx, recordsBeans);
         lv = (MyListView) view.findViewById(R.id.listview_data_layout);
-        view.findViewById(R.id.button_confirm).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(ctx, MoreFinanceActivity.class));
-            }
-        });
         lv.setOnItemClickListener(this);
         lv.setAdapter(mCouponListAdapter);
         //刷新
@@ -149,41 +137,32 @@ public class FinancialListFragment extends BaseFragment implements AdapterView.O
         try {
             obj.put("PageNow", PageNow);
             obj.put("PageSize", PageSize);
-            obj.put("Tab", Tab);
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        String url = UrlsOne.WYB_JL;//打包，稳赢
-        if (Status == 1) url = UrlsOne.ZXB_JL;
+        String url = UrlsOne.WYB;
+        if (Status == 1) url = UrlsOne.ZXB;
         BcbJsonRequest jsonRequest = new BcbJsonRequest(url, obj, TokenUtil.getEncodeToken(ctx), new BcbRequest
                 .BcbCallBack<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                LogUtil.i("bqt", "【打包稳赢宝投资记录】" + Status + "--" + Tab + "--" + response.toString());
+                LogUtil.i("bqt", "【稳赢宝】" + Status + "--" + response.toString());
 
                 try {
                     if (PackageUtil.getRequestStatus(response, ctx)) {
                         JSONObject obj = PackageUtil.getResultObject(response);
-                        tzjLbean = null;
+                        WYBbean mCouponList = null;
                         if (obj != null) {
-                            tzjLbean = MyApplication.mGson.fromJson(obj.toString(), TZJLbean.class);
-                            if (Status == 0) {
-                                ((FinancialStateFragment) getParentFragment()).yjsy.setText(String.format("%.2f", tzjLbean.PackInterest));
-                                ((FinancialStateFragment) getParentFragment()).ztbj.setText(String.format("%.2f", tzjLbean.PackPrincipal));
-                            } else {
-                                ((FinancialStateFragment) getParentFragment()).yjsy.setText(String.format("%.2f", tzjLbean.OriginalInterest));
-                                ((FinancialStateFragment) getParentFragment()).ztbj.setText(String.format("%.2f", tzjLbean.OriginalPrincipal));
-                            }
+                            mCouponList = MyApplication.mGson.fromJson(obj.toString(), WYBbean.class);
                         }
-
                         //存在数据时
-                        if (null != tzjLbean && null != tzjLbean.InvetDetail.Records && tzjLbean.InvetDetail.Records.size() > 0) {
+                        if (null != mCouponList && null != mCouponList.Records && mCouponList.Records.size() > 0) {
                             canLoadmore = true;
                             PageNow++;
                             setupListViewVisible(true);
                             synchronized (this) {
-                                recordsBeans.addAll(tzjLbean.InvetDetail.Records);
+                                recordsBeans.addAll(mCouponList.Records);
                                 //								Collections.sort(recordsBeans);
                             }
                             if (null != mCouponListAdapter) {
@@ -245,12 +224,22 @@ public class FinancialListFragment extends BaseFragment implements AdapterView.O
         }
     }
 
-    /**
-     * 投资详情的点击事件
-     */
+    //******************************************************************************************
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        //投资详情
-        FinancialDetailActivity.launche(ctx, recordsBeans.get(position).OrderNo + "", Status);
+        MainListBean2.JpxmBean jpxm = recordsBeans.get(position);
+        //判断是否属于新标预告的状态，根据状态来判断是否可点击
+        if (jpxm.Status == 10) Toast.makeText(ctx, "Status == 10，不可购买", Toast.LENGTH_SHORT).show();
+        //0正常标，1转让标，2福鸡包
+        int type = 0;//prj_package则为普通标
+        if (jpxm.Type != null && jpxm.Type.equals("claim_convey")) type = 1;//claim_convey则为债权转让标
+        else if (jpxm.Type != null && jpxm.Type.equals("mon_package")) type = 2;//mon_package为福鸡宝
+
+//		if (type == 1 || type == 2) Activity_CPXQ.launche2(ctx, jpxm.PackageId, type);
+//		else if (jpxm.Old) Activity_NormalProject_Introduction.launche2(ctx, jpxm.PackageId, 0, type);
+//		else Activity_CPXQ.launche2(ctx, jpxm.PackageId, type);
+        //	【 0稳赢】【1涨薪宝】
+        if (Status == 0) Activity_CPXQ.launche2(ctx, jpxm.PackageId, type);
+        else Activity_NormalProject_Introduction.launche2(ctx, jpxm.PackageId, 0, type);
     }
 }

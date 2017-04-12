@@ -16,7 +16,7 @@ import com.bcb.R;
 import com.bcb.base.BaseFragment;
 import com.bcb.MyApplication;
 import com.bcb.presentation.view.activity.A_Elite_Loan;
-import com.bcb.presentation.view.activity._CP;
+import com.bcb.module.homepager.morefinance.MoreFinanceActivity;
 import com.bcb.presentation.view.activity.Activity_Login;
 import com.bcb.presentation.view.activity.Activity_Love;
 import com.bcb.presentation.view.activity.Activity_Open_Account;
@@ -75,7 +75,7 @@ public class DiscoverFragment extends BaseFragment {
 				cheXian();
 				break;
 			case R.id.ll_lc:
-				startActivity(new Intent(ctx, _CP.class));
+				startActivity(new Intent(ctx, MoreFinanceActivity.class));
 				break;
 			case R.id.ll_gjj:
 				Toast.makeText(ctx, "敬请期待", Toast.LENGTH_SHORT).show();

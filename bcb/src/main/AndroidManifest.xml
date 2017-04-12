@@ -92,7 +92,7 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".presentation.view.activity._CP"
+            android:name=".module.homepager.morefinance.MoreFinanceActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"></activity>
         <activity
