@@ -9,10 +9,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.bcb.R;
-import com.bcb.common.net.UrlsOne;
+import com.bcb.base.Activity_Base;
+import com.bcb.network.UrlsOne;
 import com.bcb.data.bean.BuyProjectSuccess;
-import com.bcb.data.util.MyActivityManager;
-import com.bcb.data.util.ScreenUtils;
+import com.bcb.utils.MyActivityManager;
+import com.bcb.utils.ScreenUtils;
+import com.bcb.module.myinfo.financial.financialdetail.projectdetail.ProjectDetailActivity;
 import com.bcb.presentation.presenter.IPresenter_Base;
 import com.bcb.presentation.presenter.IPresenter_UpdateUserInfoImpl;
 import com.bcb.presentation.view.activity_interface.Interface_Base;
@@ -120,7 +122,7 @@ public class Activity_BuyProject_Success extends Activity_Base implements Interf
 			@Override
 			public void onClick(View v) {
 				//点击图片，跳转至微信
-				Activity_Browser.launche(Activity_BuyProject_Success.this, "起息第一时间通知", UrlsOne.WxBindIndex);
+				ProjectDetailActivity.launche(Activity_BuyProject_Success.this, "起息第一时间通知", UrlsOne.WxBindIndex);
 			}
 		});
 		//根据Banner的宽高比进行等比缩放

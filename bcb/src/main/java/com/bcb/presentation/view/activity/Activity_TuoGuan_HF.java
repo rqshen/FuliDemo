@@ -10,15 +10,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bcb.R;
-import com.bcb.common.app.App;
-import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbRequest;
-import com.bcb.common.net.UrlsTwo;
+import com.bcb.base.Activity_Base;
+import com.bcb.MyApplication;
+import com.bcb.network.BcbJsonRequest;
+import com.bcb.network.BcbRequest;
+import com.bcb.network.UrlsTwo;
 import com.bcb.data.bean.UserBankCard;
-import com.bcb.data.util.HttpUtils;
-import com.bcb.data.util.LogUtil;
-import com.bcb.data.util.PackageUtil;
-import com.bcb.data.util.TokenUtil;
+import com.bcb.utils.HttpUtils;
+import com.bcb.utils.LogUtil;
+import com.bcb.utils.PackageUtil;
+import com.bcb.utils.TokenUtil;
+import com.bcb.module.myinfo.financial.financialdetail.projectdetail.ProjectDetailActivity;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
 
 import org.json.JSONObject;
@@ -42,11 +44,11 @@ public class Activity_TuoGuan_HF extends Activity_Base implements View.OnClickLi
 	@Override
 	protected void onResume() {
 		super.onResume();
-		if (App.mUserDetailInfo != null) {
-			tv_account.setText(App.mUserDetailInfo.CustodyAccount);
+		if (MyApplication.mUserDetailInfo != null) {
+			tv_account.setText(MyApplication.mUserDetailInfo.CustodyAccount);
 		}
-		if (App.mUserWallet != null) {
-			tv_monery.setText("" + String.format("%.2f", App.mUserWallet.getBalanceAmount()));
+		if (MyApplication.mUserWallet != null) {
+			tv_monery.setText("" + String.format("%.2f", MyApplication.mUserWallet.getBalanceAmount()));
 		}
 	}
 
@@ -90,7 +92,7 @@ public class Activity_TuoGuan_HF extends Activity_Base implements View.OnClickLi
 	public void onClick(View v) {
 		switch (v.getId()) {
 			case R.id.rl_unband:
-				Activity_Browser.launcheForResult(this, "解绑", UrlsTwo.UrlUnBand, 2);
+				ProjectDetailActivity.launcheForResult(this, "解绑", UrlsTwo.UrlUnBand, 2);
 				break;
 			case R.id.tv_charge:
 				startActivity(new Intent(Activity_TuoGuan_HF.this, Activity_Charge_HF.class));
@@ -99,7 +101,7 @@ public class Activity_TuoGuan_HF extends Activity_Base implements View.OnClickLi
 				withdrawMoney();
 				break;
 			case R.id.rl_look:
-				Activity_Browser.launcheForResult(this, "托管接入证明", UrlsTwo.UrlZM, 3);
+				ProjectDetailActivity.launcheForResult(this, "托管接入证明", UrlsTwo.UrlZM, 3);
 				break;
 			case R.id.rl_login:
 				loginAccount();
@@ -124,7 +126,7 @@ public class Activity_TuoGuan_HF extends Activity_Base implements View.OnClickLi
 	//提现
 	private void withdrawMoney() {
 		//用户还没绑卡
-		if (App.mUserDetailInfo.BankCard == null) {
+		if (MyApplication.mUserDetailInfo.BankCard == null) {
 			showAlertView("您还没指定提现卡哦", "该银行卡将作为账户唯一提现银行卡", new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
@@ -188,7 +190,7 @@ public class Activity_TuoGuan_HF extends Activity_Base implements View.OnClickLi
 				LogUtil.d("bqt", "【Activity_TuoGuan_HF】【loginAccount】网络异常，请稍后重试" + error.toString());
 			}
 		});
-		App.getInstance().getRequestQueue().add(jsonRequest);
+		MyApplication.getInstance().getRequestQueue().add(jsonRequest);
 	}
 
 	/**
@@ -228,7 +230,7 @@ public class Activity_TuoGuan_HF extends Activity_Base implements View.OnClickLi
 				LogUtil.d("bqt", "【Activity_TuoGuan_HF】【alertLoginPassword】网络异常，请稍后重试" + error.toString());
 			}
 		});
-		App.getInstance().getRequestQueue().add(jsonRequest);
+		MyApplication.getInstance().getRequestQueue().add(jsonRequest);
 	}
 
 	/**
@@ -270,7 +272,7 @@ public class Activity_TuoGuan_HF extends Activity_Base implements View.OnClickLi
 				LogUtil.d("bqt", "【Activity_Charge_HF】【BandCard】网络异常，请稍后重试" + error.toString());
 			}
 		});
-		App.getInstance().getRequestQueue().add(jsonRequest);
+		MyApplication.getInstance().getRequestQueue().add(jsonRequest);
 	}
 
 	/**
@@ -284,8 +286,8 @@ public class Activity_TuoGuan_HF extends Activity_Base implements View.OnClickLi
 				LogUtil.i("bqt", "绑定的银行卡：" + response.toString());
 				if (PackageUtil.getRequestStatus(response, Activity_TuoGuan_HF.this)) {
 					JSONObject data = PackageUtil.getResultObject(response);
-					if (data != null && App.mUserDetailInfo != null) {
-						App.mUserDetailInfo.BankCard = App.mGson.fromJson(data.toString(), UserBankCard.class);
+					if (data != null && MyApplication.mUserDetailInfo != null) {
+						MyApplication.mUserDetailInfo.BankCard = MyApplication.mGson.fromJson(data.toString(), UserBankCard.class);
 					}
 				}
 			}
@@ -294,6 +296,6 @@ public class Activity_TuoGuan_HF extends Activity_Base implements View.OnClickLi
 			public void onErrorResponse(Exception error) {
 			}
 		});
-		App.instance.getRequestQueue().add(jsonRequest);
+		MyApplication.instance.getRequestQueue().add(jsonRequest);
 	}
 }

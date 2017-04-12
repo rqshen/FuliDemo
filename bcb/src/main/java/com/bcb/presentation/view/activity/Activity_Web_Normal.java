@@ -14,9 +14,9 @@
 //import android.widget.Toast;
 //
 //import com.bcb.R;
-//import com.bcb.common.app.App;
-//import com.bcb.data.util.DESUtil;
-//import com.bcb.data.util.MyActivityManager;
+//import com.bcb.MyApplication;
+//import com.bcb.util.DESUtil;
+//import com.bcb.util.MyActivityManager;
 //import com.bcb.presentation.view.activity_interface.WebAppinterface;
 //
 //import java.io.UnsupportedEncodingException;
@@ -91,7 +91,7 @@
 //		byte[] data = null;
 //		byte[] encodeByte_ECB;
 //		try {
-//			data = App.saveUserInfo.getLocalPhone().getBytes("UTF-8");
+//			data = MyApplication.saveUserInfo.getLocalPhone().getBytes("UTF-8");
 //		} catch (UnsupportedEncodingException e) {
 //			e.printStackTrace();
 //		}

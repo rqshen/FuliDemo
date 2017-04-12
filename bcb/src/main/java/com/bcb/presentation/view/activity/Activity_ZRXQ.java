@@ -12,14 +12,16 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bcb.R;
-import com.bcb.common.app.App;
-import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbRequest;
-import com.bcb.common.net.UrlsOne;
-import com.bcb.common.net.UrlsTwo;
+import com.bcb.base.Activity_Base;
+import com.bcb.MyApplication;
+import com.bcb.network.BcbJsonRequest;
+import com.bcb.network.BcbRequest;
+import com.bcb.network.UrlsOne;
+import com.bcb.network.UrlsTwo;
 import com.bcb.data.bean.ClaimConveyDetailBean;
-import com.bcb.data.util.LogUtil;
-import com.bcb.data.util.TokenUtil;
+import com.bcb.utils.LogUtil;
+import com.bcb.utils.TokenUtil;
+import com.bcb.module.myinfo.financial.financialdetail.projectdetail.ProjectDetailActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -67,7 +69,7 @@ public class Activity_ZRXQ extends Activity_Base {
 		setRightTitleValue("转让协议", new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Activity_Browser.launche(Activity_ZRXQ.this, "转让协议", UrlsTwo.ZRXY);
+				ProjectDetailActivity.launche(Activity_ZRXQ.this, "转让协议", UrlsTwo.ZRXY);
 			}
 		});
 		lv = (ListView) findViewById(R.id.lv);
@@ -97,7 +99,7 @@ public class Activity_ZRXQ extends Activity_Base {
 			public void onResponse(JSONObject response) {
 				LogUtil.i("bqt", "债权转让详情" + response.toString());
 				try {
-					bean = App.mGson.fromJson(response.getJSONObject("result")
+					bean = MyApplication.mGson.fromJson(response.getJSONObject("result")
 							                          .toString(), ClaimConveyDetailBean.class);
 					items = new ArrayList<Item>();
 					items.add(new Item("债权订单", bean.OrderNo));
@@ -124,7 +126,7 @@ public class Activity_ZRXQ extends Activity_Base {
 
 		);
 		jsonRequest.setTag(UrlsOne.CLAIMCONVEYDETAIL);
-		App.getInstance()
+		MyApplication.getInstance()
 				.getRequestQueue()
 				.add(jsonRequest);
 	}
@@ -214,6 +216,6 @@ public class Activity_ZRXQ extends Activity_Base {
 			}
 		});
 		jsonRequest.setTag(UrlsOne.REQUESTZR);
-		App.getInstance().getRequestQueue().add(jsonRequest);
+		MyApplication.getInstance().getRequestQueue().add(jsonRequest);
 	}
 }

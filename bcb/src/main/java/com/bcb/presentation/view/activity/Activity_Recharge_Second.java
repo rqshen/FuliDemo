@@ -18,24 +18,25 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bcb.R;
-import com.bcb.common.app.App;
-import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbRequest;
-import com.bcb.common.net.BcbRequestQueue;
-import com.bcb.common.net.BcbRequestTag;
-import com.bcb.common.net.UrlsOne;
-import com.bcb.common.net.UrlsTwo;
+import com.bcb.base.Activity_Base;
+import com.bcb.MyApplication;
+import com.bcb.network.BcbJsonRequest;
+import com.bcb.network.BcbRequest;
+import com.bcb.network.BcbRequestQueue;
+import com.bcb.network.BcbRequestTag;
+import com.bcb.network.UrlsOne;
+import com.bcb.network.UrlsTwo;
 import com.bcb.data.bean.BankItem;
 import com.bcb.data.bean.UserDetailInfo;
 import com.bcb.data.bean.UserWallet;
-import com.bcb.data.util.BankLogo;
-import com.bcb.data.util.LogUtil;
-import com.bcb.data.util.MyActivityManager;
-import com.bcb.data.util.MyConstants;
-import com.bcb.data.util.PackageUtil;
-import com.bcb.data.util.MyTextUtil;
-import com.bcb.data.util.ToastUtil;
-import com.bcb.data.util.TokenUtil;
+import com.bcb.utils.BankLogo;
+import com.bcb.utils.LogUtil;
+import com.bcb.utils.MyActivityManager;
+import com.bcb.constant.MyConstants;
+import com.bcb.utils.PackageUtil;
+import com.bcb.utils.MyTextUtil;
+import com.bcb.utils.ToastUtil;
+import com.bcb.utils.TokenUtil;
 import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
@@ -95,7 +96,7 @@ public class Activity_Recharge_Second extends Activity_Base implements View.OnCl
 		setBaseContentView(R.layout.activity_recharge_second);
 		setLeftTitleVisible(true);
 		setTitleValue("充值");
-        requestQueue = App.getInstance().getRequestQueue();
+        requestQueue = MyApplication.getInstance().getRequestQueue();
         showProgressBar();
 		receiver = new Receiver();
 		IntentFilter filter = new IntentFilter("com.bcb.money.change.success");
@@ -127,22 +128,22 @@ public class Activity_Recharge_Second extends Activity_Base implements View.OnCl
 		bank_card_text = (TextView) findViewById(R.id.bank_card_text);
 		editext_money = (EditText) findViewById(R.id.editext_money);
 		//获取用户余额，如果静态数据区存在数据，则不用从服务器中获取数据
-        if (App.mUserWallet != null && App.mUserWallet.getBalanceAmount() > 0) {
-            mUserWallet = App.mUserWallet;
+        if (MyApplication.mUserWallet != null && MyApplication.mUserWallet.getBalanceAmount() > 0) {
+            mUserWallet = MyApplication.mUserWallet;
             user_balauce.setText("" + mUserWallet.BalanceAmount + "元");
         } else {
             loadUserWalletData();
         }
         //获取账户信息，如果静态数据区存在数据，则不用从服务器中获取数据
-        if (App.mUserDetailInfo != null && App.mUserDetailInfo.BankCard != null
-                && App.mUserDetailInfo.BankCard.getCardNumber() != null) {
-            mUserDetailInfo = App.mUserDetailInfo;
-			bank_card_text.setText(MyTextUtil.delBankNum(App.mUserDetailInfo.BankCard.getCardNumber()));
+        if (MyApplication.mUserDetailInfo != null && MyApplication.mUserDetailInfo.BankCard != null
+                && MyApplication.mUserDetailInfo.BankCard.getCardNumber() != null) {
+            mUserDetailInfo = MyApplication.mUserDetailInfo;
+			bank_card_text.setText(MyTextUtil.delBankNum(MyApplication.mUserDetailInfo.BankCard.getCardNumber()));
 			//加载银行卡限额数据
 			loadBankLimitData(mUserDetailInfo.BankCard.BankCode);
 			//设置银行卡logo
 			BankLogo bankLogo = new BankLogo();
-			bank_icon.setBackgroundResource(bankLogo.getDrawableBankLogo(App.mUserDetailInfo.BankCard.getBankCode()));
+			bank_icon.setBackgroundResource(bankLogo.getDrawableBankLogo(MyApplication.mUserDetailInfo.BankCard.getBankCode()));
             hideProgressBar();
         } else {
             loadUserBankData();
@@ -187,10 +188,10 @@ public class Activity_Recharge_Second extends Activity_Base implements View.OnCl
                     JSONObject data = PackageUtil.getResultObject(response);
                     //判断JSON对象是否为空
                     if (data != null) {
-                        mUserWallet = App.mGson.fromJson(data.toString(), UserWallet.class);
+                        mUserWallet = MyApplication.mGson.fromJson(data.toString(), UserWallet.class);
                     }
                     if (null != mUserWallet) {
-                        App.mUserWallet = mUserWallet;
+                        MyApplication.mUserWallet = mUserWallet;
                         showUserWallet();
                     }
                 }
@@ -215,13 +216,13 @@ public class Activity_Recharge_Second extends Activity_Base implements View.OnCl
                     JSONObject data = PackageUtil.getResultObject(response);
                     //判断JSON对象是否为空
                     if (data != null) {
-                        mUserDetailInfo = App.mGson.fromJson(data.toString(), UserDetailInfo.class);
+                        mUserDetailInfo = MyApplication.mGson.fromJson(data.toString(), UserDetailInfo.class);
                     }
                     if (null != mUserDetailInfo) {
-                        App.mUserDetailInfo = mUserDetailInfo;
+                        MyApplication.mUserDetailInfo = mUserDetailInfo;
 						//设置银行卡logo
 						BankLogo bankLogo = new BankLogo();
-						bank_icon.setBackgroundResource(bankLogo.getDrawableBankLogo(App.mUserDetailInfo.BankCard.getBankCode()));
+						bank_icon.setBackgroundResource(bankLogo.getDrawableBankLogo(MyApplication.mUserDetailInfo.BankCard.getBankCode()));
                         showData();
                     }
                 }
@@ -247,7 +248,7 @@ public class Activity_Recharge_Second extends Activity_Base implements View.OnCl
 				try {
 					JSONArray result = response.getJSONArray("result");
 					if (result != null) {
-						mBanklist = App.mGson.fromJson(result.toString(), new TypeToken<List<BankItem>>(){}.getType());
+						mBanklist = MyApplication.mGson.fromJson(result.toString(), new TypeToken<List<BankItem>>(){}.getType());
 					}
 
 				} catch (Exception e) {
@@ -326,7 +327,7 @@ public class Activity_Recharge_Second extends Activity_Base implements View.OnCl
 
     //显示账号信息
 	private void showData(){
-		bank_card_text.setText(MyTextUtil.delBankNum(App.mUserDetailInfo.BankCard.getCardNumber()));
+		bank_card_text.setText(MyTextUtil.delBankNum(MyApplication.mUserDetailInfo.BankCard.getCardNumber()));
 		//加载银行卡限额数据
 		loadBankLimitData(mUserDetailInfo.BankCard.BankCode);
 	}

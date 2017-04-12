@@ -8,7 +8,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bcb.R;
-import com.bcb.data.util.MQCustomerManager;
+import com.bcb.base.Activity_Base;
+import com.bcb.utils.MQCustomerManager;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

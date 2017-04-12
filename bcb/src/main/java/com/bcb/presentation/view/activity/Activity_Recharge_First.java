@@ -16,11 +16,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bcb.R;
+import com.bcb.base.Activity_Base;
 import com.bcb.data.bean.BankItem;
-import com.bcb.data.util.MyActivityManager;
-import com.bcb.data.util.MyConstants;
-import com.bcb.data.util.ToastUtil;
-import com.bcb.data.util.UmengUtil;
+import com.bcb.utils.MyActivityManager;
+import com.bcb.constant.MyConstants;
+import com.bcb.utils.ToastUtil;
+import com.bcb.utils.UmengUtil;
 import com.bumptech.glide.Glide;
 
 import org.json.JSONObject;

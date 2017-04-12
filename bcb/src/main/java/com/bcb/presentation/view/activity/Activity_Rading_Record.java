@@ -12,13 +12,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bcb.R;
-import com.bcb.common.app.App;
-import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbRequest;
-import com.bcb.common.net.UrlsOne;
+import com.bcb.base.Activity_Base;
+import com.bcb.MyApplication;
+import com.bcb.network.BcbJsonRequest;
+import com.bcb.network.BcbRequest;
+import com.bcb.network.UrlsOne;
 import com.bcb.data.bean.RadingRecordBean;
-import com.bcb.data.util.LogUtil;
-import com.bcb.data.util.TokenUtil;
+import com.bcb.utils.LogUtil;
+import com.bcb.utils.TokenUtil;
 import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONException;
@@ -72,9 +73,9 @@ public class Activity_Rading_Record extends Activity_Base {
 				.BcbCallBack<JSONObject>() {
 			@Override
 			public void onResponse(JSONObject response) {
-				LogUtil.i("bqt", "【Activity_Project_Investment_Details】【onResponse】债权转让信息" + response.toString());
+				LogUtil.i("bqt", "【FinancialDetailActivity】【onResponse】债权转让信息" + response.toString());
 				try {
-					items = App.mGson.fromJson(response.getJSONArray("result").toString(), new TypeToken<List<RadingRecordBean>>() {}
+					items = MyApplication.mGson.fromJson(response.getJSONArray("result").toString(), new TypeToken<List<RadingRecordBean>>() {}
 							.getType());
 					if (items != null && items.size() > 0) {
 						null_data_layout.setVisibility(View.GONE);
@@ -96,7 +97,7 @@ public class Activity_Rading_Record extends Activity_Base {
 			}
 		});
 		jsonRequest.setTag(UrlsOne.ClaimConveyDate);
-		App.getInstance().getRequestQueue().add(jsonRequest);
+		MyApplication.getInstance().getRequestQueue().add(jsonRequest);
 	}
 
 	//******************************************************************************************

@@ -12,10 +12,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bcb.R;
-import com.bcb.data.util.MQCustomerManager;
-import com.bcb.data.util.MyActivityManager;
-import com.bcb.data.util.RegexManager;
-import com.bcb.data.util.UmengUtil;
+import com.bcb.base.Activity_Base;
+import com.bcb.utils.MQCustomerManager;
+import com.bcb.utils.MyActivityManager;
+import com.bcb.utils.RegexManager;
+import com.bcb.utils.UmengUtil;
 
 public class Activity_Register_First extends Activity_Base {
 

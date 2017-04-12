@@ -8,7 +8,7 @@ import android.util.AttributeSet;
 import android.widget.ProgressBar;
 
 import com.bcb.R;
-import com.bcb.data.util.DensityUtils;
+import com.bcb.utils.DensityUtils;
 
 public class HorizontalProgressBar extends ProgressBar {
 	protected Paint mPaint = new Paint();

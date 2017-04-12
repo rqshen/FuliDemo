@@ -9,7 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.bcb.R;
-import com.bcb.common.app.App;
+import com.bcb.MyApplication;
 import com.bcb.data.bean.MainListBean2;
 import com.bcb.presentation.view.custom.RoundProgressBar;
 
@@ -62,7 +62,7 @@ public class MainAdapter2 extends BaseAdapter {
 		MainListBean2.JpxmBean bean = data.get(pos);
 		viewHolder.tvRate.setText(String.valueOf(bean.Rate));
 		//福袋利率
-		String welfareRate = TextUtils.isEmpty(App.getInstance().getWelfare()) ? "%" : "%+" + App.getInstance().getWelfare() + "%";
+		String welfareRate = TextUtils.isEmpty(MyApplication.getInstance().getWelfare()) ? "%" : "%+" + MyApplication.getInstance().getWelfare() + "%";
 		viewHolder.tvRateAdd.setText(welfareRate);
 		viewHolder.tvTime.setText(String.valueOf(bean.Duration));
 		//天标月标

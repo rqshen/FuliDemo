@@ -7,21 +7,22 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.bcb.R;
-import com.bcb.common.app.App;
-import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbRequest;
-import com.bcb.common.net.BcbRequestQueue;
-import com.bcb.common.net.BcbRequestTag;
-import com.bcb.common.net.UrlsOne;
+import com.bcb.base.Activity_Base;
+import com.bcb.MyApplication;
+import com.bcb.network.BcbJsonRequest;
+import com.bcb.network.BcbRequest;
+import com.bcb.network.BcbRequestQueue;
+import com.bcb.network.BcbRequestTag;
+import com.bcb.network.UrlsOne;
 import com.bcb.data.bean.loan.LoanListBean;
 import com.bcb.data.bean.loan.LoanListRecordsBean;
-import com.bcb.data.util.HttpUtils;
-import com.bcb.data.util.LogUtil;
-import com.bcb.data.util.MyActivityManager;
-import com.bcb.data.util.MyListView;
-import com.bcb.data.util.PackageUtil;
-import com.bcb.data.util.ToastUtil;
-import com.bcb.data.util.TokenUtil;
+import com.bcb.utils.HttpUtils;
+import com.bcb.utils.LogUtil;
+import com.bcb.utils.MyActivityManager;
+import com.bcb.utils.MyListView;
+import com.bcb.utils.PackageUtil;
+import com.bcb.utils.ToastUtil;
+import com.bcb.utils.TokenUtil;
 import com.bcb.presentation.adapter.LoanListAdapter;
 import com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout;
 
@@ -62,7 +63,7 @@ public class Activity_LoanList extends Activity_Base {
         setBaseContentView(R.layout.activity_loanlist);
         setLeftTitleVisible(true);
         setTitleValue("借款列表");
-        requestQueue = App.getInstance().getRequestQueue();
+        requestQueue = MyApplication.getInstance().getRequestQueue();
         setupView();
     }
 
@@ -135,7 +136,7 @@ public class Activity_LoanList extends Activity_Base {
                         LoanListBean loanListBean = null;
                         //判断JSON对象是否为空
                         if (resultObject != null) {
-                            loanListBean = App.mGson.fromJson(resultObject.toString(), LoanListBean.class);
+                            loanListBean = MyApplication.mGson.fromJson(resultObject.toString(), LoanListBean.class);
                         }
                         //存在借款列表
                         if (null != loanListBean.Records && loanListBean.Records.size() > 0) {
@@ -217,7 +218,7 @@ public class Activity_LoanList extends Activity_Base {
     //产品列表的Item点击事件监听器
     class onClickViewLoanDetail implements AdapterView.OnItemClickListener {
         public void onItemClick(AdapterView<?> arg0, View view, int position,long arg3) {
-            Activity_LoanList_Detail.launche(Activity_LoanList.this, recordsBeans.get(position).UniqueId, recordsBeans.get(position).AssetCode);
+            _LoanList_Detail.launche(Activity_LoanList.this, recordsBeans.get(position).UniqueId, recordsBeans.get(position).AssetCode);
         }
     }
 

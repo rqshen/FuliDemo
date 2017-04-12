@@ -8,19 +8,20 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.bcb.R;
-import com.bcb.common.app.App;
-import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbRequest;
-import com.bcb.common.net.BcbRequestTag;
-import com.bcb.common.net.UrlsOne;
-import com.bcb.common.net.UrlsTwo;
+import com.bcb.base.Activity_Base;
+import com.bcb.MyApplication;
+import com.bcb.network.BcbJsonRequest;
+import com.bcb.network.BcbRequest;
+import com.bcb.network.BcbRequestTag;
+import com.bcb.network.UrlsOne;
+import com.bcb.network.UrlsTwo;
 import com.bcb.data.bean.loan.LoanKindBean;
 import com.bcb.data.bean.loan.LoanRequestInfoBean;
-import com.bcb.data.util.LogUtil;
-import com.bcb.data.util.PackageUtil;
-import com.bcb.data.util.ProgressDialogrUtils;
-import com.bcb.data.util.ToastUtil;
-import com.bcb.data.util.TokenUtil;
+import com.bcb.utils.LogUtil;
+import com.bcb.utils.PackageUtil;
+import com.bcb.utils.ProgressDialogrUtils;
+import com.bcb.utils.ToastUtil;
+import com.bcb.utils.TokenUtil;
 import com.bcb.presentation.view.custom.AlertView.DialogBQT;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -119,7 +120,7 @@ public class A_Elite_Loan extends Activity_Base {
 						if (result != null) {
 							JSONArray jsonArray = result.getJSONArray("LoanKindList");
 							if (jsonArray != null) {
-								list = App.mGson.fromJson(jsonArray.toString(), //
+								list = MyApplication.mGson.fromJson(jsonArray.toString(), //
 										new TypeToken<ArrayList<LoanKindBean>>() {}.getType());
 								if (list != null && list.size() >= 3) {
 									for (int i = 0 ; i < list.size() ; i++) {
@@ -153,7 +154,7 @@ public class A_Elite_Loan extends Activity_Base {
 				LogUtil.d("bqt", "借款首页" + error.toString());
 			}
 		});
-		App.getInstance().getRequestQueue().add(jsonRequest);
+		MyApplication.getInstance().getRequestQueue().add(jsonRequest);
 	}
 
 	/**
@@ -206,7 +207,7 @@ public class A_Elite_Loan extends Activity_Base {
 			}
 		});
 		jsonRequest.setTag(BcbRequestTag.BCB_LOAN_CERTIFICATION_REQUEST);
-		App.getInstance().getRequestQueue().add(jsonRequest);
+		MyApplication.getInstance().getRequestQueue().add(jsonRequest);
 	}
 
 	//****************************************************************************************************************************************
@@ -233,6 +234,6 @@ public class A_Elite_Loan extends Activity_Base {
 			public void onErrorResponse(Exception error) {
 			}
 		});
-		App.getInstance().getRequestQueue().add(jsonRequest);
+		MyApplication.getInstance().getRequestQueue().add(jsonRequest);
 	}
 }

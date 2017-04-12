@@ -11,9 +11,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.bcb.R;
-import com.bcb.common.app.App;
-import com.bcb.data.util.MyActivityManager;
-import com.bcb.data.util.UmengUtil;
+import com.bcb.base.Activity_Base;
+import com.bcb.MyApplication;
+import com.bcb.utils.MyActivityManager;
+import com.bcb.utils.UmengUtil;
 import com.bcb.presentation.adapter.MyPagerAdapter;
 
 import java.util.ArrayList;
@@ -135,7 +136,7 @@ public class Activity_Login_Introduction extends Activity_Base implements View.O
     @Override
     protected void onStart() {
         super.onStart();
-        if (App.saveUserInfo != null && !TextUtils.isEmpty(App.saveUserInfo.getAccess_Token())) {
+        if (MyApplication.saveUserInfo != null && !TextUtils.isEmpty(MyApplication.saveUserInfo.getAccess_Token())) {
             finish();
         }
     }

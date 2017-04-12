@@ -3,15 +3,15 @@ package com.bcb.presentation.presenter;
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.bcb.common.app.App;
-import com.bcb.common.event.BroadcastEvent;
-import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbRequest;
-import com.bcb.common.net.BcbRequestQueue;
-import com.bcb.common.net.BcbRequestTag;
-import com.bcb.common.net.UrlsOne;
-import com.bcb.data.util.LogUtil;
-import com.bcb.data.util.TokenUtil;
+import com.bcb.MyApplication;
+import com.bcb.event.BroadcastEvent;
+import com.bcb.network.BcbJsonRequest;
+import com.bcb.network.BcbRequest;
+import com.bcb.network.BcbRequestQueue;
+import com.bcb.network.BcbRequestTag;
+import com.bcb.network.UrlsOne;
+import com.bcb.utils.LogUtil;
+import com.bcb.utils.TokenUtil;
 import com.bcb.presentation.model.IModel_UserAccount;
 import com.bcb.presentation.model.IModel_UserAccountImpl;
 import com.bcb.presentation.view.activity_interface.Interface_AccountSetting;
@@ -39,7 +39,7 @@ public class IPresenter_AccountSettingImpl implements IPresenter_AccountSetting 
         this.iModelUserAccount = new IModel_UserAccountImpl();
         this.context = context;
         this.interfaceBase = interfaceBase;
-        this.requestQueue = App.getInstance().getRequestQueue();
+        this.requestQueue = MyApplication.getInstance().getRequestQueue();
     }
 
     @Override

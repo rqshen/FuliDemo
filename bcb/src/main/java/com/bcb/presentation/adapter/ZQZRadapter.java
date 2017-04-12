@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.bcb.R;
 import com.bcb.data.bean.ZQBGbean;
-import com.bcb.data.util.LogUtil;
+import com.bcb.utils.LogUtil;
 
 import java.util.List;
 

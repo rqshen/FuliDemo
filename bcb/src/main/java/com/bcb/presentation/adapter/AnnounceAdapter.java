@@ -9,16 +9,16 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.bcb.R;
-import com.bcb.common.app.App;
-import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbRequest;
-import com.bcb.common.net.BcbRequestQueue;
-import com.bcb.common.net.BcbRequestTag;
-import com.bcb.common.net.UrlsOne;
+import com.bcb.MyApplication;
+import com.bcb.network.BcbJsonRequest;
+import com.bcb.network.BcbRequest;
+import com.bcb.network.BcbRequestQueue;
+import com.bcb.network.BcbRequestTag;
+import com.bcb.network.UrlsOne;
 import com.bcb.data.bean.AnnounceRecordsBean;
-import com.bcb.data.util.ToastUtil;
-import com.bcb.data.util.TokenUtil;
-import com.bcb.data.util.UmengUtil;
+import com.bcb.utils.ToastUtil;
+import com.bcb.utils.TokenUtil;
+import com.bcb.utils.UmengUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -44,7 +44,7 @@ public class AnnounceAdapter extends BaseAdapter {
             this.context = context;
             this.data = data;
         }
-        requestQueue = App.getInstance().getRequestQueue();
+        requestQueue = MyApplication.getInstance().getRequestQueue();
     }
 
     @Override
@@ -134,7 +134,7 @@ public class AnnounceAdapter extends BaseAdapter {
         viewHolder.announce_text.setText("立即预约");
         viewHolder.announce_text.setTextColor(Color.argb(221, 72, 127, 248));
         //判断是否预约
-        if (TokenUtil.getEncodeToken(context)!= null && App.saveUserInfo.isPreviewInvest(data.get(pos).PackageId)) {
+        if (TokenUtil.getEncodeToken(context)!= null && MyApplication.saveUserInfo.isPreviewInvest(data.get(pos).PackageId)) {
             viewHolder.announce_text.setBackgroundResource(R.drawable.announce_button_gray);
             viewHolder.announce_text.setOnClickListener(null);
             viewHolder.announce_text.setText("已预约");
@@ -157,7 +157,7 @@ public class AnnounceAdapter extends BaseAdapter {
                     if (response.getInt("status") == 1) {
                         //设置对应位置的数据
                         if (response.getJSONObject("result").getInt("PackageStatus") == 1) {
-                            App.saveUserInfo.setPreviewInvest(data.get(pos).PackageId);
+                            MyApplication.saveUserInfo.setPreviewInvest(data.get(pos).PackageId);
                             //更新UI
                             notifyDataSetChanged();
                         } else {
@@ -197,7 +197,7 @@ public class AnnounceAdapter extends BaseAdapter {
                         //设置对应位置的数据
                         if (response.getJSONObject("result").getInt("PredictCount") > 0) {
                             data.get(index).setPredictCount(response.getJSONObject("result").getInt("PredictCount"));
-                            App.saveUserInfo.setPreviewInvest(data.get(pos).PackageId);
+                            MyApplication.saveUserInfo.setPreviewInvest(data.get(pos).PackageId);
                             //更新数据
                             notifyDataSetChanged();
                         }

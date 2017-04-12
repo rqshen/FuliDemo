@@ -7,16 +7,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bcb.R;
-import com.bcb.common.app.App;
-import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbRequest;
-import com.bcb.common.net.UrlsTwo;
+import com.bcb.base.Activity_Base;
+import com.bcb.MyApplication;
+import com.bcb.network.BcbJsonRequest;
+import com.bcb.network.BcbRequest;
+import com.bcb.network.UrlsTwo;
 import com.bcb.data.bean.SlbBasic;
 import com.bcb.data.bean.SlbZH;
-import com.bcb.data.util.HttpUtils;
-import com.bcb.data.util.LogUtil;
-import com.bcb.data.util.PackageUtil;
-import com.bcb.data.util.TokenUtil;
+import com.bcb.utils.HttpUtils;
+import com.bcb.utils.LogUtil;
+import com.bcb.utils.PackageUtil;
+import com.bcb.utils.TokenUtil;
 import com.bcb.presentation.view.custom.SlbSyView;
 
 import org.json.JSONObject;
@@ -103,7 +104,7 @@ public class A_Slb extends Activity_Base implements View.OnClickListener {
                     try {
                         JSONObject result = PackageUtil.getResultObject(response);
                         if (result != null) {
-                            SlbBasic bean = App.mGson.fromJson(result.toString(), SlbBasic.class);
+                            SlbBasic bean = MyApplication.mGson.fromJson(result.toString(), SlbBasic.class);
                             if (null != bean) {
                                 value_rate.setText(String.format("%.2f", bean.getPrdRate()) + "");
                                 List<SlbBasic.DailyRateListBean> dailyRateList = bean.getDailyRateList();
@@ -138,7 +139,7 @@ public class A_Slb extends Activity_Base implements View.OnClickListener {
                 LogUtil.d("bqt", "【A_Slb】【SLB】网络异常，请稍后重试" + error.toString());
             }
         });
-        App.getInstance().getRequestQueue().add(jsonRequest);
+        MyApplication.getInstance().getRequestQueue().add(jsonRequest);
     }
 
 
@@ -156,7 +157,7 @@ public class A_Slb extends Activity_Base implements View.OnClickListener {
                     try {
                         JSONObject result = PackageUtil.getResultObject(response);
                         if (result != null) {
-                            SlbZH bean = App.mGson.fromJson(result.toString(), SlbZH.class);
+                            SlbZH bean = MyApplication.mGson.fromJson(result.toString(), SlbZH.class);
                             if (null != bean) {
                                 tv_yesterday.setText(String.format("%.2f", bean.getYesterdayProfit()) + "");
                                 tv_total_top.setText(String.format("%.2f", bean.getTotalAsset()) + "");
@@ -174,7 +175,7 @@ public class A_Slb extends Activity_Base implements View.OnClickListener {
                 LogUtil.d("bqt", "【A_Slb】【ZH】网络异常，请稍后重试" + error.toString());
             }
         });
-        App.getInstance().getRequestQueue().add(jsonRequest);
+        MyApplication.getInstance().getRequestQueue().add(jsonRequest);
     }
 
     /**
@@ -213,6 +214,6 @@ public class A_Slb extends Activity_Base implements View.OnClickListener {
                 LogUtil.d("bqt", "【A_Slb】【v】网络异常，请稍后重试" + error.toString());
             }
         });
-        App.getInstance().getRequestQueue().add(jsonRequest);
+        MyApplication.getInstance().getRequestQueue().add(jsonRequest);
     }
 }

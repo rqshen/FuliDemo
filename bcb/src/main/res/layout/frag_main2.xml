@@ -145,7 +145,7 @@
 
 
                     <!-- 新标预告 -->
-                    <com.bcb.data.util.MyListView
+                    <com.bcb.utils.MyListView
                         android:id="@+id/announce_listView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -162,7 +162,7 @@
                         android:layout_height="0.5dp"
                         android:background="#eee"/>
                     <!-- 精品标 -->
-                    <com.bcb.data.util.MyListView
+                    <com.bcb.utils.MyListView
                         android:id="@+id/boutique_listview"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -175,7 +175,7 @@
                         android:visibility="visible"/>
 
                     <!-- 如果新标预告不存在的时候才初始化该列表 -->
-                    <com.bcb.data.util.MyListView
+                    <com.bcb.utils.MyListView
                         android:id="@+id/addition_listView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

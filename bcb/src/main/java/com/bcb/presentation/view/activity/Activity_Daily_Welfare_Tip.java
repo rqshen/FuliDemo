@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.bcb.R;
+import com.bcb.base.Activity_Base;
 
 /**
  * Created by Ray on 2016/5/13.

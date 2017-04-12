@@ -15,7 +15,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bcb.R;
-import com.bcb.data.util.MyActivityManager;
+import com.bcb.utils.MyActivityManager;
+import com.bcb.module.myinfo.financial.financiallist.FinancialListFragment;
 import com.bcb.presentation.adapter.MyFragmentPagerAdapter;
 import com.bcb.presentation.view.custom.CustomViewPager;
 
@@ -49,10 +50,10 @@ public class Activity_TZJL extends FragmentActivity implements View.OnClickListe
 	private void InitViewPager() {
 		vp = (CustomViewPager) findViewById(R.id.vp);
 		fragmentsList = new ArrayList<Fragment>();
-		fragmentsList.add(Frag_TZJL_2.newInstance(0, 1));
-		fragmentsList.add(Frag_TZJL_2.newInstance(0, 2));
-		fragmentsList.add(Frag_TZJL_2.newInstance(1, 1));
-		fragmentsList.add(Frag_TZJL_2.newInstance(1, 2));
+		fragmentsList.add(FinancialListFragment.newInstance(0, 1));
+		fragmentsList.add(FinancialListFragment.newInstance(0, 2));
+		fragmentsList.add(FinancialListFragment.newInstance(1, 1));
+		fragmentsList.add(FinancialListFragment.newInstance(1, 2));
 
 		vp.setAdapter(new MyFragmentPagerAdapter(getSupportFragmentManager(), fragmentsList));
 		vp.setCurrentItem(0);

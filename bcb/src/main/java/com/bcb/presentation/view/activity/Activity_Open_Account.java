@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.bcb.R;
-import com.bcb.common.net.UrlsTwo;
+import com.bcb.base.Activity_Base;
+import com.bcb.network.UrlsTwo;
+import com.bcb.module.myinfo.financial.financialdetail.projectdetail.ProjectDetailActivity;
 
 public class Activity_Open_Account extends Activity_Base {
 	@Override
@@ -18,7 +20,7 @@ public class Activity_Open_Account extends Activity_Base {
 		setRightTitleValue("关于汇付", new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Activity_Browser.launche(Activity_Open_Account.this, "关于汇付", UrlsTwo.UrlAboutHF);
+				ProjectDetailActivity.launche(Activity_Open_Account.this, "关于汇付", UrlsTwo.UrlAboutHF);
 			}
 		});
 		findViewById(R.id.tv_open).setOnClickListener(new View.OnClickListener() {

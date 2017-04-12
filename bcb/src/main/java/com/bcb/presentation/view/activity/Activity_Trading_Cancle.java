@@ -14,14 +14,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bcb.R;
-import com.bcb.common.app.App;
-import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbRequest;
-import com.bcb.common.net.UrlsOne;
-import com.bcb.common.net.UrlsTwo;
+import com.bcb.base.Activity_Base;
+import com.bcb.MyApplication;
+import com.bcb.network.BcbJsonRequest;
+import com.bcb.network.BcbRequest;
+import com.bcb.network.UrlsOne;
+import com.bcb.network.UrlsTwo;
 import com.bcb.data.bean.ClaimConveyBeanBQT;
-import com.bcb.data.util.LogUtil;
-import com.bcb.data.util.TokenUtil;
+import com.bcb.utils.LogUtil;
+import com.bcb.utils.TokenUtil;
+import com.bcb.module.myinfo.financial.financialdetail.projectdetail.ProjectDetailActivity;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
 
 import org.json.JSONException;
@@ -65,7 +67,7 @@ public class Activity_Trading_Cancle extends Activity_Base {
 		tv_text.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Activity_Browser.launche(Activity_Trading_Cancle.this, "转让协议", UrlsTwo.ZRXY);
+				ProjectDetailActivity.launche(Activity_Trading_Cancle.this, "转让协议", UrlsTwo.ZRXY);
 			}
 		});
 		setLeftTitleVisible(true);
@@ -92,9 +94,9 @@ public class Activity_Trading_Cancle extends Activity_Base {
 				BcbRequest.BcbCallBack<JSONObject>() {
 			@Override
 			public void onResponse(JSONObject response) {
-				LogUtil.i("bqt", "【Activity_Project_Investment_Details】【onResponse】债权转让信息" + response.toString());
+				LogUtil.i("bqt", "【FinancialDetailActivity】【onResponse】债权转让信息" + response.toString());
 				try {
-					bean = App.mGson.fromJson(response.getJSONObject("result").toString(), ClaimConveyBeanBQT.class);
+					bean = MyApplication.mGson.fromJson(response.getJSONObject("result").toString(), ClaimConveyBeanBQT.class);
 					tv.setVisibility(View.VISIBLE);
 					items = new ArrayList<Item>();
 					items.add(new Item("债权订单", bean.PackageId));
@@ -163,7 +165,7 @@ public class Activity_Trading_Cancle extends Activity_Base {
 			}
 		});
 		jsonRequest.setTag(UrlsOne.GETORDERCLAIMCONVEYINFO);
-		App.getInstance().getRequestQueue().add(jsonRequest);
+		MyApplication.getInstance().getRequestQueue().add(jsonRequest);
 	}
 	//******************************************************************************************
 
@@ -206,7 +208,7 @@ public class Activity_Trading_Cancle extends Activity_Base {
 			}
 		});
 		jsonRequest.setTag(UrlsOne.REQUESTZR);
-		App.getInstance().getRequestQueue().add(jsonRequest);
+		MyApplication.getInstance().getRequestQueue().add(jsonRequest);
 	}
 
 	//******************************************************************************************

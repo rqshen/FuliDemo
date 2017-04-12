@@ -20,9 +20,10 @@ import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 
 import com.bcb.R;
-import com.bcb.common.app.App;
-import com.bcb.data.util.DESUtil;
-import com.bcb.data.util.MyActivityManager;
+import com.bcb.base.Activity_Base;
+import com.bcb.MyApplication;
+import com.bcb.utils.DESUtil;
+import com.bcb.utils.MyActivityManager;
 import com.bcb.presentation.view.custom.Browser.X5WebView;
 import com.tencent.smtt.export.external.interfaces.WebResourceRequest;
 import com.tencent.smtt.export.external.interfaces.WebResourceResponse;
@@ -154,7 +155,7 @@ public class Activity_WebView_Upload extends Activity_Base {
 		byte[] data = null;
 		byte[] encodeByte_ECB;
 		try {
-			data = App.saveUserInfo.getLocalPhone().getBytes("UTF-8");
+			data = MyApplication.saveUserInfo.getLocalPhone().getBytes("UTF-8");
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}

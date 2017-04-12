@@ -18,18 +18,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bcb.R;
-import com.bcb.common.app.App;
-import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbRequest;
-import com.bcb.common.net.UrlsTwo;
+import com.bcb.base.Activity_Base;
+import com.bcb.MyApplication;
+import com.bcb.network.BcbJsonRequest;
+import com.bcb.network.BcbRequest;
+import com.bcb.network.UrlsTwo;
 import com.bcb.data.bean.CPXQbean;
-import com.bcb.data.util.DensityUtils;
-import com.bcb.data.util.HttpUtils;
-import com.bcb.data.util.LogUtil;
-import com.bcb.data.util.MyActivityManager;
-import com.bcb.data.util.PackageUtil;
-import com.bcb.data.util.ProgressDialogrUtils;
-import com.bcb.data.util.TokenUtil;
+import com.bcb.utils.DensityUtils;
+import com.bcb.utils.HttpUtils;
+import com.bcb.utils.LogUtil;
+import com.bcb.utils.MyActivityManager;
+import com.bcb.utils.PackageUtil;
+import com.bcb.utils.ProgressDialogrUtils;
+import com.bcb.utils.TokenUtil;
+import com.bcb.module.myinfo.financial.financialdetail.projectdetail.ProjectDetailActivity;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
 
 import org.json.JSONException;
@@ -115,7 +117,7 @@ public class Activity_CPXQ extends Activity_Base implements View.OnTouchListener
 	private void showData() {
 		tvRate.setText("" + String.format("%.1f", bean.Rate));
 		//福袋利率
-		String welfareRate = TextUtils.isEmpty(App.getInstance().getWelfare()) ? "%" : "%+" + App.getInstance().getWelfare() + "%";
+		String welfareRate = TextUtils.isEmpty(MyApplication.getInstance().getWelfare()) ? "%" : "%+" + MyApplication.getInstance().getWelfare() + "%";
 		tvRateAdd.setText(welfareRate);
 		sdq.setText(bean.MixDuration + "个月");
 		ktje.setText(String.format("%.2f", bean.Balance));
@@ -192,7 +194,7 @@ public class Activity_CPXQ extends Activity_Base implements View.OnTouchListener
 
 	@OnClick({R.id.ll_buy1, R.id.ll_buy2, R.id.more, R.id.buy})
 	public void onClick(View view) {
-		if (App.saveUserInfo.getAccess_Token() == null && view.getId() != R.id.more) {
+		if (MyApplication.saveUserInfo.getAccess_Token() == null && view.getId() != R.id.more) {
 			Activity_Login.launche(ctx);
 			return;
 		}
@@ -201,7 +203,7 @@ public class Activity_CPXQ extends Activity_Base implements View.OnTouchListener
 			case R.id.ll_buy2:
 			case R.id.buy:
 				//没有开通自动投标
-				if ( !App.mUserDetailInfo.AutoTenderPlanStatus) {//(type == 1 || type == 2) &&
+				if ( !MyApplication.mUserDetailInfo.AutoTenderPlanStatus) {//(type == 1 || type == 2) &&
 					altDialog();
 					return;
 				}
@@ -209,7 +211,7 @@ public class Activity_CPXQ extends Activity_Base implements View.OnTouchListener
 				Activity_Project_Buy2.launche2(this, packageId, bean.Name, CouponType, countDate, bean, type);
 				break;
 			case R.id.more:
-				Activity_Browser.launche2(this, bean.Name, bean.PageUrl,20095);
+				ProjectDetailActivity.launche2(this, bean.Name, bean.PageUrl,20095);
 				break;
 		}
 	}
@@ -245,7 +247,7 @@ public class Activity_CPXQ extends Activity_Base implements View.OnTouchListener
 					//判断JSON对象是否为空
 					if (data != null) {
 						//将获取到的银行卡数据写入静态数据区中
-						bean = App.mGson.fromJson(data.toString(), CPXQbean.class);
+						bean = MyApplication.mGson.fromJson(data.toString(), CPXQbean.class);
 						if (bean != null) {
 							showData();
 						}
@@ -258,7 +260,7 @@ public class Activity_CPXQ extends Activity_Base implements View.OnTouchListener
 				ProgressDialogrUtils.hide();
 			}
 		});
-		App.getInstance().getRequestQueue().add(jsonRequest);
+		MyApplication.getInstance().getRequestQueue().add(jsonRequest);
 	}
 
 	@Override
@@ -330,7 +332,7 @@ public class Activity_CPXQ extends Activity_Base implements View.OnTouchListener
 				LogUtil.d("bqt", "【Activity_TuoGuan_HF】【loginAccount】网络异常，请稍后重试" + error.toString());
 			}
 		});
-		App.getInstance()
+		MyApplication.getInstance()
 				.getRequestQueue()
 				.add(jsonRequest);
 	}

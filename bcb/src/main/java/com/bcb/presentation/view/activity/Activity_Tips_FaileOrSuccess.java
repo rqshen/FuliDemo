@@ -11,23 +11,26 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bcb.R;
-import com.bcb.common.app.App;
-import com.bcb.common.event.BroadcastEvent;
-import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbRequest;
-import com.bcb.common.net.BcbRequestTag;
-import com.bcb.common.net.UrlsOne;
-import com.bcb.common.net.UrlsTwo;
+import com.bcb.base.Activity_Base;
+import com.bcb.MyApplication;
+import com.bcb.event.BroadcastEvent;
+import com.bcb.network.BcbJsonRequest;
+import com.bcb.network.BcbRequest;
+import com.bcb.network.BcbRequestTag;
+import com.bcb.network.UrlsOne;
+import com.bcb.network.UrlsTwo;
 import com.bcb.data.bean.StringEventBusBean;
 import com.bcb.data.bean.UserBankCard;
 import com.bcb.data.bean.UserDetailInfo;
 import com.bcb.data.bean.UserWallet;
-import com.bcb.data.util.DensityUtils;
-import com.bcb.data.util.LogUtil;
-import com.bcb.data.util.MQCustomerManager;
-import com.bcb.data.util.PackageUtil;
-import com.bcb.data.util.ToastUtil;
-import com.bcb.data.util.TokenUtil;
+import com.bcb.utils.ActivityCollector;
+import com.bcb.utils.DensityUtils;
+import com.bcb.utils.LogUtil;
+import com.bcb.utils.MQCustomerManager;
+import com.bcb.utils.PackageUtil;
+import com.bcb.utils.ToastUtil;
+import com.bcb.utils.TokenUtil;
+import com.bcb.module.home.MainActivity;
 
 import org.json.JSONObject;
 
@@ -36,7 +39,7 @@ import java.util.regex.Pattern;
 import de.greenrobot.event.EventBus;
 
 /**
- * 错误提示界面
+ * 提示界面
  */
 public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.OnClickListener {
 	public static final int OPEN_HF_SUCCESS = 1;//开户成功
@@ -200,7 +203,7 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
 				tv_up.setText("开通成功");
 				tv_down.setText("");
 				tv_next.setText("完成");
-				//				App.mUserDetailInfo.AutoTenderPlanStatus=true;//手动更改
+				//				MyApplication.mUserDetailInfo.AutoTenderPlanStatus=true;//手动更改
 				tv_next.setClickable(false);//╮(╯▽╰)╭
 				handler.sendMessageDelayed(Message.obtain(handler, 1), 2000);//请求服务器最新信息
 				break;
@@ -274,8 +277,9 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
 						break;
 					//投资记录
 					case ZR_SUCCESS:
-						startActivity(new Intent(Activity_Tips_FaileOrSuccess.this, Activity_Trading_Record.class));
-						finish();
+//						startActivity(new Intent(Activity_Tips_FaileOrSuccess.this, Activity_Trading_Record.class));
+//						finish();
+						ActivityCollector.finishAll();
 						break;
 					//借款
 					case JK_SUCCESS://校验邮箱
@@ -285,7 +289,7 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
 					//客服
 					default:
 						String userId = null;
-						if (App.mUserDetailInfo != null) userId = App.mUserDetailInfo.getCustomerId();
+						if (MyApplication.mUserDetailInfo != null) userId = MyApplication.mUserDetailInfo.getCustomerId();
 						MQCustomerManager.getInstance(this).showCustomer(userId);
 						finish();
 						break;
@@ -346,6 +350,9 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
 			message = intent.getStringExtra(MESSAGE);
 			initView();
 		}
+
+		ActivityCollector.addActivity(this);
+
 	}
 
 	private void init() {
@@ -363,7 +370,7 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
 
 	private void JumpToUser() {
 		EventBus.getDefault().post(new BroadcastEvent(BroadcastEvent.USER));
-		startActivity(new Intent(this, Activity_Main.class));
+		startActivity(new Intent(this, MainActivity.class));
 		finish();
 	}
 
@@ -381,10 +388,10 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
 				if (PackageUtil.getRequestStatus(response, ctx)) {
 					JSONObject data = PackageUtil.getResultObject(response);
 					if (data != null) {
-						App.mUserWallet = App.mGson.fromJson(data.toString(), UserWallet.class);
+						MyApplication.mUserWallet = MyApplication.mGson.fromJson(data.toString(), UserWallet.class);
 						switch (type) {
 							case CHARGE__HF_SUCCESS:
-								tv_down.setText("当前账户余额：" + String.format("%.2f", App.mUserWallet.getBalanceAmount()));
+								tv_down.setText("当前账户余额：" + String.format("%.2f", MyApplication.mUserWallet.getBalanceAmount()));
 								break;
 						}
 					}
@@ -398,7 +405,7 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
 			}
 		});
 		jsonRequest.setTag(BcbRequestTag.UserWalletMessageTag);
-		App.getInstance().getRequestQueue().add(jsonRequest);
+		MyApplication.getInstance().getRequestQueue().add(jsonRequest);
 	}
 
 	/**
@@ -413,8 +420,8 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
 				LogUtil.i("bqt", "绑定的银行卡：" + response.toString());
 				if (PackageUtil.getRequestStatus(response, ctx)) {
 					JSONObject data = PackageUtil.getResultObject(response);
-					if (data != null && App.mUserDetailInfo != null) {
-						App.mUserDetailInfo.BankCard = App.mGson.fromJson(data.toString(), UserBankCard.class);
+					if (data != null && MyApplication.mUserDetailInfo != null) {
+						MyApplication.mUserDetailInfo.BankCard = MyApplication.mGson.fromJson(data.toString(), UserBankCard.class);
 					}
 				}
 			}
@@ -425,7 +432,7 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
 			}
 		});
 		jsonRequest.setTag(BcbRequestTag.UserWalletMessageTag);
-		App.getInstance().getRequestQueue().add(jsonRequest);
+		MyApplication.getInstance().getRequestQueue().add(jsonRequest);
 	}
 
 	@Override
@@ -448,7 +455,7 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
 					JSONObject data = PackageUtil.getResultObject(response);
 					if (data != null) {
 						//将获取到的银行卡数据写入静态数据区中
-						App.mUserDetailInfo = App.mGson.fromJson(data.toString(), UserDetailInfo.class);
+						MyApplication.mUserDetailInfo = MyApplication.mGson.fromJson(data.toString(), UserDetailInfo.class);
 					}
 				}
 			}
@@ -459,6 +466,6 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
 			}
 		});
 		jsonRequest.setTag(BcbRequestTag.UserBankMessageTag);
-		App.getInstance().getRequestQueue().add(jsonRequest);
+		MyApplication.getInstance().getRequestQueue().add(jsonRequest);
 	}
 }

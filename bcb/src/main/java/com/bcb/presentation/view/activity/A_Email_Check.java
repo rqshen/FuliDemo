@@ -13,14 +13,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bcb.R;
-import com.bcb.common.app.App;
-import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbRequest;
-import com.bcb.common.net.UrlsOne;
-import com.bcb.data.util.LogUtil;
-import com.bcb.data.util.MQCustomerManager;
-import com.bcb.data.util.ProgressDialogrUtils;
-import com.bcb.data.util.TokenUtil;
+import com.bcb.base.Activity_Base;
+import com.bcb.MyApplication;
+import com.bcb.network.BcbJsonRequest;
+import com.bcb.network.BcbRequest;
+import com.bcb.network.UrlsOne;
+import com.bcb.utils.LogUtil;
+import com.bcb.utils.MQCustomerManager;
+import com.bcb.utils.ProgressDialogrUtils;
+import com.bcb.utils.TokenUtil;
 import com.bcb.presentation.view.custom.AlertView.DialogBQT;
 
 import org.json.JSONException;
@@ -189,7 +190,7 @@ public class A_Email_Check extends Activity_Base {
 				}
 			});
 
-			App.getInstance().getRequestQueue().add(jsonRequest);
+			MyApplication.getInstance().getRequestQueue().add(jsonRequest);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -224,7 +225,7 @@ public class A_Email_Check extends Activity_Base {
 				}
 			});
 
-			App.getInstance().getRequestQueue().add(jsonRequest);
+			MyApplication.getInstance().getRequestQueue().add(jsonRequest);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}

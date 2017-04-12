@@ -14,20 +14,22 @@ import android.widget.TextView;
 
 import com.ant.liao.GifView;
 import com.bcb.R;
-import com.bcb.common.app.App;
-import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbRequest;
-import com.bcb.common.net.BcbRequestQueue;
-import com.bcb.common.net.BcbRequestTag;
-import com.bcb.common.net.UrlsOne;
+import com.bcb.base.Activity_Base;
+import com.bcb.MyApplication;
+import com.bcb.network.BcbJsonRequest;
+import com.bcb.network.BcbRequest;
+import com.bcb.network.BcbRequestQueue;
+import com.bcb.network.BcbRequestTag;
+import com.bcb.network.UrlsOne;
 import com.bcb.data.bean.UserWallet;
-import com.bcb.data.util.LogUtil;
-import com.bcb.data.util.MQCustomerManager;
-import com.bcb.data.util.MyActivityManager;
-import com.bcb.data.util.PackageUtil;
-import com.bcb.data.util.ScreenUtils;
-import com.bcb.data.util.ToastUtil;
-import com.bcb.data.util.TokenUtil;
+import com.bcb.utils.LogUtil;
+import com.bcb.utils.MQCustomerManager;
+import com.bcb.utils.MyActivityManager;
+import com.bcb.utils.PackageUtil;
+import com.bcb.utils.ScreenUtils;
+import com.bcb.utils.ToastUtil;
+import com.bcb.utils.TokenUtil;
+import com.bcb.module.myinfo.financial.financialdetail.projectdetail.ProjectDetailActivity;
 
 import org.json.JSONObject;
 
@@ -134,7 +136,7 @@ public class Activity_ChangeMoney_Success extends Activity_Base implements View.
                 MyActivityManager.getInstance().finishAllActivity();
             }
         });
-        requestQueue = App.getInstance().getRequestQueue();
+        requestQueue = MyApplication.getInstance().getRequestQueue();
 		init();
 	}
 
@@ -209,7 +211,7 @@ public class Activity_ChangeMoney_Success extends Activity_Base implements View.
 		//提现
 		else if (null != action && action.equals(ACTION_Withdrawals)) {
 			setTitleValue("提现成功");
-			txt_status.setText("当前账户余额为：" + (App.mUserWallet.getBalanceAmount() <= 0 ? "0.00" : String.format("%.2f", App.mUserWallet.getBalanceAmount())) + "元");
+			txt_status.setText("当前账户余额为：" + (MyApplication.mUserWallet.getBalanceAmount() <= 0 ? "0.00" : String.format("%.2f", MyApplication.mUserWallet.getBalanceAmount())) + "元");
 			layout_success.setVisibility(View.VISIBLE);
 			setupImageView();
 		}
@@ -226,7 +228,7 @@ public class Activity_ChangeMoney_Success extends Activity_Base implements View.
 			@Override
 			public void onClick(View v) {
 				//点击图片，跳转至微信
-				Activity_Browser.launche(Activity_ChangeMoney_Success.this, "提现结果早知道", UrlsOne.WxBindIndex);
+				ProjectDetailActivity.launche(Activity_ChangeMoney_Success.this, "提现结果早知道", UrlsOne.WxBindIndex);
 			}
 		});
 		//根据Banner的宽高比进行等比缩放
@@ -385,16 +387,16 @@ public class Activity_ChangeMoney_Success extends Activity_Base implements View.
 		setupLayout();
 		layout_success.setVisibility(View.VISIBLE);
 		//将充值金额写入全局静态数据区，要判断是否存在
-		if (App.mUserWallet != null) {
-			double balanceAmount = App.mUserWallet.getBalanceAmount() + amount;
-			App.mUserWallet.setBalanceAmount(balanceAmount);
+		if (MyApplication.mUserWallet != null) {
+			double balanceAmount = MyApplication.mUserWallet.getBalanceAmount() + amount;
+			MyApplication.mUserWallet.setBalanceAmount(balanceAmount);
 		}
 		//静态数据区中不存在数据时，则加载数据
 		else {
 			loadData();
 		}
 		//显示成功信息，加载用户余额
-		balance.setText("当前账户余额为：" + String.format("%.2f", App.mUserWallet.getBalanceAmount()) + "元");
+		balance.setText("当前账户余额为：" + String.format("%.2f", MyApplication.mUserWallet.getBalanceAmount()) + "元");
 }
 
 	//充值失败
@@ -425,13 +427,13 @@ public class Activity_ChangeMoney_Success extends Activity_Base implements View.
                     JSONObject data = PackageUtil.getResultObject(response);
                     //判断JSON对象是否为空
                     if (data != null) {
-                        mUserWallet = App.mGson.fromJson(data.toString(), UserWallet.class);
+                        mUserWallet = MyApplication.mGson.fromJson(data.toString(), UserWallet.class);
                     }
                     //判断是否存在用户余额信息
                     if (null != mUserWallet) {
                         balance.setText("当前账户余额为：" + String.format("%.2f", mUserWallet.getBalanceAmount()) + "元");
                         //将用户余额存入静态数据区
-                        App.mUserWallet = mUserWallet;
+                        MyApplication.mUserWallet = mUserWallet;
                     }
                 }
             }
@@ -501,8 +503,8 @@ public class Activity_ChangeMoney_Success extends Activity_Base implements View.
             //充值失败联系客服
             case R.id.layout_recharge_failed:
                 String userId = null;
-                if (App.mUserDetailInfo != null) {
-                    userId = App.mUserDetailInfo.getCustomerId();
+                if (MyApplication.mUserDetailInfo != null) {
+                    userId = MyApplication.mUserDetailInfo.getCustomerId();
                 }
                 MQCustomerManager.getInstance(this).showCustomer(userId);
                 break;

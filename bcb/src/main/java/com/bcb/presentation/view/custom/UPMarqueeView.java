@@ -10,7 +10,7 @@ import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 import com.bcb.R;
-import com.bcb.presentation.view.activity.Activity_Browser;
+import com.bcb.module.myinfo.financial.financialdetail.projectdetail.ProjectDetailActivity;
 
 import java.util.List;
 
@@ -57,7 +57,7 @@ public class UPMarqueeView extends ViewFlipper {
 			tv.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					Activity_Browser.launche(getContext(), "公告", datas.get(num).PageUrl);
+					ProjectDetailActivity.launche(getContext(), "公告", datas.get(num).PageUrl);
 				}
 			});
 			addView(tv);

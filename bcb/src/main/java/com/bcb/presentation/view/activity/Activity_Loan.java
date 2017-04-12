@@ -7,8 +7,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bcb.R;
-import com.bcb.data.util.MyActivityManager;
-import com.bcb.data.util.UmengUtil;
+import com.bcb.base.Activity_Base;
+import com.bcb.utils.MyActivityManager;
+import com.bcb.utils.UmengUtil;
 
 /**
  * Created by cain on 15/12/22.

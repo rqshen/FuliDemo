@@ -9,7 +9,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bcb.R;
-import com.bcb.common.app.App;
+import com.bcb.MyApplication;
 import com.bcb.data.bean.ExpiredRecordsBean;
 
 import java.util.List;
@@ -86,7 +86,7 @@ public class ExpiredAdapter extends BaseAdapter {
         viewHolder.rate.setText(data.get(pos).getRate() + data.get(pos).getRewardRate() + "");
 
         //福袋利率
-        String welfareRate = TextUtils.isEmpty(App.getInstance().getWelfare()) ? "" : "+" + App.getInstance().getWelfare() + "%";
+        String welfareRate = TextUtils.isEmpty(MyApplication.getInstance().getWelfare()) ? "" : "+" + MyApplication.getInstance().getWelfare() + "%";
         viewHolder.fukubukuro_rate.setText(welfareRate);
 
         //借款期限

@@ -9,14 +9,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bcb.R;
-import com.bcb.common.app.App;
-import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbRequest;
-import com.bcb.common.net.UrlsTwo;
-import com.bcb.data.util.HttpUtils;
-import com.bcb.data.util.LogUtil;
-import com.bcb.data.util.PackageUtil;
-import com.bcb.data.util.TokenUtil;
+import com.bcb.base.Activity_Base;
+import com.bcb.MyApplication;
+import com.bcb.network.BcbJsonRequest;
+import com.bcb.network.BcbRequest;
+import com.bcb.network.UrlsTwo;
+import com.bcb.utils.HttpUtils;
+import com.bcb.utils.LogUtil;
+import com.bcb.utils.PackageUtil;
+import com.bcb.utils.TokenUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -43,12 +44,12 @@ public class Activity_Open_Account2 extends Activity_Base {
 		setLeftTitleVisible(true);
 		ButterKnife.bind(this);
 
-		tv_title.setText("您好，" + App.saveUserInfo.getLocalPhone() + "\n资金托管需要验证您的身份证");//您的身份信息已绑定手机号
+		tv_title.setText("您好，" + MyApplication.saveUserInfo.getLocalPhone() + "\n资金托管需要验证您的身份证");//您的身份信息已绑定手机号
 		tv_open.setText("下一步");
 		rl_idcard.setVisibility(View.VISIBLE);
 		customer_service.setVisibility(View.INVISIBLE);
-		if (App.mUserDetailInfo != null && App.mUserDetailInfo.IDCard != null && App.mUserDetailInfo.IDCard != "") {
-			et_idcard.setText(App.mUserDetailInfo.IDCard);
+		if (MyApplication.mUserDetailInfo != null && MyApplication.mUserDetailInfo.IDCard != null && MyApplication.mUserDetailInfo.IDCard != "") {
+			et_idcard.setText(MyApplication.mUserDetailInfo.IDCard);
 		}
 	}
 
@@ -118,6 +119,6 @@ public class Activity_Open_Account2 extends Activity_Base {
 				LogUtil.d("bqt", "【Activity_Open_Account2】【OpenAccount】网络异常，请稍后重试" + error.toString());
 			}
 		});
-		App.getInstance().getRequestQueue().add(jsonRequest);
+		MyApplication.getInstance().getRequestQueue().add(jsonRequest);
 	}
 }

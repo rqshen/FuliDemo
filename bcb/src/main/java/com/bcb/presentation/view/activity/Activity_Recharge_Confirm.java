@@ -20,21 +20,22 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bcb.R;
-import com.bcb.common.app.App;
-import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbRequest;
-import com.bcb.common.net.BcbRequestQueue;
-import com.bcb.common.net.BcbRequestTag;
-import com.bcb.common.net.UrlsOne;
+import com.bcb.base.Activity_Base;
+import com.bcb.MyApplication;
+import com.bcb.network.BcbJsonRequest;
+import com.bcb.network.BcbRequest;
+import com.bcb.network.BcbRequestQueue;
+import com.bcb.network.BcbRequestTag;
+import com.bcb.network.UrlsOne;
 import com.bcb.data.bean.CardPwdPostData;
-import com.bcb.data.util.MyActivityManager;
-import com.bcb.data.util.PackageUtil;
-import com.bcb.data.util.RegexManager;
-import com.bcb.data.util.SystemUtil;
-import com.bcb.data.util.MyTextUtil;
-import com.bcb.data.util.ToastUtil;
-import com.bcb.data.util.TokenUtil;
-import com.bcb.data.util.UmengUtil;
+import com.bcb.utils.MyActivityManager;
+import com.bcb.utils.PackageUtil;
+import com.bcb.utils.RegexManager;
+import com.bcb.utils.SystemUtil;
+import com.bcb.utils.MyTextUtil;
+import com.bcb.utils.ToastUtil;
+import com.bcb.utils.TokenUtil;
+import com.bcb.utils.UmengUtil;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
 import com.bcb.presentation.view.custom.CustomDialog.DialogWidget;
 
@@ -115,7 +116,7 @@ public class Activity_Recharge_Confirm extends Activity_Base implements View.OnC
 		setBaseContentView(R.layout.activity_recharge_confirm);
 		setLeftTitleVisible(true);
 		setTitleValue("确认充值");
-        requestQueue = App.getInstance().getRequestQueue();
+        requestQueue = MyApplication.getInstance().getRequestQueue();
 		receiver = new Receiver();
 		IntentFilter filter = new IntentFilter("com.bcb.money.change.success");
 		registerReceiver(receiver, filter);
@@ -129,8 +130,8 @@ public class Activity_Recharge_Confirm extends Activity_Base implements View.OnC
 		//需要判断BankCard的信息是否为空
 		//这里如果为空，表示数据可被Android 系统清空了，这样会导致"on a null object reference"奔溃
 		//为了防止这个崩溃出现，这里将BankChannel的值缓存到这里，然后退到后台的时候把他保存起来
-		if (App.mUserDetailInfo != null && App.mUserDetailInfo.getBankCard() != null && App.mUserDetailInfo.getBankCard().getBankChannel() > 0) {
-			bankChannel = App.mUserDetailInfo.getBankCard().getBankChannel();
+		if (MyApplication.mUserDetailInfo != null && MyApplication.mUserDetailInfo.getBankCard() != null && MyApplication.mUserDetailInfo.getBankCard().getBankChannel() > 0) {
+			bankChannel = MyApplication.mUserDetailInfo.getBankCard().getBankChannel();
 		}
 		setupView();
 	}
@@ -146,16 +147,16 @@ public class Activity_Recharge_Confirm extends Activity_Base implements View.OnC
         //预留手机号
         bank_card_mobile = (EditText) findViewById(R.id.bank_card_mobile);
         //如果返回的信息存在手机号码，则禁止输入
-        if (App.mUserDetailInfo.BankCard != null && App.mUserDetailInfo.BankCard.getCardMobile() != null
-					&& !App.mUserDetailInfo.BankCard.CardMobile.equalsIgnoreCase("null")
-					&& !App.mUserDetailInfo.BankCard.CardMobile.equalsIgnoreCase("")) {
+        if (MyApplication.mUserDetailInfo.BankCard != null && MyApplication.mUserDetailInfo.BankCard.getCardMobile() != null
+					&& !MyApplication.mUserDetailInfo.BankCard.CardMobile.equalsIgnoreCase("null")
+					&& !MyApplication.mUserDetailInfo.BankCard.CardMobile.equalsIgnoreCase("")) {
             //强制隐藏光标和键盘
             bank_card_mobile.setCursorVisible(false);
             bank_card_mobile.setFocusable(false);
             bank_card_mobile.setInputType(InputType.TYPE_NULL);
             bank_card_mobile.setHint("");
-            bank_card_mobile.setText(App.mUserDetailInfo.BankCard.getCardMobile());
-            Mobile = App.mUserDetailInfo.BankCard.getCardMobile();
+            bank_card_mobile.setText(MyApplication.mUserDetailInfo.BankCard.getCardMobile());
+            Mobile = MyApplication.mUserDetailInfo.BankCard.getCardMobile();
         } else {
             bank_card_mobile.setCursorVisible(true);
             bank_card_mobile.setFocusable(true);
@@ -253,7 +254,7 @@ public class Activity_Recharge_Confirm extends Activity_Base implements View.OnC
                                 && !result.getString("CardPwdPostUrl").equalsIgnoreCase("")) {
                             //将JSON对象转义
                             String tmpCardPostData = result.getString("CardPwdPostData");
-                            CardPwdPostData cardData = App.mGson.fromJson(tmpCardPostData, CardPwdPostData.class);
+                            CardPwdPostData cardData = MyApplication.mGson.fromJson(tmpCardPostData, CardPwdPostData.class);
 
                             //如果数据不为空
                             if (cardData != null && cardData.data != null && cardData.encryptkey != null && cardData.merchant_id != null) {
@@ -581,8 +582,8 @@ public class Activity_Recharge_Confirm extends Activity_Base implements View.OnC
                         JSONObject result = PackageUtil.getResultObject(response);
                         if (result.getString("TradeStatus").equals("1")) {
                             //将充值金额写入全局静态数据区
-                            double balanceAmount = App.mUserWallet.getBalanceAmount() + Double.parseDouble(Amount);
-                            App.mUserWallet.setBalanceAmount(balanceAmount);
+                            double balanceAmount = MyApplication.mUserWallet.getBalanceAmount() + Double.parseDouble(Amount);
+                            MyApplication.mUserWallet.setBalanceAmount(balanceAmount);
                             //跳转至充值成功页面
                             Activity_ChangeMoney_Success.launche(Activity_Recharge_Confirm.this, Activity_ChangeMoney_Success.ACTION_Recharge);
                             ToastUtil.alert(Activity_Recharge_Confirm.this, "本次充值金额 + " + amount_Server_Back + "元");

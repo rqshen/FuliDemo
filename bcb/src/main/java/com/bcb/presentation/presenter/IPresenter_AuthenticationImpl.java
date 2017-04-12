@@ -3,15 +3,15 @@ package com.bcb.presentation.presenter;
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.bcb.common.app.App;
-import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbRequest;
-import com.bcb.common.net.BcbRequestQueue;
-import com.bcb.common.net.BcbRequestTag;
-import com.bcb.common.net.UrlsOne;
-import com.bcb.common.net.UrlsTwo;
-import com.bcb.data.util.PackageUtil;
-import com.bcb.data.util.TokenUtil;
+import com.bcb.MyApplication;
+import com.bcb.network.BcbJsonRequest;
+import com.bcb.network.BcbRequest;
+import com.bcb.network.BcbRequestQueue;
+import com.bcb.network.BcbRequestTag;
+import com.bcb.network.UrlsOne;
+import com.bcb.network.UrlsTwo;
+import com.bcb.utils.PackageUtil;
+import com.bcb.utils.TokenUtil;
 import com.bcb.presentation.model.IModel_UserAccount;
 import com.bcb.presentation.model.IModel_UserAccountImpl;
 import com.bcb.presentation.view.activity_interface.Interface_Authentication;
@@ -37,7 +37,7 @@ public class IPresenter_AuthenticationImpl implements IPresenter_Authentication 
         this.context = context;
         this.interfaceBase = interfaceBase;
         iModelUserAccount = new IModel_UserAccountImpl();
-        requestQueue = App.getInstance().getRequestQueue();
+        requestQueue = MyApplication.getInstance().getRequestQueue();
     }
 
     @Override

@@ -15,25 +15,26 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bcb.R;
-import com.bcb.common.app.App;
-import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbRequest;
-import com.bcb.common.net.BcbRequestQueue;
-import com.bcb.common.net.BcbRequestTag;
-import com.bcb.common.net.UrlsOne;
-import com.bcb.common.net.UrlsTwo;
+import com.bcb.base.Activity_Base;
+import com.bcb.MyApplication;
+import com.bcb.network.BcbJsonRequest;
+import com.bcb.network.BcbRequest;
+import com.bcb.network.BcbRequestQueue;
+import com.bcb.network.BcbRequestTag;
+import com.bcb.network.UrlsOne;
+import com.bcb.network.UrlsTwo;
 import com.bcb.data.bean.UserDetailInfo;
 import com.bcb.data.bean.UserWallet;
-import com.bcb.data.util.BankLogo;
-import com.bcb.data.util.HttpUtils;
-import com.bcb.data.util.LogUtil;
-import com.bcb.data.util.MyActivityManager;
-import com.bcb.data.util.MyTextUtil;
-import com.bcb.data.util.PackageUtil;
-import com.bcb.data.util.PasswordEditText;
-import com.bcb.data.util.ToastUtil;
-import com.bcb.data.util.TokenUtil;
-import com.bcb.data.util.UmengUtil;
+import com.bcb.utils.BankLogo;
+import com.bcb.utils.HttpUtils;
+import com.bcb.utils.LogUtil;
+import com.bcb.utils.MyActivityManager;
+import com.bcb.utils.MyTextUtil;
+import com.bcb.utils.PackageUtil;
+import com.bcb.utils.PasswordEditText;
+import com.bcb.utils.ToastUtil;
+import com.bcb.utils.TokenUtil;
+import com.bcb.utils.UmengUtil;
 import com.bcb.presentation.view.custom.CustomDialog.DialogWidget;
 import com.bcb.presentation.view.custom.CustomDialog.MyMaskFullScreenView;
 
@@ -104,7 +105,7 @@ public class Activity_Withdraw extends Activity_Base implements View.OnClickList
         setBaseContentView(R.layout.activity_withdraw);
         setLeftTitleVisible(true);
         setTitleValue("提现");
-        requestQueue = App.getInstance().getRequestQueue();
+        requestQueue = MyApplication.getInstance().getRequestQueue();
         findViews();
         initViews();
     }
@@ -148,18 +149,18 @@ public class Activity_Withdraw extends Activity_Base implements View.OnClickList
 
     private void initViews() {
         //账户余额
-        if (null != App.mUserWallet) {
-            username_balance.setText(String.format("%.2f", App.mUserWallet.BalanceAmount) + "  元");
-            mUserWallet = App.mUserWallet;
+        if (null != MyApplication.mUserWallet) {
+            username_balance.setText(String.format("%.2f", MyApplication.mUserWallet.BalanceAmount) + "  元");
+            mUserWallet = MyApplication.mUserWallet;
         }
 
         //银行卡账号
-        if (App.mUserDetailInfo.BankCard != null) {
-            bank_card_text.setText(MyTextUtil.delBankNum(App.mUserDetailInfo.BankCard.getCardNumber()));
+        if (MyApplication.mUserDetailInfo.BankCard != null) {
+            bank_card_text.setText(MyTextUtil.delBankNum(MyApplication.mUserDetailInfo.BankCard.getCardNumber()));
             //设置银行卡logo
             BankLogo bankLogo = new BankLogo();
-            bank_icon.setBackgroundResource(bankLogo.getDrawableBankLogo(App.mUserDetailInfo.BankCard.getBankCode()));
-            mUserBankInfo = App.mUserDetailInfo;
+            bank_icon.setBackgroundResource(bankLogo.getDrawableBankLogo(MyApplication.mUserDetailInfo.BankCard.getBankCode()));
+            mUserBankInfo = MyApplication.mUserDetailInfo;
         }
 
 //        IntentFilter intentFilter = new IntentFilter("com.bcb.bank.area.complete");
@@ -449,12 +450,12 @@ public class Activity_Withdraw extends Activity_Base implements View.OnClickList
                 LogUtil.d("bqt", "【Activity_Withdraw】【TX】网络异常，请稍后重试" + error.toString());
             }
         });
-        App.getInstance().getRequestQueue().add(jsonRequest);
+        MyApplication.getInstance().getRequestQueue().add(jsonRequest);
     }
 
     private void onWithdrawSuccess() {
         //取现成功之后，将余额写入静态数据区，方便后面充值成功获取余额
-        App.mUserWallet.setBalanceAmount(App.mUserWallet.getBalanceAmount() - Float.parseFloat(withDrawMoney));
+        MyApplication.mUserWallet.setBalanceAmount(MyApplication.mUserWallet.getBalanceAmount() - Float.parseFloat(withDrawMoney));
         Activity_ChangeMoney_Success.launche(Activity_Withdraw.this, Activity_ChangeMoney_Success.ACTION_Withdrawals);
         finish();
     }

@@ -10,23 +10,22 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bcb.R;
-import com.bcb.common.app.App;
-import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbRequest;
-import com.bcb.common.net.UrlsTwo;
+import com.bcb.base.Activity_Base;
+import com.bcb.MyApplication;
+import com.bcb.network.BcbJsonRequest;
+import com.bcb.network.BcbRequest;
+import com.bcb.network.UrlsTwo;
 import com.bcb.data.JEnterprise;
-import com.bcb.data.util.LogUtil;
-import com.bcb.data.util.MyActivityManager;
-import com.bcb.data.util.PackageUtil;
-import com.bcb.data.util.ProgressDialogrUtils;
-import com.bcb.data.util.TokenUtil;
+import com.bcb.utils.LogUtil;
+import com.bcb.utils.MyActivityManager;
+import com.bcb.utils.PackageUtil;
+import com.bcb.utils.ProgressDialogrUtils;
+import com.bcb.utils.TokenUtil;
 import com.bcb.presentation.adapter.MyPopupListAdapter;
 import com.google.gson.Gson;
 
@@ -199,7 +198,7 @@ public class A_CompanyName extends Activity_Base implements TextWatcher {
 				LogUtil.d("bqt", "企业列表" + error.toString());
 			}
 		});
-		App.getInstance().getRequestQueue().add(jsonRequest);
+		MyApplication.getInstance().getRequestQueue().add(jsonRequest);
 	}
 
 	private void saveEmail() {

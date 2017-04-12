@@ -10,22 +10,23 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.bcb.R;
-import com.bcb.common.app.App;
-import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbRequest;
-import com.bcb.common.net.BcbRequestQueue;
-import com.bcb.common.net.BcbRequestTag;
-import com.bcb.common.net.UrlsOne;
+import com.bcb.base.Activity_Base;
+import com.bcb.MyApplication;
+import com.bcb.network.BcbJsonRequest;
+import com.bcb.network.BcbRequest;
+import com.bcb.network.BcbRequestQueue;
+import com.bcb.network.BcbRequestTag;
+import com.bcb.network.UrlsOne;
 import com.bcb.data.bean.MoneyFlowingWaterListBean;
 import com.bcb.data.bean.MoneyFlowingWaterRecordsBean;
-import com.bcb.data.util.HttpUtils;
-import com.bcb.data.util.LogUtil;
-import com.bcb.data.util.MyActivityManager;
-import com.bcb.data.util.MyListView;
-import com.bcb.data.util.PackageUtil;
-import com.bcb.data.util.ToastUtil;
-import com.bcb.data.util.TokenUtil;
-import com.bcb.data.util.UmengUtil;
+import com.bcb.utils.HttpUtils;
+import com.bcb.utils.LogUtil;
+import com.bcb.utils.MyActivityManager;
+import com.bcb.utils.MyListView;
+import com.bcb.utils.PackageUtil;
+import com.bcb.utils.ToastUtil;
+import com.bcb.utils.TokenUtil;
+import com.bcb.utils.UmengUtil;
 import com.bcb.presentation.adapter.MoneyFlowingWaterAdapter;
 import com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout;
 
@@ -68,7 +69,7 @@ public class Activity_Money_Flowing_Water extends Activity_Base {
 		setLeftTitleVisible(true);
 		//setTitleValue("交易明细");
 		setTitleValue("交易明细");
-        requestQueue = App.getInstance().getRequestQueue();
+        requestQueue = MyApplication.getInstance().getRequestQueue();
 		init();
 		UmengUtil.eventById(this, R.string.sel_zjmx);
 	}
@@ -139,7 +140,7 @@ public class Activity_Money_Flowing_Water extends Activity_Base {
                         MoneyFlowingWaterListBean mMoneyFlowingWaterList = null;
                         //判断JSON对象是否为空
                         if (obj != null) {
-                            mMoneyFlowingWaterList = App.mGson.fromJson(obj.toString(), MoneyFlowingWaterListBean.class);
+                            mMoneyFlowingWaterList = MyApplication.mGson.fromJson(obj.toString(), MoneyFlowingWaterListBean.class);
                         }
                         //如果存在记录
                         if (null != mMoneyFlowingWaterList && null != mMoneyFlowingWaterList.Records && mMoneyFlowingWaterList.Records.size() > 0) {

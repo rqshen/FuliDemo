@@ -19,17 +19,18 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bcb.R;
-import com.bcb.common.app.App;
-import com.bcb.common.event.BroadcastEvent;
+import com.bcb.base.Activity_Base;
+import com.bcb.MyApplication;
+import com.bcb.event.BroadcastEvent;
 import com.bcb.data.bean.WelfareBean;
-import com.bcb.data.util.DbUtil;
-import com.bcb.data.util.LoanPersonalConfigUtil;
-import com.bcb.data.util.LogUtil;
-import com.bcb.data.util.MQCustomerManager;
-import com.bcb.data.util.RegexManager;
-import com.bcb.data.util.ToastUtil;
-import com.bcb.data.util.UmengUtil;
-import com.bcb.data.util.VerificationCode;
+import com.bcb.utils.DbUtil;
+import com.bcb.utils.LoanPersonalConfigUtil;
+import com.bcb.utils.LogUtil;
+import com.bcb.utils.MQCustomerManager;
+import com.bcb.utils.RegexManager;
+import com.bcb.utils.ToastUtil;
+import com.bcb.utils.UmengUtil;
+import com.bcb.utils.VerificationCode;
 import com.bcb.presentation.presenter.IPresenter_Login;
 import com.bcb.presentation.presenter.IPresenter_LoginImpl;
 import com.bcb.presentation.view.activity_interface.Interface_Base;
@@ -170,14 +171,14 @@ public class Activity_Login extends Activity_Base implements Interface_Base, OnC
 		EventBus.getDefault().post(new BroadcastEvent(BroadcastEvent.LOGIN));//通知刷新
 
 		//设置极光推送别名
-//        App.getInstance().setAlias();//2016-7-26，服务器未返回任何用户信息，所以后续操作都是不需要的
+//        MyApplication.getInstance().setAlias();//2016-7-26，服务器未返回任何用户信息，所以后续操作都是不需要的
 
 		//获取数据库缓存数据,若有数据就显示已经缓存的数据,则不去请求
 		WelfareBean welfareBean = DbUtil.getWelfare();
 		if (null != welfareBean && !TextUtils.isEmpty(welfareBean.getValue())) {
-			App.getInstance().setWelfare(welfareBean.getValue());
+			MyApplication.getInstance().setWelfare(welfareBean.getValue());
 		} else {
-			App.getInstance().requestWelfare();
+			MyApplication.getInstance().requestWelfare();
 		}
 
 	}

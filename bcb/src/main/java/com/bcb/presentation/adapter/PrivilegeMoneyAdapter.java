@@ -10,15 +10,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bcb.R;
-import com.bcb.common.app.App;
-import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbRequest;
-import com.bcb.common.net.BcbRequestTag;
-import com.bcb.common.net.UrlsTwo;
+import com.bcb.MyApplication;
+import com.bcb.network.BcbJsonRequest;
+import com.bcb.network.BcbRequest;
+import com.bcb.network.BcbRequestTag;
+import com.bcb.network.UrlsTwo;
 import com.bcb.data.bean.PrivilegeMoneyDto;
-import com.bcb.data.util.LogUtil;
-import com.bcb.data.util.PackageUtil;
-import com.bcb.data.util.TokenUtil;
+import com.bcb.utils.LogUtil;
+import com.bcb.utils.PackageUtil;
+import com.bcb.utils.TokenUtil;
 import com.bcb.presentation.view.activity.Activity_Open_Account;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
 
@@ -136,7 +136,7 @@ public class PrivilegeMoneyAdapter extends BaseAdapter {
                                 ibuilder.setTitle("激活成功");
                                 ibuilder.setMessage("特权本金将在" + valueDate + "日发送");
                                 //已开通托管
-                                if (App.mUserDetailInfo != null && App.mUserDetailInfo.HasOpenCustody) {
+                                if (MyApplication.mUserDetailInfo != null && MyApplication.mUserDetailInfo.HasOpenCustody) {
                                     ibuilder.setPositiveButton("知道了", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
@@ -170,7 +170,7 @@ public class PrivilegeMoneyAdapter extends BaseAdapter {
                     }
                 });
                 jsonRequest.setTag(BcbRequestTag.UserPrivilegeMoneyActivatedTag);
-                App.getInstance().getRequestQueue().add(jsonRequest);
+                MyApplication.getInstance().getRequestQueue().add(jsonRequest);
             }
         });
 

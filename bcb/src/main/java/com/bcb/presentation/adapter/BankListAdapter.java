@@ -9,8 +9,8 @@ import android.widget.TextView;
 
 import com.bcb.R;
 import com.bcb.data.bean.BankItem;
-import com.bcb.data.util.BankLogo;
-import com.bcb.data.util.LogUtil;
+import com.bcb.utils.BankLogo;
+import com.bcb.utils.LogUtil;
 
 import java.util.List;
 

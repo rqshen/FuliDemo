@@ -8,15 +8,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bcb.R;
-import com.bcb.common.app.App;
-import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbRequest;
-import com.bcb.common.net.BcbRequestTag;
-import com.bcb.common.net.UrlsOne;
+import com.bcb.base.Activity_Base;
+import com.bcb.MyApplication;
+import com.bcb.network.BcbJsonRequest;
+import com.bcb.network.BcbRequest;
+import com.bcb.network.BcbRequestTag;
+import com.bcb.network.UrlsOne;
 import com.bcb.data.bean.transaction.MoneyItemDetailBean;
-import com.bcb.data.util.LogUtil;
-import com.bcb.data.util.PackageUtil;
-import com.bcb.data.util.TokenUtil;
+import com.bcb.utils.LogUtil;
+import com.bcb.utils.PackageUtil;
+import com.bcb.utils.TokenUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -89,7 +90,7 @@ public class Activity_Money_Item_Detail extends Activity_Base {
 					if (PackageUtil.getRequestStatus(response, Activity_Money_Item_Detail.this)) {
 						JSONObject obj = PackageUtil.getResultObject(response);
 						if (obj != null) {
-							moneyItemDetailBean = App.mGson.fromJson(obj.toString(), MoneyItemDetailBean.class);
+							moneyItemDetailBean = MyApplication.mGson.fromJson(obj.toString(), MoneyItemDetailBean.class);
 							//设置界面信息
 							setupViewData();
 						}
@@ -107,7 +108,7 @@ public class Activity_Money_Item_Detail extends Activity_Base {
 			}
 		});
 		jsonRequest.setTag(BcbRequestTag.TranscationDetailTag);
-		App.getInstance().getRequestQueue().add(jsonRequest);
+		MyApplication.getInstance().getRequestQueue().add(jsonRequest);
 	}
 
 	//设置界面信息

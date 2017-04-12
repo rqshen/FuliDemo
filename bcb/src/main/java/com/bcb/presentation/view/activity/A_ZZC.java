@@ -9,7 +9,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bcb.R;
-import com.bcb.common.app.App;
+import com.bcb.base.Activity_Base;
+import com.bcb.MyApplication;
 import com.idtk.smallchart.chart.PieChart;
 import com.idtk.smallchart.data.PieData;
 import com.idtk.smallchart.interfaces.iData.IPieData;
@@ -20,7 +21,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-import static com.bcb.common.app.App.mUserWallet;
+import static com.bcb.MyApplication.mUserWallet;
 
 public class A_ZZC extends Activity_Base {
 
@@ -72,10 +73,10 @@ public class A_ZZC extends Activity_Base {
 		String[] mNames = {"账户余额", "在投本金", "应计收益", "借款保证金", "", ""};
 		float[] values = {0, 0, 0, 0, 0.01f, 0};
 
-		values[0] = (float) App.mUserWallet.BalanceAmount;
-		values[1] = (float) App.mUserWallet.InvestingAmount;
-		values[2] = (float) App.mUserWallet.LeftInterest;
-		values[3] = (float) App.mUserWallet.SecurityAmount;
+		values[0] = (float) MyApplication.mUserWallet.BalanceAmount;
+		values[1] = (float) MyApplication.mUserWallet.InvestingAmount;
+		values[2] = (float) MyApplication.mUserWallet.LeftInterest;
+		values[3] = (float) MyApplication.mUserWallet.SecurityAmount;
 		if (values[0] >= 0.01f) {
 			mColors[4] = mColors[0];
 		} else if (values[1] >= 0.01f) {

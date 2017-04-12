@@ -11,18 +11,20 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bcb.R;
-import com.bcb.common.app.App;
-import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbRequest;
-import com.bcb.common.net.BcbRequestQueue;
-import com.bcb.common.net.BcbRequestTag;
-import com.bcb.common.net.UrlsOne;
+import com.bcb.base.Activity_Base;
+import com.bcb.MyApplication;
+import com.bcb.network.BcbJsonRequest;
+import com.bcb.network.BcbRequest;
+import com.bcb.network.BcbRequestQueue;
+import com.bcb.network.BcbRequestTag;
+import com.bcb.network.UrlsOne;
 import com.bcb.data.bean.loan.LoanRequestInfoBean;
-import com.bcb.data.util.MQCustomerManager;
-import com.bcb.data.util.MyActivityManager;
-import com.bcb.data.util.ToastUtil;
-import com.bcb.data.util.TokenUtil;
-import com.bcb.data.util.UmengUtil;
+import com.bcb.utils.MQCustomerManager;
+import com.bcb.utils.MyActivityManager;
+import com.bcb.utils.ToastUtil;
+import com.bcb.utils.TokenUtil;
+import com.bcb.utils.UmengUtil;
+import com.bcb.module.myinfo.financial.financialdetail.projectdetail.ProjectDetailActivity;
 import com.bcb.presentation.view.custom.CustomDialog.DialogWidget;
 import com.bcb.presentation.view.custom.CustomDialog.IdentifyAlertView;
 
@@ -84,7 +86,7 @@ public class Activity_Loan_Introduction extends Activity_Base implements View.On
         setLeftTitleVisible(true);
         setTitleValue(title);
         setupView();
-        requestQueue = App.getInstance().getRequestQueue();
+        requestQueue = MyApplication.getInstance().getRequestQueue();
     }
 
     //初始化界面
@@ -123,25 +125,25 @@ public class Activity_Loan_Introduction extends Activity_Base implements View.On
             //我能贷多少？
             case R.id.loan_amount:
                 UmengUtil.eventById(Activity_Loan_Introduction.this, R.string.loan_info);
-                Activity_Browser.launche(Activity_Loan_Introduction.this, "我能贷多少", UrlsOne.LoanCalculated);
+                ProjectDetailActivity.launche(Activity_Loan_Introduction.this, "我能贷多少", UrlsOne.LoanCalculated);
                 break;
 
             //利息怎么算？
             case R.id.loan_interest:
                 UmengUtil.eventById(Activity_Loan_Introduction.this, R.string.loan_info2);
-                Activity_Browser.launche(Activity_Loan_Introduction.this, "利息怎么算", UrlsOne.InterestCalculated);
+                ProjectDetailActivity.launche(Activity_Loan_Introduction.this, "利息怎么算", UrlsOne.InterestCalculated);
                 break;
 
             //如何还款？
             case R.id.loan_repayment:
                 UmengUtil.eventById(Activity_Loan_Introduction.this, R.string.loan_info3);
-                Activity_Browser.launche(Activity_Loan_Introduction.this, "如何还款", UrlsOne.How2Repay);
+                ProjectDetailActivity.launche(Activity_Loan_Introduction.this, "如何还款", UrlsOne.How2Repay);
                 break;
 
             //准备哪些材料?
             case R.id.loan_material:
                 UmengUtil.eventById(Activity_Loan_Introduction.this, R.string.loan_info4);
-                Activity_Browser.launche(Activity_Loan_Introduction.this, "准备材料", UrlsOne.LoanMaterial);
+                ProjectDetailActivity.launche(Activity_Loan_Introduction.this, "准备材料", UrlsOne.LoanMaterial);
                 break;
 
             //立即申请借款
@@ -152,8 +154,8 @@ public class Activity_Loan_Introduction extends Activity_Base implements View.On
             //咨询在线客服
             case R.id.loan_customer_service:
                 String userId = null;
-                if (App.mUserDetailInfo != null) {
-                    userId = App.mUserDetailInfo.getCustomerId();
+                if (MyApplication.mUserDetailInfo != null) {
+                    userId = MyApplication.mUserDetailInfo.getCustomerId();
                 }
                 MQCustomerManager.getInstance(this).showCustomer(userId);
                 break;
@@ -180,7 +182,7 @@ public class Activity_Loan_Introduction extends Activity_Base implements View.On
 
     /***************************** 判断是否认证 ************************************/
     private boolean certificateStatus() {
-        return App.mUserDetailInfo.isHasCert();
+        return MyApplication.mUserDetailInfo.isHasCert();
     }
 
     /****************************** 弹出对话框 *************************************/
@@ -242,7 +244,7 @@ public class Activity_Loan_Introduction extends Activity_Base implements View.On
                             ToastUtil.alert(Activity_Loan_Introduction.this, "未知错误，请与工作人员联系");
                         }
                     } else {
-                        LoanRequestInfoBean loanRequestInfoBean = App.mGson.fromJson(response.getString("result"), LoanRequestInfoBean.class);
+                        LoanRequestInfoBean loanRequestInfoBean = MyApplication.mGson.fromJson(response.getString("result"), LoanRequestInfoBean.class);
                         UmengUtil.eventById(Activity_Loan_Introduction.this, R.string.loan_blank);
                         //跳转借款页面
                         Intent intent = new Intent(Activity_Loan_Introduction.this, Activity_LoanRequest_Borrow.class);

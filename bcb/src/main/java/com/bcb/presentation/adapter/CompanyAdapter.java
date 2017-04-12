@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.bcb.R;
 import com.bcb.data.bean.CompanyBean;
-import com.bcb.data.util.LogUtil;
+import com.bcb.utils.LogUtil;
 import com.bumptech.glide.Glide;
 
 import java.util.List;

@@ -19,19 +19,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bcb.R;
-import com.bcb.common.app.App;
-import com.bcb.common.event.BroadcastEvent;
-import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbRequest;
-import com.bcb.common.net.BcbRequestQueue;
-import com.bcb.common.net.BcbRequestTag;
-import com.bcb.common.net.UrlsOne;
-import com.bcb.data.util.DbUtil;
-import com.bcb.data.util.LogUtil;
-import com.bcb.data.util.MyActivityManager;
-import com.bcb.data.util.ToastUtil;
-import com.bcb.data.util.TokenUtil;
-import com.bcb.data.util.UmengUtil;
+import com.bcb.base.Activity_Base;
+import com.bcb.MyApplication;
+import com.bcb.event.BroadcastEvent;
+import com.bcb.network.BcbJsonRequest;
+import com.bcb.network.BcbRequest;
+import com.bcb.network.BcbRequestQueue;
+import com.bcb.network.BcbRequestTag;
+import com.bcb.network.UrlsOne;
+import com.bcb.utils.DbUtil;
+import com.bcb.utils.LogUtil;
+import com.bcb.utils.MyActivityManager;
+import com.bcb.utils.ToastUtil;
+import com.bcb.utils.TokenUtil;
+import com.bcb.utils.UmengUtil;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
 import com.dg.spinnerwheel.WheelVerticalView;
 import com.dg.spinnerwheel.adapters.ArrayWheelAdapter;
@@ -146,7 +147,7 @@ public class Activity_Daily_Welfare extends Activity_Base implements View.OnClic
         isPause = false;
         startRotate();
 
-        requestQueue = App.getInstance().getRequestQueue();
+        requestQueue = MyApplication.getInstance().getRequestQueue();
     }
 
     /**
@@ -282,7 +283,7 @@ public class Activity_Daily_Welfare extends Activity_Base implements View.OnClic
 
                             //保存到数据库
                             DbUtil.saveWelfare(value);
-                            App.getInstance().setWelfare(value);
+                            MyApplication.getInstance().setWelfare(value);
 
                             //通知刷新
                             EventBus.getDefault().post(new BroadcastEvent(BroadcastEvent.REFRESH));
@@ -291,18 +292,18 @@ public class Activity_Daily_Welfare extends Activity_Base implements View.OnClic
                         Activity_Daily_Welfare_Tip.launche(context);
 //                        finish();
                     }else if(-5 == status) {
-                        App.saveUserInfo.clear();
+                        MyApplication.saveUserInfo.clear();
                         Intent intent = new Intent(context, Activity_Login.class);
                         context.startActivity(intent);
                     }else{
                         //获取数据库缓存数据,若有数据就显示已经缓存的数据
-                        if (TextUtils.isEmpty(App.getInstance().getWelfare())){
+                        if (TextUtils.isEmpty(MyApplication.getInstance().getWelfare())){
                             ToastUtil.alert(context, response.getString("message"));
-                            App.getInstance().requestWelfare();
+                            MyApplication.getInstance().requestWelfare();
                         }else{
                             //通知刷新
                             EventBus.getDefault().post(new BroadcastEvent(BroadcastEvent.REFRESH));
-                            Activity_Daily_Welfare_Result.launche(context, App.getInstance().getWelfare(), String.valueOf(totalInterest));
+                            Activity_Daily_Welfare_Result.launche(context, MyApplication.getInstance().getWelfare(), String.valueOf(totalInterest));
                         }
                     }
                 } catch (Exception e) {

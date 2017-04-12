@@ -11,16 +11,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bcb.R;
-import com.bcb.common.app.App;
-import com.bcb.common.event.BroadcastEvent;
-import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbRequest;
-import com.bcb.common.net.UrlsOne;
+import com.bcb.MyApplication;
+import com.bcb.event.BroadcastEvent;
+import com.bcb.network.BcbJsonRequest;
+import com.bcb.network.BcbRequest;
+import com.bcb.network.UrlsOne;
 import com.bcb.data.bean.MainListBean2;
-import com.bcb.data.util.LogUtil;
-import com.bcb.data.util.ProgressDialogrUtils;
-import com.bcb.data.util.ToastUtil;
-import com.bcb.data.util.TokenUtil;
+import com.bcb.utils.LogUtil;
+import com.bcb.utils.ProgressDialogrUtils;
+import com.bcb.utils.ToastUtil;
+import com.bcb.utils.TokenUtil;
 import com.bcb.presentation.view.activity.Activity_Login;
 
 import org.json.JSONException;
@@ -76,7 +76,7 @@ public class MainAdapter extends BaseAdapter {
 		MainListBean2.XbygBean bean = data.get(pos);
 		viewHolder.tvRate.setText(String.valueOf(bean.Rate));
 		//福袋利率
-		String welfareRate = TextUtils.isEmpty(App.getInstance().getWelfare()) ? "%" : "%+" + App.getInstance().getWelfare() + "%";
+		String welfareRate = TextUtils.isEmpty(MyApplication.getInstance().getWelfare()) ? "%" : "%+" + MyApplication.getInstance().getWelfare() + "%";
 		viewHolder.tvRateAdd.setText(welfareRate);
 		viewHolder.tvTime.setText(String.valueOf(bean.Duration));
 		//天标月标
@@ -151,7 +151,7 @@ public class MainAdapter extends BaseAdapter {
 						//设置对应位置的数据
 						if (response.getJSONObject("result").getInt("PredictCount") > 0) {
 							data.get(index).PredictCount = response.getJSONObject("result").getInt("PredictCount");
-							App.saveUserInfo.setPreviewInvest(data.get(pos).PackageId);
+							MyApplication.saveUserInfo.setPreviewInvest(data.get(pos).PackageId);
 							//更新数据
 							notifyDataSetChanged();
 							EventBus.getDefault().post(new BroadcastEvent(BroadcastEvent.REFRESH));
@@ -171,7 +171,7 @@ public class MainAdapter extends BaseAdapter {
 				ProgressDialogrUtils.hide();
 			}
 		});
-		App.getInstance().getRequestQueue().add(jsonRequest);
+		MyApplication.getInstance().getRequestQueue().add(jsonRequest);
 	}
 
 }

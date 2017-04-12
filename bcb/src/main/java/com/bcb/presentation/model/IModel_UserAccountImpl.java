@@ -2,9 +2,9 @@ package com.bcb.presentation.model;
 
 import android.content.Context;
 
-import com.bcb.common.app.App;
+import com.bcb.MyApplication;
 import com.bcb.data.bean.UserDetailInfo;
-import com.bcb.data.util.LogUtil;
+import com.bcb.utils.LogUtil;
 
 /**
  * Created by cain on 16/3/18.
@@ -12,11 +12,11 @@ import com.bcb.data.util.LogUtil;
 public class IModel_UserAccountImpl implements IModel_UserAccount {
     @Override
     public void clearAccount() {
-        App.saveUserInfo.clear();
-        App.mUserDetailInfo = null;
-        App.mUserWallet = null;
-        App.viewJoinBanner = true;
-        LogUtil.i("bqt", "【clearAccount】"+App.saveUserInfo.getAccess_Token());
+        MyApplication.saveUserInfo.clear();
+        MyApplication.mUserDetailInfo = null;
+        MyApplication.mUserWallet = null;
+        MyApplication.viewJoinBanner = true;
+        LogUtil.i("bqt", "【clearAccount】"+ MyApplication.saveUserInfo.getAccess_Token());
     }
 
     @Override
@@ -24,81 +24,81 @@ public class IModel_UserAccountImpl implements IModel_UserAccount {
         if (userDetailInfo.isEmpty()){
             return;
         }
-        App.mUserDetailInfo = App.mGson.fromJson(userDetailInfo, UserDetailInfo.class);
+        MyApplication.mUserDetailInfo = MyApplication.mGson.fromJson(userDetailInfo, UserDetailInfo.class);
     }
 
     @Override
     public void saveAccount(String token, String phoneNumber, String userDetailInfo) {
         //本地只需要保存Token和第一次登陆信息
-        App.saveUserInfo.setAccess_Token(token);
-        App.saveUserInfo.setFirstLogin(true);
-        App.saveUserInfo.setLocalPhone(phoneNumber);
-        App.mUserDetailInfo = App.mGson.fromJson(userDetailInfo, UserDetailInfo.class);
+        MyApplication.saveUserInfo.setAccess_Token(token);
+        MyApplication.saveUserInfo.setFirstLogin(true);
+        MyApplication.saveUserInfo.setLocalPhone(phoneNumber);
+        MyApplication.mUserDetailInfo = MyApplication.mGson.fromJson(userDetailInfo, UserDetailInfo.class);
     }
 
 
     @Override
     public void saveAccessToken(String token) {
-        App.saveUserInfo.setAccess_Token(token);
+        MyApplication.saveUserInfo.setAccess_Token(token);
     }
 
     @Override
     public void setFirstLogin(boolean status) {
-        App.saveUserInfo.setFirstLogin(status);
+        MyApplication.saveUserInfo.setFirstLogin(status);
     }
     
     @Override
     public void updateJoinedCompanyName(String shortName, int status) {
-        App.mUserDetailInfo.MyCompany.setShortName(shortName);
-        App.mUserDetailInfo.MyCompany.Status = status;
+        MyApplication.mUserDetailInfo.MyCompany.setShortName(shortName);
+        MyApplication.mUserDetailInfo.MyCompany.Status = status;
     }
 
     @Override
     public void clearGesturePassord(Context context) {
-        App.saveUserInfo.remove(context, "GesturePassword");
+        MyApplication.saveUserInfo.remove(context, "GesturePassword");
     }
 
     @Override
     public boolean hasCert() {
-//        return App.mUserDetailInfo.isHasCert();
-        return App.mUserDetailInfo.HasOpenCustody;//更改为是否开通托管
+//        return MyApplication.mUserDetailInfo.isHasCert();
+        return MyApplication.mUserDetailInfo.HasOpenCustody;//更改为是否开通托管
     }
 
     @Override
     public boolean hasTradePassword() {
-        return App.mUserDetailInfo.isHasTradePassword();
+        return MyApplication.mUserDetailInfo.isHasTradePassword();
     }
 
     @Override
     public String getUserName() {
-        return App.mUserDetailInfo.getRealName();
+        return MyApplication.mUserDetailInfo.getRealName();
     }
 
     @Override
     public String getIDCard() {
-        if (App.mUserDetailInfo != null) {
-            return App.mUserDetailInfo.getIDCard();
+        if (MyApplication.mUserDetailInfo != null) {
+            return MyApplication.mUserDetailInfo.getIDCard();
         }
         return null;
     }
 
     @Override
     public String getCardNumber() {
-        if (App.mUserDetailInfo.BankCard != null) {
-            return App.mUserDetailInfo.getBankCard().getCardNumber();
+        if (MyApplication.mUserDetailInfo.BankCard != null) {
+            return MyApplication.mUserDetailInfo.getBankCard().getCardNumber();
         }
         return null;
     }
 
     @Override
     public String getLocalPhone() {
-        return App.saveUserInfo.getLocalPhone();
+        return MyApplication.saveUserInfo.getLocalPhone();
     }
 
     @Override
     public int getCompanyStatus() {
-        if (App.mUserDetailInfo.MyCompany != null) {
-            return App.mUserDetailInfo.getMyCompany().getStatus();
+        if (MyApplication.mUserDetailInfo.MyCompany != null) {
+            return MyApplication.mUserDetailInfo.getMyCompany().getStatus();
         }
         //表示公司信息为空
         return -100;
@@ -106,15 +106,15 @@ public class IModel_UserAccountImpl implements IModel_UserAccount {
 
     @Override
     public String getCompanyShortName() {
-        if (App.mUserDetailInfo.MyCompany != null) {
-            return App.mUserDetailInfo.MyCompany.getShortName();
+        if (MyApplication.mUserDetailInfo.MyCompany != null) {
+            return MyApplication.mUserDetailInfo.MyCompany.getShortName();
         }
         return null;
     }
 
     @Override
     public boolean isUserDetailInfoEmpty() {
-        return App.mUserDetailInfo == null;
+        return MyApplication.mUserDetailInfo == null;
     }
 
 }

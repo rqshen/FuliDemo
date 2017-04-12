@@ -12,10 +12,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bcb.R;
-import com.bcb.common.app.App;
-import com.bcb.data.util.LogUtil;
-import com.bcb.data.util.MyActivityManager;
-import com.bcb.data.util.UmengUtil;
+import com.bcb.base.Activity_Base;
+import com.bcb.MyApplication;
+import com.bcb.utils.LogUtil;
+import com.bcb.utils.MyActivityManager;
+import com.bcb.utils.UmengUtil;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
 import com.bcb.presentation.view.custom.GesturePatternLock.View.ContentView;
 import com.bcb.presentation.view.custom.GesturePatternLock.View.Drawl;
@@ -97,7 +98,7 @@ public class Activity_Gesture_Lock extends Activity_Base {
 					if (isSettingPasswd) {
 						Toast.makeText(Activity_Gesture_Lock.this, "密码设置成功!", Toast.LENGTH_SHORT).show();
 						isSettingPasswd = false;
-						App.saveUserInfo.setGesturePassword(password);
+						MyApplication.saveUserInfo.setGesturePassword(password);
 					}
 
 					Intent intent = new Intent();
@@ -130,13 +131,13 @@ public class Activity_Gesture_Lock extends Activity_Base {
 
 			//输入手势密码的构造器
 
-			content = new ContentView(this, App.saveUserInfo.getGesturePassword(), new Drawl.GestureCallBack() {
+			content = new ContentView(this, MyApplication.saveUserInfo.getGesturePassword(), new Drawl.GestureCallBack() {
 				@Override
 				public void checkedSuccess() {
 					//清除上一次退到后台时保存的时间
 					clearEnterTime();
 					if (!isYZ) {
-						App.saveUserInfo.setGesturePassword("");
+						MyApplication.saveUserInfo.setGesturePassword("");
 						LogUtil.i("bqt", "【Activity_Gesture_Lock】【onCreate】清除手势密码");
 					} else LogUtil.i("bqt", "【验证手势密码】" + "，时间" + new SimpleDateFormat("mm-ss-S").format(new Date()));
 					finish();
@@ -186,7 +187,7 @@ public class Activity_Gesture_Lock extends Activity_Base {
 				alertView = null;
 				finish();
 				MyActivityManager.getInstance().finishAllActivity();
-				App.instance.activity_main.finish();
+				MyApplication.instance._mainActivityActivity.finish();
 //				android.os.Process.killProcess(android.os.Process.myPid());    //获取PID
 //				System.exit(0);
 				ActivityManager am = (ActivityManager)getSystemService (Context.ACTIVITY_SERVICE);
@@ -210,12 +211,12 @@ public class Activity_Gesture_Lock extends Activity_Base {
 				alertView = null;
 				MyActivityManager myActivityManager = MyActivityManager.getInstance();
 				myActivityManager.finishAllActivity();
-				App.saveUserInfo.removeGesturePassword();
+				MyApplication.saveUserInfo.removeGesturePassword();
 				/* 清空当前用户的信息 */
-				App.saveUserInfo.clear();
-				App.mUserWallet = null;
-				App.mUserDetailInfo = null;
-				App.viewJoinBanner = true;
+				MyApplication.saveUserInfo.clear();
+				MyApplication.mUserWallet = null;
+				MyApplication.mUserDetailInfo = null;
+				MyApplication.viewJoinBanner = true;
 				Activity_Login.launche(Activity_Gesture_Lock.this);
 				sendBroadcast(new Intent("com.bcb.logout.success"));
 				//销毁当前页面
@@ -229,7 +230,7 @@ public class Activity_Gesture_Lock extends Activity_Base {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		if (isYZ&&(App.saveUserInfo.getGesturePassword().isEmpty()|| App.saveUserInfo.getAccess_Token() == null)) {
+		if (isYZ&&(MyApplication.saveUserInfo.getGesturePassword().isEmpty()|| MyApplication.saveUserInfo.getAccess_Token() == null)) {
 			finish();
 		}
 	}

@@ -14,7 +14,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.bcb.R;
-import com.bcb.data.util.UmengUtil;
+import com.bcb.base.Activity_Base;
+import com.bcb.utils.UmengUtil;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
 import com.dg.spinnerwheel.WheelVerticalView;
 import com.dg.spinnerwheel.adapters.ArrayWheelAdapter;
@@ -199,7 +200,7 @@ public class Activity_Daily_Welfare_Static extends Activity_Base implements View
                 break;
             case R.id.btn_welfare_check://跳转到首页产品列表
                 //EventBus.getDefault().post(new BroadcastEvent(BroadcastEvent.PRODUCT));
-                startActivity(new Intent(ctx, Activity_CP.class));
+                startActivity(new Intent(ctx, _CP.class));
                 finish();
                 break;
             case R.id.btn_welfare_rule://活动规则

@@ -10,7 +10,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bcb.R;
-import com.bcb.common.app.App;
+import com.bcb.MyApplication;
 import com.bcb.data.bean.ProductRecordsBean;
 
 import java.util.List;
@@ -88,7 +88,7 @@ public class ProductAdapter extends BaseAdapter {
 		viewHolder.name.setText(data.get(pos).Name);
 		viewHolder.rate.setText(String.valueOf(data.get(pos).Rate ));//+ data.get(pos).RewardRate
 		//福袋利率
-		String welfareRate = TextUtils.isEmpty(App.getInstance().getWelfare()) ? "" : "+" + App.getInstance().getWelfare() + "%";
+		String welfareRate = TextUtils.isEmpty(MyApplication.getInstance().getWelfare()) ? "" : "+" + MyApplication.getInstance().getWelfare() + "%";
 		viewHolder.fukubukuro_rate.setText(welfareRate);
         viewHolder.duration.setText(String.valueOf(data.get(pos).Duration));
 		//天标月标

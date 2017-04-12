@@ -2,14 +2,14 @@ package com.bcb.presentation.presenter;
 
 import android.content.Context;
 
-import com.bcb.common.app.App;
-import com.bcb.common.event.BroadcastEvent;
-import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbRequest;
-import com.bcb.common.net.BcbRequestQueue;
-import com.bcb.common.net.BcbRequestTag;
-import com.bcb.common.net.UrlsOne;
-import com.bcb.data.util.LogUtil;
+import com.bcb.MyApplication;
+import com.bcb.event.BroadcastEvent;
+import com.bcb.network.BcbJsonRequest;
+import com.bcb.network.BcbRequest;
+import com.bcb.network.BcbRequestQueue;
+import com.bcb.network.BcbRequestTag;
+import com.bcb.network.UrlsOne;
+import com.bcb.utils.LogUtil;
 import com.bcb.presentation.model.IModel_UserAccount;
 import com.bcb.presentation.model.IModel_UserAccountImpl;
 import com.bcb.presentation.view.activity_interface.Interface_Verification;
@@ -36,7 +36,7 @@ public class IPresenter_RegisterImpl implements IPresenter_Register {
         this.interfaceRegister = interfaceRegister;
         this.iModelUserAccount = new IModel_UserAccountImpl();
         this.context = context;
-        requestQueue = App.getInstance().getRequestQueue();
+        requestQueue = MyApplication.getInstance().getRequestQueue();
     }
 //获取验证码
     @Override
@@ -95,7 +95,7 @@ public class IPresenter_RegisterImpl implements IPresenter_Register {
                         if(status == 1) {
                             //存储Token
                             iModelUserAccount.saveAccessToken(response.getJSONObject("result").getString("Access_Token"));
-                            App.saveUserInfo.setLocalPhone(phoneNumber);
+                            MyApplication.saveUserInfo.setLocalPhone(phoneNumber);
                             iModelUserAccount.setFirstLogin(true);
                             EventBus.getDefault().post(new BroadcastEvent(BroadcastEvent.LOGIN));//通知刷新
                         }

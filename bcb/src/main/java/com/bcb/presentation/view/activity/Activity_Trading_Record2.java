@@ -12,21 +12,21 @@
 //import android.widget.TextView;
 //
 //import com.bcb.R;
-//import com.bcb.common.app.App;
-//import com.bcb.common.net.BcbJsonRequest;
-//import com.bcb.common.net.BcbRequest;
-//import com.bcb.common.net.BcbRequestQueue;
-//import com.bcb.common.net.BcbRequestTag;
-//import com.bcb.common.net.UrlsOne;
+//import com.bcb.MyApplication;
+//import com.bcb.network.BcbJsonRequest;
+//import com.bcb.network.BcbRequest;
+//import com.bcb.network.BcbRequestQueue;
+//import com.bcb.network.BcbRequestTag;
+//import com.bcb.network.UrlsOne;
 //import com.bcb.data.bean.TradingRecordListBean;
 //import com.bcb.data.bean.TradingRecordRecordsBean;
-//import com.bcb.data.util.HttpUtils;
-//import com.bcb.data.util.LogUtil;
-//import com.bcb.data.util.MyActivityManager;
-//import com.bcb.data.util.MyListView;
-//import com.bcb.data.util.PackageUtil;
-//import com.bcb.data.util.ToastUtil;
-//import com.bcb.data.util.TokenUtil;
+//import com.bcb.util.HttpUtils;
+//import com.bcb.util.LogUtil;
+//import com.bcb.util.MyActivityManager;
+//import com.bcb.util.MyListView;
+//import com.bcb.util.PackageUtil;
+//import com.bcb.util.ToastUtil;
+//import com.bcb.util.TokenUtil;
 //import com.bcb.presentation.adapter.TradingRecordAdapter;
 //import com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout;
 //
@@ -79,7 +79,7 @@
 //        setBaseContentView(R.layout.activity_trading_record);
 //        setLeftTitleVisible(true);
 //        setTitleValue("投资记录");
-//        requestQueue = App.getInstance().getRequestQueue();
+//        requestQueue = MyApplication.getInstance().getRequestQueue();
 //        init();
 //    }
 //
@@ -158,7 +158,7 @@
 //                        if (!TextUtils.isEmpty(totalIncome)) {
 //                            income.setText(totalIncome);
 //                        }
-//                        TradingRecordListBean mTradingRecordList = App.mGson.fromJson(obj.getJSONObject("InvetDetail").toString(), TradingRecordListBean.class);
+//                        TradingRecordListBean mTradingRecordList = MyApplication.mGson.fromJson(obj.getJSONObject("InvetDetail").toString(), TradingRecordListBean.class);
 //                        //判断是否存在交易记录
 //                        if (null != mTradingRecordList && null != mTradingRecordList.Records && mTradingRecordList.Records.size() > 0) {
 //                            canLoadmore = true;
@@ -226,7 +226,7 @@
 //
 //    class onClickViewTradingRecord implements OnItemClickListener {
 //        public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3) {
-//            Activity_Project_Investment_Details.launche(Activity_Trading_Record2.this, recordsBeans.get(position).getOrderNo() + "");
+//            FinancialDetailActivity.launche(Activity_Trading_Record2.this, recordsBeans.get(position).getOrderNo() + "");
 //        }
 //    }
 //

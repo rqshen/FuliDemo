@@ -11,21 +11,23 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bcb.R;
-import com.bcb.common.app.App;
-import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbRequest;
-import com.bcb.common.net.BcbRequestQueue;
-import com.bcb.common.net.BcbRequestTag;
-import com.bcb.common.net.UrlsOne;
+import com.bcb.base.Activity_Base;
+import com.bcb.MyApplication;
+import com.bcb.network.BcbJsonRequest;
+import com.bcb.network.BcbRequest;
+import com.bcb.network.BcbRequestQueue;
+import com.bcb.network.BcbRequestTag;
+import com.bcb.network.UrlsOne;
 import com.bcb.data.bean.HotStationListBean;
 import com.bcb.data.bean.HotStationRecordsBean;
-import com.bcb.data.util.AutoWrapLinearLayout;
-import com.bcb.data.util.LogUtil;
-import com.bcb.data.util.MyActivityManager;
-import com.bcb.data.util.PackageUtil;
-import com.bcb.data.util.ToastUtil;
-import com.bcb.data.util.TokenUtil;
-import com.bcb.data.util.UmengUtil;
+import com.bcb.utils.AutoWrapLinearLayout;
+import com.bcb.utils.LogUtil;
+import com.bcb.utils.MyActivityManager;
+import com.bcb.utils.PackageUtil;
+import com.bcb.utils.ToastUtil;
+import com.bcb.utils.TokenUtil;
+import com.bcb.utils.UmengUtil;
+import com.bcb.module.myinfo.financial.financialdetail.projectdetail.ProjectDetailActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -74,7 +76,7 @@ public class Activity_Station_Change extends Activity_Base {
 		setBaseContentView(R.layout.activity_station_change);
 		setLeftTitleVisible(true);
 		setTitleValue("当前公司：" + stationName);
-		requestQueue = App.getInstance().getRequestQueue();
+		requestQueue = MyApplication.getInstance().getRequestQueue();
         init();
 	}
 
@@ -85,23 +87,23 @@ public class Activity_Station_Change extends Activity_Base {
 		hotstation_layout = (LinearLayout) findViewById(R.id.hotstation_layout);
 
         //获取四个常用驿站，如果没有的话，一开始就要设置为全部公司
-        App.saveUserInfo.setAllCompany("" + "##" + "全部公司");
+        MyApplication.saveUserInfo.setAllCompany("" + "##" + "全部公司");
 		list = new ArrayList<String>();
         //全部公司
-        if (!TextUtils.isEmpty(App.saveUserInfo.getAllCompany())) {
-			list.add(App.saveUserInfo.getAllCompany().split("##")[1]);
+        if (!TextUtils.isEmpty(MyApplication.saveUserInfo.getAllCompany())) {
+			list.add(MyApplication.saveUserInfo.getAllCompany().split("##")[1]);
 		}
         //第一个位置
-		if (!TextUtils.isEmpty(App.saveUserInfo.getFirst())) {
-			list.add(App.saveUserInfo.getFirst().split("##")[1]);
+		if (!TextUtils.isEmpty(MyApplication.saveUserInfo.getFirst())) {
+			list.add(MyApplication.saveUserInfo.getFirst().split("##")[1]);
 		}
         //第二个位置
-		if (!TextUtils.isEmpty(App.saveUserInfo.getSecond())) {
-			list.add(App.saveUserInfo.getSecond().split("##")[1]);
+		if (!TextUtils.isEmpty(MyApplication.saveUserInfo.getSecond())) {
+			list.add(MyApplication.saveUserInfo.getSecond().split("##")[1]);
 		}
         //第三个位置
-		if (!TextUtils.isEmpty(App.saveUserInfo.getThird())) {
-			list.add(App.saveUserInfo.getThird().split("##")[1]);
+		if (!TextUtils.isEmpty(MyApplication.saveUserInfo.getThird())) {
+			list.add(MyApplication.saveUserInfo.getThird().split("##")[1]);
 		}
 
 		for (int i = 0; i < list.size(); i++) {
@@ -109,13 +111,13 @@ public class Activity_Station_Change extends Activity_Base {
 		    tagView = (TextView) getLayoutInflater().inflate(R.layout.item_station_often, tagContainer, false);
 		    tagView.setText(tag);
 		    if (i == 0) {
-		    	 tagView.setTag(App.saveUserInfo.getAllCompany());
+		    	 tagView.setTag(MyApplication.saveUserInfo.getAllCompany());
 			} else if (i == 1) {
-		    	 tagView.setTag(App.saveUserInfo.getFirst());
+		    	 tagView.setTag(MyApplication.saveUserInfo.getFirst());
 			} else if (i == 2) {
-		    	 tagView.setTag(App.saveUserInfo.getSecond());
+		    	 tagView.setTag(MyApplication.saveUserInfo.getSecond());
 			} else if (i == 3) {
-		    	 tagView.setTag(App.saveUserInfo.getThird());
+		    	 tagView.setTag(MyApplication.saveUserInfo.getThird());
 			}
 		   
 		    tagView.setOnClickListener(new OnClickListener() {
@@ -159,7 +161,7 @@ public class Activity_Station_Change extends Activity_Base {
                         JSONObject obj = PackageUtil.getResultObject(response);
                         //判断JSON对象是否为空
                         if (obj != null) {
-                            mHotStationList = App.mGson.fromJson(obj.toString(), HotStationListBean.class);
+                            mHotStationList = MyApplication.mGson.fromJson(obj.toString(), HotStationListBean.class);
                         }
                         if (null != mHotStationList && null != mHotStationList.Records && mHotStationList.Records.size() > 0) {
                             int size = mHotStationList.Records.size();
@@ -180,28 +182,28 @@ public class Activity_Station_Change extends Activity_Base {
                                         intent.putExtra("CompanyName", name);
                                         intent.setAction("com.bcb.choose.company");
                                         sendBroadcast(intent);
-                                        String first = App.saveUserInfo.getFirst();
-                                        String second = App.saveUserInfo.getSecond();
-                                        String third = App.saveUserInfo.getThird();
+                                        String first = MyApplication.saveUserInfo.getFirst();
+                                        String second = MyApplication.saveUserInfo.getSecond();
+                                        String third = MyApplication.saveUserInfo.getThird();
 
-                                        App.saveUserInfo.setAllCompany("" + "##" + "全部公司");
+                                        MyApplication.saveUserInfo.setAllCompany("" + "##" + "全部公司");
 
                                         if (first.indexOf(id) != -1) {
-                                            App.saveUserInfo.setFirst(id + "##" + name);
+                                            MyApplication.saveUserInfo.setFirst(id + "##" + name);
                                         }
                                         else if (second.indexOf(id) != -1) {
-                                            App.saveUserInfo.setFirst(id + "##" + name);
-                                            App.saveUserInfo.setSecond(first);
+                                            MyApplication.saveUserInfo.setFirst(id + "##" + name);
+                                            MyApplication.saveUserInfo.setSecond(first);
                                         }
                                         else if (third.indexOf(id) != -1) {
-                                            App.saveUserInfo.setFirst(id + "##" + name);
-                                            App.saveUserInfo.setSecond(first);
-                                            App.saveUserInfo.setThird(second);
+                                            MyApplication.saveUserInfo.setFirst(id + "##" + name);
+                                            MyApplication.saveUserInfo.setSecond(first);
+                                            MyApplication.saveUserInfo.setThird(second);
                                         }
                                         else {
-                                            App.saveUserInfo.setFirst(id + "##" + name);
-                                            App.saveUserInfo.setSecond(first);
-                                            App.saveUserInfo.setThird(second);
+                                            MyApplication.saveUserInfo.setFirst(id + "##" + name);
+                                            MyApplication.saveUserInfo.setSecond(first);
+                                            MyApplication.saveUserInfo.setThird(second);
                                         }
                                         UmengUtil.eventById(Activity_Station_Change.this, R.string.list_select_company);
                                         finish();
@@ -246,7 +248,7 @@ public class Activity_Station_Change extends Activity_Base {
 			@Override
 			public void onClick(View view) {
                 UmengUtil.eventById(Activity_Station_Change.this, R.string.list_select_com_intro);
-				Activity_Browser.launche(Activity_Station_Change.this, bean.getShortName(), bean.getPageUrl());
+				ProjectDetailActivity.launche(Activity_Station_Change.this, bean.getShortName(), bean.getPageUrl());
 			}
 		});
 		//公司名称

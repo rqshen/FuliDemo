@@ -8,9 +8,10 @@ import android.view.View;
 import android.widget.Button;
 
 import com.bcb.R;
-import com.bcb.common.app.App;
-import com.bcb.common.event.BroadcastEvent;
-import com.bcb.data.util.MyActivityManager;
+import com.bcb.base.Activity_Base;
+import com.bcb.MyApplication;
+import com.bcb.event.BroadcastEvent;
+import com.bcb.utils.MyActivityManager;
 
 import de.greenrobot.event.EventBus;
 
@@ -84,7 +85,7 @@ public class Activity_ChangePwd_Success extends Activity_Base {
 				else {
 					//发送交易密码出来
 					sendBroardCast();
-					App.mUserDetailInfo.setHasTradePassword(true);
+					MyApplication.mUserDetailInfo.setHasTradePassword(true);
 					finish();
 				}
 				break;

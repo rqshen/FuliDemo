@@ -2,7 +2,7 @@ package com.bcb.presentation.view.activity_interface;
 
 import android.app.Activity;
 
-import com.bcb.data.util.LogUtil;
+import com.bcb.utils.LogUtil;
 
 /**
  * 描述：

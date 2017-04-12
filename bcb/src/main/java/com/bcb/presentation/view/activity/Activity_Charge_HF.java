@@ -14,17 +14,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bcb.R;
-import com.bcb.common.app.App;
-import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbRequest;
-import com.bcb.common.net.UrlsTwo;
+import com.bcb.base.Activity_Base;
+import com.bcb.MyApplication;
+import com.bcb.network.BcbJsonRequest;
+import com.bcb.network.BcbRequest;
+import com.bcb.network.UrlsTwo;
 import com.bcb.data.bean.BanksBean;
 import com.bcb.data.bean.UserBankCard;
-import com.bcb.data.util.BankLogo;
-import com.bcb.data.util.HttpUtils;
-import com.bcb.data.util.LogUtil;
-import com.bcb.data.util.PackageUtil;
-import com.bcb.data.util.TokenUtil;
+import com.bcb.utils.BankLogo;
+import com.bcb.utils.HttpUtils;
+import com.bcb.utils.LogUtil;
+import com.bcb.utils.PackageUtil;
+import com.bcb.utils.TokenUtil;
+import com.bcb.module.myinfo.financial.financialdetail.projectdetail.ProjectDetailActivity;
 import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONException;
@@ -91,20 +93,20 @@ public class Activity_Charge_HF extends Activity_Base implements View.OnClickLis
 	}
 
 	private void initBankCard() {
-		if (App.mUserWallet != null) tv_left_monery.setText(String.format("%.2f", App.mUserWallet.getBalanceAmount()) + "元");
+		if (MyApplication.mUserWallet != null) tv_left_monery.setText(String.format("%.2f", MyApplication.mUserWallet.getBalanceAmount()) + "元");
 		//【解绑说明】已绑定银行卡账号，且是快捷支付
-		if (App.mUserDetailInfo.BankCard != null && App.mUserDetailInfo.BankCard.IsQPCard) {
-			//bank_card_text.setText(MyTextUtil.delBankNum(App.mUserDetailInfo.BankCard.getCardNumber()));
-			String cardNumber = App.mUserDetailInfo.BankCard.CardNumber;
+		if (MyApplication.mUserDetailInfo.BankCard != null && MyApplication.mUserDetailInfo.BankCard.IsQPCard) {
+			//bank_card_text.setText(MyTextUtil.delBankNum(MyApplication.mUserDetailInfo.BankCard.getCardNumber()));
+			String cardNumber = MyApplication.mUserDetailInfo.BankCard.CardNumber;
 			bank_card_text.setText("尾号" + cardNumber.substring(cardNumber.length() - 4));
 			//设置银行卡logo
 			BankLogo bankLogo = new BankLogo();
-			bank_icon.setBackgroundResource(bankLogo.getDrawableBankLogo(App.mUserDetailInfo.BankCard.BankCode));
-			bank_name_text.setText(App.mUserDetailInfo.BankCard.BankName);
+			bank_icon.setBackgroundResource(bankLogo.getDrawableBankLogo(MyApplication.mUserDetailInfo.BankCard.BankCode));
+			bank_name_text.setText(MyApplication.mUserDetailInfo.BankCard.BankName);
 			setRightTitleValue("解绑说明", new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					Activity_Browser.launcheForResult(Activity_Charge_HF.this, "解绑说明", UrlsTwo.UrlUnBandExplain, 2);
+					ProjectDetailActivity.launcheForResult(Activity_Charge_HF.this, "解绑说明", UrlsTwo.UrlUnBandExplain, 2);
 				}
 			});
 
@@ -140,8 +142,8 @@ public class Activity_Charge_HF extends Activity_Base implements View.OnClickLis
 	//			public void onClick(View widget) {
 	//				String userId = null;
 	//				//判断是否为空
-	//				if (App.mUserDetailInfo != null) {
-	//					userId = App.mUserDetailInfo.getCustomerId();
+	//				if (MyApplication.mUserDetailInfo != null) {
+	//					userId = MyApplication.mUserDetailInfo.getCustomerId();
 	//				}
 	//				MQCustomerManager.getInstance(Activity_Charge_HF.this).showCustomer(userId);
 	//			}
@@ -156,7 +158,7 @@ public class Activity_Charge_HF extends Activity_Base implements View.OnClickLis
 		super.onActivityResult(requestCode, resultCode, data);
 		switch (requestCode) {
 			case 1:
-				if (App.mUserWallet != null) tv_left_monery.setText(String.format("%.2f", App.mUserWallet.getBalanceAmount()) + "元");
+				if (MyApplication.mUserWallet != null) tv_left_monery.setText(String.format("%.2f", MyApplication.mUserWallet.getBalanceAmount()) + "元");
 				break;
 			case 2:
 				requestUserBankCard();
@@ -173,7 +175,7 @@ public class Activity_Charge_HF extends Activity_Base implements View.OnClickLis
 				finish();
 				break;
 			case R.id.tv_unband:
-				Activity_Browser.launcheForResult(this, "解绑", UrlsTwo.UrlUnBand, 2);
+				ProjectDetailActivity.launcheForResult(this, "解绑", UrlsTwo.UrlUnBand, 2);
 				break;
 			case R.id.iv_clear:
 				et_add_monery.setText("");
@@ -252,7 +254,7 @@ public class Activity_Charge_HF extends Activity_Base implements View.OnClickLis
 				LogUtil.i("bqt", "【Activity_Charge_HF】【Charge】网络异常，请稍后重试" + error.toString());
 			}
 		});
-		App.getInstance().getRequestQueue().add(jsonRequest);
+		MyApplication.getInstance().getRequestQueue().add(jsonRequest);
 	}
 
 	int maxMonery;
@@ -271,14 +273,14 @@ public class Activity_Charge_HF extends Activity_Base implements View.OnClickLis
 				LogUtil.i("bqt", "【Activity_Charge_HF】【BankList】返回数据：" + response.toString());
 				if (PackageUtil.getRequestStatus(response, Activity_Charge_HF.this)) {
 					try {
-						list = App.mGson.fromJson(response.optJSONArray("result").toString(), new TypeToken<List<BanksBean>>() {}
+						list = MyApplication.mGson.fromJson(response.optJSONArray("result").toString(), new TypeToken<List<BanksBean>>() {}
 								.getType());
 						if (list != null) {
 
 						}
-						if (App.mUserDetailInfo.BankCard != null && App.mUserDetailInfo.BankCard.IsQPCard) {//已绑定，且是快捷支付
+						if (MyApplication.mUserDetailInfo.BankCard != null && MyApplication.mUserDetailInfo.BankCard.IsQPCard) {//已绑定，且是快捷支付
 							for (int i = 0 ; i < list.size() ; i++) {
-								if (App.mUserDetailInfo.BankCard.BankCode.equalsIgnoreCase(list.get(i).getBankCode())) {
+								if (MyApplication.mUserDetailInfo.BankCard.BankCode.equalsIgnoreCase(list.get(i).getBankCode())) {
 									ll_card.setVisibility(View.VISIBLE);
 									maxMonery = list.get(i).getMaxSingle();
 									//                                    tv_xianer.setText("该卡本次最多可充值" + list.get(i).getMaxSingle()
@@ -299,7 +301,7 @@ public class Activity_Charge_HF extends Activity_Base implements View.OnClickLis
 				LogUtil.d("bqt", "【Activity_Charge_HF】【BankList】网络异常，请稍后重试" + error.toString());
 			}
 		});
-		App.getInstance().getRequestQueue().add(jsonRequest);
+		MyApplication.getInstance().getRequestQueue().add(jsonRequest);
 	}
 
 	private String initMonery(int monery) {
@@ -346,8 +348,8 @@ public class Activity_Charge_HF extends Activity_Base implements View.OnClickLis
 				LogUtil.i("bqt", "绑定的银行卡：" + response.toString());
 				if (PackageUtil.getRequestStatus(response, Activity_Charge_HF.this)) {
 					JSONObject data = PackageUtil.getResultObject(response);
-					if (data != null && App.mUserDetailInfo != null) {
-						App.mUserDetailInfo.BankCard = App.mGson.fromJson(data.toString(), UserBankCard.class);
+					if (data != null && MyApplication.mUserDetailInfo != null) {
+						MyApplication.mUserDetailInfo.BankCard = MyApplication.mGson.fromJson(data.toString(), UserBankCard.class);
 						initBankCard();
 					}
 				}
@@ -357,6 +359,6 @@ public class Activity_Charge_HF extends Activity_Base implements View.OnClickLis
 			public void onErrorResponse(Exception error) {
 			}
 		});
-		App.instance.getRequestQueue().add(jsonRequest);
+		MyApplication.instance.getRequestQueue().add(jsonRequest);
 	}
 }

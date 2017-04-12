@@ -4,8 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.bcb.data.util.LogUtil;
-import com.bcb.data.util.MyConstants;
+import com.bcb.utils.LogUtil;
+import com.bcb.constant.MyConstants;
 import com.tencent.mm.sdk.modelbase.BaseReq;
 import com.tencent.mm.sdk.modelbase.BaseResp;
 import com.tencent.mm.sdk.openapi.IWXAPI;

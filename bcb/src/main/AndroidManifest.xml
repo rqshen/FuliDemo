@@ -1,47 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools"
-          package="com.bcb"
-          android:versionCode="66"
-          android:versionName="2.5">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.bcb"
+    android:versionCode="67"
+    android:versionName="2.5.1">
 
     <uses-sdk
         android:minSdkVersion="14"
-        android:targetSdkVersion="19"/>
+        android:targetSdkVersion="19" />
 
     <!-- 极光推送 Required 自定义用来收发消息的相关权限 -->
     <PERMISSION
         android:name="${applicationId}.permission.JPUSH_MESSAGE"
-        android:protectionLevel="signature"/>
+        android:protectionLevel="signature" />
 
     <!-- 极光推送 Required 一些系统要求的权限，如访问网络等 -->
-    <uses-permission android:name="${applicationId}.permission.JPUSH_MESSAGE"/>
-    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT"/>
-    <uses-permission android:name="android.permission.WAKE_LOCK"/>
-    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
-    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="${applicationId}.permission.JPUSH_MESSAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <!-- Optional for location -->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.BLUETOOTH"/>
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <uses-permission android:name="android.permission.READ_LOGS"/>
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
-    <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW" />
 
     <application
-        android:name=".common.app.App"
+        android:name=".MyApplication"
         android:icon="@drawable/bcb_logo"
         android:label="@string/app_name"
         android:theme="@style/AppTheme"
@@ -50,356 +50,319 @@
         <!-- 高德地图 -->
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="02324a12c22384b37cd3f2e1c37460ea"/>
+            android:value="02324a12c22384b37cd3f2e1c37460ea" />
         <!-- 定位需要的服务 -->
-        <service android:name="com.amap.api.location.APSService"/>
+        <service android:name="com.amap.api.location.APSService" />
 
         <activity
-            android:name=".presentation.view.activity.Activity_Start_Up"
+            android:name=".module.welcome.WelcomeActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.NoTitleBar">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".presentation.view.activity.Activity_Main"
+            android:name=".module.home.MainActivity"
             android:label="@string/app_name"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".presentation.view.activity.Activity_Base"
-            android:label="@string/app_name">
-        </activity>
+            android:name=".base.Activity_Base"
+            android:label="@string/app_name"></activity>
         <activity
-            android:name=".presentation.view.activity.Activity_Browser"
+            android:name=".module.myinfo.financial.financialdetail.projectdetail.ProjectDetailActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".presentation.view.activity.Activity_Login"
             android:label="@string/app_name"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustPan">
-        </activity>
+            android:windowSoftInputMode="stateHidden|adjustPan"></activity>
         <activity
             android:name=".presentation.view.activity.Activity_Register_Next"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".presentation.view.activity.Activity_Register_First"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".presentation.view.activity.Activity_CP"
+            android:name=".presentation.view.activity._CP"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".presentation.view.activity.Activity_CPXQ"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".presentation.view.activity.Activity_Project_Buy2"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".presentation.view.activity.Activity_Forget_Pwd"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".presentation.view.activity.Activity_TZJL"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".presentation.view.activity.Activity_TZJL_1"
+            android:name=".module.myinfo.financial.FinancialActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".presentation.view.activity.Activity_Account_Setting"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme">
-        </activity>
+            android:theme="@style/AppTheme"></activity>
         <activity
             android:name=".presentation.view.activity.Activity_ChangePwd_Success"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".presentation.view.activity.Activity_Modify_Pwd"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar">
-        </activity>
+            android:theme="@android:style/Theme.NoTitleBar"></activity>
         <activity
             android:name=".presentation.view.activity.Activity_Setting_Pay_Pwd"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".presentation.view.activity.Activity_ChangeMoney_Success"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".presentation.view.activity.Activity_Withdraw"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".presentation.view.activity.Activity_Station_Change"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <!-- 交易明细 -->
         <activity
             android:name=".presentation.view.activity.Activity_Money_Flowing_Water"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <!-- 用户流水 -->
         <activity
             android:name=".presentation.view.activity.Activity_Transaction_Detail"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".presentation.view.activity.Activity_Trading_Record"
             android:label="@string/app_name"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".presentation.view.activity.Activity_Project_Investment_Details"
+            android:name=".module.myinfo.financial.financialdetail.FinancialDetailActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".presentation.view.activity.Activity_Select_Bank"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".presentation.view.activity.Activity_Province"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".presentation.view.activity.Activity_City"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".presentation.view.activity.Activity_BuyProject_Success"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="com.umeng.fb.ConversationActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="564c1cd6e0f55ab6e6001ce4">
-        </meta-data>
+            android:value="564c1cd6e0f55ab6e6001ce4"></meta-data>
         <meta-data
             android:name="UMENG_CHANNEL"
-            android:value="DEFAULT"/>
+            android:value="DEFAULT" />
 
         <service
             android:name="com.umeng.update.net.DownloadingService"
-            android:process=":DownloadingService">
-        </service>
+            android:process=":DownloadingService"></service>
 
         <activity
             android:name="com.umeng.update.UpdateDialogActivity"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar">
-        </activity>
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"></activity>
 
         <!-- 充值 -->
         <activity
             android:name=".presentation.view.activity.Activity_Recharge_First"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".presentation.view.activity.Activity_Recharge_Second"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".presentation.view.activity.Activity_Recharge_Confirm"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".presentation.view.activity.Activity_Recharge_WebView"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
 
         <!-- 优惠券 -->
         <activity
             android:name=".presentation.view.activity.Activity_Select_Coupon"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".presentation.view.activity.Activity_Coupons"
+            android:name=".presentation.view.activity._Coupons"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
 
         <!-- 认证 -->
         <activity
             android:name=".presentation.view.activity.Activity_Authentication"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
 
         <!-- 借款 -->
         <activity
             android:name=".presentation.view.activity.Activity_Loan"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".presentation.view.activity.Activity_LoanList"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".presentation.view.activity.Activity_LoanRequest_Borrow"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".presentation.view.activity.Activity_Join_Company"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".presentation.view.activity.Activity_LoanRequest_Person"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".presentation.view.activity.Activity_LoanRequest_Job"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".presentation.view.activity.Activity_Loan_Introduction"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".presentation.view.activity.Activity_LoanRequest_Success"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".wxapi.WXEntryActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".presentation.view.activity.Activity_LoanList_Detail"
+            android:name=".presentation.view.activity._LoanList_Detail"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".presentation.view.activity.Activity_NormalProject_Introduction"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".presentation.view.activity.Activity_Project_Buy"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".presentation.view.activity.Activity_ExpiredProject_Introduction"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".presentation.view.activity.Activity_Select_Material"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".presentation.view.activity.A_Elite_Loan"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".presentation.view.activity.Activity_Base_Fragment"
+            android:name=".base.BaseActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".presentation.view.activity.Activity_Gesture_Lock"
             android:label="@string/app_name"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".presentation.view.activity.Activity_Login_Introduction"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".presentation.view.activity.Activity_Money_Item_Detail"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".presentation.view.activity.A_CompanyName"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".presentation.view.activity.A_Email_Check"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".presentation.view.activity.Activity_Open_Account2"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".presentation.view.activity.Activity_Open_Account3"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <!-- 每日福利 -->
         <activity
             android:name=".presentation.view.activity.Activity_Daily_Welfare"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".presentation.view.activity.Activity_Daily_Welfare_Result"
             android:label="@string/app_name"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:theme="@style/Dialog_Fullscreen"/>
+            android:theme="@style/Dialog_Fullscreen" />
         <activity
             android:name=".presentation.view.activity.Activity_Daily_Welfare_Tip"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".presentation.view.activity.Activity_Daily_Welfare_Static"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <!-- 图片浏览 -->
         <activity
             android:name=".presentation.view.activity.Activity_Image_Display"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <!-- 聚爱 -->
         <activity
             android:name=".presentation.view.activity.Activity_Love"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <!-- 特权本金 -->
         <activity
             android:name=".presentation.view.activity.Activity_Privilege_Money"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
 
         <!-- ***********以下是极光推送相关配置************ -->
         <!-- Required SDK核心功能 -->
@@ -409,10 +372,10 @@
             android:exported="false"
             android:theme="@android:style/Theme.NoTitleBar">
             <intent-filter>
-                <action android:name="cn.jpush.android.ui.PushActivity"/>
+                <action android:name="cn.jpush.android.ui.PushActivity" />
 
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="${applicationId}"/>
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="${applicationId}" />
             </intent-filter>
         </activity>
 
@@ -420,8 +383,7 @@
         <service
             android:name="cn.jpush.android.service.DownloadService"
             android:enabled="true"
-            android:exported="false">
-        </service>
+            android:exported="false"></service>
 
         <!-- Required SDK 核心功能 -->
         <!-- option since 2.0.5 可配置PushService，DaemonService,PushReceiver,AlarmReceiver的android:process参数 将JPush相关组件设置为一个独立进程 -->
@@ -431,10 +393,10 @@
             android:enabled="true"
             android:exported="false">
             <intent-filter>
-                <action android:name="cn.jpush.android.intent.REGISTER"/>
-                <action android:name="cn.jpush.android.intent.REPORT"/>
-                <action android:name="cn.jpush.android.intent.PushService"/>
-                <action android:name="cn.jpush.android.intent.PUSH_TIME"/>
+                <action android:name="cn.jpush.android.intent.REGISTER" />
+                <action android:name="cn.jpush.android.intent.REPORT" />
+                <action android:name="cn.jpush.android.intent.PushService" />
+                <action android:name="cn.jpush.android.intent.PUSH_TIME" />
             </intent-filter>
         </service>
 
@@ -444,9 +406,9 @@
             android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <action android:name="cn.jpush.android.intent.DaemonService"/>
+                <action android:name="cn.jpush.android.intent.DaemonService" />
 
-                <category android:name="${applicationId}"/>
+                <category android:name="${applicationId}" />
             </intent-filter>
         </service>
 
@@ -456,108 +418,88 @@
             android:enabled="true"
             android:exported="false">
             <intent-filter android:priority="1000">
-                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY"/>
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED_PROXY" />
                 <!-- Required 显示通知栏 -->
-                <category android:name="${applicationId}"/>
+                <category android:name="${applicationId}" />
             </intent-filter>
             <intent-filter>
-                <action android:name="android.intent.action.USER_PRESENT"/>
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+                <action android:name="android.intent.action.USER_PRESENT" />
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
             <!-- Optional -->
             <intent-filter>
-                <action android:name="android.intent.action.PACKAGE_ADDED"/>
-                <action android:name="android.intent.action.PACKAGE_REMOVED"/>
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
 
-                <data android:scheme="package"/>
+                <data android:scheme="package" />
             </intent-filter>
         </receiver>
 
         <!-- Required SDK核心功能 -->
         <receiver
             android:name="cn.jpush.android.service.AlarmReceiver"
-            android:exported="false"/>
+            android:exported="false" />
 
         <!-- User defined. 用户自定义的广播接收器 -->
         <receiver
-            android:name=".common.receiver.JPushReceiver"
+            android:name=".jpush.JPushReceiver"
             android:enabled="true">
             <intent-filter>
-                <action android:name="cn.jpush.android.intent.REGISTRATION"/>
+                <action android:name="cn.jpush.android.intent.REGISTRATION" />
                 <!-- Required 用户注册SDK的intent -->
-                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED"/>
+                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED" />
                 <!-- Required 用户接收SDK消息的intent -->
-                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED"/>
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED" />
                 <!-- Required 用户接收SDK通知栏信息的intent -->
-                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED"/>
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" />
                 <!-- Required 用户打开自定义通知栏的intent -->
-                <action android:name="cn.jpush.android.intent.ACTION_RICHPUSH_CALLBACK"/>
+                <action android:name="cn.jpush.android.intent.ACTION_RICHPUSH_CALLBACK" />
                 <!-- Optional 用户接受Rich Push Javascript 回调函数的intent -->
-                <action android:name="cn.jpush.android.intent.CONNECTION"/>
+                <action android:name="cn.jpush.android.intent.CONNECTION" />
                 <!-- 接收网络变化 连接/断开 since 1.6.3 -->
-                <category android:name="${applicationId}"/>
+                <category android:name="${applicationId}" />
             </intent-filter>
         </receiver>
 
         <!-- Required . Enable it you can get statistics data with channel -->
         <meta-data
             android:name="JPUSH_CHANNEL"
-            android:value="developer-default"/>
+            android:value="developer-default" />
         <meta-data
             android:name="JPUSH_APPKEY"
-            android:value="983f6d809971c6e36d403c49"/>
+            android:value="983f6d809971c6e36d403c49" />
         <!-- </>值来自开发者平台取得的AppKey ： 983f6d809971c6e36d403c49 -->
 
-        <activity android:name=".presentation.view.activity.Activity_Open_Account">
-        </activity>
-        <activity android:name=".presentation.view.activity.Activity_TuoGuan_HF">
-        </activity>
-        <activity android:name=".presentation.view.activity.Activity_Charge_HF">
-        </activity>
+        <activity android:name=".presentation.view.activity.Activity_Open_Account"></activity>
+        <activity android:name=".presentation.view.activity.Activity_TuoGuan_HF"></activity>
+        <activity android:name=".presentation.view.activity.Activity_Charge_HF"></activity>
         <activity
             android:name=".presentation.view.activity.Activity_Tips_FaileOrSuccess"
-            android:launchMode="singleTask">
-        </activity>
-        <activity android:name=".presentation.view.activity.Activity_WebView">
-        </activity>
-        <activity android:name=".presentation.view.activity.A_Slb">
-        </activity>
+            android:launchMode="singleTask"></activity>
+        <activity android:name=".presentation.view.activity.Activity_WebView"></activity>
+        <activity android:name=".presentation.view.activity.A_Slb"></activity>
         <!--
  ATTENTION: This was auto-generated to add Google Play services to your project for
-     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
+     MyApplication Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
         -->
         <meta-data
             android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version"/>
+            android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".presentation.view.activity.A_AboutSlb">
-        </activity>
-        <activity android:name=".presentation.view.activity.A_Slb_List">
-        </activity>
-        <activity android:name=".presentation.view.activity.A_TZ_Cheques">
-        </activity>
-        <activity android:name=".presentation.view.activity.Activity_Charge_Tips">
-        </activity>
-        <activity android:name=".presentation.view.activity.Activity_Trading_Cancle">
-        </activity>
-        <activity android:name=".presentation.view.activity.Activity_Trading_change">
-        </activity>
-        <activity android:name=".presentation.view.activity.Activity_Rading_Record">
-        </activity>
-        <activity android:name=".presentation.view.activity.Activity_ZRXQ">
-        </activity>
-        <activity android:name=".presentation.view.activity.Activity_Web_Normal">
-        </activity>
-        <activity android:name=".presentation.view.activity.A_MySecurity">
-        </activity>
-        <activity android:name=".presentation.view.activity.Activity_WebView_Upload">
-        </activity>
-        <activity android:name=".presentation.view.activity.A_MyYE">
-        </activity>
-        <activity android:name=".presentation.view.activity.My_LC">
-        </activity>
-        <activity android:name=".presentation.view.activity.A_ZZC">
-        </activity>
+        <activity android:name=".presentation.view.activity.A_AboutSlb"></activity>
+        <activity android:name=".presentation.view.activity.A_Slb_List"></activity>
+        <activity android:name=".module.myinfo.financial.financialdetail.backpayment.BackPaymentActivity"></activity>
+        <activity android:name=".presentation.view.activity.Activity_Charge_Tips"></activity>
+        <activity android:name=".presentation.view.activity.Activity_Trading_Cancle"></activity>
+        <activity android:name=".presentation.view.activity._Trading_change"></activity>
+        <activity android:name=".presentation.view.activity.Activity_Rading_Record"></activity>
+        <activity android:name=".presentation.view.activity.Activity_ZRXQ"></activity>
+        <activity android:name=".presentation.view.activity.Activity_Web_Normal"></activity>
+        <activity android:name=".presentation.view.activity.A_MySecurity"></activity>
+        <activity android:name=".presentation.view.activity.Activity_WebView_Upload"></activity>
+        <activity android:name=".module.myinfo.balance.BalanceActivity"></activity>
+        <activity android:name=".presentation.view.activity.My_LC"></activity>
+        <activity android:name=".presentation.view.activity.A_ZZC"></activity>
     </application>
 
 </manifest>

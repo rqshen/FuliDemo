@@ -21,25 +21,26 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bcb.R;
-import com.bcb.common.app.App;
-import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbRequest;
-import com.bcb.common.net.BcbRequestTag;
-import com.bcb.common.net.UrlsOne;
-import com.bcb.common.net.UrlsTwo;
+import com.bcb.base.Activity_Base;
+import com.bcb.MyApplication;
+import com.bcb.network.BcbJsonRequest;
+import com.bcb.network.BcbRequest;
+import com.bcb.network.BcbRequestTag;
+import com.bcb.network.UrlsOne;
+import com.bcb.network.UrlsTwo;
 import com.bcb.data.bean.CPXQbean;
 import com.bcb.data.bean.CouponListBean;
 import com.bcb.data.bean.CouponRecordsBean;
 import com.bcb.data.bean.UserDetailInfo;
 import com.bcb.data.bean.UserWallet;
-import com.bcb.data.util.HttpUtils;
-import com.bcb.data.util.LogUtil;
-import com.bcb.data.util.MyActivityManager;
-import com.bcb.data.util.MyTextUtil;
-import com.bcb.data.util.PackageUtil;
-import com.bcb.data.util.ToastUtil;
-import com.bcb.data.util.TokenUtil;
-import com.bcb.data.util.UmengUtil;
+import com.bcb.utils.HttpUtils;
+import com.bcb.utils.LogUtil;
+import com.bcb.utils.MyActivityManager;
+import com.bcb.utils.MyTextUtil;
+import com.bcb.utils.PackageUtil;
+import com.bcb.utils.ToastUtil;
+import com.bcb.utils.TokenUtil;
+import com.bcb.utils.UmengUtil;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
 import com.bcb.presentation.view.custom.CustomDialog.DialogWidget;
 import com.bcb.presentation.view.custom.CustomDialog.MyMaskFullScreenView;
@@ -169,7 +170,7 @@ public class Activity_Project_Buy2 extends Activity_Base implements View.OnClick
 	//*************************************************************初始化页面 ************************************************
 	private void setupView() {
 
-		if (App.mUserWallet.BalanceAmount <= 0) buyAll.setEnabled(false);
+		if (MyApplication.mUserWallet.BalanceAmount <= 0) buyAll.setEnabled(false);
 		PackageToken = mSimpleProjectDetail.PackageToken;
 		//投资金额
 		invest_money = (EditText) findViewById(R.id.invest_money);
@@ -223,7 +224,7 @@ public class Activity_Project_Buy2 extends Activity_Base implements View.OnClick
 //			button_buy.setBackgroundResource(R.drawable.button_solid_red);
 //		}
 		//获取优惠券张数
-		if (App.saveUserInfo.getAccess_Token() != null) {
+		if (MyApplication.saveUserInfo.getAccess_Token() != null) {
 			getCouponCount();
 			getUserBanlance();
 		}
@@ -265,7 +266,7 @@ public class Activity_Project_Buy2 extends Activity_Base implements View.OnClick
 						//显示优惠券数量
 						if (obj != null) {
 							//******************************************************************************************
-							List<CouponRecordsBean> Records = App.mGson.fromJson(obj.toString(), CouponListBean.class).Records;
+							List<CouponRecordsBean> Records = MyApplication.mGson.fromJson(obj.toString(), CouponListBean.class).Records;
 							number = 0;
 							for (int i = 0; i < Records.size(); i++) {
 								if (Records.get(i)
@@ -287,7 +288,7 @@ public class Activity_Project_Buy2 extends Activity_Base implements View.OnClick
 			}
 		});
 		jsonRequest.setTag(BcbRequestTag.BCB_SELECT_COUPON_REQUEST);
-		App.getInstance()
+		MyApplication.getInstance()
 				.getRequestQueue()
 				.add(jsonRequest);
 	}
@@ -320,11 +321,11 @@ public class Activity_Project_Buy2 extends Activity_Base implements View.OnClick
 						JSONObject data = PackageUtil.getResultObject(response);
 						//判断JSON对象是否为空
 						if (data != null) {
-							mUserDetailInfo = App.mGson.fromJson(data.toString(), UserDetailInfo.class);
+							mUserDetailInfo = MyApplication.mGson.fromJson(data.toString(), UserDetailInfo.class);
 						}
 						//将用户信息写入静态数据区
 						if (mUserDetailInfo != null) {
-							App.mUserDetailInfo = mUserDetailInfo;
+							MyApplication.mUserDetailInfo = mUserDetailInfo;
 						}
 					}
 					//去登陆
@@ -342,7 +343,7 @@ public class Activity_Project_Buy2 extends Activity_Base implements View.OnClick
 			}
 		});
 		jsonRequest.setTag(BcbRequestTag.UserBankMessageTag);
-		App.getInstance()
+		MyApplication.getInstance()
 				.getRequestQueue()
 				.add(jsonRequest);
 	}
@@ -361,11 +362,11 @@ public class Activity_Project_Buy2 extends Activity_Base implements View.OnClick
 								JSONObject data = PackageUtil.getResultObject(response);
 								//判断JSON对象是否为空
 								if (data != null) {
-									mUserWallet = App.mGson.fromJson(data.toString(), UserWallet.class);
+									mUserWallet = MyApplication.mGson.fromJson(data.toString(), UserWallet.class);
 								}
 								if (null != mUserWallet) {
-									App.mUserWallet = mUserWallet;
-									wallet_money.setText(String.format("%.2f", App.mUserWallet.BalanceAmount) + "元");
+									MyApplication.mUserWallet = mUserWallet;
+									wallet_money.setText(String.format("%.2f", MyApplication.mUserWallet.BalanceAmount) + "元");
 									button_buy.setText("立即申购");
 								}
 							} else if (status == -5) {
@@ -382,7 +383,7 @@ public class Activity_Project_Buy2 extends Activity_Base implements View.OnClick
 					}
 				});
 		jsonRequest.setTag(BcbRequestTag.UserWalletMessageTag);
-		App.getInstance()
+		MyApplication.getInstance()
 				.getRequestQueue()
 				.add(jsonRequest);
 	}
@@ -417,7 +418,7 @@ public class Activity_Project_Buy2 extends Activity_Base implements View.OnClick
 						.show();
 			}
 		});
-		App.getInstance()
+		MyApplication.getInstance()
 				.getRequestQueue()
 				.add(jsonRequest);
 	}
@@ -438,19 +439,19 @@ public class Activity_Project_Buy2 extends Activity_Base implements View.OnClick
 			return;
 		}
 		// 未登录
-		if (App.saveUserInfo.getAccess_Token() == null) {
+		if (MyApplication.saveUserInfo.getAccess_Token() == null) {
 			ToastUtil.alert(Activity_Project_Buy2.this, "请先登录");
 			startActivity(new Intent(Activity_Project_Buy2.this, Activity_Login.class));
 			return;
 		}
 		//无法获取用户余额
-		if (App.mUserWallet == null) {
+		if (MyApplication.mUserWallet == null) {
 			error_tips.setVisibility(View.VISIBLE);
 			error_tips.setText("暂时无法获取用户余额");
 			return;
 		}
 		//未开通托管
-		if (App.mUserDetailInfo == null || !App.mUserDetailInfo.HasOpenCustody) {
+		if (MyApplication.mUserDetailInfo == null || !MyApplication.mUserDetailInfo.HasOpenCustody) {
 			startActivity(new Intent(Activity_Project_Buy2.this, Activity_Open_Account.class));
 			return;
 		}
@@ -469,7 +470,7 @@ public class Activity_Project_Buy2 extends Activity_Base implements View.OnClick
 		inputMoney = Float.parseFloat(invest_money.getText().toString().replace(",", ""));
 
 		//用户余额小于输入金额
-		if ((float) App.mUserWallet.BalanceAmount < inputMoney) {
+		if ((float) MyApplication.mUserWallet.BalanceAmount < inputMoney) {
 			altDialog();
 			//ToastUtil.alert(Activity_Project_Buy.this, "余额不足，请先充值");
 			//Activity_Recharge_Second.launche(Activity_Project_Buy.this);
@@ -604,7 +605,7 @@ public class Activity_Project_Buy2 extends Activity_Base implements View.OnClick
 						.show();
 			}
 		});
-		App.getInstance()
+		MyApplication.getInstance()
 				.getRequestQueue()
 				.add(jsonRequest);
 	}
@@ -655,7 +656,7 @@ public class Activity_Project_Buy2 extends Activity_Base implements View.OnClick
 						.show();
 			}
 		});
-		App.getInstance()
+		MyApplication.getInstance()
 				.getRequestQueue()
 				.add(jsonRequest);
 	}
@@ -682,7 +683,7 @@ public class Activity_Project_Buy2 extends Activity_Base implements View.OnClick
 	public void onClick(View view) {
 		switch (view.getId()) {
 			case R.id.buy_all:
-				double all = Math.min(mSimpleProjectDetail.Balance, App.mUserWallet.BalanceAmount);
+				double all = Math.min(mSimpleProjectDetail.Balance, MyApplication.mUserWallet.BalanceAmount);
 				if (type == 2) {
 					all = Math.min(all, amount);
 				}
@@ -695,7 +696,7 @@ public class Activity_Project_Buy2 extends Activity_Base implements View.OnClick
 			case R.id.invest_money:
 			case R.id.layout_coupon:
 				//先判断是否登录
-				if (App.saveUserInfo.getAccess_Token() == null)
+				if (MyApplication.saveUserInfo.getAccess_Token() == null)
 					startActivity(new Intent(Activity_Project_Buy2.this, Activity_Login.class));
 					//判断优惠券类型，跳转
 				else startupActivity(2);
@@ -726,13 +727,13 @@ public class Activity_Project_Buy2 extends Activity_Base implements View.OnClick
 	//充值
 	private void rechargeMoney() {
 		// 用户是否登录
-		if (App.saveUserInfo.getAccess_Token() == null) {
+		if (MyApplication.saveUserInfo.getAccess_Token() == null) {
 			ToastUtil.alert(Activity_Project_Buy2.this, "请先登录");
 			startActivity(new Intent(Activity_Project_Buy2.this, Activity_Login.class));
 			return;
 		}
 		//已开通托管
-		if (App.mUserDetailInfo != null && App.mUserDetailInfo.HasOpenCustody)
+		if (MyApplication.mUserDetailInfo != null && MyApplication.mUserDetailInfo.HasOpenCustody)
 			startActivity(new Intent(Activity_Project_Buy2.this, Activity_Charge_HF.class));
 		else startActivity(new Intent(Activity_Project_Buy2.this, Activity_Open_Account.class));
 	}

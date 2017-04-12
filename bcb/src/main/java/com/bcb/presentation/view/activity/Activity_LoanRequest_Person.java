@@ -12,21 +12,22 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bcb.R;
-import com.bcb.common.app.App;
-import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbRequest;
-import com.bcb.common.net.BcbRequestTag;
-import com.bcb.common.net.UrlsOne;
+import com.bcb.base.Activity_Base;
+import com.bcb.MyApplication;
+import com.bcb.network.BcbJsonRequest;
+import com.bcb.network.BcbRequest;
+import com.bcb.network.BcbRequestTag;
+import com.bcb.network.UrlsOne;
 import com.bcb.data.bean.StringEventBusBean;
 import com.bcb.data.bean.loan.LoanKindBean;
 import com.bcb.data.bean.loan.PersonInfoBean;
-import com.bcb.data.util.LoanPersonalConfigUtil;
-import com.bcb.data.util.LogUtil;
-import com.bcb.data.util.MyActivityManager;
-import com.bcb.data.util.RegexManager;
-import com.bcb.data.util.SpinnerWheelUtil;
-import com.bcb.data.util.ToastUtil;
-import com.bcb.data.util.TokenUtil;
+import com.bcb.utils.LoanPersonalConfigUtil;
+import com.bcb.utils.LogUtil;
+import com.bcb.utils.MyActivityManager;
+import com.bcb.utils.RegexManager;
+import com.bcb.utils.SpinnerWheelUtil;
+import com.bcb.utils.ToastUtil;
+import com.bcb.utils.TokenUtil;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -248,7 +249,7 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
 			}
 		});
 		jsonRequest.setTag(BcbRequestTag.BCB_GET_LOAN_PERSONAL_MESSAGE_REQUEST);
-		App.getInstance().getRequestQueue().add(jsonRequest);
+		MyApplication.getInstance().getRequestQueue().add(jsonRequest);
 	}
 
 	/**
@@ -454,8 +455,8 @@ public class Activity_LoanRequest_Person extends Activity_Base implements View.O
 		}
 
 		//判断紧急联系人是否跟用户姓名一样
-		if (loan_emergency_case.getText().toString().equalsIgnoreCase(App.mUserDetailInfo.getRealName()) ||
-				loan_emergency_case_second.getText().toString().equalsIgnoreCase(App.mUserDetailInfo.getRealName())) {
+		if (loan_emergency_case.getText().toString().equalsIgnoreCase(MyApplication.mUserDetailInfo.getRealName()) ||
+				loan_emergency_case_second.getText().toString().equalsIgnoreCase(MyApplication.mUserDetailInfo.getRealName())) {
 			ToastUtil.alert(Activity_LoanRequest_Person.this, "紧急联系人不能与本人相同");
 			return;
 		}

@@ -17,21 +17,22 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bcb.R;
-import com.bcb.common.app.App;
-import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbRequest;
-import com.bcb.common.net.BcbRequestQueue;
-import com.bcb.common.net.BcbRequestTag;
-import com.bcb.common.net.UrlsOne;
+import com.bcb.base.Activity_Base;
+import com.bcb.MyApplication;
+import com.bcb.network.BcbJsonRequest;
+import com.bcb.network.BcbRequest;
+import com.bcb.network.BcbRequestQueue;
+import com.bcb.network.BcbRequestTag;
+import com.bcb.network.UrlsOne;
 import com.bcb.data.bean.CouponListBean;
 import com.bcb.data.bean.CouponRecordsBean;
-import com.bcb.data.util.HttpUtils;
-import com.bcb.data.util.LogUtil;
-import com.bcb.data.util.MyActivityManager;
-import com.bcb.data.util.MyListView;
-import com.bcb.data.util.PackageUtil;
-import com.bcb.data.util.ToastUtil;
-import com.bcb.data.util.TokenUtil;
+import com.bcb.utils.HttpUtils;
+import com.bcb.utils.LogUtil;
+import com.bcb.utils.MyActivityManager;
+import com.bcb.utils.MyListView;
+import com.bcb.utils.PackageUtil;
+import com.bcb.utils.ToastUtil;
+import com.bcb.utils.TokenUtil;
 import com.bcb.presentation.adapter.CouponListAdapter;
 import com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout;
 
@@ -82,7 +83,7 @@ public class Activity_Select_Coupon extends Activity_Base {
                 showConvertDialog();
             }
         });
-		requestQueue = App.getInstance().getRequestQueue();
+		requestQueue = MyApplication.getInstance().getRequestQueue();
         init();
 	}
 
@@ -165,7 +166,7 @@ public class Activity_Select_Coupon extends Activity_Base {
                         JSONObject obj = PackageUtil.getResultObject(response);
                         CouponListBean mCouponList = null;
                         if (obj != null) {
-                            mCouponList = App.mGson.fromJson(obj.toString(), CouponListBean.class);
+                            mCouponList = MyApplication.mGson.fromJson(obj.toString(), CouponListBean.class);
                         }
                         if (null != mCouponList && null != mCouponList.Records && mCouponList.Records.size() > 0) {
                             PageNow++;

@@ -9,7 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bcb.R;
-import com.bcb.data.util.MyActivityManager;
+import com.bcb.base.Activity_Base;
+import com.bcb.utils.MyActivityManager;
 
 /**
  * Created by cain on 16/1/8.

@@ -11,11 +11,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bcb.R;
-import com.bcb.common.app.App;
-import com.bcb.common.event.BroadcastEvent;
+import com.bcb.MyApplication;
+import com.bcb.event.BroadcastEvent;
 import com.bcb.data.bean.CouponRecordsBean;
-import com.bcb.data.util.LogUtil;
-import com.bcb.data.util.MyConstants;
+import com.bcb.utils.LogUtil;
+import com.bcb.constant.MyConstants;
 import com.bcb.presentation.view.activity.A_Elite_Loan;
 import com.bcb.presentation.view.activity.Activity_Open_Account;
 import com.bcb.presentation.view.activity.Activity_Withdraw;
@@ -146,7 +146,7 @@ public class CouponListAdapter extends BaseAdapter {
 						ctx.startActivity(new Intent(ctx, Activity_Withdraw.class));
 					} else if (MyConstants.LOAN_SUBSIDIES == data.get(pos).getCouponType()) {//借款补贴券时，点击则跳转至借款界面
 						//用户还没认证时，先去认证
-						if (App.mUserDetailInfo != null && App.mUserDetailInfo.HasOpenCustody)
+						if (MyApplication.mUserDetailInfo != null && MyApplication.mUserDetailInfo.HasOpenCustody)
 							ctx.startActivity(new Intent(ctx, A_Elite_Loan.class));
 						else ctx.startActivity(new Intent(ctx, Activity_Open_Account.class));
 					} else if (MyConstants.CASH == data.get(pos).getCouponType()) {//现金券时，点击则跳转至产品列表界面

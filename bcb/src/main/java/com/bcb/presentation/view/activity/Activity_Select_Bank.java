@@ -10,19 +10,20 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 import com.bcb.R;
-import com.bcb.common.app.App;
-import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbRequest;
-import com.bcb.common.net.BcbRequestQueue;
-import com.bcb.common.net.BcbRequestTag;
-import com.bcb.common.net.UrlsOne;
+import com.bcb.base.Activity_Base;
+import com.bcb.MyApplication;
+import com.bcb.network.BcbJsonRequest;
+import com.bcb.network.BcbRequest;
+import com.bcb.network.BcbRequestQueue;
+import com.bcb.network.BcbRequestTag;
+import com.bcb.network.UrlsOne;
 import com.bcb.data.bean.BankItem;
-import com.bcb.data.util.LoadingLayoutMgr;
-import com.bcb.data.util.LogUtil;
-import com.bcb.data.util.MyActivityManager;
-import com.bcb.data.util.PackageUtil;
-import com.bcb.data.util.ToastUtil;
-import com.bcb.data.util.TokenUtil;
+import com.bcb.utils.LoadingLayoutMgr;
+import com.bcb.utils.LogUtil;
+import com.bcb.utils.MyActivityManager;
+import com.bcb.utils.PackageUtil;
+import com.bcb.utils.ToastUtil;
+import com.bcb.utils.TokenUtil;
 import com.bcb.presentation.adapter.BankListAdapter;
 import com.google.gson.reflect.TypeToken;
 
@@ -54,7 +55,7 @@ public class Activity_Select_Bank  extends Activity_Base implements OnItemClickL
 		setBaseContentView(R.layout.activity_select_bank);
 		setLeftTitleVisible(true);
 		setTitleValue("选择银行");
-        requestQueue = App.getInstance().getRequestQueue();
+        requestQueue = MyApplication.getInstance().getRequestQueue();
 		loading_layout = (RelativeLayout) findViewById(R.id.load_layout);
 		ld = new LoadingLayoutMgr(Activity_Select_Bank.this, false, "正在加载...");
 		loading_layout.addView(ld.getLayout());
@@ -98,7 +99,7 @@ public class Activity_Select_Bank  extends Activity_Base implements OnItemClickL
                     try {
                         JSONArray result = response.getJSONArray("result");
                         if (result != null) {
-                            mBanklist = App.mGson.fromJson(result.toString(), new TypeToken<List<BankItem>>(){}.getType());
+                            mBanklist = MyApplication.mGson.fromJson(result.toString(), new TypeToken<List<BankItem>>(){}.getType());
                         }
                         if(null != mBanklist && mBanklist.size() > 0){
                             handler.sendEmptyMessage(0);

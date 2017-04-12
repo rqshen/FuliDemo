@@ -11,21 +11,23 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bcb.R;
-import com.bcb.common.app.App;
-import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbRequest;
-import com.bcb.common.net.BcbRequestQueue;
-import com.bcb.common.net.BcbRequestTag;
-import com.bcb.common.net.UrlsTwo;
+import com.bcb.base.Activity_Base;
+import com.bcb.MyApplication;
+import com.bcb.network.BcbJsonRequest;
+import com.bcb.network.BcbRequest;
+import com.bcb.network.BcbRequestQueue;
+import com.bcb.network.BcbRequestTag;
+import com.bcb.network.UrlsTwo;
 import com.bcb.data.bean.PrivilegeMoneyBasic;
 import com.bcb.data.bean.PrivilegeMoneyDto;
-import com.bcb.data.util.HttpUtils;
-import com.bcb.data.util.LogUtil;
-import com.bcb.data.util.MyActivityManager;
-import com.bcb.data.util.MyListView;
-import com.bcb.data.util.PackageUtil;
-import com.bcb.data.util.ToastUtil;
-import com.bcb.data.util.TokenUtil;
+import com.bcb.utils.HttpUtils;
+import com.bcb.utils.LogUtil;
+import com.bcb.utils.MyActivityManager;
+import com.bcb.utils.MyListView;
+import com.bcb.utils.PackageUtil;
+import com.bcb.utils.ToastUtil;
+import com.bcb.utils.TokenUtil;
+import com.bcb.module.myinfo.financial.financialdetail.projectdetail.ProjectDetailActivity;
 import com.bcb.presentation.adapter.PrivilegeMoneyAdapter;
 import com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout;
 
@@ -73,14 +75,14 @@ public class Activity_Privilege_Money extends Activity_Base implements AdapterVi
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(ctx, Activity_Money_Flowing_Water.class));
-//                if (App.mUserDetailInfo != null && App.mUserDetailInfo.HasOpenCustody) startActivity(new Intent(ctx, Activity_Money_Flowing_Water.class));
+//                if (MyApplication.mUserDetailInfo != null && MyApplication.mUserDetailInfo.HasOpenCustody) startActivity(new Intent(ctx, Activity_Money_Flowing_Water.class));
 //                else startActivity(new Intent(ctx, Activity_Open_Account.class));
             }
         });
         iv_about.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Activity_Browser.launche(Activity_Privilege_Money.this, "关于特权本金", UrlsTwo.AboutExpiredProjectIntroduction);
+                ProjectDetailActivity.launche(Activity_Privilege_Money.this, "关于特权本金", UrlsTwo.AboutExpiredProjectIntroduction);
             }
         });
         //管理Activity栈，用于忘记密码的时候，跳转至登陆界面之前销毁栈中所有的Activity
@@ -94,7 +96,7 @@ public class Activity_Privilege_Money extends Activity_Base implements AdapterVi
 //            }
 //        });
 
-        requestQueue = App.getInstance().getRequestQueue();
+        requestQueue = MyApplication.getInstance().getRequestQueue();
         ctx = this;
         datas = new ArrayList<>();
         myAdapter = new PrivilegeMoneyAdapter(this, datas);
@@ -151,7 +153,7 @@ public class Activity_Privilege_Money extends Activity_Base implements AdapterVi
                     JSONObject data = PackageUtil.getResultObject(response);
                     //判断JSON对象是否为空
                     if (data != null) {
-                        PrivilegeMoneyBasic bean = App.mGson.fromJson(data.toString(), PrivilegeMoneyBasic.class);
+                        PrivilegeMoneyBasic bean = MyApplication.mGson.fromJson(data.toString(), PrivilegeMoneyBasic.class);
                         tv_shouyi_all.setText(String.format("%.2f", bean.TotalIncome));
                         tv_benjin.setText(String.format("%.2f", bean.ActivedPrincipal));
                         tv_shouyi.setText(String.format("%.2f", bean.ActivedIncome));
@@ -162,7 +164,7 @@ public class Activity_Privilege_Money extends Activity_Base implements AdapterVi
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 try {
                                     JSONObject item = jsonArray.getJSONObject(i);
-                                    datas.add(App.mGson.fromJson(item.toString(), PrivilegeMoneyDto.class));
+                                    datas.add(MyApplication.mGson.fromJson(item.toString(), PrivilegeMoneyDto.class));
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }

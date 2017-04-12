@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 
 import com.bcb.R;
+import com.bcb.base.Activity_Base;
 
 import butterknife.ButterKnife;
 

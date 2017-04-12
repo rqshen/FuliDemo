@@ -21,19 +21,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bcb.R;
-import com.bcb.common.app.App;
-import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbRequest;
-import com.bcb.common.net.BcbRequestQueue;
-import com.bcb.common.net.BcbRequestTag;
-import com.bcb.common.net.UrlsOne;
-import com.bcb.data.util.MQCustomerManager;
-import com.bcb.data.util.MyActivityManager;
-import com.bcb.data.util.PackageUtil;
-import com.bcb.data.util.RegexManager;
-import com.bcb.data.util.ToastUtil;
-import com.bcb.data.util.TokenUtil;
-import com.bcb.data.util.UmengUtil;
+import com.bcb.base.Activity_Base;
+import com.bcb.MyApplication;
+import com.bcb.network.BcbJsonRequest;
+import com.bcb.network.BcbRequest;
+import com.bcb.network.BcbRequestQueue;
+import com.bcb.network.BcbRequestTag;
+import com.bcb.network.UrlsOne;
+import com.bcb.utils.MQCustomerManager;
+import com.bcb.utils.MyActivityManager;
+import com.bcb.utils.PackageUtil;
+import com.bcb.utils.RegexManager;
+import com.bcb.utils.ToastUtil;
+import com.bcb.utils.TokenUtil;
+import com.bcb.utils.UmengUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -97,7 +98,7 @@ public class Activity_Forget_Pwd extends Activity_Base {
 				MQCustomerManager.getInstance(Activity_Forget_Pwd.this).showCustomer(null);
 			}
 		});
-        requestQueue = App.getInstance().getRequestQueue();
+        requestQueue = MyApplication.getInstance().getRequestQueue();
 		init();
 	}
 
@@ -527,7 +528,7 @@ public class Activity_Forget_Pwd extends Activity_Base {
 				obj.put("CodeType", 3);
 			} else {
 				//只能取出缓存在本地的手机号码
-				obj.put("Mobile", App.saveUserInfo.getLocalPhone());
+				obj.put("Mobile", MyApplication.saveUserInfo.getLocalPhone());
 				obj.put("CodeType", 4);
 			}		
 			obj.put("Platform", 2);
@@ -550,7 +551,7 @@ public class Activity_Forget_Pwd extends Activity_Base {
                         }
                         //找回支付密码，手机号码必须从本地取出
                         else {
-                            ToastUtil.alert(Activity_Forget_Pwd.this, "验证码已发送至 " + App.saveUserInfo.getLocalPhone());
+                            ToastUtil.alert(Activity_Forget_Pwd.this, "验证码已发送至 " + MyApplication.saveUserInfo.getLocalPhone());
                         }
                         setTimer();
                     } else {

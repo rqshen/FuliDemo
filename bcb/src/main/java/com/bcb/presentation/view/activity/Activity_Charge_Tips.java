@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.widget.ListView;
 
 import com.bcb.R;
+import com.bcb.base.Activity_Base;
 import com.bcb.data.bean.BanksBean;
 import com.bcb.presentation.adapter.BanksAdapter;
 

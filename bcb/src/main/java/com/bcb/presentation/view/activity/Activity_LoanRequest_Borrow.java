@@ -16,29 +16,31 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bcb.R;
-import com.bcb.common.app.App;
-import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbRequest;
-import com.bcb.common.net.BcbRequestTag;
-import com.bcb.common.net.UrlsOne;
+import com.bcb.base.Activity_Base;
+import com.bcb.MyApplication;
+import com.bcb.network.BcbJsonRequest;
+import com.bcb.network.BcbRequest;
+import com.bcb.network.BcbRequestTag;
+import com.bcb.network.UrlsOne;
 import com.bcb.data.bean.StringEventBusBean;
 import com.bcb.data.bean.UserExtraInfo;
 import com.bcb.data.bean.loan.LoanDurationListBean;
 import com.bcb.data.bean.loan.LoanKindBean;
 import com.bcb.data.bean.loan.LoanPeriodWithRateBean;
 import com.bcb.data.bean.loan.LoanRequestInfoBean;
-import com.bcb.data.util.DbUtil;
-import com.bcb.data.util.HttpUtils;
-import com.bcb.data.util.LogUtil;
-import com.bcb.data.util.MQCustomerManager;
-import com.bcb.data.util.MyActivityManager;
-import com.bcb.data.util.MyConstants;
-import com.bcb.data.util.PackageUtil;
-import com.bcb.data.util.ProgressDialogrUtils;
-import com.bcb.data.util.SpinnerWheelUtil;
-import com.bcb.data.util.ToastUtil;
-import com.bcb.data.util.TokenUtil;
-import com.bcb.data.util.UmengUtil;
+import com.bcb.utils.DbUtil;
+import com.bcb.utils.HttpUtils;
+import com.bcb.utils.LogUtil;
+import com.bcb.utils.MQCustomerManager;
+import com.bcb.utils.MyActivityManager;
+import com.bcb.constant.MyConstants;
+import com.bcb.utils.PackageUtil;
+import com.bcb.utils.ProgressDialogrUtils;
+import com.bcb.utils.SpinnerWheelUtil;
+import com.bcb.utils.ToastUtil;
+import com.bcb.utils.TokenUtil;
+import com.bcb.utils.UmengUtil;
+import com.bcb.module.myinfo.financial.financialdetail.projectdetail.ProjectDetailActivity;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
 import com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout;
 import com.google.gson.Gson;
@@ -149,8 +151,8 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 	public void onDestroy() {
 		super.onDestroy();
 		EventBus.getDefault().unregister(this);
-		App.getInstance().getRequestQueue().cancelAll(BcbRequestTag.BCB_SELECT_COUPON_REQUEST);
-		App.getInstance().getRequestQueue().cancelAll(BcbRequestTag.BCB_CREATE_LOAN_REQUEST_MESSAGE_REQUEST);
+		MyApplication.getInstance().getRequestQueue().cancelAll(BcbRequestTag.BCB_SELECT_COUPON_REQUEST);
+		MyApplication.getInstance().getRequestQueue().cancelAll(BcbRequestTag.BCB_CREATE_LOAN_REQUEST_MESSAGE_REQUEST);
 	}
 
 	//****************************************************************************************************************************************
@@ -288,7 +290,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 					}
 				});
 		jsonRequest.setTag(BcbRequestTag.BCB_LOAN_CERTIFICATION_REQUEST);
-		App.getInstance().getRequestQueue().add(jsonRequest);
+		MyApplication.getInstance().getRequestQueue().add(jsonRequest);
 	}
 
 	private void initBean() {
@@ -386,7 +388,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 			}
 		});
 		jsonRequest.setTag(BcbRequestTag.BCB_SELECT_COUPON_REQUEST);
-		App.getInstance().getRequestQueue().add(jsonRequest);
+		MyApplication.getInstance().getRequestQueue().add(jsonRequest);
 	}
 
 	/**
@@ -650,11 +652,11 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 				break;
 			//借款服务协议
 			case R.id.loan_protocol:
-				Activity_Browser.launche(Activity_LoanRequest_Borrow.this, "借款服务协议", UrlsOne.LoanProtocol);
+				ProjectDetailActivity.launche(Activity_LoanRequest_Borrow.this, "借款服务协议", UrlsOne.LoanProtocol);
 				break;
 			//如何获得补贴
 			case R.id.loan_how:
-				Activity_Browser.launche(Activity_LoanRequest_Borrow.this, "如何获得补贴", UrlsOne.How2GetSubsidy);
+				ProjectDetailActivity.launche(Activity_LoanRequest_Borrow.this, "如何获得补贴", UrlsOne.How2GetSubsidy);
 				break;
 
 			//点击利息抵扣券
@@ -675,7 +677,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 
 			//客服
 			case R.id.layout_customer_service:
-				MQCustomerManager.getInstance(this).showCustomer(App.mUserDetailInfo.getCustomerId());
+				MQCustomerManager.getInstance(this).showCustomer(MyApplication.mUserDetailInfo.getCustomerId());
 				break;
 		}
 	}
@@ -859,7 +861,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 						}
 					});
 			jsonRequest.setTag(BcbRequestTag.BCB_CREATE_LOAN_REQUEST_MESSAGE_REQUEST);
-			App.getInstance().getRequestQueue().add(jsonRequest);
+			MyApplication.getInstance().getRequestQueue().add(jsonRequest);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

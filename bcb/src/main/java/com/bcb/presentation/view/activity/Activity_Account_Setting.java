@@ -18,13 +18,15 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.bcb.R;
-import com.bcb.common.app.App;
-import com.bcb.common.net.UrlsOne;
-import com.bcb.data.util.LogUtil;
-import com.bcb.data.util.MyActivityManager;
-import com.bcb.data.util.MyTextUtil;
-import com.bcb.data.util.ToastUtil;
-import com.bcb.data.util.UmengUtil;
+import com.bcb.base.Activity_Base;
+import com.bcb.MyApplication;
+import com.bcb.network.UrlsOne;
+import com.bcb.utils.LogUtil;
+import com.bcb.utils.MyActivityManager;
+import com.bcb.utils.MyTextUtil;
+import com.bcb.utils.ToastUtil;
+import com.bcb.utils.UmengUtil;
+import com.bcb.module.myinfo.financial.financialdetail.projectdetail.ProjectDetailActivity;
 import com.bcb.presentation.model.IModel_UserAccount;
 import com.bcb.presentation.model.IModel_UserAccountImpl;
 import com.bcb.presentation.presenter.IPresenter_AccountSetting;
@@ -33,7 +35,7 @@ import com.bcb.presentation.view.activity_interface.Interface_AccountSetting;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
 import com.bcb.presentation.view.custom.CustomDialog.DialogWidget;
 
-import static com.bcb.common.app.App.mUserDetailInfo;
+import static com.bcb.MyApplication.mUserDetailInfo;
 
 public class Activity_Account_Setting extends Activity_Base implements OnClickListener, Interface_AccountSetting {
 	private RelativeLayout layout_username, layout_id_card, layout_bank_card, layout_phone;
@@ -96,7 +98,7 @@ public class Activity_Account_Setting extends Activity_Base implements OnClickLi
 		//获取用户信息
 		updateUserData();
 
-		if (App.saveUserInfo.getAccess_Token() == null||mUserDetailInfo == null) {
+		if (MyApplication.saveUserInfo.getAccess_Token() == null||mUserDetailInfo == null) {
 			name.setText("");
 			layout_id_card.setVisibility(View.GONE);
 			layout_phone.setVisibility(View.GONE);
@@ -106,7 +108,7 @@ public class Activity_Account_Setting extends Activity_Base implements OnClickLi
 			layout_username.setVisibility(View.VISIBLE);
 			text_tg.setText("银行卡/资金账户/交易密码");
 		} else {
-			name.setText("" + App.saveUserInfo.getLocalPhone());
+			name.setText("" + MyApplication.saveUserInfo.getLocalPhone());
 			layout_id_card.setVisibility(View.GONE);
 			layout_username.setVisibility(View.GONE);
 			text_tg.setText("去开通");
@@ -120,8 +122,8 @@ public class Activity_Account_Setting extends Activity_Base implements OnClickLi
 		switch_gesture = (Switch) findViewById(R.id.switch_gesture);
 		switch_gesture.setOnCheckedChangeListener(null);
 		//如果手势密码不为空，则设置为打开状态
-		switch_gesture.setChecked(!App.saveUserInfo.getGesturePassword().isEmpty());
-		LogUtil.i("bqt", "【Activity_Account_Setting】【onResume】保存的手势密码" + App.saveUserInfo.getGesturePassword());
+		switch_gesture.setChecked(!MyApplication.saveUserInfo.getGesturePassword().isEmpty());
+		LogUtil.i("bqt", "【Activity_Account_Setting】【onResume】保存的手势密码" + MyApplication.saveUserInfo.getGesturePassword());
 
 		switch_gesture.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 			@Override
@@ -257,7 +259,7 @@ public class Activity_Account_Setting extends Activity_Base implements OnClickLi
 				break;
 			//手机号码
 			case R.id.tg:
-				if (App.mUserDetailInfo!=null&&App.mUserDetailInfo.HasOpenCustody) {//已开通托管
+				if (MyApplication.mUserDetailInfo!=null&& MyApplication.mUserDetailInfo.HasOpenCustody) {//已开通托管
 					startActivity(new Intent(this, Activity_TuoGuan_HF.class));
 				} else startActivity(new Intent(this, Activity_Open_Account.class));
 				break;
@@ -364,7 +366,7 @@ public class Activity_Account_Setting extends Activity_Base implements OnClickLi
 				showProgressBar();
 				//退出登录
 				iPresenterAccountSetting.updateUserInfo(2);
-				App.getInstance().setWelfare("");
+				MyApplication.getInstance().setWelfare("");
 			}
 		});
 	}
@@ -381,7 +383,7 @@ public class Activity_Account_Setting extends Activity_Base implements OnClickLi
 
 	//公司信息
 	private void aboutCompany() {
-		Activity_Browser.launche(Activity_Account_Setting.this, "关于福利金融", UrlsOne.AboutConpany);
+		ProjectDetailActivity.launche(Activity_Account_Setting.this, "关于福利金融", UrlsOne.AboutConpany);
 	}
 
 	/**
@@ -526,7 +528,7 @@ public class Activity_Account_Setting extends Activity_Base implements OnClickLi
 				if (data != null) {
 					switch_gesture.setChecked(false);
 					//清除手势密码
-					App.saveUserInfo.remove(getBaseContext(), "GesturePassword");
+					MyApplication.saveUserInfo.remove(getBaseContext(), "GesturePassword");
 				}
 				break;
 		}

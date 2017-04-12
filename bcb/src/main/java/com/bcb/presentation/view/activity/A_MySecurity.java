@@ -9,7 +9,9 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.bcb.R;
-import com.bcb.common.app.App;
+import com.bcb.base.Activity_Base;
+import com.bcb.MyApplication;
+import com.bcb.module.myinfo.financial.financialdetail.projectdetail.ProjectDetailActivity;
 import com.bcb.presentation.view.custom.AlertView.OpenSMRZDialog;
 
 import butterknife.BindView;
@@ -30,26 +32,26 @@ public class A_MySecurity extends Activity_Base {
 		ButterKnife.bind(this);
 		setLeftTitleVisible(true);
 		setTitleValue("我的保险");
-		if (App.mUserDetailInfo == null ||TextUtils.isEmpty(App.mUserDetailInfo.CarInsuranceMyOrderPage)){
+		if (MyApplication.mUserDetailInfo == null ||TextUtils.isEmpty(MyApplication.mUserDetailInfo.CarInsuranceMyOrderPage)){
 			layoutCar.setVisibility(View.GONE);
 		}
 	}
 
 	@OnClick({R.id.layout_car, R.id.layout_security})
 	public void onClick(View view) {
-		if (App.saveUserInfo.getAccess_Token() == null) Activity_Login.launche(ctx);
+		if (MyApplication.saveUserInfo.getAccess_Token() == null) Activity_Login.launche(ctx);
 		switch (view.getId()) {
 			case R.id.layout_car:
-				if (App.mUserDetailInfo == null || TextUtils.isEmpty(App.mUserDetailInfo.CarInsuranceMyOrderPage)) {
+				if (MyApplication.mUserDetailInfo == null || TextUtils.isEmpty(MyApplication.mUserDetailInfo.CarInsuranceMyOrderPage)) {
 					Toast.makeText(ctx, "网络异常，请刷新后重试", Toast.LENGTH_SHORT).show();
 				} else {
-					Activity_Browser.launche(ctx, "我的车险", App.mUserDetailInfo.CarInsuranceMyOrderPage);
+					ProjectDetailActivity.launche(ctx, "我的车险", MyApplication.mUserDetailInfo.CarInsuranceMyOrderPage);
 				}
 				break;
 			case R.id.layout_security:
-				if (App.mUserDetailInfo == null || TextUtils.isEmpty(App.mUserDetailInfo.GroupInsuranceUrl)) {
+				if (MyApplication.mUserDetailInfo == null || TextUtils.isEmpty(MyApplication.mUserDetailInfo.GroupInsuranceUrl)) {
 					Toast.makeText(ctx, "网络异常，请刷新后重试", Toast.LENGTH_SHORT).show();
-				} else if (App.mUserDetailInfo == null || !App.mUserDetailInfo.HasOpenCustody) {
+				} else if (MyApplication.mUserDetailInfo == null || !MyApplication.mUserDetailInfo.HasOpenCustody) {
 					new OpenSMRZDialog(ctx) {
 						@Override
 						public void onClick() {
@@ -58,7 +60,7 @@ public class A_MySecurity extends Activity_Base {
 						}
 					}.show();
 				} else {
-					Activity_Browser.launche(ctx, "员工团险", App.mUserDetailInfo.GroupInsuranceUrl);
+					ProjectDetailActivity.launche(ctx, "员工团险", MyApplication.mUserDetailInfo.GroupInsuranceUrl);
 				}
 				break;
 		}

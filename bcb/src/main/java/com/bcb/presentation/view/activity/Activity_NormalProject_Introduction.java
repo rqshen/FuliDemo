@@ -15,21 +15,23 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bcb.R;
-import com.bcb.common.app.App;
-import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbRequest;
-import com.bcb.common.net.BcbRequestTag;
-import com.bcb.common.net.UrlsTwo;
+import com.bcb.base.Activity_Base;
+import com.bcb.MyApplication;
+import com.bcb.network.BcbJsonRequest;
+import com.bcb.network.BcbRequest;
+import com.bcb.network.BcbRequestTag;
+import com.bcb.network.UrlsTwo;
 import com.bcb.data.bean.UserDetailInfo;
 import com.bcb.data.bean.project.SimpleProjectDetail;
-import com.bcb.data.util.HttpUtils;
-import com.bcb.data.util.LogUtil;
-import com.bcb.data.util.MQCustomerManager;
-import com.bcb.data.util.MyActivityManager;
-import com.bcb.data.util.PackageUtil;
-import com.bcb.data.util.ToastUtil;
-import com.bcb.data.util.TokenUtil;
-import com.bcb.data.util.UmengUtil;
+import com.bcb.utils.HttpUtils;
+import com.bcb.utils.LogUtil;
+import com.bcb.utils.MQCustomerManager;
+import com.bcb.utils.MyActivityManager;
+import com.bcb.utils.PackageUtil;
+import com.bcb.utils.ToastUtil;
+import com.bcb.utils.TokenUtil;
+import com.bcb.utils.UmengUtil;
+import com.bcb.module.myinfo.financial.financialdetail.projectdetail.ProjectDetailActivity;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
 import com.bcb.presentation.view.custom.CustomDialog.DialogWidget;
 import com.bcb.presentation.view.custom.CustomDialog.MyMaskFullScreenView;
@@ -149,10 +151,10 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
 		add_rate = (LinearLayout) findViewById(R.id.add_rate);
 		value_reward = (TextView) findViewById(R.id.value_reward);
 		//福袋数据
-		if (!TextUtils.isEmpty(App.getInstance()
+		if (!TextUtils.isEmpty(MyApplication.getInstance()
 				.getWelfare())) {
 			add_rate.setVisibility(View.VISIBLE);
-			value_reward.setText("+" + App.getInstance()
+			value_reward.setText("+" + MyApplication.getInstance()
 					.getWelfare() + "%");
 		} else add_rate.setVisibility(View.GONE);
 		//可投金额
@@ -258,7 +260,7 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
 						JSONObject resultObject = new JSONObject(resultString);
 						//注意：不去掉会出现json解析语法错误
 						if (TextUtils.isEmpty(resultObject.getString("AssetAuditContent"))) resultObject.remove("AssetAuditContent");
-						mSimpleProjectDetail = App.mGson.fromJson(resultObject.toString(), SimpleProjectDetail.class);
+						mSimpleProjectDetail = MyApplication.mGson.fromJson(resultObject.toString(), SimpleProjectDetail.class);
 						//显示标的数据
 						if (null != mSimpleProjectDetail) showProjectData();
 					} catch (Exception e) {
@@ -276,7 +278,7 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
 			}
 		});
 		jsonRequest.setTag(BcbRequestTag.NormalProjectIntroductionTag);
-		App.getInstance().getRequestQueue().add(jsonRequest);
+		MyApplication.getInstance().getRequestQueue().add(jsonRequest);
 	}
 
 	//**********************************************************显示标的数据 **********************************************
@@ -428,7 +430,7 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
 				LogUtil.d("bqt", "【Activity_TuoGuan_HF】【loginAccount】网络异常，请稍后重试" + error.toString());
 			}
 		});
-		App.getInstance()
+		MyApplication.getInstance()
 				.getRequestQueue()
 				.add(jsonRequest);
 	}
@@ -448,7 +450,7 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
 	//*******************************************************获取用户银行卡信息 ***************************************
 	private void loadUserDetailInfoData() {
 		//如果Token为空或者银行卡信息不为空，则停止请求
-		if (App.saveUserInfo.getAccess_Token() == null || App.mUserDetailInfo != null && App.mUserDetailInfo.BankCard != null) {
+		if (MyApplication.saveUserInfo.getAccess_Token() == null || MyApplication.mUserDetailInfo != null && MyApplication.mUserDetailInfo.BankCard != null) {
 			return;
 		} else {
 			BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsTwo.UserMessage, null, TokenUtil.getEncodeToken(this), new BcbRequest
@@ -463,10 +465,10 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
 							UserDetailInfo mUserDetailInfo;
 							//判断JSON对象是否为空
 							if (data != null) {
-								mUserDetailInfo = App.mGson.fromJson(data.toString(), UserDetailInfo.class);
+								mUserDetailInfo = MyApplication.mGson.fromJson(data.toString(), UserDetailInfo.class);
 								//将用户信息写入静态数据区
 								if (mUserDetailInfo != null) {
-									App.mUserDetailInfo = mUserDetailInfo;
+									MyApplication.mUserDetailInfo = mUserDetailInfo;
 								}
 							}
 						}
@@ -481,7 +483,7 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
 				}
 			});
 			jsonRequest.setTag(BcbRequestTag.UserBankMessageTag);
-			App.getInstance()
+			MyApplication.getInstance()
 					.getRequestQueue()
 					.add(jsonRequest);
 		}
@@ -545,8 +547,8 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
 				UmengUtil.eventById(Activity_NormalProject_Introduction.this, R.string.bid_buy_kefu);
 				//如果ID存在
 				String userId = null;
-				if (App.mUserDetailInfo != null) {
-					userId = App.mUserDetailInfo.getCustomerId();
+				if (MyApplication.mUserDetailInfo != null) {
+					userId = MyApplication.mUserDetailInfo.getCustomerId();
 				}
 				MQCustomerManager.getInstance(this)
 						.showCustomer(userId);
@@ -562,7 +564,7 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
 
 			//借款来源公司
 			case R.id.layout_source:
-				Activity_Browser.launche(this, TextUtils.isEmpty(mSimpleProjectDetail.CompanyName) ? "借款来源公司详情" :
+				ProjectDetailActivity.launche(this, TextUtils.isEmpty(mSimpleProjectDetail.CompanyName) ? "借款来源公司详情" :
 						mSimpleProjectDetail.CompanyName, mSimpleProjectDetail.CompanyUrl);
 				break;
 
@@ -593,7 +595,7 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
 					UmengUtil.eventById(Activity_NormalProject_Introduction.this, R.string.bid_buy_detail1);
 				}
 				if (null != mSimpleProjectDetail && !TextUtils.isEmpty(mSimpleProjectDetail.PageUrl)) {
-					Activity_Browser.launche2(Activity_NormalProject_Introduction.this, mSimpleProjectDetail.Name,
+					ProjectDetailActivity.launche2(Activity_NormalProject_Introduction.this, mSimpleProjectDetail.Name,
 							mSimpleProjectDetail.PageUrl + "&tab=0", 20095);
 					//							"http://192.168.1.200:7073/", 20095);
 				}
@@ -604,7 +606,7 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
 					UmengUtil.eventById(Activity_NormalProject_Introduction.this, R.string.bid_buy_detail2);
 				}
 				if (null != mSimpleProjectDetail && !TextUtils.isEmpty(mSimpleProjectDetail.PageUrl)) {
-					Activity_Browser.launche2(Activity_NormalProject_Introduction.this, mSimpleProjectDetail.Name,
+					ProjectDetailActivity.launche2(Activity_NormalProject_Introduction.this, mSimpleProjectDetail.Name,
 							mSimpleProjectDetail.PageUrl + "&tab=1", 20095);
 					//							"http://192.168.1.200:7073/", 20095);
 				}
@@ -615,7 +617,7 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
 					UmengUtil.eventById(Activity_NormalProject_Introduction.this, R.string.bid_buy_detail3);
 				}
 				if (null != mSimpleProjectDetail && !TextUtils.isEmpty(mSimpleProjectDetail.PageUrl)) {
-					Activity_Browser.launche2(Activity_NormalProject_Introduction.this, mSimpleProjectDetail.Name,
+					ProjectDetailActivity.launche2(Activity_NormalProject_Introduction.this, mSimpleProjectDetail.Name,
 							mSimpleProjectDetail.PageUrl + "&tab=3", 20095);
 					//							"http://192.168.1.200:7073/", 20095);
 				}
@@ -626,7 +628,7 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
 					UmengUtil.eventById(Activity_NormalProject_Introduction.this, R.string.bid_buy_detail4);
 				}
 				if (null != mSimpleProjectDetail && !TextUtils.isEmpty(mSimpleProjectDetail.PageUrl)) {
-					Activity_Browser.launche2(Activity_NormalProject_Introduction.this, mSimpleProjectDetail.Name,
+					ProjectDetailActivity.launche2(Activity_NormalProject_Introduction.this, mSimpleProjectDetail.Name,
 							mSimpleProjectDetail.PageUrl + "&tab=2", 20095);
 					//							"http://192.168.1.200:7073/", 20095);
 				}
@@ -649,21 +651,21 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
 		}
 
 		//还没有登陆时，跳转至登陆页面
-		if (App.saveUserInfo.getAccess_Token() == null) {
+		if (MyApplication.saveUserInfo.getAccess_Token() == null) {
 			startActivity(new Intent(Activity_NormalProject_Introduction.this, Activity_Login.class));
 			finish();
 			return;
 		}
 
 		//没有开通汇付托管
-		if (App.mUserDetailInfo == null || !App.mUserDetailInfo.HasOpenCustody) {
+		if (MyApplication.mUserDetailInfo == null || !MyApplication.mUserDetailInfo.HasOpenCustody) {
 			startActivity(new Intent(this, Activity_Open_Account.class));
 			finish();
 			return;
 		}
 
 		//没有开通自动投标
-		if ((type == 1 || type == 2) && !App.mUserDetailInfo.AutoTenderPlanStatus) {
+		if ((type == 1 || type == 2) && !MyApplication.mUserDetailInfo.AutoTenderPlanStatus) {
 			altDialog();
 			return;
 		}

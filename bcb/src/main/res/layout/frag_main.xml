@@ -238,7 +238,7 @@
                             android:textSize="@dimen/main_text_small"/>
                     </LinearLayout>
                     <!-- 体验标 -->
-                    <com.bcb.data.util.MyListView
+                    <com.bcb.utils.MyListView
                         android:id="@+id/expired_listview"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -250,7 +250,7 @@
                         android:scrollbars="none"
                         android:visibility="visible"/>
                     <!-- 新手标 -->
-                    <com.bcb.data.util.MyListView
+                    <com.bcb.utils.MyListView
                         android:id="@+id/new_listview"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -263,7 +263,7 @@
                         android:scrollbars="none"
                         android:visibility="visible"/>
                     <!-- 精品标 -->
-                    <com.bcb.data.util.MyListView
+                    <com.bcb.utils.MyListView
                         android:id="@+id/boutique_listview"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -276,7 +276,7 @@
                         android:scrollbars="none"
                         android:visibility="visible"/>
                     <!-- 新标预告 -->
-                    <com.bcb.data.util.MyListView
+                    <com.bcb.utils.MyListView
                         android:id="@+id/announce_listView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -289,7 +289,7 @@
                         android:scrollbars="none"/>
 
                     <!-- 如果新标预告不存在的时候才初始化该列表 -->
-                    <com.bcb.data.util.MyListView
+                    <com.bcb.utils.MyListView
                         android:id="@+id/addition_listView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

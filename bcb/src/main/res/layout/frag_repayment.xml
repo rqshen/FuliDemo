@@ -65,7 +65,7 @@
                             android:textSize="13sp"/>
                     </LinearLayout>
 
-                    <com.bcb.data.util.MyListView
+                    <com.bcb.utils.MyListView
                         android:id="@+id/repayment_listView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

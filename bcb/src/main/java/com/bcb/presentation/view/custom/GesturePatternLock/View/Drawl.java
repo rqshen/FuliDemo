@@ -10,7 +10,7 @@ import android.util.Pair;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.bcb.data.util.ScreenUtils;
+import com.bcb.utils.ScreenUtils;
 import com.bcb.presentation.view.custom.GesturePatternLock.bean.Point;
 
 import java.util.ArrayList;

@@ -14,17 +14,18 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.bcb.R;
-import com.bcb.common.app.App;
-import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbRequest;
-import com.bcb.common.net.BcbRequestQueue;
-import com.bcb.common.net.BcbRequestTag;
-import com.bcb.common.net.UrlsOne;
+import com.bcb.base.Activity_Base;
+import com.bcb.MyApplication;
+import com.bcb.network.BcbJsonRequest;
+import com.bcb.network.BcbRequest;
+import com.bcb.network.BcbRequestQueue;
+import com.bcb.network.BcbRequestTag;
+import com.bcb.network.UrlsOne;
 import com.bcb.data.bean.AreaBean;
-import com.bcb.data.util.LogUtil;
-import com.bcb.data.util.MyActivityManager;
-import com.bcb.data.util.PackageUtil;
-import com.bcb.data.util.TokenUtil;
+import com.bcb.utils.LogUtil;
+import com.bcb.utils.MyActivityManager;
+import com.bcb.utils.PackageUtil;
+import com.bcb.utils.TokenUtil;
 import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
@@ -52,7 +53,7 @@ public class Activity_Province extends Activity_Base {
 		setBaseContentView(R.layout.activity_choose);
 		setLeftTitleVisible(true);
 		setTitleValue("选择省份");
-        requestQueue = App.getInstance().getRequestQueue();
+        requestQueue = MyApplication.getInstance().getRequestQueue();
 		mListView = (ListView) findViewById(R.id.list);
 		mListView.setOnItemClickListener(mOnItemClickListener);
 		loadData();
@@ -95,7 +96,7 @@ public class Activity_Province extends Activity_Base {
                         JSONArray result = response.getJSONArray("result");
                         //判断JSON对象是否为空
                         if (result != null) {
-                            list = App.mGson.fromJson(result.toString(), new TypeToken<List<AreaBean>>(){}.getType());
+                            list = MyApplication.mGson.fromJson(result.toString(), new TypeToken<List<AreaBean>>(){}.getType());
                         }
                         if(null != list && list.size() > 0){
                             mListView.setAdapter(adapter);

@@ -24,7 +24,7 @@
             android:orientation="vertical"
             android:background="@android:color/white">
 
-            <com.bcb.data.util.PasswordEditText
+            <com.bcb.utils.PasswordEditText
                 android:id="@+id/newpwd"
                 android:layout_width="match_parent"
                 android:layout_height="50dip"
@@ -69,7 +69,7 @@
             android:layout_marginTop="10dip"
             android:background="@android:color/white">
 
-            <com.bcb.data.util.PasswordEditText
+            <com.bcb.utils.PasswordEditText
                 android:id="@+id/confirmpwd"
                 android:layout_width="match_parent"
                 android:layout_height="50dip"

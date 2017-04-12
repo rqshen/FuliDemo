@@ -10,8 +10,9 @@ import android.webkit.WebViewClient;
 import android.widget.RelativeLayout;
 
 import com.bcb.R;
-import com.bcb.data.util.LoadingLayoutMgr;
-import com.bcb.data.util.MyActivityManager;
+import com.bcb.base.Activity_Base;
+import com.bcb.utils.LoadingLayoutMgr;
+import com.bcb.utils.MyActivityManager;
 
 /**
  * Created by cain on 15/12/25.

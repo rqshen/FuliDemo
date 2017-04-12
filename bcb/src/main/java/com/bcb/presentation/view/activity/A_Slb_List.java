@@ -10,18 +10,19 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bcb.R;
-import com.bcb.common.app.App;
-import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbRequest;
-import com.bcb.common.net.UrlsTwo;
+import com.bcb.base.Activity_Base;
+import com.bcb.MyApplication;
+import com.bcb.network.BcbJsonRequest;
+import com.bcb.network.BcbRequest;
+import com.bcb.network.UrlsTwo;
 import com.bcb.data.bean.SlbList;
-import com.bcb.data.util.HttpUtils;
-import com.bcb.data.util.LogUtil;
-import com.bcb.data.util.MyActivityManager;
-import com.bcb.data.util.MyListView;
-import com.bcb.data.util.PackageUtil;
-import com.bcb.data.util.ToastUtil;
-import com.bcb.data.util.TokenUtil;
+import com.bcb.utils.HttpUtils;
+import com.bcb.utils.LogUtil;
+import com.bcb.utils.MyActivityManager;
+import com.bcb.utils.MyListView;
+import com.bcb.utils.PackageUtil;
+import com.bcb.utils.ToastUtil;
+import com.bcb.utils.TokenUtil;
 import com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout;
 
 import org.json.JSONException;
@@ -121,7 +122,7 @@ public class A_Slb_List extends Activity_Base {
                     if (PackageUtil.getRequestStatus(response, A_Slb_List.this)) {
                         JSONObject obj = PackageUtil.getResultObject(response);
                         SlbList mSlbList = null;
-                        if (obj != null) mSlbList = App.mGson.fromJson(obj.toString(), SlbList.class);
+                        if (obj != null) mSlbList = MyApplication.mGson.fromJson(obj.toString(), SlbList.class);
                         //如果存在记录
                         if (null != mSlbList && null != mSlbList.Records && mSlbList.Records.size() > 0) {
                             canLoadmore = true;
@@ -158,7 +159,7 @@ public class A_Slb_List extends Activity_Base {
                 else setupListViewVisible(true);
             }
         });
-        App.getInstance().getRequestQueue().add(jsonRequest);
+        MyApplication.getInstance().getRequestQueue().add(jsonRequest);
     }
 
 

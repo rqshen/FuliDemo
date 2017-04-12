@@ -290,7 +290,7 @@
                     </LinearLayout>
                 </RelativeLayout>
 
-                <com.bcb.data.util.PasswordEditText
+                <com.bcb.utils.PasswordEditText
                     android:id="@+id/userpwd"
                     android:layout_width="match_parent"
                     android:layout_height="50dip"
@@ -305,7 +305,7 @@
                     android:singleLine="true"
                     android:textSize="@dimen/main_text_default"
                     android:visibility="gone">
-                </com.bcb.data.util.PasswordEditText>
+                </com.bcb.utils.PasswordEditText>
             </LinearLayout>
             <!-- 提现券 -->
             <RelativeLayout

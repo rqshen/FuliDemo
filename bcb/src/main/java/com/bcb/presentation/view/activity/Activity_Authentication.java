@@ -13,14 +13,15 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bcb.common.app.App;
+import com.bcb.base.Activity_Base;
+import com.bcb.MyApplication;
 import com.bcb.R;
 import com.bcb.data.bean.BankItem;
-import com.bcb.data.util.BankLogo;
-import com.bcb.data.util.MQCustomerManager;
-import com.bcb.data.util.MyActivityManager;
-import com.bcb.data.util.ToastUtil;
-import com.bcb.data.util.UmengUtil;
+import com.bcb.utils.BankLogo;
+import com.bcb.utils.MQCustomerManager;
+import com.bcb.utils.MyActivityManager;
+import com.bcb.utils.ToastUtil;
+import com.bcb.utils.UmengUtil;
 import com.bcb.presentation.presenter.IPresenter_Authentication;
 import com.bcb.presentation.presenter.IPresenter_AuthenticationImpl;
 import com.bcb.presentation.view.activity_interface.Interface_Authentication;
@@ -290,8 +291,8 @@ public class Activity_Authentication extends Activity_Base implements Interface_
             //客服
             case R.id.customer_service:
                 String userId = null;
-                if (App.mUserDetailInfo != null) {
-                    userId = App.mUserDetailInfo.getCustomerId();
+                if (MyApplication.mUserDetailInfo != null) {
+                    userId = MyApplication.mUserDetailInfo.getCustomerId();
                 }
                 MQCustomerManager.getInstance(this).showCustomer(userId);
                 break;

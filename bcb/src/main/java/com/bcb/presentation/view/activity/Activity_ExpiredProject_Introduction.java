@@ -13,21 +13,21 @@
 //import android.widget.TextView;
 //
 //import com.bcb.R;
-//import com.bcb.common.app.App;
-//import com.bcb.common.net.BcbJsonRequest;
-//import com.bcb.common.net.BcbRequest;
-//import com.bcb.common.net.BcbRequestQueue;
-//import com.bcb.common.net.BcbRequestTag;
-//import com.bcb.common.net.UrlsOne;
-//import com.bcb.common.net.UrlsTwo;
+//import com.bcb.MyApplication;
+//import com.bcb.network.BcbJsonRequest;
+//import com.bcb.network.BcbRequest;
+//import com.bcb.network.BcbRequestQueue;
+//import com.bcb.network.BcbRequestTag;
+//import com.bcb.network.UrlsOne;
+//import com.bcb.network.UrlsTwo;
 //import com.bcb.data.bean.UserDetailInfo;
 //import com.bcb.data.bean.project.ExpiredProjectDetail;
-//import com.bcb.data.util.MQCustomerManager;
-//import com.bcb.data.util.MyActivityManager;
-//import com.bcb.data.util.PackageUtil;
-//import com.bcb.data.util.ToastUtil;
-//import com.bcb.data.util.TokenUtil;
-//import com.bcb.data.util.UmengUtil;
+//import com.bcb.util.MQCustomerManager;
+//import com.bcb.util.MyActivityManager;
+//import com.bcb.util.PackageUtil;
+//import com.bcb.util.ToastUtil;
+//import com.bcb.util.TokenUtil;
+//import com.bcb.util.UmengUtil;
 //import com.bcb.presentation.view.custom.CustomDialog.DialogWidget;
 //import com.bcb.presentation.view.custom.CustomDialog.IdentifyAlertView;
 //import com.bcb.presentation.view.custom.CustomDialog.MyMaskFullScreenView;
@@ -108,7 +108,7 @@
 //        setBaseContentView(R.layout.activity_expiredproject_introduction);
 //        setLeftTitleVisible(true);
 //        setTitleValue(title);
-//        requestQueue = App.getInstance().getRequestQueue();
+//        requestQueue = MyApplication.getInstance().getRequestQueue();
 //        //初始化标的界面
 //        setupView();
 //        //加载数据
@@ -126,9 +126,9 @@
 //        add_rate = (LinearLayout) findViewById(R.id.add_rate);
 //        expire_value_reward = (TextView) findViewById(R.id.expire_value_reward);
 //        //福袋数据
-//        if (!TextUtils.isEmpty(App.getInstance().getWelfare())){
+//        if (!TextUtils.isEmpty(MyApplication.getInstance().getWelfare())){
 //            add_rate.setVisibility(View.VISIBLE);
-//            expire_value_reward.setText("+" + App.getInstance().getWelfare() + "%");
+//            expire_value_reward.setText("+" + MyApplication.getInstance().getWelfare() + "%");
 //        }else{
 //            add_rate.setVisibility(View.GONE);
 //        }
@@ -179,7 +179,7 @@
 //                    JSONObject resultObject = PackageUtil.getResultObject(response.toString().replace("\\", "").replace("\"[", "[").replace("]\"", "]"));
 //                    //判断JSON对象是否为空
 //                    if (resultObject != null) {
-//                        expiredProjectDetail = App.mGson.fromJson(resultObject.toString(), ExpiredProjectDetail.class);
+//                        expiredProjectDetail = MyApplication.mGson.fromJson(resultObject.toString(), ExpiredProjectDetail.class);
 //                    }
 //                    if(null != expiredProjectDetail){
 //                        showExpiredData();
@@ -268,7 +268,7 @@
 //     */
 //    private void loadUserDetailInfoData(){
 //        //如果银行卡信息不为空，则停止请求
-//        if (App.saveUserInfo.getAccess_Token() == null || App.mUserDetailInfo != null && App.mUserDetailInfo.BankCard != null) {
+//        if (MyApplication.saveUserInfo.getAccess_Token() == null || MyApplication.mUserDetailInfo != null && MyApplication.mUserDetailInfo.BankCard != null) {
 //            return;
 //        }
 //        BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsTwo.UserMessage, null, TokenUtil.getEncodeToken(this), new BcbRequest.BcbCallBack<JSONObject>() {
@@ -281,10 +281,10 @@
 //                        JSONObject data = PackageUtil.getResultObject(response);
 //                        //判断JSON对象是否为空
 //                        if (data != null) {
-//                            UserDetailInfo mUserDetailInfo = App.mGson.fromJson(data.toString(), UserDetailInfo.class);
+//                            UserDetailInfo mUserDetailInfo = MyApplication.mGson.fromJson(data.toString(), UserDetailInfo.class);
 //                            //将用户信息写入静态数据区
 //                            if (mUserDetailInfo != null) {
-//                                App.mUserDetailInfo = mUserDetailInfo;
+//                                MyApplication.mUserDetailInfo = mUserDetailInfo;
 //                            }
 //                        }
 //                    }
@@ -325,7 +325,7 @@
 //
 //            //体验标说明
 //            case R.id.layout_description:
-//                Activity_Browser.launche(Activity_ExpiredProject_Introduction.this, "体验标说明", UrlsOne.ExpiredProjectIntroduction);
+//                ProjectDetailActivity.launche(Activity_ExpiredProject_Introduction.this, "体验标说明", UrlsOne.ExpiredProjectIntroduction);
 //                break;
 //
 //            //专属客服
@@ -333,8 +333,8 @@
 //                UmengUtil.eventById(Activity_ExpiredProject_Introduction.this, R.string.bid_buy_kefu);
 //                //如果ID存在
 //                String userId = null;
-//                if (App.mUserDetailInfo != null) {
-//                    userId = App.mUserDetailInfo.getCustomerId();
+//                if (MyApplication.mUserDetailInfo != null) {
+//                    userId = MyApplication.mUserDetailInfo.getCustomerId();
 //                }
 //                MQCustomerManager.getInstance(this).showCustomer(userId);
 //                break;
@@ -375,12 +375,12 @@
 //            return;
 //        }
 //        //还没有登陆时，跳转至登陆页面
-//        if (App.saveUserInfo.getAccess_Token() == null) {
+//        if (MyApplication.saveUserInfo.getAccess_Token() == null) {
 //            startActivity(new Intent(Activity_ExpiredProject_Introduction.this, Activity_Login_Introduction.class));
 //            return;
 //        }
 //        //如果没有认证则跳转至认证界面
-//        if (App.mUserDetailInfo == null ||  !App.mUserDetailInfo.HasCert || App.mUserDetailInfo.BankCard==null) {
+//        if (MyApplication.mUserDetailInfo == null ||  !MyApplication.mUserDetailInfo.HasCert || MyApplication.mUserDetailInfo.BankCard==null) {
 //            identifyPageTips();
 //            return;
 //        }

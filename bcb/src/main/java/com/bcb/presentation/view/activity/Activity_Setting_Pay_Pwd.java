@@ -12,17 +12,18 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.bcb.R;
-import com.bcb.common.app.App;
-import com.bcb.common.net.BcbJsonRequest;
-import com.bcb.common.net.BcbRequest;
-import com.bcb.common.net.BcbRequestQueue;
-import com.bcb.common.net.BcbRequestTag;
-import com.bcb.common.net.UrlsOne;
-import com.bcb.data.util.MyActivityManager;
-import com.bcb.data.util.PackageUtil;
-import com.bcb.data.util.ToastUtil;
-import com.bcb.data.util.TokenUtil;
-import com.bcb.data.util.UmengUtil;
+import com.bcb.base.Activity_Base;
+import com.bcb.MyApplication;
+import com.bcb.network.BcbJsonRequest;
+import com.bcb.network.BcbRequest;
+import com.bcb.network.BcbRequestQueue;
+import com.bcb.network.BcbRequestTag;
+import com.bcb.network.UrlsOne;
+import com.bcb.utils.MyActivityManager;
+import com.bcb.utils.PackageUtil;
+import com.bcb.utils.ToastUtil;
+import com.bcb.utils.TokenUtil;
+import com.bcb.utils.UmengUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -58,7 +59,7 @@ public class Activity_Setting_Pay_Pwd  extends Activity_Base {
         setLeftTitleVisible(true);
 		setTitleValue("设置福利金融交易密码");
 		UmengUtil.eventById(Activity_Setting_Pay_Pwd.this, R.string.set_f_key);
-		requestQueue = App.getInstance().getRequestQueue();
+		requestQueue = MyApplication.getInstance().getRequestQueue();
         init();
 	}
 
@@ -181,8 +182,8 @@ public class Activity_Setting_Pay_Pwd  extends Activity_Base {
                         UmengUtil.eventById(Activity_Setting_Pay_Pwd.this, R.string.set_f_key_y);
                         ToastUtil.alert(Activity_Setting_Pay_Pwd.this, "交易密码设置成功");
                         //将本地的支付密码设置状态为true，表示已经设置了交易密码
-                        if (App.mUserDetailInfo != null) {
-                            App.mUserDetailInfo.setHasTradePassword(true);
+                        if (MyApplication.mUserDetailInfo != null) {
+                            MyApplication.mUserDetailInfo.setHasTradePassword(true);
                         }
 
                         Activity_ChangePwd_Success.launche(Activity_Setting_Pay_Pwd.this, false, false);
