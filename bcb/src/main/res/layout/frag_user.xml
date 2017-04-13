@@ -97,9 +97,9 @@
                             android:id="@+id/ll_qd"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginBottom="5dp"
                             android:layout_marginRight="10dp"
                             android:gravity="center_horizontal"
-                            android:layout_marginBottom="5dp"
                             android:orientation="vertical">
 
                             <ImageView
@@ -432,7 +432,8 @@
                             android:singleLine="true"
                             android:text="0张"
                             android:textColor="#999"
-                            android:textSize="16sp"/>
+                            android:textSize="16sp"
+                            android:visibility="invisible"/>
 
 
                     </RelativeLayout>
@@ -484,17 +485,11 @@
                         android:background="@color/background"/>
 
 
-
-
-
                     <ImageView
                         android:id="@+id/layout_update_line"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
                         android:background="@color/background"/>
-
-
-
 
 
                     <RelativeLayout
@@ -541,6 +536,7 @@
                             android:textColor="#999"
                             android:textSize="16sp"/>
                     </RelativeLayout>
+
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="0.5dp"
