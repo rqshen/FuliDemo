@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.view.View;
 
 import com.bcb.R;
-import com.bcb.presentation.view.activity.Activity_Open_Account;
+import com.bcb.module.myinfo.balance.FundCustodianAboutActivity;
 
 /**
  * 描述：
@@ -41,7 +41,7 @@ public class BasicDialog extends Dialog implements View.OnClickListener {
                 dismiss();
                 break;
             case R.id.iv_open:
-                context.startActivity(new Intent(context, Activity_Open_Account.class));
+                context.startActivity(new Intent(context, FundCustodianAboutActivity.class));
                 dismiss();
                 break;
             default:

@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.bcb.R;
 import com.bcb.base.Activity_Base;
 import com.bcb.MyApplication;
+import com.bcb.module.login.LoginActivity;
 import com.bcb.utils.LogUtil;
 import com.bcb.utils.MyActivityManager;
 import com.bcb.utils.UmengUtil;
@@ -217,7 +218,7 @@ public class Activity_Gesture_Lock extends Activity_Base {
 				MyApplication.mUserWallet = null;
 				MyApplication.mUserDetailInfo = null;
 				MyApplication.viewJoinBanner = true;
-				Activity_Login.launche(Activity_Gesture_Lock.this);
+				LoginActivity.launche(Activity_Gesture_Lock.this);
 				sendBroadcast(new Intent("com.bcb.logout.success"));
 				//销毁当前页面
 				finish();

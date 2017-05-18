@@ -22,6 +22,7 @@ import com.bcb.R;
 import com.bcb.base.Activity_Base;
 import com.bcb.MyApplication;
 import com.bcb.event.BroadcastEvent;
+import com.bcb.module.login.LoginActivity;
 import com.bcb.network.BcbJsonRequest;
 import com.bcb.network.BcbRequest;
 import com.bcb.network.BcbRequestQueue;
@@ -293,7 +294,7 @@ public class Activity_Daily_Welfare extends Activity_Base implements View.OnClic
 //                        finish();
                     }else if(-5 == status) {
                         MyApplication.saveUserInfo.clear();
-                        Intent intent = new Intent(context, Activity_Login.class);
+                        Intent intent = new Intent(context, LoginActivity.class);
                         context.startActivity(intent);
                     }else{
                         //获取数据库缓存数据,若有数据就显示已经缓存的数据

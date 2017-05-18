@@ -1,4 +1,4 @@
-package com.bcb.presentation.view.activity;
+package com.bcb.module.login;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -23,6 +23,8 @@ import com.bcb.base.Activity_Base;
 import com.bcb.MyApplication;
 import com.bcb.event.BroadcastEvent;
 import com.bcb.data.bean.WelfareBean;
+import com.bcb.presentation.view.activity.Activity_Forget_Pwd;
+import com.bcb.presentation.view.activity.Activity_Register_First;
 import com.bcb.utils.DbUtil;
 import com.bcb.utils.LoanPersonalConfigUtil;
 import com.bcb.utils.LogUtil;
@@ -39,9 +41,9 @@ import de.greenrobot.event.EventBus;
 
 import static com.bcb.R.id.userpwd;
 
-public class Activity_Login extends Activity_Base implements Interface_Base, OnClickListener {
+public class LoginActivity extends Activity_Base implements Interface_Base, OnClickListener {
 
-	private static final String TAG = "Activity_Login";
+	private static final String TAG = "LoginActivity";
 
 	private EditText user;
 	private EditText pwd;
@@ -65,14 +67,14 @@ public class Activity_Login extends Activity_Base implements Interface_Base, OnC
 	
 	public static void launche(Context ctx) {
 		Intent intent = new Intent();
-		intent.setClass(ctx, Activity_Login.class);
+		intent.setClass(ctx, LoginActivity.class);
 		ctx.startActivity(intent);
 	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		LogUtil.i("bqt", "【Activity_Login】【onCreate】");
+		LogUtil.i("bqt", "【LoginActivity】【onCreate】");
 
 		setBaseContentView(R.layout.activity_login);
 		setLeftTitleVisible(true);
@@ -80,7 +82,7 @@ public class Activity_Login extends Activity_Base implements Interface_Base, OnC
 		setRightTitleValue("联系客服", new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				MQCustomerManager.getInstance(Activity_Login.this).showCustomer(null);
+				MQCustomerManager.getInstance(LoginActivity.this).showCustomer(null);
 			}
 		});
 		init();
@@ -211,13 +213,13 @@ public class Activity_Login extends Activity_Base implements Interface_Base, OnC
 
 			//输入错误
 			case 1:
-				ToastUtil.alert(Activity_Login.this, message);
+				ToastUtil.alert(LoginActivity.this, message);
 				break;
 
 			//登陆失败
 			case -1:
-				ToastUtil.alert(Activity_Login.this, message);
-				UmengUtil.eventById(Activity_Login.this, R.string.login_key_n);
+				ToastUtil.alert(LoginActivity.this, message);
+				UmengUtil.eventById(LoginActivity.this, R.string.login_key_n);
 				errorCount++;
 				if (errorCount >= 3) {
 					localcode_layout.setVisibility(View.VISIBLE);
@@ -227,7 +229,7 @@ public class Activity_Login extends Activity_Base implements Interface_Base, OnC
 				break;
 
 			default:
-				ToastUtil.alert(Activity_Login.this, message);
+				ToastUtil.alert(LoginActivity.this, message);
 				break;
 		}
 	}
@@ -255,7 +257,7 @@ public class Activity_Login extends Activity_Base implements Interface_Base, OnC
 					//登陆
 					iPresenterLogin.doLogin(username, password);
 				} else {
-					ToastUtil.alert(Activity_Login.this, "验证码不正确");
+					ToastUtil.alert(LoginActivity.this, "验证码不正确");
 					vc_image.setImageBitmap(VerificationCode.getInstance().getBitmap());
 					getCode = VerificationCode.getInstance().getCode();
 				}
@@ -263,13 +265,13 @@ public class Activity_Login extends Activity_Base implements Interface_Base, OnC
 
 			//忘记密码
 			case R.id.layout_foget:
-				UmengUtil.eventById(Activity_Login.this, R.string.login_key_f);
-				Activity_Forget_Pwd.launche(Activity_Login.this, true);
+				UmengUtil.eventById(LoginActivity.this, R.string.login_key_f);
+				Activity_Forget_Pwd.launche(LoginActivity.this, true);
 				break;
 
 			//客服
 			case R.id.customer_service:
-				Activity_Register_First.launche(Activity_Login.this);
+				Activity_Register_First.launche(LoginActivity.this);
 				break;
 		}
 	}

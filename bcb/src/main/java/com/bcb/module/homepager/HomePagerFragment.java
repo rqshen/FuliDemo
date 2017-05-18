@@ -27,6 +27,8 @@ import com.bcb.data.bean.MainListBean2;
 import com.bcb.data.bean.StringEventBusBean;
 import com.bcb.data.bean.UserDetailInfo;
 import com.bcb.event.BroadcastEvent;
+import com.bcb.module.login.LoginActivity;
+import com.bcb.module.myinfo.balance.FundCustodianAboutActivity;
 import com.bcb.module.myinfo.financial.financialdetail.projectdetail.ProjectDetailActivity;
 import com.bcb.network.BcbJsonRequest;
 import com.bcb.network.BcbRequest;
@@ -38,9 +40,7 @@ import com.bcb.presentation.adapter.MainAdapter;
 import com.bcb.presentation.adapter.MainAdapter2;
 import com.bcb.presentation.view.activity.Activity_CPXQ;
 import com.bcb.presentation.view.activity.Activity_Join_Company;
-import com.bcb.presentation.view.activity.Activity_Login;
 import com.bcb.presentation.view.activity.Activity_NormalProject_Introduction;
-import com.bcb.presentation.view.activity.Activity_Open_Account;
 import com.bcb.presentation.view.activity.Activity_Privilege_Money;
 import com.bcb.presentation.view.activity.Activity_Register_First;
 import com.bcb.presentation.view.activity.Activity_WebView_Upload;
@@ -485,7 +485,7 @@ public class HomePagerFragment extends BaseFragment implements View.OnClickListe
     @Override
     public void onClick(View v) {
         if (MyApplication.saveUserInfo.getAccess_Token() == null && v.getId() != R.id.tv_more) {
-            Activity_Login.launche(ctx);
+            LoginActivity.launche(ctx);
             return;
         }
         switch (v.getId()) {
@@ -514,7 +514,7 @@ public class HomePagerFragment extends BaseFragment implements View.OnClickListe
     //加入公司
     private void toJoinCompany() {
         if (mUserDetailInfo == null || !mUserDetailInfo.HasOpenCustody) {
-            startActivity(new Intent(ctx, Activity_Open_Account.class));
+            startActivity(new Intent(ctx, FundCustodianAboutActivity.class));
         }
         //否则需要判断MyCompany字段
         else {

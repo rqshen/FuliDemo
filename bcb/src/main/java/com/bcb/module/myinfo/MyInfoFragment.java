@@ -27,6 +27,8 @@ import com.bcb.R;
 import com.bcb.base.BaseFragment;
 import com.bcb.MyApplication;
 import com.bcb.event.BroadcastEvent;
+import com.bcb.module.login.LoginActivity;
+import com.bcb.module.myinfo.balance.FundCustodianAboutActivity;
 import com.bcb.network.BcbJsonRequest;
 import com.bcb.network.BcbRequest;
 import com.bcb.network.BcbRequestQueue;
@@ -55,18 +57,16 @@ import com.bcb.module.myinfo.balance.BalanceActivity;
 import com.bcb.presentation.view.activity.A_Slb;
 import com.bcb.presentation.view.activity.A_ZZC;
 import com.bcb.presentation.view.activity.Activity_Account_Setting;
-import com.bcb.presentation.view.activity.Activity_Charge_HF;
+import com.bcb.module.myinfo.balance.RechargeActivity;
 import com.bcb.presentation.view.activity._Coupons;
 import com.bcb.presentation.view.activity.Activity_Daily_Welfare;
 import com.bcb.presentation.view.activity.Activity_Daily_Welfare_Static;
 import com.bcb.presentation.view.activity.Activity_Join_Company;
-import com.bcb.presentation.view.activity.Activity_Login;
 import com.bcb.presentation.view.activity.Activity_Money_Flowing_Water;
-import com.bcb.presentation.view.activity.Activity_Open_Account;
 import com.bcb.presentation.view.activity.Activity_Privilege_Money;
 import com.bcb.presentation.view.activity.Activity_Trading_Record;
 import com.bcb.presentation.view.activity.Activity_TuoGuan_HF;
-import com.bcb.presentation.view.activity.Activity_WebView;
+import com.bcb.module.myinfo.balance.FundCustodianWebActivity;
 import com.bcb.presentation.view.activity.Activity_Withdraw;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
 import com.bcb.presentation.view.custom.AlertView.UpdateDialog;
@@ -456,7 +456,7 @@ public class MyInfoFragment extends BaseFragment implements OnClickListener {
 		}
 		//除了专属客服和电话客服之外的职位都要在点击之前登陆
 		if (MyApplication.saveUserInfo.getAccess_Token() == null) {
-			Activity_Login.launche(ctx);
+			LoginActivity.launche(ctx);
 			return;
 		}
 		switch (v.getId()) {
@@ -565,7 +565,7 @@ public class MyInfoFragment extends BaseFragment implements OnClickListener {
 	//加入公司
 	private void toJoinCompany() {
 		if (mUserDetailInfo == null || !mUserDetailInfo.HasOpenCustody) {
-			startActivity(new Intent(ctx, Activity_Open_Account.class));
+			startActivity(new Intent(ctx, FundCustodianAboutActivity.class));
 		}
 		//否则需要判断MyCompany字段
 		else {
@@ -602,7 +602,7 @@ public class MyInfoFragment extends BaseFragment implements OnClickListener {
 		//已开通托管
 		if (isLoading()) return;
 		if (MyApplication.mUserDetailInfo != null && MyApplication.mUserDetailInfo.HasOpenCustody) startActivity(new Intent(ctx, A_Elite_Loan.class));
-		else startActivity(new Intent(ctx, Activity_Open_Account.class));
+		else startActivity(new Intent(ctx, FundCustodianAboutActivity.class));
 	}
 
 	//充值
@@ -610,8 +610,8 @@ public class MyInfoFragment extends BaseFragment implements OnClickListener {
 		if (isLoading()) return;
 		//已开通托管
 		if (MyApplication.mUserDetailInfo != null && MyApplication.mUserDetailInfo.HasOpenCustody)
-			startActivity(new Intent(ctx, Activity_Charge_HF.class));
-		else startActivity(new Intent(ctx, Activity_Open_Account.class));
+			startActivity(new Intent(ctx, RechargeActivity.class));
+		else startActivity(new Intent(ctx, FundCustodianAboutActivity.class));
 	}
 
 	//提现
@@ -622,7 +622,7 @@ public class MyInfoFragment extends BaseFragment implements OnClickListener {
 		if (isLoading()) return;
 		//没开通托管
 		if (MyApplication.mUserDetailInfo == null || !MyApplication.mUserDetailInfo.HasOpenCustody) {
-			startActivity(new Intent(ctx, Activity_Open_Account.class));
+			startActivity(new Intent(ctx, FundCustodianAboutActivity.class));
 			return;
 		}
 		//用户还没绑卡
@@ -643,7 +643,7 @@ public class MyInfoFragment extends BaseFragment implements OnClickListener {
 		if (isLoading()) return;
 		if (MyApplication.mUserDetailInfo.HasOpenCustody) {//已开通托管
 			startActivity(new Intent(ctx, Activity_TuoGuan_HF.class));
-		} else startActivity(new Intent(ctx, Activity_Open_Account.class));
+		} else startActivity(new Intent(ctx, FundCustodianAboutActivity.class));
 	}
 
 	//生利宝
@@ -651,7 +651,7 @@ public class MyInfoFragment extends BaseFragment implements OnClickListener {
 		if (isLoading()) return;
 		//已开通托管
 		if (MyApplication.mUserDetailInfo != null && MyApplication.mUserDetailInfo.HasOpenCustody) startActivity(new Intent(ctx, A_Slb.class));
-		else startActivity(new Intent(ctx, Activity_Open_Account.class));
+		else startActivity(new Intent(ctx, FundCustodianAboutActivity.class));
 	}
 
 	//判断状态，如果获取数据中或者获取数据失败，都表示依旧要加载数据
@@ -889,7 +889,7 @@ public class MyInfoFragment extends BaseFragment implements OnClickListener {
 	private void requestBandCard() {
 		String requestUrl = UrlsTwo.UrlBandCard;
 		String encodeToken = TokenUtil.getEncodeToken(ctx);
-		LogUtil.i("bqt", "【Activity_Charge_HF】【BandCard】请求路径：" + requestUrl);
+		LogUtil.i("bqt", "【RechargeActivity】【BandCard】请求路径：" + requestUrl);
 		BcbJsonRequest jsonRequest = new BcbJsonRequest(requestUrl, null, encodeToken, true, new BcbRequest.BcbCallBack<JSONObject>
 				() {
 			@Override
@@ -906,10 +906,10 @@ public class MyInfoFragment extends BaseFragment implements OnClickListener {
 							//传递的 参数
 							String postData = HttpUtils.jsonToStr(result.toString());
 							//跳转到webview
-							Activity_WebView.launche(ctx, "绑定提现卡", postUrl, postData);
+							FundCustodianWebActivity.launche(ctx, "绑定提现卡", postUrl, postData);
 						}
 					} catch (Exception e) {
-						LogUtil.d("bqt", "【Activity_Open_Account】【OpenAccount】" + e.getMessage());
+						LogUtil.d("bqt", "【FundCustodianAboutActivity】【OpenAccount】" + e.getMessage());
 					}
 				} else if (response != null) {
 					Toast.makeText(ctx, response.optString("message"), Toast.LENGTH_SHORT)
@@ -919,7 +919,7 @@ public class MyInfoFragment extends BaseFragment implements OnClickListener {
 
 			@Override
 			public void onErrorResponse(Exception error) {
-				LogUtil.d("bqt", "【Activity_Charge_HF】【BandCard】网络异常，请稍后重试" + error.toString());
+				LogUtil.d("bqt", "【RechargeActivity】【BandCard】网络异常，请稍后重试" + error.toString());
 			}
 		});
 		MyApplication.getInstance()

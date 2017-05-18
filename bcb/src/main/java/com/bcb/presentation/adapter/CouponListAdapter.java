@@ -17,7 +17,7 @@ import com.bcb.data.bean.CouponRecordsBean;
 import com.bcb.utils.LogUtil;
 import com.bcb.constant.MyConstants;
 import com.bcb.presentation.view.activity.A_Elite_Loan;
-import com.bcb.presentation.view.activity.Activity_Open_Account;
+import com.bcb.module.myinfo.balance.FundCustodianAboutActivity;
 import com.bcb.presentation.view.activity.Activity_Withdraw;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
 
@@ -148,7 +148,7 @@ public class CouponListAdapter extends BaseAdapter {
 						//用户还没认证时，先去认证
 						if (MyApplication.mUserDetailInfo != null && MyApplication.mUserDetailInfo.HasOpenCustody)
 							ctx.startActivity(new Intent(ctx, A_Elite_Loan.class));
-						else ctx.startActivity(new Intent(ctx, Activity_Open_Account.class));
+						else ctx.startActivity(new Intent(ctx, FundCustodianAboutActivity.class));
 					} else if (MyConstants.CASH == data.get(pos).getCouponType()) {//现金券时，点击则跳转至产品列表界面
 						EventBus.getDefault().post(new BroadcastEvent(BroadcastEvent.PRODUCT));
 						((Activity) ctx).finish();

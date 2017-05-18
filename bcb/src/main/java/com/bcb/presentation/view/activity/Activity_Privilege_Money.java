@@ -76,7 +76,7 @@ public class Activity_Privilege_Money extends Activity_Base implements AdapterVi
             public void onClick(View v) {
                 startActivity(new Intent(ctx, Activity_Money_Flowing_Water.class));
 //                if (MyApplication.mUserDetailInfo != null && MyApplication.mUserDetailInfo.HasOpenCustody) startActivity(new Intent(ctx, Activity_Money_Flowing_Water.class));
-//                else startActivity(new Intent(ctx, Activity_Open_Account.class));
+//                else startActivity(new Intent(ctx, FundCustodianAboutActivity.class));
             }
         });
         iv_about.setOnClickListener(new View.OnClickListener() {

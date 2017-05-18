@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.bcb.R;
 import com.bcb.base.Activity_Base;
+import com.bcb.module.login.LoginActivity;
 import com.bcb.utils.MQCustomerManager;
 import com.bcb.utils.MyActivityManager;
 import com.bcb.utils.RegexManager;
@@ -50,7 +51,7 @@ public class Activity_Register_First extends Activity_Base {
 //		setRightTitleValue("登录", new View.OnClickListener() {
 //			@Override
 //			public void onClick(View view) {
-//				Activity_Login.launche(Activity_Register_First.this);
+//				LoginActivity.launche(Activity_Register_First.this);
 //				//销毁当前页面
 //				finish();
 //			}
@@ -118,7 +119,7 @@ public class Activity_Register_First extends Activity_Base {
 
 					break;
 				case R.id.login:
-					startActivity(new Intent(Activity_Register_First.this, Activity_Login.class));
+					startActivity(new Intent(Activity_Register_First.this, LoginActivity.class));
 					break;
 			}
 		}

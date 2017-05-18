@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.bcb.R;
 import com.bcb.MyApplication;
 import com.bcb.event.BroadcastEvent;
+import com.bcb.module.login.LoginActivity;
 import com.bcb.network.BcbJsonRequest;
 import com.bcb.network.BcbRequest;
 import com.bcb.network.UrlsOne;
@@ -21,7 +22,6 @@ import com.bcb.utils.LogUtil;
 import com.bcb.utils.ProgressDialogrUtils;
 import com.bcb.utils.ToastUtil;
 import com.bcb.utils.TokenUtil;
-import com.bcb.presentation.view.activity.Activity_Login;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -109,7 +109,7 @@ public class MainAdapter extends BaseAdapter {
 					if (TokenUtil.getEncodeToken(ctx) != null) {
 						requestAnnounce(pos);
 					} else {
-						Activity_Login.launche(ctx);
+						LoginActivity.launche(ctx);
 //						ToastUtil.alert(ctx, "请登录后再操作");
 					}
 				}

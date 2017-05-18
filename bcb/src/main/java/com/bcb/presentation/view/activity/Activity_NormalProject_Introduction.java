@@ -17,6 +17,9 @@ import android.widget.Toast;
 import com.bcb.R;
 import com.bcb.base.Activity_Base;
 import com.bcb.MyApplication;
+import com.bcb.module.login.LoginActivity;
+import com.bcb.module.myinfo.balance.FundCustodianWebActivity;
+import com.bcb.module.myinfo.balance.FundCustodianAboutActivity;
 import com.bcb.network.BcbJsonRequest;
 import com.bcb.network.BcbRequest;
 import com.bcb.network.BcbRequestTag;
@@ -414,7 +417,7 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
 							result.remove("PostUrl");//移除这个参数
 							//传递的参数
 							String postData = HttpUtils.jsonToStr(result.toString()); //跳转到webview
-							Activity_WebView.launche(Activity_NormalProject_Introduction.this, "开启份额锁", postUrl, postData);
+							FundCustodianWebActivity.launche(Activity_NormalProject_Introduction.this, "开启份额锁", postUrl, postData);
 						}
 					} catch (Exception e) {
 						LogUtil.d("bqt", "开通自动投标2" + e.getMessage());
@@ -652,14 +655,14 @@ public class Activity_NormalProject_Introduction extends Activity_Base implement
 
 		//还没有登陆时，跳转至登陆页面
 		if (MyApplication.saveUserInfo.getAccess_Token() == null) {
-			startActivity(new Intent(Activity_NormalProject_Introduction.this, Activity_Login.class));
+			startActivity(new Intent(Activity_NormalProject_Introduction.this, LoginActivity.class));
 			finish();
 			return;
 		}
 
 		//没有开通汇付托管
 		if (MyApplication.mUserDetailInfo == null || !MyApplication.mUserDetailInfo.HasOpenCustody) {
-			startActivity(new Intent(this, Activity_Open_Account.class));
+			startActivity(new Intent(this, FundCustodianAboutActivity.class));
 			finish();
 			return;
 		}

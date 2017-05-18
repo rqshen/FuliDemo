@@ -12,6 +12,8 @@ import android.widget.Toast;
 import com.bcb.R;
 import com.bcb.base.Activity_Base;
 import com.bcb.MyApplication;
+import com.bcb.module.myinfo.balance.FundCustodianWebActivity;
+import com.bcb.module.myinfo.balance.RechargeActivity;
 import com.bcb.network.BcbJsonRequest;
 import com.bcb.network.BcbRequest;
 import com.bcb.network.UrlsTwo;
@@ -95,7 +97,7 @@ public class Activity_TuoGuan_HF extends Activity_Base implements View.OnClickLi
 				ProjectDetailActivity.launcheForResult(this, "解绑", UrlsTwo.UrlUnBand, 2);
 				break;
 			case R.id.tv_charge:
-				startActivity(new Intent(Activity_TuoGuan_HF.this, Activity_Charge_HF.class));
+				startActivity(new Intent(Activity_TuoGuan_HF.this, RechargeActivity.class));
 				break;
 			case R.id.tv_get:
 				withdrawMoney();
@@ -175,7 +177,7 @@ public class Activity_TuoGuan_HF extends Activity_Base implements View.OnClickLi
 							result.remove("PostUrl");//移除这个参数
 							//传递的参数
 							String postData = HttpUtils.jsonToStr(result.toString()); //跳转到webview
-							Activity_WebView.launche(Activity_TuoGuan_HF.this, "登录汇付账户", postUrl, postData);
+							FundCustodianWebActivity.launche(Activity_TuoGuan_HF.this, "登录汇付账户", postUrl, postData);
 						}
 					} catch (Exception e) {
 						LogUtil.d("bqt", "【Activity_TuoGuan_HF】【loginAccount】" + e.getMessage());
@@ -215,7 +217,7 @@ public class Activity_TuoGuan_HF extends Activity_Base implements View.OnClickLi
 							result.remove("PostUrl");//移除这个参数
 							//传递的参数
 							String postData = HttpUtils.jsonToStr(result.toString()); //跳转到webview
-							Activity_WebView.launche(Activity_TuoGuan_HF.this, title, postUrl, postData);
+							FundCustodianWebActivity.launche(Activity_TuoGuan_HF.this, title, postUrl, postData);
 						}
 					} catch (Exception e) {
 						LogUtil.d("bqt", "【Activity_TuoGuan_HF】【alertLoginPassword】" + e.getMessage());
@@ -240,12 +242,12 @@ public class Activity_TuoGuan_HF extends Activity_Base implements View.OnClickLi
 
 		String requestUrl = UrlsTwo.UrlBandCard;
 		String encodeToken = TokenUtil.getEncodeToken(ctx);
-		LogUtil.i("bqt", "【Activity_Charge_HF】【BandCard】请求路径：" + requestUrl);
+		LogUtil.i("bqt", "【RechargeActivity】【BandCard】请求路径：" + requestUrl);
 		BcbJsonRequest jsonRequest = new BcbJsonRequest(requestUrl, null, encodeToken, true, new BcbRequest.BcbCallBack<JSONObject>
 				() {
 			@Override
 			public void onResponse(JSONObject response) {
-				LogUtil.i("bqt", "【Activity_Charge_HF】【BandCard】返回数据：" + response.toString());
+				LogUtil.i("bqt", "【RechargeActivity】【BandCard】返回数据：" + response.toString());
 				if (PackageUtil.getRequestStatus(response, ctx)) {
 					try {
 						/** 后台返回的JSON对象，也是要转发给汇付的对象 */
@@ -257,10 +259,10 @@ public class Activity_TuoGuan_HF extends Activity_Base implements View.OnClickLi
 							//传递的 参数
 							String postData = HttpUtils.jsonToStr(result.toString());
 							//跳转到webview
-							Activity_WebView.launche(ctx, "绑定提现卡", postUrl, postData);
+							FundCustodianWebActivity.launche(ctx, "绑定提现卡", postUrl, postData);
 						}
 					} catch (Exception e) {
-						LogUtil.d("bqt", "【Activity_Open_Account】【OpenAccount】" + e.getMessage());
+						LogUtil.d("bqt", "【FundCustodianAboutActivity】【OpenAccount】" + e.getMessage());
 					}
 				} else if (response != null) {
 					Toast.makeText(ctx, response.optString("message"), Toast.LENGTH_SHORT).show();
@@ -269,7 +271,7 @@ public class Activity_TuoGuan_HF extends Activity_Base implements View.OnClickLi
 
 			@Override
 			public void onErrorResponse(Exception error) {
-				LogUtil.d("bqt", "【Activity_Charge_HF】【BandCard】网络异常，请稍后重试" + error.toString());
+				LogUtil.d("bqt", "【RechargeActivity】【BandCard】网络异常，请稍后重试" + error.toString());
 			}
 		});
 		MyApplication.getInstance().getRequestQueue().add(jsonRequest);

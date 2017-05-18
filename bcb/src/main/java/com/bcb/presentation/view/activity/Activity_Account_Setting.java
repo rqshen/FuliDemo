@@ -20,6 +20,8 @@ import android.widget.TextView;
 import com.bcb.R;
 import com.bcb.base.Activity_Base;
 import com.bcb.MyApplication;
+import com.bcb.module.login.LoginActivity;
+import com.bcb.module.myinfo.balance.FundCustodianAboutActivity;
 import com.bcb.network.UrlsOne;
 import com.bcb.utils.LogUtil;
 import com.bcb.utils.MyActivityManager;
@@ -251,7 +253,7 @@ public class Activity_Account_Setting extends Activity_Base implements OnClickLi
 			case R.id.layout_username:
 			case R.id.layout_id_card:
 			case R.id.layout_bank_card:
-				startActivity(new Intent(this, Activity_Open_Account.class));
+				startActivity(new Intent(this, FundCustodianAboutActivity.class));
 				break;
 
 			//手机号码
@@ -261,14 +263,14 @@ public class Activity_Account_Setting extends Activity_Base implements OnClickLi
 			case R.id.tg:
 				if (MyApplication.mUserDetailInfo!=null&& MyApplication.mUserDetailInfo.HasOpenCustody) {//已开通托管
 					startActivity(new Intent(this, Activity_TuoGuan_HF.class));
-				} else startActivity(new Intent(this, Activity_Open_Account.class));
+				} else startActivity(new Intent(this, FundCustodianAboutActivity.class));
 				break;
 
 			//所在公司(加入公司)
 			case R.id.layout_company:
 				if (mUserDetailInfo == null || !mUserDetailInfo.HasOpenCustody) {
 					//                    Toast.makeText(Activity_Account_Setting.this, "公司认证需要先开通汇付账户", Toast.LENGTH_SHORT).show();
-					startActivity(new Intent(this, Activity_Open_Account.class));
+					startActivity(new Intent(this, FundCustodianAboutActivity.class));
 					return;
 				}
 				joinCompany();
@@ -445,7 +447,7 @@ public class Activity_Account_Setting extends Activity_Base implements OnClickLi
 
 	//跳转至登陆界面
 	private void gotoLoginActivity() {
-		Activity_Login.launche(Activity_Account_Setting.this);
+		LoginActivity.launche(Activity_Account_Setting.this);
 		MyActivityManager myActivityManager = MyActivityManager.getInstance();
 		myActivityManager.finishAllActivity();
 	}

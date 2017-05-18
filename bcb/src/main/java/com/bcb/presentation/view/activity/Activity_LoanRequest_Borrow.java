@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.bcb.R;
 import com.bcb.base.Activity_Base;
 import com.bcb.MyApplication;
+import com.bcb.module.login.LoginActivity;
 import com.bcb.network.BcbJsonRequest;
 import com.bcb.network.BcbRequest;
 import com.bcb.network.BcbRequestTag;
@@ -265,7 +266,7 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 								return;
 							}
 							if (response.getInt("status") == -5) {
-								Activity_Login.launche(Activity_LoanRequest_Borrow.this);
+								LoginActivity.launche(Activity_LoanRequest_Borrow.this);
 								finish();
 							}
 							LogUtil.i("bqt", "借款信息" + response.toString());
@@ -846,12 +847,12 @@ public class Activity_LoanRequest_Borrow extends Activity_Base {
 									ToastUtil.alert(Activity_LoanRequest_Borrow.this, response.getString("message").equalsIgnoreCase("") ?
 											"服务器繁忙，请稍候再试" : response.getString("message"));
 									//判断是否是Token过期，如果过期则跳转至登陆界面
-									if (response.getInt("status") == -5) Activity_Login.launche(Activity_LoanRequest_Borrow.this);
+									if (response.getInt("status") == -5) LoginActivity.launche(Activity_LoanRequest_Borrow.this);
 								}
 							} catch (Exception e) {
 								e.printStackTrace();
 								//数据出错重新登录
-								Activity_Login.launche(Activity_LoanRequest_Borrow.this);
+								LoginActivity.launche(Activity_LoanRequest_Borrow.this);
 							}
 						}
 

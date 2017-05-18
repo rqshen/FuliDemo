@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.bcb.R;
-import com.bcb.presentation.view.activity.Activity_Login;
+import com.bcb.module.login.LoginActivity;
 import com.bcb.presentation.view.activity.Activity_Register_First;
 
 import butterknife.BindView;
@@ -35,7 +35,7 @@ public class DLDialog extends Dialog {
 			@Override
 			public void onClick(View v) {
 				dismiss();
-				Activity_Login.launche(getContext());
+				LoginActivity.launche(getContext());
 			}
 		});
 		zc.setOnClickListener(new View.OnClickListener() {

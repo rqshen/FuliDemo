@@ -19,6 +19,7 @@ import android.widget.RelativeLayout;
 
 import com.bcb.R;
 import com.bcb.base.Activity_Base;
+import com.bcb.module.login.LoginActivity;
 import com.bcb.utils.MyActivityManager;
 import com.bcb.utils.ToastUtil;
 import com.bcb.utils.UmengUtil;
@@ -275,7 +276,7 @@ public class Activity_Join_Company extends Activity_Base implements Interface_Ba
         }
         // token过期则跳转至登录页面
         else if (resultStatus == -5) {
-            Activity_Login.launche(this);
+            LoginActivity.launche(this);
         }
     }
 }

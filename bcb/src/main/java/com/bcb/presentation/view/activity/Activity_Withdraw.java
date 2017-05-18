@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.bcb.R;
 import com.bcb.base.Activity_Base;
 import com.bcb.MyApplication;
+import com.bcb.module.myinfo.balance.FundCustodianWebActivity;
 import com.bcb.network.BcbJsonRequest;
 import com.bcb.network.BcbRequest;
 import com.bcb.network.BcbRequestQueue;
@@ -434,7 +435,7 @@ public class Activity_Withdraw extends Activity_Base implements View.OnClickList
                             //传递的 参数
                             String postData = HttpUtils.jsonToStr(result.toString());
                             //跳转到webview
-                            Activity_WebView.launche(Activity_Withdraw.this, "提现", postUrl, postData);
+                            FundCustodianWebActivity.launche(Activity_Withdraw.this, "提现", postUrl, postData);
                             finish();
                         }
                     } catch (Exception e) {

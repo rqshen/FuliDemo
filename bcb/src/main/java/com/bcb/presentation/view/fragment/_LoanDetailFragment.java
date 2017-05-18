@@ -27,6 +27,7 @@ import android.widget.TextView;
 import com.bcb.R;
 import com.bcb.base.BaseFragment;
 import com.bcb.MyApplication;
+import com.bcb.module.myinfo.balance.RechargeActivity;
 import com.bcb.network.BcbJsonRequest;
 import com.bcb.network.BcbRequest;
 import com.bcb.network.BcbRequestQueue;
@@ -38,7 +39,6 @@ import com.bcb.utils.PackageUtil;
 import com.bcb.utils.ToastUtil;
 import com.bcb.utils.TokenUtil;
 import com.bcb.presentation.adapter.GridAdapter;
-import com.bcb.presentation.view.activity.Activity_Charge_HF;
 import com.bcb.presentation.view.activity.Activity_Image_Display;
 import com.bigkoo.alertview.AlertView;
 import com.bigkoo.alertview.OnItemClickListener;
@@ -185,7 +185,7 @@ public class _LoanDetailFragment extends BaseFragment {
             public void onClick(View view) {
                 //跳转至充值按钮
 //                Activity_Recharge_Second.launche(context);
-                startActivity(new Intent(context, Activity_Charge_HF.class));
+                startActivity(new Intent(context, RechargeActivity.class));
             }
         });
     }

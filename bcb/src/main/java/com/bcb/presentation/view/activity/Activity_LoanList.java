@@ -9,6 +9,7 @@ import android.widget.RelativeLayout;
 import com.bcb.R;
 import com.bcb.base.Activity_Base;
 import com.bcb.MyApplication;
+import com.bcb.module.login.LoginActivity;
 import com.bcb.network.BcbJsonRequest;
 import com.bcb.network.BcbRequest;
 import com.bcb.network.BcbRequestQueue;
@@ -170,7 +171,7 @@ public class Activity_LoanList extends Activity_Base {
                         canLoadmore = false;
                         //判断是否是Token过期，如果过期则跳转至登陆界面
                         if (response.getInt("status") == -5) {
-                            Activity_Login.launche(Activity_LoanList.this);
+                            LoginActivity.launche(Activity_LoanList.this);
                             finish();
                         }
                         if (recordsBeans == null || recordsBeans.size() <= 0) {

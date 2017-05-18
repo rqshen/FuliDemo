@@ -19,7 +19,7 @@ import com.bcb.data.bean.PrivilegeMoneyDto;
 import com.bcb.utils.LogUtil;
 import com.bcb.utils.PackageUtil;
 import com.bcb.utils.TokenUtil;
-import com.bcb.presentation.view.activity.Activity_Open_Account;
+import com.bcb.module.myinfo.balance.FundCustodianAboutActivity;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
 
 import org.json.JSONException;
@@ -151,7 +151,7 @@ public class PrivilegeMoneyAdapter extends BaseAdapter {
                                         public void onClick(DialogInterface dialog, int which) {
                                             alertView.dismiss();
                                             alertView = null;
-                                            ctx.startActivity(new Intent(ctx, Activity_Open_Account.class));
+                                            ctx.startActivity(new Intent(ctx, FundCustodianAboutActivity.class));
                                         }
                                     });
                                 }

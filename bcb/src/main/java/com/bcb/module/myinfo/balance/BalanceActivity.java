@@ -19,11 +19,8 @@ import com.bcb.utils.LogUtil;
 import com.bcb.utils.PackageUtil;
 import com.bcb.utils.TokenUtil;
 import com.bcb.base.Activity_Base;
-import com.bcb.presentation.view.activity.Activity_Charge_HF;
-import com.bcb.presentation.view.activity.Activity_Login;
+import com.bcb.module.login.LoginActivity;
 import com.bcb.presentation.view.activity.Activity_Money_Flowing_Water;
-import com.bcb.presentation.view.activity.Activity_Open_Account;
-import com.bcb.presentation.view.activity.Activity_WebView;
 import com.bcb.presentation.view.activity.Activity_Withdraw;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
 
@@ -69,7 +66,7 @@ public class BalanceActivity extends Activity_Base {
 	
 	@OnClick({R.id.layout_cz, R.id.layout_tx,R.id.layout_mx})
 	public void onClick(View view) {
-		if (MyApplication.saveUserInfo.getAccess_Token() == null) Activity_Login.launche(ctx);
+		if (MyApplication.saveUserInfo.getAccess_Token() == null) LoginActivity.launche(ctx);
 		switch (view.getId()) {
 			case R.id.layout_cz:
 				rechargeMoney();
@@ -87,8 +84,8 @@ public class BalanceActivity extends Activity_Base {
 	private void rechargeMoney() {
 		//已开通托管
 		if (MyApplication.mUserDetailInfo != null && MyApplication.mUserDetailInfo.HasOpenCustody)
-			startActivity(new Intent(ctx, Activity_Charge_HF.class));
-		else startActivity(new Intent(ctx, Activity_Open_Account.class));
+			startActivity(new Intent(ctx, RechargeActivity.class));
+		else startActivity(new Intent(ctx, FundCustodianAboutActivity.class));
 	}
 
 	//提现
@@ -97,7 +94,7 @@ public class BalanceActivity extends Activity_Base {
 	private void withdrawMoney() {
 		//未开通托管
 		if (MyApplication.mUserDetailInfo == null || !MyApplication.mUserDetailInfo.HasOpenCustody) {
-			startActivity(new Intent(ctx, Activity_Open_Account.class));
+			startActivity(new Intent(ctx, FundCustodianAboutActivity.class));
 			return;
 		}
 		//用户还没绑卡
@@ -132,7 +129,7 @@ public class BalanceActivity extends Activity_Base {
 	private void requestBandCard() {
 		String requestUrl = UrlsTwo.UrlBandCard;
 		String encodeToken = TokenUtil.getEncodeToken(ctx);
-		LogUtil.i("bqt", "【Activity_Charge_HF】【BandCard】请求路径：" + requestUrl);
+		LogUtil.i("bqt", "【RechargeActivity】【BandCard】请求路径：" + requestUrl);
 		BcbJsonRequest jsonRequest = new BcbJsonRequest(requestUrl, null, encodeToken, true, new BcbRequest.BcbCallBack<JSONObject>
 				() {
 			@Override
@@ -149,10 +146,10 @@ public class BalanceActivity extends Activity_Base {
 							//传递的 参数
 							String postData = HttpUtils.jsonToStr(result.toString());
 							//跳转到webview
-							Activity_WebView.launche(ctx, "绑定提现卡", postUrl, postData);
+							FundCustodianWebActivity.launche(ctx, "绑定提现卡", postUrl, postData);
 						}
 					} catch (Exception e) {
-						LogUtil.d("bqt", "【Activity_Open_Account】【OpenAccount】" + e.getMessage());
+						LogUtil.d("bqt", "【FundCustodianAboutActivity】【OpenAccount】" + e.getMessage());
 					}
 				} else if (response != null) {
 					Toast.makeText(ctx, response.optString("message"), Toast.LENGTH_SHORT)
@@ -162,7 +159,7 @@ public class BalanceActivity extends Activity_Base {
 
 			@Override
 			public void onErrorResponse(Exception error) {
-				LogUtil.d("bqt", "【Activity_Charge_HF】【BandCard】网络异常，请稍后重试" + error.toString());
+				LogUtil.d("bqt", "【RechargeActivity】【BandCard】网络异常，请稍后重试" + error.toString());
 			}
 		});
 		MyApplication.getInstance()

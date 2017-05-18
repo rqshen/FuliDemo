@@ -15,11 +15,11 @@ import android.widget.Toast;
 import com.bcb.R;
 import com.bcb.base.BaseFragment;
 import com.bcb.MyApplication;
+import com.bcb.module.myinfo.balance.FundCustodianAboutActivity;
 import com.bcb.presentation.view.activity.A_Elite_Loan;
 import com.bcb.module.homepager.morefinance.MoreFinanceActivity;
-import com.bcb.presentation.view.activity.Activity_Login;
+import com.bcb.module.login.LoginActivity;
 import com.bcb.presentation.view.activity.Activity_Love;
-import com.bcb.presentation.view.activity.Activity_Open_Account;
 import com.bcb.presentation.view.activity.Activity_WebView_Upload;
 
 import butterknife.BindView;
@@ -92,7 +92,7 @@ public class DiscoverFragment extends BaseFragment {
 	//车险
 	private void cheXian() {
 		if (MyApplication.saveUserInfo.getAccess_Token() == null) {
-			Activity_Login.launche(ctx);
+			LoginActivity.launche(ctx);
 		} else if (MyApplication.mUserDetailInfo == null || TextUtils.isEmpty(MyApplication.mUserDetailInfo.CarInsuranceIndexPage)) {
 			Toast.makeText(ctx, "网络异常，请刷新后重试", Toast.LENGTH_SHORT).show();
 		} else {
@@ -110,7 +110,7 @@ public class DiscoverFragment extends BaseFragment {
 	private void loanMainPage() {
 		//已开通托管
 		if (MyApplication.mUserDetailInfo != null && MyApplication.mUserDetailInfo.HasOpenCustody) startActivity(new Intent(ctx, A_Elite_Loan.class));
-		else startActivity(new Intent(ctx, Activity_Open_Account.class));
+		else startActivity(new Intent(ctx, FundCustodianAboutActivity.class));
 	}
 
 }

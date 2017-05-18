@@ -78,7 +78,7 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".presentation.view.activity.Activity_Login"
+            android:name=".module.login.LoginActivity"
             android:label="@string/app_name"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
@@ -322,7 +322,7 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".presentation.view.activity.Activity_Open_Account2"
+            android:name=".module.myinfo.balance.FundCustodianIdCardActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
@@ -470,13 +470,13 @@
             android:value="983f6d809971c6e36d403c49" />
         <!-- </>值来自开发者平台取得的AppKey ： 983f6d809971c6e36d403c49 -->
 
-        <activity android:name=".presentation.view.activity.Activity_Open_Account"></activity>
+        <activity android:name=".module.myinfo.balance.FundCustodianAboutActivity"></activity>
         <activity android:name=".presentation.view.activity.Activity_TuoGuan_HF"></activity>
-        <activity android:name=".presentation.view.activity.Activity_Charge_HF"></activity>
+        <activity android:name=".module.myinfo.balance.RechargeActivity"></activity>
         <activity
             android:name=".presentation.view.activity.Activity_Tips_FaileOrSuccess"
             android:launchMode="singleTask"></activity>
-        <activity android:name=".presentation.view.activity.Activity_WebView"></activity>
+        <activity android:name=".module.myinfo.balance.FundCustodianWebActivity"></activity>
         <activity android:name=".presentation.view.activity.A_Slb"></activity>
         <!--
  ATTENTION: This was auto-generated to add Google Play services to your project for

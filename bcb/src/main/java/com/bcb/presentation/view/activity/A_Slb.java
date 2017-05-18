@@ -9,6 +9,7 @@ import android.widget.Toast;
 import com.bcb.R;
 import com.bcb.base.Activity_Base;
 import com.bcb.MyApplication;
+import com.bcb.module.myinfo.balance.FundCustodianWebActivity;
 import com.bcb.network.BcbJsonRequest;
 import com.bcb.network.BcbRequest;
 import com.bcb.network.UrlsTwo;
@@ -199,7 +200,7 @@ public class A_Slb extends Activity_Base implements View.OnClickListener {
                             //传递的 参数
                             String postData = HttpUtils.jsonToStr(result.toString());
                             //跳转到webview
-                            Activity_WebView.launche(A_Slb.this, "生利宝", postUrl, postData);
+                            FundCustodianWebActivity.launche(A_Slb.this, "生利宝", postUrl, postData);
                         }
                     } catch (Exception e) {
                         LogUtil.d("bqt", "【A_Slb】【JY】" + e.getMessage());

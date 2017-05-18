@@ -31,6 +31,7 @@ import com.bcb.R;
 import com.bcb.base.BaseFragment;
 import com.bcb.MyApplication;
 import com.bcb.event.BroadcastEvent;
+import com.bcb.module.login.LoginActivity;
 import com.bcb.network.BcbJsonRequest;
 import com.bcb.network.BcbRequest;
 import com.bcb.network.BcbRequestQueue;
@@ -61,7 +62,6 @@ import com.bcb.presentation.adapter.ExpiredAdapter;
 import com.bcb.presentation.adapter.ProductAdapter;
 import com.bcb.presentation.view.activity.Activity_Daily_Welfare;
 import com.bcb.presentation.view.activity.Activity_Daily_Welfare_Static;
-import com.bcb.presentation.view.activity.Activity_Login;
 import com.bcb.presentation.view.activity.Activity_Login_Introduction;
 import com.bcb.presentation.view.activity.Activity_Love;
 import com.bcb.presentation.view.activity.Activity_NormalProject_Introduction;
@@ -810,7 +810,7 @@ public class _Main3Fragment extends BaseFragment implements View.OnClickListener
 		switch (v.getId()) {
 			case R.id.rl_car:
 				if (MyApplication.saveUserInfo.getAccess_Token() == null) {
-					Activity_Login.launche(ctx);
+					LoginActivity.launche(ctx);
 				} else if (MyApplication.mUserDetailInfo == null ||TextUtils.isEmpty(MyApplication.mUserDetailInfo.CarInsuranceIndexPage)) {
 					Toast.makeText(ctx, "网络异常，请刷新后重试", Toast.LENGTH_SHORT).show();
 				} else {
@@ -819,7 +819,7 @@ public class _Main3Fragment extends BaseFragment implements View.OnClickListener
 				break;
 			case R.id.ll_daily_welfare://每日福利
 				if (MyApplication.saveUserInfo.getAccess_Token() == null) {
-					Activity_Login.launche(ctx);
+					LoginActivity.launche(ctx);
 					break;
 				}
 				UmengUtil.eventById(ctx, R.string.fuli_c);

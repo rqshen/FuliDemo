@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.bcb.R;
 import com.bcb.base.Activity_Base;
+import com.bcb.module.login.LoginActivity;
 import com.bcb.utils.LogUtil;
 import com.bcb.utils.MQCustomerManager;
 import com.bcb.utils.MyActivityManager;
@@ -506,7 +507,7 @@ public class Activity_Register_Next extends Activity_Base implements Interface_V
 
             //客服
             case R.id.login:
-                startActivity(new Intent(this, Activity_Login.class));
+                startActivity(new Intent(this, LoginActivity.class));
                 break;
         }
     }

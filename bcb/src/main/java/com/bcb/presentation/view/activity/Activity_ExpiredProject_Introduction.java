@@ -310,7 +310,7 @@
 //    /****************** 跳转到登录页面 ***************/
 //    private void gotoLoginActivity() {
 //        UmengUtil.eventById(Activity_ExpiredProject_Introduction.this, R.string.bid_buy_n_login);
-//        Intent newIntent = new Intent(Activity_ExpiredProject_Introduction.this, Activity_Login.class);
+//        Intent newIntent = new Intent(Activity_ExpiredProject_Introduction.this, LoginActivity.class);
 //        startActivity(newIntent);
 //    }
 //

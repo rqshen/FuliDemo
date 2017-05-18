@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import com.bcb.R;
 import com.bcb.base.Activity_Base;
 import com.bcb.MyApplication;
+import com.bcb.module.login.LoginActivity;
 import com.bcb.utils.MyActivityManager;
 import com.bcb.utils.UmengUtil;
 import com.bcb.presentation.adapter.MyPagerAdapter;
@@ -154,7 +155,7 @@ public class Activity_Login_Introduction extends Activity_Base implements View.O
      *******************/
     private void gotoLoginPage() {
         UmengUtil.eventById(Activity_Login_Introduction.this, R.string.bid_buy_n_login);
-        startActivity(new Intent(this, Activity_Login.class));
+        startActivity(new Intent(this, LoginActivity.class));
     }
 
 //    @Override

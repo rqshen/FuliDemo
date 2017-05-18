@@ -29,6 +29,7 @@ import android.widget.RelativeLayout;
 import com.bcb.R;
 import com.bcb.base.Activity_Base;
 import com.bcb.MyApplication;
+import com.bcb.module.myinfo.balance.FundCustodianAboutActivity;
 import com.bcb.network.UrlsOne;
 import com.bcb.utils.BitmapUtil;
 import com.bcb.utils.DESUtil;
@@ -39,8 +40,7 @@ import com.bcb.constant.MyConstants;
 import com.bcb.utils.ToastUtil;
 import com.bcb.presentation.view.activity.Activity_Authentication;
 import com.bcb.presentation.view.activity.Activity_Join_Company;
-import com.bcb.presentation.view.activity.Activity_Login;
-import com.bcb.presentation.view.activity.Activity_Open_Account;
+import com.bcb.module.login.LoginActivity;
 import com.bcb.presentation.view.activity.Activity_Register_First;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
 import com.bcb.presentation.view.custom.Browser.X5WebView;
@@ -305,7 +305,7 @@ public class ProjectDetailActivity extends Activity_Base {
 					finish();
 					return true;
 				} else if (url.contains("fulihui://login")) {
-					startActivity(new Intent(ProjectDetailActivity.this, Activity_Login.class));
+					startActivity(new Intent(ProjectDetailActivity.this, LoginActivity.class));
 					finish();
 					return true;
 				} else if (url.contains("fulihui://callcenter")) {
@@ -415,7 +415,7 @@ public class ProjectDetailActivity extends Activity_Base {
 	private DialogWidget dialogWidget;
 
 	private void popHFDialog() {
-		startActivity(new Intent(context, Activity_Open_Account.class));
+		startActivity(new Intent(context, FundCustodianAboutActivity.class));
 		//        dialogWidget = new DialogWidget(context, IdentifyAlertView.getInstance(context, new IdentifyAlertView
 		// .OnClikListener() {
 		//            @Override
@@ -428,7 +428,7 @@ public class ProjectDetailActivity extends Activity_Base {
 		//            public void onSureClick() {
 		//                dialogWidget.dismiss();
 		//                dialogWidget = null;
-		//                startActivity(new Intent(context, Activity_Open_Account.class));
+		//                startActivity(new Intent(context, FundCustodianAboutActivity.class));
 		//            }
 		//        }).getView());
 		//        dialogWidget.show();

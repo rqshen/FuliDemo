@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.bcb.R;
 import com.bcb.base.Activity_Base;
 import com.bcb.MyApplication;
+import com.bcb.module.login.LoginActivity;
 import com.bcb.network.BcbJsonRequest;
 import com.bcb.network.BcbRequest;
 import com.bcb.network.BcbRequestQueue;
@@ -237,7 +238,7 @@ public class Activity_Loan_Introduction extends Activity_Base implements View.On
                             ToastUtil.alert(Activity_Loan_Introduction.this, message);
                             //判断是否Token过期，如果过期则跳转至登陆界面
                             if (response.getInt("status") == -5) {
-                                Activity_Login.launche(Activity_Loan_Introduction.this);
+                                LoginActivity.launche(Activity_Loan_Introduction.this);
                                 finish();
                             }
                         } else {

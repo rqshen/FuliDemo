@@ -23,6 +23,10 @@ import android.widget.Toast;
 import com.bcb.R;
 import com.bcb.base.Activity_Base;
 import com.bcb.MyApplication;
+import com.bcb.module.login.LoginActivity;
+import com.bcb.module.myinfo.balance.FundCustodianWebActivity;
+import com.bcb.module.myinfo.balance.FundCustodianAboutActivity;
+import com.bcb.module.myinfo.balance.RechargeActivity;
 import com.bcb.network.BcbJsonRequest;
 import com.bcb.network.BcbRequest;
 import com.bcb.network.BcbRequestTag;
@@ -330,7 +334,7 @@ public class Activity_Project_Buy2 extends Activity_Base implements View.OnClick
 					}
 					//去登陆
 					else if (status == -5) {
-						startActivity(new Intent(Activity_Project_Buy2.this, Activity_Login.class));
+						startActivity(new Intent(Activity_Project_Buy2.this, LoginActivity.class));
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -370,7 +374,7 @@ public class Activity_Project_Buy2 extends Activity_Base implements View.OnClick
 									button_buy.setText("立即申购");
 								}
 							} else if (status == -5) {
-								startActivity(new Intent(Activity_Project_Buy2.this, Activity_Login.class));
+								startActivity(new Intent(Activity_Project_Buy2.this, LoginActivity.class));
 							}
 						} catch (Exception e) {
 							e.printStackTrace();
@@ -441,7 +445,7 @@ public class Activity_Project_Buy2 extends Activity_Base implements View.OnClick
 		// 未登录
 		if (MyApplication.saveUserInfo.getAccess_Token() == null) {
 			ToastUtil.alert(Activity_Project_Buy2.this, "请先登录");
-			startActivity(new Intent(Activity_Project_Buy2.this, Activity_Login.class));
+			startActivity(new Intent(Activity_Project_Buy2.this, LoginActivity.class));
 			return;
 		}
 		//无法获取用户余额
@@ -452,7 +456,7 @@ public class Activity_Project_Buy2 extends Activity_Base implements View.OnClick
 		}
 		//未开通托管
 		if (MyApplication.mUserDetailInfo == null || !MyApplication.mUserDetailInfo.HasOpenCustody) {
-			startActivity(new Intent(Activity_Project_Buy2.this, Activity_Open_Account.class));
+			startActivity(new Intent(Activity_Project_Buy2.this, FundCustodianAboutActivity.class));
 			return;
 		}
 		//未输入投资金额
@@ -640,7 +644,7 @@ public class Activity_Project_Buy2 extends Activity_Base implements View.OnClick
 							//传递的 参数
 							String postData = HttpUtils.jsonToStr(result.toString());
 							//跳转到webview
-							Activity_WebView.launche(Activity_Project_Buy2.this, "投资确认", postUrl, postData);
+							FundCustodianWebActivity.launche(Activity_Project_Buy2.this, "投资确认", postUrl, postData);
 						}
 					} catch (Exception e) {
 						LogUtil.d("bqt", "【Activity_Project_Buy】【Buy】" + e.getMessage());
@@ -697,7 +701,7 @@ public class Activity_Project_Buy2 extends Activity_Base implements View.OnClick
 			case R.id.layout_coupon:
 				//先判断是否登录
 				if (MyApplication.saveUserInfo.getAccess_Token() == null)
-					startActivity(new Intent(Activity_Project_Buy2.this, Activity_Login.class));
+					startActivity(new Intent(Activity_Project_Buy2.this, LoginActivity.class));
 					//判断优惠券类型，跳转
 				else startupActivity(2);
 				break;
@@ -729,13 +733,13 @@ public class Activity_Project_Buy2 extends Activity_Base implements View.OnClick
 		// 用户是否登录
 		if (MyApplication.saveUserInfo.getAccess_Token() == null) {
 			ToastUtil.alert(Activity_Project_Buy2.this, "请先登录");
-			startActivity(new Intent(Activity_Project_Buy2.this, Activity_Login.class));
+			startActivity(new Intent(Activity_Project_Buy2.this, LoginActivity.class));
 			return;
 		}
 		//已开通托管
 		if (MyApplication.mUserDetailInfo != null && MyApplication.mUserDetailInfo.HasOpenCustody)
-			startActivity(new Intent(Activity_Project_Buy2.this, Activity_Charge_HF.class));
-		else startActivity(new Intent(Activity_Project_Buy2.this, Activity_Open_Account.class));
+			startActivity(new Intent(Activity_Project_Buy2.this, RechargeActivity.class));
+		else startActivity(new Intent(Activity_Project_Buy2.this, FundCustodianAboutActivity.class));
 	}
 
 	//对话框

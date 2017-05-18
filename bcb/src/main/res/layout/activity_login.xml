@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:paddingBottom="15dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingBottom="15dp">
 
     <ImageView
         android:id="@+id/iv_1"
@@ -104,12 +104,14 @@
                 android:src="@drawable/r_visible_3x"/>
         </RelativeLayout>
 
+        <!--请输入验证码-->
         <RelativeLayout
             android:id="@+id/localcode_layout"
             android:layout_width="fill_parent"
             android:layout_height="50.0dip"
-            android:layout_marginTop="25dip"
-            android:visibility="gone">
+            android:layout_marginBottom="-10dp"
+            android:layout_marginTop="20dip"
+            android:visibility="visible">
 
             <EditText
                 android:id="@+id/vc_code"
@@ -144,6 +146,7 @@
                 android:background="@drawable/write"/>
         </RelativeLayout>
 
+        <!--登录-->
         <Button
             android:id="@+id/login"
             android:layout_width="match_parent"

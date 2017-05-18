@@ -20,6 +20,8 @@ import android.widget.Toast;
 import com.bcb.R;
 import com.bcb.base.Activity_Base;
 import com.bcb.MyApplication;
+import com.bcb.module.login.LoginActivity;
+import com.bcb.module.myinfo.balance.FundCustodianWebActivity;
 import com.bcb.network.BcbJsonRequest;
 import com.bcb.network.BcbRequest;
 import com.bcb.network.UrlsTwo;
@@ -195,7 +197,7 @@ public class Activity_CPXQ extends Activity_Base implements View.OnTouchListener
 	@OnClick({R.id.ll_buy1, R.id.ll_buy2, R.id.more, R.id.buy})
 	public void onClick(View view) {
 		if (MyApplication.saveUserInfo.getAccess_Token() == null && view.getId() != R.id.more) {
-			Activity_Login.launche(ctx);
+			LoginActivity.launche(ctx);
 			return;
 		}
 		switch (view.getId()) {
@@ -316,7 +318,7 @@ public class Activity_CPXQ extends Activity_Base implements View.OnTouchListener
 							result.remove("PostUrl");//移除这个参数
 							//传递的参数
 							String postData = HttpUtils.jsonToStr(result.toString()); //跳转到webview
-							Activity_WebView.launche(ctx, "开启份额锁", postUrl, postData);
+							FundCustodianWebActivity.launche(ctx, "开启份额锁", postUrl, postData);
 						}
 					} catch (Exception e) {
 						LogUtil.d("bqt", "开通自动投标2" + e.getMessage());

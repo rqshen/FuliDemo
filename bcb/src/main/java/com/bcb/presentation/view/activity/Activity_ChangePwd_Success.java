@@ -11,6 +11,7 @@ import com.bcb.R;
 import com.bcb.base.Activity_Base;
 import com.bcb.MyApplication;
 import com.bcb.event.BroadcastEvent;
+import com.bcb.module.login.LoginActivity;
 import com.bcb.utils.MyActivityManager;
 
 import de.greenrobot.event.EventBus;
@@ -73,7 +74,7 @@ public class Activity_ChangePwd_Success extends Activity_Base {
 				if (isLoginPwd) {
 					//如果是忘记密码，则跳回到登陆页面
 					if (isForgetPwd) {
-						Activity_Login.launche(Activity_ChangePwd_Success.this);
+						LoginActivity.launche(Activity_ChangePwd_Success.this);
 						finish();
 					}
 					//否则
@@ -112,7 +113,7 @@ public class Activity_ChangePwd_Success extends Activity_Base {
 		Intent intent = new Intent();		
 		intent.setAction("com.bcb.logout");
 		sendBroadcast(intent);
-		Activity_Login.launche(Activity_ChangePwd_Success.this);
+		LoginActivity.launche(Activity_ChangePwd_Success.this);
 		//通知切换到首页
 		EventBus.getDefault().post(new BroadcastEvent(BroadcastEvent.HOME));
 		finish();

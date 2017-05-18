@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.bcb.MyApplication;
-import com.bcb.presentation.view.activity.Activity_Login;
+import com.bcb.module.login.LoginActivity;
 import com.bcb.presentation.view.activity.Activity_NormalProject_Introduction;
 
 import org.json.JSONException;
@@ -85,7 +85,7 @@ public class PackageUtil {
 		MyApplication.saveUserInfo.removeGesturePassword();
 		MyApplication.saveUserInfo.clear();
 		Intent intent = new Intent();
-		intent.setClass(ctx, Activity_Login.class);
+		intent.setClass(ctx, LoginActivity.class);
 		ctx.startActivity(intent);
 	}
 	

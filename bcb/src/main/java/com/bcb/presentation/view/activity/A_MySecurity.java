@@ -11,6 +11,8 @@ import android.widget.Toast;
 import com.bcb.R;
 import com.bcb.base.Activity_Base;
 import com.bcb.MyApplication;
+import com.bcb.module.login.LoginActivity;
+import com.bcb.module.myinfo.balance.FundCustodianAboutActivity;
 import com.bcb.module.myinfo.financial.financialdetail.projectdetail.ProjectDetailActivity;
 import com.bcb.presentation.view.custom.AlertView.OpenSMRZDialog;
 
@@ -39,7 +41,7 @@ public class A_MySecurity extends Activity_Base {
 
 	@OnClick({R.id.layout_car, R.id.layout_security})
 	public void onClick(View view) {
-		if (MyApplication.saveUserInfo.getAccess_Token() == null) Activity_Login.launche(ctx);
+		if (MyApplication.saveUserInfo.getAccess_Token() == null) LoginActivity.launche(ctx);
 		switch (view.getId()) {
 			case R.id.layout_car:
 				if (MyApplication.mUserDetailInfo == null || TextUtils.isEmpty(MyApplication.mUserDetailInfo.CarInsuranceMyOrderPage)) {
@@ -56,7 +58,7 @@ public class A_MySecurity extends Activity_Base {
 						@Override
 						public void onClick() {
 							super.onClick();
-							startActivity(new Intent(ctx, Activity_Open_Account.class));
+							startActivity(new Intent(ctx, FundCustodianAboutActivity.class));
 						}
 					}.show();
 				} else {
