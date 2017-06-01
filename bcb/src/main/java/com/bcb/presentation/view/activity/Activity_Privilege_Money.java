@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.bcb.R;
 import com.bcb.base.Activity_Base;
 import com.bcb.MyApplication;
+import com.bcb.module.myinfo.balance.trading.TradingRecordActivity;
 import com.bcb.network.BcbJsonRequest;
 import com.bcb.network.BcbRequest;
 import com.bcb.network.BcbRequestQueue;
@@ -27,7 +28,7 @@ import com.bcb.utils.MyListView;
 import com.bcb.utils.PackageUtil;
 import com.bcb.utils.ToastUtil;
 import com.bcb.utils.TokenUtil;
-import com.bcb.module.myinfo.financial.financialdetail.projectdetail.ProjectDetailActivity;
+import com.bcb.module.myinfo.myfinancial.myfinancialstate.myfinanciallist.myfinancialdetail.projectdetail.ProjectDetailActivity;
 import com.bcb.presentation.adapter.PrivilegeMoneyAdapter;
 import com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout;
 
@@ -74,8 +75,8 @@ public class Activity_Privilege_Money extends Activity_Base implements AdapterVi
         total_privilege_money.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ctx, Activity_Money_Flowing_Water.class));
-//                if (MyApplication.mUserDetailInfo != null && MyApplication.mUserDetailInfo.HasOpenCustody) startActivity(new Intent(ctx, Activity_Money_Flowing_Water.class));
+                startActivity(new Intent(ctx, TradingRecordActivity.class));
+//                if (MyApplication.mUserDetailInfo != null && MyApplication.mUserDetailInfo.HasOpenCustody) startActivity(new Intent(ctx, TradingRecordActivity.class));
 //                else startActivity(new Intent(ctx, FundCustodianAboutActivity.class));
             }
         });

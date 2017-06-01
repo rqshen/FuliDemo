@@ -16,7 +16,7 @@ import android.widget.TextView;
 import com.bcb.R;
 import com.bcb.base.BaseActivity;
 import com.bcb.utils.MyActivityManager;
-import com.bcb.presentation.adapter.MyFragmentPagerAdapter;
+import com.bcb.module.discover.financialproduct.adapter.MyFragmentPagerAdapter;
 import com.bcb.presentation.view.fragment._LoanDetailFragment;
 import com.bcb.presentation.view.fragment._RepaymentFragment;
 

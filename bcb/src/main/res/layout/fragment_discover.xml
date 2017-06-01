@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/background"
+              android:orientation="vertical">
+    <!-- 标题 -->
+    <include layout="@layout/frag_base"/>
+
+
+    <ScrollView
+        android:id="@+id/layout_scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/linegray"/>
+
+            <!--福利借款-->
+            <LinearLayout
+                android:id="@+id/ll_jk"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:src="@drawable/find_jk"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <!-- 用户名 -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="福利借款"
+                        android:textColor="#424954"
+                        android:textSize="16sp"/>
+                    <!-- 公司缩写 -->
+                    <TextView
+                        android:id="@+id/jk"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center_vertical"
+                        android:maxLines="1"
+                        android:text="最高放款20万，费率低至0.5%/月"
+                        android:textColor="#999"
+                        android:textSize="@dimen/main_text_small"/>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginLeft="100dp"
+                android:background="@color/linegray"/>
+
+            <!--车险内购-->
+            <LinearLayout
+                android:id="@+id/ll_cx"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:src="@drawable/find_cx"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <!-- 用户名 -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="车险内购"
+                        android:textColor="#424954"
+                        android:textSize="16sp"/>
+                    <!-- 公司缩写 -->
+                    <TextView
+                        android:id="@+id/cx"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center_vertical"
+                        android:maxLines="1"
+                        android:text="支持十余家保险公司在线报价"
+                        android:textColor="#999"
+                        android:textSize="@dimen/main_text_small"/>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginLeft="100dp"
+                android:background="@color/linegray"/>
+
+            <!--投资理财-->
+            <LinearLayout
+                android:id="@+id/ll_lc"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:src="@drawable/find_lc"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <!-- 用户名 -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="投资理财"
+                        android:textColor="#424954"
+                        android:textSize="16sp"/>
+                    <!-- 公司缩写 -->
+                    <TextView
+                        android:id="@+id/lc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center_vertical"
+                        android:maxLines="1"
+                        android:text="10:00发布项目，收益7%~14%"
+                        android:textColor="#999"
+                        android:textSize="@dimen/main_text_small"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/background"
+                android:visibility="gone"/>
+
+            <LinearLayout
+                android:id="@+id/ll_gjj"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:src="@drawable/find_gjj"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <!-- 用户名 -->
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="社保/公积金查询"
+                        android:textColor="#424954"
+                        android:textSize="16sp"/>
+                    <!-- 公司缩写 -->
+                    <TextView
+                        android:id="@+id/gjj"
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center_vertical"
+                        android:maxLines="1"
+                        android:text="广州百财帮网络金融信息服务有限公司"
+                        android:textColor="#999"
+                        android:textSize="@dimen/main_text_small"/>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginLeft="100dp"
+                android:background="@color/linegray"/>
+
+            <LinearLayout
+                android:id="@+id/ll_zx"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:src="@drawable/find_zx"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <!-- 用户名 -->
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="个人征信记录查询"
+                        android:textColor="#424954"
+                        android:textSize="16sp"/>
+                    <!-- 公司缩写 -->
+                    <TextView
+                        android:id="@+id/zx"
+                        android:layout_width="180dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center_vertical"
+                        android:maxLines="1"
+                        android:text="广州百财帮网络金融信息服务有限公司"
+                        android:textColor="#999"
+                        android:textSize="@dimen/main_text_small"/>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/background"/>
+
+            <LinearLayout
+                android:id="@+id/ll_ja"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:src="@drawable/find_ja"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <!-- 用户名 -->
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="聚爱公益"
+                        android:textColor="#424954"
+                        android:textSize="16sp"/>
+                    <!-- 公司缩写 -->
+                    <TextView
+                        android:id="@+id/ja"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center_vertical"
+                        android:maxLines="1"
+                        android:text="聚爱，在一起，就会了不起"
+                        android:textColor="#999"
+                        android:textSize="@dimen/main_text_small"/>
+                </LinearLayout>
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

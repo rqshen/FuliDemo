@@ -7,7 +7,7 @@ import android.widget.Button;
 
 import com.bcb.R;
 import com.bcb.module.login.LoginActivity;
-import com.bcb.presentation.view.activity.Activity_Register_First;
+import com.bcb.module.login.register.RegisterFirstActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -42,7 +42,7 @@ public class DLDialog extends Dialog {
 			@Override
 			public void onClick(View v) {
 				dismiss();
-				Activity_Register_First.launche(getContext());
+				RegisterFirstActivity.launche(getContext());
 			}
 		});
 	}

@@ -26,7 +26,7 @@ import com.bcb.MyApplication;
 import com.bcb.module.login.LoginActivity;
 import com.bcb.module.myinfo.balance.FundCustodianWebActivity;
 import com.bcb.module.myinfo.balance.FundCustodianAboutActivity;
-import com.bcb.module.myinfo.balance.RechargeActivity;
+import com.bcb.module.myinfo.balance.recharge.RechargeActivity;
 import com.bcb.network.BcbJsonRequest;
 import com.bcb.network.BcbRequest;
 import com.bcb.network.BcbRequestTag;

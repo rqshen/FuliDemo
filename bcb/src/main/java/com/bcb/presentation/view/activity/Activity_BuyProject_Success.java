@@ -14,7 +14,7 @@ import com.bcb.network.UrlsOne;
 import com.bcb.data.bean.BuyProjectSuccess;
 import com.bcb.utils.MyActivityManager;
 import com.bcb.utils.ScreenUtils;
-import com.bcb.module.myinfo.financial.financialdetail.projectdetail.ProjectDetailActivity;
+import com.bcb.module.myinfo.myfinancial.myfinancialstate.myfinanciallist.myfinancialdetail.projectdetail.ProjectDetailActivity;
 import com.bcb.presentation.presenter.IPresenter_Base;
 import com.bcb.presentation.presenter.IPresenter_UpdateUserInfoImpl;
 import com.bcb.presentation.view.activity_interface.Interface_Base;

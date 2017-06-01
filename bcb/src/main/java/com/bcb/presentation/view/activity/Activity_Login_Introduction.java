@@ -14,6 +14,7 @@ import com.bcb.R;
 import com.bcb.base.Activity_Base;
 import com.bcb.MyApplication;
 import com.bcb.module.login.LoginActivity;
+import com.bcb.module.login.register.RegisterFirstActivity;
 import com.bcb.utils.MyActivityManager;
 import com.bcb.utils.UmengUtil;
 import com.bcb.presentation.adapter.MyPagerAdapter;
@@ -146,7 +147,7 @@ public class Activity_Login_Introduction extends Activity_Base implements View.O
      * 去注册页面
      **********************/
     private void gotoRegisterPage() {
-        Activity_Register_First.launche(Activity_Login_Introduction.this);
+        RegisterFirstActivity.launche(Activity_Login_Introduction.this);
 //        finish();
     }
 

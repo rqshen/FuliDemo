@@ -74,7 +74,7 @@
             android:name=".base.Activity_Base"
             android:label="@string/app_name"></activity>
         <activity
-            android:name=".module.myinfo.financial.financialdetail.projectdetail.ProjectDetailActivity"
+            android:name=".module.myinfo.myfinancial.myfinancialstate.myfinanciallist.myfinancialdetail.projectdetail.ProjectDetailActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"></activity>
         <activity
@@ -84,19 +84,19 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustPan"></activity>
         <activity
-            android:name=".presentation.view.activity.Activity_Register_Next"
+            android:name=".module.login.register.RegisterNextActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".presentation.view.activity.Activity_Register_First"
+            android:name=".module.login.register.RegisterFirstActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".module.homepager.morefinance.MoreFinanceActivity"
+            android:name=".module.discover.financialproduct.InvestmentFinanceActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".presentation.view.activity.Activity_CPXQ"
+            android:name=".module.discover.financialproduct.wrapprogram.month.WrapProgramIntroductionActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"></activity>
         <activity
@@ -104,15 +104,11 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".presentation.view.activity.Activity_Forget_Pwd"
+            android:name=".module.login.forgetpassword.ForgetPasswordActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".presentation.view.activity.Activity_TZJL"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"></activity>
-        <activity
-            android:name=".module.myinfo.financial.FinancialActivity"
+            android:name=".module.myinfo.myfinancial.MyFinancialActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"></activity>
         <activity
@@ -138,7 +134,7 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".presentation.view.activity.Activity_Withdraw"
+            android:name=".module.myinfo.balance.withdraw.WithdrawActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"></activity>
         <activity
@@ -147,7 +143,7 @@
             android:screenOrientation="portrait"></activity>
         <!-- 交易明细 -->
         <activity
-            android:name=".presentation.view.activity.Activity_Money_Flowing_Water"
+            android:name=".module.myinfo.balance.trading.TradingRecordActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"></activity>
         <!-- 用户流水 -->
@@ -161,7 +157,7 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".module.myinfo.financial.financialdetail.FinancialDetailActivity"
+            android:name=".module.myinfo.myfinancial.myfinancialstate.myfinanciallist.myfinancialdetail.FinancialDetailActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"></activity>
         <activity
@@ -240,15 +236,15 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".presentation.view.activity.Activity_LoanList"
+            android:name=".module.discover.eliteloan.loanlist.LoanListActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".presentation.view.activity.Activity_LoanRequest_Borrow"
+            android:name=".module.discover.eliteloan.loanborrow.LoanRequestBorrowActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".presentation.view.activity.Activity_Join_Company"
+            android:name=".module.myinfo.joincompany.JoinCompanyActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
@@ -277,23 +273,20 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".presentation.view.activity.Activity_NormalProject_Introduction"
+            android:name=".module.discover.financialproduct.normalproject.NormalProjectIntroductionActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
             android:name=".presentation.view.activity.Activity_Project_Buy"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".presentation.view.activity.Activity_ExpiredProject_Introduction"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait" />
+
         <activity
             android:name=".presentation.view.activity.Activity_Select_Material"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".presentation.view.activity.A_Elite_Loan"
+            android:name=".module.discover.eliteloan.EliteLoanActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
@@ -310,7 +303,7 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".presentation.view.activity.Activity_Money_Item_Detail"
+            android:name=".module.myinfo.balance.trading.TradingRecordDetailActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
@@ -331,11 +324,11 @@
             android:screenOrientation="portrait" />
         <!-- 每日福利 -->
         <activity
-            android:name=".presentation.view.activity.Activity_Daily_Welfare"
+            android:name=".module.myinfo.welfare.DailyWelfareActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".presentation.view.activity.Activity_Daily_Welfare_Result"
+            android:name=".module.myinfo.welfare.DailyWelfareResultActivity"
             android:label="@string/app_name"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
@@ -345,7 +338,7 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".presentation.view.activity.Activity_Daily_Welfare_Static"
+            android:name=".module.myinfo.welfare.DailyWelfareStaticActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <!-- 图片浏览 -->
@@ -355,7 +348,7 @@
             android:screenOrientation="portrait" />
         <!-- 聚爱 -->
         <activity
-            android:name=".presentation.view.activity.Activity_Love"
+            android:name=".module.discover.welfare.Activity_Love"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
         <!-- 特权本金 -->
@@ -472,7 +465,7 @@
 
         <activity android:name=".module.myinfo.balance.FundCustodianAboutActivity"></activity>
         <activity android:name=".presentation.view.activity.Activity_TuoGuan_HF"></activity>
-        <activity android:name=".module.myinfo.balance.RechargeActivity"></activity>
+        <activity android:name=".module.myinfo.balance.recharge.RechargeActivity"></activity>
         <activity
             android:name=".presentation.view.activity.Activity_Tips_FaileOrSuccess"
             android:launchMode="singleTask"></activity>
@@ -488,18 +481,16 @@
 
         <activity android:name=".presentation.view.activity.A_AboutSlb"></activity>
         <activity android:name=".presentation.view.activity.A_Slb_List"></activity>
-        <activity android:name=".module.myinfo.financial.financialdetail.backpayment.BackPaymentActivity"></activity>
+        <activity android:name=".module.myinfo.myfinancial.myfinancialstate.myfinanciallist.myfinancialdetail.backpayment.BackPaymentActivity"></activity>
         <activity android:name=".presentation.view.activity.Activity_Charge_Tips"></activity>
         <activity android:name=".presentation.view.activity.Activity_Trading_Cancle"></activity>
         <activity android:name=".presentation.view.activity._Trading_change"></activity>
         <activity android:name=".presentation.view.activity.Activity_Rading_Record"></activity>
         <activity android:name=".presentation.view.activity.Activity_ZRXQ"></activity>
-        <activity android:name=".presentation.view.activity.Activity_Web_Normal"></activity>
         <activity android:name=".presentation.view.activity.A_MySecurity"></activity>
-        <activity android:name=".presentation.view.activity.Activity_WebView_Upload"></activity>
+        <activity android:name=".module.discover.carinsurance.CarInsuranceActivity"></activity>
         <activity android:name=".module.myinfo.balance.BalanceActivity"></activity>
-        <activity android:name=".presentation.view.activity.My_LC"></activity>
-        <activity android:name=".presentation.view.activity.A_ZZC"></activity>
+        <activity android:name=".module.myinfo.totalassets.TotalAssetsActivity"></activity>
     </application>
 
 </manifest>

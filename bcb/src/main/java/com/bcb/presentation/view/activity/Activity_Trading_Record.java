@@ -25,7 +25,7 @@ import com.bcb.utils.MyListView;
 import com.bcb.utils.PackageUtil;
 import com.bcb.utils.ToastUtil;
 import com.bcb.utils.TokenUtil;
-import com.bcb.module.myinfo.financial.financialdetail.FinancialDetailActivity;
+import com.bcb.module.myinfo.myfinancial.myfinancialstate.myfinanciallist.myfinancialdetail.FinancialDetailActivity;
 import com.bcb.presentation.adapter.TradingRecordAdapter;
 import com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout;
 

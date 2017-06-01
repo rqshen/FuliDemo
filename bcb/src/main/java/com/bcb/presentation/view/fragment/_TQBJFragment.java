@@ -29,9 +29,9 @@ import com.bcb.utils.MyListView;
 import com.bcb.utils.PackageUtil;
 import com.bcb.utils.ToastUtil;
 import com.bcb.utils.TokenUtil;
-import com.bcb.module.myinfo.financial.financialdetail.projectdetail.ProjectDetailActivity;
+import com.bcb.module.myinfo.myfinancial.myfinancialstate.myfinanciallist.myfinancialdetail.projectdetail.ProjectDetailActivity;
 import com.bcb.presentation.adapter.PrivilegeMoneyAdapter;
-import com.bcb.presentation.view.activity.Activity_Money_Flowing_Water;
+import com.bcb.module.myinfo.balance.trading.TradingRecordActivity;
 import com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout;
 
 import org.json.JSONArray;
@@ -90,7 +90,7 @@ public class _TQBJFragment extends BaseFragment implements AdapterView.OnItemCli
 		total_privilege_money.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				startActivity(new Intent(ctx, Activity_Money_Flowing_Water.class));
+				startActivity(new Intent(ctx, TradingRecordActivity.class));
 			}
 		});
 		iv_about.setOnClickListener(new View.OnClickListener() {

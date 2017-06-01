@@ -6,7 +6,7 @@ import android.view.View;
 
 import com.bcb.R;
 import com.bcb.base.Activity_Base;
-import com.bcb.module.myinfo.financial.financialdetail.projectdetail.ProjectDetailActivity;
+import com.bcb.module.myinfo.myfinancial.myfinancialstate.myfinanciallist.myfinancialdetail.projectdetail.ProjectDetailActivity;
 import com.bcb.network.UrlsTwo;
 
 /**

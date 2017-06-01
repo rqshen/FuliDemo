@@ -22,13 +22,14 @@ import com.bcb.base.Activity_Base;
 import com.bcb.MyApplication;
 import com.bcb.module.login.LoginActivity;
 import com.bcb.module.myinfo.balance.FundCustodianAboutActivity;
+import com.bcb.module.myinfo.joincompany.JoinCompanyActivity;
 import com.bcb.network.UrlsOne;
 import com.bcb.utils.LogUtil;
 import com.bcb.utils.MyActivityManager;
 import com.bcb.utils.MyTextUtil;
 import com.bcb.utils.ToastUtil;
 import com.bcb.utils.UmengUtil;
-import com.bcb.module.myinfo.financial.financialdetail.projectdetail.ProjectDetailActivity;
+import com.bcb.module.myinfo.myfinancial.myfinancialstate.myfinanciallist.myfinancialdetail.projectdetail.ProjectDetailActivity;
 import com.bcb.presentation.model.IModel_UserAccount;
 import com.bcb.presentation.model.IModel_UserAccountImpl;
 import com.bcb.presentation.presenter.IPresenter_AccountSetting;
@@ -318,7 +319,7 @@ public class Activity_Account_Setting extends Activity_Base implements OnClickLi
 	private void joinCompany() {
 		UmengUtil.eventById(Activity_Account_Setting.this, R.string.self_auth_c2);
 		if (mUserDetailInfo.MyCompany == null) {
-			Activity_Join_Company.launche(Activity_Account_Setting.this);
+			JoinCompanyActivity.launche(Activity_Account_Setting.this);
 		} else if (mUserDetailInfo.MyCompany.Status == 5) {
 			companyDialog();
 		} else if (mUserDetailInfo.MyCompany.Status == 10) {
@@ -347,7 +348,7 @@ public class Activity_Account_Setting extends Activity_Base implements OnClickLi
 			public void onClick(DialogInterface dialog, int which) {
 				alertView.dismiss();
 				alertView = null;
-				Activity_Join_Company.launche(Activity_Account_Setting.this);
+				JoinCompanyActivity.launche(Activity_Account_Setting.this);
 				finish();
 			}
 		});

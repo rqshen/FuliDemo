@@ -27,9 +27,15 @@ import com.bcb.data.bean.MainListBean2;
 import com.bcb.data.bean.StringEventBusBean;
 import com.bcb.data.bean.UserDetailInfo;
 import com.bcb.event.BroadcastEvent;
+import com.bcb.module.discover.carinsurance.CarInsuranceActivity;
+import com.bcb.module.discover.financialproduct.InvestmentFinanceActivity;
+import com.bcb.module.discover.financialproduct.normalproject.NormalProjectIntroductionActivity;
+import com.bcb.module.discover.financialproduct.wrapprogram.month.WrapProgramIntroductionActivity;
 import com.bcb.module.login.LoginActivity;
+import com.bcb.module.login.register.RegisterFirstActivity;
 import com.bcb.module.myinfo.balance.FundCustodianAboutActivity;
-import com.bcb.module.myinfo.financial.financialdetail.projectdetail.ProjectDetailActivity;
+import com.bcb.module.myinfo.myfinancial.myfinancialstate.myfinanciallist.myfinancialdetail.projectdetail.ProjectDetailActivity;
+import com.bcb.module.myinfo.joincompany.JoinCompanyActivity;
 import com.bcb.network.BcbJsonRequest;
 import com.bcb.network.BcbRequest;
 import com.bcb.network.BcbRequestQueue;
@@ -38,13 +44,7 @@ import com.bcb.network.UrlsOne;
 import com.bcb.network.UrlsTwo;
 import com.bcb.presentation.adapter.MainAdapter;
 import com.bcb.presentation.adapter.MainAdapter2;
-import com.bcb.presentation.view.activity.Activity_CPXQ;
-import com.bcb.presentation.view.activity.Activity_Join_Company;
-import com.bcb.presentation.view.activity.Activity_NormalProject_Introduction;
 import com.bcb.presentation.view.activity.Activity_Privilege_Money;
-import com.bcb.presentation.view.activity.Activity_Register_First;
-import com.bcb.presentation.view.activity.Activity_WebView_Upload;
-import com.bcb.module.homepager.morefinance.MoreFinanceActivity;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
 import com.bcb.presentation.view.custom.CustomDialog.BasicDialog;
 import com.bcb.presentation.view.custom.CustomDialog.DialogWidget;
@@ -120,7 +120,7 @@ public class HomePagerFragment extends BaseFragment implements View.OnClickListe
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.frag_main2, container, false);
+        return inflater.inflate(R.layout.fragment_home_pager, container, false);
     }
 
     @Override
@@ -493,7 +493,7 @@ public class HomePagerFragment extends BaseFragment implements View.OnClickListe
                 if (mUserDetailInfo == null || TextUtils.isEmpty(mUserDetailInfo.CarInsuranceIndexPage)) {
                     Toast.makeText(ctx, "您尚未注册", Toast.LENGTH_SHORT).show();
                 } else {
-                    Activity_WebView_Upload.launche(ctx, "车险内购", mUserDetailInfo.CarInsuranceIndexPage);
+                    CarInsuranceActivity.launche(ctx, "车险内购", mUserDetailInfo.CarInsuranceIndexPage);
                 }
                 break;
             case R.id.ll_lb:
@@ -503,10 +503,10 @@ public class HomePagerFragment extends BaseFragment implements View.OnClickListe
                 Toast.makeText(ctx, "敬请期待", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.tv_more://更多理财
-                startActivity(new Intent(ctx, MoreFinanceActivity.class));
+                startActivity(new Intent(ctx, InvestmentFinanceActivity.class));
                 break;
             case R.id.iv_zc:
-                Activity_Register_First.launche(ctx);
+                RegisterFirstActivity.launche(ctx);
                 break;
         }
     }
@@ -520,7 +520,7 @@ public class HomePagerFragment extends BaseFragment implements View.OnClickListe
         else {
             //未申请
             if (mUserDetailInfo.MyCompany == null) {
-                Activity_Join_Company.launche(ctx);
+                JoinCompanyActivity.launche(ctx);
             }
             //审核中
             else if (mUserDetailInfo.MyCompany.Status == 5) {
@@ -541,7 +541,7 @@ public class HomePagerFragment extends BaseFragment implements View.OnClickListe
             public void onClick(DialogInterface dialog, int which) {
                 alertView.dismiss();
                 alertView = null;
-                Activity_Join_Company.launche(ctx);
+                JoinCompanyActivity.launche(ctx);
             }
         });
     }
@@ -572,7 +572,7 @@ public class HomePagerFragment extends BaseFragment implements View.OnClickListe
     //新手标项目点击事件
     class newItemClickListener implements AdapterView.OnItemClickListener {
         public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3) {
-            //            Activity_NormalProject_Introduction.launche(ctx,
+            //            NormalProjectIntroductionActivity.launche(ctx,
             //                    newRecordsBeans.get(position).getPackageId(),
             //                    newRecordsBeans.get(position).getName(),
             //                    newRecordsBeans.get(position).getCouponType());
@@ -584,17 +584,22 @@ public class HomePagerFragment extends BaseFragment implements View.OnClickListe
     public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3) {
         MainListBean2.JpxmBean jpxm = boutqueRecordsBeans.get(position);
         //判断是否属于新标预告的状态，根据状态来判断是否可点击
-        if (jpxm.Status == 10) Toast.makeText(ctx, "Status == 10，不可购买", Toast.LENGTH_SHORT).show();
+        if (jpxm.Status == 10) {
+            Toast.makeText(ctx, "Status == 10，不可购买", Toast.LENGTH_SHORT).show();
+        }
         //0正常标，1转让标，2福鸡包
         int type = 0;//prj_package则为普通标
-        if (jpxm.Type != null && jpxm.Type.equals("claim_convey")) type = 1;//claim_convey则为债权转让标
-        else if (jpxm.Type != null && jpxm.Type.equals("mon_package")) type = 2;//mon_package为福鸡宝
-//		if (type == 1 || type == 2) Activity_CPXQ.launche2(ctx, jpxm.PackageId, type);
-//		else if (jpxm.Old) Activity_NormalProject_Introduction.launche2(ctx, jpxm.PackageId, 0, type);
-//		else Activity_CPXQ.launche2(ctx, jpxm.PackageId, type);
+        if (jpxm.Type != null && jpxm.Type.equals("claim_convey")) {
+            type = 1;//claim_convey则为债权转让标
+        } else if (jpxm.Type != null && jpxm.Type.equals("mon_package")) {
+            type = 2;//mon_package为福鸡宝
+        }
 
-        if (type == 2) Activity_CPXQ.launche2(ctx, jpxm.PackageId, type);
-        else Activity_NormalProject_Introduction.launche2(ctx, jpxm.PackageId, 0, type);
+        if (type == 2) {
+            WrapProgramIntroductionActivity.launche2(ctx, jpxm.PackageId, type);
+        } else {
+            NormalProjectIntroductionActivity.launche2(ctx, jpxm.PackageId, 0, type);
+        }
     }
 
     //注册广播，用于接收广播之后更新精品项目的数据

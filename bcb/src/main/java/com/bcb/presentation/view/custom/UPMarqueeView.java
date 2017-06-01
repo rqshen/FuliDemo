@@ -10,7 +10,7 @@ import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 import com.bcb.R;
-import com.bcb.module.myinfo.financial.financialdetail.projectdetail.ProjectDetailActivity;
+import com.bcb.module.myinfo.myfinancial.myfinancialstate.myfinanciallist.myfinancialdetail.projectdetail.ProjectDetailActivity;
 
 import java.util.List;
 

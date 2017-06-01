@@ -37,7 +37,7 @@ import com.bcb.network.UrlsOne;
 import com.bcb.utils.LogUtil;
 import com.bcb.utils.MyActivityManager;
 import com.bcb.utils.TokenUtil;
-import com.bcb.presentation.adapter.MyFragmentPagerAdapter;
+import com.bcb.module.discover.financialproduct.adapter.MyFragmentPagerAdapter;
 import com.bcb.presentation.view.fragment._Coupon2Fragment;
 import com.bcb.presentation.view.fragment._TQBJFragment;
 

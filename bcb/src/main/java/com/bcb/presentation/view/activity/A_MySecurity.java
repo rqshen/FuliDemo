@@ -13,7 +13,7 @@ import com.bcb.base.Activity_Base;
 import com.bcb.MyApplication;
 import com.bcb.module.login.LoginActivity;
 import com.bcb.module.myinfo.balance.FundCustodianAboutActivity;
-import com.bcb.module.myinfo.financial.financialdetail.projectdetail.ProjectDetailActivity;
+import com.bcb.module.myinfo.myfinancial.myfinancialstate.myfinanciallist.myfinancialdetail.projectdetail.ProjectDetailActivity;
 import com.bcb.presentation.view.custom.AlertView.OpenSMRZDialog;
 
 import butterknife.BindView;

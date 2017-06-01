@@ -37,7 +37,7 @@ import com.bcb.utils.ToastUtil;
 import com.bcb.utils.TokenUtil;
 import com.bcb.utils.UmengUtil;
 import com.bcb.presentation.adapter.ProductAdapter;
-import com.bcb.presentation.view.activity.Activity_NormalProject_Introduction;
+import com.bcb.module.discover.financialproduct.normalproject.NormalProjectIntroductionActivity;
 import com.bcb.presentation.view.activity.Activity_Station_Change;
 import com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout;
 
@@ -283,7 +283,7 @@ public class _ProductFragment extends BaseFragment implements OnClickListener {
 			int type = 0;
 			if (recordsBeans.get(position).Type.equals("claim_convey")) type = 1;
 			else if (recordsBeans.get(position).Type.equals("mon_package")) type = 2;
-			Activity_NormalProject_Introduction.launche2(ctx, recordsBeans.get(position).PackageId, 0, type);//标类型
+			NormalProjectIntroductionActivity.launche2(ctx, recordsBeans.get(position).PackageId, 0, type);//标类型
 		}
 	}
 

@@ -14,6 +14,7 @@ import com.bcb.R;
 import com.bcb.base.Activity_Base;
 import com.bcb.MyApplication;
 import com.bcb.event.BroadcastEvent;
+import com.bcb.module.discover.eliteloan.loanlist.LoanListActivity;
 import com.bcb.network.BcbJsonRequest;
 import com.bcb.network.BcbRequest;
 import com.bcb.network.BcbRequestTag;
@@ -242,7 +243,7 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
 						break;
 					//借款
 					case JK_SUCCESS://返回借款列表
-						startActivity(new Intent(Activity_Tips_FaileOrSuccess.this, Activity_LoanList.class));
+						startActivity(new Intent(Activity_Tips_FaileOrSuccess.this, LoanListActivity.class));
 						finish();
 						break;
 					//客服
@@ -255,7 +256,7 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
 			case R.id.tv_next://下一步
 				switch (type) {
 					case EMAIL_SUCCESS://借款列表
-						startActivity(new Intent(this, Activity_LoanList.class));//A_Elite_Loan
+						startActivity(new Intent(this, LoanListActivity.class));//EliteLoanActivity
 						EventBus.getDefault().post(new StringEventBusBean("LoanFinish"));
 						finish();
 						break;

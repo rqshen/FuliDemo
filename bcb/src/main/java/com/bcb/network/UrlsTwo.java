@@ -81,14 +81,12 @@ public class UrlsTwo {
     //关于汇付
     public static String UrlAboutHF = hostStatic + "/static/HftxIntroduce.html";//http://ttwap.100cb.cn/
 
-    //转让协议http://192.168.20.14/static/CreditAgreement.html
-    public static String ZRXY = hostStatic + "/static/CreditAgreement.html";
     //解绑
     public static String UrlUnBand = "https://c.chinapnr.com/p2puser/";
     //解绑说明
-    public static String UrlUnBandExplain = hostStatic +"/static/UnbindExplain.html";
+    public static String UrlUnBandExplain = hostStatic + "/static/UnbindExplain.html";
     //接入证明
-    public static String UrlZM = hostStatic +"/static/hftgzm.html";
+    public static String UrlZM = hostStatic + "/static/hftgzm.html";
 
 
 }

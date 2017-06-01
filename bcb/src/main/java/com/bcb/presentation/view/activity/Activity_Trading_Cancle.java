@@ -16,14 +16,14 @@ import android.widget.Toast;
 import com.bcb.R;
 import com.bcb.base.Activity_Base;
 import com.bcb.MyApplication;
+import com.bcb.constant.H5UrlConstant;
 import com.bcb.network.BcbJsonRequest;
 import com.bcb.network.BcbRequest;
 import com.bcb.network.UrlsOne;
-import com.bcb.network.UrlsTwo;
 import com.bcb.data.bean.ClaimConveyBeanBQT;
 import com.bcb.utils.LogUtil;
 import com.bcb.utils.TokenUtil;
-import com.bcb.module.myinfo.financial.financialdetail.projectdetail.ProjectDetailActivity;
+import com.bcb.module.myinfo.myfinancial.myfinancialstate.myfinanciallist.myfinancialdetail.projectdetail.ProjectDetailActivity;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
 
 import org.json.JSONException;
@@ -67,7 +67,7 @@ public class Activity_Trading_Cancle extends Activity_Base {
 		tv_text.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				ProjectDetailActivity.launche(Activity_Trading_Cancle.this, "转让协议", UrlsTwo.ZRXY);
+				ProjectDetailActivity.launche(Activity_Trading_Cancle.this, "转让协议", H5UrlConstant.ZRXY);
 			}
 		});
 		setLeftTitleVisible(true);

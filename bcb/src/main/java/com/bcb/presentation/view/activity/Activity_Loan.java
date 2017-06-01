@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.bcb.R;
 import com.bcb.base.Activity_Base;
+import com.bcb.module.discover.eliteloan.loanlist.LoanListActivity;
 import com.bcb.utils.MyActivityManager;
 import com.bcb.utils.UmengUtil;
 
@@ -61,7 +62,7 @@ public class Activity_Loan extends Activity_Base implements View.OnClickListener
     //借款列表页
     private void gotoListPage() {
         UmengUtil.eventById(Activity_Loan.this, R.string.loan_my);
-        Intent listIntent = new Intent(Activity_Loan.this, Activity_LoanList.class);
+        Intent listIntent = new Intent(Activity_Loan.this, LoanListActivity.class);
         startActivity(listIntent);
     }
 

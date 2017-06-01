@@ -13,7 +13,9 @@ import android.widget.TextView;
 import com.bcb.R;
 import com.bcb.base.Activity_Base;
 import com.bcb.MyApplication;
+import com.bcb.module.discover.eliteloan.loanborrow.LoanRequestBorrowActivity;
 import com.bcb.module.login.LoginActivity;
+import com.bcb.module.myinfo.joincompany.JoinCompanyActivity;
 import com.bcb.network.BcbJsonRequest;
 import com.bcb.network.BcbRequest;
 import com.bcb.network.BcbRequestQueue;
@@ -25,7 +27,7 @@ import com.bcb.utils.MyActivityManager;
 import com.bcb.utils.ToastUtil;
 import com.bcb.utils.TokenUtil;
 import com.bcb.utils.UmengUtil;
-import com.bcb.module.myinfo.financial.financialdetail.projectdetail.ProjectDetailActivity;
+import com.bcb.module.myinfo.myfinancial.myfinancialstate.myfinanciallist.myfinancialdetail.projectdetail.ProjectDetailActivity;
 import com.bcb.presentation.view.custom.CustomDialog.DialogWidget;
 import com.bcb.presentation.view.custom.CustomDialog.IdentifyAlertView;
 
@@ -215,7 +217,7 @@ public class Activity_Loan_Introduction extends Activity_Base implements View.On
 
     /************************ 跳转到加入公司的列表界面 ********************************/
     private void gotoJoinCompanyPage() {
-        Intent newIntent = new Intent(Activity_Loan_Introduction.this, Activity_Join_Company.class);
+        Intent newIntent = new Intent(Activity_Loan_Introduction.this, JoinCompanyActivity.class);
         startActivityForResult(newIntent, 100);
     }
 
@@ -248,7 +250,7 @@ public class Activity_Loan_Introduction extends Activity_Base implements View.On
                         LoanRequestInfoBean loanRequestInfoBean = MyApplication.mGson.fromJson(response.getString("result"), LoanRequestInfoBean.class);
                         UmengUtil.eventById(Activity_Loan_Introduction.this, R.string.loan_blank);
                         //跳转借款页面
-                        Intent intent = new Intent(Activity_Loan_Introduction.this, Activity_LoanRequest_Borrow.class);
+                        Intent intent = new Intent(Activity_Loan_Introduction.this, LoanRequestBorrowActivity.class);
                         intent.putExtra("loanRequestInfoBean", loanRequestInfoBean);
                         intent.putExtra("loanRequestInfoString", response.getString("result"));
                         startActivity(intent);

@@ -29,7 +29,7 @@ import com.bcb.utils.PackageUtil;
 import com.bcb.utils.ScreenUtils;
 import com.bcb.utils.ToastUtil;
 import com.bcb.utils.TokenUtil;
-import com.bcb.module.myinfo.financial.financialdetail.projectdetail.ProjectDetailActivity;
+import com.bcb.module.myinfo.myfinancial.myfinancialstate.myfinanciallist.myfinancialdetail.projectdetail.ProjectDetailActivity;
 
 import org.json.JSONObject;
 

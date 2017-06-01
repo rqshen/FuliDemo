@@ -13,7 +13,8 @@ import com.bcb.R;
 import com.bcb.base.Activity_Base;
 import com.bcb.MyApplication;
 import com.bcb.module.myinfo.balance.FundCustodianWebActivity;
-import com.bcb.module.myinfo.balance.RechargeActivity;
+import com.bcb.module.myinfo.balance.recharge.RechargeActivity;
+import com.bcb.module.myinfo.balance.withdraw.WithdrawActivity;
 import com.bcb.network.BcbJsonRequest;
 import com.bcb.network.BcbRequest;
 import com.bcb.network.UrlsTwo;
@@ -22,7 +23,7 @@ import com.bcb.utils.HttpUtils;
 import com.bcb.utils.LogUtil;
 import com.bcb.utils.PackageUtil;
 import com.bcb.utils.TokenUtil;
-import com.bcb.module.myinfo.financial.financialdetail.projectdetail.ProjectDetailActivity;
+import com.bcb.module.myinfo.myfinancial.myfinancialstate.myfinanciallist.myfinancialdetail.projectdetail.ProjectDetailActivity;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
 
 import org.json.JSONObject;
@@ -138,7 +139,7 @@ public class Activity_TuoGuan_HF extends Activity_Base implements View.OnClickLi
 				}
 			});
 		} else//跳到提现页面
-			startActivity(new Intent(ctx, Activity_Withdraw.class));
+			startActivity(new Intent(ctx, WithdrawActivity.class));
 	}
 
 	//提示对话框

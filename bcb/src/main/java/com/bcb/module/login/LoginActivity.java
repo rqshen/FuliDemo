@@ -23,8 +23,8 @@ import com.bcb.base.Activity_Base;
 import com.bcb.MyApplication;
 import com.bcb.event.BroadcastEvent;
 import com.bcb.data.bean.WelfareBean;
-import com.bcb.presentation.view.activity.Activity_Forget_Pwd;
-import com.bcb.presentation.view.activity.Activity_Register_First;
+import com.bcb.module.login.forgetpassword.ForgetPasswordActivity;
+import com.bcb.module.login.register.RegisterFirstActivity;
 import com.bcb.utils.DbUtil;
 import com.bcb.utils.LoanPersonalConfigUtil;
 import com.bcb.utils.LogUtil;
@@ -266,12 +266,12 @@ public class LoginActivity extends Activity_Base implements Interface_Base, OnCl
 			//忘记密码
 			case R.id.layout_foget:
 				UmengUtil.eventById(LoginActivity.this, R.string.login_key_f);
-				Activity_Forget_Pwd.launche(LoginActivity.this, true);
+				ForgetPasswordActivity.launche(LoginActivity.this, true);
 				break;
 
 			//客服
 			case R.id.customer_service:
-				Activity_Register_First.launche(LoginActivity.this);
+				RegisterFirstActivity.launche(LoginActivity.this);
 				break;
 		}
 	}

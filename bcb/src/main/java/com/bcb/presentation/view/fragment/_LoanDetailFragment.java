@@ -27,7 +27,7 @@ import android.widget.TextView;
 import com.bcb.R;
 import com.bcb.base.BaseFragment;
 import com.bcb.MyApplication;
-import com.bcb.module.myinfo.balance.RechargeActivity;
+import com.bcb.module.myinfo.balance.recharge.RechargeActivity;
 import com.bcb.network.BcbJsonRequest;
 import com.bcb.network.BcbRequest;
 import com.bcb.network.BcbRequestQueue;

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/background"
     android:orientation="vertical"
-    tools:context="com.bcb.presentation.view.activity.Activity_Money_Item_Detail">
+    tools:context="com.bcb.module.myinfo.balance.trading.TradingRecordDetailActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
