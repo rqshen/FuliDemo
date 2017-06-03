@@ -8,7 +8,6 @@ public class UrlsOne {
 	public static final String host_v2 = MyConstants.getHost();//为了区分
 
 	// 登录
-	//	public static final String UserDoLogin = host + "/api/v1.0/866ed3ee0260";
 	public static final String UserDoLogin = host_v2 + "/api/v2.0/a64200d31c1b";//2016-7-25更改
 
 	//创建邮箱验证码
@@ -23,52 +22,30 @@ public class UrlsOne {
 	public static final String EDITMYBORROWEREMAIL = host + "/api/v2.0/88c99ef28230";
 
 	// 用户注册
-	//	public static final String UserDoRegister = host + "/api/v1.0/e81bf6e10a18";
 	public static final String UserDoRegister = host_v2 + "/api/v2.0/a64200d30c27";//2016-7-25更改
 
 	// 首页广告轮播
-//	public static final String MainpageAdRotator = host + "/api/v1.5.2/01170ac7916f";
 	public static final String MainpageAdRotator = host + "/api/v2.5/a71400f186e3 ";
 
-	//首页新手体验标
-	public static final String MainpageExpired = host + "/api/v1.0/bd5f57bdbc8b";
-
-	//首页精品项目
-	public static final String MainpageBoutique = host + "/api/v1.0/a59800f24a15";
-
 	//产品项目列表
-	//    public static final String MainpageProduct = host + "/api/v1.0/60bb55e23716";
 	public static final String MainpageProduct = host + "/api/v2.0/a64b0102ccf0";
 
 	// 项目汇总
-	public static final String CompanyProduct = host + "/api/v1.0/ae72adb06802";
 
 	// 首页驿站切换-热门驿站
 	public static final String MainpageHotStation = host + "/api/v1.0/7469e8252732";
 
-	// 首页驿站切换-城市驿站
-	public static final String MainpageCityStation = host + "/api/v1.0/7469e8252732";
-
-	// 资金流水
-	public static final String MoneyFlowingWater = host + "/api/v1.0/a5330105d6c3";
-
 	// 投资记录
-	//    public static final String TradingRecord = host + "/api/v1.0/cc738a2de840";
 	public static final String TradingRecord = host + "/api/v2.0/a65000ed8db8";
 
 	// 交易明细
-	//    public static final String MoneyDetail = host + "/api/v1.0/8152ae00741b";
 	public static final String MoneyDetail = host + "/api/v2.0/a64e011c4b73";
 
 	//资金流水详情
-	//    public static final String MoneyItemDetail = host + "/api/v1.3.4/a5da0116755c";
 	public static final String MoneyItemDetail = host + "/api/v2.0/a64e011e0590";
 
 	// 投资详情
-	//    public static final String TradingRecordDetail = host + "/api/v1.0/e2c1df573f9f";
-	public static final String TradingRecordDetail = host + "/api/v2.0/a65000b30f36";
 	public static final String ClaimConveyDate = host + "/api/v2.0/a69000af0cfe";//获取债权转让变更记录
-
 
 
 	public static final String REQUESTZR = host + "/api/v2.0/a69000ac1b78";//申请债权转让
@@ -150,9 +127,6 @@ public class UrlsOne {
 	//认证
 	public static final String Authentication = host + "/api/v1.0/312ee12de4a6";
 
-	//公司列表
-	public static final String CompanyList = host + "/api/v1.0/04c177d3d36d";
-
 	//加入公司
 	public static final String JoinCompany = host + "/api/v1.3.4/372bd4be30ad";
 
@@ -172,22 +146,18 @@ public class UrlsOne {
 	public static final String MyLoanListMessage = host + "/api/v1.2/8be49b965b27";
 
 	//借款详情
-	//    public static final String MyLoanItemDetailMessage = host + "/api/v1.3.4/db3a4dd4fe70";
 	public static final String MyLoanItemDetailMessage = host + "/api/v2.0/a64c00c6ce76";
 
 	//上传借款补充材料
 	public static final String Loan_Supplementary_Material = host + "/api/v1.3.4/a61000b6a80a";
 
 	//还款列表
-	//    public static final String MyLoanRepaymentMessage = host + "/api/v1.3.4/82dcb6a645aa";
 	public static final String MyLoanRepaymentMessage = host + "/api/v2.0/a64c00c6c856";
 
 	//订单状态查询
 	public static final String RechargeOrderStatus = host + "/api/v1.0/8b441a56e2e1";
 
 	//首页标的数据(v1.3.4)
-	//    public static final String MainFragmentListData = host + "/api/v1.3.4/af3af1b08768";
-	public static final String MainFragmentListData = host + "/api/v2.0/a64b00ed48a0";
 	public static final String MainFragmentListData2 = host + "/api/v2.5/a71b0110b729";
 
 	//预约新标预告
@@ -199,8 +169,6 @@ public class UrlsOne {
 	//可用提现券信息
 	public static final String WithdrawCouponInfo = host + "/api/v1.3/d3625b30882b";
 
-	// 用户钱包信息
-	//    public static final String UserWalletMessage = host + "/api/v1.0/e7401af956b5";
 	public static final String UserWalletMessage = host_v2 + "/api/v2.0/a64701348128";//2016-7-25更改
 
 	//是否升级
@@ -222,23 +190,16 @@ public class UrlsOne {
 	//聚爱项目列表
 	public static final String LoveProduct = host + "/api/v1.6/a6240133fbae";
 
-	// 安全保障WebView
-	public static final String SecureWebView = "http://wap.100cb.cn/static/security.html";
-	// 理财学院WebView
-	//    public static final String CollegeWebView = "http://fulijinrong.kuaizhan.com/58/36/p32451810370302";
-	public static final String CollegeWebView = "http://fulijinrong.kuaizhan.com";
 	//一分钟了解福利金融
-	public static final String AboutFuliJingRong = "http://wap.flh001.com/static/1minute/index.html";
+	public static final String AboutFuliJingRong = "http://wap.fulijr.com/static/1minute/index.html";
 	//如何获得补贴
-	public static final String How2GetSubsidy = "http://wap.flh001.com/Loan/CouponActivity/index";
+	public static final String How2GetSubsidy = "http://wap.fulijr.com/Loan/CouponActivity/index";
 	//起息第一时间通知
-	public static final String WxBindIndex = "http://wap.flh001.com/account/wxbindindex";
+	public static final String WxBindIndex = "http://wap.fulijr.com/account/wxbindindex";
 	//借款服务协议
-	public static final String LoanProtocol = "http://wap.flh001.com/static/loan-agreement.html";
+	public static final String LoanProtocol = "http://wap.fulijr.com/static/loan-agreement.html";
 	//关于福利金融
 	public static final String AboutConpany = "http://cnt.flh001.com/2015/12/08/mabout/";
-	//体验标说明
-	public static final String ExpiredProjectIntroduction = "http://cnt.flh001.com/2016/01/27/tiyanbiaoshuoming/";
 	//我能贷多少
 	public static final String LoanCalculated = "http://wap.100cb.cn/static/LoanCalculated.html";
 	//利息怎么算

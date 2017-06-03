@@ -13,10 +13,10 @@ import com.android.volley.Response.ErrorListener;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.bcb.MyApplication;
+import com.bcb.constant.MyConstants;
 import com.bcb.utils.DESUtil;
 import com.bcb.utils.IpUtils;
 import com.bcb.utils.LogUtil;
-import com.bcb.constant.MyConstants;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -190,10 +190,12 @@ public abstract class BcbRequest<T> extends Request<T> {
     @Override
     public Map<String, String> getHeaders() throws AuthFailureError {
         Map<String, String> headers = new HashMap<String, String>();
+
+        // TODO: 2017/6/2
+//        mEncodeToken = "7Qezsy+8/dGhJKFJZdfFao+TH1m4UQmMrp9UJn5H1tyubivXyCh2Lm7+HJbBouzo343/c8ea50FMmiyTU3Z5Lg==";
         if (mEncodeToken != null) {
             headers.put("access-token", mEncodeToken);
         }
-//        headers.put("version", android.os.Build.VERSION.RELEASE);
 
         try {
             String pkName = MyApplication.instance.getPackageName();
@@ -205,17 +207,6 @@ public abstract class BcbRequest<T> extends Request<T> {
         headers.put("platform", "2");
         headers.put("ip", IpUtils.getIpAddressString());
         return headers;
-//        if (mEncodeToken != null) {
-//            Map<String, String> headers = new HashMap<String, String>();
-//            headers.put("access-token",mEncodeToken);
-//            if (isAddDevInfo){
-//                headers.put("version", android.os.Build.VERSION.RELEASE);
-//                headers.put("platform", "android");
-//            }
-//            return headers;
-//        } else {
-//            return super.getHeaders();
-//        }
     }
 
     /**

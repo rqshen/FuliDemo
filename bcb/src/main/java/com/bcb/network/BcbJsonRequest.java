@@ -1,15 +1,18 @@
 package com.bcb.network;
 
 import android.util.Base64;
+
 import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;
 import com.android.volley.Response;
 import com.android.volley.toolbox.HttpHeaderParser;
+import com.bcb.constant.MyConstants;
 import com.bcb.utils.DESUtil;
 import com.bcb.utils.LogUtil;
-import com.bcb.constant.MyConstants;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.UnsupportedEncodingException;
 
 /**
@@ -21,10 +24,11 @@ public class BcbJsonRequest extends BcbRequest<JSONObject> {
 
     /**
      * 构造函数，默认为POST请求
-     * @param url           请求接口
-     * @param jsonObject    JSONObject对象
-     * @param encodeToken   Token
-     * @param callBack      请求回调
+     *
+     * @param url         请求接口
+     * @param jsonObject  JSONObject对象
+     * @param encodeToken Token
+     * @param callBack    请求回调
      */
     public BcbJsonRequest(String url, JSONObject jsonObject, String encodeToken, BcbCallBack<JSONObject> callBack) {
         this(Method.POST, url, jsonObject, encodeToken, callBack);
@@ -32,11 +36,12 @@ public class BcbJsonRequest extends BcbRequest<JSONObject> {
 
     /**
      * 构造函数，默认为POST请求
-     * @param url           请求接口
-     * @param jsonObject    JSONObject对象
-     * @param encodeToken   Token
-     * @param index         位置参数
-     * @param callBack      请求回调
+     *
+     * @param url         请求接口
+     * @param jsonObject  JSONObject对象
+     * @param encodeToken Token
+     * @param index       位置参数
+     * @param callBack    请求回调
      */
     public BcbJsonRequest(String url, JSONObject jsonObject, String encodeToken, int index, BcbIndexCallBack<JSONObject> callBack) {
         this(Method.POST, url, jsonObject, encodeToken, index, callBack);
@@ -44,11 +49,12 @@ public class BcbJsonRequest extends BcbRequest<JSONObject> {
 
     /**
      * 构造函数
-     * @param url           请求接口
-     * @param jsonObject    JSONObject对象
-     * @param encodeToken   Token
-     * @param isAddDevInfo  是否添加设备信息
-     * @param callBack      请求回调
+     *
+     * @param url          请求接口
+     * @param jsonObject   JSONObject对象
+     * @param encodeToken  Token
+     * @param isAddDevInfo 是否添加设备信息
+     * @param callBack     请求回调
      */
     public BcbJsonRequest(String url, JSONObject jsonObject, String encodeToken, boolean isAddDevInfo, BcbCallBack<JSONObject> callBack) {
         super(Method.POST, url, jsonObject == null ? "" : jsonObject.toString(), encodeToken, isAddDevInfo, callBack);
@@ -57,11 +63,12 @@ public class BcbJsonRequest extends BcbRequest<JSONObject> {
 
     /**
      * 构造函数
-     * @param method        请求方式，GET ？ POST 还是其他
-     * @param url           请求接口
-     * @param jsonObject    JSONObject对象
-     * @param encodeToken   Token
-     * @param callBack      请求回调
+     *
+     * @param method      请求方式，GET ？ POST 还是其他
+     * @param url         请求接口
+     * @param jsonObject  JSONObject对象
+     * @param encodeToken Token
+     * @param callBack    请求回调
      */
     public BcbJsonRequest(int method, String url, JSONObject jsonObject, String encodeToken, BcbCallBack<JSONObject> callBack) {
         super(method, url, jsonObject == null ? "" : jsonObject.toString(), encodeToken, callBack);
@@ -70,12 +77,13 @@ public class BcbJsonRequest extends BcbRequest<JSONObject> {
 
     /**
      * 构造函数
-     * @param method        请求方式，GET ？ POST 还是其他
-     * @param url           请求接口
-     * @param jsonObject    JSONObject对象
-     * @param encodeToken   Token
-     * @param index         位置参数
-     * @param callBack      请求回调
+     *
+     * @param method      请求方式，GET ？ POST 还是其他
+     * @param url         请求接口
+     * @param jsonObject  JSONObject对象
+     * @param encodeToken Token
+     * @param index       位置参数
+     * @param callBack    请求回调
      */
     public BcbJsonRequest(int method, String url, JSONObject jsonObject, String encodeToken, int index, BcbIndexCallBack<JSONObject> callBack) {
         super(method, url, jsonObject == null ? "" : jsonObject.toString(), encodeToken, index, callBack);
@@ -85,16 +93,11 @@ public class BcbJsonRequest extends BcbRequest<JSONObject> {
     @Override
     protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
         try {
-
             //返回不成功，则提示是否成功
             if (response.statusCode != 200) {
                 LogUtil.d("error", "返回出错，状态码为：" + response.statusCode + " 请求链接：" + getUrl());
-//                for (String key : response.headers.keySet()){
-//                    LogUtil.d("error", "key：" + key + " value:" + response.headers.get(key));
-//                }
                 return Response.error(new ParseError());
             }
-
             //获取解密的key
             String key;
             if (null == mEncodeToken) {
@@ -103,7 +106,6 @@ public class BcbJsonRequest extends BcbRequest<JSONObject> {
             } else {
                 key = DESUtil.decodeKey(mEncodeToken);
             }
-
             //解密数据
             String result = new String(response.data);
             byte[] baseDecodeResult = Base64.decode(result, Base64.DEFAULT);

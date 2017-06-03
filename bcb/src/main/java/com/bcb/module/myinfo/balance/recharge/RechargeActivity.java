@@ -6,10 +6,10 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +28,7 @@ import com.bcb.utils.BankLogo;
 import com.bcb.utils.HttpUtils;
 import com.bcb.utils.LogUtil;
 import com.bcb.utils.PackageUtil;
+import com.bcb.utils.ToastUtils;
 import com.bcb.utils.TokenUtil;
 import com.google.gson.reflect.TypeToken;
 
@@ -43,16 +44,14 @@ import java.util.List;
  */
 public class RechargeActivity extends Activity_Base implements View.OnClickListener, TextWatcher {
     public static float ADD_MONERY = 0;
-    TextView tv_left_monery, tv_next, tv_unband;
+    TextView tv_left_monery, tv_next;
     EditText et_add_monery;
     ArrayList<BanksBean> list;
 
-    TextView bank_card_text, tv_xianer, bank_name_text;
-    //	TextView tv_no, tv_tip_bottom;
-    RelativeLayout layout_bank_card;
-    LinearLayout ll_card;
-    //	LinearLayout  ll_tips;
+    TextView bank_card_text, tv_xianer;
+    LinearLayout layout_bank_card;
     ImageView bank_icon, iv_clear;
+    CheckBox checkbox_agress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,9 +60,7 @@ public class RechargeActivity extends Activity_Base implements View.OnClickListe
         initTitle();
         findViews();
         initBankCard();
-        //		initTv_tip_bottom();
         iv_clear.setOnClickListener(this);
-        tv_unband.setOnClickListener(this);
         tv_next.setOnClickListener(this);
         et_add_monery.addTextChangedListener(this);
         requestBankList();
@@ -79,19 +76,13 @@ public class RechargeActivity extends Activity_Base implements View.OnClickListe
     private void findViews() {
         tv_left_monery = (TextView) findViewById(R.id.tv_left_monery);
         tv_next = (TextView) findViewById(R.id.tv_next);
-        //		tv_tip_bottom = (TextView) findViewById(R.id.tv_tip_bottom);
-        tv_unband = (TextView) findViewById(R.id.tv_unband);
         iv_clear = (ImageView) findViewById(R.id.iv_clear);
-
-        layout_bank_card = (RelativeLayout) findViewById(R.id.layout_bank_card);
-        ll_card = (LinearLayout) findViewById(R.id.ll_card);
-        //		ll_tips = (LinearLayout) findViewById(R.id.ll_tips);
+        layout_bank_card = (LinearLayout) findViewById(R.id.layout_bank_card);
         bank_card_text = (TextView) findViewById(R.id.bank_card_text);
-        bank_name_text = (TextView) findViewById(R.id.bank_name_text);
         tv_xianer = (TextView) findViewById(R.id.tv_xianer);
-        //		tv_no = (TextView) findViewById(R.id.tv_no);
         bank_icon = (ImageView) findViewById(R.id.bank_icon);
         et_add_monery = (EditText) findViewById(R.id.et_add_monery);
+        checkbox_agress = (CheckBox) findViewById(R.id.checkbox_agress);
     }
 
     private void initBankCard() {
@@ -99,25 +90,18 @@ public class RechargeActivity extends Activity_Base implements View.OnClickListe
             tv_left_monery.setText(String.format("%.2f", MyApplication.mUserWallet.getBalanceAmount()) + "元");
         //【解绑说明】已绑定银行卡账号，且是快捷支付
         if (MyApplication.mUserDetailInfo.BankCard != null && MyApplication.mUserDetailInfo.BankCard.IsQPCard) {
-            //bank_card_text.setText(MyTextUtil.delBankNum(MyApplication.mUserDetailInfo.BankCard.getCardNumber()));
             String cardNumber = MyApplication.mUserDetailInfo.BankCard.CardNumber;
             bank_card_text.setText("尾号" + cardNumber.substring(cardNumber.length() - 4));
             //设置银行卡logo
             BankLogo bankLogo = new BankLogo();
             bank_icon.setBackgroundResource(bankLogo.getDrawableBankLogo(MyApplication.mUserDetailInfo.BankCard.BankCode));
-            bank_name_text.setText(MyApplication.mUserDetailInfo.BankCard.BankName);
             setRightTitleValue("解绑说明", new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     ProjectDetailActivity.launcheForResult(RechargeActivity.this, "解绑说明", UrlsTwo.UrlUnBandExplain, 2);
                 }
             });
-
-            //			tv_no.setVisibility(View.GONE);
             layout_bank_card.setVisibility(View.VISIBLE);//银行卡号
-            ll_card.setVisibility(View.VISIBLE);//该卡本次最多可充值1000元，每日最多2000元
-            //			ll_tips.setVisibility(View.VISIBLE);//福利金融由央行监管的****进行资金托管
-            //【限额说明】未绑定
         } else {
             setRightTitleValue("限额说明", new View.OnClickListener() {
                 @Override
@@ -130,32 +114,9 @@ public class RechargeActivity extends Activity_Base implements View.OnClickListe
                         Toast.makeText(RechargeActivity.this, "查询限额信息失败", Toast.LENGTH_SHORT).show();
                 }
             });
-            //			tv_no.setVisibility(View.VISIBLE);//快捷支付银行卡将作为本账户唯一提现卡
-            layout_bank_card.setVisibility(View.GONE);
-            ll_card.setVisibility(View.GONE);
-            //			ll_tips.setVisibility(View.GONE);
+            layout_bank_card.setVisibility(View.INVISIBLE);
         }
     }
-
-    //	private void initTv_tip_bottom() {
-    //		SpannableString mSpannableString = new SpannableString("点击联系客服");
-    //		ForegroundColorSpan colorSpan = new ForegroundColorSpan(0xff3399ff);
-    //		mSpannableString.setSpan(colorSpan, 0, mSpannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-    //		ClickableSpan clickableSpan = new ClickableSpan() {
-    //			@Override
-    //			public void onClick(View widget) {
-    //				String userId = null;
-    //				//判断是否为空
-    //				if (MyApplication.mUserDetailInfo != null) {
-    //					userId = MyApplication.mUserDetailInfo.getCustomerId();
-    //				}
-    //				MQCustomerManager.getInstance(RechargeActivity.this).showCustomer(userId);
-    //			}
-    //		};
-    //		mSpannableString.setSpan(clickableSpan, 0, mSpannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-    //		tv_tip_bottom.append(mSpannableString);
-    //		tv_tip_bottom.setMovementMethod(LinkMovementMethod.getInstance());
-    //	}
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -179,9 +140,6 @@ public class RechargeActivity extends Activity_Base implements View.OnClickListe
             case R.id.back_img:
                 finish();
                 break;
-            case R.id.tv_unband:
-                ProjectDetailActivity.launcheForResult(this, "解绑", UrlsTwo.UrlUnBand, 2);
-                break;
             case R.id.iv_clear:
                 et_add_monery.setText("");
                 break;
@@ -189,6 +147,8 @@ public class RechargeActivity extends Activity_Base implements View.OnClickListe
                 if (TextUtils.isEmpty(et_add_monery.getText().toString().trim())) {
                     Toast.makeText(RechargeActivity.this, "请输入充值金额", Toast.LENGTH_SHORT).show();
                     return;
+                } else if (!checkbox_agress.isChecked()) {
+                    ToastUtils.show("请同意福利金融理财服务协议");
                 } else {
                     try {
                         ADD_MONERY = Float.valueOf(et_add_monery.getText().toString().trim());
@@ -287,10 +247,7 @@ public class RechargeActivity extends Activity_Base implements View.OnClickListe
                         if (MyApplication.mUserDetailInfo.BankCard != null && MyApplication.mUserDetailInfo.BankCard.IsQPCard) {//已绑定，且是快捷支付
                             for (int i = 0; i < list.size(); i++) {
                                 if (MyApplication.mUserDetailInfo.BankCard.BankCode.equalsIgnoreCase(list.get(i).getBankCode())) {
-                                    ll_card.setVisibility(View.VISIBLE);
                                     maxMonery = list.get(i).getMaxSingle();
-                                    //                                    tv_xianer.setText("该卡本次最多可充值" + list.get(i).getMaxSingle()
-                                    // + "元，每日最多" + list.get(i).getMaxDay() + "元");
                                     tv_xianer.setText("单笔最高" + initMonery(list.get(i).getMaxSingle()) + "，单日限额" + initMonery(list.get
                                             (i).getMaxDay()));
                                 }
@@ -328,16 +285,6 @@ public class RechargeActivity extends Activity_Base implements View.OnClickListe
     @Override
     public void afterTextChanged(Editable s) {
         String text = et_add_monery.getText().toString().trim();
-        //        try {
-        //            if (!TextUtils.isEmpty(text) && Float.valueOf(text) >0) {//= 500
-        //                tv_next.setBackgroundResource(R.drawable.button_solid_red);
-        //            } else {
-        //                tv_next.setBackgroundResource(R.drawable.button_solid_black);
-        //            }
-        //        } catch (Exception e) {
-        //            Toast.makeText(RechargeActivity.this, "输入金额格式有误", Toast.LENGTH_SHORT).show();
-        //            et_add_monery.setText("");
-        //        }
         if (!TextUtils.isEmpty(text)) {
             iv_clear.setVisibility(View.VISIBLE);
         } else iv_clear.setVisibility(View.GONE);

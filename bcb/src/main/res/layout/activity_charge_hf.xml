@@ -7,245 +7,217 @@
     <!-- 标题 -->
     <include layout="@layout/frag_base"/>
 
-    <ScrollView
-        android:id="@+id/layout_scrollview"
+    <!--银行卡和余额-->
+    <LinearLayout
+        android:id="@+id/layout_bank_card"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scrollbars="none">
+        android:layout_height="140dp"
+        android:background="@color/item_blue"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <Space
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_weight="1"/>
+
+        <!--银行卡 尾号-->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:background="#fff"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 >
 
-                <TextView
+                <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:gravity="center"
-                    android:singleLine="true"
-                    android:text="账户余额 "
-                    android:textColor="#666"
-                    android:textSize="16sp"/>
-
-                <TextView
-                    android:id="@+id/tv_left_monery"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="22dp"
-                    android:gravity="center"
-                    android:singleLine="true"
-                    android:text="0.00元"
-                    android:textColor="#666"
-                    android:textSize="16sp"/>
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dip"
-                android:background="@color/linegray"/>
-
-            <RelativeLayout
-                android:id="@+id/layout_bank_card"
-                android:layout_width="match_parent"
-                android:layout_height="60dip"
-                android:background="#fff">
+                    android:layout_gravity="center"
+                    android:src="@drawable/bg_bank"/>
 
                 <ImageView
                     android:id="@+id/bank_icon"
-                    android:layout_width="33dp"
-                    android:layout_height="33dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dp"
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:layout_gravity="center"
                     />
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="15dip"
-                    android:layout_toRightOf="@+id/bank_icon"
-                    android:background="@color/white"
-                    android:orientation="vertical">
+            </FrameLayout>
 
-                    <TextView
-                        android:id="@+id/bank_name_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="银行"
-                        android:textColor="#333"
-                        android:textSize="@dimen/main_text_default"
-                        />
-
-                    <TextView
-                        android:id="@+id/bank_card_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:layout_toRightOf="@id/bank_name_text"
-                        android:gravity="center"
-                        android:singleLine="true"
-                        android:text="尾号"
-                        android:textColor="#999"
-                        android:textSize="12sp"/>
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/tv_unband"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentRight="true"
-                    android:drawablePadding="5dp"
-                    android:drawableRight="@drawable/right_more"
-                    android:gravity="center"
-                    android:padding="10dp"
-                    android:text="解绑"
-                    android:textColor="#999"
-                    android:textSize="12sp"
-                    />
-
-            </RelativeLayout>
-
-            <LinearLayout
-                android:id="@+id/ll_card"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingLeft="10dp">
-
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/ico_withdraw_tip"/>
-
-
-                <TextView
-                    android:id="@+id/tv_xianer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="3dp"
-                    android:gravity="center"
-                    android:singleLine="true"
-                    android:text="该卡本次最多可充值1000元，每日最多2000元"
-                    android:textColor="#999"
-                    android:textSize="12sp"/>
-            </LinearLayout>
-
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:background="#fff"
-                >
-
-                <TextView
-                    android:id="@+id/tv_je"
-                    android:layout_width="wrap_content"
-                    android:layout_height="45dp"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="10dp"
-                    android:singleLine="true"
-                    android:text="充值金额 "
-                    android:textColor="#333"
-                    android:textSize="16sp"
-                    />
-
-                <TextView
-
-                    android:id="@+id/danwei"
-                    android:layout_width="50dp"
-                    android:layout_height="45dp"
-                    android:layout_alignParentRight="true"
-                    android:gravity="center"
-                    android:text=" 元 "
-                    android:textColor="#999"
-
-                    android:textSize="16sp"
-                    android:visibility="gone"/>
-
-
-                <EditText
-                    android:id="@+id/et_add_monery"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_toLeftOf="@+id/danwei"
-                    android:layout_toRightOf="@+id/tv_je"
-                    android:background="@null"
-                    android:digits="0123456789"
-                    android:focusable="true"
-                    android:gravity="center_vertical"
-                    android:hint="最低充值100元"
-                    android:inputType="numberDecimal"
-                    android:maxLength="9"
-                    android:paddingLeft="20dp"
-                    android:singleLine="true"
-                    android:textColorHint="#999"
-                    android:textSize="16sp"/>
-
-                <ImageView
-                    android:id="@+id/iv_clear"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:padding="10dp"
-                    android:src="@drawable/clear_del"
-                    android:visibility="gone"/>
-
-            </RelativeLayout>
-
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="10dp"/>
 
             <TextView
-                android:id="@+id/tv_next"
-                android:layout_width="300dp"
-                android:layout_height="45dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="30dp"
-                android:background="@drawable/button_solid_red"
-                android:gravity="center"
-                android:text="下一步"
-                android:textColor="#fff"
-                android:textSize="16sp"/>
-
-            <TextView
-                android:id="@+id/tv_no"
-                android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center"
-                android:text="快捷支付银行卡将作为本账户唯一提现卡"
-                android:textColor="#39f"
-                android:textSize="12sp"
-                android:visibility="gone"/>
-
-            <include layout="@layout/com_funds_trusteeship_tip"/>
-
-
-            <TextView
-                android:id="@+id/tv_tip_bottom"
+                android:id="@+id/bank_card_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="30dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="30dp"
-                android:text="@string/charge_tips"
-                android:textColor="#333"
-                android:textSize="12sp"
-                android:visibility="gone"/>
+                android:text="尾号"
+                android:textColor="@color/white"
+                android:textSize="12sp"/>
         </LinearLayout>
 
-    </ScrollView>
+        <Space
+            android:layout_width="43dp"
+            android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/icon_double_arrow"/>
+
+        <Space
+            android:layout_width="43dp"
+            android:layout_height="wrap_content"/>
+
+        <!--余额-->
+        <TextView
+            android:id="@+id/tv_left_monery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="10dp"
+            android:drawableTop="@drawable/icon_balance"
+            android:gravity="center_horizontal"
+            android:text="0.00元"
+            android:textColor="@color/white"
+            android:textSize="12sp"/>
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+
+    </LinearLayout>
+
+
+    <!--充值金额-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <Space
+            android:layout_width="15dp"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="¥"
+            android:textColor="@color/black"
+            android:textSize="22sp"/>
+
+        <Space
+            android:layout_width="15dp"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+
+            android:id="@+id/et_add_monery"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="请输入充值金额"
+            android:textColorHint="@color/txt_gray"
+            android:textSize="22sp"/>
+
+        <ImageView
+            android:id="@+id/iv_clear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:src="@drawable/clear_del"
+            android:visibility="gone"/>
+
+
+    </LinearLayout>
+
+    <!--横线 -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@color/linegray"/>
+
+
+    <!--文字说明-->
+    <TextView
+        android:id="@+id/tv_xianer"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:paddingLeft="15dp"
+        android:text="单笔最高5万，单日限额5万"
+        android:textColor="@color/txt_gray"
+        android:textSize="12sp"/>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="5dp"/>
+
+    <!--协议-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical">
+
+        <Space
+            android:layout_width="15dp"
+            android:layout_height="wrap_content"/>
+
+        <CheckBox
+            android:id="@+id/checkbox_agress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/selector_checkbox"
+            android:checked="true"
+            android:paddingBottom="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="我已同意"
+            android:textColor="@color/txt_gray"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:id="@+id/financial_service_agreement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="《福利金融理财服务协议》"
+            android:textColor="@color/txt_gray"
+            android:textSize="12sp"/>
+
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="5dp"/>
+
+    <TextView
+        android:id="@+id/tv_next"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/button_solid_red"
+        android:gravity="center"
+        android:text="下一步"
+        android:textColor="#fff"
+        android:textSize="16sp"/>
+
 </LinearLayout>

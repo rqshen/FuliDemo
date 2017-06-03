@@ -131,6 +131,12 @@ public class MyApplication extends Application implements AMapLocationListener {
 		return instance.getApplicationContext();
 	}
 
+	public static Context getAppContext() {
+		return instance.getApplicationContext();
+	}
+
+
+
 	public String getWelfare() {
 		return null == saveUserInfo.getAccess_Token() ? "" : welfare;
 	}
