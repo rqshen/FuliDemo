@@ -11,13 +11,14 @@ import android.widget.Toast;
 import com.bcb.MyApplication;
 import com.bcb.R;
 import com.bcb.base.Activity_Base;
+import com.bcb.module.browse.FundCustodianWebActivity;
 import com.bcb.network.BcbJsonRequest;
 import com.bcb.network.BcbRequest;
 import com.bcb.network.UrlsTwo;
-import com.bcb.utils.HttpUtils;
-import com.bcb.utils.LogUtil;
-import com.bcb.utils.PackageUtil;
-import com.bcb.utils.TokenUtil;
+import com.bcb.util.HttpUtils;
+import com.bcb.util.LogUtil;
+import com.bcb.util.PackageUtil;
+import com.bcb.util.TokenUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;

@@ -24,9 +24,9 @@ import com.bcb.presentation.presenter.IPresenter_JoinCompany;
 import com.bcb.presentation.presenter.IPresenter_JoinCompanyImpl;
 import com.bcb.presentation.view.activity.Activity_Select_Material;
 import com.bcb.presentation.view.activity_interface.Interface_Base;
-import com.bcb.utils.MyActivityManager;
-import com.bcb.utils.ToastUtil;
-import com.bcb.utils.UmengUtil;
+import com.bcb.util.MyActivityManager;
+import com.bcb.util.ToastUtil;
+import com.bcb.util.UmengUtil;
 
 /**
  * Created by ruiqin.shen

@@ -20,8 +20,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.bcb.R;
 import com.bcb.base.BaseFragment;
-import com.bcb.utils.HttpUtils;
-import com.bcb.utils.ToastUtil;
+import com.bcb.util.HttpUtils;
+import com.bcb.util.ToastUtil;
 import com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout;
 
 public class _SecureFragment extends BaseFragment implements OnClickListener {

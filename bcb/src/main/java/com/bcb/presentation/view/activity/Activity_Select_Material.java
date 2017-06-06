@@ -14,8 +14,8 @@ import android.widget.Toast;
 
 import com.bcb.R;
 import com.bcb.base.Activity_Base;
-import com.bcb.utils.LogUtil;
-import com.bcb.utils.MyActivityManager;
+import com.bcb.util.LogUtil;
+import com.bcb.util.MyActivityManager;
 import com.bcb.presentation.view.custom.CustomDialog.DialogWidget;
 import com.bcb.presentation.view.custom.CustomDialog.MaterialDialogView;
 

@@ -15,8 +15,8 @@ import com.bcb.base.Activity_Base;
 import com.bcb.MyApplication;
 import com.bcb.module.login.LoginActivity;
 import com.bcb.module.login.register.RegisterFirstActivity;
-import com.bcb.utils.MyActivityManager;
-import com.bcb.utils.UmengUtil;
+import com.bcb.util.MyActivityManager;
+import com.bcb.util.UmengUtil;
 import com.bcb.presentation.adapter.MyPagerAdapter;
 
 import java.util.ArrayList;

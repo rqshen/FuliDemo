@@ -37,10 +37,10 @@
                         android:textSize="14sp"/>
 
                     <TextView
-                        android:layout_toRightOf="@+id/tv_1"
                         android:id="@+id/more_value"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/tv_1"
                         android:minWidth="20dp"
                         android:text="0.00"
                         android:textColor="@color/txt_black"
@@ -54,16 +54,17 @@
                         android:text="(不能申购本人持有债权，可投金额变小)"
 
                         android:textColor="@color/txt_gray"
-                        android:visibility="gone"
-                        android:textSize="12sp"/>
+                        android:textSize="12sp"
+                        android:visibility="gone"/>
+
                     <ImageView
-                    	android:id="@+id/iv_tips"
+                        android:id="@+id/iv_tips"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                    	android:layout_width="wrap_content"
                         android:layout_marginRight="18dp"
-                    	android:layout_height="wrap_content"
-                        android:visibility="gone"
-                    	android:src="@drawable/tips_about" />
+                        android:src="@drawable/tips_about"
+                        android:visibility="gone"/>
 
                 </RelativeLayout>
                 <!-- 账户余额 -->
@@ -91,13 +92,13 @@
                             android:textSize="14sp"/>
 
                         <ImageView
-                            android:src="@drawable/forward_default"
-                            android:layout_alignParentRight="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
                             android:layout_marginLeft="5dp"
                             android:layout_marginRight="18dp"
-                            android:layout_centerVertical="true"/>
+                            android:src="@drawable/forward_default"/>
                     </LinearLayout>
 
 
@@ -300,19 +301,6 @@
                     android:text=" 元"
                     android:textColor="@color/txt_gray"
                     android:textSize="13sp"/>
-                <LinearLayout
-                    android:id="@+id/project_service_fee"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/earnings_description"
-                    android:padding="18dp"
-                    android:visibility="gone">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/service_fee"/>
-                </LinearLayout>
 
             </RelativeLayout>
 
@@ -358,12 +346,12 @@
 
                 <ImageView
                     android:id="@+id/coupon_arrow"
-                    android:src="@drawable/forward_default"
-                    android:layout_alignParentRight="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
                     android:layout_marginRight="18dp"
-                    android:layout_centerVertical="true"/>
+                    android:src="@drawable/forward_default"/>
             </RelativeLayout>
 
             <LinearLayout
@@ -374,6 +362,7 @@
 
                 <Button
                     android:id="@+id/button_buy"
+                    style="?android:attr/borderlessButtonStyle"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/button_height"
                     android:layout_gravity="center_horizontal"
@@ -384,7 +373,6 @@
                     android:paddingBottom="0dip"
                     android:paddingTop="0dip"
                     android:text="立即申购"
-                    style="?android:attr/borderlessButtonStyle"
                     android:textColor="#999"
                     android:textSize="@dimen/main_text_default"/>
 

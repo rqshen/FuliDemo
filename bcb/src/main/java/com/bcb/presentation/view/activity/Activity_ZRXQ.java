@@ -19,8 +19,8 @@ import com.bcb.network.BcbJsonRequest;
 import com.bcb.network.BcbRequest;
 import com.bcb.network.UrlsOne;
 import com.bcb.data.bean.ClaimConveyDetailBean;
-import com.bcb.utils.LogUtil;
-import com.bcb.utils.TokenUtil;
+import com.bcb.util.LogUtil;
+import com.bcb.util.TokenUtil;
 import com.bcb.module.myinfo.myfinancial.myfinancialstate.myfinanciallist.myfinancialdetail.projectdetail.ProjectDetailActivity;
 
 import org.json.JSONException;

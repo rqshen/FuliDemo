@@ -15,9 +15,9 @@ import com.bcb.network.BcbJsonRequest;
 import com.bcb.network.BcbRequest;
 import com.bcb.network.BcbRequestTag;
 import com.bcb.network.UrlsOne;
-import com.bcb.utils.LogUtil;
-import com.bcb.utils.PackageUtil;
-import com.bcb.utils.TokenUtil;
+import com.bcb.util.LogUtil;
+import com.bcb.util.PackageUtil;
+import com.bcb.util.TokenUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;

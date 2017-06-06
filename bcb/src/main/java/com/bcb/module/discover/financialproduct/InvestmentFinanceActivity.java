@@ -14,16 +14,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bcb.R;
-import com.bcb.base.BaseActivity;
+import com.bcb.base.BaseActivity1;
 import com.bcb.module.discover.financialproduct.adapter.MyFragmentPagerAdapter;
-import com.bcb.utils.MyActivityManager;
+import com.bcb.util.MyActivityManager;
 
 import java.util.ArrayList;
 
 /**
  * 投资理财 列表
  */
-public class InvestmentFinanceActivity extends BaseActivity implements View.OnClickListener {
+public class InvestmentFinanceActivity extends BaseActivity1 implements View.OnClickListener {
     private ViewPager vp;
     private ArrayList<Fragment> fragmentsList;
 

@@ -5,8 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.bcb.utils.LogUtil;
-import com.bcb.module.home.MainActivity;
+import com.bcb.util.LogUtil;
+import com.bcb.module.home.MainActivity1;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -52,7 +52,7 @@ public class JPushReceiver extends BroadcastReceiver {
             LogUtil.d(TAG, "[MyReceiver] 用户点击打开了通知");
 
             //打开自定义的Activity
-            Intent i = new Intent(context, MainActivity.class);
+            Intent i = new Intent(context, MainActivity1.class);
             i.putExtras(bundle);
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
             context.startActivity(i);
@@ -103,18 +103,18 @@ public class JPushReceiver extends BroadcastReceiver {
         return sb.toString();
     }
 
-//    //send msg to MainActivity
+//    //send msg to MainActivity1
 //    private void processCustomMessage(Context context, Bundle bundle) {
-//        if (MainActivity.isForeground) {
+//        if (MainActivity1.isForeground) {
 //            String message = bundle.getString(JPushInterface.EXTRA_MESSAGE);
 //            String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);
-//            Intent msgIntent = new Intent(MainActivity.MESSAGE_RECEIVED_ACTION);
-//            msgIntent.putExtra(MainActivity.KEY_MESSAGE, message);
+//            Intent msgIntent = new Intent(MainActivity1.MESSAGE_RECEIVED_ACTION);
+//            msgIntent.putExtra(MainActivity1.KEY_MESSAGE, message);
 //            if (!ExampleUtil.isEmpty(extras)) {
 //                try {
 //                    JSONObject extraJson = new JSONObject(extras);
 //                    if (null != extraJson && extraJson.length() > 0) {
-//                        msgIntent.putExtra(MainActivity.KEY_EXTRAS, extras);
+//                        msgIntent.putExtra(MainActivity1.KEY_EXTRAS, extras);
 //                    }
 //                } catch (JSONException e) {
 //

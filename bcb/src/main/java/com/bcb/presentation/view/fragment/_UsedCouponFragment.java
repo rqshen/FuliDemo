@@ -19,12 +19,12 @@ import com.bcb.network.BcbRequestTag;
 import com.bcb.network.UrlsOne;
 import com.bcb.data.bean.CouponListBean;
 import com.bcb.data.bean.CouponRecordsBean;
-import com.bcb.utils.HttpUtils;
-import com.bcb.utils.LogUtil;
-import com.bcb.utils.MyListView;
-import com.bcb.utils.PackageUtil;
-import com.bcb.utils.ToastUtil;
-import com.bcb.utils.TokenUtil;
+import com.bcb.util.HttpUtils;
+import com.bcb.util.LogUtil;
+import com.bcb.util.MyListView;
+import com.bcb.util.PackageUtil;
+import com.bcb.util.ToastUtil;
+import com.bcb.util.TokenUtil;
 import com.bcb.presentation.adapter.CouponListAdapter;
 import com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout;
 

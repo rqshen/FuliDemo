@@ -13,21 +13,22 @@ import android.widget.Toast;
 import com.bcb.MyApplication;
 import com.bcb.R;
 import com.bcb.base.BaseFragment;
+import com.bcb.constant.ProjectListType;
 import com.bcb.data.bean.MainListBean2;
 import com.bcb.data.bean.WYBbean;
+import com.bcb.module.discover.adapter.FinanceListAdapter;
+import com.bcb.module.discover.financialproduct.normalproject.NormalProjectIntroductionActivity;
+import com.bcb.module.discover.financialproduct.wrapprogram.month.WrapProgramIntroductionActivity;
 import com.bcb.network.BcbJsonRequest;
 import com.bcb.network.BcbRequest;
 import com.bcb.network.UrlsOne;
-import com.bcb.presentation.adapter.MainAdapter2;
-import com.bcb.module.discover.financialproduct.wrapprogram.month.WrapProgramIntroductionActivity;
-import com.bcb.module.discover.financialproduct.normalproject.NormalProjectIntroductionActivity;
 import com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout;
-import com.bcb.utils.HttpUtils;
-import com.bcb.utils.LogUtil;
-import com.bcb.utils.MyListView;
-import com.bcb.utils.PackageUtil;
-import com.bcb.utils.ToastUtil;
-import com.bcb.utils.TokenUtil;
+import com.bcb.util.HttpUtils;
+import com.bcb.util.LogUtil;
+import com.bcb.util.MyListView;
+import com.bcb.util.PackageUtil;
+import com.bcb.util.ToastUtil;
+import com.bcb.util.TokenUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -44,12 +45,12 @@ public class FinanceListFragment extends BaseFragment implements AdapterView.OnI
     private Context ctx;
 
     private MyListView lv;
-    private int Status;//	【 0稳赢】【1涨薪宝】
+    private int Status;//	【 0稳赢 散标】【1涨薪宝 原始标】 【3周盈宝 散标】
     private int PageNow = 1;
     private int PageSize = 10;
 
     private List<MainListBean2.JpxmBean> recordsBeans;
-    private MainAdapter2 mCouponListAdapter;
+    private FinanceListAdapter mCouponListAdapter;
 
     private LinearLayout null_data_layout;
     private boolean canLoadmore = true;
@@ -89,7 +90,7 @@ public class FinanceListFragment extends BaseFragment implements AdapterView.OnI
         this.ctx = view.getContext();
         null_data_layout = (LinearLayout) view.findViewById(R.id.null_data_layout);
         recordsBeans = new ArrayList<>();
-        mCouponListAdapter = new MainAdapter2(ctx, recordsBeans);
+        mCouponListAdapter = new FinanceListAdapter(ctx, recordsBeans);
         lv = (MyListView) view.findViewById(R.id.listview_data_layout);
         lv.setOnItemClickListener(this);
         lv.setAdapter(mCouponListAdapter);
@@ -141,8 +142,16 @@ public class FinanceListFragment extends BaseFragment implements AdapterView.OnI
             e.printStackTrace();
         }
 
-        String url = UrlsOne.WYB;
-        if (Status == 1) url = UrlsOne.ZXB;
+        String url = "";//请求的地址
+
+        if (Status == ProjectListType.WYB) {//稳盈宝
+            url = UrlsOne.WYB;
+        } else if (Status == ProjectListType.ZXB) {//涨薪宝【原始标】
+            url = UrlsOne.ZXB;
+        } else if (Status == ProjectListType.ZYB) {//周盈宝
+            url = UrlsOne.ZYB;
+        }
+
         BcbJsonRequest jsonRequest = new BcbJsonRequest(url, obj, TokenUtil.getEncodeToken(ctx), new BcbRequest
                 .BcbCallBack<JSONObject>() {
             @Override

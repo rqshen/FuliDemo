@@ -8,7 +8,7 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 
 import com.bcb.R;
-import com.bcb.utils.DensityUtils;
+import com.bcb.util.DensityUtils;
 
 public class RoundProgressBar extends HorizontalProgressBar {
 	/**

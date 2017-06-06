@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.bcb.R;
 import com.bcb.base.Activity_Base;
-import com.bcb.utils.MQCustomerManager;
+import com.bcb.util.MQCustomerManager;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

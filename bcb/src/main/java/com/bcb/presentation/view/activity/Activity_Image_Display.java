@@ -14,8 +14,8 @@ import android.widget.ImageView;
 
 import com.bcb.R;
 import com.bcb.base.Activity_Base;
-import com.bcb.utils.MyActivityManager;
-import com.bcb.utils.ToastUtil;
+import com.bcb.util.MyActivityManager;
+import com.bcb.util.ToastUtil;
 import com.bcb.presentation.view.custom.PagerIndicator.CirclePageIndicator;
 import com.bumptech.glide.Glide;
 

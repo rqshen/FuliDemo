@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.bcb.R;
 import com.bcb.base.Activity_Base;
 import com.bcb.data.bean.Project_Investment_Details_Bean;
-import com.bcb.utils.MyActivityManager;
+import com.bcb.util.MyActivityManager;
 
 import java.util.List;
 

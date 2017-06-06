@@ -20,11 +20,11 @@ import com.bcb.network.BcbRequestTag;
 import com.bcb.network.UrlsOne;
 import com.bcb.network.UrlsTwo;
 import com.bcb.presentation.view.custom.AlertView.DialogBQT;
-import com.bcb.utils.LogUtil;
-import com.bcb.utils.PackageUtil;
-import com.bcb.utils.ProgressDialogrUtils;
-import com.bcb.utils.ToastUtil;
-import com.bcb.utils.TokenUtil;
+import com.bcb.util.LogUtil;
+import com.bcb.util.PackageUtil;
+import com.bcb.util.ProgressDialogrUtils;
+import com.bcb.util.ToastUtil;
+import com.bcb.util.TokenUtil;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 

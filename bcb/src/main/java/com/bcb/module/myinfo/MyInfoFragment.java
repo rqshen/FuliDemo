@@ -36,15 +36,16 @@ import com.bcb.module.discover.eliteloan.EliteLoanActivity;
 import com.bcb.module.login.LoginActivity;
 import com.bcb.module.myinfo.balance.BalanceActivity;
 import com.bcb.module.myinfo.balance.FundCustodianAboutActivity;
-import com.bcb.module.myinfo.balance.FundCustodianWebActivity;
+import com.bcb.module.browse.FundCustodianWebActivity;
 import com.bcb.module.myinfo.balance.recharge.RechargeActivity;
 import com.bcb.module.myinfo.balance.trading.TradingRecordActivity;
 import com.bcb.module.myinfo.balance.withdraw.WithdrawActivity;
+import com.bcb.module.myinfo.joincompany.JoinCompanyActivity;
 import com.bcb.module.myinfo.myfinancial.MyFinancialActivity;
 import com.bcb.module.myinfo.myfinancial.myfinancialstate.myfinanciallist.myfinancialdetail.projectdetail.ProjectDetailActivity;
-import com.bcb.module.myinfo.joincompany.JoinCompanyActivity;
 import com.bcb.module.myinfo.totalassets.TotalAssetsActivity;
 import com.bcb.module.myinfo.welfare.DailyWelfareActivity;
+import com.bcb.module.myinfo.welfare.DailyWelfareStaticActivity;
 import com.bcb.network.BcbJsonRequest;
 import com.bcb.network.BcbRequest;
 import com.bcb.network.BcbRequestQueue;
@@ -54,7 +55,6 @@ import com.bcb.network.UrlsTwo;
 import com.bcb.presentation.view.activity.A_MySecurity;
 import com.bcb.presentation.view.activity.A_Slb;
 import com.bcb.presentation.view.activity.Activity_Account_Setting;
-import com.bcb.module.myinfo.welfare.DailyWelfareStaticActivity;
 import com.bcb.presentation.view.activity.Activity_Privilege_Money;
 import com.bcb.presentation.view.activity.Activity_Trading_Record;
 import com.bcb.presentation.view.activity.Activity_TuoGuan_HF;
@@ -64,15 +64,15 @@ import com.bcb.presentation.view.custom.AlertView.UpdateDialog;
 import com.bcb.presentation.view.custom.CustomDialog.DialogWidget;
 import com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout;
 import com.bcb.presentation.view.custom.PullableView.PullableScrollView;
-import com.bcb.utils.DialogUtil;
-import com.bcb.utils.DownloadUtils;
-import com.bcb.utils.HttpUtils;
-import com.bcb.utils.LogUtil;
-import com.bcb.utils.MQCustomerManager;
-import com.bcb.utils.PackageUtil;
-import com.bcb.utils.ToastUtil;
-import com.bcb.utils.TokenUtil;
-import com.bcb.utils.UmengUtil;
+import com.bcb.util.DialogUtil;
+import com.bcb.util.DownloadUtils;
+import com.bcb.util.HttpUtils;
+import com.bcb.util.LogUtil;
+import com.bcb.util.MQCustomerManager;
+import com.bcb.util.PackageUtil;
+import com.bcb.util.ToastUtil;
+import com.bcb.util.TokenUtil;
+import com.bcb.util.UmengUtil;
 
 import org.json.JSONObject;
 
@@ -241,13 +241,11 @@ public class MyInfoFragment extends BaseFragment implements OnClickListener {
             @Override
             public void onClick(View v) {
                 String userId = null;
-
                 //判断是否为空
                 if (MyApplication.mUserDetailInfo != null) {
                     userId = MyApplication.mUserDetailInfo.getCustomerId();
                 }
-                MQCustomerManager.getInstance(ctx)
-                        .showCustomer(userId);
+                MQCustomerManager.getInstance(ctx).showCustomer(userId);
             }
         });
 
@@ -791,30 +789,29 @@ public class MyInfoFragment extends BaseFragment implements OnClickListener {
      * 用户钱包
      */
     private void requestUserWallet() {
-        BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.UserWalletMessage, null, TokenUtil.getEncodeToken(ctx), new
-                BcbRequest.BcbCallBack<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        LogUtil.i("bqt", "请求用户资产账户返回：" + response.toString());
-                        if (PackageUtil.getRequestStatus(response, ctx)) {
-                            JSONObject data = PackageUtil.getResultObject(response);
-                            if (data != null) {
-                                //注意数据结构变了，2016-7-26
-                                mUserWallet = MyApplication.mGson.fromJson(data.toString(), UserWallet.class);
-                                MyApplication.mUserWallet = mUserWallet;
-                                showData();
-                            }
-                        }
-                        refreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
+        BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.UserWalletMessage, null, TokenUtil.getEncodeToken(ctx), new BcbRequest.BcbCallBack<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                LogUtil.i("bqt", "请求用户资产账户返回：" + response.toString());
+                if (PackageUtil.getRequestStatus(response, ctx)) {
+                    JSONObject data = PackageUtil.getResultObject(response);
+                    if (data != null) {
+                        //注意数据结构变了，2016-7-26
+                        mUserWallet = MyApplication.mGson.fromJson(data.toString(), UserWallet.class);
+                        MyApplication.mUserWallet = mUserWallet;
+                        showData();
                     }
+                }
+                refreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
+            }
 
-                    @Override
-                    public void onErrorResponse(Exception error) {
-                        ToastUtil.alert(ctx, "网络异常，请稍后重试");
-                        refreshLayout.refreshFinish(PullToRefreshLayout.FAIL);
-                        loadingError = true;
-                    }
-                });
+            @Override
+            public void onErrorResponse(Exception error) {
+                ToastUtil.alert(ctx, "网络异常，请稍后重试");
+                refreshLayout.refreshFinish(PullToRefreshLayout.FAIL);
+                loadingError = true;
+            }
+        });
         jsonRequest.setTag(BcbRequestTag.UserWalletMessageTag);
         requestQueue.add(jsonRequest);
     }

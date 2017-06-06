@@ -12,34 +12,33 @@ import java.util.List;
  */
 public class SimpleProjectDetail implements Serializable {
     /**
-     *     "Amount": 5000,
-     "ApplyBeginTime": "2016-08-03 17:11:05",
-     "ApplyEndTime": "2016-08-10 17:11:05",
-     "Balance": 3800,
-     "CompanyName": "百财帮",
-     "CompanyUrl": "http://cnt.flh001.com/053c0b4c-b488-44fa-ab24-a64c00bca8d4",
-     "CouponType": 0,
-     "Duration": 1080,
-     "DurationExchangeType": 1,
-     "HaploidAmount": 0,
-     "InterestTakeDate": "2016-08-11 17:11:05",
-     "InvestLeader": "",
-     "Name": "WXMGRJK201608031000",
-     "PackageId": "ee445bda-1554-437e-9f9f-a657011b3215",
-     "PackageToken": "Q+DFxUQnIzvUcYIHe2f6/ej5HOkdK7KfxVFFwXDCBdPO+Nda2SVGAUTbwaryz2WjZsp4kqeOAh11om4W1RqZEQqyqO/Ys4htxAOL4U51Czn4niYvRMv2eQ==",
-     "PageUrl": "http://ttwap.100cb.cn/package/detail?packageId=ee445bda-1554-437e-9f9f-a657011b3215",
-     "PayEndDate": "2019-07-27 17:11:05",
-     "PaymentType": "等额本金",
-     "ProcessPercent": 24,
-     "Rate": 7.5,
-     "SingletonAmount": 100,
-     "StartingAmount": 100,
-     "Status": 20
+     * "Amount": 5000,
+     * "ApplyBeginTime": "2016-08-03 17:11:05",
+     * "ApplyEndTime": "2016-08-10 17:11:05",
+     * "Balance": 3800,
+     * "CompanyName": "百财帮",
+     * "CompanyUrl": "http://cnt.flh001.com/053c0b4c-b488-44fa-ab24-a64c00bca8d4",
+     * "CouponType": 0,
+     * "Duration": 1080,
+     * "DurationExchangeType": 1,
+     * "HaploidAmount": 0,
+     * "InterestTakeDate": "2016-08-11 17:11:05",
+     * "InvestLeader": "",
+     * "Name": "WXMGRJK201608031000",
+     * "PackageId": "ee445bda-1554-437e-9f9f-a657011b3215",
+     * "PackageToken": "Q+DFxUQnIzvUcYIHe2f6/ej5HOkdK7KfxVFFwXDCBdPO+Nda2SVGAUTbwaryz2WjZsp4kqeOAh11om4W1RqZEQqyqO/Ys4htxAOL4U51Czn4niYvRMv2eQ==",
+     * "PageUrl": "http://ttwap.100cb.cn/package/detail?packageId=ee445bda-1554-437e-9f9f-a657011b3215",
+     * "PayEndDate": "2019-07-27 17:11:05",
+     * "PaymentType": "等额本金",
+     * "ProcessPercent": 24,
+     * "Rate": 7.5,
+     * "SingletonAmount": 100,
+     * "StartingAmount": 100,
+     * "Status": 20
      */
     public String PackageId;//项目Id
     public String Name;//项目名称
     public float Rate;//	年化利率
-
     public float Amount;//融资总金额······
     public float Balance;//剩余融资金额···········
     public int Duration;//融资期限

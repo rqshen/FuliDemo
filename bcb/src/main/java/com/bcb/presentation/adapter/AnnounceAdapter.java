@@ -16,9 +16,9 @@ import com.bcb.network.BcbRequestQueue;
 import com.bcb.network.BcbRequestTag;
 import com.bcb.network.UrlsOne;
 import com.bcb.data.bean.AnnounceRecordsBean;
-import com.bcb.utils.ToastUtil;
-import com.bcb.utils.TokenUtil;
-import com.bcb.utils.UmengUtil;
+import com.bcb.util.ToastUtil;
+import com.bcb.util.TokenUtil;
+import com.bcb.util.UmengUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;

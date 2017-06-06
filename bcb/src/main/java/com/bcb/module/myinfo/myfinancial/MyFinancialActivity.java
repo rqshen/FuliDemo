@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.bcb.R;
 import com.bcb.module.myinfo.myfinancial.myfinancialstate.MyFinancialStateFragment;
-import com.bcb.utils.MyActivityManager;
+import com.bcb.util.MyActivityManager;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

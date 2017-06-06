@@ -65,7 +65,7 @@
                 android:layout_height="wrap_content"
                 android:padding="5dip"
                 android:orientation="horizontal" >
-                <com.bcb.utils.AutoWrapLinearLayout
+                <com.bcb.util.AutoWrapLinearLayout
                     android:id="@+id/tag_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -73,7 +73,7 @@
                     android:orientation="horizontal"
                     android:paddingLeft="10dip"
                     android:paddingRight="10dip" >
-                </com.bcb.utils.AutoWrapLinearLayout>
+                </com.bcb.util.AutoWrapLinearLayout>
             </LinearLayout>
 
             <LinearLayout

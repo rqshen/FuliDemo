@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.bcb.MyApplication;
 import com.bcb.data.bean.UserDetailInfo;
-import com.bcb.utils.LogUtil;
+import com.bcb.util.LogUtil;
 
 /**
  * Created by cain on 16/3/18.

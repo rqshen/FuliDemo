@@ -21,11 +21,11 @@ import com.bcb.network.BcbRequest;
 import com.bcb.network.BcbRequestQueue;
 import com.bcb.network.BcbRequestTag;
 import com.bcb.network.UrlsOne;
-import com.bcb.utils.MyActivityManager;
-import com.bcb.utils.PackageUtil;
-import com.bcb.utils.RegexManager;
-import com.bcb.utils.ToastUtil;
-import com.bcb.utils.TokenUtil;
+import com.bcb.util.MyActivityManager;
+import com.bcb.util.PackageUtil;
+import com.bcb.util.RegexManager;
+import com.bcb.util.ToastUtil;
+import com.bcb.util.TokenUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;

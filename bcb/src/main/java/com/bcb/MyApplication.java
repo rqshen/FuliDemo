@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationListener;
 import com.bcb.event.BroadcastEvent;
+import com.bcb.module.home.MainActivity1;
 import com.bcb.network.BcbJsonRequest;
 import com.bcb.network.BcbNetworkManager;
 import com.bcb.network.BcbRequest;
@@ -16,14 +17,13 @@ import com.bcb.data.bean.UserDetailInfo;
 import com.bcb.data.bean.UserWallet;
 import com.bcb.data.bean.WelfareBean;
 import com.bcb.data.bean.transaction.VersionBean;
-import com.bcb.utils.DbUtil;
-import com.bcb.utils.LogUtil;
-import com.bcb.utils.MapUtil;
-import com.bcb.utils.SaveConfigUtil;
-import com.bcb.utils.SaveUserInfoUtils;
-import com.bcb.utils.SystemUtil;
-import com.bcb.utils.TokenUtil;
-import com.bcb.module.home.MainActivity;
+import com.bcb.util.DbUtil;
+import com.bcb.util.LogUtil;
+import com.bcb.util.MapUtil;
+import com.bcb.util.SaveConfigUtil;
+import com.bcb.util.SaveUserInfoUtils;
+import com.bcb.util.SystemUtil;
+import com.bcb.util.TokenUtil;
 import com.google.gson.Gson;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.umeng.analytics.MobclickAgent;
@@ -40,7 +40,7 @@ import de.greenrobot.event.EventBus;
 
 public class MyApplication extends Application implements AMapLocationListener {
 
-	public MainActivity _mainActivityActivity;
+	public MainActivity1 _mainActivityActivity;
 	public static final String TAG = "MyApplication";
 	public static SaveUserInfoUtils saveUserInfo;
 	public static SaveConfigUtil saveConfigUtil;

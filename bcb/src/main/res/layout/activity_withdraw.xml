@@ -118,6 +118,7 @@
             android:layout_height="wrap_content"/>
 
         <EditText
+            android:inputType="number"
             android:id="@+id/editext_money"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

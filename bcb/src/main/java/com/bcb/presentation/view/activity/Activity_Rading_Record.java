@@ -18,8 +18,8 @@ import com.bcb.network.BcbJsonRequest;
 import com.bcb.network.BcbRequest;
 import com.bcb.network.UrlsOne;
 import com.bcb.data.bean.RadingRecordBean;
-import com.bcb.utils.LogUtil;
-import com.bcb.utils.TokenUtil;
+import com.bcb.util.LogUtil;
+import com.bcb.util.TokenUtil;
 import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONException;

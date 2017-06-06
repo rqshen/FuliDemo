@@ -14,10 +14,10 @@ import android.widget.Toast;
 import com.bcb.R;
 import com.bcb.base.Activity_Base;
 import com.bcb.module.login.LoginActivity;
-import com.bcb.utils.MQCustomerManager;
-import com.bcb.utils.MyActivityManager;
-import com.bcb.utils.RegexManager;
-import com.bcb.utils.UmengUtil;
+import com.bcb.util.MQCustomerManager;
+import com.bcb.util.MyActivityManager;
+import com.bcb.util.RegexManager;
+import com.bcb.util.UmengUtil;
 
 public class RegisterFirstActivity extends Activity_Base {
 

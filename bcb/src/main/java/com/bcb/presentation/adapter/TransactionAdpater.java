@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.bcb.R;
 import com.bcb.data.bean.TransactionBean;
-import com.bcb.utils.LogUtil;
+import com.bcb.util.LogUtil;
 
 import java.util.List;
 

@@ -15,14 +15,14 @@ import android.widget.Toast;
 
 import com.bcb.R;
 import com.bcb.base.Activity_Base;
+import com.bcb.module.home.MainActivity1;
 import com.bcb.module.login.LoginActivity;
-import com.bcb.utils.LogUtil;
-import com.bcb.utils.MQCustomerManager;
-import com.bcb.utils.MyActivityManager;
-import com.bcb.utils.RegexManager;
-import com.bcb.utils.ToastUtil;
-import com.bcb.utils.UmengUtil;
-import com.bcb.module.home.MainActivity;
+import com.bcb.util.LogUtil;
+import com.bcb.util.MQCustomerManager;
+import com.bcb.util.MyActivityManager;
+import com.bcb.util.RegexManager;
+import com.bcb.util.ToastUtil;
+import com.bcb.util.UmengUtil;
 import com.bcb.presentation.presenter.IPresenter_Register;
 import com.bcb.presentation.presenter.IPresenter_RegisterImpl;
 import com.bcb.presentation.view.activity_interface.Interface_Verification;
@@ -554,7 +554,7 @@ public class RegisterNextActivity extends Activity_Base implements Interface_Ver
             // 销毁所有页面，回到首页
             sendBroardCast();
 //            MyActivityManager.getInstance().finishAllActivity();
-            startActivity(new Intent(RegisterNextActivity.this, MainActivity.class));
+            startActivity(new Intent(RegisterNextActivity.this, MainActivity1.class));
         }
         //出错信息
         else {

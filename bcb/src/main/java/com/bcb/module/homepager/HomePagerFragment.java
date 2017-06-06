@@ -31,19 +31,19 @@ import com.bcb.module.discover.carinsurance.CarInsuranceActivity;
 import com.bcb.module.discover.financialproduct.InvestmentFinanceActivity;
 import com.bcb.module.discover.financialproduct.normalproject.NormalProjectIntroductionActivity;
 import com.bcb.module.discover.financialproduct.wrapprogram.month.WrapProgramIntroductionActivity;
+import com.bcb.module.homepager.adapter.AnnounceListAdapter;
 import com.bcb.module.login.LoginActivity;
 import com.bcb.module.login.register.RegisterFirstActivity;
 import com.bcb.module.myinfo.balance.FundCustodianAboutActivity;
-import com.bcb.module.myinfo.myfinancial.myfinancialstate.myfinanciallist.myfinancialdetail.projectdetail.ProjectDetailActivity;
 import com.bcb.module.myinfo.joincompany.JoinCompanyActivity;
+import com.bcb.module.myinfo.myfinancial.myfinancialstate.myfinanciallist.myfinancialdetail.projectdetail.ProjectDetailActivity;
 import com.bcb.network.BcbJsonRequest;
 import com.bcb.network.BcbRequest;
 import com.bcb.network.BcbRequestQueue;
 import com.bcb.network.BcbRequestTag;
 import com.bcb.network.UrlsOne;
 import com.bcb.network.UrlsTwo;
-import com.bcb.presentation.adapter.MainAdapter;
-import com.bcb.presentation.adapter.MainAdapter2;
+import com.bcb.module.discover.adapter.FinanceListAdapter;
 import com.bcb.presentation.view.activity.Activity_Privilege_Money;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
 import com.bcb.presentation.view.custom.CustomDialog.BasicDialog;
@@ -54,13 +54,13 @@ import com.bcb.presentation.view.custom.PagerIndicator.CirclePageIndicator;
 import com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout;
 import com.bcb.presentation.view.custom.PullableView.PullableScrollView;
 import com.bcb.presentation.view.custom.UPMarqueeView;
-import com.bcb.utils.HttpUtils;
-import com.bcb.utils.LogUtil;
-import com.bcb.utils.MyListView;
-import com.bcb.utils.PackageUtil;
-import com.bcb.utils.ToastUtil;
-import com.bcb.utils.TokenUtil;
-import com.bcb.utils.UmengUtil;
+import com.bcb.util.HttpUtils;
+import com.bcb.util.LogUtil;
+import com.bcb.util.MyListView;
+import com.bcb.util.PackageUtil;
+import com.bcb.util.ToastUtil;
+import com.bcb.util.TokenUtil;
+import com.bcb.util.UmengUtil;
 import com.bumptech.glide.Glide;
 
 import org.json.JSONException;
@@ -88,12 +88,12 @@ public class HomePagerFragment extends BaseFragment implements View.OnClickListe
     MainListBean2 mainListBean2;
     //新标预告
     private MyListView announceListView;
-    private MainAdapter announceAdapter;
+    private AnnounceListAdapter mAnnounceListAdapter;
     private List<MainListBean2.XbygBean> announceRecordsBeans;
 
     //精品项目
     private MyListView boutiqueListview;
-    private MainAdapter2 mBoutiqueAdapter;
+    private FinanceListAdapter mBoutiqueAdapter;
     private List<MainListBean2.JpxmBean> boutqueRecordsBeans;
 
     //Banner
@@ -176,13 +176,13 @@ public class HomePagerFragment extends BaseFragment implements View.OnClickListe
 
         //新标预告
         announceRecordsBeans = new ArrayList<>();
-        announceAdapter = new MainAdapter(ctx, announceRecordsBeans);
+        mAnnounceListAdapter = new AnnounceListAdapter(ctx, announceRecordsBeans);
         announceListView = (MyListView) view.findViewById(R.id.announce_listView);
-        announceListView.setAdapter(announceAdapter);
+        announceListView.setAdapter(mAnnounceListAdapter);
 
         //精品项目
         boutqueRecordsBeans = new ArrayList<>();
-        mBoutiqueAdapter = new MainAdapter2(ctx, boutqueRecordsBeans);
+        mBoutiqueAdapter = new FinanceListAdapter(ctx, boutqueRecordsBeans);
         JXPackageAdWord = (TextView) view.findViewById(R.id.JXPackageAdWord);
         boutiqueListview = (MyListView) view.findViewById(R.id.boutique_listview);
         boutiqueListview.setOnItemClickListener(this);
@@ -438,8 +438,8 @@ public class HomePagerFragment extends BaseFragment implements View.OnClickListe
         if (null != mainListBean2 && null != mainListBean2.Xbyg && mainListBean2.Xbyg.size() > 0) {
             announceRecordsBeans.addAll(mainListBean2.Xbyg);
             //刷新适配器，如果适配器没有则创建新的适配器
-            if (announceAdapter != null) {
-                announceAdapter.notifyDataSetChanged();
+            if (mAnnounceListAdapter != null) {
+                mAnnounceListAdapter.notifyDataSetChanged();
             }
             setupAnnounceVisible(View.VISIBLE);
         } else {
@@ -611,8 +611,8 @@ public class HomePagerFragment extends BaseFragment implements View.OnClickListe
             //登陆和退出的时候要重新创建新标预告，防止没法刷新数据
             else if (intent.getAction().equals("com.bcb.login.success")) {
                 //需要判断announceAdapter是否存在，有可能退到后台时间过长被内存被释放掉了。
-                if (announceAdapter != null) {
-                    announceAdapter.notifyDataSetChanged();
+                if (mAnnounceListAdapter != null) {
+                    mAnnounceListAdapter.notifyDataSetChanged();
                 }
                 showItemVisible();
                 requestUserDetailInfo();
@@ -667,8 +667,8 @@ public class HomePagerFragment extends BaseFragment implements View.OnClickListe
         if (mBoutiqueAdapter != null) {
             mBoutiqueAdapter.notifyDataSetChanged();
         }
-        if (announceAdapter != null) {
-            announceAdapter.notifyDataSetChanged();
+        if (mAnnounceListAdapter != null) {
+            mAnnounceListAdapter.notifyDataSetChanged();
         }
     }
 

@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.bcb.MyApplication;
 import com.bcb.R;
 import com.bcb.base.Activity_Base;
+import com.bcb.module.browse.FundCustodianWebActivity;
 import com.bcb.module.login.LoginActivity;
 import com.bcb.module.myinfo.balance.recharge.RechargeActivity;
 import com.bcb.module.myinfo.balance.withdraw.WithdrawActivity;
@@ -20,10 +21,10 @@ import com.bcb.network.BcbRequest;
 import com.bcb.network.UrlsTwo;
 import com.bcb.module.myinfo.balance.trading.TradingRecordActivity;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
-import com.bcb.utils.HttpUtils;
-import com.bcb.utils.LogUtil;
-import com.bcb.utils.PackageUtil;
-import com.bcb.utils.TokenUtil;
+import com.bcb.util.HttpUtils;
+import com.bcb.util.LogUtil;
+import com.bcb.util.PackageUtil;
+import com.bcb.util.TokenUtil;
 
 import org.json.JSONObject;
 

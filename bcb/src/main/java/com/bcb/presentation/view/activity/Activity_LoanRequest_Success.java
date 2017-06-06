@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.bcb.R;
 import com.bcb.base.Activity_Base;
-import com.bcb.utils.MyActivityManager;
+import com.bcb.util.MyActivityManager;
 
 /**
  * Created by cain on 16/1/8.

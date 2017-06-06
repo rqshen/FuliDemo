@@ -27,13 +27,13 @@ import com.bcb.network.BcbRequest;
 import com.bcb.network.BcbRequestQueue;
 import com.bcb.network.BcbRequestTag;
 import com.bcb.data.bean.AreaBean;
-import com.bcb.utils.MyActivityManager;
-import com.bcb.utils.TokenUtil;
+import com.bcb.util.MyActivityManager;
+import com.bcb.util.TokenUtil;
 import com.google.gson.reflect.TypeToken;
 import com.bcb.network.UrlsOne;
-import com.bcb.utils.LogUtil;
-import com.bcb.utils.PackageUtil;
-import com.bcb.utils.ToastUtil;
+import com.bcb.util.LogUtil;
+import com.bcb.util.PackageUtil;
+import com.bcb.util.ToastUtil;
 
 public class Activity_City extends Activity_Base {
 

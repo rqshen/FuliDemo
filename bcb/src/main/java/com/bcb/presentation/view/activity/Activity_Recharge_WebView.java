@@ -11,8 +11,8 @@ import android.widget.RelativeLayout;
 
 import com.bcb.R;
 import com.bcb.base.Activity_Base;
-import com.bcb.utils.LoadingLayoutMgr;
-import com.bcb.utils.MyActivityManager;
+import com.bcb.util.LoadingLayoutMgr;
+import com.bcb.util.MyActivityManager;
 
 /**
  * Created by cain on 15/12/25.

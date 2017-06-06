@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <color name="colorPrimary">#FFFFFF</color>
+    <color name="colorPrimaryDark">#424954</color>
+    <color name="colorAccent">#FF4081</color>
+
     <!-- 文本绿 -->
     <color name="txt_green">#93c52e</color>
     <!-- 背景色 -->
@@ -28,6 +33,8 @@
     <color name="black">#424954</color>
     <!-- 蓝色 -->
     <color name="blue">#445CFB</color>
+    <!--蓝色2-->
+    <color name="blue2">#4499F8</color>
     <!-- 绿色-->
     <color name="green">#00B700</color>
     <!-- 灰色 -->
@@ -80,5 +87,5 @@
     <color name="pie_rg">#FF4fccff</color>
     <color name="pie_gb">#ff008888</color>
     <color name="pie_rb">#ff880088</color>
-    
+
 </resources>

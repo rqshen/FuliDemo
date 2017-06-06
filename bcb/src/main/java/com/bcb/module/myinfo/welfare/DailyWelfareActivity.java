@@ -30,12 +30,12 @@ import com.bcb.network.BcbRequestTag;
 import com.bcb.network.UrlsOne;
 import com.bcb.presentation.view.activity.Activity_Daily_Welfare_Tip;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
-import com.bcb.utils.DbUtil;
-import com.bcb.utils.LogUtil;
-import com.bcb.utils.MyActivityManager;
-import com.bcb.utils.ToastUtil;
-import com.bcb.utils.TokenUtil;
-import com.bcb.utils.UmengUtil;
+import com.bcb.util.DbUtil;
+import com.bcb.util.LogUtil;
+import com.bcb.util.MyActivityManager;
+import com.bcb.util.ToastUtil;
+import com.bcb.util.TokenUtil;
+import com.bcb.util.UmengUtil;
 import com.dg.spinnerwheel.WheelVerticalView;
 import com.dg.spinnerwheel.adapters.ArrayWheelAdapter;
 

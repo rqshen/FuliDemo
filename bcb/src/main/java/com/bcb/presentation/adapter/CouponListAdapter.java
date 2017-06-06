@@ -16,7 +16,7 @@ import com.bcb.event.BroadcastEvent;
 import com.bcb.data.bean.CouponRecordsBean;
 import com.bcb.module.discover.eliteloan.EliteLoanActivity;
 import com.bcb.module.myinfo.balance.withdraw.WithdrawActivity;
-import com.bcb.utils.LogUtil;
+import com.bcb.util.LogUtil;
 import com.bcb.constant.MyConstants;
 import com.bcb.module.myinfo.balance.FundCustodianAboutActivity;
 import com.bcb.presentation.view.custom.AlertView.AlertView;

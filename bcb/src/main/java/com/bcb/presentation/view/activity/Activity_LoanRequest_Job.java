@@ -18,12 +18,12 @@ import com.bcb.network.UrlsOne;
 import com.bcb.data.bean.StringEventBusBean;
 import com.bcb.data.bean.loan.LoanKindBean;
 import com.bcb.data.bean.loan.PersonInfoBean;
-import com.bcb.utils.LoanPersonalConfigUtil;
-import com.bcb.utils.LogUtil;
-import com.bcb.utils.MyActivityManager;
-import com.bcb.utils.ProgressDialogrUtils;
-import com.bcb.utils.ToastUtil;
-import com.bcb.utils.TokenUtil;
+import com.bcb.util.LoanPersonalConfigUtil;
+import com.bcb.util.LogUtil;
+import com.bcb.util.MyActivityManager;
+import com.bcb.util.ProgressDialogrUtils;
+import com.bcb.util.ToastUtil;
+import com.bcb.util.TokenUtil;
 import com.bcb.presentation.view.custom.EditTextWithDate.EditTextWithDate;
 import com.google.gson.Gson;
 

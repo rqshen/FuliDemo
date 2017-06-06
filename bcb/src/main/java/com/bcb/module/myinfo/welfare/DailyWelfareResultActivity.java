@@ -21,8 +21,8 @@ import com.bcb.R;
 import com.bcb.base.Activity_Base;
 import com.bcb.module.discover.financialproduct.InvestmentFinanceActivity;
 import com.bcb.module.myinfo.balance.trading.TradingRecordActivity;
-import com.bcb.utils.MyActivityManager;
-import com.bcb.utils.UmengUtil;
+import com.bcb.util.MyActivityManager;
+import com.bcb.util.UmengUtil;
 
 /**
  * Created by ruiqin.shen

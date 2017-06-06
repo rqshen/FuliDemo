@@ -24,14 +24,14 @@ import com.bcb.data.bean.StringEventBusBean;
 import com.bcb.data.bean.UserBankCard;
 import com.bcb.data.bean.UserDetailInfo;
 import com.bcb.data.bean.UserWallet;
-import com.bcb.utils.ActivityCollector;
-import com.bcb.utils.DensityUtils;
-import com.bcb.utils.LogUtil;
-import com.bcb.utils.MQCustomerManager;
-import com.bcb.utils.PackageUtil;
-import com.bcb.utils.ToastUtil;
-import com.bcb.utils.TokenUtil;
-import com.bcb.module.home.MainActivity;
+import com.bcb.util.ActivityCollector;
+import com.bcb.util.DensityUtils;
+import com.bcb.util.LogUtil;
+import com.bcb.util.MQCustomerManager;
+import com.bcb.util.PackageUtil;
+import com.bcb.util.ToastUtil;
+import com.bcb.util.TokenUtil;
+import com.bcb.module.home.MainActivity1;
 
 import org.json.JSONObject;
 
@@ -371,7 +371,7 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
 
 	private void JumpToUser() {
 		EventBus.getDefault().post(new BroadcastEvent(BroadcastEvent.USER));
-		startActivity(new Intent(this, MainActivity.class));
+		startActivity(new Intent(this, MainActivity1.class));
 		finish();
 	}
 

@@ -12,7 +12,7 @@ import com.bcb.base.Activity_Base;
 import com.bcb.MyApplication;
 import com.bcb.event.BroadcastEvent;
 import com.bcb.module.login.LoginActivity;
-import com.bcb.utils.MyActivityManager;
+import com.bcb.util.MyActivityManager;
 
 import de.greenrobot.event.EventBus;
 

@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dip"
             android:background="@android:color/white">
-            <com.bcb.utils.PasswordEditText
+            <com.bcb.util.PasswordEditText
                 android:id="@+id/oldpwd"
                 android:layout_width="match_parent"
                 android:layout_height="50dip"
@@ -52,7 +52,7 @@
             android:layout_marginTop="5dip"
             android:background="@android:color/white">
 
-            <com.bcb.utils.PasswordEditText
+            <com.bcb.util.PasswordEditText
                 android:id="@+id/newpwd"
                 android:layout_width="match_parent"
                 android:layout_height="50dip"
@@ -78,7 +78,7 @@
                 android:layout_height="1dip"
                 android:background="@color/linegray"/>
 
-            <com.bcb.utils.PasswordEditText
+            <com.bcb.util.PasswordEditText
                 android:id="@+id/confirmpwd"
                 android:layout_width="match_parent"
                 android:layout_height="50dip"

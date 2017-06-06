@@ -14,9 +14,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.bcb.MyApplication;
 import com.bcb.constant.MyConstants;
-import com.bcb.utils.DESUtil;
-import com.bcb.utils.IpUtils;
-import com.bcb.utils.LogUtil;
+import com.bcb.util.DESUtil;
+import com.bcb.util.IpUtils;
+import com.bcb.util.LogUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -190,13 +190,9 @@ public abstract class BcbRequest<T> extends Request<T> {
     @Override
     public Map<String, String> getHeaders() throws AuthFailureError {
         Map<String, String> headers = new HashMap<String, String>();
-
-        // TODO: 2017/6/2
-//        mEncodeToken = "7Qezsy+8/dGhJKFJZdfFao+TH1m4UQmMrp9UJn5H1tyubivXyCh2Lm7+HJbBouzo343/c8ea50FMmiyTU3Z5Lg==";
         if (mEncodeToken != null) {
             headers.put("access-token", mEncodeToken);
         }
-
         try {
             String pkName = MyApplication.instance.getPackageName();
             String version = MyApplication.instance.getPackageManager().getPackageInfo(pkName, 0).versionName;
@@ -217,7 +213,6 @@ public abstract class BcbRequest<T> extends Request<T> {
     @Override
     public byte[] getBody() {
         try {
-
             // 检测传入的密文token是否为空
             if (null == mEncodeToken) {
                 // 没有token参数，数据解密的key为默认的

@@ -21,11 +21,11 @@ import com.bcb.network.BcbJsonRequest;
 import com.bcb.network.BcbRequest;
 import com.bcb.network.UrlsTwo;
 import com.bcb.data.JEnterprise;
-import com.bcb.utils.LogUtil;
-import com.bcb.utils.MyActivityManager;
-import com.bcb.utils.PackageUtil;
-import com.bcb.utils.ProgressDialogrUtils;
-import com.bcb.utils.TokenUtil;
+import com.bcb.util.LogUtil;
+import com.bcb.util.MyActivityManager;
+import com.bcb.util.PackageUtil;
+import com.bcb.util.ProgressDialogrUtils;
+import com.bcb.util.TokenUtil;
 import com.bcb.presentation.adapter.MyPopupListAdapter;
 import com.google.gson.Gson;
 

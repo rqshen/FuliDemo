@@ -17,8 +17,8 @@ import android.view.WindowManager;
 
 import com.bcb.R;
 import com.bcb.MyApplication;
-import com.bcb.utils.UmengUtil;
-import com.bcb.module.home.MainActivity;
+import com.bcb.util.UmengUtil;
+import com.bcb.module.home.MainActivity1;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -37,7 +37,7 @@ public class WelcomeActivity extends Activity {
             super.handleMessage(msg);
             switch (msg.what) {
                 case 1:
-                    startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
+                    startActivity(new Intent(WelcomeActivity.this, MainActivity1.class));
                     finish();
                     break;
             }

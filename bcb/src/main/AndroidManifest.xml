@@ -66,73 +66,73 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".module.home.MainActivity"
+            android:name=".module.home.MainActivity1"
             android:label="@string/app_name"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".base.Activity_Base"
-            android:label="@string/app_name"></activity>
+            android:label="@string/app_name"/>
         <activity
             android:name=".module.myinfo.myfinancial.myfinancialstate.myfinanciallist.myfinancialdetail.projectdetail.ProjectDetailActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".module.login.LoginActivity"
             android:label="@string/app_name"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden|adjustPan"></activity>
+            android:windowSoftInputMode="stateHidden|adjustPan"/>
         <activity
             android:name=".module.login.register.RegisterNextActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".module.login.register.RegisterFirstActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".module.discover.financialproduct.InvestmentFinanceActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".module.discover.financialproduct.wrapprogram.month.WrapProgramIntroductionActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
         <activity
-            android:name=".presentation.view.activity.Activity_Project_Buy2"
+            android:name=".module.discover.financialproduct.wrapprogram.month.buy.Activity_Project_Buy2"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".module.login.forgetpassword.ForgetPasswordActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".module.myinfo.myfinancial.MyFinancialActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".presentation.view.activity.Activity_Account_Setting"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme"/>
         <activity
             android:name=".presentation.view.activity.Activity_ChangePwd_Success"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".presentation.view.activity.Activity_Modify_Pwd"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.NoTitleBar"></activity>
+            android:theme="@android:style/Theme.NoTitleBar"/>
         <activity
             android:name=".presentation.view.activity.Activity_Setting_Pay_Pwd"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".presentation.view.activity.Activity_ChangeMoney_Success"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".module.myinfo.balance.withdraw.WithdrawActivity"
             android:label="@string/app_name"
@@ -141,71 +141,71 @@
         <activity
             android:name=".presentation.view.activity.Activity_Station_Change"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
         <!-- 交易明细 -->
         <activity
             android:name=".module.myinfo.balance.trading.TradingRecordActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
         <!-- 用户流水 -->
         <activity
             android:name=".presentation.view.activity.Activity_Transaction_Detail"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".presentation.view.activity.Activity_Trading_Record"
             android:label="@string/app_name"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".module.myinfo.myfinancial.myfinancialstate.myfinanciallist.myfinancialdetail.FinancialDetailActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".presentation.view.activity.Activity_Select_Bank"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".presentation.view.activity.Activity_Province"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".presentation.view.activity.Activity_City"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".presentation.view.activity.Activity_BuyProject_Success"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name="com.umeng.fb.ConversationActivity"
             android:screenOrientation="portrait"/>
 
         <meta-data
             android:name="UMENG_APPKEY"
-            android:value="564c1cd6e0f55ab6e6001ce4"></meta-data>
+            android:value="564c1cd6e0f55ab6e6001ce4"/>
         <meta-data
             android:name="UMENG_CHANNEL"
             android:value="DEFAULT"/>
 
         <service
             android:name="com.umeng.update.net.DownloadingService"
-            android:process=":DownloadingService"></service>
+            android:process=":DownloadingService"/>
 
         <activity
             android:name="com.umeng.update.UpdateDialogActivity"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"></activity>
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
 
         <!-- 充值 -->
         <activity
             android:name=".presentation.view.activity.Activity_Recharge_Second"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".presentation.view.activity.Activity_Recharge_Confirm"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".presentation.view.activity.Activity_Recharge_WebView"
             android:label="@string/app_name"
@@ -215,23 +215,23 @@
         <activity
             android:name=".presentation.view.activity.Activity_Select_Coupon"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".presentation.view.activity._Coupons"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
 
         <!-- 认证 -->
         <activity
             android:name=".presentation.view.activity.Activity_Authentication"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
 
         <!-- 借款 -->
         <activity
             android:name=".presentation.view.activity.Activity_Loan"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".module.discover.eliteloan.loanlist.LoanListActivity"
             android:label="@string/app_name"
@@ -274,10 +274,9 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".presentation.view.activity.Activity_Project_Buy"
+            android:name=".module.discover.financialproduct.normalproject.buy.ProjectBuyActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"/>
-
         <activity
             android:name=".presentation.view.activity.Activity_Select_Material"
             android:label="@string/app_name"
@@ -287,7 +286,7 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".base.BaseActivity"
+            android:name=".base.BaseActivity1"
             android:label="@string/app_name"
             android:screenOrientation="portrait"/>
         <activity
@@ -373,7 +372,7 @@
         <service
             android:name="cn.jpush.android.service.DownloadService"
             android:enabled="true"
-            android:exported="false"></service>
+            android:exported="false"/>
 
         <!-- Required SDK 核心功能 -->
         <!-- option since 2.0.5 可配置PushService，DaemonService,PushReceiver,AlarmReceiver的android:process参数 将JPush相关组件设置为一个独立进程 -->
@@ -460,17 +459,17 @@
             android:value="983f6d809971c6e36d403c49"/>
         <!-- </>值来自开发者平台取得的AppKey ： 983f6d809971c6e36d403c49 -->
 
-        <activity android:name=".module.myinfo.balance.FundCustodianAboutActivity"></activity>
-        <activity android:name=".presentation.view.activity.Activity_TuoGuan_HF"></activity>
-        <!--充值-->
+        <activity android:name=".module.myinfo.balance.FundCustodianAboutActivity"/>
+        <activity android:name=".presentation.view.activity.Activity_TuoGuan_HF"/>
+        <!-- 充值 -->
         <activity
             android:name=".module.myinfo.balance.recharge.RechargeActivity"
             android:windowSoftInputMode="adjustResize"/>
         <activity
             android:name=".presentation.view.activity.Activity_Tips_FaileOrSuccess"
-            android:launchMode="singleTask"></activity>
-        <activity android:name=".module.myinfo.balance.FundCustodianWebActivity"></activity>
-        <activity android:name=".presentation.view.activity.A_Slb"></activity>
+            android:launchMode="singleTask"/>
+        <activity android:name=".module.browse.FundCustodianWebActivity"/>
+        <activity android:name=".presentation.view.activity.A_Slb"/>
         <!--
  ATTENTION: This was auto-generated to add Google Play services to your project for
      MyApplication Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -479,18 +478,24 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version"/>
 
-        <activity android:name=".presentation.view.activity.A_AboutSlb"></activity>
-        <activity android:name=".presentation.view.activity.A_Slb_List"></activity>
-        <activity android:name=".module.myinfo.myfinancial.myfinancialstate.myfinanciallist.myfinancialdetail.backpayment.BackPaymentActivity"></activity>
-        <activity android:name=".presentation.view.activity.Activity_Charge_Tips"></activity>
-        <activity android:name=".presentation.view.activity.Activity_Trading_Cancle"></activity>
-        <activity android:name=".presentation.view.activity._Trading_change"></activity>
-        <activity android:name=".presentation.view.activity.Activity_Rading_Record"></activity>
-        <activity android:name=".presentation.view.activity.Activity_ZRXQ"></activity>
-        <activity android:name=".presentation.view.activity.A_MySecurity"></activity>
-        <activity android:name=".module.discover.carinsurance.CarInsuranceActivity"></activity>
-        <activity android:name=".module.myinfo.balance.BalanceActivity"></activity>
-        <activity android:name=".module.myinfo.totalassets.TotalAssetsActivity"></activity>
+        <activity android:name=".presentation.view.activity.A_AboutSlb"/>
+        <activity android:name=".presentation.view.activity.A_Slb_List"/>
+        <activity android:name=".module.myinfo.myfinancial.myfinancialstate.myfinanciallist.myfinancialdetail.backpayment.BackPaymentActivity"/>
+        <activity android:name=".presentation.view.activity.Activity_Charge_Tips"/>
+        <activity android:name=".presentation.view.activity.Activity_Trading_Cancle"/>
+        <activity android:name=".presentation.view.activity._Trading_change"/>
+        <activity android:name=".presentation.view.activity.Activity_Rading_Record"/>
+        <activity android:name=".presentation.view.activity.Activity_ZRXQ"/>
+        <activity android:name=".presentation.view.activity.A_MySecurity"/>
+        <activity android:name=".module.discover.carinsurance.CarInsuranceActivity"/>
+        <activity android:name=".module.myinfo.balance.BalanceActivity"/>
+        <activity android:name=".module.myinfo.totalassets.TotalAssetsActivity"/>
+        <activity android:name=".module.discover.financialproduct.normalproject.buy.ProjectBuySuccessActivity">
+        </activity>
+        <activity android:name=".module.discover.financialproduct.normalproject.buy.ProjectBuyFailActivity">
+        </activity>
+        <activity android:name=".module.myinfo.balance.withdraw.WithdrawSuccessActivity">
+        </activity>
     </application>
 
 </manifest>

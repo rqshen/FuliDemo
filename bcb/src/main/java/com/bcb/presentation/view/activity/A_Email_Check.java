@@ -18,10 +18,10 @@ import com.bcb.MyApplication;
 import com.bcb.network.BcbJsonRequest;
 import com.bcb.network.BcbRequest;
 import com.bcb.network.UrlsOne;
-import com.bcb.utils.LogUtil;
-import com.bcb.utils.MQCustomerManager;
-import com.bcb.utils.ProgressDialogrUtils;
-import com.bcb.utils.TokenUtil;
+import com.bcb.util.LogUtil;
+import com.bcb.util.MQCustomerManager;
+import com.bcb.util.ProgressDialogrUtils;
+import com.bcb.util.TokenUtil;
 import com.bcb.presentation.view.custom.AlertView.DialogBQT;
 
 import org.json.JSONException;

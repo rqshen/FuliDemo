@@ -18,7 +18,7 @@ import com.bcb.base.Activity_Base;
 import com.bcb.module.discover.financialproduct.InvestmentFinanceActivity;
 import com.bcb.module.myinfo.balance.trading.TradingRecordActivity;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
-import com.bcb.utils.UmengUtil;
+import com.bcb.util.UmengUtil;
 import com.dg.spinnerwheel.WheelVerticalView;
 import com.dg.spinnerwheel.adapters.ArrayWheelAdapter;
 

@@ -13,8 +13,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bcb.R;
-import com.bcb.base.BaseActivity;
-import com.bcb.utils.MyActivityManager;
+import com.bcb.base.BaseActivity1;
+import com.bcb.util.MyActivityManager;
 import com.bcb.module.discover.financialproduct.adapter.MyFragmentPagerAdapter;
 
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ import java.util.ArrayList;
 /**
  * 1、债权变更
  */
-public class _Trading_change extends BaseActivity implements View.OnClickListener {
+public class _Trading_change extends BaseActivity1 implements View.OnClickListener {
 	private ViewPager vp;
 	private ArrayList<Fragment> fragmentsList;
 

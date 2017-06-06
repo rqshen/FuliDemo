@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bcb.R;
-import com.bcb.utils.ScreenUtils;
+import com.bcb.util.ScreenUtils;
 import com.bcb.presentation.view.custom.GesturePatternLock.bean.Point;
 
 import java.util.ArrayList;

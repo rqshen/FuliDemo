@@ -9,8 +9,8 @@ import android.widget.TextView;
 import com.bcb.R;
 import com.bcb.base.Activity_Base;
 import com.bcb.module.discover.eliteloan.loanlist.LoanListActivity;
-import com.bcb.utils.MyActivityManager;
-import com.bcb.utils.UmengUtil;
+import com.bcb.util.MyActivityManager;
+import com.bcb.util.UmengUtil;
 
 /**
  * Created by cain on 15/12/22.

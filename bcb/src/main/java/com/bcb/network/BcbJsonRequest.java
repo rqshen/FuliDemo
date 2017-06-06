@@ -7,8 +7,8 @@ import com.android.volley.ParseError;
 import com.android.volley.Response;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.bcb.constant.MyConstants;
-import com.bcb.utils.DESUtil;
-import com.bcb.utils.LogUtil;
+import com.bcb.util.DESUtil;
+import com.bcb.util.LogUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;

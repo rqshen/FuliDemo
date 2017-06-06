@@ -18,7 +18,7 @@ import android.widget.TextView;
 
 import com.bcb.R;
 import com.bcb.MyApplication;
-import com.bcb.utils.TokenUtil;
+import com.bcb.util.TokenUtil;
 import com.bcb.presentation.view.activity.Activity_Gesture_Lock;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
 import com.umeng.analytics.MobclickAgent;
@@ -58,11 +58,6 @@ public class Activity_Base extends Activity {
 	public void setBaseContentView(int layoutResId) {
 		LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View v = inflater.inflate(layoutResId, null);
-//		if (v instanceof ViewGroup) {
-//			((ViewGroup)v).setFitsSystemWindows(true);
-//			((ViewGroup)v).setClipToPadding(true);
-//			LogUtil.i("bqt", "【卧槽】");
-//		}
 		llContent.addView(v);
 
 	}
