@@ -6,7 +6,7 @@ package com.bcb.constant;
  */
 
 public class ProjectListType {
-    public static final int WYB = 0;//稳盈宝【打包标，月】
-    public static final int ZXB = 1;//涨薪宝【原始标】
-    public static final int ZYB = 2;//周盈宝【打包标，周】
+    public static final String WYB = "mon_package";//稳盈宝【打包标，月】
+    public static final String ZXB = "prj_package";//涨薪宝【原始标】
+    public static final String ZYB = "chk_package";//周盈宝【打包标，周】
 }

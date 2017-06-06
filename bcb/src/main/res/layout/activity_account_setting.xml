@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/background"
-    android:orientation="vertical" >
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/background"
+              android:orientation="vertical">
 
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:scrollbars="none" >
+        android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -19,44 +19,46 @@
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:layout_marginTop="@dimen/margin_size_default"
-                android:background="@color/linegray" />
+                android:background="@color/linegray"/>
 
             <RelativeLayout
                 android:id="@+id/layout_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white" >
+                android:background="@color/white">
 
                 <TextView
                     android:id="@+id/textView1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/margin_size_large"
                     android:layout_centerVertical="true"
-                    android:paddingTop="@dimen/margin_size_large"
-                    android:paddingBottom="@dimen/margin_size_large"
+                    android:layout_marginLeft="@dimen/margin_size_large"
                     android:gravity="center"
+                    android:paddingBottom="@dimen/margin_size_large"
+                    android:paddingTop="@dimen/margin_size_large"
                     android:text="@string/setting_name"
                     android:textColor="@color/txt_gray"
-                    android:textSize="@dimen/main_text_default" />
+                    android:textSize="@dimen/main_text_default"/>
 
                 <TextView
                     android:id="@+id/username_text"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/margin_size_large"
                     android:layout_marginRight="18dp"
-                    android:layout_alignParentRight="true"
                     android:gravity="center"
                     android:text="          "
                     android:textColor="#424954"
-                    android:textSize="@dimen/main_text_default" />
+                    android:textSize="@dimen/main_text_default"/>
+
                 <LinearLayout
                     android:id="@+id/layout_name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true">
+
                     <TextView
                         android:id="@+id/name"
                         android:layout_width="wrap_content"
@@ -64,92 +66,96 @@
                         android:layout_gravity="center_vertical"
                         android:text=""
                         android:textColor="#424954"
-                        android:textSize="@dimen/main_text_default" />
+                        android:textSize="@dimen/main_text_default"/>
+
                     <ImageView
                         style="@style/img_ind"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentRight="true" />
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"/>
                 </LinearLayout>
             </RelativeLayout>
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:background="@color/linegray" />
+                android:background="@color/linegray"/>
 
             <RelativeLayout
                 android:id="@+id/layout_id_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white" >
+                android:background="@color/white">
 
                 <TextView
                     android:id="@+id/textView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/margin_size_large"
                     android:layout_centerVertical="true"
-                    android:paddingTop="@dimen/margin_size_large"
+                    android:layout_marginLeft="@dimen/margin_size_large"
                     android:paddingBottom="@dimen/margin_size_large"
+                    android:paddingTop="@dimen/margin_size_large"
                     android:text="@string/setting_idcard"
                     android:textColor="@color/txt_gray"
-                    android:textSize="@dimen/main_text_default" />
+                    android:textSize="@dimen/main_text_default"/>
 
                 <TextView
                     android:id="@+id/id_card_text"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/margin_size_large"
+                    android:layout_marginRight="18dp"
                     android:gravity="center"
                     android:text="          "
-                    android:layout_marginRight="18dp"
-                    android:layout_alignParentRight="true"
                     android:textColor="#424954"
-                    android:textSize="@dimen/main_text_default" />
+                    android:textSize="@dimen/main_text_default"/>
+
                 <LinearLayout
                     android:id="@+id/layout_idcard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:text="去认证"
-                        android:visibility="gone"
                         android:textColor="#424954"
-                        android:textSize="@dimen/main_text_default" />
+                        android:textSize="@dimen/main_text_default"
+                        android:visibility="gone"/>
+
                     <ImageView
                         style="@style/img_ind"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentRight="true" />
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"/>
                 </LinearLayout>
             </RelativeLayout>
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:background="@color/linegray" />
+                android:background="@color/linegray"/>
 
             <RelativeLayout
                 android:id="@+id/layout_bank_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:background="@color/white" >
+                android:background="@color/white"
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/textView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/margin_size_large"
                     android:layout_centerVertical="true"
-                    android:paddingTop="@dimen/margin_size_large"
+                    android:layout_marginLeft="@dimen/margin_size_large"
                     android:paddingBottom="@dimen/margin_size_large"
+                    android:paddingTop="@dimen/margin_size_large"
                     android:text="@string/setting_bankcard"
                     android:textColor="@color/txt_gray"
-                    android:textSize="@dimen/main_text_default" />
+                    android:textSize="@dimen/main_text_default"/>
 
                 <TextView
                     android:id="@+id/bank_card_text"
@@ -161,23 +167,26 @@
                     android:gravity="center"
                     android:text=""
                     android:textColor="@color/txt_gray"
-                    android:textSize="@dimen/main_text_default" />
+                    android:textSize="@dimen/main_text_default"/>
+
                 <LinearLayout
                     android:id="@+id/layout_bankcard"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:text="@string/setting_modify"
                         android:textColor="@color/blue"
-                        android:textSize="@dimen/main_text_default" />
+                        android:textSize="@dimen/main_text_default"/>
+
                     <ImageView
                         style="@style/img_ind"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentRight="true" />
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"/>
                 </LinearLayout>
             </RelativeLayout>
 
@@ -186,94 +195,97 @@
                 android:id="@+id/layout_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white" >
+                android:background="@color/white">
 
                 <TextView
                     android:id="@+id/textView4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/margin_size_large"
                     android:layout_centerVertical="true"
-                    android:paddingTop="@dimen/margin_size_large"
+                    android:layout_marginLeft="@dimen/margin_size_large"
                     android:paddingBottom="@dimen/margin_size_large"
+                    android:paddingTop="@dimen/margin_size_large"
                     android:text="@string/setting_phonenum"
                     android:textColor="@color/txt_gray"
-                    android:textSize="@dimen/main_text_default" />
+                    android:textSize="@dimen/main_text_default"/>
 
                 <ImageView
                     android:id="@+id/right4"
                     style="@style/img_ind"
                     android:layout_width="0dp"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true" />
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"/>
 
                 <TextView
                     android:id="@+id/phone_text"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/margin_size_large"
                     android:layout_marginRight="18dp"
-                    android:layout_alignParentRight="true"
                     android:gravity="center"
                     android:text="           "
                     android:textColor="#424954"
-                    android:textSize="@dimen/main_text_default" />
+                    android:textSize="@dimen/main_text_default"/>
 
                 <TextView
                     android:id="@+id/phone_status"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="@dimen/account_setting_margin_right"
                     android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/account_setting_margin_right"
                     android:text="@string/setting_modify"
                     android:textColor="#424954"
-                    android:textSize="@dimen/main_text_default" />
+                    android:textSize="@dimen/main_text_default"/>
             </RelativeLayout>
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="1px"
-                android:background="@color/linegray" />
+                android:background="@color/linegray"/>
+
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:layout_marginTop="@dimen/margin_size_default"
-                android:background="@color/linegray" />
+                android:background="@color/linegray"/>
+
             <RelativeLayout
                 android:id="@+id/tg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:visibility="visible">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/margin_size_large"
                     android:layout_centerVertical="true"
-                    android:paddingTop="@dimen/margin_size_large"
+                    android:layout_marginLeft="@dimen/margin_size_large"
                     android:paddingBottom="@dimen/margin_size_large"
+                    android:paddingTop="@dimen/margin_size_large"
                     android:text="资金托管"
                     android:textColor="@color/txt_gray"
-                    android:textSize="@dimen/main_text_default" />
+                    android:textSize="@dimen/main_text_default"/>
 
                 <ImageView
                     android:id="@+id/iv_tg"
                     style="@style/img_ind"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"/>
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"/>
 
                 <TextView
                     android:id="@+id/text_tg"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="@dimen/account_setting_margin_right"
                     android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/account_setting_margin_right"
                     android:text="银行卡/资金账户/交易密码"
                     android:textColor="#424954"
-                    android:textSize="@dimen/main_text_default" />
+                    android:textSize="@dimen/main_text_default"/>
             </RelativeLayout>
 
             <ImageView
@@ -288,33 +300,34 @@
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:visibility="visible">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/margin_size_large"
                     android:layout_centerVertical="true"
-                    android:paddingTop="@dimen/margin_size_large"
+                    android:layout_marginLeft="@dimen/margin_size_large"
                     android:paddingBottom="@dimen/margin_size_large"
+                    android:paddingTop="@dimen/margin_size_large"
                     android:text="公司认证"
                     android:textColor="@color/txt_gray"
-                    android:textSize="@dimen/main_text_default" />
+                    android:textSize="@dimen/main_text_default"/>
 
                 <ImageView
                     android:id="@+id/company_arrow"
                     style="@style/img_ind"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"/>
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"/>
 
                 <TextView
                     android:id="@+id/text_company"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="@dimen/account_setting_margin_right"
                     android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/account_setting_margin_right"
                     android:text="@string/setting_modify"
                     android:textColor="@color/blue"
-                    android:textSize="@dimen/main_text_default" />
+                    android:textSize="@dimen/main_text_default"/>
             </RelativeLayout>
 
             <ImageView
@@ -327,81 +340,82 @@
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:layout_marginTop="@dimen/margin_size_default"
-                android:background="@color/linegray" />
+                android:background="@color/linegray"/>
 
             <RelativeLayout
                 android:id="@+id/layout_login_pwd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white" >
+                android:background="@color/white">
 
                 <TextView
                     android:id="@+id/textView6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dip"
                     android:layout_centerVertical="true"
-                    android:paddingTop="@dimen/margin_size_large"
+                    android:layout_marginLeft="15dip"
                     android:paddingBottom="@dimen/margin_size_large"
+                    android:paddingTop="@dimen/margin_size_large"
                     android:text="@string/setting_login_passwd"
                     android:textColor="@color/txt_gray"
-                    android:textSize="@dimen/main_text_default" />
+                    android:textSize="@dimen/main_text_default"/>
+
                 <ImageView
                     android:id="@+id/right6"
                     style="@style/img_ind"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"/>
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"/>
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="@dimen/account_setting_margin_right"
                     android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/account_setting_margin_right"
                     android:text="@string/setting_modify"
                     android:textColor="@color/blue"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"/>
             </RelativeLayout>
+
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:background="@color/linegray" />
+                android:background="@color/linegray"/>
 
             <!-- 手势密码 -->
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white" >
+                android:background="@color/white">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
-                    android:layout_marginLeft="@dimen/margin_size_large"
-                    android:paddingTop="@dimen/margin_size_large"
-                    android:paddingBottom="@dimen/margin_size_large"
                     android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/margin_size_large"
                     android:gravity="center"
+                    android:paddingBottom="@dimen/margin_size_large"
+                    android:paddingTop="@dimen/margin_size_large"
                     android:text="手势密码"
                     android:textColor="@color/txt_gray"
-                    android:textSize="@dimen/main_text_default" />
+                    android:textSize="@dimen/main_text_default"/>
 
                 <Switch
                     android:id="@+id/switch_gesture"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
                     android:layout_marginRight="18dp"/>
 
             </RelativeLayout>
 
 
-
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="1px"
-                android:background="@color/linegray" />
+                android:background="@color/linegray"/>
 
             <!-- 检查升级 -->
             <ImageView
@@ -410,27 +424,30 @@
                 android:layout_marginTop="10dip"
                 android:background="@color/linegray"
                 android:visibility="gone"/>
+
             <RelativeLayout
                 android:id="@+id/layout_update"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:visibility="gone">
+
                 <TextView
                     android:id="@+id/textView8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/margin_size_large"
                     android:layout_centerVertical="true"
-                    android:paddingTop="@dimen/margin_size_large"
+                    android:layout_marginLeft="@dimen/margin_size_large"
                     android:paddingBottom="@dimen/margin_size_large"
+                    android:paddingTop="@dimen/margin_size_large"
                     android:text="@string/setting_update"
                     android:textColor="@color/txt_black"
-                    android:textSize="@dimen/main_text_default" />
+                    android:textSize="@dimen/main_text_default"/>
+
                 <ImageView
                     style="@style/img_ind"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"/>
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"/>
             </RelativeLayout>
 
             <RelativeLayout
@@ -438,7 +455,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dip"
                 android:background="@color/white"
-                android:visibility="gone" >
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/textView9"
@@ -448,7 +465,7 @@
                     android:gravity="center"
                     android:text="用户反馈"
                     android:textColor="@color/txt_black"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"/>
 
                 <ImageView
                     android:id="@+id/right9"
@@ -457,7 +474,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="20dip"
-                    android:src="@drawable/forward_default" />
+                    android:src="@drawable/forward_default"/>
             </RelativeLayout>
 
             <ImageView
@@ -471,14 +488,14 @@
                 android:layout_height="1dip"
                 android:layout_marginTop="10dip"
                 android:background="@color/linegray"
-                android:visibility="gone" />
+                android:visibility="gone"/>
 
             <RelativeLayout
                 android:id="@+id/layout_guide"
                 android:layout_width="match_parent"
                 android:layout_height="60dip"
                 android:background="@color/white"
-                android:visibility="gone" >
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/textView10"
@@ -488,7 +505,7 @@
                     android:gravity="center"
                     android:text="引导页面"
                     android:textColor="@color/txt_black"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"/>
 
                 <ImageView
                     android:id="@+id/right10"
@@ -497,9 +514,8 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="20dip"
-                    android:src="@drawable/forward_default" />
+                    android:src="@drawable/forward_default"/>
             </RelativeLayout>
-
 
 
             <RelativeLayout
@@ -513,18 +529,18 @@
                     android:id="@+id/textView11"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/margin_size_large"
                     android:layout_centerVertical="true"
-                    android:paddingTop="@dimen/margin_size_large"
+                    android:layout_marginLeft="@dimen/margin_size_large"
                     android:paddingBottom="@dimen/margin_size_large"
+                    android:paddingTop="@dimen/margin_size_large"
                     android:text="@string/setting_aboutus"
                     android:textColor="@color/txt_gray"
-                    android:textSize="@dimen/main_text_default" />
+                    android:textSize="@dimen/main_text_default"/>
 
                 <ImageView
                     style="@style/img_ind"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"/>
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"/>
             </RelativeLayout>
 
             <ImageView
@@ -538,43 +554,40 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dip"
                 android:layout_marginTop="@dimen/margin_size_default"
-                android:background="@color/linegray" />
+                android:background="@color/linegray"/>
+
             <RelativeLayout
                 android:id="@+id/layout_logout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white" >
-
-       <!--         <ImageView
-                    style="@style/img_ind"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"/>-->
+                android:background="@color/white">
 
                 <TextView
+                    android:id="@+id/textView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:paddingTop="@dimen/margin_size_large"
-                    android:paddingBottom="@dimen/margin_size_large"
-                    android:text="退出登录"
-                    android:textSize="@dimen/button_titlesize"
-                    android:textColor="#424954"
-                    android:layout_centerVertical="true"
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
-                    android:id="@+id/textView"/>
+                    android:layout_centerVertical="true"
+                    android:gravity="center"
+                    android:paddingBottom="@dimen/margin_size_large"
+                    android:paddingTop="@dimen/margin_size_large"
+                    android:text="退出登录"
+                    android:textColor="#424954"
+                    android:textSize="@dimen/button_titlesize"/>
             </RelativeLayout>
 
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="1dip"
-                android:background="@color/linegray" />
+                android:background="@color/linegray"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_gravity="center_vertical"
                 android:gravity="center_vertical">
+
                 <TextView
                     android:id="@+id/version"
                     android:layout_width="wrap_content"

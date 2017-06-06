@@ -30,7 +30,7 @@ import com.bcb.event.BroadcastEvent;
 import com.bcb.module.discover.carinsurance.CarInsuranceActivity;
 import com.bcb.module.discover.financialproduct.InvestmentFinanceActivity;
 import com.bcb.module.discover.financialproduct.normalproject.NormalProjectIntroductionActivity;
-import com.bcb.module.discover.financialproduct.wrapprogram.month.WrapProgramIntroductionActivity;
+import com.bcb.module.discover.financialproduct.wrapprogram.WrapProgramIntroductionActivity;
 import com.bcb.module.homepager.adapter.AnnounceListAdapter;
 import com.bcb.module.login.LoginActivity;
 import com.bcb.module.login.register.RegisterFirstActivity;

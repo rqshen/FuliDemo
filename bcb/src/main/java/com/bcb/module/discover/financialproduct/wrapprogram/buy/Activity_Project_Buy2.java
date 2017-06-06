@@ -1,4 +1,4 @@
-package com.bcb.module.discover.financialproduct.wrapprogram.month.buy;
+package com.bcb.module.discover.financialproduct.wrapprogram.buy;
 
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;

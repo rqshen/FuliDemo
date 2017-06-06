@@ -1,4 +1,4 @@
-package com.bcb.module.discover.financialproduct.wrapprogram.month;
+package com.bcb.module.discover.financialproduct.wrapprogram;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -26,7 +26,7 @@ import com.bcb.network.BcbJsonRequest;
 import com.bcb.network.BcbRequest;
 import com.bcb.network.UrlsTwo;
 import com.bcb.data.bean.CPXQbean;
-import com.bcb.module.discover.financialproduct.wrapprogram.month.buy.Activity_Project_Buy2;
+import com.bcb.module.discover.financialproduct.wrapprogram.buy.Activity_Project_Buy2;
 import com.bcb.util.DensityUtils;
 import com.bcb.util.HttpUtils;
 import com.bcb.util.LogUtil;

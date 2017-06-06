@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.bcb.R;
 import com.bcb.base.Activity_Base;
+import com.bcb.module.myinfo.setting.AccountSettingActivity;
 import com.bcb.util.MQCustomerManager;
 
 import butterknife.BindView;
@@ -55,7 +56,7 @@ public class Activity_Open_Account3 extends Activity_Base {
 				MQCustomerManager.getInstance(this).showCustomer(null);
 				break;
 			case R.id.tv_open:
-				Activity_Account_Setting.launche(this);
+				AccountSettingActivity.launche(this);
 				break;
 			default:
 				break;

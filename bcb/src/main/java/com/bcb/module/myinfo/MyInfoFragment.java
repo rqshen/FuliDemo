@@ -54,7 +54,7 @@ import com.bcb.network.UrlsOne;
 import com.bcb.network.UrlsTwo;
 import com.bcb.presentation.view.activity.A_MySecurity;
 import com.bcb.presentation.view.activity.A_Slb;
-import com.bcb.presentation.view.activity.Activity_Account_Setting;
+import com.bcb.module.myinfo.setting.AccountSettingActivity;
 import com.bcb.presentation.view.activity.Activity_Privilege_Money;
 import com.bcb.presentation.view.activity.Activity_Trading_Record;
 import com.bcb.presentation.view.activity.Activity_TuoGuan_HF;
@@ -561,7 +561,7 @@ public class MyInfoFragment extends BaseFragment implements OnClickListener {
             // 账号设置
             case R.id.layout_account_settting:
                 UmengUtil.eventById(ctx, R.string.self_setting);
-                Activity_Account_Setting.launche(ctx);
+                AccountSettingActivity.launche(ctx);
                 break;
         }
     }

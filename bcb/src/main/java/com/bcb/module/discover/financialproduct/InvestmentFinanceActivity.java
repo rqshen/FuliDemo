@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bcb.R;
@@ -34,7 +33,6 @@ public class InvestmentFinanceActivity extends BaseActivity1 implements View.OnC
         setBaseContentView(R.layout.activity_cp);
         setLeftTitleVisible(true);
         setTitleValue("投资理财");
-//		setTitleValue("产品列表");
         initUnderLine();
         InitViewPager();
     }
@@ -44,51 +42,51 @@ public class InvestmentFinanceActivity extends BaseActivity1 implements View.OnC
         fragmentsList = new ArrayList<Fragment>();
         fragmentsList.add(FinanceListFragment.newInstance(0));
         fragmentsList.add(FinanceListFragment.newInstance(1));
+        fragmentsList.add(FinanceListFragment.newInstance(2));
 
         vp.setAdapter(new MyFragmentPagerAdapter(getSupportFragmentManager(), fragmentsList));
         vp.setCurrentItem(0);
-        vp.setOffscreenPageLimit(2);
-        vp.setOnPageChangeListener(new MyOnPageChangeListener());
+        vp.setOffscreenPageLimit(3);
+        vp.addOnPageChangeListener(new MyOnPageChangeListener());
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.tv_unused:
+            case R.id.tv_wyb:
                 vp.setCurrentItem(0);
                 break;
-            case R.id.tv_used:
+            case R.id.tv_zxb:
                 vp.setCurrentItem(1);
+                break;
+            case R.id.tv_zyb:
+                vp.setCurrentItem(2);
                 break;
             default:
                 break;
         }
     }
 
-    //********************************************************下面的一条红线**********************************
-    private TextView unusedTextView, usedTextView;
+    /**
+     * 设置横线的点击事件并获取横线的长度
+     */
+    private TextView tvWYB, tvZXB, tvZYB;
     private int currIndex = 0;
-    private int bottomLineWidth;
-    private int offset = 0;
     private int position_one;
     private ImageView ivBottomLine;
 
     private void initUnderLine() {
-        unusedTextView = (TextView) findViewById(R.id.tv_unused);
-        usedTextView = (TextView) findViewById(R.id.tv_used);
-        unusedTextView.setOnClickListener(this);
-        usedTextView.setOnClickListener(this);
+        tvWYB = (TextView) findViewById(R.id.tv_wyb);
+        tvZXB = (TextView) findViewById(R.id.tv_zxb);
+        tvZYB = (TextView) findViewById(R.id.tv_zyb);
+        tvWYB.setOnClickListener(this);
+        tvZXB.setOnClickListener(this);
+        tvZYB.setOnClickListener(this);
         ivBottomLine = (ImageView) findViewById(R.id.red);
-        bottomLineWidth = ivBottomLine.getLayoutParams().width;
         DisplayMetrics dmDisplayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dmDisplayMetrics);
         int screenW = dmDisplayMetrics.widthPixels;
-        offset = (int) ((screenW / 2.0 - bottomLineWidth) / 2);
-        position_one = (int) (screenW / 2.0);
-        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) ivBottomLine.getLayoutParams();
-        params.leftMargin = offset;
-        params.rightMargin = 0;
-        ivBottomLine.setLayoutParams(params);
+        position_one = screenW / 3;
     }
 
     public class MyOnPageChangeListener implements ViewPager.OnPageChangeListener {
@@ -111,12 +109,15 @@ public class InvestmentFinanceActivity extends BaseActivity1 implements View.OnC
             switch (arg0) {
                 case 0:
                     setTextColor();
-                    unusedTextView.setTextColor(Color.RED);
+                    tvWYB.setTextColor(Color.RED);
                     break;
-
                 case 1:
                     setTextColor();
-                    usedTextView.setTextColor(Color.RED);
+                    tvZXB.setTextColor(Color.RED);
+                    break;
+                case 2:
+                    setTextColor();
+                    tvZYB.setTextColor(Color.RED);
                     break;
             }
             //将当前位置设置为目标位置
@@ -128,8 +129,9 @@ public class InvestmentFinanceActivity extends BaseActivity1 implements View.OnC
 
         //设置所有的字体颜色为灰色
         private void setTextColor() {
-            unusedTextView.setTextColor(Color.GRAY);
-            usedTextView.setTextColor(Color.GRAY);
+            tvWYB.setTextColor(Color.GRAY);
+            tvZXB.setTextColor(Color.GRAY);
+            tvZYB.setTextColor(Color.GRAY);
         }
     }
 }

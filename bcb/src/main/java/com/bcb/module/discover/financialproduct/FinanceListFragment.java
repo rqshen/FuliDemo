@@ -13,12 +13,13 @@ import android.widget.Toast;
 import com.bcb.MyApplication;
 import com.bcb.R;
 import com.bcb.base.BaseFragment;
+import com.bcb.constant.ProjectListStatus;
 import com.bcb.constant.ProjectListType;
 import com.bcb.data.bean.MainListBean2;
 import com.bcb.data.bean.WYBbean;
 import com.bcb.module.discover.adapter.FinanceListAdapter;
 import com.bcb.module.discover.financialproduct.normalproject.NormalProjectIntroductionActivity;
-import com.bcb.module.discover.financialproduct.wrapprogram.month.WrapProgramIntroductionActivity;
+import com.bcb.module.discover.financialproduct.wrapprogram.WrapProgramIntroductionActivity;
 import com.bcb.network.BcbJsonRequest;
 import com.bcb.network.BcbRequest;
 import com.bcb.network.UrlsOne;
@@ -144,11 +145,11 @@ public class FinanceListFragment extends BaseFragment implements AdapterView.OnI
 
         String url = "";//请求的地址
 
-        if (Status == ProjectListType.WYB) {//稳盈宝
+        if (Status == ProjectListStatus.WYB) {//稳盈宝
             url = UrlsOne.WYB;
-        } else if (Status == ProjectListType.ZXB) {//涨薪宝【原始标】
+        } else if (Status == ProjectListStatus.ZXB) {//涨薪宝【原始标】
             url = UrlsOne.ZXB;
-        } else if (Status == ProjectListType.ZYB) {//周盈宝
+        } else if (Status == ProjectListStatus.ZYB) {//周盈宝
             url = UrlsOne.ZYB;
         }
 
@@ -156,8 +157,6 @@ public class FinanceListFragment extends BaseFragment implements AdapterView.OnI
                 .BcbCallBack<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                LogUtil.i("bqt", "【稳赢宝】" + Status + "--" + response.toString());
-
                 try {
                     if (PackageUtil.getRequestStatus(response, ctx)) {
                         JSONObject obj = PackageUtil.getResultObject(response);
@@ -172,7 +171,6 @@ public class FinanceListFragment extends BaseFragment implements AdapterView.OnI
                             setupListViewVisible(true);
                             synchronized (this) {
                                 recordsBeans.addAll(mCouponList.Records);
-                                //								Collections.sort(recordsBeans);
                             }
                             if (null != mCouponListAdapter) {
                                 mCouponListAdapter.notifyDataSetChanged();
@@ -206,7 +204,6 @@ public class FinanceListFragment extends BaseFragment implements AdapterView.OnI
 
             @Override
             public void onErrorResponse(Exception error) {
-                LogUtil.i("bqt", "2");
                 refreshLayout.refreshFinish(PullToRefreshLayout.FAIL);
                 refreshLayout.loadmoreFinish(PullToRefreshLayout.FAIL);
                 if (recordsBeans == null || recordsBeans.size() <= 0) {
@@ -241,18 +238,13 @@ public class FinanceListFragment extends BaseFragment implements AdapterView.OnI
         if (jpxm.Status == 10) {
             Toast.makeText(ctx, "Status == 10，不可购买", Toast.LENGTH_SHORT).show();
         }
-        //0正常标，1转让标，2福鸡包
-        int type = 0;//prj_package则为普通标
-        if (jpxm.Type != null && jpxm.Type.equals("claim_convey")) {
-            type = 1;//claim_convey则为债权转让标
-        } else if (jpxm.Type != null && jpxm.Type.equals("mon_package")) {
-            type = 2;//mon_package为福鸡宝
-        }
-        //	【 0稳赢】【1涨薪宝】
-        if (Status == 0) {
-            WrapProgramIntroductionActivity.launche2(ctx, jpxm.PackageId, type);
-        } else {
-            NormalProjectIntroductionActivity.launche2(ctx, jpxm.PackageId, 0, type);
+        //0稳盈宝【月】，1涨薪宝【普通】，2周盈宝【周】
+        if (jpxm.Type != null && jpxm.Type.equals(ProjectListType.WYB)) {//稳盈宝【月】mon_package
+            WrapProgramIntroductionActivity.launche2(ctx, jpxm.PackageId, ProjectListStatus.WYB);
+        } else if (jpxm.Type != null && jpxm.Type.equals(ProjectListType.ZXB)) {//涨薪宝，原始
+            NormalProjectIntroductionActivity.launche2(ctx, jpxm.PackageId, 0, ProjectListStatus.ZXB);
+        } else if (jpxm.Type != null && jpxm.Type.equals(ProjectListType.ZYB)) {//周盈宝，周
+            WrapProgramIntroductionActivity.launche2(ctx, jpxm.PackageId, ProjectListStatus.ZYB);
         }
     }
 }
