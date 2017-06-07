@@ -30,7 +30,7 @@
 
             <LinearLayout
                 android:id="@+id/ll_top"
-                android:layout_width="150dp"
+                android:layout_width="wrap_content"
                 android:layout_height="35dp"
                 android:layout_centerHorizontal="true"
                 android:layout_margin="5dp"
@@ -48,11 +48,20 @@
                     android:textSize="14sp"/>
 
                 <TextView
-                    android:id="@+id/zyb"
+                    android:id="@+id/zxb"
                     android:layout_width="75dp"
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="涨薪宝"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"/>
+
+                <TextView
+                    android:id="@+id/tv_zyb"
+                    android:layout_width="75dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="周盈宝"
                     android:textColor="@color/white"
                     android:textSize="14sp"/>
             </LinearLayout>

@@ -37,7 +37,8 @@ import com.bcb.presentation.presenter.IPresenter_Login;
 import com.bcb.presentation.presenter.IPresenter_LoginImpl;
 import com.bcb.presentation.view.activity_interface.Interface_Base;
 
-import de.greenrobot.event.EventBus;
+
+import org.greenrobot.eventbus.EventBus;
 
 import static com.bcb.R.id.userpwd;
 

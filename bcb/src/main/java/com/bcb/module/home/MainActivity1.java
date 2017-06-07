@@ -50,13 +50,15 @@ import com.bcb.presentation.view.custom.CustomViewPager;
 import com.bcb.module.discover.DiscoverFragment;
 import com.bcb.module.homepager.HomePagerFragment;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONObject;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.greenrobot.event.EventBus;
 
 public class MainActivity1 extends BaseActivity1 {
 	
@@ -430,7 +432,8 @@ public class MainActivity1 extends BaseActivity1 {
 	}
 	
 	//接收事件
-	
+
+	@Subscribe(threadMode = ThreadMode.MAIN)
 	public void onEventMainThread(BroadcastEvent event) {
 		//判断要显示的fragment
 		String flag = event.getFlag();

@@ -74,12 +74,14 @@ import com.bcb.util.ToastUtil;
 import com.bcb.util.TokenUtil;
 import com.bcb.util.UmengUtil;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONObject;
 
 import java.io.File;
 import java.util.List;
 
-import de.greenrobot.event.EventBus;
 
 /**
  * Created by ruiqin.shen
@@ -925,17 +927,14 @@ public class MyInfoFragment extends BaseFragment implements OnClickListener {
                 .add(jsonRequest);
     }
 
-    //***************************************************************************************************************************************
     //接收事件
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(BroadcastEvent event) {
         String flag = event.getFlag();
         if (!TextUtils.isEmpty(flag)) {
             LogUtil.i("bqt", "【MyInfoFragment】【onEventMainThread】状态：" + flag);
             switch (flag) {
                 case BroadcastEvent.LOGOUT:
-//					joinCompany.setVisibility(View.VISIBLE);
-//					user_company_layout.setVisibility(View.GONE);
-//					layout_scrollview.scrollTo(0, 0);
                     LogUtil.i("bqt", "【wocao】");
                     showData();
                     setupJoinCompanyMessage();

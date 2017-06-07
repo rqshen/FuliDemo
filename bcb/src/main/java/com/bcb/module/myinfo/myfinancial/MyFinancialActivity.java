@@ -29,8 +29,10 @@ public class MyFinancialActivity extends FragmentActivity {
     FrameLayout container;
     @BindView(R.id.wyb)
     TextView wyb;
-    @BindView(R.id.zyb)
-    TextView zyb;
+    @BindView(R.id.zxb)
+    TextView zxb;
+    @BindView(R.id.tv_zyb)
+    TextView tvZyb;
     MyFinancialStateFragment wyb_f;
     MyFinancialStateFragment zxb_f;
 
@@ -43,7 +45,7 @@ public class MyFinancialActivity extends FragmentActivity {
         showWYB();
     }
 
-    @OnClick({R.id.iv_left, R.id.wyb, R.id.zyb})
+    @OnClick({R.id.iv_left, R.id.wyb, R.id.zxb, R.id.tv_zyb})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_left:
@@ -52,17 +54,29 @@ public class MyFinancialActivity extends FragmentActivity {
             case R.id.wyb://稳赢宝
                 showWYB();
                 break;
-            case R.id.zyb://涨薪宝
+            case R.id.zxb://涨薪宝
+                showZXB();
+                break;
+            case R.id.tv_zyb:
                 showZYB();
                 break;
         }
     }
 
+    /**
+     * 周盈宝
+     */
     private void showZYB() {
-        zyb.setBackground(getResources().getDrawable(R.drawable.stroke_r));
+    }
+
+    /**
+     * 涨薪宝
+     */
+    private void showZXB() {
+        zxb.setBackground(getResources().getDrawable(R.drawable.stroke_r));
         wyb.setBackground(null);
         wyb.setTextColor(getResources().getColor(R.color.white));
-        zyb.setTextColor(getResources().getColor(R.color.red));
+        zxb.setTextColor(getResources().getColor(R.color.red));
         if (zxb_f == null) {
             zxb_f = MyFinancialStateFragment.newInstance(1);
             getSupportFragmentManager().beginTransaction().add(R.id.container, zxb_f, "AA").commit();
@@ -77,9 +91,9 @@ public class MyFinancialActivity extends FragmentActivity {
      */
     private void showWYB() {
         wyb.setTextColor(getResources().getColor(R.color.red));
-        zyb.setTextColor(getResources().getColor(R.color.white));
+        zxb.setTextColor(getResources().getColor(R.color.white));
         wyb.setBackground(getResources().getDrawable(R.drawable.stroke_l));
-        zyb.setBackground(null);
+        zxb.setBackground(null);
         if (wyb_f == null) {
             wyb_f = MyFinancialStateFragment.newInstance(0);
             getSupportFragmentManager().beginTransaction().add(R.id.container, wyb_f, "AA").commit();

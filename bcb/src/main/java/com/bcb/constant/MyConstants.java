@@ -5,9 +5,8 @@ public class MyConstants {
 
     public static final String IDCARDTYPE = "01";
 
-    //192.168.1.108
-    public static final String HOST_DEV_LOCAL = "http://192.168.1.111:5071";//本地，内网。"http://192.168.1.111:7071"
-    //    public static final String HOST_DEV_LOCAL = "http://192.168.1.108:9003";//临时测试
+    public static final String HOST_DEV_LOCAL = "http://192.168.20.12";//本地，内网
+    public static final String HOST_TEMP_LOCAL = "http://192.168.1.108:9003";//临时测试
     public static final String HOST_DEV = "http://112.74.107.186:9003";//测试外网。线下"http://ttgateway.100cb.cn";
     public static final String HOST_RELEASE = "https://app.fulijr.com";//正式"http://app.fulijr.com";
 
@@ -16,7 +15,7 @@ public class MyConstants {
     public static final String HOST_DEV_Static = "http://ttwap.100cb.cn";//测试
     public static final String HOST_RELEASE_Static = "http://wap.fulijr.com";//正式
 
-    public static int TESTMODE = 1;// 0为本地，1为线下，2为正式
+    public static int TESTMODE = 0;// 0为本地，1为线下，2为正式, 3临时
 
     public static String getHost() {
         switch (TESTMODE) {
@@ -24,6 +23,10 @@ public class MyConstants {
                 return HOST_DEV_LOCAL;
             case 1:
                 return HOST_DEV;
+            case 2:
+                return HOST_RELEASE;
+            case 3:
+                return HOST_TEMP_LOCAL;
             default:
                 return HOST_RELEASE;
         }

@@ -14,7 +14,8 @@ import com.bcb.event.BroadcastEvent;
 import com.bcb.module.login.LoginActivity;
 import com.bcb.util.MyActivityManager;
 
-import de.greenrobot.event.EventBus;
+import org.greenrobot.eventbus.EventBus;
+
 
 public class Activity_ChangePwd_Success extends Activity_Base {
 

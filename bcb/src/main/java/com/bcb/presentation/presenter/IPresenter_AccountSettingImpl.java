@@ -16,9 +16,9 @@ import com.bcb.presentation.model.IModel_UserAccount;
 import com.bcb.presentation.model.IModel_UserAccountImpl;
 import com.bcb.presentation.view.activity_interface.Interface_AccountSetting;
 
+import org.greenrobot.eventbus.EventBus;
 import org.json.JSONObject;
 
-import de.greenrobot.event.EventBus;
 
 /**
  * Created by cain on 16/3/28.

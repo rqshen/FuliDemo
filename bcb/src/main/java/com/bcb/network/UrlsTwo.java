@@ -7,20 +7,10 @@ public class UrlsTwo {
     public static final String host = MyConstants.getHost();
     public static final String hostStatic = MyConstants.getHostStatic();
 
-    //体验标介绍
-    public static String ExpiredProjectIntroduction = host + "/api/v1.0/df76208580b6";
     public static String AboutExpiredProjectIntroduction = "http://ttwap.100cb.cn/static/specialgoldinfo.html";
 
     // 普通项目介绍
     public static String NormalProjectIntroduction = host + "/api/v2.0/a64b0102ddbd";
-    //债权项目详情
-    public static String CLAIMCONVEYPACKAGEDETAIL = host + "/api/v2.0/a6a300b390fe";
-    //福记包
-    public static String GETMONKEYPACKAGEDETAIL = host + "/api/v2.0/a6de0105e5df";
-    //打包标
-    public static String DBB_WYB = host + "/api/v2.5/a6de0105e5df";
-    //三标
-    public static String SB_ZXB = host + "/api/v2.5/a71b011dbf16";
 
     // 获取会员信息
     public static String UserMessage = host + "/api/v2.0/a64300c7417c";
@@ -42,15 +32,9 @@ public class UrlsTwo {
     public static String LoginAccount = host + "/api/v2.0/a63d00c4eca5";
     //托管用户信息修改
     public static String LoginAccountAlert = host + "/api/v2.0/a644012e52bb";
-    //转发给汇付开户
-    public static String OpenAccountHF = host + "/api/v2.0/a63d00c46389";
-    // 提现
-//    public static String UrlWithdrawals = host + "/api/v1.0/a095329ba55b";
     // 提现
     public static String UrlTX_HF = host + "/api/v2.0/a63c0105dc1f";
 
-    // 投标
-//    public static String UrlBuyProject = host + "/api/v1.0/e7b238e2d3df";
     public static String UrlBuyProject = host + "/api/v2.0/a63c0109b86a";
     //预约购买债权转让标
     public static String RRECLAIMCONVEY = host + "/api/v2.0/a6a400e5ed86";

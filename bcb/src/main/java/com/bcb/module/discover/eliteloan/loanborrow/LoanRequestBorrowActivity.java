@@ -48,6 +48,9 @@ import com.bcb.util.TokenUtil;
 import com.bcb.util.UmengUtil;
 import com.google.gson.Gson;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -59,7 +62,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import de.greenrobot.event.EventBus;
 
 /**
  * Created by ruiqin.shen
@@ -160,6 +162,8 @@ public class LoanRequestBorrowActivity extends Activity_Base {
         getLoanCertification();
     }
 
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(StringEventBusBean event) {
         if (event.getContent().equals("LoanFinish")) {
             finish();
@@ -314,19 +318,6 @@ public class LoanRequestBorrowActivity extends Activity_Base {
         MyApplication.getInstance().getRequestQueue().add(jsonRequest);
     }
 
-    private void initBean() {
-        switch (bean.LoanKindId) {
-            case 1:
-                loanRequestInfo.LoanTimeType = 12;
-                break;
-            case 2:
-                loanRequestInfo.LoanTimeType = 3;
-                break;
-            default:
-                loanRequestInfo.LoanTimeType = 12;
-                break;
-        }
-    }
 
     /**
      * 初始化借款申请信息

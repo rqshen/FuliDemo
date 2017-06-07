@@ -100,7 +100,7 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".module.discover.financialproduct.wrapprogram.buy.Activity_Project_Buy2"
+            android:name=".module.discover.financialproduct.wrapprogram.buy.WrapProjectBuyActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"/>
         <activity
@@ -274,7 +274,7 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".module.discover.financialproduct.normalproject.buy.ProjectBuyActivity"
+            android:name=".module.discover.financialproduct.normalproject.buy.NorProjectBuyActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"/>
         <activity

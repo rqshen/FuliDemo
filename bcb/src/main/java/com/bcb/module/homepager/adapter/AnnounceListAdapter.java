@@ -23,6 +23,7 @@ import com.bcb.util.ProgressDialogrUtils;
 import com.bcb.util.ToastUtil;
 import com.bcb.util.TokenUtil;
 
+import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -30,7 +31,6 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import de.greenrobot.event.EventBus;
 
 /**
  * Created by ruiqin.shen

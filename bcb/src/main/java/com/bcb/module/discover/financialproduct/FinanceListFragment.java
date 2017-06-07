@@ -146,11 +146,13 @@ public class FinanceListFragment extends BaseFragment implements AdapterView.OnI
         String url = "";//请求的地址
 
         if (Status == ProjectListStatus.WYB) {//稳盈宝
-            url = UrlsOne.WYB;
+            url = UrlsOne.WYB_LIST;
         } else if (Status == ProjectListStatus.ZXB) {//涨薪宝【原始标】
-            url = UrlsOne.ZXB;
+            url = UrlsOne.ZXB_LIST;
         } else if (Status == ProjectListStatus.ZYB) {//周盈宝
-            url = UrlsOne.ZYB;
+            url = UrlsOne.ZYB_LIST;
+        } else {
+            url = UrlsOne.WYB_LIST;
         }
 
         BcbJsonRequest jsonRequest = new BcbJsonRequest(url, obj, TokenUtil.getEncodeToken(ctx), new BcbRequest
@@ -242,7 +244,7 @@ public class FinanceListFragment extends BaseFragment implements AdapterView.OnI
         if (jpxm.Type != null && jpxm.Type.equals(ProjectListType.WYB)) {//稳盈宝【月】mon_package
             WrapProgramIntroductionActivity.launche2(ctx, jpxm.PackageId, ProjectListStatus.WYB);
         } else if (jpxm.Type != null && jpxm.Type.equals(ProjectListType.ZXB)) {//涨薪宝，原始
-            NormalProjectIntroductionActivity.launche2(ctx, jpxm.PackageId, 0, ProjectListStatus.ZXB);
+            NormalProjectIntroductionActivity.launche(ctx, jpxm.PackageId);
         } else if (jpxm.Type != null && jpxm.Type.equals(ProjectListType.ZYB)) {//周盈宝，周
             WrapProgramIntroductionActivity.launche2(ctx, jpxm.PackageId, ProjectListStatus.ZYB);
         }

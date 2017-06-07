@@ -33,11 +33,11 @@ import com.bcb.util.ToastUtil;
 import com.bcb.util.TokenUtil;
 import com.bcb.module.home.MainActivity1;
 
+import org.greenrobot.eventbus.EventBus;
 import org.json.JSONObject;
 
 import java.util.regex.Pattern;
 
-import de.greenrobot.event.EventBus;
 
 /**
  * 提示界面

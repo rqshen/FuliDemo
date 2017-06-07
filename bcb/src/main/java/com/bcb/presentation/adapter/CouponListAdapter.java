@@ -21,9 +21,10 @@ import com.bcb.constant.MyConstants;
 import com.bcb.module.myinfo.balance.FundCustodianAboutActivity;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.List;
 
-import de.greenrobot.event.EventBus;
 
 public class CouponListAdapter extends BaseAdapter {
 

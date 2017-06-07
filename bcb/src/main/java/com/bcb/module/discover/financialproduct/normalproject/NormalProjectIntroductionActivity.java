@@ -17,10 +17,11 @@ import android.widget.Toast;
 import com.bcb.MyApplication;
 import com.bcb.R;
 import com.bcb.base.Activity_Base;
+import com.bcb.constant.ProjectListStatus;
 import com.bcb.data.bean.UserDetailInfo;
 import com.bcb.data.bean.project.SimpleProjectDetail;
 import com.bcb.module.browse.FundCustodianWebActivity;
-import com.bcb.module.discover.financialproduct.normalproject.buy.ProjectBuyActivity;
+import com.bcb.module.discover.financialproduct.normalproject.buy.NorProjectBuyActivity;
 import com.bcb.module.login.LoginActivity;
 import com.bcb.module.myinfo.balance.FundCustodianAboutActivity;
 import com.bcb.module.myinfo.myfinancial.myfinancialstate.myfinanciallist.myfinancialdetail.projectdetail.ProjectDetailActivity;
@@ -95,18 +96,11 @@ public class NormalProjectIntroductionActivity extends Activity_Base implements 
     private DialogWidget dialogWidget;
     private LinearLayout layout_customer_service;
 
-    private int CouponType = 0;
     private int countDate = 0;
 
-    //初始化******************************************************************************************
-    //0正常标，1转让标，2福鸡包
-    private int type = 0;
-
-    public static void launche2(Context ctx, String pid, int CouponType, int type) {
+    public static void launche(Context ctx, String pid) {
         Intent intent = new Intent();
         intent.putExtra("pid", pid);
-        intent.putExtra("CouponType", CouponType);
-        intent.putExtra("type", type);
         intent.setClass(ctx, NormalProjectIntroductionActivity.class);
         ctx.startActivity(intent);
     }
@@ -114,12 +108,9 @@ public class NormalProjectIntroductionActivity extends Activity_Base implements 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        MyActivityManager.getInstance()
-                .pushOneActivity(NormalProjectIntroductionActivity.this);
+        MyActivityManager.getInstance().pushOneActivity(NormalProjectIntroductionActivity.this);
         if (getIntent() != null) {
             packageId = getIntent().getStringExtra("pid");
-            CouponType = getIntent().getIntExtra("CouponType", 0);
-            type = getIntent().getIntExtra("type", 0);
         }
         setBaseContentView(R.layout.activity_normalproject_introduction);
         setLeftTitleVisible(true);
@@ -237,15 +228,13 @@ public class NormalProjectIntroductionActivity extends Activity_Base implements 
             e.printStackTrace();
         }
         String url = UrlsTwo.NormalProjectIntroduction;//普通标
-        LogUtil.i("bqt", "【请求地址】" + url + "【packageId】" + packageId);
 
         BcbJsonRequest jsonRequest = new BcbJsonRequest(url, jObject, TokenUtil.getEncodeToken(this), new BcbRequest
                 .BcbCallBack<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
 
-                if (type == 1 || type == 2 || PackageUtil.getRequestStatus(response, NormalProjectIntroductionActivity.this)) {
-                    LogUtil.i("bqt", "【标类型】" + type + "【返回内容】" + response.toString());
+                if (PackageUtil.getRequestStatus(response, NormalProjectIntroductionActivity.this)) {
                     try {
                         //先转义
                         String resultString = response.getString("result")
@@ -663,13 +652,13 @@ public class NormalProjectIntroductionActivity extends Activity_Base implements 
         }
 
         //没有开通自动投标
-        if ((type == 1 || type == 2) && !MyApplication.mUserDetailInfo.AutoTenderPlanStatus) {
+        if (!MyApplication.mUserDetailInfo.AutoTenderPlanStatus) {
             altDialog();
             return;
         }
 
         //跳转到购买页面
-        ProjectBuyActivity.launche2(this, packageId, mSimpleProjectDetail.Name, CouponType, countDate, mSimpleProjectDetail, type);
+        NorProjectBuyActivity.launche2(this, packageId, mSimpleProjectDetail.Name, countDate, mSimpleProjectDetail, ProjectListStatus.ZXB);
     }
 
     AlertView alertView;

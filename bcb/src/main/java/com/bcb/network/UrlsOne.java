@@ -27,11 +27,6 @@ public class UrlsOne {
     // 首页广告轮播
     public static final String MainpageAdRotator = host + "/api/v2.5/a71400f186e3 ";
 
-    //产品项目列表
-    public static final String MainpageProduct = host + "/api/v2.0/a64b0102ccf0";
-
-    // 项目汇总
-
     // 首页驿站切换-热门驿站
     public static final String MainpageHotStation = host + "/api/v1.0/7469e8252732";
 
@@ -108,11 +103,20 @@ public class UrlsOne {
     public static final String SEARCHCLAIMCONVEY = host + "/api/v2.0/a69a00bc546d";
 
     //稳赢宝列表，打包的标【月】
-    public static final String WYB = host + "/api/v2.5/a71b011df7f7";//打包
-    //涨薪宝，普通表，原始标
-    public static final String ZXB = host + "/api/v2.5/a71b011d974a";//原始
+    public static final String WYB_LIST = host + "/api/v2.5/a71b011df7f7";//打包
+    //涨薪宝列表，普通表，原始标
+    public static final String ZXB_LIST = host + "/api/v2.5/a71b011d974a";//原始
     //周盈宝列表，打包的标【周】
-    public static final String ZYB = host + "/api/v2.5/a78000f4e1d9";//打包
+    public static final String ZYB_LIST = host + "/api/v2.5/a78000f4e1d9";//打包
+
+
+    //稳赢宝详情，打包的标【月】
+    public static final String WYB_DETAIL = host + "/api/v2.5/a6de0105e5df";//打包
+    //涨薪宝详情，普通表，原始标
+    public static final String ZXB_DETAIL = host + "/api/v2.5/a71b011dbf16";//原始
+    //周盈宝详情，打包的标【周】
+    public static final String ZYB_DETAIL = host + "/api/v2.5/a78000f4e64e";//打包
+
 
     //稳赢宝【月】，已购买的标的列表
     public static final String WYB_JL = host + "/api/v2.5/a71c00f5bd72";//打包

@@ -28,6 +28,7 @@ import com.google.gson.Gson;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.umeng.analytics.MobclickAgent;
 
+import org.greenrobot.eventbus.EventBus;
 import org.json.JSONObject;
 import org.litepal.LitePalApplication;
 
@@ -36,7 +37,6 @@ import java.util.Set;
 
 import cn.jpush.android.api.JPushInterface;
 import cn.jpush.android.api.TagAliasCallback;
-import de.greenrobot.event.EventBus;
 
 public class MyApplication extends Application implements AMapLocationListener {
 

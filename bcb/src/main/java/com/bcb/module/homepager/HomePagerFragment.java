@@ -21,12 +21,14 @@ import android.widget.Toast;
 import com.bcb.MyApplication;
 import com.bcb.R;
 import com.bcb.base.BaseFragment;
+import com.bcb.constant.ProjectListStatus;
+import com.bcb.constant.ProjectListType;
 import com.bcb.data.bean.AdPhotoListBean;
 import com.bcb.data.bean.BannerInfo;
 import com.bcb.data.bean.MainListBean2;
-import com.bcb.data.bean.StringEventBusBean;
 import com.bcb.data.bean.UserDetailInfo;
 import com.bcb.event.BroadcastEvent;
+import com.bcb.module.discover.adapter.FinanceListAdapter;
 import com.bcb.module.discover.carinsurance.CarInsuranceActivity;
 import com.bcb.module.discover.financialproduct.InvestmentFinanceActivity;
 import com.bcb.module.discover.financialproduct.normalproject.NormalProjectIntroductionActivity;
@@ -43,7 +45,6 @@ import com.bcb.network.BcbRequestQueue;
 import com.bcb.network.BcbRequestTag;
 import com.bcb.network.UrlsOne;
 import com.bcb.network.UrlsTwo;
-import com.bcb.module.discover.adapter.FinanceListAdapter;
 import com.bcb.presentation.view.activity.Activity_Privilege_Money;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
 import com.bcb.presentation.view.custom.CustomDialog.BasicDialog;
@@ -63,6 +64,9 @@ import com.bcb.util.TokenUtil;
 import com.bcb.util.UmengUtil;
 import com.bumptech.glide.Glide;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -70,8 +74,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
-
-import de.greenrobot.event.EventBus;
 
 import static com.bcb.MyApplication.mUserDetailInfo;
 
@@ -569,37 +571,22 @@ public class HomePagerFragment extends BaseFragment implements View.OnClickListe
         alertView.show();
     }
 
-    //新手标项目点击事件
-    class newItemClickListener implements AdapterView.OnItemClickListener {
-        public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3) {
-            //            NormalProjectIntroductionActivity.launche(ctx,
-            //                    newRecordsBeans.get(position).getPackageId(),
-            //                    newRecordsBeans.get(position).getName(),
-            //                    newRecordsBeans.get(position).getCouponType());
-        }
-    }
-
     //精品项目的点击事件
-
     public void onItemClick(AdapterView<?> arg0, View view, int position, long arg3) {
         MainListBean2.JpxmBean jpxm = boutqueRecordsBeans.get(position);
         //判断是否属于新标预告的状态，根据状态来判断是否可点击
         if (jpxm.Status == 10) {
             Toast.makeText(ctx, "Status == 10，不可购买", Toast.LENGTH_SHORT).show();
         }
-        //0正常标，1转让标，2福鸡包
-        int type = 0;//prj_package则为普通标
-        if (jpxm.Type != null && jpxm.Type.equals("claim_convey")) {
-            type = 1;//claim_convey则为债权转让标
-        } else if (jpxm.Type != null && jpxm.Type.equals("mon_package")) {
-            type = 2;//mon_package为福鸡宝
+        //0稳盈宝【月】，1涨薪宝【普通】，2周盈宝【周】
+        if (jpxm.Type != null && jpxm.Type.equals(ProjectListType.WYB)) {//稳盈宝【月】mon_package
+            WrapProgramIntroductionActivity.launche2(ctx, jpxm.PackageId, ProjectListStatus.WYB);
+        } else if (jpxm.Type != null && jpxm.Type.equals(ProjectListType.ZXB)) {//涨薪宝，原始
+            NormalProjectIntroductionActivity.launche(ctx, jpxm.PackageId);
+        } else if (jpxm.Type != null && jpxm.Type.equals(ProjectListType.ZYB)) {//周盈宝，周
+            WrapProgramIntroductionActivity.launche2(ctx, jpxm.PackageId, ProjectListStatus.ZYB);
         }
 
-        if (type == 2) {
-            WrapProgramIntroductionActivity.launche2(ctx, jpxm.PackageId, type);
-        } else {
-            NormalProjectIntroductionActivity.launche2(ctx, jpxm.PackageId, 0, type);
-        }
     }
 
     //注册广播，用于接收广播之后更新精品项目的数据
@@ -672,21 +659,9 @@ public class HomePagerFragment extends BaseFragment implements View.OnClickListe
         }
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-//		showItemVisible();
-//		boolean che = mUserDetailInfo == null || TextUtils.isEmpty(mUserDetailInfo.CarInsuranceIndexPage);
-//		LogUtil.i("bqt", "【进入时是否没有获取到车险】" + che);
-//		if (che) {
-//			ll_car.setVisibility(View.GONE);
-//		}
-    }
-
     /**
      * 判断是否显示列表数据
      */
-
     private void showItemVisible() {
         //如果没有登录或者没有投资过的
         if ((MyApplication.saveUserInfo == null || TextUtils.isEmpty(MyApplication.saveUserInfo.getAccess_Token())) || MyApplication.mUserDetailInfo == null ||
@@ -699,16 +674,6 @@ public class HomePagerFragment extends BaseFragment implements View.OnClickListe
         if (announceRecordsBeans == null || announceRecordsBeans.size() <= 0) {
             setupBoutiqueVisible(View.VISIBLE);
         }
-    }
-
-    public void onEventMainThread(StringEventBusBean event) {
-//		if (event.getContent().equals("CXGONE")) {
-//			ll_car.setVisibility(View.GONE);
-//			LogUtil.i("bqt", "【隐藏车险】");
-//		} else if (event.getContent().equals("CXVISIBLE")) {
-//			ll_car.setVisibility(View.VISIBLE);
-//			LogUtil.i("bqt", "【显示车险】");
-//		}
     }
 
     @Override
@@ -743,6 +708,7 @@ public class HomePagerFragment extends BaseFragment implements View.OnClickListe
     }
 
     //接收事件
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(BroadcastEvent event) {
         String flag = event.getFlag();
         if (!TextUtils.isEmpty(flag)) {
