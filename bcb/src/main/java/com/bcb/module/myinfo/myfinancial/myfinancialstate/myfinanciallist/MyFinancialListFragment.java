@@ -10,24 +10,25 @@ import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
+import com.bcb.MyApplication;
 import com.bcb.R;
 import com.bcb.base.BaseFragment;
-import com.bcb.MyApplication;
+import com.bcb.constant.ProjectListStatus;
+import com.bcb.data.bean.TZJLbean;
+import com.bcb.module.discover.financialproduct.InvestmentFinanceActivity;
+import com.bcb.module.myinfo.myfinancial.myfinancialstate.MyFinancialStateFragment;
 import com.bcb.module.myinfo.myfinancial.myfinancialstate.myfinanciallist.adapter.MyFinancialListAdapter;
+import com.bcb.module.myinfo.myfinancial.myfinancialstate.myfinanciallist.myfinancialdetail.FinancialDetailActivity;
 import com.bcb.network.BcbJsonRequest;
 import com.bcb.network.BcbRequest;
 import com.bcb.network.UrlsOne;
-import com.bcb.data.bean.TZJLbean;
+import com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout;
 import com.bcb.util.HttpUtils;
 import com.bcb.util.LogUtil;
 import com.bcb.util.MyListView;
 import com.bcb.util.PackageUtil;
 import com.bcb.util.ToastUtil;
 import com.bcb.util.TokenUtil;
-import com.bcb.module.myinfo.myfinancial.myfinancialstate.MyFinancialStateFragment;
-import com.bcb.module.myinfo.myfinancial.myfinancialstate.myfinanciallist.myfinancialdetail.FinancialDetailActivity;
-import com.bcb.module.discover.financialproduct.InvestmentFinanceActivity;
-import com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -59,6 +60,8 @@ public class MyFinancialListFragment extends BaseFragment implements AdapterView
     private boolean canLoadmore = true;
     private PullToRefreshLayout refreshLayout;
     private RelativeLayout loadmore_view;
+    private static String EXTRA_STATUS = "status";
+    private static String EXTRA_TAB = "Tab";
 
     //******************************************************************************************
 
@@ -67,8 +70,8 @@ public class MyFinancialListFragment extends BaseFragment implements AdapterView
      */
     public static MyFinancialListFragment newInstance(int Status, int Tab) {
         Bundle bundle = new Bundle();
-        bundle.putInt("Status", Status);
-        bundle.putInt("Tab", Tab);
+        bundle.putInt(EXTRA_STATUS, Status);
+        bundle.putInt(EXTRA_TAB, Tab);
         MyFinancialListFragment fragment = new MyFinancialListFragment();
         fragment.setArguments(bundle);
         return fragment;
@@ -79,8 +82,8 @@ public class MyFinancialListFragment extends BaseFragment implements AdapterView
         super.onCreate(savedInstanceState);
         Bundle bundle = getArguments();
         if (bundle != null) {
-            Status = bundle.getInt("Status");
-            Tab = bundle.getInt("Tab");
+            Status = bundle.getInt(EXTRA_STATUS);
+            Tab = bundle.getInt(EXTRA_TAB);
         }
     }
     //******************************************************************************************
@@ -154,27 +157,40 @@ public class MyFinancialListFragment extends BaseFragment implements AdapterView
             e.printStackTrace();
         }
 
-        String url = UrlsOne.WYB_JL;//打包，稳赢
-        if (Status == 1) url = UrlsOne.ZXB_JL;
+
+        String url = UrlsOne.WYB_MyFinancial;//打包，稳赢
+        if (Status == ProjectListStatus.WYB) {
+            url = UrlsOne.WYB_MyFinancial;//打包，稳赢
+        } else if (Status == ProjectListStatus.ZXB) {
+            url = UrlsOne.ZXB_MyFinancial;
+        } else if (Status == ProjectListStatus.ZYB) {
+            url = UrlsOne.ZYB_MyFinancial;
+        }
+
         BcbJsonRequest jsonRequest = new BcbJsonRequest(url, obj, TokenUtil.getEncodeToken(ctx), new BcbRequest
                 .BcbCallBack<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                LogUtil.i("bqt", "【打包稳赢宝投资记录】" + Status + "--" + Tab + "--" + response.toString());
-
                 try {
                     if (PackageUtil.getRequestStatus(response, ctx)) {
                         JSONObject obj = PackageUtil.getResultObject(response);
                         tzjLbean = null;
                         if (obj != null) {
+                            float tempYjsy = 0;//应计收益
+                            float tempZtbj = 0;//再投本金
                             tzjLbean = MyApplication.mGson.fromJson(obj.toString(), TZJLbean.class);
-                            if (Status == 0) {
-                                ((MyFinancialStateFragment) getParentFragment()).yjsy.setText(String.format("%.2f", tzjLbean.PackInterest));
-                                ((MyFinancialStateFragment) getParentFragment()).ztbj.setText(String.format("%.2f", tzjLbean.PackPrincipal));
-                            } else {
-                                ((MyFinancialStateFragment) getParentFragment()).yjsy.setText(String.format("%.2f", tzjLbean.OriginalInterest));
-                                ((MyFinancialStateFragment) getParentFragment()).ztbj.setText(String.format("%.2f", tzjLbean.OriginalPrincipal));
+                            if (Status == ProjectListStatus.WYB) {
+                                tempYjsy = tzjLbean.PackInterest;
+                                tempZtbj = tzjLbean.PackPrincipal;
+                            } else if (Status == ProjectListStatus.ZXB) {
+                                tempYjsy = tzjLbean.OriginalInterest;
+                                tempZtbj = tzjLbean.OriginalPrincipal;
+                            } else if (Status == ProjectListStatus.ZYB) {
+                                tempYjsy = tzjLbean.ChickenInterest;
+                                tempZtbj = tzjLbean.ChickenPrincipal;
                             }
+                            ((MyFinancialStateFragment) getParentFragment()).yjsy.setText(String.format("%.2f", tempYjsy));
+                            ((MyFinancialStateFragment) getParentFragment()).ztbj.setText(String.format("%.2f", tempZtbj));
                         }
 
                         //存在数据时
@@ -184,7 +200,6 @@ public class MyFinancialListFragment extends BaseFragment implements AdapterView
                             setupListViewVisible(true);
                             synchronized (this) {
                                 recordsBeans.addAll(tzjLbean.InvetDetail.Records);
-                                //								Collections.sort(recordsBeans);
                             }
                             if (null != mCouponListAdapter) {
                                 mCouponListAdapter.notifyDataSetChanged();

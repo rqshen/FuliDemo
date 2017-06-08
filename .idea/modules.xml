@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/bcb/bcb.iml" filepath="$PROJECT_DIR$/bcb/bcb.iml" />
-      <module fileurl="file://$PROJECT_DIR$/bcb_android_fulejinrong.iml" filepath="$PROJECT_DIR$/bcb_android_fulejinrong.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bcb_android_fulijinrong.iml" filepath="$PROJECT_DIR$/bcb_android_fulijinrong.iml" />
       <module fileurl="file://$PROJECT_DIR$/spinnerwheel/spinnerwheel.iml" filepath="$PROJECT_DIR$/spinnerwheel/spinnerwheel.iml" />
       <module fileurl="file://$PROJECT_DIR$/volley/volley.iml" filepath="$PROJECT_DIR$/volley/volley.iml" />
     </modules>

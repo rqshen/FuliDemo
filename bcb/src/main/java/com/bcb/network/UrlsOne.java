@@ -117,11 +117,13 @@ public class UrlsOne {
     //周盈宝详情，打包的标【周】
     public static final String ZYB_DETAIL = host + "/api/v2.5/a78000f4e64e";//打包
 
+    //稳赢宝【月】，购买的标的列表
+    public static final String WYB_MyFinancial = host + "/api/v2.5/a71c00f5bd72";
+    //涨薪宝【原始】，已购买的【原始标】列表
+    public static final String ZXB_MyFinancial = host + "/api/v2.5/a6fd011ee788";
+    //周赢宝【周】，购买的标的列表
+    public static final String ZYB_MyFinancial = host + "/api/v2.5/a78000f74fdf";
 
-    //稳赢宝【月】，已购买的标的列表
-    public static final String WYB_JL = host + "/api/v2.5/a71c00f5bd72";//打包
-    //涨薪宝【原始】，易购买的【原始标】列表
-    public static final String ZXB_JL = host + "/api/v2.5/a6fd011ee788";//散
     //稳赢宝
     public static final String WYB_XQ = host + "/api/v2.5/a71c00f5f9ff";//打包
     //zhangxinbao

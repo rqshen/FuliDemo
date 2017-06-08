@@ -14,11 +14,10 @@
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="40dp">
-
+            <!--返回图标-->
             <ImageView
                 android:id="@+id/iv_left"
                 android:layout_width="wrap_content"
@@ -36,7 +35,7 @@
                 android:layout_margin="5dp"
                 android:background="@drawable/button_stroke_white2"
                 android:orientation="horizontal">
-
+                <!--稳盈宝-->
                 <TextView
                     android:id="@+id/wyb"
                     android:layout_width="75dp"
@@ -46,16 +45,26 @@
                     android:text="稳盈宝"
                     android:textColor="@color/red"
                     android:textSize="14sp"/>
-
+                <!--分割线-->
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/linegray"/>
+                <!--涨薪宝-->
                 <TextView
                     android:id="@+id/zxb"
                     android:layout_width="75dp"
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="涨薪宝"
-                    android:textColor="@color/white"
+                    android:textColor="@color/linegray"
                     android:textSize="14sp"/>
-
+                <!--分割线-->
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"/>
+                <!--周盈宝-->
                 <TextView
                     android:id="@+id/tv_zyb"
                     android:layout_width="75dp"
@@ -65,8 +74,6 @@
                     android:textColor="@color/white"
                     android:textSize="14sp"/>
             </LinearLayout>
-
-
         </RelativeLayout>
         <!-- 填充Fragment的容器 -->
         <FrameLayout

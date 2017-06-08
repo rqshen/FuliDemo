@@ -101,7 +101,7 @@ public class RechargeActivity extends Activity_Base implements View.OnClickListe
                     ProjectDetailActivity.launcheForResult(RechargeActivity.this, "解绑说明", UrlsTwo.UrlUnBandExplain, 2);
                 }
             });
-            layout_bank_card.setVisibility(View.VISIBLE);//银行卡号
+//            layout_bank_card.setVisibility(View.VISIBLE);//银行卡号
         } else {
             setRightTitleValue("限额说明", new View.OnClickListener() {
                 @Override
@@ -114,7 +114,7 @@ public class RechargeActivity extends Activity_Base implements View.OnClickListe
                         Toast.makeText(RechargeActivity.this, "查询限额信息失败", Toast.LENGTH_SHORT).show();
                 }
             });
-            layout_bank_card.setVisibility(View.INVISIBLE);
+//            layout_bank_card.setVisibility(View.INVISIBLE);
         }
     }
 

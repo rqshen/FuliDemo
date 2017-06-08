@@ -8,8 +8,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bcb.R;
-import com.bcb.util.ScreenUtils;
 import com.bcb.presentation.view.custom.GesturePatternLock.bean.Point;
+import com.bcb.util.ScreenUtils;
+import com.blankj.utilcode.util.ConvertUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +38,7 @@ public class ContentView extends ViewGroup {
         setupContentView(context, true, "", callBack);
     }
 
-    public ContentView(Context context,String passWord, Drawl.GestureCallBack callBack) {
+    public ContentView(Context context, String passWord, Drawl.GestureCallBack callBack) {
         super(context);
         setupContentView(context, false, passWord, callBack);
     }
@@ -53,21 +54,24 @@ public class ContentView extends ViewGroup {
         if (isSettingPasswd) {
             drawl = new Drawl(context, list, callBack);
         } else {
-            drawl = new Drawl(context, list, passWord,callBack);
+            drawl = new Drawl(context, list, passWord, callBack);
         }
     }
 
+
+    int leftDistance = ConvertUtils.dp2px(36);//最两边的距离
+
     //添加子元素
-    private void addChild(){
+    private void addChild() {
         for (int i = 0; i < 9; i++) {
             ImageView image = new ImageView(context);
             image.setBackgroundResource(R.drawable.gesture_node_default);
             this.addView(image);
 
             //获取图片宽度
-            Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.gesture_logo);
-            eachWith = bitmap.getWidth() / 2;
-            margin = (screenDispaly[0] - 3 * bitmap.getWidth()) / 4;
+            Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.gesture_node_default);
+            eachWith = bitmap.getWidth();
+            margin = (screenDispaly[0] - 3 * bitmap.getWidth() - leftDistance * 2) / 4;
 
             // 第几行
             int row = i / 3;
@@ -75,18 +79,18 @@ public class ContentView extends ViewGroup {
             int col = i % 3;
 
             // 定义点的上下左右位置
-            int leftX = col * (2 * eachWith + margin) + margin;
-            int topY = row * (2 * eachWith + margin) + margin;
-            int rightX = (col + 1) * (2 * eachWith + margin);
-            int bottomY = (row + 1) * (2 * eachWith + margin);
+            int leftX = col * (eachWith + margin) + margin + leftDistance;
+            int topY = row * (eachWith + margin) + margin;
+            int rightX = (col + 1) * (eachWith + margin) + leftDistance;
+            int bottomY = (row + 1) * (eachWith + margin);
 
-            Point p = new Point(leftX, rightX, topY, bottomY, image,i+1);
+            Point p = new Point(leftX, rightX, topY, bottomY, image, i + 1);
             this.list.add(p);
         }
     }
 
     //设置父界面
-    public void setParentView(ViewGroup parent){
+    public void setParentView(ViewGroup parent) {
         // 得到屏幕的宽度
         int width = screenDispaly[0];
         LayoutParams layoutParams = new LayoutParams(width, width);
@@ -118,7 +122,7 @@ public class ContentView extends ViewGroup {
             int col = i % 3;
             View v = getChildAt(i);
             //布局每个子元素的大小和位置
-            v.layout(col * (2 * eachWith + margin) + margin, row * (2 * eachWith + margin) + margin, (col + 1) * (2 * eachWith + margin), (row + 1) * (2 * eachWith + margin));
+            v.layout(col * (eachWith + margin) + margin + leftDistance, row * (eachWith + margin) + margin, (col + 1) * (eachWith + margin) + leftDistance, (row + 1) * (eachWith + margin));
         }
     }
 

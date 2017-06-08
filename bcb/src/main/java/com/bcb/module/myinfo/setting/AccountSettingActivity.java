@@ -24,12 +24,12 @@ import com.bcb.module.login.LoginActivity;
 import com.bcb.module.myinfo.balance.FundCustodianAboutActivity;
 import com.bcb.module.myinfo.joincompany.JoinCompanyActivity;
 import com.bcb.module.myinfo.myfinancial.myfinancialstate.myfinanciallist.myfinancialdetail.projectdetail.ProjectDetailActivity;
+import com.bcb.module.myinfo.setting.gesturelock.GestureLockActivity;
 import com.bcb.network.UrlsOne;
 import com.bcb.presentation.model.IModel_UserAccount;
 import com.bcb.presentation.model.IModel_UserAccountImpl;
 import com.bcb.presentation.presenter.IPresenter_AccountSetting;
 import com.bcb.presentation.presenter.IPresenter_AccountSettingImpl;
-import com.bcb.presentation.view.activity.Activity_Gesture_Lock;
 import com.bcb.presentation.view.activity.Activity_Modify_Pwd;
 import com.bcb.presentation.view.activity.Activity_TuoGuan_HF;
 import com.bcb.presentation.view.activity_interface.Interface_AccountSetting;
@@ -510,7 +510,7 @@ public class AccountSettingActivity extends Activity_Base implements OnClickList
      */
     private void settingGesturePassword() {
         UmengUtil.eventById(AccountSettingActivity.this, R.string.gesture_on);
-        Intent newIntent = new Intent(AccountSettingActivity.this, Activity_Gesture_Lock.class);
+        Intent newIntent = new Intent(AccountSettingActivity.this, GestureLockActivity.class);
         startActivityForResult(newIntent, 1);
     }
 
@@ -550,7 +550,7 @@ public class AccountSettingActivity extends Activity_Base implements OnClickList
      */
     private void clearGesturePassword() {
         UmengUtil.eventById(AccountSettingActivity.this, R.string.gusture_off);
-        Intent newIntent = new Intent(AccountSettingActivity.this, Activity_Gesture_Lock.class);
+        Intent newIntent = new Intent(AccountSettingActivity.this, GestureLockActivity.class);
         newIntent.putExtra("isSettingPasswd", false);
         newIntent.putExtra("isCanBack", true);
         startActivityForResult(newIntent, 10);

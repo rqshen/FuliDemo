@@ -290,7 +290,7 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".presentation.view.activity.Activity_Gesture_Lock"
+            android:name=".module.myinfo.setting.gesturelock.GestureLockActivity"
             android:label="@string/app_name"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"/>

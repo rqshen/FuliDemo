@@ -30,6 +30,7 @@ import com.bcb.R;
 import com.bcb.MyApplication;
 import com.bcb.base.BaseActivity1;
 import com.bcb.event.BroadcastEvent;
+import com.bcb.module.myinfo.setting.gesturelock.GestureLockActivity;
 import com.bcb.network.BcbJsonRequest;
 import com.bcb.network.BcbRequest;
 import com.bcb.network.BcbRequestTag;
@@ -42,7 +43,6 @@ import com.bcb.util.PackageUtil;
 import com.bcb.util.TokenUtil;
 import com.bcb.util.UmengUtil;
 import com.bcb.module.myinfo.MyInfoFragment;
-import com.bcb.presentation.view.activity.Activity_Gesture_Lock;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
 import com.bcb.presentation.view.custom.AlertView.DLDialog;
 import com.bcb.presentation.view.custom.AlertView.UpdateDialog;
@@ -99,7 +99,7 @@ public class MainActivity1 extends BaseActivity1 {
 
 		if (!MyApplication.saveUserInfo.getGesturePassword()
 				.isEmpty() && MyApplication.saveUserInfo.getAccess_Token() != null) {
-			Activity_Gesture_Lock.launche(MainActivity1.this, false, true);
+			GestureLockActivity.launche(MainActivity1.this, false, true);
 		}
 	}
 

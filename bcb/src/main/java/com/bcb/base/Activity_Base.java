@@ -18,8 +18,8 @@ import android.widget.TextView;
 
 import com.bcb.R;
 import com.bcb.MyApplication;
+import com.bcb.module.myinfo.setting.gesturelock.GestureLockActivity;
 import com.bcb.util.TokenUtil;
-import com.bcb.presentation.view.activity.Activity_Gesture_Lock;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
 import com.umeng.analytics.MobclickAgent;
 
@@ -155,7 +155,7 @@ public class Activity_Base extends Activity {
 		if (isAppOnForeground() && isLongerThanOneMinute()) {
 			//存在手势密码
 			if (hasGesturePassword()) {
-				Activity_Gesture_Lock.launche(Activity_Base.this, false, true);
+				GestureLockActivity.launche(Activity_Base.this, false, true);
 			}
 			//如果不存在手势密码，并且是第一次登陆，则提醒去设置手势密码
 			else if (MyApplication.saveUserInfo.getAccess_Token() != null && MyApplication.saveUserInfo.isFirstLogin()) {
@@ -166,8 +166,8 @@ public class Activity_Base extends Activity {
 				ibuilder.setPositiveButton("立即设置", new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-//						Activity_Gesture_Lock.launche(Activity_Base.this, true, true);
-						startActivity(new Intent(Activity_Base.this, Activity_Gesture_Lock.class));
+//						GestureLockActivity.launche(Activity_Base.this, true, true);
+						startActivity(new Intent(Activity_Base.this, GestureLockActivity.class));
 						alertView.dismiss();
 						alertView = null;
 					}

@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 import com.bcb.R;
 import com.bcb.MyApplication;
-import com.bcb.presentation.view.activity.Activity_Gesture_Lock;
+import com.bcb.module.myinfo.setting.gesturelock.GestureLockActivity;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
 
 import java.text.ParseException;
@@ -124,7 +124,7 @@ public class BaseActivity1 extends FragmentActivity {
         if (isAppOnForeground() && isLongerThanOneMinute()) {
             //存在手势密码
             if (hasGesturePassword()) {
-                Activity_Gesture_Lock.launche(BaseActivity1.this, false, true);
+                GestureLockActivity.launche(BaseActivity1.this, false, true);
             }
         }
     }
@@ -231,8 +231,8 @@ public class BaseActivity1 extends FragmentActivity {
             ibuilder.setPositiveButton("立即设置", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-//                    Activity_Gesture_Lock.launche(BaseActivity1.this, true, true);
-                    startActivity(new Intent(BaseActivity1.this, Activity_Gesture_Lock.class));
+//                    GestureLockActivity.launche(BaseActivity1.this, true, true);
+                    startActivity(new Intent(BaseActivity1.this, GestureLockActivity.class));
                     alertView.dismiss();
                     alertView = null;
                 }

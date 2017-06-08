@@ -33,6 +33,7 @@ public class MyFinancialStateFragment extends BaseFragment implements View.OnCli
     private ViewPager vp;
     private ArrayList<Fragment> fragmentsList;
     private int Status;//	【 0稳赢，打包】【1涨薪宝，三标】
+    private static String EXTRA_STATUS = "status";
 
     //******************************************************************************************
 
@@ -41,7 +42,7 @@ public class MyFinancialStateFragment extends BaseFragment implements View.OnCli
      */
     public static MyFinancialStateFragment newInstance(int Status) {
         Bundle bundle = new Bundle();
-        bundle.putInt("Status", Status);
+        bundle.putInt(EXTRA_STATUS, Status);
         MyFinancialStateFragment fragment = new MyFinancialStateFragment();
         fragment.setArguments(bundle);
         return fragment;
@@ -52,7 +53,7 @@ public class MyFinancialStateFragment extends BaseFragment implements View.OnCli
         super.onCreate(savedInstanceState);
         Bundle bundle = getArguments();
         if (bundle != null) {
-            Status = bundle.getInt("Status");
+            Status = bundle.getInt(EXTRA_STATUS);
         }
     }
     //******************************************************************************************
@@ -74,13 +75,8 @@ public class MyFinancialStateFragment extends BaseFragment implements View.OnCli
     private void InitViewPager(View view) {
         vp = (ViewPager) view.findViewById(R.id.vp);
         fragmentsList = new ArrayList<Fragment>();
-        if (Status == 0) {
-            fragmentsList.add(MyFinancialListFragment.newInstance(0, 1));
-            fragmentsList.add(MyFinancialListFragment.newInstance(0, 2));
-        } else {
-            fragmentsList.add(MyFinancialListFragment.newInstance(1, 1));
-            fragmentsList.add(MyFinancialListFragment.newInstance(1, 2));
-        }
+        fragmentsList.add(MyFinancialListFragment.newInstance(Status, 1));
+        fragmentsList.add(MyFinancialListFragment.newInstance(Status, 2));
         vp.setAdapter(new MyFragmentPagerAdapter(getChildFragmentManager(), fragmentsList));
         vp.setCurrentItem(0);
         vp.setOffscreenPageLimit(2);

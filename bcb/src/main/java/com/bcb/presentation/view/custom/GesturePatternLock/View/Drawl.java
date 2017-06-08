@@ -77,15 +77,6 @@ public class Drawl extends View {
 
         paint.setStyle(Paint.Style.STROKE);// 设置非填充
         paint.setStrokeWidth(4);// 笔宽像素
-//        if (screenDispaly[0] <= 480) {
-//            paint.setStrokeWidth(10);// 笔宽像素
-//        } else if (screenDispaly[0] <= 720) {
-//            paint.setStrokeWidth(15);// 笔宽像素
-//        } else if (screenDispaly[0] <= 1080) {
-//            paint.setStrokeWidth(20);// 笔宽像素
-//        } else {
-//            paint.setStrokeWidth(30);// 笔宽像素
-//        }
 
         paint.setColor(Color.rgb(219, 56, 56));// 设置颜色
         paint.setAntiAlias(true);// 不显示锯齿
