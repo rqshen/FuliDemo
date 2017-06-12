@@ -46,8 +46,6 @@ public class UrlsOne {
     public static final String REQUESTZR = host + "/api/v2.0/a69000ac1b78";//申请债权转让
     public static final String UNREQUESTZR = host + "/api/v2.0/a69100a6d8a4";//取消债权转让
 
-    public static final String WYB_ZR = host + "/api/v2.5/a71d01130432";//申请债权退出
-
 
     //债权转让信息
     public static final String CLAIMCONVEYDETAIL = host + "/api/v2.0/a69a00bc7e0f";
@@ -118,16 +116,24 @@ public class UrlsOne {
     public static final String ZYB_DETAIL = host + "/api/v2.5/a78000f4e64e";//打包
 
     //稳赢宝【月】，购买的标的列表
-    public static final String WYB_MyFinancial = host + "/api/v2.5/a71c00f5bd72";
+    public static final String WYB_MyFinancial_List = host + "/api/v2.5/a71c00f5bd72";
     //涨薪宝【原始】，已购买的【原始标】列表
-    public static final String ZXB_MyFinancial = host + "/api/v2.5/a6fd011ee788";
+    public static final String ZXB_MyFinancial_List = host + "/api/v2.5/a6fd011ee788";
     //周赢宝【周】，购买的标的列表
-    public static final String ZYB_MyFinancial = host + "/api/v2.5/a78000f74fdf";
+    public static final String ZYB_MyFinancial_List = host + "/api/v2.5/a78000f74fdf";
 
-    //稳赢宝
-    public static final String WYB_XQ = host + "/api/v2.5/a71c00f5f9ff";//打包
-    //zhangxinbao
-    public static final String ZXB_XQ = host + "/api/v2.5/a6fd011f5ca5";//散
+    //稳赢宝【月】，购买的标的列表详情
+    public static final String WYB_MyFinancial_XQ = host + "/api/v2.5/a71c00f5f9ff";//打包
+    //涨薪宝【原始】，已购买的【原始标】列表详情
+    public static final String ZXB_MyFinancial_XQ = host + "/api/v2.5/a6fd011f5ca5";//散
+    // 周赢宝【周】，购买的标的列表详情
+    public static final String ZYB_MyFinancial_XQ = host + "/api/v2.5/a78500f9885e";//散
+
+    // 稳赢宝【月】，购买的标退出
+    public static final String WYB_MyFinancial_Exit = host + "/api/v2.5/a71d01130432";//申请债权退出
+
+    // 周赢宝【周】，购买的标退出
+    public static final String ZYB_MyFinancial_Exit = host + "/api/v2.5/a78500f9a281";//申请债权退出
 
     // 兑换优惠劵
     public static final String Convert_Coupon = host + "/api/v1.0/95aabaaae186";

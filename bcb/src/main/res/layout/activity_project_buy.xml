@@ -376,6 +376,16 @@
                     android:textColor="#999"
                     android:textSize="@dimen/main_text_default"/>
 
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="福利金融将从您的每笔投资收益里扣除10%的平台服务费"/>
+
                 <include layout="@layout/com_funds_trusteeship_tip"/>
 
                 <!-- 出错提示 -->
@@ -392,6 +402,14 @@
                     android:textColor="@color/red"
                     android:textSize="16sp"/>
             </LinearLayout>
+
         </LinearLayout>
+
+        <com.bcb.module.commonality.keyboard.view.VirtualKeyboardView
+            android:id="@+id/virtualKeyboardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom" />
+
     </RelativeLayout>
 </LinearLayout>

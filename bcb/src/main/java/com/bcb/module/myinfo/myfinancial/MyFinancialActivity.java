@@ -122,7 +122,7 @@ public class MyFinancialActivity extends FragmentActivity {
                 break;
             case 1://涨薪宝选中
                 zxb.setTextColor(ContextCompat.getColor(this, R.color.red));
-                zxb.setBackground(ContextCompat.getDrawable(this, R.drawable.stroke_l));
+                zxb.setBackground(ContextCompat.getDrawable(this, R.drawable.stroke_center));
                 if (zxb_f == null) {
                     zxb_f = MyFinancialStateFragment.newInstance(ProjectListStatus.ZXB);
                     getSupportFragmentManager().beginTransaction().add(R.id.container, zxb_f, "AA").commit();
@@ -130,9 +130,9 @@ public class MyFinancialActivity extends FragmentActivity {
                     getSupportFragmentManager().beginTransaction().show(zxb_f).commit();
                 }
                 break;
-            case 2://周盈宝恢复
+            case 2://周盈宝选中
                 tvZyb.setTextColor(ContextCompat.getColor(this, R.color.red));
-                tvZyb.setBackground(ContextCompat.getDrawable(this, R.drawable.stroke_l));
+                tvZyb.setBackground(ContextCompat.getDrawable(this, R.drawable.stroke_r));
                 if (zyb_f == null) {
                     zyb_f = MyFinancialStateFragment.newInstance(ProjectListStatus.ZYB);
                     getSupportFragmentManager().beginTransaction().add(R.id.container, zyb_f, "AA").commit();

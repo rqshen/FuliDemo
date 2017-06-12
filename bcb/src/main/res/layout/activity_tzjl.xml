@@ -47,7 +47,7 @@
                     android:textSize="14sp"/>
                 <!--分割线-->
                 <View
-                    android:layout_width="2dp"
+                    android:layout_width="1dp"
                     android:layout_height="match_parent"
                     android:background="@color/linegray"/>
                 <!--涨薪宝-->
@@ -61,7 +61,7 @@
                     android:textSize="14sp"/>
                 <!--分割线-->
                 <View
-                    android:layout_width="2dp"
+                    android:layout_width="1dp"
                     android:layout_height="match_parent"
                     android:background="@color/white"/>
                 <!--周盈宝-->

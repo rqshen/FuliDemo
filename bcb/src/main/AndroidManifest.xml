@@ -153,11 +153,6 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".presentation.view.activity.Activity_Trading_Record"
-            android:label="@string/app_name"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"/>
-        <activity
             android:name=".module.myinfo.myfinancial.myfinancialstate.myfinanciallist.myfinancialdetail.FinancialDetailActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"/>

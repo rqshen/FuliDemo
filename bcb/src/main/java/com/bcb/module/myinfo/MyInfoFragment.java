@@ -1,6 +1,5 @@
 package com.bcb.module.myinfo;
 
-import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.DownloadManager;
 import android.content.BroadcastReceiver;
@@ -32,17 +31,17 @@ import com.bcb.data.bean.UserDetailInfo;
 import com.bcb.data.bean.UserWallet;
 import com.bcb.data.bean.WelfareDto;
 import com.bcb.event.BroadcastEvent;
+import com.bcb.module.browse.FundCustodianWebActivity;
 import com.bcb.module.discover.eliteloan.EliteLoanActivity;
 import com.bcb.module.login.LoginActivity;
 import com.bcb.module.myinfo.balance.BalanceActivity;
 import com.bcb.module.myinfo.balance.FundCustodianAboutActivity;
-import com.bcb.module.browse.FundCustodianWebActivity;
 import com.bcb.module.myinfo.balance.recharge.RechargeActivity;
-import com.bcb.module.myinfo.balance.trading.TradingRecordActivity;
 import com.bcb.module.myinfo.balance.withdraw.WithdrawActivity;
 import com.bcb.module.myinfo.joincompany.JoinCompanyActivity;
 import com.bcb.module.myinfo.myfinancial.MyFinancialActivity;
 import com.bcb.module.myinfo.myfinancial.myfinancialstate.myfinanciallist.myfinancialdetail.projectdetail.ProjectDetailActivity;
+import com.bcb.module.myinfo.setting.AccountSettingActivity;
 import com.bcb.module.myinfo.totalassets.TotalAssetsActivity;
 import com.bcb.module.myinfo.welfare.DailyWelfareActivity;
 import com.bcb.module.myinfo.welfare.DailyWelfareStaticActivity;
@@ -54,14 +53,11 @@ import com.bcb.network.UrlsOne;
 import com.bcb.network.UrlsTwo;
 import com.bcb.presentation.view.activity.A_MySecurity;
 import com.bcb.presentation.view.activity.A_Slb;
-import com.bcb.module.myinfo.setting.AccountSettingActivity;
 import com.bcb.presentation.view.activity.Activity_Privilege_Money;
-import com.bcb.presentation.view.activity.Activity_Trading_Record;
 import com.bcb.presentation.view.activity.Activity_TuoGuan_HF;
 import com.bcb.presentation.view.activity._Coupons;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
 import com.bcb.presentation.view.custom.AlertView.UpdateDialog;
-import com.bcb.presentation.view.custom.CustomDialog.DialogWidget;
 import com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout;
 import com.bcb.presentation.view.custom.PullableView.PullableScrollView;
 import com.bcb.util.DialogUtil;
@@ -99,7 +95,7 @@ public class MyInfoFragment extends BaseFragment implements OnClickListener {
     //我的保险
     RelativeLayout layout_security;
     ImageView iv_head;
-    private TextView value_earn, value_balance, value_back, value_total, value_yhq;
+    private TextView value_earn, value_balance, value_yhq;
     private UserWallet mUserWallet;
     private UserDetailInfo mUserDetailInfo;
     PullableScrollView layout_scrollview;
@@ -111,7 +107,6 @@ public class MyInfoFragment extends BaseFragment implements OnClickListener {
 
     //加入公司
     private LinearLayout join_company;
-    //	private ImageView joinCompany;
     private TextView user_join_name;
     private TextView user_comany_shortname;
     //广播
@@ -119,10 +114,6 @@ public class MyInfoFragment extends BaseFragment implements OnClickListener {
     //专属客服
     private RelativeLayout layout_customer_service;
     //电话客服
-    private RelativeLayout layout_phone_service;
-
-    //对话框
-    private DialogWidget dialogWidget;
     private AlertView alertView;
     //刷新
     private PullToRefreshLayout refreshLayout;
@@ -131,12 +122,6 @@ public class MyInfoFragment extends BaseFragment implements OnClickListener {
 
     public MyInfoFragment() {
         super();
-    }
-
-    @SuppressLint("ValidFragment")
-    public MyInfoFragment(Context ctx) {
-        super();
-        this.ctx = ctx;
     }
 
     @Override
@@ -187,8 +172,6 @@ public class MyInfoFragment extends BaseFragment implements OnClickListener {
             tv_update.setText("发现新版本 V" + MyApplication.versionBean.Version);
         } else {
             tv_update.setText("");
-//			layout_update.setVisibility(View.GONE);
-//			layout_update_line.setVisibility(View.GONE);
         }
 
         view.findViewById(R.id.ll_test).setOnClickListener(this);
@@ -201,38 +184,9 @@ public class MyInfoFragment extends BaseFragment implements OnClickListener {
         value_earn = (TextView) view.findViewById(R.id.value_earn);
         // 用户余额
         value_balance = (TextView) view.findViewById(R.id.value_balance);
-        // 待收本息
-        value_back = (TextView) view.findViewById(R.id.value_back);
-        // 冻结金额
-        value_total = (TextView) view.findViewById(R.id.value_total);
-        //叹号
-        view.findViewById(R.id.freeze_amount_image)
-                .setOnClickListener(this);
-        //充值
-        view.findViewById(R.id.recharge_btn)
-                .setOnClickListener(this);
-        //提现
-        view.findViewById(R.id.withdraw_btn)
-                .setOnClickListener(this);
-        //投资记录
-        view.findViewById(R.id.trading_record)
-                .setOnClickListener(this);
-        //资金流水
-        view.findViewById(R.id.money_flow_water)
-                .setOnClickListener(this);
+
         //借款
         view.findViewById(R.id.borrow_money)
-                .setOnClickListener(this);
-        //优惠券
-        view.findViewById(R.id.coupons)
-                .setOnClickListener(this);
-        //特权本金
-        view.findViewById(R.id.privilege_money)
-                .setOnClickListener(this);
-        //胜利包
-        view.findViewById(R.id.managed_slb)
-                .setOnClickListener(this);
-        view.findViewById(R.id.managed_funds)
                 .setOnClickListener(this);
         //账号设置
         view.findViewById(R.id.layout_account_settting)
@@ -256,14 +210,6 @@ public class MyInfoFragment extends BaseFragment implements OnClickListener {
             //            showPopupWindow(true);
             MyApplication.saveConfigUtil.setNotFirstRun(true);
         }
-        //电话客服
-        layout_phone_service = (RelativeLayout) view.findViewById(R.id.layout_phone_service);
-        layout_phone_service.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showPhoneService();
-            }
-        });
         //刷新
         (view.findViewById(R.id.loadmore_view)).setVisibility(View.GONE);
         refreshLayout = (PullToRefreshLayout) view.findViewById(R.id.refresh_view);
@@ -297,23 +243,6 @@ public class MyInfoFragment extends BaseFragment implements OnClickListener {
         else iv_red.setVisibility(View.VISIBLE);
     }
 
-    private void showPhoneService() {
-        AlertView.Builder ibuilder = new AlertView.Builder(ctx);
-        ibuilder.setTitle("是否电联客服？");
-        ibuilder.setMessage("客服热线：020-38476886");
-        ibuilder.setPositiveButton("立即联系", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:020-38476886"));
-                ctx.startActivity(intent);
-                alertView.dismiss();
-            }
-        });
-        ibuilder.setNegativeButton("取消", null);
-        alertView = ibuilder.create();
-        alertView.show();
-    }
-
     //从静态数据区中取出数据
     private void showData() {
         LogUtil.i("bqt", "【】" + MyApplication.saveUserInfo.getAccess_Token());
@@ -326,10 +255,6 @@ public class MyInfoFragment extends BaseFragment implements OnClickListener {
             //账户余额
             value_balance.setText("0.00");
             //待收本息
-
-            value_back.setText("0.00");
-            //冻结金额
-            value_total.setText("0.00");
             value_yhq.setText("0张");
             value_lc.setText("0.00");
         } else if (MyApplication.mUserWallet != null) {
@@ -341,8 +266,6 @@ public class MyInfoFragment extends BaseFragment implements OnClickListener {
             value_balance.setText("￥" + String.format("%.2f", MyApplication.mUserWallet.BalanceAmount));
             //待收本息
             value_lc.setText("￥" + String.format("%.2f", MyApplication.mUserWallet.InvestingAmount + MyApplication.mUserWallet.LeftInterest));
-            //冻结金额
-            value_total.setText("" + String.format("%.2f", MyApplication.mUserWallet.getFreezeAmount()));
             if (MyApplication.mUserDetailInfo != null)
                 value_yhq.setText(MyApplication.mUserDetailInfo.CouponCount + "张");
             if (MyApplication.mUserWallet.getBalanceAmount() == 0) value_balance.setText("去充值");
@@ -501,65 +424,17 @@ public class MyInfoFragment extends BaseFragment implements OnClickListener {
                 UmengUtil.eventById(ctx, R.string.self_auth_c);
                 toJoinCompany();
                 break;
-            //冻结金额提示
-            case R.id.freeze_amount_image:
-                Toast.makeText(ctx, "投资未计息本金、借款保证金等", Toast.LENGTH_SHORT)
-                        .show();
-                break;
-
-            //点击充值按钮
-            case R.id.recharge_btn:
-                rechargeMoney();
-                break;
-
-            //点击提现按钮
-            case R.id.withdraw_btn:
-                withdrawMoney();
-                break;
-
-            //投资记录
-            case R.id.trading_record:
-                if (isLoading()) return;
-                UmengUtil.eventById(ctx, R.string.self_tzjl);
-                Activity_Trading_Record.launche(ctx);
-                break;
-
-            //资金流水，交易明细
-            case R.id.money_flow_water:
-                if (isLoading()) return;
-                UmengUtil.eventById(ctx, R.string.self_zjls);
-                TradingRecordActivity.launche(ctx);
-                break;
-
             //借款--员工贷
             case R.id.borrow_money:
                 UmengUtil.eventById(ctx, R.string.loan_blank);
                 loanMainPage();
                 break;
-
-            // 优惠券
-            case R.id.coupons:
-                if (isLoading()) return;
-                UmengUtil.eventById(ctx, R.string.self_coupon);
-                startActivityForResult(new Intent(ctx, _Coupons.class), 1);
-                break;
-
             // 特权本金
             case R.id.privilege_money:
                 if (isLoading()) return;
                 UmengUtil.eventById(ctx, R.string.self_invate);
                 Activity_Privilege_Money.launch(ctx);
                 break;
-
-            // 资金托管
-            case R.id.managed_funds:
-                managedFunds();
-                break;
-            // 圣力宝
-            case R.id.managed_slb:
-                slbOpen();
-                break;
-
             // 账号设置
             case R.id.layout_account_settting:
                 UmengUtil.eventById(ctx, R.string.self_setting);
@@ -602,56 +477,6 @@ public class MyInfoFragment extends BaseFragment implements OnClickListener {
         if (isLoading()) return;
         if (MyApplication.mUserDetailInfo != null && MyApplication.mUserDetailInfo.HasOpenCustody)
             startActivity(new Intent(ctx, EliteLoanActivity.class));
-        else startActivity(new Intent(ctx, FundCustodianAboutActivity.class));
-    }
-
-    //充值
-    private void rechargeMoney() {
-        if (isLoading()) return;
-        //已开通托管
-        if (MyApplication.mUserDetailInfo != null && MyApplication.mUserDetailInfo.HasOpenCustody)
-            startActivity(new Intent(ctx, RechargeActivity.class));
-        else startActivity(new Intent(ctx, FundCustodianAboutActivity.class));
-    }
-
-    //提现
-    //绑定提现卡后请求我的银行卡接口同样会返回银行卡信息，不过【IsQPCard】为【false】
-    // {"status":1,"message":"","result":{"BankCode":"CIB","BankName":"兴业银行","CardNumber":"6229081111111111112","IsQPCard":false}}
-    private void withdrawMoney() {
-        //未开通托管
-        if (isLoading()) return;
-        //没开通托管
-        if (MyApplication.mUserDetailInfo == null || !MyApplication.mUserDetailInfo.HasOpenCustody) {
-            startActivity(new Intent(ctx, FundCustodianAboutActivity.class));
-            return;
-        }
-        //用户还没绑卡
-        if (MyApplication.mUserDetailInfo.BankCard == null) {
-            showAlertView("您还没指定提现卡哦", "该银行卡将作为账户唯一提现银行卡", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    requestBandCard();
-                    alertView.dismiss();
-                    alertView = null;
-                }
-            });
-        } else startActivity(new Intent(ctx, WithdrawActivity.class));
-    }
-
-    //资金托管
-    private void managedFunds() {
-        if (isLoading()) return;
-        if (MyApplication.mUserDetailInfo.HasOpenCustody) {//已开通托管
-            startActivity(new Intent(ctx, Activity_TuoGuan_HF.class));
-        } else startActivity(new Intent(ctx, FundCustodianAboutActivity.class));
-    }
-
-    //生利宝
-    private void slbOpen() {
-        if (isLoading()) return;
-        //已开通托管
-        if (MyApplication.mUserDetailInfo != null && MyApplication.mUserDetailInfo.HasOpenCustody)
-            startActivity(new Intent(ctx, A_Slb.class));
         else startActivity(new Intent(ctx, FundCustodianAboutActivity.class));
     }
 
@@ -701,8 +526,7 @@ public class MyInfoFragment extends BaseFragment implements OnClickListener {
         @Override
         public void onReceive(Context context, Intent intent) {
             //加入公司
-            if (intent.getAction()
-                    .equals("com.bcb.update.company.joined")) {
+            if (intent.getAction().equals("com.bcb.update.company.joined")) {
                 setupJoinCompanyMessage();
             }
             //登陆成功
@@ -723,17 +547,6 @@ public class MyInfoFragment extends BaseFragment implements OnClickListener {
         super.onDestroy();
         ctx.unregisterReceiver(receiver);
         EventBus.getDefault().unregister(this);
-    }
-
-    //提示对话框
-    private void showAlertView(String titleName, String contentMessage, DialogInterface.OnClickListener onClickListener) {
-        AlertView.Builder ibuilder = new AlertView.Builder(ctx);
-        ibuilder.setTitle(titleName);
-        ibuilder.setMessage(contentMessage);
-        ibuilder.setPositiveButton("立即设置", onClickListener);
-        ibuilder.setNegativeButton("取消", null);
-        alertView = ibuilder.create();
-        alertView.show();
     }
 
     //提示对话框
@@ -881,50 +694,6 @@ public class MyInfoFragment extends BaseFragment implements OnClickListener {
         });
         jsonRequest.setTag(BcbRequestTag.UserWalletMessageTag);
         requestQueue.add(jsonRequest);
-    }
-
-    /**
-     * 绑定提现卡
-     */
-    private void requestBandCard() {
-        String requestUrl = UrlsTwo.UrlBandCard;
-        String encodeToken = TokenUtil.getEncodeToken(ctx);
-        LogUtil.i("bqt", "【RechargeActivity】【BandCard】请求路径：" + requestUrl);
-        BcbJsonRequest jsonRequest = new BcbJsonRequest(requestUrl, null, encodeToken, true, new BcbRequest.BcbCallBack<JSONObject>
-                () {
-            @Override
-            public void onResponse(JSONObject response) {
-                LogUtil.i("bqt", "绑定提现卡：" + response.toString());
-                if (PackageUtil.getRequestStatus(response, ctx)) {
-                    try {
-                        /** 后台返回的JSON对象，也是要转发给汇付的对象 */
-                        JSONObject result = PackageUtil.getResultObject(response);
-                        if (result != null) {
-                            //网页地址
-                            String postUrl = result.optString("PostUrl");
-                            result.remove("PostUrl");//移除这个参数
-                            //传递的 参数
-                            String postData = HttpUtils.jsonToStr(result.toString());
-                            //跳转到webview
-                            FundCustodianWebActivity.launche(ctx, "绑定提现卡", postUrl, postData);
-                        }
-                    } catch (Exception e) {
-                        LogUtil.d("bqt", "【FundCustodianAboutActivity】【OpenAccount】" + e.getMessage());
-                    }
-                } else if (response != null) {
-                    Toast.makeText(ctx, response.optString("message"), Toast.LENGTH_SHORT)
-                            .show();
-                }
-            }
-
-            @Override
-            public void onErrorResponse(Exception error) {
-                LogUtil.d("bqt", "【RechargeActivity】【BandCard】网络异常，请稍后重试" + error.toString());
-            }
-        });
-        MyApplication.getInstance()
-                .getRequestQueue()
-                .add(jsonRequest);
     }
 
     //接收事件

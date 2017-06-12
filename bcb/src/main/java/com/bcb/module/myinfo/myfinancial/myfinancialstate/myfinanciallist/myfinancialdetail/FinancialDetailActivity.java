@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.bcb.MyApplication;
 import com.bcb.R;
 import com.bcb.base.Activity_Base;
+import com.bcb.constant.ProjectListStatus;
 import com.bcb.data.bean.ClaimConveyBean;
 import com.bcb.data.bean.Project_Investment_Details_Bean;
 import com.bcb.module.myinfo.myfinancial.myfinancialstate.myfinanciallist.myfinancialdetail.backpayment.BackPaymentActivity;
@@ -49,19 +50,12 @@ public class FinancialDetailActivity extends Activity_Base implements View.OnCli
     private String OrderNo;
     private TextView top_amount, earning_expected, tv_id_number, state_title, state_below;
     private TextView earningtime;
-    private TextView annual_yield, earnings_end, have, left;
+    private TextView annual_yield, earnings_end;
     LinearLayout ll_id_number;
     private RelativeLayout rl_hk, rl_zr, tourl;
     private Button button;
-    int Status = 1;//0稳盈宝  1涨薪宝
+    int Status = ProjectListStatus.WYB;//0稳盈宝  1涨薪宝  2周盈宝
     private Project_Investment_Details_Bean bean;
-
-    public static void launche(Context ctx, String OrderNo) {
-        Intent intent = new Intent();
-        intent.setClass(ctx, FinancialDetailActivity.class);
-        intent.putExtra("OrderNo", OrderNo);
-        ctx.startActivity(intent);
-    }
 
     /**
      * 启动自身
@@ -114,8 +108,6 @@ public class FinancialDetailActivity extends Activity_Base implements View.OnCli
         earnings_end = (TextView) findViewById(R.id.earnings_end);
         state_title = (TextView) findViewById(R.id.state_title);
         state_below = (TextView) findViewById(R.id.state_below);
-        have = (TextView) findViewById(R.id.have);
-        left = (TextView) findViewById(R.id.left);
         button = (Button) findViewById(R.id.button);
         rl_hk = (RelativeLayout) findViewById(R.id.rl_hk);
         rl_zr = (RelativeLayout) findViewById(R.id.rl_zr);
@@ -136,9 +128,15 @@ public class FinancialDetailActivity extends Activity_Base implements View.OnCli
             e.printStackTrace();
         }
 
-        String url = UrlsOne.ZXB_XQ;
-        if (Status == 0) url = UrlsOne.WYB_XQ;//打包，稳赢
-        LogUtil.i("bqt", "【地址】" + url);
+        String url = UrlsOne.WYB_MyFinancial_XQ;
+
+        if (Status == ProjectListStatus.WYB) {
+            url = UrlsOne.WYB_MyFinancial_XQ;
+        } else if (Status == ProjectListStatus.ZXB) {
+            url = UrlsOne.ZXB_MyFinancial_XQ;
+        } else if (Status == ProjectListStatus.ZYB) {
+            url = UrlsOne.ZYB_MyFinancial_XQ;
+        }
 
         BcbJsonRequest jsonRequest = new BcbJsonRequest(url, obj, TokenUtil.getEncodeToken(this), new
                 BcbRequest.BcbCallBack<JSONObject>() {
@@ -176,7 +174,7 @@ public class FinancialDetailActivity extends Activity_Base implements View.OnCli
                                         button.setVisibility(View.INVISIBLE);
                                         button.setClickable(false);
                                         button.setEnabled(false);
-                                    } else {//稳盈宝，有退出选项
+                                    } else {//稳盈宝和周盈宝，有退出选项
                                         switch (bean.StatusCode) {// 0：不能申请转让 1：已完成 2：可以申请退出 3：退出中
                                             case 0:
                                                 button.setVisibility(View.INVISIBLE);
@@ -213,8 +211,6 @@ public class FinancialDetailActivity extends Activity_Base implements View.OnCli
                                     //年化利率，锁定期限，已收本息，剩余本息
                                     annual_yield.setText(String.format("%.2f", bean.Rate) + "%");
                                     earnings_end.setText(bean.Duration);//封闭期 带单位【 "Duration": 3天】
-                                    //have.setText(String.format("%.2f", bean.ReceivedPrincipalAndInterest));
-                                    //left.setText(String.format("%.2f", bean.WaitPrincipalAndInterest));
                                 } else {
                                     LogUtil.e(TAG, "请求项目详情出现错误");
                                 }
@@ -256,7 +252,7 @@ public class FinancialDetailActivity extends Activity_Base implements View.OnCli
                 Activity_Rading_Record.launche(this, OrderNo);
                 break;
             case R.id.button://申请退出
-                if (Status == 0) {//稳盈宝
+                if (Status == ProjectListStatus.WYB || Status == ProjectListStatus.ZYB) {//稳盈宝
                     showDialog();
                 }
                 break;
@@ -270,7 +266,11 @@ public class FinancialDetailActivity extends Activity_Base implements View.OnCli
                     @Override
                     public void onSureClick(View v) {
                         super.onSureClick(v);
-                        requestZR(UrlsOne.WYB_ZR);
+                        if (Status == ProjectListStatus.WYB) {
+                            requestZR(UrlsOne.WYB_MyFinancial_Exit);
+                        } else {
+                            requestZR(UrlsOne.ZYB_MyFinancial_Exit);
+                        }
                         dismiss();
                     }
                 };

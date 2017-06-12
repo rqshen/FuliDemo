@@ -134,15 +134,27 @@ public class WrapProgramIntroductionActivity extends Activity_Base implements Vi
         ProgressDialogrUtils.show(this, "正在获取数据，请稍后…");
     }
 
+    String dayOrMonth = "个月";
+
     private void showData() {
+
+        if (bean.DurationExchangeType == 1) {
+            dayOrMonth = "天";
+            tvU2.setText("持续收益，按周退出");
+        } else {
+            dayOrMonth = "个月";
+            tvU2.setText("持续收益，按月退出");
+        }
+
+
         tvRate.setText("" + String.format("%.1f", bean.Rate));
         //福袋利率
         String welfareRate = TextUtils.isEmpty(MyApplication.getInstance().getWelfare()) ? "%" : "%+" + MyApplication.getInstance().getWelfare() + "%";
         tvRateAdd.setText(welfareRate);
-        sdq.setText(bean.MixDuration + "个月");
+        sdq.setText(bean.MixDuration + dayOrMonth);
         ktje.setText(String.format("%.2f", bean.Balance));
         tvLimite.setText(getSpan(bean.MixDuration + "", bean.MaxDuration + ""));
-        cy.setText(bean.MaxDuration + "个月");
+        cy.setText(bean.MaxDuration + dayOrMonth);
         buy1.setText(getSpan2(10000, bean.MixDuration, String.format("%.2f", bean.MinPreInterest)));//
         buy2.setText(getSpan2(10000, bean.MaxDuration, String.format("%.2f", bean.MaxPreInterest)));
         setTitleValue(bean.Name);
@@ -166,11 +178,6 @@ public class WrapProgramIntroductionActivity extends Activity_Base implements Vi
 
             qxr.setText(format2.format(qxr_));
             tc.setText(format2.format(tc_));
-            //进度
-            Date dateNow = new Date();
-//			if (dateNow.getTime() < qxr_.getTime()) {//未到起息时间
-//				pb.setProgress(2);
-//			} else pb.setProgress(30);
 
         } catch (ParseException e) {
             e.printStackTrace();
@@ -191,8 +198,15 @@ public class WrapProgramIntroductionActivity extends Activity_Base implements Vi
 
     private SpannableStringBuilder getSpan(String string1, String string2) {
         SpannableStringBuilder needStartSSB = new SpannableStringBuilder("最少持有");
-        needStartSSB.append(getSSpannableString(string1)).append("个月，按月续期，最长")//
-                .append(getSSpannableString(string2)).append("个月");
+
+        needStartSSB.append(getSSpannableString(string1));
+
+        if (bean.DurationExchangeType == 1) {
+            needStartSSB.append(dayOrMonth + "，按天续期，最长").append(getSSpannableString(string2)).append(dayOrMonth);
+        } else {
+            needStartSSB.append(dayOrMonth + "，按月续期，最长").append(getSSpannableString(string2)).append(dayOrMonth);
+        }
+
         return needStartSSB;
     }
 
@@ -207,7 +221,7 @@ public class WrapProgramIntroductionActivity extends Activity_Base implements Vi
 
     private SpannableStringBuilder getSpan2(int money, int time, String string2) {
         SpannableStringBuilder needStartSSB = new SpannableStringBuilder("购买");
-        needStartSSB.append(getSSpannableString2(" " + money)).append(" 元，" + time + "个月可收益 ")//
+        needStartSSB.append(getSSpannableString2(" " + money)).append(" 元，" + time + dayOrMonth + "可收益 ")//
                 .append(getSSpannableString2(string2)).append(" 元");
         return needStartSSB;
     }

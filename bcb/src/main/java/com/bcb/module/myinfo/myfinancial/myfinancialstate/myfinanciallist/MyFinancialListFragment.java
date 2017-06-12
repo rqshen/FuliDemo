@@ -158,13 +158,13 @@ public class MyFinancialListFragment extends BaseFragment implements AdapterView
         }
 
 
-        String url = UrlsOne.WYB_MyFinancial;//打包，稳赢
+        String url = UrlsOne.WYB_MyFinancial_List;//打包，稳赢
         if (Status == ProjectListStatus.WYB) {
-            url = UrlsOne.WYB_MyFinancial;//打包，稳赢
+            url = UrlsOne.WYB_MyFinancial_List;//打包，稳赢
         } else if (Status == ProjectListStatus.ZXB) {
-            url = UrlsOne.ZXB_MyFinancial;
+            url = UrlsOne.ZXB_MyFinancial_List;
         } else if (Status == ProjectListStatus.ZYB) {
-            url = UrlsOne.ZYB_MyFinancial;
+            url = UrlsOne.ZYB_MyFinancial_List;
         }
 
         BcbJsonRequest jsonRequest = new BcbJsonRequest(url, obj, TokenUtil.getEncodeToken(ctx), new BcbRequest

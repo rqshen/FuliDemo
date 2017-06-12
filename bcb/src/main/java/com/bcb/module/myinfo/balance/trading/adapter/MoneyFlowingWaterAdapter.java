@@ -1,4 +1,4 @@
-package com.bcb.presentation.adapter;
+package com.bcb.module.myinfo.balance.trading.adapter;
 
 import android.content.Context;
 import android.graphics.Color;

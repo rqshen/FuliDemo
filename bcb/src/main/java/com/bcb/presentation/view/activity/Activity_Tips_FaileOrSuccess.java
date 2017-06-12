@@ -278,8 +278,6 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
 						break;
 					//投资记录
 					case ZR_SUCCESS:
-//						startActivity(new Intent(Activity_Tips_FaileOrSuccess.this, Activity_Trading_Record.class));
-//						finish();
 						ActivityCollector.finishAll();
 						break;
 					//借款
