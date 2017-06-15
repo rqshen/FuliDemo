@@ -16,7 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bcb.R;
-import com.bcb.base.BaseFragment;
+import com.bcb.base.old.BaseFragment1;
 import com.bcb.module.discover.financialproduct.adapter.MyFragmentPagerAdapter;
 import com.bcb.module.myinfo.myfinancial.myfinancialstate.myfinanciallist.MyFinancialListFragment;
 
@@ -26,7 +26,7 @@ import java.util.ArrayList;
  * 投资理财的状态,
  * 持有中，已结束，ViewPager
  */
-public class MyFinancialStateFragment extends BaseFragment implements View.OnClickListener {
+public class MyFinancialStateFragment extends BaseFragment1 implements View.OnClickListener {
     private Context ctx;
     public TextView ztbj;
     public TextView yjsy;

@@ -19,7 +19,7 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.bcb.base.Activity_Base;
+import com.bcb.base.old.Activity_Base;
 import com.bcb.MyApplication;
 import com.bcb.R;
 import com.bcb.network.BcbJsonRequest;

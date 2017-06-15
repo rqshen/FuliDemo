@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.bcb.MyApplication;
 import com.bcb.R;
-import com.bcb.base.Activity_Base;
+import com.bcb.base.old.Activity_Base;
 import com.idtk.smallchart.chart.PieChart;
 import com.idtk.smallchart.data.PieData;
 import com.idtk.smallchart.interfaces.iData.IPieData;

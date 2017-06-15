@@ -20,7 +20,7 @@ import android.widget.Toast;
 
 import com.bcb.MyApplication;
 import com.bcb.R;
-import com.bcb.base.BaseFragment;
+import com.bcb.base.old.BaseFragment1;
 import com.bcb.constant.ProjectListStatus;
 import com.bcb.constant.ProjectListType;
 import com.bcb.data.bean.AdPhotoListBean;
@@ -34,6 +34,7 @@ import com.bcb.module.discover.financialproduct.InvestmentFinanceActivity;
 import com.bcb.module.discover.financialproduct.normalproject.NormalProjectIntroductionActivity;
 import com.bcb.module.discover.financialproduct.wrapprogram.WrapProgramIntroductionActivity;
 import com.bcb.module.homepager.adapter.AnnounceListAdapter;
+import com.bcb.module.homepager.slideshow.SlideShowFragment;
 import com.bcb.module.login.LoginActivity;
 import com.bcb.module.login.register.RegisterFirstActivity;
 import com.bcb.module.myinfo.balance.FundCustodianAboutActivity;
@@ -77,7 +78,7 @@ import java.util.Queue;
 
 import static com.bcb.MyApplication.mUserDetailInfo;
 
-public class HomePagerFragment extends BaseFragment implements View.OnClickListener, AdapterView.OnItemClickListener {
+public class HomePagerFragment extends BaseFragment1 implements View.OnClickListener, AdapterView.OnItemClickListener {
     private static final String TAG = "HomePagerFragment";
     UPMarqueeView tb;
     //车险
@@ -127,6 +128,8 @@ public class HomePagerFragment extends BaseFragment implements View.OnClickListe
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
+
+        getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_banner, new SlideShowFragment()).commitAllowingStateLoss();//添加首页广告fragment
 
         this.ctx = (Activity) view.getContext();
         EventBus.getDefault().register(this);

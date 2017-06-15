@@ -21,7 +21,7 @@ import android.widget.ProgressBar;
 
 import com.bcb.MyApplication;
 import com.bcb.R;
-import com.bcb.base.Activity_Base;
+import com.bcb.base.old.Activity_Base;
 import com.bcb.presentation.view.activity.ImageFilePath;
 import com.bcb.presentation.view.custom.Browser.X5WebView;
 import com.bcb.util.DESUtil;

@@ -24,20 +24,17 @@ import android.widget.Toast;
 
 import com.bcb.MyApplication;
 import com.bcb.R;
-import com.bcb.base.BaseFragment;
+import com.bcb.base.old.BaseFragment1;
 import com.bcb.data.bean.StringEventBusBean;
 import com.bcb.data.bean.UserBankCard;
 import com.bcb.data.bean.UserDetailInfo;
 import com.bcb.data.bean.UserWallet;
 import com.bcb.data.bean.WelfareDto;
 import com.bcb.event.BroadcastEvent;
-import com.bcb.module.browse.FundCustodianWebActivity;
 import com.bcb.module.discover.eliteloan.EliteLoanActivity;
 import com.bcb.module.login.LoginActivity;
 import com.bcb.module.myinfo.balance.BalanceActivity;
 import com.bcb.module.myinfo.balance.FundCustodianAboutActivity;
-import com.bcb.module.myinfo.balance.recharge.RechargeActivity;
-import com.bcb.module.myinfo.balance.withdraw.WithdrawActivity;
 import com.bcb.module.myinfo.joincompany.JoinCompanyActivity;
 import com.bcb.module.myinfo.myfinancial.MyFinancialActivity;
 import com.bcb.module.myinfo.myfinancial.myfinancialstate.myfinanciallist.myfinancialdetail.projectdetail.ProjectDetailActivity;
@@ -52,9 +49,7 @@ import com.bcb.network.BcbRequestTag;
 import com.bcb.network.UrlsOne;
 import com.bcb.network.UrlsTwo;
 import com.bcb.presentation.view.activity.A_MySecurity;
-import com.bcb.presentation.view.activity.A_Slb;
 import com.bcb.presentation.view.activity.Activity_Privilege_Money;
-import com.bcb.presentation.view.activity.Activity_TuoGuan_HF;
 import com.bcb.presentation.view.activity._Coupons;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
 import com.bcb.presentation.view.custom.AlertView.UpdateDialog;
@@ -83,7 +78,7 @@ import java.util.List;
  * Created by ruiqin.shen
  * 类说明：我的信息页面
  */
-public class MyInfoFragment extends BaseFragment implements OnClickListener {
+public class MyInfoFragment extends BaseFragment1 implements OnClickListener {
     //标题
     private TextView title_text, value_earn_all;
     ImageView layout_update_line, iv_red;

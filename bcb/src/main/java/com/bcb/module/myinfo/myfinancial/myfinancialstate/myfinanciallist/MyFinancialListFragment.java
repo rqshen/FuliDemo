@@ -12,7 +12,7 @@ import android.widget.RelativeLayout;
 
 import com.bcb.MyApplication;
 import com.bcb.R;
-import com.bcb.base.BaseFragment;
+import com.bcb.base.old.BaseFragment1;
 import com.bcb.constant.ProjectListStatus;
 import com.bcb.data.bean.TZJLbean;
 import com.bcb.module.discover.financialproduct.InvestmentFinanceActivity;
@@ -42,7 +42,7 @@ import java.util.List;
  * status表示稳盈宝和涨薪宝 0 稳赢  1涨薪
  * tab表示持有中和已结束  1为持有中，2为已结束
  */
-public class MyFinancialListFragment extends BaseFragment implements AdapterView.OnItemClickListener {
+public class MyFinancialListFragment extends BaseFragment1 implements AdapterView.OnItemClickListener {
     private Context ctx;
 
     private MyListView lv;
@@ -224,7 +224,7 @@ public class MyFinancialListFragment extends BaseFragment implements AdapterView
                         }
                     }
                 } catch (Exception e) {
-                    LogUtil.i("bqt", "【_Change_InFragment】【onResponse】" + e.toString());
+                    LogUtil.i("bqt", "【_Change_InFragment1】【onResponse】" + e.toString());
                 } finally {
                     refreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
                     refreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);

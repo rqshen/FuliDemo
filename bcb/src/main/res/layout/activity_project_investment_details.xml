@@ -280,10 +280,11 @@
                 android:padding="10dp">
 
                 <TextView
+                    android:id="@+id/tv_backpayment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:text="回款说明"
+                    android:text="回款计划"
                     android:textColor="#666"
                     android:textSize="@dimen/main_text_default"/>
 

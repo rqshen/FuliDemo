@@ -17,7 +17,7 @@ import android.widget.Toast;
 
 import com.bcb.MyApplication;
 import com.bcb.R;
-import com.bcb.base.Activity_Base;
+import com.bcb.base.old.Activity_Base;
 import com.bcb.constant.MyConstants;
 import com.bcb.data.bean.StringEventBusBean;
 import com.bcb.data.bean.UserExtraInfo;

@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.bcb.R;
-import com.bcb.base.BaseFragment;
+import com.bcb.base.old.BaseFragment1;
 import com.bcb.MyApplication;
 import com.bcb.network.BcbJsonRequest;
 import com.bcb.network.BcbRequest;
@@ -34,9 +34,10 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class _UsedCouponFragment extends BaseFragment {
+public class _ExpiredCouponFragment1 extends BaseFragment1 {
 
-	private static final String TAG = "_UsedCouponFragment";
+	private static final String TAG = "Frag_Expired";
+
     private Context ctx;
 
 	private MyListView mCouponListView;
@@ -44,7 +45,7 @@ public class _UsedCouponFragment extends BaseFragment {
 	private int PageNow = 1; 
 	private int PageSize = 10;
 
-    private List<CouponRecordsBean> recordsBeans;
+	private List<CouponRecordsBean> recordsBeans;
 	private CouponListAdapter mCouponListAdapter;
 	
 	private LinearLayout null_data_layout;
@@ -55,24 +56,26 @@ public class _UsedCouponFragment extends BaseFragment {
 
     private BcbRequestQueue requestQueue;
 
-    public _UsedCouponFragment(){
+    public _ExpiredCouponFragment1(){
         super();
     }
 
     @SuppressLint("ValidFragment")
-	public _UsedCouponFragment(Context ctx) {
+	public _ExpiredCouponFragment1(Context ctx) {
 		super();
-        this.ctx= ctx;	
+        this.ctx= ctx;
 	}
 	
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 	}
 
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.frag_coupon_used, container, false);
+        return inflater.inflate(R.layout.frag_coupon_expried, container, false);
 	}
+
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -120,39 +123,41 @@ public class _UsedCouponFragment extends BaseFragment {
         });
         refreshLayout.autoRefresh();
     }
-
-    //获取数据
+	
     private void loadData() {
     	JSONObject obj = new JSONObject();
 		try {
 			obj.put("PageNow", PageNow);
 			obj.put("PageSize", PageSize);	
-			obj.put("Status", 20);
+			obj.put("Status", 40);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-
         BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.Select_Coupon, obj, TokenUtil.getEncodeToken(ctx), new BcbRequest.BcbCallBack<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                LogUtil.i("bqt", "【_UnusedCouponFragment】【onResponse】已使用的优惠券" + response.toString());
+                LogUtil.i("bqt", "【_UnusedCouponFragment1】【onResponse】已过期的优惠券" + response.toString());
                 try {
-                    if (PackageUtil.getRequestStatus(response, ctx)) {
+                    boolean flag = PackageUtil.getRequestStatus(response, ctx);
+                    if(flag){
                         JSONObject obj = PackageUtil.getResultObject(response);
                         CouponListBean mCouponList = null;
-                        //判断JSON对象是否为空
                         if (obj != null) {
                             mCouponList = MyApplication.mGson.fromJson(obj.toString(), CouponListBean.class);
                         }
-                        //存在数据
+                        //如果数据存在
                         if (null != mCouponList && null != mCouponList.Records && mCouponList.Records.size() > 0) {
                             canLoadmore = true;
                             PageNow++;
                             setupListViewVisible(true);
-                            recordsBeans.addAll(mCouponList.Records);
+                            synchronized (this) {
+                                recordsBeans.addAll(mCouponList.Records);
+                            }
+                            //刷新适配器，如果适配器不存在，则创建并绑定适配器
                             if (null != mCouponListAdapter) {
                                 mCouponListAdapter.notifyDataSetChanged();
                             }
+
                         } else {
                             canLoadmore = false;
                             if(null != mCouponListAdapter){
@@ -162,9 +167,7 @@ public class _UsedCouponFragment extends BaseFragment {
                                 setupListViewVisible(false);
                             }
                         }
-                    }
-                    //没有返回数据，要判断原先是否存在数据
-                    else {
+                    } else {
                         canLoadmore = false;
                         if (recordsBeans == null || recordsBeans.size() <= 0) {
                             setupListViewVisible(false);
@@ -191,7 +194,9 @@ public class _UsedCouponFragment extends BaseFragment {
         });
         jsonRequest.setTag(BcbRequestTag.BCB_SELECT_COUPON_REQUEST);
         requestQueue.add(jsonRequest);
+
 	}
+
 
     //加载优惠券，true 表示有数据，false 表示没数据
     private void setupListViewVisible(boolean state) {

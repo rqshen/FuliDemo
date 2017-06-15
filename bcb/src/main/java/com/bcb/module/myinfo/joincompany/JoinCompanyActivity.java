@@ -18,7 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.bcb.R;
-import com.bcb.base.Activity_Base;
+import com.bcb.base.old.Activity_Base;
 import com.bcb.module.login.LoginActivity;
 import com.bcb.presentation.presenter.IPresenter_JoinCompany;
 import com.bcb.presentation.presenter.IPresenter_JoinCompanyImpl;

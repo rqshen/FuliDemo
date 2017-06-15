@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import com.bcb.MyApplication;
 import com.bcb.R;
-import com.bcb.base.Activity_Base;
+import com.bcb.base.old.Activity_Base;
 import com.bcb.module.login.LoginActivity;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
 import com.bcb.presentation.view.custom.GesturePatternLock.View.ContentView;

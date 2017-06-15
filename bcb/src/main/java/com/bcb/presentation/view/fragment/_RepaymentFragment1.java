@@ -10,83 +10,87 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.bcb.R;
-import com.bcb.base.BaseFragment;
+import com.bcb.base.old.BaseFragment1;
 import com.bcb.MyApplication;
 import com.bcb.network.BcbJsonRequest;
 import com.bcb.network.BcbRequest;
 import com.bcb.network.BcbRequestQueue;
 import com.bcb.network.BcbRequestTag;
 import com.bcb.network.UrlsOne;
-import com.bcb.data.bean.CouponListBean;
-import com.bcb.data.bean.CouponRecordsBean;
+import com.bcb.data.bean.loan.RepaymentListBean;
+import com.bcb.data.bean.loan.RepaymentRecordsBean;
 import com.bcb.util.HttpUtils;
-import com.bcb.util.LogUtil;
 import com.bcb.util.MyListView;
 import com.bcb.util.PackageUtil;
 import com.bcb.util.ToastUtil;
 import com.bcb.util.TokenUtil;
-import com.bcb.presentation.adapter.CouponListAdapter;
+import com.bcb.presentation.adapter.RepaymentAdapter;
 import com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class _ExpiredCouponFragment extends BaseFragment {
+/**
+ * Created by cain on 16/1/13.
+ */
+public class _RepaymentFragment1 extends BaseFragment1 {
 
-	private static final String TAG = "Frag_Expired";
 
-    private Context ctx;
+    private Context context;
+    private String assetCode;
 
-	private MyListView mCouponListView;
-	
-	private int PageNow = 1; 
-	private int PageSize = 10;
+    private int PageNow = 1;
+    private int PageSize = 36;
 
-	private List<CouponRecordsBean> recordsBeans;
-	private CouponListAdapter mCouponListAdapter;
-	
-	private LinearLayout null_data_layout;
+    //还款列表
+    private MyListView repaymentListView;
 
-    private boolean canLoadmore = true;
+    //还款列表数据和适配器
+    private List<RepaymentRecordsBean> recordsBeans;
+    private RepaymentAdapter repaymentAdapter;
+
+    private LinearLayout null_data_layout;
+
+    private boolean canLoadmore = false;
     private PullToRefreshLayout refreshLayout;
     private RelativeLayout loadmore_view;
 
     private BcbRequestQueue requestQueue;
 
-    public _ExpiredCouponFragment(){
+    public _RepaymentFragment1() {
         super();
     }
 
     @SuppressLint("ValidFragment")
-	public _ExpiredCouponFragment(Context ctx) {
-		super();
-        this.ctx= ctx;
-	}
-	
-	public void onActivityCreated(Bundle savedInstanceState) {
-		super.onActivityCreated(savedInstanceState);
-	}
-
-
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.frag_coupon_expried, container, false);
-	}
-
+    public _RepaymentFragment1(Context context, String assetCode) {
+        super();
+        this.context = context;
+        this.assetCode = assetCode;
+    }
 
     @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.frag_repayment, container, false);
+    }
+
+    //初始化页面要在这里进行，多线程情况下，在onCreateView中初始化会崩溃
+    @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        this.ctx = view.getContext();
         requestQueue = MyApplication.getInstance().getRequestQueue();
+        setupView(view);
+        loanRepaymentData();
+    }
+
+    //初始化界面元素
+    private void setupView(View view) {
+        recordsBeans = new ArrayList<RepaymentRecordsBean>();
+        repaymentAdapter = new RepaymentAdapter(context, recordsBeans);
+        repaymentListView = (MyListView) view.findViewById(R.id.repayment_listView);
+        repaymentListView.setAdapter(repaymentAdapter);
+
         null_data_layout = (LinearLayout) view.findViewById(R.id.null_data_layout);
-        //产品列表数据
-        recordsBeans = new ArrayList<>();
-        mCouponListAdapter = new CouponListAdapter(ctx, recordsBeans, -3);
-        mCouponListView = (MyListView) view.findViewById(R.id.listview_data_layout);
-        mCouponListView.setAdapter(mCouponListAdapter);
 
         //刷新
         loadmore_view = (RelativeLayout) view.findViewById(R.id.loadmore_view);
@@ -95,73 +99,76 @@ public class _ExpiredCouponFragment extends BaseFragment {
         refreshLayout.setOnRefreshListener(new PullToRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh(PullToRefreshLayout pullToRefreshLayout) {
-                if (HttpUtils.isNetworkConnected(ctx)) {
+                if (HttpUtils.isNetworkConnected(context)) {
                     PageNow = 1;
-                    recordsBeans.clear();
-                    loadData();
+                    loanRepaymentData();
                     loadmore_view.setVisibility(View.VISIBLE);
                 } else {
-                    ToastUtil.alert(ctx, "网络异常，请稍后再试");
+                    ToastUtil.alert(context, "网络异常，请稍后再试");
                     refreshLayout.refreshFinish(PullToRefreshLayout.FAIL);
                 }
             }
 
             @Override
             public void onLoadMore(PullToRefreshLayout pullToRefreshLayout) {
-                if (HttpUtils.isNetworkConnected(ctx)) {
+                if (HttpUtils.isNetworkConnected(context)) {
                     if (canLoadmore) {
-                        loadData();
+                        loanRepaymentData();
                     } else {
                         loadmore_view.setVisibility(View.GONE);
                         refreshLayout.loadmoreFinish(PullToRefreshLayout.NOMORE);
                     }
                 } else {
-                    ToastUtil.alert(ctx, "网络异常，请稍后再试");
+                    ToastUtil.alert(context, "网络异常，请稍后再试");
                     refreshLayout.loadmoreFinish(PullToRefreshLayout.FAIL);
                 }
             }
         });
         refreshLayout.autoRefresh();
     }
-	
-    private void loadData() {
-    	JSONObject obj = new JSONObject();
-		try {
-			obj.put("PageNow", PageNow);
-			obj.put("PageSize", PageSize);	
-			obj.put("Status", 40);
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-        BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.Select_Coupon, obj, TokenUtil.getEncodeToken(ctx), new BcbRequest.BcbCallBack<JSONObject>() {
+
+    //获取借款详情数据
+    private void loanRepaymentData() {
+        JSONObject jsonObject = new JSONObject();
+        try{
+            jsonObject.put("AssetCode", assetCode);
+            jsonObject.put("PageNow", PageNow);
+            jsonObject.put("PageSize", PageSize);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.MyLoanRepaymentMessage, jsonObject, TokenUtil.getEncodeToken(context), new BcbRequest.BcbCallBack<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                LogUtil.i("bqt", "【_UnusedCouponFragment】【onResponse】已过期的优惠券" + response.toString());
-                try {
-                    boolean flag = PackageUtil.getRequestStatus(response, ctx);
-                    if(flag){
-                        JSONObject obj = PackageUtil.getResultObject(response);
-                        CouponListBean mCouponList = null;
-                        if (obj != null) {
-                            mCouponList = MyApplication.mGson.fromJson(obj.toString(), CouponListBean.class);
+                try{
+                    //判断状态是否存在
+                    if (PackageUtil.getRequestStatus(response, context)) {
+                        JSONObject jsonObject = PackageUtil.getResultObject(response);
+                        RepaymentListBean listBean = null;
+                        if (jsonObject != null) {
+                            listBean = MyApplication.mGson.fromJson(jsonObject.toString(), RepaymentListBean.class);
+//                            Log.d("1234", "PageNow = " + PageNow + " listBean = " + listBean.toString());
                         }
-                        //如果数据存在
-                        if (null != mCouponList && null != mCouponList.Records && mCouponList.Records.size() > 0) {
+                        //存在还款记录时
+                        if (listBean.Records != null && listBean.Records.size() > 0) {
                             canLoadmore = true;
+                            if (1 == PageNow){
+                                recordsBeans.clear();
+                            }
                             PageNow++;
                             setupListViewVisible(true);
-                            synchronized (this) {
-                                recordsBeans.addAll(mCouponList.Records);
+                            if ((PageNow - 1) == listBean.PageNow){
+                                synchronized (this) {
+                                    recordsBeans.addAll(listBean.Records);
+                                }
+                                if (repaymentAdapter != null) {
+                                    repaymentAdapter.notifyDataSetChanged();
+                                }
                             }
-                            //刷新适配器，如果适配器不存在，则创建并绑定适配器
-                            if (null != mCouponListAdapter) {
-                                mCouponListAdapter.notifyDataSetChanged();
-                            }
-
                         } else {
                             canLoadmore = false;
-                            if(null != mCouponListAdapter){
-                                mCouponListAdapter.notifyDataSetChanged();
+                            if(null != repaymentAdapter){
+                                repaymentAdapter.notifyDataSetChanged();
                             }
                             if (PageNow <= 1) {
                                 setupListViewVisible(false);
@@ -192,20 +199,19 @@ public class _ExpiredCouponFragment extends BaseFragment {
                 }
             }
         });
-        jsonRequest.setTag(BcbRequestTag.BCB_SELECT_COUPON_REQUEST);
+        jsonRequest.setTag(BcbRequestTag.MyLoanRepaymentMessageTag);
         requestQueue.add(jsonRequest);
+    }
 
-	}
-
-
-    //加载优惠券，true 表示有数据，false 表示没数据
-    private void setupListViewVisible(boolean state) {
-        if (state) {
+    private void setupListViewVisible(boolean status) {
+        if (status) {
+            repaymentListView.setVisibility(View.VISIBLE);
             null_data_layout.setVisibility(View.GONE);
-            mCouponListView.setVisibility(View.VISIBLE);
-        } else {
+        }
+        //表示不存在数据时，隐藏listView
+        else {
+            repaymentListView.setVisibility(View.GONE);
             null_data_layout.setVisibility(View.VISIBLE);
-            mCouponListView.setVisibility(View.GONE);
         }
     }
 }

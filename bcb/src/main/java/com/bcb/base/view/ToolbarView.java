@@ -1,6 +1,7 @@
 package com.bcb.base.view;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -50,6 +51,13 @@ public class ToolbarView extends RelativeLayout {
      */
     public void setToolBarTitle(String title) {
         toolbarTitle.setText(title);
+    }
+
+    /**
+     * 设置字体颜色
+     */
+    public void setToolBarTitleColor(Context context, int color) {
+        toolbarTitle.setTextColor(ContextCompat.getColor(context, color));
     }
 
     /**

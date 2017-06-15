@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import com.bcb.MyApplication;
 import com.bcb.R;
-import com.bcb.base.BaseFragment;
+import com.bcb.base.old.BaseFragment1;
 import com.bcb.constant.ProjectListStatus;
 import com.bcb.constant.ProjectListType;
 import com.bcb.data.bean.MainListBean2;
@@ -42,7 +42,7 @@ import java.util.List;
  * 作者：baicaibang
  * 时间：2017/2/27 17:05
  */
-public class FinanceListFragment extends BaseFragment implements AdapterView.OnItemClickListener {
+public class FinanceListFragment extends BaseFragment1 implements AdapterView.OnItemClickListener {
     private Context ctx;
 
     private MyListView lv;
@@ -146,13 +146,13 @@ public class FinanceListFragment extends BaseFragment implements AdapterView.OnI
         String url = "";//请求的地址
 
         if (Status == ProjectListStatus.WYB) {//稳盈宝
-            url = UrlsOne.WYB_LIST;
+            url = UrlsOne.WYB_Buy_LIST;
         } else if (Status == ProjectListStatus.ZXB) {//涨薪宝【原始标】
-            url = UrlsOne.ZXB_LIST;
+            url = UrlsOne.ZXB_Buy_LIST;
         } else if (Status == ProjectListStatus.ZYB) {//周盈宝
-            url = UrlsOne.ZYB_LIST;
+            url = UrlsOne.ZYB_Buy_LIST;
         } else {
-            url = UrlsOne.WYB_LIST;
+            url = UrlsOne.WYB_Buy_LIST;
         }
 
         BcbJsonRequest jsonRequest = new BcbJsonRequest(url, obj, TokenUtil.getEncodeToken(ctx), new BcbRequest
@@ -197,7 +197,7 @@ public class FinanceListFragment extends BaseFragment implements AdapterView.OnI
                         }
                     }
                 } catch (Exception e) {
-                    LogUtil.i("bqt", "【_Change_InFragment】【onResponse】" + e.toString());
+                    LogUtil.i("bqt", "【_Change_InFragment1】【onResponse】" + e.toString());
                 } finally {
                     refreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
                     refreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);

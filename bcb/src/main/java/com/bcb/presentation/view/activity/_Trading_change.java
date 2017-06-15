@@ -13,7 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bcb.R;
-import com.bcb.base.BaseActivity1;
+import com.bcb.base.old.BaseActivity1;
 import com.bcb.util.MyActivityManager;
 import com.bcb.module.discover.financialproduct.adapter.MyFragmentPagerAdapter;
 
@@ -41,8 +41,8 @@ public class _Trading_change extends BaseActivity1 implements View.OnClickListen
 		vp = (ViewPager) findViewById(R.id.vp);
 		fragmentsList = new ArrayList<Fragment>();
 		//	状态 1 转让中 0已完成
-		fragmentsList.add(_Change_InFragment.newInstance(1));
-		fragmentsList.add(_Change_InFragment.newInstance(0));
+		fragmentsList.add(_Change_InFragment1.newInstance(1));
+		fragmentsList.add(_Change_InFragment1.newInstance(0));
 
 		vp.setAdapter(new MyFragmentPagerAdapter(getSupportFragmentManager(), fragmentsList));
 		vp.setCurrentItem(0);

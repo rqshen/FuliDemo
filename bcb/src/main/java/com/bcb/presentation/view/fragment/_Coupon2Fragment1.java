@@ -1,29 +1,38 @@
-package com.bcb.presentation.view.activity;
+package com.bcb.presentation.view.fragment;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.bcb.R;
+import com.bcb.base.old.BaseFragment1;
 import com.bcb.MyApplication;
 import com.bcb.network.BcbJsonRequest;
 import com.bcb.network.BcbRequest;
+import com.bcb.network.BcbRequestQueue;
+import com.bcb.network.BcbRequestTag;
 import com.bcb.network.UrlsOne;
-import com.bcb.data.bean.ZQBGbean;
+import com.bcb.data.bean.CouponListBean;
+import com.bcb.data.bean.CouponRecordsBean;
 import com.bcb.util.HttpUtils;
 import com.bcb.util.LogUtil;
 import com.bcb.util.MyListView;
 import com.bcb.util.PackageUtil;
 import com.bcb.util.ToastUtil;
 import com.bcb.util.TokenUtil;
-import com.bcb.presentation.adapter.ZQZRadapter;
+import com.bcb.presentation.adapter.CouponListAdapter;
 import com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout;
-import com.bcb.base.BaseFragment;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,61 +41,67 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 转让中，已转让
+ * 所有优惠券
  */
-public class _Change_InFragment extends BaseFragment implements AdapterView.OnItemClickListener {
+public class _Coupon2Fragment1 extends BaseFragment1 {
+
+	private static final String TAG = "_UnusedCouponFragment1";
+
 	private Context ctx;
 
-	private MyListView lv;
-	private int Status;//	状态 【1 转让中】【 0已完成】
+	private MyListView mCouponListView;
+
 	private int PageNow = 1;
 	private int PageSize = 10;
 
-	private List<ZQBGbean.RecordsBean> recordsBeans;
-	private ZQZRadapter mCouponListAdapter;
+	private List<CouponRecordsBean> recordsBeans;
+	private CouponListAdapter mCouponListAdapter;
 
 	private LinearLayout null_data_layout;
+
+	private Receiver mReceiver;
+
 	private boolean canLoadmore = true;
 	private PullToRefreshLayout refreshLayout;
 	private RelativeLayout loadmore_view;
 
-	//******************************************************************************************
+	private BcbRequestQueue requestQueue;
 
-	/**
-	 * 构造时把传入的参数带进来
-	 */
-	public static _Change_InFragment newInstance(int Status) {
-		Bundle bundle = new Bundle();
-		bundle.putInt("Status", Status);
-		_Change_InFragment fragment = new _Change_InFragment();
-		fragment.setArguments(bundle);
-		return fragment;
+	public _Coupon2Fragment1() {
+		super();
 	}
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		Bundle bundle = getArguments();
-		if (bundle != null) {
-			Status = bundle.getInt("Status");
-		}
+	@SuppressLint("ValidFragment")
+	public _Coupon2Fragment1(Context ctx) {
+		super();
+		this.ctx = ctx;
 	}
-	//******************************************************************************************
+
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		return inflater.inflate(R.layout.fragment_change_in, container, false);
+		return inflater.inflate(R.layout.frag_coupon_unused, container, false);
 	}
 
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		this.ctx = view.getContext();
+		requestQueue = MyApplication.getInstance().getRequestQueue();
+		IntentFilter intentFilter = new IntentFilter("com.bcb.update.couponui");
+		mReceiver = new Receiver();
+		ctx.registerReceiver(mReceiver, intentFilter);
+
 		null_data_layout = (LinearLayout) view.findViewById(R.id.null_data_layout);
+
 		recordsBeans = new ArrayList<>();
-		mCouponListAdapter = new ZQZRadapter(ctx, recordsBeans);
-		lv = (MyListView) view.findViewById(R.id.listview_data_layout);
-		lv.setOnItemClickListener(this);
-		lv.setAdapter(mCouponListAdapter);
+		mCouponListAdapter = new CouponListAdapter(ctx, recordsBeans, 10086);
+		mCouponListView = (MyListView) view.findViewById(R.id.listview_data_layout);
+//        mCouponListView.setOnItemClickListener(new onClickViewCoupon());
+		mCouponListView.setAdapter(mCouponListAdapter);
+
 		//刷新
 		loadmore_view = (RelativeLayout) view.findViewById(R.id.loadmore_view);
 		refreshLayout = (PullToRefreshLayout) view.findViewById(R.id.refresh_view);
@@ -94,7 +109,6 @@ public class _Change_InFragment extends BaseFragment implements AdapterView.OnIt
 		refreshLayout.setOnRefreshListener(new PullToRefreshLayout.OnRefreshListener() {
 			@Override
 			public void onRefresh(PullToRefreshLayout pullToRefreshLayout) {
-
 				if (HttpUtils.isNetworkConnected(ctx)) {
 					PageNow = 1;
 					recordsBeans.clear();
@@ -108,7 +122,6 @@ public class _Change_InFragment extends BaseFragment implements AdapterView.OnIt
 
 			@Override
 			public void onLoadMore(PullToRefreshLayout pullToRefreshLayout) {
-
 				if (HttpUtils.isNetworkConnected(ctx)) {
 					if (canLoadmore) {
 						loadData();
@@ -125,31 +138,50 @@ public class _Change_InFragment extends BaseFragment implements AdapterView.OnIt
 		refreshLayout.autoRefresh();
 	}
 
-	//******************************************************************************************
+	//广播
+	class Receiver extends BroadcastReceiver {
+		public void onReceive(Context context, Intent intent) {
+			if (intent.getAction().equals("com.bcb.update.couponui")) {
+				PageNow = 1;
+				//先清空原有的数据
+				recordsBeans.clear();
+				loadData();
+			}
+		}
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		ctx.unregisterReceiver(mReceiver);
+	}
+
 	private void loadData() {
+	    /*1	未使用
+	    10	冻结中
+	    20	已使用
+	    30	已回收
+	    40	已过期*/
 		JSONObject obj = new JSONObject();
 		try {
 			obj.put("PageNow", PageNow);
 			obj.put("PageSize", PageSize);
-			obj.put("Status", Status);
+//			obj.put("Status", 1);
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
 
-		BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.SEARCHCLAIMCONVEY, obj, TokenUtil.getEncodeToken(ctx), new BcbRequest
-				.BcbCallBack<JSONObject>() {
+		BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.Select_Coupon, obj, TokenUtil.getEncodeToken(ctx), new BcbRequest.BcbCallBack<JSONObject>() {
 			@Override
 			public void onResponse(JSONObject response) {
-				LogUtil.i("bqt", "【状态 1 转让中 0已完成】" + Status);
-
-				LogUtil.i("bqt", "债权转让列表" + response.toString());
+				LogUtil.i("bqt", "【_UnusedCouponFragment1】【onResponse】未使用的优惠券" + response.toString());
 
 				try {
 					if (PackageUtil.getRequestStatus(response, ctx)) {
 						JSONObject obj = PackageUtil.getResultObject(response);
-						ZQBGbean mCouponList = null;
+						CouponListBean mCouponList = null;
 						if (obj != null) {
-							mCouponList = MyApplication.mGson.fromJson(obj.toString(), ZQBGbean.class);
+							mCouponList = MyApplication.mGson.fromJson(obj.toString(), CouponListBean.class);
 						}
 						//存在数据时
 						if (null != mCouponList && null != mCouponList.Records && mCouponList.Records.size() > 0) {
@@ -158,7 +190,7 @@ public class _Change_InFragment extends BaseFragment implements AdapterView.OnIt
 							setupListViewVisible(true);
 							synchronized (this) {
 								recordsBeans.addAll(mCouponList.Records);
-								//								Collections.sort(recordsBeans);
+//								Collections.sort(recordsBeans);
 							}
 							if (null != mCouponListAdapter) {
 								mCouponListAdapter.notifyDataSetChanged();
@@ -182,8 +214,6 @@ public class _Change_InFragment extends BaseFragment implements AdapterView.OnIt
 							setupListViewVisible(true);
 						}
 					}
-				} catch (Exception e) {
-					LogUtil.i("bqt", "【_Change_InFragment】【onResponse】" + e.toString());
 				} finally {
 					refreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
 					refreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
@@ -192,7 +222,6 @@ public class _Change_InFragment extends BaseFragment implements AdapterView.OnIt
 
 			@Override
 			public void onErrorResponse(Exception error) {
-				LogUtil.i("bqt", "2");
 				refreshLayout.refreshFinish(PullToRefreshLayout.FAIL);
 				refreshLayout.loadmoreFinish(PullToRefreshLayout.FAIL);
 				if (recordsBeans == null || recordsBeans.size() <= 0) {
@@ -202,26 +231,31 @@ public class _Change_InFragment extends BaseFragment implements AdapterView.OnIt
 				}
 			}
 		});
-		jsonRequest.setTag(UrlsOne.SEARCHCLAIMCONVEY);
-		MyApplication.getInstance()
-				.getRequestQueue()
-				.add(jsonRequest);
+		jsonRequest.setTag(BcbRequestTag.BCB_SELECT_COUPON_REQUEST);
+		requestQueue.add(jsonRequest);
+
+	}
+	
+	class onClickViewCoupon implements OnItemClickListener {
+		
+		@Override
+		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//            LogUtil.d("1234", "type = " + recordsBeans.get(position).getCouponType());
+			Intent intent = new Intent();
+			intent.putExtra("selectCoupon", true);
+			((Activity) ctx).setResult(1, intent);
+			((Activity) ctx).finish();
+		}
 	}
 
 	//加载优惠券，true 表示有数据，false 表示没数据
 	private void setupListViewVisible(boolean state) {
 		if (state) {
 			null_data_layout.setVisibility(View.GONE);
-			lv.setVisibility(View.VISIBLE);
+			mCouponListView.setVisibility(View.VISIBLE);
 		} else {
 			null_data_layout.setVisibility(View.VISIBLE);
-			lv.setVisibility(View.GONE);
+			mCouponListView.setVisibility(View.GONE);
 		}
-	}
-
-	//******************************************************************************************
-	@Override
-	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		Activity_ZRXQ.launche(ctx, recordsBeans.get(position).Id, Status);
 	}
 }

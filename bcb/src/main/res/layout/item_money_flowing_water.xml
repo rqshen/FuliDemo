@@ -2,82 +2,75 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:background="@drawable/main_item_frame"
+              android:background="@color/background"
               android:orientation="vertical">
-
+    <!--日期-->
     <LinearLayout
         android:id="@+id/layout_date"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/background"
-        android:orientation="vertical">
+        android:layout_height="35dp"
+        android:background="@color/linegray"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <Space
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"/>
 
         <TextView
             android:id="@+id/value_date"
             android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:layout_marginLeft="@dimen/margin_size_rather_large"
-            android:gravity="center_vertical"
+            android:layout_height="wrap_content"
             android:text="0000年00月00日"
             android:textColor="@color/txt_gray"
-            android:textSize="12sp"/>
-
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="0.5dp"
-            android:background="@color/linegray"/>
+            android:textSize="13sp"/>
     </LinearLayout>
 
-    <RelativeLayout
+    <View style="@style/line"/>
+
+    <!--状态和金额-->
+    <LinearLayout
+        android:id="@+id/ll_trading_detail"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        >
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <Space
+            android:layout_width="25dp"
+            android:layout_height="wrap_content"/>
 
         <TextView
             android:id="@+id/value_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/margin_size_rather_large"
-            android:text="XXXXX"
-            android:textColor="@color/black"
-            android:textSize="@dimen/main_text_default"/>
+            android:text="活动奖励"
+            android:textColor="@color/txt_black"
+            android:textSize="15sp"/>
 
-        <LinearLayout
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+
+        <TextView
+            android:id="@+id/value_amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="24dp"
-            android:gravity="right">
+            android:drawablePadding="10dp"
+            android:drawableRight="@drawable/ind"
+            android:text="+0.01元"
+            android:textColor="@color/red"
+            android:textSize="15sp"/>
 
-            <TextView
-                android:id="@+id/value_amount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="12.5dp"
-                android:text="00000"
-                android:textColor="@color/txt_black"
-                android:textSize="@dimen/main_text_default"/>
+        <Space
+            android:layout_width="15dp"
+            android:layout_height="wrap_content"/>
 
-            <LinearLayout
-                android:layout_width="14dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center_horizontal">
+    </LinearLayout>
 
-                <ImageView
-                    android:id="@+id/image_status"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:background="@drawable/ind"/>
-            </LinearLayout>
-        </LinearLayout>
-    </RelativeLayout>
+    <View style="@style/line"/>
 
-    <View
-        android:layout_width="wrap_content"
-        android:layout_height="0.5dp"
-        android:background="@color/linegray"/>
 </LinearLayout>

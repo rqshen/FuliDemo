@@ -3,7 +3,7 @@ package com.bcb.presentation.view.activity;
 import android.os.Bundle;
 
 import com.bcb.R;
-import com.bcb.base.Activity_Base;
+import com.bcb.base.old.Activity_Base;
 
 public class A_AboutSlb extends Activity_Base {
 

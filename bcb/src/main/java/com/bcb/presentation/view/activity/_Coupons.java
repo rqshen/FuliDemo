@@ -27,19 +27,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bcb.R;
-import com.bcb.base.BaseActivity1;
+import com.bcb.base.old.BaseActivity1;
 import com.bcb.MyApplication;
 import com.bcb.network.BcbJsonRequest;
 import com.bcb.network.BcbRequest;
 import com.bcb.network.BcbRequestQueue;
 import com.bcb.network.BcbRequestTag;
 import com.bcb.network.UrlsOne;
+import com.bcb.presentation.view.fragment._Coupon2Fragment1;
 import com.bcb.util.LogUtil;
 import com.bcb.util.MyActivityManager;
 import com.bcb.util.TokenUtil;
 import com.bcb.module.discover.financialproduct.adapter.MyFragmentPagerAdapter;
-import com.bcb.presentation.view.fragment._Coupon2Fragment;
-import com.bcb.presentation.view.fragment._TQBJFragment;
+import com.bcb.presentation.view.fragment._TQBJFragment1;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -98,8 +98,8 @@ public class _Coupons extends BaseActivity1 {
 		mPager = (ViewPager) findViewById(R.id.coupons_viewpager);
 		
 		fragmentsList = new ArrayList<Fragment>();
-		Fragment fragment01 = new _Coupon2Fragment(_Coupons.this);
-		Fragment fragment02 = new _TQBJFragment(_Coupons.this);
+		Fragment fragment01 = new _Coupon2Fragment1(_Coupons.this);
+		Fragment fragment02 = new _TQBJFragment1(_Coupons.this);
 
 		fragmentsList.add(fragment01);
 		fragmentsList.add(fragment02);

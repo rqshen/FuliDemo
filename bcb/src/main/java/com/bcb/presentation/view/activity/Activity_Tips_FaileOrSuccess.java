@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bcb.R;
-import com.bcb.base.Activity_Base;
+import com.bcb.base.old.Activity_Base;
 import com.bcb.MyApplication;
 import com.bcb.event.BroadcastEvent;
 import com.bcb.module.discover.eliteloan.loanlist.LoanListActivity;
@@ -31,7 +31,7 @@ import com.bcb.util.MQCustomerManager;
 import com.bcb.util.PackageUtil;
 import com.bcb.util.ToastUtil;
 import com.bcb.util.TokenUtil;
-import com.bcb.module.home.MainActivity1;
+import com.bcb.module.home.MainActivity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.json.JSONObject;
@@ -369,7 +369,7 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
 
 	private void JumpToUser() {
 		EventBus.getDefault().post(new BroadcastEvent(BroadcastEvent.USER));
-		startActivity(new Intent(this, MainActivity1.class));
+		startActivity(new Intent(this, MainActivity.class));
 		finish();
 	}
 

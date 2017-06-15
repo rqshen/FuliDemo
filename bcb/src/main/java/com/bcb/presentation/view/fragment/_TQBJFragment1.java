@@ -14,7 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bcb.R;
-import com.bcb.base.BaseFragment;
+import com.bcb.base.old.BaseFragment1;
 import com.bcb.MyApplication;
 import com.bcb.network.BcbJsonRequest;
 import com.bcb.network.BcbRequest;
@@ -44,7 +44,7 @@ import java.util.List;
 /**
  * 所有优惠券
  */
-public class _TQBJFragment extends BaseFragment implements AdapterView.OnItemClickListener, PrivilegeMoneyAdapter.IloadAfterRegeist  {
+public class _TQBJFragment1 extends BaseFragment1 implements AdapterView.OnItemClickListener, PrivilegeMoneyAdapter.IloadAfterRegeist  {
 
 	private BcbRequestQueue requestQueue;
 	private List<PrivilegeMoneyDto> datas;
@@ -60,12 +60,12 @@ public class _TQBJFragment extends BaseFragment implements AdapterView.OnItemCli
 	ImageView iv_about;
 
 
-	public _TQBJFragment() {
+	public _TQBJFragment1() {
 		super();
 	}
 
 	@SuppressLint("ValidFragment")
-	public _TQBJFragment(Context ctx) {
+	public _TQBJFragment1(Context ctx) {
 		super();
 		this.ctx = ctx;
 	}

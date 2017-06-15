@@ -28,8 +28,9 @@ import android.widget.Toast;
 
 import com.bcb.R;
 import com.bcb.MyApplication;
-import com.bcb.base.BaseActivity1;
+import com.bcb.base.old.BaseActivity1;
 import com.bcb.event.BroadcastEvent;
+import com.bcb.module.homepager.HomePagerFragment;
 import com.bcb.module.myinfo.setting.gesturelock.GestureLockActivity;
 import com.bcb.network.BcbJsonRequest;
 import com.bcb.network.BcbRequest;
@@ -48,7 +49,6 @@ import com.bcb.presentation.view.custom.AlertView.DLDialog;
 import com.bcb.presentation.view.custom.AlertView.UpdateDialog;
 import com.bcb.presentation.view.custom.CustomViewPager;
 import com.bcb.module.discover.DiscoverFragment;
-import com.bcb.module.homepager.HomePagerFragment;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -60,7 +60,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity1 extends BaseActivity1 {
+public class MainActivity extends BaseActivity1 {
 	
 	//viewpager
 	public CustomViewPager content;
@@ -93,13 +93,13 @@ public class MainActivity1 extends BaseActivity1 {
 		//注册广播
 		registerBroadcast();
 		init();
-		UmengUtil.update(MainActivity1.this);
+		UmengUtil.update(MainActivity.this);
 		EventBus.getDefault()
 				.register(this);
 
 		if (!MyApplication.saveUserInfo.getGesturePassword()
 				.isEmpty() && MyApplication.saveUserInfo.getAccess_Token() != null) {
-			GestureLockActivity.launche(MainActivity1.this, false, true);
+			GestureLockActivity.launche(MainActivity.this, false, true);
 		}
 	}
 
@@ -136,7 +136,7 @@ public class MainActivity1 extends BaseActivity1 {
 				if (data != null) {
 					versionBean = MyApplication.mGson.fromJson(data.toString(), VersionBean.class);
 					//判断版本号！
-					if (versionBean != null && versionBean.Increment > getVersionCode(MainActivity1.this)) {
+					if (versionBean != null && versionBean.Increment > getVersionCode(MainActivity.this)) {
 						MyApplication.versionBean=versionBean;
 						if (versionBean.Force) {//强制升级
 							fileName = "fljr-v" + versionBean.Increment + ".apk";
@@ -174,11 +174,11 @@ public class MainActivity1 extends BaseActivity1 {
 						editor.clear();
 						editor.commit();
 						registerReceiver();//被删了，重新下载
-					} else installApk(MainActivity1.this);//否则，安装
+					} else installApk(MainActivity.this);//否则，安装
 				} else if (getIsFinishedWhenDownloading()) {//上次在下载过程中退出了，下次进入应用时重新下载
 					registerReceiver();//重新下载
 				} else if (apkFile != null && apkFile.exists()) {//正在下载
-					Toast.makeText(MainActivity1.this, "正在下载，请稍后", Toast.LENGTH_SHORT)
+					Toast.makeText(MainActivity.this, "正在下载，请稍后", Toast.LENGTH_SHORT)
 							.show();
 				} else {//没下载过
 					registerReceiver();
@@ -211,11 +211,11 @@ public class MainActivity1 extends BaseActivity1 {
 								editor.clear();
 								editor.commit();
 								registerReceiver();//被删了，重新下载
-							} else installApk(MainActivity1.this);//否则，安装
+							} else installApk(MainActivity.this);//否则，安装
 						} else if (getIsFinishedWhenDownloading()) {//上次在下载过程中退出了，下次进入应用时重新下载
 							registerReceiver();//重新下载
 						} else if (apkFile != null && apkFile.exists()) {//正在下载
-							Toast.makeText(MainActivity1.this, "正在下载，请稍后", Toast.LENGTH_SHORT)
+							Toast.makeText(MainActivity.this, "正在下载，请稍后", Toast.LENGTH_SHORT)
 									.show();
 						} else {//没下载过
 							registerReceiver();
@@ -232,13 +232,13 @@ public class MainActivity1 extends BaseActivity1 {
 	}
 
 	private void registerReceiver() {
-		Toast.makeText(MainActivity1.this, "正在下载新版本安装包", Toast.LENGTH_SHORT)
+		Toast.makeText(MainActivity.this, "正在下载新版本安装包", Toast.LENGTH_SHORT)
 				.show();
 		downloadCompleteReceiver = new DownloadCompleteReceiver();
 		IntentFilter intentFilter = new IntentFilter();
 		intentFilter.addAction(DownloadManager.ACTION_DOWNLOAD_COMPLETE);//下载完成的动作
 		registerReceiver(downloadCompleteReceiver, intentFilter);
-		DownloadUtils.downLoadFile(MainActivity1.this, versionBean.Url, fileName);//开始下载
+		DownloadUtils.downLoadFile(MainActivity.this, versionBean.Url, fileName);//开始下载
 	}
 
 	/**
@@ -336,17 +336,17 @@ public class MainActivity1 extends BaseActivity1 {
 	public void onClick(View view) {
 		switch (view.getId()) {
 			case R.id.layout_main:
-				UmengUtil.eventById(MainActivity1.this, R.string.home);
+				UmengUtil.eventById(MainActivity.this, R.string.home);
 				setFragMain();
 				break;
 			
 			case R.id.layout_product:
-				UmengUtil.eventById(MainActivity1.this, R.string.main_product_list);
+				UmengUtil.eventById(MainActivity.this, R.string.main_product_list);
 				setFragProduct();
 				break;
 			
 			case R.id.layout_user:
-				UmengUtil.eventById(MainActivity1.this, R.string.self_c);
+				UmengUtil.eventById(MainActivity.this, R.string.self_c);
 				setFragUser();
 				break;
 			
@@ -440,15 +440,15 @@ public class MainActivity1 extends BaseActivity1 {
 		if (!TextUtils.isEmpty(flag)) {
 			switch (flag) {
 				case BroadcastEvent.HOME:
-					UmengUtil.eventById(MainActivity1.this, R.string.home);
+					UmengUtil.eventById(MainActivity.this, R.string.home);
 					setFragMain();
 					break;
 				case BroadcastEvent.PRODUCT:
-					UmengUtil.eventById(MainActivity1.this, R.string.main_product_list);
+					UmengUtil.eventById(MainActivity.this, R.string.main_product_list);
 					setFragProduct();
 					break;
 				case BroadcastEvent.USER:
-					UmengUtil.eventById(MainActivity1.this, R.string.self_c);
+					UmengUtil.eventById(MainActivity.this, R.string.self_c);
 					setFragUser();
 					break;
 			}

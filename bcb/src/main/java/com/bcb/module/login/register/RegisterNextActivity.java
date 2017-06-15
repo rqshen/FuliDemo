@@ -14,8 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bcb.R;
-import com.bcb.base.Activity_Base;
-import com.bcb.module.home.MainActivity1;
+import com.bcb.base.old.Activity_Base;
+import com.bcb.module.home.MainActivity;
 import com.bcb.module.login.LoginActivity;
 import com.bcb.util.LogUtil;
 import com.bcb.util.MQCustomerManager;
@@ -554,7 +554,7 @@ public class RegisterNextActivity extends Activity_Base implements Interface_Ver
             // 销毁所有页面，回到首页
             sendBroardCast();
 //            MyActivityManager.getInstance().finishAllActivity();
-            startActivity(new Intent(RegisterNextActivity.this, MainActivity1.class));
+            startActivity(new Intent(RegisterNextActivity.this, MainActivity.class));
         }
         //出错信息
         else {

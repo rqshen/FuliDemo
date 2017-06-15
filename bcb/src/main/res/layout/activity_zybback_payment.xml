@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/linegray"
+              android:orientation="vertical">
+    <!--标题-->
+    <com.bcb.base.view.ToolbarView
+        android:id="@+id/toolbar_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <!--本息-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/red"
+        android:orientation="horizontal"
+        android:paddingBottom="25dp"
+        android:paddingTop="20dp">
+
+        <Space
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"/>
+
+        <!--已收本息-->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="已收本息(元)"
+                android:textColor="@color/white"
+                android:textSize="13sp"/>
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="5dp"/>
+
+            <TextView
+                android:id="@+id/donePrincipalInterest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0.00"
+                android:textColor="@color/white"
+                android:textSize="20sp"/>
+        </LinearLayout>
+
+        <Space
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"/>
+
+        <!--已收本息-->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="待还本息(元)"
+                android:textColor="@color/white"
+                android:textSize="13sp"/>
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="5dp"/>
+
+            <TextView
+                android:id="@+id/prePrincipalInterest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0.00"
+                android:textColor="@color/white"
+                android:textSize="20sp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!--天数-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@color/linegray"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/BackPaymentDay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="最长可持有"
+            />
+
+
+        <TextView
+            android:id="@+id/repaymentAllPeriod"
+            style="@style/BackPaymentDay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="84天"/>
+
+        <TextView
+            style="@style/BackPaymentDay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="，已收益"/>
+
+
+        <TextView
+            android:id="@+id/repaymentHadPeriod"
+            style="@style/BackPaymentDay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="6天"/>
+
+    </LinearLayout>
+
+    <!--回款列表-->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/zyb_backpayment_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+
+</LinearLayout>

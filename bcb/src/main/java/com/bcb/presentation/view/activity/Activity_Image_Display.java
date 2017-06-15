@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bcb.R;
-import com.bcb.base.Activity_Base;
+import com.bcb.base.old.Activity_Base;
 import com.bcb.util.MyActivityManager;
 import com.bcb.util.ToastUtil;
 import com.bcb.presentation.view.custom.PagerIndicator.CirclePageIndicator;

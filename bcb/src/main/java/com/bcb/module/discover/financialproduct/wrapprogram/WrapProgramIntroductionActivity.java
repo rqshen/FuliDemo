@@ -19,7 +19,7 @@ import android.widget.Toast;
 
 import com.bcb.MyApplication;
 import com.bcb.R;
-import com.bcb.base.Activity_Base;
+import com.bcb.base.old.Activity_Base;
 import com.bcb.constant.ProjectListStatus;
 import com.bcb.data.bean.CPXQbean;
 import com.bcb.module.browse.FundCustodianWebActivity;
@@ -202,7 +202,7 @@ public class WrapProgramIntroductionActivity extends Activity_Base implements Vi
         needStartSSB.append(getSSpannableString(string1));
 
         if (bean.DurationExchangeType == 1) {
-            needStartSSB.append(dayOrMonth + "，按天续期，最长").append(getSSpannableString(string2)).append(dayOrMonth);
+            needStartSSB.append(dayOrMonth + "，按周续期，最长").append(getSSpannableString(string2)).append(dayOrMonth);
         } else {
             needStartSSB.append(dayOrMonth + "，按月续期，最长").append(getSSpannableString(string2)).append(dayOrMonth);
         }
@@ -242,7 +242,7 @@ public class WrapProgramIntroductionActivity extends Activity_Base implements Vi
                     return;
                 }
                 //跳转到购买页面
-                WrapProjectBuyActivity.launche2(this, packageId, bean.Name, bean, type);
+                WrapProjectBuyActivity.launche(this, packageId, bean.Name, bean, type);
                 break;
             case R.id.more:
                 ProjectDetailActivity.launche2(this, bean.Name, bean.PageUrl, 20095);
@@ -268,11 +268,11 @@ public class WrapProgramIntroductionActivity extends Activity_Base implements Vi
          * 获取当前是稳盈宝还是周盈宝
          */
         if (type == ProjectListStatus.WYB) {
-            url = UrlsOne.WYB_DETAIL;
+            url = UrlsOne.WYB_Buy_DETAIL;
         } else if (type == ProjectListStatus.ZYB) {
-            url = UrlsOne.ZYB_DETAIL;
+            url = UrlsOne.ZYB_Buy_DETAIL;
         } else {
-            url = UrlsOne.WYB_DETAIL;
+            url = UrlsOne.WYB_Buy_DETAIL;
         }
 
 

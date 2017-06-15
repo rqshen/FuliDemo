@@ -19,14 +19,14 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.bcb.R;
-import com.bcb.base.BaseFragment;
+import com.bcb.base.old.BaseFragment1;
 import com.bcb.util.HttpUtils;
 import com.bcb.util.ToastUtil;
 import com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout;
 
-public class _SecureFragment extends BaseFragment implements OnClickListener {
+public class _SecureFragment1 extends BaseFragment1 implements OnClickListener {
 	
-	private static final String TAG = "_SecureFragment";
+	private static final String TAG = "_SecureFragment1";
 	
 	private ImageView back_img;
 	private TextView title_text;
@@ -41,12 +41,12 @@ public class _SecureFragment extends BaseFragment implements OnClickListener {
 
     private PullToRefreshLayout refreshLayout;
 
-    public _SecureFragment() {
+    public _SecureFragment1() {
         super();
     }
 
     @SuppressLint("ValidFragment")
-	public _SecureFragment(Context ctx, boolean left_textIsgone, String tittle, String url) {
+	public _SecureFragment1(Context ctx, boolean left_textIsgone, String tittle, String url) {
 		super();
 		this.ctx = ctx;
 		this.left_textIsgone = left_textIsgone;

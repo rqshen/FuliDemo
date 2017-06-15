@@ -10,7 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bcb.R;
-import com.bcb.base.Activity_Base;
+import com.bcb.base.old.Activity_Base;
 import com.bcb.MyApplication;
 import com.bcb.module.browse.FundCustodianWebActivity;
 import com.bcb.module.myinfo.balance.recharge.RechargeActivity;

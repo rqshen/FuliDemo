@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/white"
+              android:gravity="center_horizontal"
+              android:orientation="vertical">
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="15dp"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_zyb_back_payment_no"/>
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="15dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:lineSpacingExtra="6dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:text="1、锁定期内若无申请退出，即锁定期过后，将按7天的锁定期限进行本金自动复投。\n例如：\n您购买了周盈宝10000元，14天的锁定期，若期间无申请退出，则锁定期后您的10000元投资本金将按7天的锁定期自动复投。如有复投不成功的部分本金，我们将把这部分本金和对应的持有天数的收益一起退回到您的账户余额里。\n\n2、锁定期内可随时申请退出，申请成功，锁定期后为您回款累计收益和投资本金。"
+        android:textColor="@color/txt_black"/>
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="10dp"/>
+
+</LinearLayout>

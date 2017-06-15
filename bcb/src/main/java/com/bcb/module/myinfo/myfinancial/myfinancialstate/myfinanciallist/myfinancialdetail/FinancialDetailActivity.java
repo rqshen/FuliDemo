@@ -14,11 +14,12 @@ import android.widget.Toast;
 
 import com.bcb.MyApplication;
 import com.bcb.R;
-import com.bcb.base.Activity_Base;
+import com.bcb.base.old.Activity_Base;
 import com.bcb.constant.ProjectListStatus;
 import com.bcb.data.bean.ClaimConveyBean;
 import com.bcb.data.bean.Project_Investment_Details_Bean;
 import com.bcb.module.myinfo.myfinancial.myfinancialstate.myfinanciallist.myfinancialdetail.backpayment.BackPaymentActivity;
+import com.bcb.module.myinfo.myfinancial.myfinancialstate.myfinanciallist.myfinancialdetail.backpayment.zyb.ZYBBackPaymentActivity;
 import com.bcb.module.myinfo.myfinancial.myfinancialstate.myfinanciallist.myfinancialdetail.projectdetail.ProjectDetailActivity;
 import com.bcb.network.BcbJsonRequest;
 import com.bcb.network.BcbRequest;
@@ -57,6 +58,8 @@ public class FinancialDetailActivity extends Activity_Base implements View.OnCli
     int Status = ProjectListStatus.WYB;//0稳盈宝  1涨薪宝  2周盈宝
     private Project_Investment_Details_Bean bean;
 
+    private TextView tv_backpayment;//回款计划说明
+
     /**
      * 启动自身
      *
@@ -92,9 +95,21 @@ public class FinancialDetailActivity extends Activity_Base implements View.OnCli
         OrderNo = getIntent().getStringExtra("OrderNo");
         Status = getIntent().getIntExtra("Status", 1);
         initView();
+        initData();
         loadData();
 
         ActivityCollector.addActivity(this);
+    }
+
+    /**
+     * 初始化数据
+     */
+    private void initData() {
+        if (Status == ProjectListStatus.ZYB) {//周盈宝回款计划
+            tv_backpayment.setText("回款记录");
+        } else {
+            tv_backpayment.setText("回款计划");
+        }
     }
 
     private void initView() {
@@ -102,6 +117,7 @@ public class FinancialDetailActivity extends Activity_Base implements View.OnCli
         earning_expected = (TextView) findViewById(R.id.earning_expected);
         tv_id_number = (TextView) findViewById(R.id.tv_id_number);
         ll_id_number = (LinearLayout) findViewById(R.id.ll_id_number);
+        tv_backpayment = (TextView) findViewById(R.id.tv_backpayment);
         ll_id_number.setOnClickListener(this);
         earningtime = (TextView) findViewById(R.id.earningtime);
         annual_yield = (TextView) findViewById(R.id.annual_yield);
@@ -243,10 +259,15 @@ public class FinancialDetailActivity extends Activity_Base implements View.OnCli
                 Toast.makeText(this, "订单号已经复制到剪贴板", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.rl_hk://回款计划
-                Intent intent = new Intent(FinancialDetailActivity.this, BackPaymentActivity.class);
-                intent.putExtra("data", bean);
-                intent.putExtra("Status", Status);
-                startActivity(intent);
+                if (Status == ProjectListStatus.ZYB) {//周盈宝无回款计划，跳转到特殊的页面
+                    startActivity(ZYBBackPaymentActivity.newIntent(FinancialDetailActivity.this, bean, OrderNo));
+                } else {//稳盈宝和涨薪宝
+                    Intent intent = new Intent(FinancialDetailActivity.this, BackPaymentActivity.class);
+                    intent.putExtra("data", bean);
+                    intent.putExtra("Status", Status);
+                    startActivity(intent);
+                }
+
                 break;
             case R.id.rl_zr:
                 Activity_Rading_Record.launche(this, OrderNo);

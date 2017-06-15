@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bcb.R;
-import com.bcb.base.BaseActivity1;
+import com.bcb.base.old.BaseActivity1;
 import com.bcb.module.discover.financialproduct.adapter.MyFragmentPagerAdapter;
 import com.bcb.util.MyActivityManager;
 

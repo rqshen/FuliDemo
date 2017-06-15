@@ -11,7 +11,7 @@ import android.widget.RelativeLayout;
 
 import com.bcb.MyApplication;
 import com.bcb.R;
-import com.bcb.base.Activity_Base;
+import com.bcb.base.old.Activity_Base;
 import com.bcb.data.bean.MoneyFlowingWaterListBean;
 import com.bcb.data.bean.MoneyFlowingWaterRecordsBean;
 import com.bcb.network.BcbJsonRequest;

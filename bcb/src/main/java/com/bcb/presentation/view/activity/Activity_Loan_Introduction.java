@@ -11,7 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bcb.R;
-import com.bcb.base.Activity_Base;
+import com.bcb.base.old.Activity_Base;
 import com.bcb.MyApplication;
 import com.bcb.module.discover.eliteloan.loanborrow.LoanRequestBorrowActivity;
 import com.bcb.module.login.LoginActivity;

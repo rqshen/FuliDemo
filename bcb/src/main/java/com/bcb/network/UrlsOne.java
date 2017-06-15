@@ -30,9 +30,6 @@ public class UrlsOne {
     // 首页驿站切换-热门驿站
     public static final String MainpageHotStation = host + "/api/v1.0/7469e8252732";
 
-    // 投资记录
-    public static final String TradingRecord = host + "/api/v2.0/a65000ed8db8";
-
     // 交易明细
     public static final String MoneyDetail = host + "/api/v2.0/a64e011c4b73";
 
@@ -42,10 +39,8 @@ public class UrlsOne {
     // 投资详情
     public static final String ClaimConveyDate = host + "/api/v2.0/a69000af0cfe";//获取债权转让变更记录
 
-
     public static final String REQUESTZR = host + "/api/v2.0/a69000ac1b78";//申请债权转让
     public static final String UNREQUESTZR = host + "/api/v2.0/a69100a6d8a4";//取消债权转让
-
 
     //债权转让信息
     public static final String CLAIMCONVEYDETAIL = host + "/api/v2.0/a69a00bc7e0f";
@@ -69,7 +64,6 @@ public class UrlsOne {
     public static final String ForgetPayPwd = host + "/api/v1.0/8911a5522bec";
 
     // 获取会员信息
-    //    public static final String GetUserInfo = host + "/api/v1.0/1337fb626563";//旧接口
     public static final String GetUserInfo = UrlsTwo.UserMessage;//2.0
 
     // 获取省份
@@ -101,19 +95,28 @@ public class UrlsOne {
     public static final String SEARCHCLAIMCONVEY = host + "/api/v2.0/a69a00bc546d";
 
     //稳赢宝列表，打包的标【月】
-    public static final String WYB_LIST = host + "/api/v2.5/a71b011df7f7";//打包
+    public static final String WYB_Buy_LIST = host + "/api/v2.5/a71b011df7f7";//打包
     //涨薪宝列表，普通表，原始标
-    public static final String ZXB_LIST = host + "/api/v2.5/a71b011d974a";//原始
+    public static final String ZXB_Buy_LIST = host + "/api/v2.5/a71b011d974a";//原始
     //周盈宝列表，打包的标【周】
-    public static final String ZYB_LIST = host + "/api/v2.5/a78000f4e1d9";//打包
+    public static final String ZYB_Buy_LIST = host + "/api/v2.5/a78000f4e1d9";//打包
 
+    //购买涨薪宝
+    public static String ZXB_Buying = host + "/api/v2.0/a63c0109b86a";
+
+    //购买稳盈宝
+    public static String WYB_Buying = host + "/api/v2.0/a6de0115f478";
+
+    //购买稳盈宝
+    public static String ZYB_Buying = host + "/api/v2.0/a78000f6d15e";
 
     //稳赢宝详情，打包的标【月】
-    public static final String WYB_DETAIL = host + "/api/v2.5/a6de0105e5df";//打包
+    public static final String WYB_Buy_DETAIL = host + "/api/v2.5/a6de0105e5df";//打包
     //涨薪宝详情，普通表，原始标
-    public static final String ZXB_DETAIL = host + "/api/v2.5/a71b011dbf16";//原始
+//    public static final String ZXB_DETAIL = host + "/api/v2.5/a71b011dbf16";//新的接口，暂未使用
+    public static final String ZXB_Buy_DETAIL = host + "/api/v2.0/a64b0102ddbd";//原始
     //周盈宝详情，打包的标【周】
-    public static final String ZYB_DETAIL = host + "/api/v2.5/a78000f4e64e";//打包
+    public static final String ZYB_Buy_DETAIL = host + "/api/v2.5/a78000f4e64e";//打包
 
     //稳赢宝【月】，购买的标的列表
     public static final String WYB_MyFinancial_List = host + "/api/v2.5/a71c00f5bd72";
@@ -134,6 +137,9 @@ public class UrlsOne {
 
     // 周赢宝【周】，购买的标退出
     public static final String ZYB_MyFinancial_Exit = host + "/api/v2.5/a78500f9a281";//申请债权退出
+
+    //周盈宝回款计划列表
+    public static final String ZYB_BackPayment_List = host + "/api/v2.5/a780010e681e";//
 
     // 兑换优惠劵
     public static final String Convert_Coupon = host + "/api/v1.0/95aabaaae186";
@@ -171,8 +177,8 @@ public class UrlsOne {
     //订单状态查询
     public static final String RechargeOrderStatus = host + "/api/v1.0/8b441a56e2e1";
 
-    //首页标的数据(v1.3.4)
-    public static final String MainFragmentListData2 = host + "/api/v2.5/a71b0110b729";
+    //首页标的数据
+    public static final String MainFragmentListData2 = host + "/api/v2.5/a7910127d4ba";
 
     //预约新标预告
     public static final String RequestAnnounce = host + "/api/v1.3/075c12497971";
@@ -204,6 +210,9 @@ public class UrlsOne {
     //聚爱项目列表
     public static final String LoveProduct = host + "/api/v1.6/a6240133fbae";
 
+    //活动首页
+    public static final String Home_Activities = host + "/api/v2.5/a7910128ebae";
+
     //一分钟了解福利金融
     public static final String AboutFuliJingRong = "http://wap.fulijr.com/static/1minute/index.html";
     //如何获得补贴
@@ -224,5 +233,6 @@ public class UrlsOne {
     public static final String LoanMaterial = "http://cnt.flh001.com/2016/01/21/zunbeicailiao/";
     //关于聚爱
     public static final String AboutLove = "http://cnt.flh001.com/juaiintro/";
+
 
 }

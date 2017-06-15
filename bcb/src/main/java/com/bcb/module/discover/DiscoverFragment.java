@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import com.bcb.MyApplication;
 import com.bcb.R;
-import com.bcb.base.BaseFragment;
+import com.bcb.base.old.BaseFragment1;
 import com.bcb.module.discover.carinsurance.CarInsuranceActivity;
 import com.bcb.module.discover.eliteloan.EliteLoanActivity;
 import com.bcb.module.discover.financialproduct.InvestmentFinanceActivity;
@@ -33,7 +33,7 @@ import static com.bcb.R.id.title_text;
  * Created by ruiqin.shen
  * 类说明：发现页面
  */
-public class DiscoverFragment extends BaseFragment {
+public class DiscoverFragment extends BaseFragment1 {
     @BindView(R.id.ll_jk)
     LinearLayout ll_jk;
     @BindView(R.id.ll_cx)

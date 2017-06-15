@@ -11,7 +11,7 @@ import com.bcb.data.bean.UserWallet;
 import com.bcb.data.bean.WelfareBean;
 import com.bcb.data.bean.transaction.VersionBean;
 import com.bcb.event.BroadcastEvent;
-import com.bcb.module.home.MainActivity1;
+import com.bcb.module.home.MainActivity;
 import com.bcb.network.BcbJsonRequest;
 import com.bcb.network.BcbNetworkManager;
 import com.bcb.network.BcbRequest;
@@ -41,7 +41,7 @@ import cn.jpush.android.api.TagAliasCallback;
 
 public class MyApplication extends Application implements AMapLocationListener {
 
-    public MainActivity1 _mainActivityActivity;
+    public MainActivity _mainActivityActivity;
     public static final String TAG = "MyApplication";
     public static SaveUserInfoUtils saveUserInfo;
     public static SaveConfigUtil saveConfigUtil;

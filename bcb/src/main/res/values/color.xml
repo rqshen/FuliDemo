@@ -88,4 +88,8 @@
     <color name="pie_gb">#ff008888</color>
     <color name="pie_rb">#ff880088</color>
 
+    <color name="slide_point">#CACACA</color>
+
+    <color name="fixed_point">#EEEEEE</color>
+
 </resources>

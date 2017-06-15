@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.text.method.DigitsKeyListener;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,13 +21,15 @@ import android.widget.Toast;
 
 import com.bcb.MyApplication;
 import com.bcb.R;
-import com.bcb.base.Activity_Base;
+import com.bcb.base.old.Activity_Base;
+import com.bcb.constant.ProjectListStatus;
 import com.bcb.data.bean.CPXQbean;
 import com.bcb.data.bean.CouponListBean;
 import com.bcb.data.bean.CouponRecordsBean;
 import com.bcb.data.bean.UserDetailInfo;
 import com.bcb.data.bean.UserWallet;
-import com.bcb.module.browse.FundCustodianWebActivity;
+import com.bcb.module.discover.financialproduct.normalproject.buy.ProjectBuyFailActivity;
+import com.bcb.module.discover.financialproduct.normalproject.buy.ProjectBuySuccessActivity;
 import com.bcb.module.login.LoginActivity;
 import com.bcb.module.myinfo.balance.FundCustodianAboutActivity;
 import com.bcb.module.myinfo.balance.recharge.RechargeActivity;
@@ -38,9 +39,7 @@ import com.bcb.network.BcbRequestTag;
 import com.bcb.network.UrlsOne;
 import com.bcb.network.UrlsTwo;
 import com.bcb.presentation.view.activity.Activity_Select_Coupon;
-import com.bcb.presentation.view.activity.Activity_Tips_FaileOrSuccess;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
-import com.bcb.util.HttpUtils;
 import com.bcb.util.LogUtil;
 import com.bcb.util.MyActivityManager;
 import com.bcb.util.MyTextUtil;
@@ -111,7 +110,7 @@ public class WrapProjectBuyActivity extends Activity_Base implements View.OnClic
     private double amount;
 
     //默认构造函数，用来传递普通标的数据
-    public static void launche2(Context ctx, String pid, String title, CPXQbean
+    public static void launche(Context ctx, String pid, String title, CPXQbean
             simpleProjectDetail, int type) {
         Intent intent = new Intent(ctx, WrapProjectBuyActivity.class);
         intent.putExtra("pid", pid);
@@ -126,8 +125,7 @@ public class WrapProjectBuyActivity extends Activity_Base implements View.OnClic
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        MyActivityManager.getInstance()
-                .pushOneActivity(WrapProjectBuyActivity.this);
+        MyActivityManager.getInstance().pushOneActivity(WrapProjectBuyActivity.this);
         if (getIntent() != null) {
             packageId = this.getIntent().getStringExtra("pid");
             title = this.getIntent().getStringExtra("title");
@@ -168,14 +166,6 @@ public class WrapProjectBuyActivity extends Activity_Base implements View.OnClic
         invest_money.addTextChangedListener(this);
         invest_money.setSelection(invest_money.getText().length());
 
-        //债券标，且可投金额含小数时，可输入小数。判断是否含小数部分【a % 1 != 0】或【a - (int) a != 0】
-        if ((type == 1 || type == 2) && mSimpleProjectDetail.Balance % 1 != 0) {
-            invest_money.setHint(String.format("%.2f", mSimpleProjectDetail.StartingAmount) + "元起投");
-            invest_money.setKeyListener(DigitsKeyListener.getInstance("0123456789."));
-        } else {//否则不可输入小数
-            invest_money.setHint((int) mSimpleProjectDetail.StartingAmount + "元起投");
-            invest_money.setKeyListener(DigitsKeyListener.getInstance("0123456789"));
-        }
 
         //选择优惠券
         layout_coupon = (RelativeLayout) findViewById(R.id.layout_coupon);
@@ -207,8 +197,11 @@ public class WrapProjectBuyActivity extends Activity_Base implements View.OnClic
             getUserBanlance();
         }
 
-        if (type == 2) requestAmount();
-        else moreValue.setText(String.format("%.2f", mSimpleProjectDetail.Balance));
+        if (type == ProjectListStatus.WYB) {//稳盈从接口请求余额
+            requestAmount();
+        } else {
+            moreValue.setText(String.format("%.2f", mSimpleProjectDetail.Balance));
+        }
     }
 
     int number = 0;
@@ -227,7 +220,7 @@ public class WrapProjectBuyActivity extends Activity_Base implements View.OnClic
                 .BcbCallBack<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                LogUtil.i("bqt", "【NorProjectBuyActivity】【onResponse】获取优惠券张数" + response.toString());
+                LogUtil.i("bqt", "【NormalProjectBuyActivity】【onResponse】获取优惠券张数" + response.toString());
 
                 try {
                     boolean flag = PackageUtil.getRequestStatus(response, WrapProjectBuyActivity.this);
@@ -465,7 +458,7 @@ public class WrapProjectBuyActivity extends Activity_Base implements View.OnClic
         }
 
         //打包标时，超出自己可投的金额
-        if (type == 2 && inputMoney > (float) amount) {
+        if (type == ProjectListStatus.WYB && inputMoney > (float) amount) {
             Toast.makeText(this, "购买金额不能大于可投金额", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -475,20 +468,7 @@ public class WrapProjectBuyActivity extends Activity_Base implements View.OnClic
             return;
         }
 
-        //满足所有条件后，请求买标
-        switch (type) {
-            case 0:
-                requestBuy();
-                break;
-            case 1:
-                requestBuy2(UrlsTwo.RRECLAIMCONVEY);
-                break;
-            case 2:
-                requestBuy2(UrlsTwo.BOOKINGMONKEYPACKAGE);
-                break;
-            default:
-                break;
-        }
+        requestBuy();
     }
 
     private void altDialog() {
@@ -527,22 +507,19 @@ public class WrapProjectBuyActivity extends Activity_Base implements View.OnClic
     }
 
     //***************************************************************买债权标*******************************************
-    private void requestBuy2(String url) {
+    private void requestBuy() {
+        String url = UrlsOne.WYB_Buying;
+        if (type == ProjectListStatus.WYB) {
+            url = UrlsOne.WYB_Buying;
+        } else if (type == ProjectListStatus.ZYB) {
+            url = UrlsOne.ZYB_Buying;
+        }
         String encodeToken = TokenUtil.getEncodeToken(WrapProjectBuyActivity.this);
         LogUtil.i("bqt", "买债权标请求路径：" + url);
         JSONObject requestObj = new JSONObject();
         try {
             requestObj.put("Amount", inputMoney + "");
-            switch (type) {
-                case 1:
-                    requestObj.put("PackageId", packageId);//a6a400e5ed86这个接口中，ClaimConveyId参数改为PackageId
-                    break;
-                case 2:
-                    requestObj.put("PackageId", packageId);
-                    break;
-                default:
-                    break;
-            }
+            requestObj.put("PackageId", packageId);
             requestObj.put("PackageToken", PackageToken);
             requestObj.put("CouponId", CouponId);
             LogUtil.i("bqt", "买债权标请求参数：" + requestObj.toString());
@@ -554,10 +531,10 @@ public class WrapProjectBuyActivity extends Activity_Base implements View.OnClic
             @Override
             public void onResponse(JSONObject response) {
                 LogUtil.i("bqt", "买债权标返回数据：" + response.toString());
-                if (response.optInt("result") != -3) {
-                    Activity_Tips_FaileOrSuccess.launche(WrapProjectBuyActivity.this, Activity_Tips_FaileOrSuccess.BUY_HF_SUCCESS, "");
+                if (response.optInt("status") == 1) {
+                    startActivity(ProjectBuySuccessActivity.newIntent(WrapProjectBuyActivity.this, inputMoney + ""));
                 } else {
-                    Activity_Tips_FaileOrSuccess.launche(WrapProjectBuyActivity.this, Activity_Tips_FaileOrSuccess.BUY_HF_FAILED, response.optString("message"));
+                    startActivity(ProjectBuyFailActivity.newIntent(WrapProjectBuyActivity.this));
                 }
                 finish();
             }
@@ -565,58 +542,6 @@ public class WrapProjectBuyActivity extends Activity_Base implements View.OnClic
             @Override
             public void onErrorResponse(Exception error) {
                 LogUtil.d("bqt", "【买债权标】" + error.toString());
-                Toast.makeText(WrapProjectBuyActivity.this, error.toString(), Toast.LENGTH_SHORT)
-                        .show();
-            }
-        });
-        MyApplication.getInstance()
-                .getRequestQueue()
-                .add(jsonRequest);
-    }
-
-    //***************************************************************买平常标****************************
-    private void requestBuy() {
-        String requestUrl = UrlsTwo.UrlBuyProject;
-        String encodeToken = TokenUtil.getEncodeToken(WrapProjectBuyActivity.this);
-        LogUtil.i("bqt", "【NorProjectBuyActivity】【Buy】请求路径：" + requestUrl);
-        JSONObject requestObj = new JSONObject();
-        try {
-            requestObj.put("Amount", inputMoney + "");
-            requestObj.put("PackageId", packageId);
-            requestObj.put("CouponId", CouponId);
-            requestObj.put("PackageToken", PackageToken);
-            LogUtil.i("bqt", "【NorProjectBuyActivity】【Buy】请求参数：" + requestObj.toString());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        BcbJsonRequest jsonRequest = new BcbJsonRequest(requestUrl, requestObj, encodeToken, true, new BcbRequest
-                .BcbCallBack<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                LogUtil.i("bqt", "【NorProjectBuyActivity】【Buy】返回数据：" + response.toString());
-                if (PackageUtil.getRequestStatus(response, WrapProjectBuyActivity.this)) {
-                    try {
-                        JSONObject result = PackageUtil.getResultObject(response);
-                        if (result != null) {
-                            //网页地址
-                            String postUrl = result.optString("PostUrl");
-                            result.remove("PostUrl");//移除这个参数
-                            //传递的 参数
-                            String postData = HttpUtils.jsonToStr(result.toString());
-                            //跳转到webview
-                            FundCustodianWebActivity.launche(WrapProjectBuyActivity.this, "投资确认", postUrl, postData);
-                        }
-                    } catch (Exception e) {
-                        LogUtil.d("bqt", "【NorProjectBuyActivity】【Buy】" + e.getMessage());
-                    }
-                } else
-                    Toast.makeText(WrapProjectBuyActivity.this, response.optString("message"), Toast.LENGTH_SHORT)
-                            .show();
-            }
-
-            @Override
-            public void onErrorResponse(Exception error) {
-                LogUtil.d("bqt", "【买平常标】" + error.toString());
                 Toast.makeText(WrapProjectBuyActivity.this, error.toString(), Toast.LENGTH_SHORT)
                         .show();
             }

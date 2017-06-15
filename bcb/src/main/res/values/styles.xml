@@ -243,4 +243,11 @@
         <item name="android:background">@color/linegray</item>
     </style>
 
+
+    <!--回款计划 天数-->
+    <style name="BackPaymentDay">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/txt_black</item>
+    </style>
+
 </resources>

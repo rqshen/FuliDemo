@@ -1,4 +1,4 @@
-package com.bcb.base;
+package com.bcb.base.old;
 
 import android.annotation.SuppressLint;
 import android.app.ActivityManager;

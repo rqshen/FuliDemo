@@ -9,9 +9,6 @@ public class UrlsTwo {
 
     public static String AboutExpiredProjectIntroduction = "http://ttwap.100cb.cn/static/specialgoldinfo.html";
 
-    // 普通项目介绍
-    public static String NormalProjectIntroduction = host + "/api/v2.0/a64b0102ddbd";
-
     // 获取会员信息
     public static String UserMessage = host + "/api/v2.0/a64300c7417c";
 
@@ -35,11 +32,8 @@ public class UrlsTwo {
     // 提现
     public static String UrlTX_HF = host + "/api/v2.0/a63c0105dc1f";
 
-    public static String UrlBuyProject = host + "/api/v2.0/a63c0109b86a";
-    //预约购买债权转让标
-    public static String RRECLAIMCONVEY = host + "/api/v2.0/a6a400e5ed86";
-    //福记包
-    public static String BOOKINGMONKEYPACKAGE = host + "/api/v2.0/a6de0115f478";
+
+
 
     //获取打包项目可投余额
     public static String MONKEYPACKAGEBALANCE = host + "/api/v2.0/a6de0114df3b";

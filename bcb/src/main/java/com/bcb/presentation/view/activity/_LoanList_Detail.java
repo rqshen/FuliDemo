@@ -14,11 +14,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bcb.R;
-import com.bcb.base.BaseActivity1;
+import com.bcb.base.old.BaseActivity1;
 import com.bcb.util.MyActivityManager;
 import com.bcb.module.discover.financialproduct.adapter.MyFragmentPagerAdapter;
-import com.bcb.presentation.view.fragment._LoanDetailFragment;
-import com.bcb.presentation.view.fragment._RepaymentFragment;
+import com.bcb.presentation.view.fragment._LoanDetailFragment1;
+import com.bcb.presentation.view.fragment._RepaymentFragment1;
 
 import java.util.ArrayList;
 
@@ -101,8 +101,8 @@ public class _LoanList_Detail extends BaseActivity1 {
         mPager = (ViewPager) findViewById(R.id.loan_viewpager);
         //fragment
         fragmentsList = new ArrayList<Fragment>();
-        Fragment detailFragment = new _LoanDetailFragment(_LoanList_Detail.this, uniqueId);
-        Fragment repaymentFragment = new _RepaymentFragment(_LoanList_Detail.this, assetCode);
+        Fragment detailFragment = new _LoanDetailFragment1(_LoanList_Detail.this, uniqueId);
+        Fragment repaymentFragment = new _RepaymentFragment1(_LoanList_Detail.this, assetCode);
         fragmentsList.add(detailFragment);
         fragmentsList.add(repaymentFragment);
 

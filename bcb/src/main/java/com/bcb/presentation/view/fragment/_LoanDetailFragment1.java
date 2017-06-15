@@ -25,7 +25,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bcb.R;
-import com.bcb.base.BaseFragment;
+import com.bcb.base.old.BaseFragment1;
 import com.bcb.MyApplication;
 import com.bcb.module.myinfo.balance.recharge.RechargeActivity;
 import com.bcb.network.BcbJsonRequest;
@@ -55,7 +55,7 @@ import java.util.Date;
 /**
  * Created by cain on 16/1/13.
  */
-public class _LoanDetailFragment extends BaseFragment {
+public class _LoanDetailFragment1 extends BaseFragment1 {
 
 
     private Activity context;
@@ -103,12 +103,12 @@ public class _LoanDetailFragment extends BaseFragment {
     private BcbRequestQueue requestQueue;
 
     //构造函数
-    public _LoanDetailFragment() {
+    public _LoanDetailFragment1() {
         super();
     }
 
     @SuppressLint("ValidFragment")
-    public _LoanDetailFragment(Activity context, String loanUniqueId) {
+    public _LoanDetailFragment1(Activity context, String loanUniqueId) {
         super();
         this.context = context;
         this.loanUniqueId = loanUniqueId;
@@ -202,7 +202,7 @@ public class _LoanDetailFragment extends BaseFragment {
         BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.MyLoanItemDetailMessage, jsonObject, TokenUtil.getEncodeToken(context), new BcbRequest.BcbCallBack<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                LogUtil.i("bqt", "【_LoanDetailFragment】【onResponse】借款详情数据" + response.toString());
+                LogUtil.i("bqt", "【_LoanDetailFragment1】【onResponse】借款详情数据" + response.toString());
                 try{
                     //如果存在返回数据时
                     if(PackageUtil.getRequestStatus(response, context)) {

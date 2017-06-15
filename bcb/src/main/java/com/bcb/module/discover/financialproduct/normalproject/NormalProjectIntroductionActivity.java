@@ -16,18 +16,19 @@ import android.widget.Toast;
 
 import com.bcb.MyApplication;
 import com.bcb.R;
-import com.bcb.base.Activity_Base;
+import com.bcb.base.old.Activity_Base;
 import com.bcb.constant.ProjectListStatus;
 import com.bcb.data.bean.UserDetailInfo;
 import com.bcb.data.bean.project.SimpleProjectDetail;
 import com.bcb.module.browse.FundCustodianWebActivity;
-import com.bcb.module.discover.financialproduct.normalproject.buy.NorProjectBuyActivity;
+import com.bcb.module.discover.financialproduct.normalproject.buy.NormalProjectBuyActivity;
 import com.bcb.module.login.LoginActivity;
 import com.bcb.module.myinfo.balance.FundCustodianAboutActivity;
 import com.bcb.module.myinfo.myfinancial.myfinancialstate.myfinanciallist.myfinancialdetail.projectdetail.ProjectDetailActivity;
 import com.bcb.network.BcbJsonRequest;
 import com.bcb.network.BcbRequest;
 import com.bcb.network.BcbRequestTag;
+import com.bcb.network.UrlsOne;
 import com.bcb.network.UrlsTwo;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
 import com.bcb.presentation.view.custom.CustomDialog.DialogWidget;
@@ -227,7 +228,7 @@ public class NormalProjectIntroductionActivity extends Activity_Base implements 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        String url = UrlsTwo.NormalProjectIntroduction;//普通标
+        String url = UrlsOne.ZXB_Buy_DETAIL;//普通标
 
         BcbJsonRequest jsonRequest = new BcbJsonRequest(url, jObject, TokenUtil.getEncodeToken(this), new BcbRequest
                 .BcbCallBack<JSONObject>() {
@@ -658,7 +659,7 @@ public class NormalProjectIntroductionActivity extends Activity_Base implements 
         }
 
         //跳转到购买页面
-        NorProjectBuyActivity.launche2(this, packageId, mSimpleProjectDetail.Name, countDate, mSimpleProjectDetail, ProjectListStatus.ZXB);
+        NormalProjectBuyActivity.launche(this, packageId, mSimpleProjectDetail.Name, countDate, mSimpleProjectDetail, ProjectListStatus.ZXB);
     }
 
     AlertView alertView;

@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.bcb.R;
-import com.bcb.base.Activity_Base;
+import com.bcb.base.old.Activity_Base;
 import com.bcb.MyApplication;
 import com.bcb.module.login.LoginActivity;
 import com.bcb.module.login.register.RegisterFirstActivity;

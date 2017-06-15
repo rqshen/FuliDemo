@@ -7,7 +7,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bcb.R;
-import com.bcb.base.Activity_Base;
+import com.bcb.base.old.Activity_Base;
 import com.bcb.module.discover.eliteloan.loanlist.LoanListActivity;
 import com.bcb.util.MyActivityManager;
 import com.bcb.util.UmengUtil;
