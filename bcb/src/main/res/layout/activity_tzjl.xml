@@ -63,7 +63,8 @@
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:background="@color/white"/>
+                    android:background="@color/white"
+                    android:visibility="gone"/>
                 <!--周盈宝-->
                 <TextView
                     android:id="@+id/tv_zyb"
@@ -72,7 +73,8 @@
                     android:gravity="center"
                     android:text="周盈宝"
                     android:textColor="@color/white"
-                    android:textSize="14sp"/>
+                    android:textSize="14sp"
+                    android:visibility="gone"/>
             </LinearLayout>
         </RelativeLayout>
         <!-- 填充Fragment的容器 -->

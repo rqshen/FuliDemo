@@ -31,7 +31,7 @@ import com.bcb.presentation.model.IModel_UserAccountImpl;
 import com.bcb.presentation.presenter.IPresenter_AccountSetting;
 import com.bcb.presentation.presenter.IPresenter_AccountSettingImpl;
 import com.bcb.presentation.view.activity.Activity_Modify_Pwd;
-import com.bcb.presentation.view.activity.Activity_TuoGuan_HF;
+import com.bcb.module.myinfo.setting.tuoguan.TuoGuanHFActivity;
 import com.bcb.presentation.view.activity_interface.Interface_AccountSetting;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
 import com.bcb.presentation.view.custom.CustomDialog.DialogWidget;
@@ -270,7 +270,7 @@ public class AccountSettingActivity extends Activity_Base implements OnClickList
             //手机号码
             case R.id.tg:
                 if (MyApplication.mUserDetailInfo != null && MyApplication.mUserDetailInfo.HasOpenCustody) {//已开通托管
-                    startActivity(new Intent(this, Activity_TuoGuan_HF.class));
+                    startActivity(new Intent(this, TuoGuanHFActivity.class));
                 } else startActivity(new Intent(this, FundCustodianAboutActivity.class));
                 break;
 

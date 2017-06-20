@@ -15,6 +15,7 @@ import com.bcb.base.old.Activity_Base;
 import com.bcb.MyApplication;
 import com.bcb.event.BroadcastEvent;
 import com.bcb.module.discover.eliteloan.loanlist.LoanListActivity;
+import com.bcb.module.myinfo.setting.tuoguan.TuoGuanHFActivity;
 import com.bcb.network.BcbJsonRequest;
 import com.bcb.network.BcbRequest;
 import com.bcb.network.BcbRequestTag;
@@ -262,7 +263,7 @@ public class Activity_Tips_FaileOrSuccess extends Activity_Base implements View.
 						break;
 					//托管
 					case OPEN_HF_SUCCESS:
-						startActivity(new Intent(Activity_Tips_FaileOrSuccess.this, Activity_TuoGuan_HF.class));
+						startActivity(new Intent(Activity_Tips_FaileOrSuccess.this, TuoGuanHFActivity.class));
 						finish();
 						break;
 					//个人中心

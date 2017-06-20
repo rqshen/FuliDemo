@@ -42,11 +42,13 @@ public class InvestmentFinanceActivity extends BaseActivity1 implements View.OnC
         fragmentsList = new ArrayList<Fragment>();
         fragmentsList.add(FinanceListFragment.newInstance(0));
         fragmentsList.add(FinanceListFragment.newInstance(1));
-        fragmentsList.add(FinanceListFragment.newInstance(2));
+//        fragmentsList.add(FinanceListFragment.newInstance(2));
+        // TODO: 2017/6/16 暂时隐藏周盈宝
 
         vp.setAdapter(new MyFragmentPagerAdapter(getSupportFragmentManager(), fragmentsList));
         vp.setCurrentItem(0);
-        vp.setOffscreenPageLimit(3);
+//        vp.setOffscreenPageLimit(3);
+        // TODO: 2017/6/16 暂时隐藏周盈宝
         vp.addOnPageChangeListener(new MyOnPageChangeListener());
     }
 

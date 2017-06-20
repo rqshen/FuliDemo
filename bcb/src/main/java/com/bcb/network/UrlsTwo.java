@@ -32,9 +32,6 @@ public class UrlsTwo {
     // 提现
     public static String UrlTX_HF = host + "/api/v2.0/a63c0105dc1f";
 
-
-
-
     //获取打包项目可投余额
     public static String MONKEYPACKAGEBALANCE = host + "/api/v2.0/a6de0114df3b";
 

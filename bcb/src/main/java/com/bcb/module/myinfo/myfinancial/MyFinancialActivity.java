@@ -122,7 +122,9 @@ public class MyFinancialActivity extends FragmentActivity {
                 break;
             case 1://涨薪宝选中
                 zxb.setTextColor(ContextCompat.getColor(this, R.color.red));
-                zxb.setBackground(ContextCompat.getDrawable(this, R.drawable.stroke_center));
+//                zxb.setBackground(ContextCompat.getDrawable(this, R.drawable.stroke_center));
+                // TODO: 2017/6/16 隐藏周盈宝 正方形图标改变
+                zxb.setBackground(ContextCompat.getDrawable(this, R.drawable.stroke_r));
                 if (zxb_f == null) {
                     zxb_f = MyFinancialStateFragment.newInstance(ProjectListStatus.ZXB);
                     getSupportFragmentManager().beginTransaction().add(R.id.container, zxb_f, "AA").commit();

@@ -15,7 +15,6 @@
         android:layout_width="305dp"
         android:layout_height="181dp"
         android:layout_marginTop="16dp"
-
         android:background="@drawable/tg_hf_bg">
 
         <ImageView

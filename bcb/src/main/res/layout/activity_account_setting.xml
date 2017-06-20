@@ -252,6 +252,7 @@
                 android:layout_marginTop="@dimen/margin_size_default"
                 android:background="@color/linegray"/>
 
+            <!--资金托管-->
             <RelativeLayout
                 android:id="@+id/tg"
                 android:layout_width="match_parent"

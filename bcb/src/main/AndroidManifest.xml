@@ -455,7 +455,7 @@
         <!-- </>值来自开发者平台取得的AppKey ： 983f6d809971c6e36d403c49 -->
 
         <activity android:name=".module.myinfo.balance.FundCustodianAboutActivity"/>
-        <activity android:name=".presentation.view.activity.Activity_TuoGuan_HF"/>
+        <activity android:name=".module.myinfo.setting.tuoguan.TuoGuanHFActivity"/>
         <!-- 充值 -->
         <activity
             android:name=".module.myinfo.balance.recharge.RechargeActivity"

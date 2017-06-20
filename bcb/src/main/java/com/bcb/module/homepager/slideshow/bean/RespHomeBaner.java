@@ -14,30 +14,30 @@ public class RespHomeBaner {
      */
 
     private String Title;
-    private String ImageUrl;
-    private String PageUrl;
+    private String img;
+    private String url;
 
     public String getTitle() {
         return Title;
     }
 
-    public void setTitle(String Title) {
-        this.Title = Title;
+    public void setTitle(String title) {
+        Title = title;
     }
 
-    public String getImageUrl() {
-        return ImageUrl;
+    public String getImg() {
+        return img;
     }
 
-    public void setImageUrl(String ImageUrl) {
-        this.ImageUrl = ImageUrl;
+    public void setImg(String img) {
+        this.img = img;
     }
 
-    public String getPageUrl() {
-        return PageUrl;
+    public String getUrl() {
+        return url;
     }
 
-    public void setPageUrl(String PageUrl) {
-        this.PageUrl = PageUrl;
+    public void setUrl(String url) {
+        this.url = url;
     }
 }
