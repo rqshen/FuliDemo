@@ -87,7 +87,7 @@ public class RechargeActivity extends Activity_Base implements View.OnClickListe
 
     private void initBankCard() {
         if (MyApplication.mUserWallet != null)
-            tv_left_monery.setText(String.format("%.2f", MyApplication.mUserWallet.getBalanceAmount()) + "元");
+            tv_left_monery.setText("余额：" + String.format("%.2f", MyApplication.mUserWallet.getBalanceAmount()) + "元");
         //【解绑说明】已绑定银行卡账号，且是快捷支付
         if (MyApplication.mUserDetailInfo.BankCard != null && MyApplication.mUserDetailInfo.BankCard.IsQPCard) {
             String cardNumber = MyApplication.mUserDetailInfo.BankCard.CardNumber;
@@ -124,7 +124,7 @@ public class RechargeActivity extends Activity_Base implements View.OnClickListe
         switch (requestCode) {
             case 1:
                 if (MyApplication.mUserWallet != null)
-                    tv_left_monery.setText(String.format("%.2f", MyApplication.mUserWallet.getBalanceAmount()) + "元");
+                    tv_left_monery.setText("余额：" + String.format("%.2f", MyApplication.mUserWallet.getBalanceAmount()) + "元");
                 break;
             case 2:
                 requestUserBankCard();

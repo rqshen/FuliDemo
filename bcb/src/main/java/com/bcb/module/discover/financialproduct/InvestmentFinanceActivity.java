@@ -88,7 +88,7 @@ public class InvestmentFinanceActivity extends BaseActivity1 implements View.OnC
         DisplayMetrics dmDisplayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dmDisplayMetrics);
         int screenW = dmDisplayMetrics.widthPixels;
-        position_one = screenW / 3;
+        position_one = screenW / 2;
     }
 
     public class MyOnPageChangeListener implements ViewPager.OnPageChangeListener {
