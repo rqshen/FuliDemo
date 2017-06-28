@@ -91,11 +91,11 @@ public class RechargeActivity extends Activity_Base implements View.OnClickListe
         //【解绑说明】已绑定银行卡账号，且是快捷支付
         if (MyApplication.mUserDetailInfo.BankCard != null && MyApplication.mUserDetailInfo.BankCard.IsQPCard) {
             String cardNumber = MyApplication.mUserDetailInfo.BankCard.CardNumber;
-            bank_card_text.setText("尾号" + cardNumber.substring(cardNumber.length() - 4));
+            bank_card_text.setText("尾号：" + cardNumber.substring(cardNumber.length() - 4));
             //设置银行卡logo
             BankLogo bankLogo = new BankLogo();
             bank_icon.setBackgroundResource(bankLogo.getDrawableBankLogo(MyApplication.mUserDetailInfo.BankCard.BankCode));
-            setRightTitleValue("解绑说明", new View.OnClickListener() {
+            setRightTitleValue("解绑银行卡", new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     ProjectDetailActivity.launcheForResult(RechargeActivity.this, "解绑说明", UrlsTwo.UrlUnBandExplain, 2);

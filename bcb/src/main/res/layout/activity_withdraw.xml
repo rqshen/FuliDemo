@@ -9,21 +9,17 @@
     <LinearLayout
         android:id="@+id/layout_bank_card"
         android:layout_width="match_parent"
-        android:layout_height="140dp"
+        android:layout_height="120dp"
         android:background="@color/item_blue"
         android:gravity="center_vertical"
         android:orientation="horizontal">
 
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-
         <!--余额-->
         <TextView
             android:id="@+id/username_balance"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:drawablePadding="10dp"
             android:drawableTop="@drawable/icon_balance"
             android:gravity="center_horizontal"
@@ -31,24 +27,17 @@
             android:textColor="@color/white"
             android:textSize="12sp"/>
 
-        <Space
-            android:layout_width="43dp"
-            android:layout_height="wrap_content"/>
-
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:src="@drawable/icon_double_arrow"/>
 
-        <Space
-            android:layout_width="43dp"
-            android:layout_height="wrap_content"/>
-
         <!--银行卡 尾号-->
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
@@ -69,7 +58,6 @@
                     android:layout_height="42dp"
                     android:layout_gravity="center"
                     />
-
             </FrameLayout>
 
             <Space
@@ -84,12 +72,6 @@
                 android:textColor="@color/white"
                 android:textSize="12sp"/>
         </LinearLayout>
-
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
 
 
     </LinearLayout>
@@ -118,13 +100,13 @@
             android:layout_height="wrap_content"/>
 
         <EditText
-            android:inputType="number"
             android:id="@+id/editext_money"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@null"
             android:hint="请输入提现金额"
+            android:inputType="number"
             android:textColorHint="@color/txt_gray"
             android:textSize="22sp"/>
 
@@ -254,19 +236,6 @@
         android:layout_width="match_parent"
         android:layout_height="5dp"/>
 
-    <TextView
-        android:id="@+id/withdraw_rule"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="本次提现收费2元"
-        android:textColor="@color/red"
-        android:textSize="12sp"/>
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="5dp"/>
-
     <Button
         android:id="@+id/withdraw_button"
         android:layout_width="match_parent"
@@ -279,6 +248,21 @@
         android:text="立即提现"
         android:textColor="#fff"
         android:textSize="16sp"/>
+
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="5dp"/>
+
+    <TextView
+        android:id="@+id/withdraw_rule"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="本次提现收费2元"
+        android:textColor="@color/red"
+        android:textSize="12sp"/>
+
 
 </LinearLayout>
 

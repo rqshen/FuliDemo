@@ -22,6 +22,6 @@ public class SlidingActivity extends AppCompatActivity {
     }
 
     protected boolean enableSliding() {
-        return true;
+        return false;
     }
 }

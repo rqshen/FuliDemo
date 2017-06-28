@@ -74,6 +74,12 @@ public class WithdrawActivity extends Activity_Base implements View.OnClickListe
         setBaseContentView(R.layout.activity_withdraw);
         setLeftTitleVisible(true);
         setTitleValue("提现");
+        setRightTitleValue("提现说明", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(WithdrawDescriptionActivity.newIntent(WithdrawActivity.this));
+            }
+        });
         requestQueue = MyApplication.getInstance().getRequestQueue();
         findViews();
         initViews();
@@ -115,7 +121,7 @@ public class WithdrawActivity extends Activity_Base implements View.OnClickListe
     private void initViews() {
         //账户余额
         if (null != MyApplication.mUserWallet) {
-            username_balance.setText(String.format("%.2f", MyApplication.mUserWallet.BalanceAmount) + "元");
+            username_balance.setText("余额：" + String.format("%.2f", MyApplication.mUserWallet.BalanceAmount) + "元");
             tv_xianer.setText(String.format("%.2f", MyApplication.mUserWallet.BalanceAmount));
             mUserWallet = MyApplication.mUserWallet;
         }
@@ -123,7 +129,7 @@ public class WithdrawActivity extends Activity_Base implements View.OnClickListe
         //银行卡账号
         if (MyApplication.mUserDetailInfo.BankCard != null) {
             String cardNumber = MyApplication.mUserDetailInfo.BankCard.CardNumber;
-            bank_card_text.setText("尾号" + cardNumber.substring(cardNumber.length() - 4));
+            bank_card_text.setText("尾号：" + cardNumber.substring(cardNumber.length() - 4));
             //设置银行卡logo
             BankLogo bankLogo = new BankLogo();
             bank_icon.setBackgroundResource(bankLogo.getDrawableBankLogo(MyApplication.mUserDetailInfo.BankCard.getBankCode()));

@@ -69,7 +69,6 @@ public class SlideShowFragment extends BaseFragment {
                     if (flag) {
                         JSONObject obj = PackageUtil.getResultObject(response);
                         if (obj != null) {
-                            // TODO: 2017/6/16
 //                            String s = "[{url:\"http://www.baidu.com\",img:\"http://img05.tooopen.com/images/20160121/tooopen_sy_155168162826.jpg\"},{url:\"http://www.baidu.com\",img:\"http://img.171u.com/image/1309/1309322513428.jpg\"}]";
                             Type type = new TypeToken<ArrayList<RespHomeBaner>>() {
                             }.getType();
@@ -138,8 +137,7 @@ public class SlideShowFragment extends BaseFragment {
                         String title = mRespHomeBaners.get(position).getTitle();
                         String pageUrl = mRespHomeBaners.get(position).getUrl();
                         if (!StringUtils.isEmpty(pageUrl)) {//不为空跳转
-//                            startActivity(X5WebViewBrowseActivity.newIntent(mContext, pageUrl, title));
-                            ProjectDetailActivity.launche(mContext, "活动详情", pageUrl, true);
+                            ProjectDetailActivity.launche(mContext, title, pageUrl);
                         }
                     }
                 });

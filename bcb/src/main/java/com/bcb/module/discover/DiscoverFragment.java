@@ -18,9 +18,9 @@ import com.bcb.base.old.BaseFragment1;
 import com.bcb.module.discover.carinsurance.CarInsuranceActivity;
 import com.bcb.module.discover.eliteloan.EliteLoanActivity;
 import com.bcb.module.discover.financialproduct.InvestmentFinanceActivity;
+import com.bcb.module.discover.welfare.Activity_Love;
 import com.bcb.module.login.LoginActivity;
 import com.bcb.module.myinfo.balance.FundCustodianAboutActivity;
-import com.bcb.module.discover.welfare.Activity_Love;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -90,7 +90,7 @@ public class DiscoverFragment extends BaseFragment1 {
                 cheXian();
                 break;
             case R.id.ll_lc:
-                startActivity(new Intent(ctx, InvestmentFinanceActivity.class));
+                startActivity(InvestmentFinanceActivity.newIntent(ctx));
                 break;
             case R.id.ll_gjj:
                 Toast.makeText(ctx, "敬请期待", Toast.LENGTH_SHORT).show();

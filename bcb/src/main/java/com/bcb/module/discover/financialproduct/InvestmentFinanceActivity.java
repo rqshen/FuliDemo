@@ -1,6 +1,8 @@
 
 package com.bcb.module.discover.financialproduct;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -25,6 +27,11 @@ import java.util.ArrayList;
 public class InvestmentFinanceActivity extends BaseActivity1 implements View.OnClickListener {
     private ViewPager vp;
     private ArrayList<Fragment> fragmentsList;
+
+    public static Intent newIntent(Context context) {
+        Intent intent = new Intent(context.getApplicationContext(), InvestmentFinanceActivity.class);
+        return intent;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
