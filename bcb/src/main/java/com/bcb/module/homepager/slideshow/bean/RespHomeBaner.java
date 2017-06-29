@@ -14,8 +14,8 @@ public class RespHomeBaner {
      */
 
     private String Title;
-    private String img;
-    private String url;
+    private String Img;
+    private String Url;
 
     public String getTitle() {
         return Title;
@@ -26,18 +26,18 @@ public class RespHomeBaner {
     }
 
     public String getImg() {
-        return img;
+        return Img;
     }
 
     public void setImg(String img) {
-        this.img = img;
+        Img = img;
     }
 
     public String getUrl() {
-        return url;
+        return Url;
     }
 
     public void setUrl(String url) {
-        this.url = url;
+        Url = url;
     }
 }

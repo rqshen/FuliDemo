@@ -326,6 +326,7 @@ public class ProjectDetailActivity extends Activity_Base {
                     return true;
                 } else if (url.contains("fulihui://product_list")) {//产品列表
                     startActivity(InvestmentFinanceActivity.newIntent(MyApplication.getAppContext()));
+                    finish();
                     return true;
                 } else {
                     return super.shouldOverrideUrlLoading(view, url);

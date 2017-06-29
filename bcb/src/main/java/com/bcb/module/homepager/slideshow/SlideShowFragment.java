@@ -28,6 +28,7 @@ import com.google.gson.reflect.TypeToken;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.lang.reflect.Type;
@@ -57,7 +58,7 @@ public class SlideShowFragment extends BaseFragment {
     /**
      * 联网请求首页的图片数据
      */
-    private void requestHomeBaner() {
+    public void requestHomeBaner() {
         JSONObject obj = new JSONObject();
         String url = UrlsOne.Home_Activities;
         BcbJsonRequest jsonRequest = new BcbJsonRequest(url, obj, TokenUtil.getEncodeToken(mContext), new BcbRequest.BcbCallBack<JSONObject>() {
@@ -67,7 +68,7 @@ public class SlideShowFragment extends BaseFragment {
                 try {
                     boolean flag = PackageUtil.getRequestStatus(response, mContext);
                     if (flag) {
-                        JSONObject obj = PackageUtil.getResultObject(response);
+                        JSONArray obj = response.getJSONArray("result");
                         if (obj != null) {
 //                            String s = "[{url:\"http://www.baidu.com\",img:\"http://img05.tooopen.com/images/20160121/tooopen_sy_155168162826.jpg\"},{url:\"http://www.baidu.com\",img:\"http://img.171u.com/image/1309/1309322513428.jpg\"}]";
                             Type type = new TypeToken<ArrayList<RespHomeBaner>>() {
@@ -134,7 +135,7 @@ public class SlideShowFragment extends BaseFragment {
                 .setOnItemClickListener(new OnItemClickListener() {
                     @Override
                     public void onItemClick(int position) {
-                        String title = mRespHomeBaners.get(position).getTitle();
+                        String title = "活动页面";
                         String pageUrl = mRespHomeBaners.get(position).getUrl();
                         if (!StringUtils.isEmpty(pageUrl)) {//不为空跳转
                             ProjectDetailActivity.launche(mContext, title, pageUrl);

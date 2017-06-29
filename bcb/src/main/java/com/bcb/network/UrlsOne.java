@@ -178,7 +178,9 @@ public class UrlsOne {
     public static final String RechargeOrderStatus = host + "/api/v1.0/8b441a56e2e1";
 
     //首页标的数据
-    public static final String MainFragmentListData2 = host + "/api/v2.5/a7910127d4ba";
+//    public static final String MainFragmentListData2 = host + "/api/v2.5/a7910127d4ba";
+    // TODO: 2017/6/29  首页标 先用原始地址
+    public static final String MainFragmentListData2 = host + "/api/v2.5/a71b0110b729";
 
     //预约新标预告
     public static final String RequestAnnounce = host + "/api/v1.3/075c12497971";

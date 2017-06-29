@@ -161,7 +161,8 @@ public class HomePagerFragment extends BaseFragment1 implements View.OnClickList
             @Override
             public void onRefresh(PullToRefreshLayout pullToRefreshLayout) {
                 if (HttpUtils.isNetworkConnected(ctx)) {
-                    loadBanner();
+                    loadBottomBanner();
+                    loadTopBanner();
                     loadMainListViewData();
                     if (MyApplication.saveUserInfo.getAccess_Token() == null) {
                         iv_zc.setVisibility(View.VISIBLE);
@@ -234,6 +235,14 @@ public class HomePagerFragment extends BaseFragment1 implements View.OnClickList
     }
 
     /**
+     * 刷新底部 banner
+     */
+    private void loadBottomBanner() {
+        SlideShowFragment slideShowFragment = (SlideShowFragment) getFragmentManager().findFragmentById(R.id.fragment_banner);
+        slideShowFragment.requestHomeBaner();
+    }
+
+    /**
      * 文案配置
      */
     private void loadCopyWriter() {
@@ -281,7 +290,7 @@ public class HomePagerFragment extends BaseFragment1 implements View.OnClickList
     /**
      * 获取首页Banner
      */
-    private void loadBanner() {
+    private void loadTopBanner() {
         BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.MainpageAdRotator, null, TokenUtil.getEncodeToken(ctx), new
                 BcbRequest.BcbCallBack<JSONObject>() {
                     @Override
@@ -401,8 +410,6 @@ public class HomePagerFragment extends BaseFragment1 implements View.OnClickList
      * 获取新标预告、精品项目
      */
     private void loadMainListViewData() {
-        //首先要清空数据
-        clearAdapter();
         BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.MainFragmentListData2, null, TokenUtil.getEncodeToken(ctx), new
                 BcbRequest.BcbCallBack<JSONObject>() {
                     @Override
@@ -648,18 +655,6 @@ public class HomePagerFragment extends BaseFragment1 implements View.OnClickList
 
     private void alterHFOpen() {
         new BasicDialog(ctx).show();
-    }
-
-    //清空首页标的数据
-    private void clearAdapter() {
-        boutqueRecordsBeans.clear();
-        announceRecordsBeans.clear();
-        if (mBoutiqueAdapter != null) {
-            mBoutiqueAdapter.notifyDataSetChanged();
-        }
-        if (mAnnounceListAdapter != null) {
-            mAnnounceListAdapter.notifyDataSetChanged();
-        }
     }
 
     /**
