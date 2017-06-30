@@ -29,6 +29,7 @@ import com.bcb.util.DbUtil;
 import com.bcb.util.LoanPersonalConfigUtil;
 import com.bcb.util.LogUtil;
 import com.bcb.util.MQCustomerManager;
+import com.bcb.util.MyActivityManager;
 import com.bcb.util.RegexManager;
 import com.bcb.util.ToastUtil;
 import com.bcb.util.UmengUtil;
@@ -76,6 +77,8 @@ public class LoginActivity extends Activity_Base implements Interface_Base, OnCl
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		LogUtil.i("bqt", "【LoginActivity】【onCreate】");
+
+		MyActivityManager.getInstance().pushOneActivity(this);
 
 		setBaseContentView(R.layout.activity_login);
 		setLeftTitleVisible(true);
@@ -209,7 +212,9 @@ public class LoginActivity extends Activity_Base implements Interface_Base, OnCl
 				intent.putExtra("loginStatus", true);
 				setResult(100, intent);
 				//销毁当前页面
-				finish();
+//				finish();
+				// TODO: 2017/6/30  
+				MyActivityManager.getInstance().finishAllActivity();
 				break;
 
 			//输入错误

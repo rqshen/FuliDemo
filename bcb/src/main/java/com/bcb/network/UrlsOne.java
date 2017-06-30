@@ -107,7 +107,7 @@ public class UrlsOne {
     //购买稳盈宝
     public static String WYB_Buying = host + "/api/v2.0/a6de0115f478";
 
-    //购买稳盈宝
+    //购买周盈宝
     public static String ZYB_Buying = host + "/api/v2.0/a78000f6d15e";
 
     //稳赢宝详情，打包的标【月】

@@ -117,15 +117,22 @@ public class FundCustodianWebActivity extends Activity_Base {
                     LogUtil.i("bqt", "截获的url地址为空");
                     return true;
                 }
-                LogUtil.i("bqt", "截获的url地址：" + url);
-                String message = "";
+
                 try {
-                    message = URLDecoder.decode(url.substring(url.lastIndexOf('|') + 1), "UTF-8");
-                    LogUtil.i("bqt", "最后一部分消息内容" + message);
-                } catch (Exception e) {
-                    LogUtil.i("bqt", "提取消息出错" + e.toString());
+                    url = URLDecoder.decode(url, "UTF-8");
+                } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }
+
+                String[] split = url.split("\\|");
+
+
+                LogUtil.i("bqt", "截获的url地址：" + url);
+                String message = split[split.length];
+                String scheme = split[0];
+                String code = split[1];
+
+
                 //******************************************************************************************
                 //开通自动投标
                 if (url.contains("fulihui://openautotenderplanresult")) {
@@ -171,12 +178,12 @@ public class FundCustodianWebActivity extends Activity_Base {
                     finish();
                     return true;
                     //买标、申购
-                } else if (url.contains("fulihui://invest_result")) {
+                } else if (scheme.equals("fulihui://invest_result")) {
                     LogUtil.i("bqt", "买标" + url);
-                    if (url.contains("000")) {
+                    if (code.equals("000")) {
                         startActivity(ProjectBuySuccessActivity.newIntent(context, message));
                     } else {
-                        startActivity(ProjectBuyFailActivity.newIntent(context));
+                        startActivity(ProjectBuyFailActivity.newIntent(context, split[2]));
                     }
                     finish();
                     return true;

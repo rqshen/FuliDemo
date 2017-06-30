@@ -534,7 +534,7 @@ public class WrapProjectBuyActivity extends Activity_Base implements View.OnClic
                 if (response.optInt("status") == 1) {
                     startActivity(ProjectBuySuccessActivity.newIntent(WrapProjectBuyActivity.this, inputMoney + ""));
                 } else {
-                    startActivity(ProjectBuyFailActivity.newIntent(WrapProjectBuyActivity.this));
+                    startActivity(ProjectBuyFailActivity.newIntent(WrapProjectBuyActivity.this, response.optString("message")));
                 }
                 finish();
             }

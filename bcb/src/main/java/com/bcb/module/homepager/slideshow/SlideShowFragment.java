@@ -113,6 +113,9 @@ public class SlideShowFragment extends BaseFragment {
             return;
         }
         mRespHomeBaners = respHomeBaners;
+        if (mRespHomeBaners.size() == 1) {
+            convenientBanner.stopTurning();
+        }
         setSlideImage(respHomeBaners);
     }
 
