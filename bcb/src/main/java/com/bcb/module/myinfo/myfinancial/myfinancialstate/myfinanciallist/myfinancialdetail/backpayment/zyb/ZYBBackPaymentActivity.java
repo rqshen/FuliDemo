@@ -104,8 +104,8 @@ public class ZYBBackPaymentActivity extends BaseActivity {
                         JSONObject obj = PackageUtil.getResultObject(response);
                         if (obj != null) {
                             mZYBBackPaymentBean = MyApplication.mGson.fromJson(obj.toString(), ZYBBackPaymentBean.class);
-                            mDonePrincipalInterest.setText(DoubleFormatUtils.format(mZYBBackPaymentBean.getDonePrincialInterest()));
-                            mPrePrincipalInterest.setText(DoubleFormatUtils.format(mZYBBackPaymentBean.getPePrincipalInteres()));
+                            mDonePrincipalInterest.setText(DoubleFormatUtils.format(mZYBBackPaymentBean.getDonePrincipalInterest()));
+                            mPrePrincipalInterest.setText(DoubleFormatUtils.format(mZYBBackPaymentBean.getPrePrincipalInterest()));
                         }
                         setZYBBackPaymentAdapter();
                     }

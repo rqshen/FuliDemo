@@ -15,32 +15,20 @@ public class ZYBBackPaymentBean {
      * RepaymentPlan : [{"CraeteDate":"2017-06-13 02:43:04","Descn":"复投不成功","Interest":0.25,"Principal":1500}]
      */
 
-    private double DonePrincialInterest;
-    private double PePrincipalInteres;
+    private double DonePrincipalInterest;
+    private double PrePrincipalInterest;
     private List<RepaymentPlanBean> RepaymentPlan;
 
-    public double getDonePrincialInterest() {
-        return DonePrincialInterest;
+    public double getDonePrincipalInterest() {
+        return DonePrincipalInterest;
     }
 
-    public void setDonePrincialInterest(double DonePrincialInterest) {
-        this.DonePrincialInterest = DonePrincialInterest;
-    }
-
-    public double getPePrincipalInteres() {
-        return PePrincipalInteres;
-    }
-
-    public void setPePrincipalInteres(double PePrincipalInteres) {
-        this.PePrincipalInteres = PePrincipalInteres;
+    public double getPrePrincipalInterest() {
+        return PrePrincipalInterest;
     }
 
     public List<RepaymentPlanBean> getRepaymentPlan() {
         return RepaymentPlan;
-    }
-
-    public void setRepaymentPlan(List<RepaymentPlanBean> RepaymentPlan) {
-        this.RepaymentPlan = RepaymentPlan;
     }
 
     public static class RepaymentPlanBean {

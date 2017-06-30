@@ -162,6 +162,8 @@ public class WrapProgramIntroductionActivity extends Activity_Base implements Vi
             buy.setText("已售罄");
             buy.setTextColor(0xff999999);
             buy.setEnabled(false);
+            llBuy1.setEnabled(false);
+            llBuy2.setEnabled(false);
             buy.setBackgroundColor(0xffd0d0d0);
         } else {
             buy.setText("立即购买");

@@ -41,6 +41,7 @@
                     android:layout_width="42dp"
                     android:layout_height="42dp"
                     android:layout_gravity="center"
+                    android:background="@drawable/icon_bank"
                     />
 
             </FrameLayout>
@@ -53,7 +54,7 @@
                 android:id="@+id/bank_card_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="尾号"
+                android:text="未绑卡"
                 android:textColor="@color/white"
                 android:textSize="12sp"/>
         </LinearLayout>
@@ -74,7 +75,7 @@
             android:drawablePadding="10dp"
             android:drawableTop="@drawable/icon_balance"
             android:gravity="center_horizontal"
-            android:text="0.00元"
+            android:text="余额：0.00元"
             android:textColor="@color/white"
             android:textSize="12sp"/>
 
@@ -144,7 +145,7 @@
         android:background="@color/white"
         android:gravity="center_vertical"
         android:paddingLeft="15dp"
-        android:text="单笔最高5万，单日限额5万"
+        android:text="点击“下一步”去绑卡"
         android:textColor="@color/txt_gray"
         android:textSize="12sp"/>
 

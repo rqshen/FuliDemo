@@ -653,10 +653,10 @@ public class NormalProjectIntroductionActivity extends Activity_Base implements 
         }
 
         //没有开通自动投标
-        if (!MyApplication.mUserDetailInfo.AutoTenderPlanStatus) {
-            altDialog();
-            return;
-        }
+//        if (!MyApplication.mUserDetailInfo.AutoTenderPlanStatus) {
+//            altDialog();
+//            return;
+//        }
 
         //跳转到购买页面
         NormalProjectBuyActivity.launche(this, packageId, mSimpleProjectDetail.Name, countDate, mSimpleProjectDetail, ProjectListStatus.ZXB);
