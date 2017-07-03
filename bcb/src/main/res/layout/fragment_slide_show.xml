@@ -7,11 +7,9 @@
     >
     <!--可替换的子布局，滑动viewPager-->
     <com.bigkoo.convenientbanner.ConvenientBanner
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/convenientBanner"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:canLoop="true"
         />
 
 </FrameLayout>

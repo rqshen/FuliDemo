@@ -113,8 +113,9 @@ public class SlideShowFragment extends BaseFragment {
             return;
         }
         mRespHomeBaners = respHomeBaners;
-        if (mRespHomeBaners.size() == 1) {
-            convenientBanner.stopTurning();
+        if (mRespHomeBaners.size() > 1) {
+            convenientBanner.setCanLoop(true);
+            convenientBanner.startTurning(5000);
         }
         setSlideImage(respHomeBaners);
     }
@@ -174,7 +175,7 @@ public class SlideShowFragment extends BaseFragment {
     public void onResume() {
         super.onResume();
         //开始自动翻页
-        convenientBanner.startTurning(5000);
+//        convenientBanner.startTurning(5000);
     }
 
     // 停止自动翻页
@@ -182,7 +183,7 @@ public class SlideShowFragment extends BaseFragment {
     public void onPause() {
         super.onPause();
         //停止翻页
-        convenientBanner.stopTurning();
+//        convenientBanner.stopTurning();
     }
 
     @Override
