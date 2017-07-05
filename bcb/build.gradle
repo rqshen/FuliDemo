@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
 android {
+    signingConfigs {
+        config {
+            keyAlias ALIAS_NAME
+            keyPassword KEY_PASS
+            storeFile file(KEY_PATH)
+            storePassword KEY_PASS
+        }
+    }
     compileSdkVersion 23
     buildToolsVersion '25.0.0'
     //Android6.0 不再支持Apache HTTP client，需要支持，则需要加入下面这一句话
@@ -14,6 +22,10 @@ android {
         release {
             minifyEnabled false
             //proguardFiles getDefaultProguardFile('proguard-rules.pro'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+        }
+        debug {
+            signingConfig signingConfigs.config
         }
     }
     lintOptions {

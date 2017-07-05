@@ -31,6 +31,7 @@ import com.bcb.data.bean.UserDetailInfo;
 import com.bcb.data.bean.UserWallet;
 import com.bcb.data.bean.WelfareDto;
 import com.bcb.event.BroadcastEvent;
+import com.bcb.module.commonality.share.ShareDialog;
 import com.bcb.module.discover.eliteloan.EliteLoanActivity;
 import com.bcb.module.login.LoginActivity;
 import com.bcb.module.myinfo.balance.BalanceActivity;
@@ -83,7 +84,7 @@ public class MyInfoFragment extends BaseFragment1 implements OnClickListener {
     private TextView title_text, value_earn_all;
     ImageView layout_update_line, iv_red;
     RelativeLayout layout_update;
-    RelativeLayout rl_ye, rl_lc, rl_yhq, rl_about;
+    RelativeLayout rl_ye, rl_lc, rl_yhq, rl_about, rl_share;
     TextView tv_update, value_lc;
     LinearLayout ll_qd;
     private Context ctx;
@@ -152,6 +153,8 @@ public class MyInfoFragment extends BaseFragment1 implements OnClickListener {
         rl_lc = (RelativeLayout) view.findViewById(R.id.rl_lc);
         rl_yhq = (RelativeLayout) view.findViewById(R.id.rl_yhq);
         rl_about = (RelativeLayout) view.findViewById(R.id.rl_about);
+        rl_share = (RelativeLayout) view.findViewById(R.id.rl_share);
+        rl_share.setOnClickListener(this);
         rl_ye.setOnClickListener(this);
         rl_lc.setOnClickListener(this);
         rl_yhq.setOnClickListener(this);
@@ -434,6 +437,11 @@ public class MyInfoFragment extends BaseFragment1 implements OnClickListener {
             case R.id.layout_account_settting:
                 UmengUtil.eventById(ctx, R.string.self_setting);
                 AccountSettingActivity.launche(ctx);
+                break;
+            case R.id.rl_share:
+                showShareDialog();
+                break;
+            default:
                 break;
         }
     }
@@ -765,6 +773,18 @@ public class MyInfoFragment extends BaseFragment1 implements OnClickListener {
                     }
                 });
         requestQueue.add(jsonRequest);
+    }
+
+    ShareDialog shareDialog;
+
+    /**
+     * 分享
+     */
+    private void showShareDialog() {
+        if (shareDialog == null) {
+            shareDialog = new ShareDialog(ctx);
+        }
+        shareDialog.show();
     }
 
 }

@@ -5,6 +5,9 @@
     <color name="colorPrimaryDark">#424954</color>
     <color name="colorAccent">#FF4081</color>
 
+    <!--透明背景-->
+    <color name="transparent">#00000000</color>
+
     <!-- 文本绿 -->
     <color name="txt_green">#93c52e</color>
     <!-- 背景色 -->
