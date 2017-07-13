@@ -160,14 +160,11 @@ public class FundCustodianWebActivity extends Activity_Base {
                 //【充值】
                 else if (url.contains("fulihui://recharge_result")) {
                     LogUtil.i("bqt", "充值" + url);
-                    //针对【充值失败、绑卡失败】--绑卡没有结果页，暂不做；436也暂不做
-                    if (url.contains("434")) message = "银行卡余额不足";
-                    else if (url.contains("435")) message = "金额超过单笔限额";
-                    //	else if (url.contains("436")) message = "姓名、证件信息或手机与银行账户预留信息不一致";
                     if (url.contains("000")) {
                         Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.CHARGE__HF_SUCCESS, message);
-                    } else
+                    } else {
                         Activity_Tips_FaileOrSuccess.launche(context, Activity_Tips_FaileOrSuccess.CHARGE_HF_FAILED, message);
+                    }
                     finish();
                     return true;
                 }

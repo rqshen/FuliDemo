@@ -49,12 +49,13 @@ public class InvestmentFinanceActivity extends BaseActivity1 implements View.OnC
         fragmentsList = new ArrayList<Fragment>();
         fragmentsList.add(FinanceListFragment.newInstance(0));
         fragmentsList.add(FinanceListFragment.newInstance(1));
-        fragmentsList.add(FinanceListFragment.newInstance(2));
+//        fragmentsList.add(FinanceListFragment.newInstance(2));
         // TODO: 2017/6/16 暂时隐藏周盈宝
 
         vp.setAdapter(new MyFragmentPagerAdapter(getSupportFragmentManager(), fragmentsList));
         vp.setCurrentItem(0);
-        vp.setOffscreenPageLimit(3);
+//        vp.setOffscreenPageLimit(3);
+        vp.setOffscreenPageLimit(2);
         // TODO: 2017/6/16 暂时隐藏周盈宝
         vp.addOnPageChangeListener(new MyOnPageChangeListener());
     }
@@ -95,9 +96,9 @@ public class InvestmentFinanceActivity extends BaseActivity1 implements View.OnC
         DisplayMetrics dmDisplayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dmDisplayMetrics);
         int screenW = dmDisplayMetrics.widthPixels;
-//        position_one = screenW / 2;
+        position_one = screenW / 2;
         // TODO: 2017/6/30
-        position_one = screenW / 3;
+//        position_one = screenW / 3;
     }
 
     public class MyOnPageChangeListener implements ViewPager.OnPageChangeListener {
