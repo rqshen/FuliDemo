@@ -352,8 +352,7 @@ public class MyInfoFragment extends BaseFragment1 implements OnClickListener {
     class DownloadCompleteReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if (intent.getAction()
-                    .equals(DownloadManager.ACTION_DOWNLOAD_COMPLETE)) {
+            if (intent.getAction().equals(DownloadManager.ACTION_DOWNLOAD_COMPLETE)) {
                 LogUtil.i("bqt", "下载完毕");
                 installApk(context);
                 if (downloadCompleteReceiver != null) {

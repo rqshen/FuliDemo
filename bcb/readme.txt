@@ -17,7 +17,6 @@
 1极光推送与美洽客服在bug收集后台有不少崩溃bug，如有更新需要尽快升级SDK，只需要修改gradle。
 美洽SDK：https://github.com/Meiqia/MeiqiaSDK-Android
 
-
 ftr_update/dxs
 统一用ftr_功能点开头，写错绩效－分
 
@@ -39,3 +38,16 @@ https、检查更新  测试完成
 1、UI 界面整体改造  -  肖羽已经完成80%设计，预计在本周发起评审
 2、单标继续持有功能 -  需求负责人屈文
 2017-1-4
+
+
+福利金融2.5版本已发布
+android:versionCode="68"
+android:versionName="2.5.0"
+
+---------------------------------------------------------------
+
+          android:versionCode="69"
+          android:versionName="2.6.1">
+
+
+----------------------------------

@@ -114,7 +114,7 @@ public class FundCustodianWebActivity extends Activity_Base {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 if (url == null) {
-                    LogUtil.i("bqt", "截获的url地址为空");
+                    LogUtil.e("bqt", "截获的url地址为空");
                     return true;
                 }
 
@@ -123,14 +123,17 @@ public class FundCustodianWebActivity extends Activity_Base {
                 } catch (UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }
+                LogUtil.i("bqt", "截获的url地址：" + url);
 
                 String[] split = url.split("\\|");
-
-
-                LogUtil.i("bqt", "截获的url地址：" + url);
-                String message = split[split.length];
-                String scheme = split[0];
-                String code = split[1];
+                String scheme = "";
+                String code = "";
+                String message = "";
+                if (split.length > 2) {
+                    scheme = split[0];
+                    code = split[1];
+                    message = split[split.length - 1];
+                }
 
 
                 //******************************************************************************************

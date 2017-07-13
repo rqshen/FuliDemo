@@ -141,8 +141,7 @@ public class MainActivity extends BaseActivity1 {
                         MyApplication.versionBean = versionBean;
                         if (versionBean.Force) {//强制升级
                             fileName = "fljr-v" + versionBean.Increment + ".apk";
-                            apkFile = new File(Environment.getExternalStorageDirectory()
-                                    .getPath() + DownloadUtils.FILE_PATH + File.separator + fileName);
+                            apkFile = new File(Environment.getExternalStorageDirectory().getPath() + DownloadUtils.FILE_PATH + File.separator + fileName);
                             showVersionDialog2();
                         } else {//非强制升级
                             MyApplication.isNeedUpdate = true;
