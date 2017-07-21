@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bcb.R;
-import com.bcb.constant.ProjectListStatus;
+import com.bcb.constant.ProjectListType;
 import com.bcb.module.myinfo.myfinancial.myfinancialstate.MyFinancialStateFragment;
 import com.bcb.util.MyActivityManager;
 
@@ -114,29 +114,17 @@ public class MyFinancialActivity extends FragmentActivity {
                 wyb.setTextColor(ContextCompat.getColor(this, R.color.red));
                 wyb.setBackground(ContextCompat.getDrawable(this, R.drawable.stroke_l));
                 if (wyb_f == null) {
-                    wyb_f = MyFinancialStateFragment.newInstance(ProjectListStatus.WYB);
+                    wyb_f = MyFinancialStateFragment.newInstance(ProjectListType.MONTH);
                     getSupportFragmentManager().beginTransaction().add(R.id.container, wyb_f, "AA").commit();
                 } else {
                     getSupportFragmentManager().beginTransaction().show(wyb_f).commit();
-                }
-                break;
-            case 1://涨薪宝选中
-                zxb.setTextColor(ContextCompat.getColor(this, R.color.red));
-//                zxb.setBackground(ContextCompat.getDrawable(this, R.drawable.stroke_center));
-                // TODO: 2017/6/16 隐藏周盈宝 正方形图标改变
-                zxb.setBackground(ContextCompat.getDrawable(this, R.drawable.stroke_r));
-                if (zxb_f == null) {
-                    zxb_f = MyFinancialStateFragment.newInstance(ProjectListStatus.ZXB);
-                    getSupportFragmentManager().beginTransaction().add(R.id.container, zxb_f, "AA").commit();
-                } else {
-                    getSupportFragmentManager().beginTransaction().show(zxb_f).commit();
                 }
                 break;
             case 2://周盈宝选中
                 tvZyb.setTextColor(ContextCompat.getColor(this, R.color.red));
                 tvZyb.setBackground(ContextCompat.getDrawable(this, R.drawable.stroke_r));
                 if (zyb_f == null) {
-                    zyb_f = MyFinancialStateFragment.newInstance(ProjectListStatus.ZYB);
+                    zyb_f = MyFinancialStateFragment.newInstance(ProjectListType.DAY);
                     getSupportFragmentManager().beginTransaction().add(R.id.container, zyb_f, "AA").commit();
                 } else {
                     getSupportFragmentManager().beginTransaction().show(zyb_f).commit();

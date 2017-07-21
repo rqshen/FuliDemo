@@ -6,7 +6,6 @@ package com.bcb.constant;
  */
 
 public class ProjectListStatus {
-    public static final int WYB = 0;//稳盈宝【打包标，月】
-    public static final int ZXB = 1;//涨薪宝【原始标】
-    public static final int ZYB = 2;//周盈宝【打包标，周】
+    public static final int WYB = 0;//稳盈宝【稳盈安心赚】
+    public static final int ZYB = 2;//周盈宝【稳盈灵活投】
 }

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/white">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="#eee"/>
+        android:background="#eee" />
     <!-- Tab标签 -->
     <LinearLayout
         android:id="@+id/ll_viewpager"
@@ -22,19 +22,9 @@
             android:layout_height="match_parent"
             android:layout_weight="1.0"
             android:gravity="center"
-            android:text="稳盈宝"
+            android:text="稳赢安心赚"
             android:textColor="@color/red"
-            android:textSize="14sp"/>
-
-        <TextView
-            android:id="@+id/tv_zxb"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1.0"
-            android:gravity="center"
-            android:text="涨薪宝"
-            android:textColor="@color/txt_gray"
-            android:textSize="14sp"/>
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/tv_zyb"
@@ -42,10 +32,10 @@
             android:layout_height="match_parent"
             android:layout_weight="1.0"
             android:gravity="center"
-            android:text="周盈宝"
+            android:text="稳盈灵活投"
             android:textColor="@color/txt_gray"
             android:textSize="14sp"
-            android:visibility="visible"/>
+            android:visibility="visible" />
 
 
     </LinearLayout>
@@ -68,24 +58,19 @@
                 android:layout_height="2dp"
                 android:layout_weight="1"
                 android:scaleType="matrix"
-                android:src="@color/red"/>
-
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"/>
+                android:src="@color/red" />
 
             <Space
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:visibility="visible"/>
+                android:visibility="visible" />
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
-            android:background="@color/linegray"/>
+            android:background="@color/linegray" />
     </LinearLayout>
 
 
@@ -93,6 +78,6 @@
         android:id="@+id/vp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/ll_cursor"/>
+        android:layout_below="@id/ll_cursor" />
 
 </RelativeLayout>

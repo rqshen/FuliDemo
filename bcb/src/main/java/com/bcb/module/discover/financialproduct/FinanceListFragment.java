@@ -13,13 +13,12 @@ import android.widget.Toast;
 import com.bcb.MyApplication;
 import com.bcb.R;
 import com.bcb.base.old.BaseFragment1;
-import com.bcb.constant.ProjectListStatus;
 import com.bcb.constant.ProjectListType;
 import com.bcb.data.bean.MainListBean2;
 import com.bcb.data.bean.WYBbean;
 import com.bcb.module.discover.adapter.FinanceListAdapter;
-import com.bcb.module.discover.financialproduct.normalproject.NormalProjectIntroductionActivity;
-import com.bcb.module.discover.financialproduct.wrapprogram.WrapProgramIntroductionActivity;
+import com.bcb.module.discover.financialproduct.dayprogram.DayProgramIntroductionActivity;
+import com.bcb.module.discover.financialproduct.monthproject.MonthProgramIntroductionActivity;
 import com.bcb.network.BcbJsonRequest;
 import com.bcb.network.BcbRequest;
 import com.bcb.network.UrlsOne;
@@ -43,10 +42,10 @@ import java.util.List;
  * 时间：2017/2/27 17:05
  */
 public class FinanceListFragment extends BaseFragment1 implements AdapterView.OnItemClickListener {
-    private Context ctx;
+    private Context context;
 
     private MyListView lv;
-    private int Status;//	【 0稳赢 散标】【1涨薪宝 原始标】 【3周盈宝 散标】
+    private String Status;//	【 0稳赢 散标】【1涨薪宝 原始标】 【3周盈宝 散标】
     private int PageNow = 1;
     private int PageSize = 10;
 
@@ -63,9 +62,9 @@ public class FinanceListFragment extends BaseFragment1 implements AdapterView.On
     /**
      * 构造时把传入的参数带进来，
      */
-    public static FinanceListFragment newInstance(int Status) {
+    public static FinanceListFragment newInstance(String Status) {
         Bundle bundle = new Bundle();
-        bundle.putInt("Status", Status);
+        bundle.putString("Status", Status);
         FinanceListFragment fragment = new FinanceListFragment();
         fragment.setArguments(bundle);
         return fragment;
@@ -76,7 +75,7 @@ public class FinanceListFragment extends BaseFragment1 implements AdapterView.On
         super.onCreate(savedInstanceState);
         Bundle bundle = getArguments();
         if (bundle != null) {
-            Status = bundle.getInt("Status");
+            Status = bundle.getString("Status");
         }
     }
     //******************************************************************************************
@@ -88,10 +87,10 @@ public class FinanceListFragment extends BaseFragment1 implements AdapterView.On
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        this.ctx = view.getContext();
+        this.context = view.getContext();
         null_data_layout = (LinearLayout) view.findViewById(R.id.null_data_layout);
         recordsBeans = new ArrayList<>();
-        mCouponListAdapter = new FinanceListAdapter(ctx, recordsBeans);
+        mCouponListAdapter = new FinanceListAdapter(context, recordsBeans);
         lv = (MyListView) view.findViewById(R.id.listview_data_layout);
         lv.setOnItemClickListener(this);
         lv.setAdapter(mCouponListAdapter);
@@ -103,13 +102,13 @@ public class FinanceListFragment extends BaseFragment1 implements AdapterView.On
             @Override
             public void onRefresh(PullToRefreshLayout pullToRefreshLayout) {
 
-                if (HttpUtils.isNetworkConnected(ctx)) {
+                if (HttpUtils.isNetworkConnected(context)) {
                     PageNow = 1;
                     recordsBeans.clear();
                     loadData();
                     loadmore_view.setVisibility(View.VISIBLE);
                 } else {
-                    ToastUtil.alert(ctx, "网络异常，请稍后再试");
+                    ToastUtil.alert(context, "网络异常，请稍后再试");
                     refreshLayout.refreshFinish(PullToRefreshLayout.FAIL);
                 }
             }
@@ -117,7 +116,7 @@ public class FinanceListFragment extends BaseFragment1 implements AdapterView.On
             @Override
             public void onLoadMore(PullToRefreshLayout pullToRefreshLayout) {
 
-                if (HttpUtils.isNetworkConnected(ctx)) {
+                if (HttpUtils.isNetworkConnected(context)) {
                     if (canLoadmore) {
                         loadData();
                     } else {
@@ -125,7 +124,7 @@ public class FinanceListFragment extends BaseFragment1 implements AdapterView.On
                         refreshLayout.loadmoreFinish(PullToRefreshLayout.NOMORE);
                     }
                 } else {
-                    ToastUtil.alert(ctx, "网络异常，请稍后再试");
+                    ToastUtil.alert(context, "网络异常，请稍后再试");
                     refreshLayout.loadmoreFinish(PullToRefreshLayout.FAIL);
                 }
             }
@@ -143,24 +142,20 @@ public class FinanceListFragment extends BaseFragment1 implements AdapterView.On
             e.printStackTrace();
         }
 
-        String url = "";//请求的地址
+        String url = UrlsOne.Month_Finance_LIST;//请求的地址
 
-        if (Status == ProjectListStatus.WYB) {//稳盈宝
-            url = UrlsOne.WYB_Buy_LIST;
-        } else if (Status == ProjectListStatus.ZXB) {//涨薪宝【原始标】
-            url = UrlsOne.ZXB_Buy_LIST;
-        } else if (Status == ProjectListStatus.ZYB) {//周盈宝
-            url = UrlsOne.ZYB_Buy_LIST;
-        } else {
-            url = UrlsOne.WYB_Buy_LIST;
+        if (Status.equals(ProjectListType.MONTH)) {//稳盈宝
+            url = UrlsOne.Month_Finance_LIST;
+        } else if (Status.equals(ProjectListType.DAY)) {//周盈宝
+            url = UrlsOne.Day_Finance_LIST;
         }
 
-        BcbJsonRequest jsonRequest = new BcbJsonRequest(url, obj, TokenUtil.getEncodeToken(ctx), new BcbRequest
+        BcbJsonRequest jsonRequest = new BcbJsonRequest(url, obj, TokenUtil.getEncodeToken(context), new BcbRequest
                 .BcbCallBack<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    if (PackageUtil.getRequestStatus(response, ctx)) {
+                    if (PackageUtil.getRequestStatus(response, context)) {
                         JSONObject obj = PackageUtil.getResultObject(response);
                         WYBbean mCouponList = null;
                         if (obj != null) {
@@ -238,15 +233,13 @@ public class FinanceListFragment extends BaseFragment1 implements AdapterView.On
         MainListBean2.JpxmBean jpxm = recordsBeans.get(position);
         //判断是否属于新标预告的状态，根据状态来判断是否可点击
         if (jpxm.Status == 10) {
-            Toast.makeText(ctx, "Status == 10，不可购买", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Status == 10，不可购买", Toast.LENGTH_SHORT).show();
         }
         //0稳盈宝【月】，1涨薪宝【普通】，2周盈宝【周】
-        if (jpxm.Type != null && jpxm.Type.equals(ProjectListType.WYB)) {//稳盈宝【月】mon_package
-            WrapProgramIntroductionActivity.launche2(ctx, jpxm.PackageId, ProjectListStatus.WYB);
-        } else if (jpxm.Type != null && jpxm.Type.equals(ProjectListType.ZXB)) {//涨薪宝，原始
-            NormalProjectIntroductionActivity.launche(ctx, jpxm.PackageId);
-        } else if (jpxm.Type != null && jpxm.Type.equals(ProjectListType.ZYB)) {//周盈宝，周
-            WrapProgramIntroductionActivity.launche2(ctx, jpxm.PackageId, ProjectListStatus.ZYB);
+        if (jpxm.Type != null && jpxm.Type.equals(ProjectListType.MONTH)) {//稳盈宝【月】mon_package
+            MonthProgramIntroductionActivity.launche(context, jpxm.PackageId);
+        } else if (jpxm.Type != null && jpxm.Type.equals(ProjectListType.DAY)) {//周盈宝，周
+            DayProgramIntroductionActivity.launche(context, jpxm.PackageId);
         }
     }
 }

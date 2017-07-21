@@ -14,6 +14,7 @@ import com.bcb.MyApplication;
 import com.bcb.R;
 import com.bcb.base.old.BaseFragment1;
 import com.bcb.constant.ProjectListStatus;
+import com.bcb.constant.ProjectListType;
 import com.bcb.data.bean.TZJLbean;
 import com.bcb.module.discover.financialproduct.InvestmentFinanceActivity;
 import com.bcb.module.myinfo.myfinancial.myfinancialstate.MyFinancialStateFragment;
@@ -46,7 +47,7 @@ public class MyFinancialListFragment extends BaseFragment1 implements AdapterVie
     private Context ctx;
 
     private MyListView lv;
-    private int Status;//	【 0稳赢，打包】【1涨薪宝，三标】
+    private String Status;//	【 0稳赢，打包】【1涨薪宝，三标】
     private int Tab;//	1为持有中，2为已结束
 
     private int PageNow = 1;
@@ -68,9 +69,9 @@ public class MyFinancialListFragment extends BaseFragment1 implements AdapterVie
     /**
      * 构造时把传入的参数带进来，
      */
-    public static MyFinancialListFragment newInstance(int Status, int Tab) {
+    public static MyFinancialListFragment newInstance(String Status, int Tab) {
         Bundle bundle = new Bundle();
-        bundle.putInt(EXTRA_STATUS, Status);
+        bundle.putString(EXTRA_STATUS, Status);
         bundle.putInt(EXTRA_TAB, Tab);
         MyFinancialListFragment fragment = new MyFinancialListFragment();
         fragment.setArguments(bundle);
@@ -82,7 +83,7 @@ public class MyFinancialListFragment extends BaseFragment1 implements AdapterVie
         super.onCreate(savedInstanceState);
         Bundle bundle = getArguments();
         if (bundle != null) {
-            Status = bundle.getInt(EXTRA_STATUS);
+            Status = bundle.getString(EXTRA_STATUS);
             Tab = bundle.getInt(EXTRA_TAB);
         }
     }
@@ -158,13 +159,11 @@ public class MyFinancialListFragment extends BaseFragment1 implements AdapterVie
         }
 
 
-        String url = UrlsOne.WYB_MyFinancial_List;//打包，稳赢
-        if (Status == ProjectListStatus.WYB) {
-            url = UrlsOne.WYB_MyFinancial_List;//打包，稳赢
-        } else if (Status == ProjectListStatus.ZXB) {
-            url = UrlsOne.ZXB_MyFinancial_List;
-        } else if (Status == ProjectListStatus.ZYB) {
-            url = UrlsOne.ZYB_MyFinancial_List;
+        String url = UrlsOne.Month_MyFinancial_List;//打包，稳赢
+        if (Status.equals(ProjectListType.MONTH)) {
+            url = UrlsOne.Month_MyFinancial_List;//打包，稳赢
+        } else if (Status == ProjectListType.DAY) {
+            url = UrlsOne.Day_MyFinancial_List;
         }
 
         BcbJsonRequest jsonRequest = new BcbJsonRequest(url, obj, TokenUtil.getEncodeToken(ctx), new BcbRequest
@@ -179,13 +178,10 @@ public class MyFinancialListFragment extends BaseFragment1 implements AdapterVie
                             float tempYjsy = 0;//应计收益
                             float tempZtbj = 0;//再投本金
                             tzjLbean = MyApplication.mGson.fromJson(obj.toString(), TZJLbean.class);
-                            if (Status == ProjectListStatus.WYB) {
+                            if (Status.equals(ProjectListType.MONTH)) {
                                 tempYjsy = tzjLbean.PackInterest;
                                 tempZtbj = tzjLbean.PackPrincipal;
-                            } else if (Status == ProjectListStatus.ZXB) {
-                                tempYjsy = tzjLbean.OriginalInterest;
-                                tempZtbj = tzjLbean.OriginalPrincipal;
-                            } else if (Status == ProjectListStatus.ZYB) {
+                            } else if (Status.equals(ProjectListStatus.ZYB)) {
                                 tempYjsy = tzjLbean.ChickenInterest;
                                 tempZtbj = tzjLbean.ChickenPrincipal;
                             }

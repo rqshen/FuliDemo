@@ -21,7 +21,6 @@ import android.widget.Toast;
 import com.bcb.MyApplication;
 import com.bcb.R;
 import com.bcb.base.old.BaseFragment1;
-import com.bcb.constant.ProjectListStatus;
 import com.bcb.constant.ProjectListType;
 import com.bcb.data.bean.AdPhotoListBean;
 import com.bcb.data.bean.BannerInfo;
@@ -31,8 +30,8 @@ import com.bcb.event.BroadcastEvent;
 import com.bcb.module.discover.adapter.FinanceListAdapter;
 import com.bcb.module.discover.carinsurance.CarInsuranceActivity;
 import com.bcb.module.discover.financialproduct.InvestmentFinanceActivity;
-import com.bcb.module.discover.financialproduct.normalproject.NormalProjectIntroductionActivity;
-import com.bcb.module.discover.financialproduct.wrapprogram.WrapProgramIntroductionActivity;
+import com.bcb.module.discover.financialproduct.dayprogram.DayProgramIntroductionActivity;
+import com.bcb.module.discover.financialproduct.monthproject.MonthProgramIntroductionActivity;
 import com.bcb.module.homepager.adapter.AnnounceListAdapter;
 import com.bcb.module.homepager.slideshow.SlideShowFragment;
 import com.bcb.module.login.LoginActivity;
@@ -589,12 +588,10 @@ public class HomePagerFragment extends BaseFragment1 implements View.OnClickList
             Toast.makeText(ctx, "Status == 10，不可购买", Toast.LENGTH_SHORT).show();
         }
         //0稳盈宝【月】，1涨薪宝【普通】，2周盈宝【周】
-        if (jpxm.Type != null && jpxm.Type.equals(ProjectListType.WYB)) {//稳盈宝【月】mon_package
-            WrapProgramIntroductionActivity.launche2(ctx, jpxm.PackageId, ProjectListStatus.WYB);
-        } else if (jpxm.Type != null && jpxm.Type.equals(ProjectListType.ZXB)) {//涨薪宝，原始
-            NormalProjectIntroductionActivity.launche(ctx, jpxm.PackageId);
-        } else if (jpxm.Type != null && jpxm.Type.equals(ProjectListType.ZYB)) {//周盈宝，周
-            WrapProgramIntroductionActivity.launche2(ctx, jpxm.PackageId, ProjectListStatus.ZYB);
+        if (jpxm.Type != null && jpxm.Type.equals(ProjectListType.MONTH)) {//稳盈宝【月】mon_package
+            MonthProgramIntroductionActivity.launche(ctx, jpxm.PackageId);
+        } else if (jpxm.Type != null && jpxm.Type.equals(ProjectListType.DAY)) {//周盈宝，周
+            DayProgramIntroductionActivity.launche(ctx, jpxm.PackageId);
         }
 
     }

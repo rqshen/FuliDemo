@@ -95,42 +95,30 @@ public class UrlsOne {
     public static final String SEARCHCLAIMCONVEY = host + "/api/v2.0/a69a00bc546d";
 
     //稳赢宝列表，打包的标【月】
-    public static final String WYB_Buy_LIST = host + "/api/v2.5/a71b011df7f7";//打包
-    //涨薪宝列表，普通表，原始标
-    public static final String ZXB_Buy_LIST = host + "/api/v2.5/a71b011d974a";//原始
-    //周盈宝列表，打包的标【周】
-    public static final String ZYB_Buy_LIST = host + "/api/v2.5/a78000f4e1d9";//打包
-
-    //购买涨薪宝
-    public static String ZXB_Buying = host + "/api/v2.0/a63c0109b86a";
+    public static final String Month_Finance_LIST = host + "/api/v2.5/a6fd011ee788";
+    //周盈宝列表，打包的标【天】
+    public static final String Day_Finance_LIST = host + "/api/v2.5/a78000f74fdf";
 
     //购买稳盈宝
-    public static String WYB_Buying = host + "/api/v2.0/a6de0115f478";
+    public static String Month_Buying = host + "/api/v2.0/a6de0115f478";
 
     //购买周盈宝
-    public static String ZYB_Buying = host + "/api/v2.0/a78000f6d15e";
+    public static String Day_Buying = host + "/api/v2.0/a78000f6d15e";
 
     //稳赢宝详情，打包的标【月】
-    public static final String WYB_Buy_DETAIL = host + "/api/v2.5/a6de0105e5df";//打包
-    //涨薪宝详情，普通表，原始标
-//    public static final String ZXB_DETAIL = host + "/api/v2.5/a71b011dbf16";//新的接口，暂未使用
-    public static final String ZXB_Buy_DETAIL = host + "/api/v2.0/a64b0102ddbd";//原始
+    public static final String Month_Buy_DETAIL = host + "/api/v2.5/a6de0105e5df";
     //周盈宝详情，打包的标【周】
-    public static final String ZYB_Buy_DETAIL = host + "/api/v2.5/a78000f4e64e";//打包
+    public static final String Day_Buy_DETAIL = host + "/api/v2.5/a78000f4e64e";
 
     //稳赢宝【月】，购买的标的列表
-    public static final String WYB_MyFinancial_List = host + "/api/v2.5/a71c00f5bd72";
-    //涨薪宝【原始】，已购买的【原始标】列表
-    public static final String ZXB_MyFinancial_List = host + "/api/v2.5/a6fd011ee788";
+    public static final String Month_MyFinancial_List = host + "/api/v2.5/a71c00f5bd72";
     //周赢宝【周】，购买的标的列表
-    public static final String ZYB_MyFinancial_List = host + "/api/v2.5/a78000f74fdf";
+    public static final String Day_MyFinancial_List = host + "/api/v2.5/a78000f74fdf";
 
     //稳赢宝【月】，购买的标的列表详情
-    public static final String WYB_MyFinancial_XQ = host + "/api/v2.5/a71c00f5f9ff";//打包
-    //涨薪宝【原始】，已购买的【原始标】列表详情
-    public static final String ZXB_MyFinancial_XQ = host + "/api/v2.5/a6fd011f5ca5";//散
+    public static final String Month_MyFinancial_XQ = host + "/api/v2.5/a71c00f5f9ff";
     // 周赢宝【周】，购买的标的列表详情
-    public static final String ZYB_MyFinancial_XQ = host + "/api/v2.5/a78500f9885e";//散
+    public static final String Day_MyFinancial_XQ = host + "/api/v2.5/a78500f9885e";
 
     // 稳赢宝【月】，购买的标退出
     public static final String WYB_MyFinancial_Exit = host + "/api/v2.5/a71d01130432";//申请债权退出

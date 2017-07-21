@@ -1,15 +1,11 @@
-package com.bcb.module.discover.financialproduct.wrapprogram;
+package com.bcb.module.discover.financialproduct.monthproject;
 
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Spannable;
 import android.text.SpannableString;
-import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
-import android.text.style.AbsoluteSizeSpan;
-import android.text.style.ForegroundColorSpan;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -20,10 +16,10 @@ import android.widget.Toast;
 import com.bcb.MyApplication;
 import com.bcb.R;
 import com.bcb.base.old.Activity_Base;
-import com.bcb.constant.ProjectListStatus;
+import com.bcb.constant.ProjectListType;
 import com.bcb.data.bean.CPXQbean;
 import com.bcb.module.browse.FundCustodianWebActivity;
-import com.bcb.module.discover.financialproduct.wrapprogram.buy.WrapProjectBuyActivity;
+import com.bcb.module.discover.financialproduct.buy.ProjectBuyActivity;
 import com.bcb.module.login.LoginActivity;
 import com.bcb.module.myinfo.myfinancial.myfinancialstate.myfinanciallist.myfinancialdetail.projectdetail.ProjectDetailActivity;
 import com.bcb.network.BcbJsonRequest;
@@ -31,12 +27,12 @@ import com.bcb.network.BcbRequest;
 import com.bcb.network.UrlsOne;
 import com.bcb.network.UrlsTwo;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
-import com.bcb.util.DensityUtils;
 import com.bcb.util.HttpUtils;
 import com.bcb.util.LogUtil;
 import com.bcb.util.MyActivityManager;
 import com.bcb.util.PackageUtil;
 import com.bcb.util.ProgressDialogrUtils;
+import com.bcb.util.SpanUtils;
 import com.bcb.util.TokenUtil;
 
 import org.json.JSONException;
@@ -52,12 +48,9 @@ import butterknife.OnClick;
 
 import static com.bcb.R.id.back_img;
 
-/**
- * 稳盈宝详情
- * setTitleValue("产品详情"。setTitleValue("详情"。setTitleValue("项目详情"。setTitleValue("立即购买"。setTitleValue("立即申购"。
- */
-public class WrapProgramIntroductionActivity extends Activity_Base implements View.OnTouchListener {
-    Context ctx;
+public class MonthProgramIntroductionActivity extends Activity_Base implements View.OnTouchListener {
+
+    Context context;
     @BindView(R.id.tv_rate)
     TextView tvRate;
     @BindView(R.id.tv_rate_add)
@@ -95,29 +88,22 @@ public class WrapProgramIntroductionActivity extends Activity_Base implements Vi
 
     private String packageId = "";
 
-
-    //初始化******************************************************************************************
-    //0稳盈宝【打包标，月】, 2周盈宝【打包标，周】
-    private int type = 0;
-
-    public static void launche2(Context ctx, String pid, int type) {
+    public static void launche(Context ctx, String pid) {
         Intent intent = new Intent();
         intent.putExtra("pid", pid);
-        intent.putExtra("type", type);
-        intent.setClass(ctx, WrapProgramIntroductionActivity.class);
+        intent.setClass(ctx, MonthProgramIntroductionActivity.class);
         ctx.startActivity(intent);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ctx = this;
-        MyActivityManager.getInstance().pushOneActivity(WrapProgramIntroductionActivity.this);
+        context = this;
+        MyActivityManager.getInstance().pushOneActivity(MonthProgramIntroductionActivity.this);
         if (getIntent() != null) {
             packageId = getIntent().getStringExtra("pid");
-            type = getIntent().getIntExtra("type", 0);
         }
-        setBaseContentView(R.layout.activity_cpxq);
+        setBaseContentView(R.layout.activity_month_program_introduction);
         ButterKnife.bind(this);// ButterKnife.inject(this) should be called after setContentView()
         setTitleValue("产品详情");
         layout_title.setBackgroundColor(getResources().getColor(R.color.red));
@@ -134,29 +120,18 @@ public class WrapProgramIntroductionActivity extends Activity_Base implements Vi
         ProgressDialogrUtils.show(this, "正在获取数据，请稍后…");
     }
 
-    String dayOrMonth = "个月";
-
     private void showData() {
-
-        if (bean.DurationExchangeType == 1) {
-            dayOrMonth = "天";
-            tvU2.setText("持续收益，按周退出");
-        } else {
-            dayOrMonth = "个月";
-            tvU2.setText("持续收益，按月退出");
-        }
-
-
         tvRate.setText("" + String.format("%.1f", bean.Rate));
         //福袋利率
         String welfareRate = TextUtils.isEmpty(MyApplication.getInstance().getWelfare()) ? "%" : "%+" + MyApplication.getInstance().getWelfare() + "%";
         tvRateAdd.setText(welfareRate);
-        sdq.setText(bean.MixDuration + dayOrMonth);
-        ktje.setText(String.format("%.2f", bean.Balance));
-        tvLimite.setText(getSpan(bean.MixDuration + "", bean.MaxDuration + ""));
-        cy.setText(bean.MaxDuration + dayOrMonth);
-        buy1.setText(getSpan2(10000, bean.MixDuration, String.format("%.2f", bean.MinPreInterest)));//
-        buy2.setText(getSpan2(10000, bean.MaxDuration, String.format("%.2f", bean.MaxPreInterest)));
+        sdq.setText(bean.MixDuration + "个月");//锁定期
+        ktje.setText(String.format("%.2f", bean.Balance));//可投金额
+        tvLimite.setText(getSpanDayDesc(bean.MixDuration + "", bean.MaxDuration + ""));//最少多天，最长多少天
+        tvU2.setText("持续收益，按月退出");//退出描述
+        cy.setText(bean.MaxDuration + "个月");//最长多少天
+        buy1.setText(getSpanBuyDesc(10000, bean.MixDuration, String.format("%.2f", bean.MinPreInterest)));//
+        buy2.setText(getSpanBuyDesc(10000, bean.MaxDuration, String.format("%.2f", bean.MaxPreInterest)));
         setTitleValue(bean.Name);
         if (bean.Balance <= 0) {
             buy.setText("已售罄");
@@ -177,61 +152,42 @@ public class WrapProgramIntroductionActivity extends Activity_Base implements Vi
             SimpleDateFormat format2 = new SimpleDateFormat("yyyy.MM.dd");
             Date qxr_ = format.parse(bean.InterestTakeDate);
             Date tc_ = format.parse(bean.HoldingDate);
-
             qxr.setText(format2.format(qxr_));
             tc.setText(format2.format(tc_));
-
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
     }
 
-    private SpannableString getSSpannableString(String string) {
-        SpannableString mSpannableString = new SpannableString(string);
-        //颜色
-        ForegroundColorSpan colorSpan = new ForegroundColorSpan(0xffff4c4c);
-        mSpannableString.setSpan(colorSpan, 0, mSpannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        //大小
-        AbsoluteSizeSpan absoluteSizeSpan = new AbsoluteSizeSpan(DensityUtils.dp2px(this, 22));
-        mSpannableString.setSpan(absoluteSizeSpan, 0, mSpannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        return mSpannableString;
+    /**
+     * 持有天数的描述
+     *
+     * @param string1
+     * @param string2
+     * @return
+     */
+    private SpannableString getSpanDayDesc(String string1, String string2) {
+        String desc = "最少持有" + string1 + "个月，按月续期，最长" + string2 + "个月";
+        return SpanUtils.updateFontColor(desc, new String[]{string1, string2});
     }
 
-    private SpannableStringBuilder getSpan(String string1, String string2) {
-        SpannableStringBuilder needStartSSB = new SpannableStringBuilder("最少持有");
-
-        needStartSSB.append(getSSpannableString(string1));
-
-        if (bean.DurationExchangeType == 1) {
-            needStartSSB.append(dayOrMonth + "，按周续期，最长").append(getSSpannableString(string2)).append(dayOrMonth);
-        } else {
-            needStartSSB.append(dayOrMonth + "，按月续期，最长").append(getSSpannableString(string2)).append(dayOrMonth);
-        }
-
-        return needStartSSB;
-    }
-
-    private SpannableString getSSpannableString2(String string) {
-        SpannableString mSpannableString = new SpannableString(string);
-        //颜色
-        ForegroundColorSpan colorSpan = new ForegroundColorSpan(0xffff4c4c);
-        mSpannableString.setSpan(colorSpan, 0, mSpannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-        return mSpannableString;
-    }
-
-    private SpannableStringBuilder getSpan2(int money, int time, String string2) {
-        SpannableStringBuilder needStartSSB = new SpannableStringBuilder("购买");
-        needStartSSB.append(getSSpannableString2(" " + money)).append(" 元，" + time + dayOrMonth + "可收益 ")//
-                .append(getSSpannableString2(string2)).append(" 元");
-        return needStartSSB;
+    /**
+     * 购买描述
+     *
+     * @param money
+     * @param time
+     * @param string2
+     * @return
+     */
+    private SpannableString getSpanBuyDesc(int money, int time, String string2) {
+        String desc = "购买" + money + "元," + time + "天可收益" + string2 + "元";
+        return SpanUtils.updateFontColor(desc, new String[]{String.valueOf(money), string2});
     }
 
     @OnClick({R.id.ll_buy1, R.id.ll_buy2, R.id.more, R.id.buy})
     public void onClick(View view) {
         if (MyApplication.saveUserInfo.getAccess_Token() == null && view.getId() != R.id.more) {
-            LoginActivity.launche(ctx);
+            LoginActivity.launche(context);
             return;
         }
         switch (view.getId()) {
@@ -244,7 +200,7 @@ public class WrapProgramIntroductionActivity extends Activity_Base implements Vi
                     return;
                 }
                 //跳转到购买页面
-                WrapProjectBuyActivity.launche(this, packageId, bean.Name, bean, type);
+                ProjectBuyActivity.launche(this, packageId, bean.Name, bean, ProjectListType.MONTH);
                 break;
             case R.id.more:
                 ProjectDetailActivity.launche2(this, bean.Name, bean.PageUrl, 20095);
@@ -265,25 +221,12 @@ public class WrapProgramIntroductionActivity extends Activity_Base implements Vi
             e.printStackTrace();
         }
 
-        String url;//网络请求的地址
-        /**
-         * 获取当前是稳盈宝还是周盈宝
-         */
-        if (type == ProjectListStatus.WYB) {
-            url = UrlsOne.WYB_Buy_DETAIL;
-        } else if (type == ProjectListStatus.ZYB) {
-            url = UrlsOne.ZYB_Buy_DETAIL;
-        } else {
-            url = UrlsOne.WYB_Buy_DETAIL;
-        }
-
-
-        BcbJsonRequest jsonRequest = new BcbJsonRequest(url, obj, TokenUtil.getEncodeToken(ctx), new BcbRequest
+        BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsOne.Month_Buy_DETAIL, obj, TokenUtil.getEncodeToken(context), new BcbRequest
                 .BcbCallBack<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 ProgressDialogrUtils.hide();
-                if (PackageUtil.getRequestStatus(response, ctx)) {
+                if (PackageUtil.getRequestStatus(response, context)) {
                     JSONObject data = PackageUtil.getResultObject(response);
                     //判断JSON对象是否为空
                     if (data != null) {
@@ -336,7 +279,7 @@ public class WrapProgramIntroductionActivity extends Activity_Base implements Vi
      */
     private void autoOpen() {
         String requestUrl = UrlsTwo.OPENAUTOTENDERPLAN;
-        String encodeToken = TokenUtil.getEncodeToken(ctx);
+        String encodeToken = TokenUtil.getEncodeToken(context);
         JSONObject obj = new JSONObject();
         try {
             obj.put("Platform", 2);
@@ -347,7 +290,7 @@ public class WrapProgramIntroductionActivity extends Activity_Base implements Vi
             @Override
             public void onResponse(JSONObject response) {
                 LogUtil.i("bqt", "开通自动投标" + response.toString());
-                if (PackageUtil.getRequestStatus(response, ctx)) {
+                if (PackageUtil.getRequestStatus(response, context)) {
                     try {
                         /** 后台返回的JSON对象，也是要转发给汇付的对象 */
                         JSONObject result = PackageUtil.getResultObject(response);
@@ -357,13 +300,13 @@ public class WrapProgramIntroductionActivity extends Activity_Base implements Vi
                             result.remove("PostUrl");//移除这个参数
                             //传递的参数
                             String postData = HttpUtils.jsonToStr(result.toString()); //跳转到webview
-                            FundCustodianWebActivity.launche(ctx, "开启份额锁", postUrl, postData);
+                            FundCustodianWebActivity.launche(context, "开启份额锁", postUrl, postData);
                         }
                     } catch (Exception e) {
                         LogUtil.d("bqt", "开通自动投标2" + e.getMessage());
                     }
                 } else if (response != null) {
-                    Toast.makeText(ctx, response.optString("message"), Toast.LENGTH_SHORT)
+                    Toast.makeText(context, response.optString("message"), Toast.LENGTH_SHORT)
                             .show();
                 }
             }

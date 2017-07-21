@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.bcb.R;
 import com.bcb.base.old.BaseActivity1;
+import com.bcb.constant.ProjectListType;
 import com.bcb.module.discover.financialproduct.adapter.MyFragmentPagerAdapter;
 import com.bcb.util.MyActivityManager;
 
@@ -47,16 +48,12 @@ public class InvestmentFinanceActivity extends BaseActivity1 implements View.OnC
     private void InitViewPager() {
         vp = (ViewPager) findViewById(R.id.vp);
         fragmentsList = new ArrayList<Fragment>();
-        fragmentsList.add(FinanceListFragment.newInstance(0));
-        fragmentsList.add(FinanceListFragment.newInstance(1));
-        fragmentsList.add(FinanceListFragment.newInstance(2));
-        // TODO: 2017/6/16 暂时隐藏周盈宝
+        fragmentsList.add(FinanceListFragment.newInstance(ProjectListType.MONTH));
+        fragmentsList.add(FinanceListFragment.newInstance(ProjectListType.DAY));
 
         vp.setAdapter(new MyFragmentPagerAdapter(getSupportFragmentManager(), fragmentsList));
         vp.setCurrentItem(0);
-        vp.setOffscreenPageLimit(3);
-//        vp.setOffscreenPageLimit(2);
-        // TODO: 2017/6/16 暂时隐藏周盈宝
+        vp.setOffscreenPageLimit(2);
         vp.addOnPageChangeListener(new MyOnPageChangeListener());
     }
 
@@ -66,11 +63,8 @@ public class InvestmentFinanceActivity extends BaseActivity1 implements View.OnC
             case R.id.tv_wyb:
                 vp.setCurrentItem(0);
                 break;
-            case R.id.tv_zxb:
-                vp.setCurrentItem(1);
-                break;
             case R.id.tv_zyb:
-                vp.setCurrentItem(2);
+                vp.setCurrentItem(1);
                 break;
             default:
                 break;
@@ -80,25 +74,21 @@ public class InvestmentFinanceActivity extends BaseActivity1 implements View.OnC
     /**
      * 设置横线的点击事件并获取横线的长度
      */
-    private TextView tvWYB, tvZXB, tvZYB;
+    private TextView tvWYB, tvZYB;
     private int currIndex = 0;
     private int position_one;
     private ImageView ivBottomLine;
 
     private void initUnderLine() {
         tvWYB = (TextView) findViewById(R.id.tv_wyb);
-        tvZXB = (TextView) findViewById(R.id.tv_zxb);
         tvZYB = (TextView) findViewById(R.id.tv_zyb);
         tvWYB.setOnClickListener(this);
-        tvZXB.setOnClickListener(this);
         tvZYB.setOnClickListener(this);
         ivBottomLine = (ImageView) findViewById(R.id.red);
         DisplayMetrics dmDisplayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dmDisplayMetrics);
         int screenW = dmDisplayMetrics.widthPixels;
-//        position_one = screenW / 2;
-        // TODO: 2017/6/30
-        position_one = screenW / 3;
+        position_one = screenW / 2;
     }
 
     public class MyOnPageChangeListener implements ViewPager.OnPageChangeListener {
@@ -125,10 +115,6 @@ public class InvestmentFinanceActivity extends BaseActivity1 implements View.OnC
                     break;
                 case 1:
                     setTextColor();
-                    tvZXB.setTextColor(Color.RED);
-                    break;
-                case 2:
-                    setTextColor();
                     tvZYB.setTextColor(Color.RED);
                     break;
             }
@@ -142,7 +128,6 @@ public class InvestmentFinanceActivity extends BaseActivity1 implements View.OnC
         //设置所有的字体颜色为灰色
         private void setTextColor() {
             tvWYB.setTextColor(Color.GRAY);
-            tvZXB.setTextColor(Color.GRAY);
             tvZYB.setTextColor(Color.GRAY);
         }
     }

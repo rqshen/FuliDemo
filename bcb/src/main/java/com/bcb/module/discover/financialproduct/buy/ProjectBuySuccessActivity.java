@@ -1,4 +1,4 @@
-package com.bcb.module.discover.financialproduct.normalproject.buy;
+package com.bcb.module.discover.financialproduct.buy;
 
 import android.content.Context;
 import android.content.Intent;

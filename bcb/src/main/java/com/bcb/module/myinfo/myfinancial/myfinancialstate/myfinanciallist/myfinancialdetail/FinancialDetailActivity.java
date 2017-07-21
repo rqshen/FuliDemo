@@ -15,7 +15,7 @@ import android.widget.Toast;
 import com.bcb.MyApplication;
 import com.bcb.R;
 import com.bcb.base.old.Activity_Base;
-import com.bcb.constant.ProjectListStatus;
+import com.bcb.constant.ProjectListType;
 import com.bcb.data.bean.ClaimConveyBean;
 import com.bcb.data.bean.Project_Investment_Details_Bean;
 import com.bcb.module.myinfo.myfinancial.myfinancialstate.myfinanciallist.myfinancialdetail.backpayment.BackPaymentActivity;
@@ -55,7 +55,7 @@ public class FinancialDetailActivity extends Activity_Base implements View.OnCli
     LinearLayout ll_id_number;
     private RelativeLayout rl_hk, rl_zr, tourl;
     private Button button;
-    int Status = ProjectListStatus.WYB;//0稳盈宝  1涨薪宝  2周盈宝
+    String Status = ProjectListType.MONTH;//0稳盈宝  1涨薪宝  2周盈宝
     private Project_Investment_Details_Bean bean;
 
     private TextView tv_backpayment;//回款计划说明
@@ -67,7 +67,7 @@ public class FinancialDetailActivity extends Activity_Base implements View.OnCli
      * @param OrderNo
      * @param Status
      */
-    public static void launche(Context context, String OrderNo, int Status) {
+    public static void launche(Context context, String OrderNo, String Status) {
         Intent intent = new Intent();
         intent.setClass(context, FinancialDetailActivity.class);
         intent.putExtra("OrderNo", OrderNo);
@@ -93,7 +93,7 @@ public class FinancialDetailActivity extends Activity_Base implements View.OnCli
         });
         (findViewById(back_img)).setVisibility(View.GONE);
         OrderNo = getIntent().getStringExtra("OrderNo");
-        Status = getIntent().getIntExtra("Status", 1);
+        Status = getIntent().getStringExtra("Status");
         initView();
         initData();
         loadData();
@@ -105,7 +105,7 @@ public class FinancialDetailActivity extends Activity_Base implements View.OnCli
      * 初始化数据
      */
     private void initData() {
-        if (Status == ProjectListStatus.ZYB) {//周盈宝回款计划
+        if (Status.equals(ProjectListType.DAY)) {//周盈宝回款计划
             tv_backpayment.setText("回款记录");
         } else {
             tv_backpayment.setText("回款计划");
@@ -144,14 +144,12 @@ public class FinancialDetailActivity extends Activity_Base implements View.OnCli
             e.printStackTrace();
         }
 
-        String url = UrlsOne.WYB_MyFinancial_XQ;
+        String url = UrlsOne.Month_MyFinancial_XQ;
 
-        if (Status == ProjectListStatus.WYB) {
-            url = UrlsOne.WYB_MyFinancial_XQ;
-        } else if (Status == ProjectListStatus.ZXB) {
-            url = UrlsOne.ZXB_MyFinancial_XQ;
-        } else if (Status == ProjectListStatus.ZYB) {
-            url = UrlsOne.ZYB_MyFinancial_XQ;
+        if (Status.equals(ProjectListType.MONTH)) {
+            url = UrlsOne.Month_MyFinancial_XQ;
+        } else if (Status.equals(ProjectListType.DAY)) {
+            url = UrlsOne.Day_MyFinancial_XQ;
         }
 
         BcbJsonRequest jsonRequest = new BcbJsonRequest(url, obj, TokenUtil.getEncodeToken(this), new
@@ -186,7 +184,8 @@ public class FinancialDetailActivity extends Activity_Base implements View.OnCli
                                     }
 
                                     //判断是稳盈宝还是涨薪宝，涨薪宝1没有退出选项
-                                    if (Status == 1) {//涨薪宝
+                                    // TODO: 2017/7/21
+                                    if (Status.equals(ProjectListType.DAY)) {//涨薪宝
                                         button.setVisibility(View.INVISIBLE);
                                         button.setClickable(false);
                                         button.setEnabled(false);
@@ -259,7 +258,7 @@ public class FinancialDetailActivity extends Activity_Base implements View.OnCli
                 Toast.makeText(this, "订单号已经复制到剪贴板", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.rl_hk://回款计划
-                if (Status == ProjectListStatus.ZYB) {//周盈宝无回款计划，跳转到特殊的页面
+                if (Status.equals(ProjectListType.DAY)) {//周盈宝无回款计划，跳转到特殊的页面
                     startActivity(ZYBBackPaymentActivity.newIntent(FinancialDetailActivity.this, bean, OrderNo));
                 } else {//稳盈宝和涨薪宝
                     Intent intent = new Intent(FinancialDetailActivity.this, BackPaymentActivity.class);
@@ -273,9 +272,10 @@ public class FinancialDetailActivity extends Activity_Base implements View.OnCli
                 Activity_Rading_Record.launche(this, OrderNo);
                 break;
             case R.id.button://申请退出
-                if (Status == ProjectListStatus.WYB || Status == ProjectListStatus.ZYB) {//稳盈宝
-                    showDialog();
-                }
+                // TODO: 2017/7/21
+//                if (Status == ProjectListStatus.MONTH || Status == ProjectListStatus.DAY) {//稳盈宝
+//                    showDialog();
+//                }
                 break;
         }
     }
@@ -287,7 +287,7 @@ public class FinancialDetailActivity extends Activity_Base implements View.OnCli
                     @Override
                     public void onSureClick(View v) {
                         super.onSureClick(v);
-                        if (Status == ProjectListStatus.WYB) {
+                        if (Status.equals(ProjectListType.MONTH)) {
                             requestZR(UrlsOne.WYB_MyFinancial_Exit);
                         } else {
                             requestZR(UrlsOne.ZYB_MyFinancial_Exit);

@@ -95,4 +95,6 @@
 
     <color name="fixed_point">#EEEEEE</color>
 
+    <color name="text_red">#ff4c4c</color>
+
 </resources>

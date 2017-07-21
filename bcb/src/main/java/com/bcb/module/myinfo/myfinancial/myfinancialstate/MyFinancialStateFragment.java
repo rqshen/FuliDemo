@@ -32,7 +32,7 @@ public class MyFinancialStateFragment extends BaseFragment1 implements View.OnCl
     public TextView yjsy;
     private ViewPager vp;
     private ArrayList<Fragment> fragmentsList;
-    private int Status;//	【 0稳赢，打包】【1涨薪宝，三标】
+    private String Status;//	【 0稳赢，打包】【1涨薪宝，三标】
     private static String EXTRA_STATUS = "status";
 
     //******************************************************************************************
@@ -40,9 +40,9 @@ public class MyFinancialStateFragment extends BaseFragment1 implements View.OnCl
     /**
      * 构造时把传入的参数带进来，
      */
-    public static MyFinancialStateFragment newInstance(int Status) {
+    public static MyFinancialStateFragment newInstance(String Status) {
         Bundle bundle = new Bundle();
-        bundle.putInt(EXTRA_STATUS, Status);
+        bundle.putString(EXTRA_STATUS, Status);
         MyFinancialStateFragment fragment = new MyFinancialStateFragment();
         fragment.setArguments(bundle);
         return fragment;
@@ -53,7 +53,7 @@ public class MyFinancialStateFragment extends BaseFragment1 implements View.OnCl
         super.onCreate(savedInstanceState);
         Bundle bundle = getArguments();
         if (bundle != null) {
-            Status = bundle.getInt(EXTRA_STATUS);
+            Status = bundle.getString(EXTRA_STATUS);
         }
     }
     //******************************************************************************************
