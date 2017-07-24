@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/background"
@@ -14,18 +13,17 @@
         android:gravity="center"
         android:text="2016年"
         android:textColor="#999"
-        android:textSize="12sp"/>
+        android:textSize="12sp" />
 
     <View
         android:id="@+id/v_top"
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="#e5e5e5"/>
+        android:background="#e5e5e5" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="120dp">
-
 
         <RelativeLayout
             android:id="@+id/left"
@@ -40,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:text="24"
                 android:textColor="#424954"
-                android:textSize="25sp"/>
+                android:textSize="25sp" />
 
             <TextView
                 android:id="@+id/month"
@@ -50,7 +48,7 @@
                 android:layout_marginTop="1dp"
                 android:text="12月"
                 android:textColor="#999"
-                android:textSize="13sp"/>
+                android:textSize="13sp" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -62,43 +60,45 @@
             android:layout_marginTop="24dp"
             android:layout_toRightOf="@+id/left"
             android:background="@color/white"
-            android:padding="15dp"
-            >
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:paddingTop="15dp">
 
             <TextView
-                android:id="@+id/je"
+                android:id="@+id/ztbj"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0.00"
                 android:textColor="#ff4c4c"
-                android:textSize="20sp"/>
+                android:textSize="20sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:text="订单金额(元)"
+                android:layout_below="@+id/ztbj"
+                android:layout_marginTop="15dp"
+                android:text="在投金额(元)"
                 android:textColor="#999"
-                android:textSize="12sp"/>
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/tzts"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="140dp"
-                android:text="0"
-                android:textColor="#424954"
-                android:textSize="20sp"/>
+                android:text="持有天数 12"
+                android:textColor="#666666"
+                android:textSize="15sp" />
 
             <TextView
-                android:id="@+id/ts"
+                android:id="@+id/je"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="140dp"
                 android:layout_alignParentBottom="true"
-                android:text="持有天数(天)"
-                android:textColor="#999"
-                android:textSize="12sp"/>
+                android:layout_marginLeft="140dp"
+                android:text="原订单金额：30000元"
+                android:textColor="#999999"
+                android:textSize="12sp" />
 
 
         </RelativeLayout>
@@ -117,7 +117,7 @@
             android:singleLine="true"
             android:text="2017-2-28可申请退出"
             android:textColor="#999"
-            android:textSize="10sp"/>
+            android:textSize="10sp" />
 
 
     </RelativeLayout>

@@ -1,4 +1,4 @@
-package com.bcb.module.myinfo.myfinancial.myfinancialstate.myfinanciallist.myfinancialdetail.backpayment.zyb.adapter;
+package com.bcb.module.myinfo.myfinancial.myfinancialstate.myfinanciallist.myfinancialdetail.backpayment.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -21,7 +21,7 @@ import butterknife.ButterKnife;
  * 类说明：
  */
 
-public class ZYBBackPaymentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class BackPaymentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
 
     private List<ZYBBackPaymentBean.RepaymentPlanBean> mZYBBackPaymentBean;
@@ -45,7 +45,7 @@ public class ZYBBackPaymentAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         return null;
     }
 
-    public ZYBBackPaymentAdapter(List<ZYBBackPaymentBean.RepaymentPlanBean> ZYBBackPaymentBean) {
+    public BackPaymentAdapter(List<ZYBBackPaymentBean.RepaymentPlanBean> ZYBBackPaymentBean) {
         mZYBBackPaymentBean = ZYBBackPaymentBean;
     }
 

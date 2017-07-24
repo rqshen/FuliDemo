@@ -1,188 +1,204 @@
 package com.bcb.module.myinfo.myfinancial.myfinancialstate.myfinanciallist.myfinancialdetail.backpayment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ListView;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.ActionBar;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.bcb.MyApplication;
 import com.bcb.R;
-import com.bcb.base.old.Activity_Base;
+import com.bcb.base.BaseActivity;
+import com.bcb.base.view.ToolbarView;
+import com.bcb.constant.ProjectListType;
 import com.bcb.data.bean.Project_Investment_Details_Bean;
-import com.bcb.util.MyActivityManager;
+import com.bcb.data.bean.ZYBBackPaymentBean;
+import com.bcb.module.myinfo.myfinancial.myfinancialstate.myfinanciallist.myfinancialdetail.backpayment.adapter.BackPaymentAdapter;
+import com.bcb.network.BcbJsonRequest;
+import com.bcb.network.BcbRequest;
+import com.bcb.network.UrlsOne;
+import com.bcb.util.DoubleFormatUtils;
+import com.bcb.util.LogUtil;
+import com.bcb.util.PackageUtil;
+import com.bcb.util.TokenUtil;
 
-import java.util.List;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-import static com.bcb.R.id.back_img;
+import butterknife.BindView;
 
 /**
  * Created by ruiqin.shen
- * 类说明：稳盈宝、涨薪宝 回款计划
+ * 类说明：回款记录
  */
-public class BackPaymentActivity extends Activity_Base {
-    private TextView have, left, tv_top;
-    private ListView mListView;
-    private List<Project_Investment_Details_Bean.Plar> mList;
-    private BaseAdapter mMyBaseAdapter;
-    private LinearLayout null_data_layout;
-    int Status = 1;
+public class BackPaymentActivity extends BaseActivity {
+
+    @BindView(R.id.toolbar_view)
+    ToolbarView mToolbarView;
+    private static final String EXTRA_DATA = "data";
+    private static final String EXTRA_ORDERNO = "orderNo";
+    private static final String EXTRA_PROJECTTYPE = "projectType";
+
+    Project_Investment_Details_Bean bean;
+    @BindView(R.id.donePrincipalInterest)
+    TextView mDonePrincipalInterest;
+    @BindView(R.id.prePrincipalInterest)
+    TextView mPrePrincipalInterest;
+    @BindView(R.id.repaymentAllPeriod)
+    TextView mRepaymentAllPeriod;
+    @BindView(R.id.repaymentHadPeriod)
+    TextView mRepaymentHadPeriod;
+    @BindView(R.id.zyb_backpayment_recyclerview)
+    RecyclerView mZybBackpaymentRecyclerview;
+    private String mOrderNo;
+    private String projectType;
+
+    public static Intent newIntent(Context context, Project_Investment_Details_Bean bean, String orderNo, String projectType) {
+        Intent intent = new Intent(context.getApplicationContext(), BackPaymentActivity.class);
+        intent.putExtra(EXTRA_DATA, bean);
+        intent.putExtra(EXTRA_ORDERNO, orderNo);
+        intent.putExtra(EXTRA_PROJECTTYPE, projectType);
+        return intent;
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        MyActivityManager myActivityManager = MyActivityManager.getInstance();
-        myActivityManager.pushOneActivity(BackPaymentActivity.this);
-        setBaseContentView(R.layout.activity_tz__cheques);
-        null_data_layout = (LinearLayout) findViewById(R.id.null_data_layout);
-        mListView = (ListView) findViewById(R.id.lv);
-        have = (TextView) findViewById(R.id.have);
-        left = (TextView) findViewById(R.id.left);
-        tv_top = (TextView) findViewById(R.id.tv_top);
-        Intent intent = getIntent();
-        if (intent != null) {
-            Project_Investment_Details_Bean bean = (Project_Investment_Details_Bean) intent.getSerializableExtra("data");
-            Status = getIntent().getIntExtra("Status", 1);
-            if (bean != null) {
-                //列表
-                mList = bean.RepaymentPlan;
-                if (mList != null && mList.size() > 0) {
-                    null_data_layout.setVisibility(View.GONE);
-                    mListView.setVisibility(View.VISIBLE);
-                    if (Status == 1) {
-                        tv_top.setVisibility(View.GONE);
-                        mListView.addHeaderView(LayoutInflater.from(this).inflate(R.layout.hk_head, null));
-                        mMyBaseAdapter = new MyBaseAdapter();
-                    } else {
-                        tv_top.setVisibility(View.VISIBLE);
-                        tv_top.setText("最长可持有" + bean.RepaymentAllPeriod + "，已收益" + bean.RepaymentHadPeriod);
-                        mListView.addHeaderView(LayoutInflater.from(this).inflate(R.layout.hk_head2, null));
-                        mMyBaseAdapter = new MyBaseAdapter2();
+    protected int getFragmentContentId() {
+        return 0;
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_bback_payment;
+    }
+
+    @Override
+    public void initView(Bundle savedInstanceState) {
+        initToolBar();
+        getIntentData();
+        initData();//初始化数据
+        loadZYBBackPaymentData();
+    }
+
+    private ZYBBackPaymentBean mZYBBackPaymentBean;
+
+    /**
+     * 请求周盈宝的
+     */
+    private void loadZYBBackPaymentData() {
+        JSONObject obj = new JSONObject();
+        try {
+            obj.put("OrderNo", mOrderNo);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        String url = UrlsOne.Day_BackPayment_List;
+        if (projectType.equals(ProjectListType.MONTH)) {
+            url = UrlsOne.Month_BackPayment_List;
+        }
+        BcbJsonRequest jsonRequest = new BcbJsonRequest(url, obj, TokenUtil.getEncodeToken(this), new BcbRequest.BcbCallBack<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                LogUtil.e("TAG", "【投资回款计划】" + response.toString());
+                try {
+                    boolean flag = PackageUtil.getRequestStatus(response, mContext);
+                    if (flag) {
+                        JSONObject obj = PackageUtil.getResultObject(response);
+                        if (obj != null) {
+                            mZYBBackPaymentBean = MyApplication.mGson.fromJson(obj.toString(), ZYBBackPaymentBean.class);
+                            mDonePrincipalInterest.setText(DoubleFormatUtils.format(mZYBBackPaymentBean.getDonePrincipalInterest()));
+                            mPrePrincipalInterest.setText(DoubleFormatUtils.format(mZYBBackPaymentBean.getPrePrincipalInterest()));
+                        }
+                        setZYBBackPaymentAdapter();
                     }
-                    mListView.setAdapter(mMyBaseAdapter);
-                    //已收本息，剩余本息
-                    have.setText(String.format("%.2f", bean.DonePrincipalInterest));
-                    left.setText(String.format("%.2f", bean.PrePrincipalInterest));
-//					float v_have = 0, v_left = 0;
-//					for (int i = 0; i < mList.size(); i++) {
-//						if (mList.get(i).Repayed == 1) v_have += (mList.get(i).Interest+mList.get(i).Principal);
-//						else v_left += (mList.get(i).Interest+mList.get(i).Principal);
-//					}
-//					have.setText(String.format("%.2f", v_have));//有个叫Repayed值来区分已还和待还的。
-//					left.setText(String.format("%.2f", v_left));
-                } else {
-                    null_data_layout.setVisibility(View.VISIBLE);
-                    mListView.setVisibility(View.GONE);
+                } catch (Exception e) {
+                    LogUtil.d("TAG", "" + e.getMessage());
                 }
             }
-        }
-        setLeftTitleVisible(true);
-        setTitleValue("回款计划");
-        layout_title.setBackgroundColor(getResources().getColor(R.color.red));
-        title_text.setTextColor(getResources().getColor(R.color.white));
-        dropdown.setImageResource(R.drawable.return_delault);
-        dropdown.setOnClickListener(new View.OnClickListener() {
+
             @Override
-            public void onClick(View v) {
-                finish();
+            public void onErrorResponse(Exception error) {
+
             }
         });
-        (findViewById(back_img)).setVisibility(View.GONE);
+        MyApplication.getInstance().getRequestQueue().add(jsonRequest);
+
     }
 
-    class MyBaseAdapter extends BaseAdapter {
-        private ViewHolder mViewHolder;
+    BackPaymentAdapter mBackPaymentAdapter;
 
-        @Override
-        public int getCount() {
-            return mList == null ? 0 : mList.size();
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return mList == null ? null : mList.get(position);
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-
-        @Override
-        public View getView(final int position, View convertView, ViewGroup parent) {
-            if (convertView != null) mViewHolder = (ViewHolder) convertView.getTag();
-            else {
-                convertView = LayoutInflater.from(BackPaymentActivity.this).inflate(R.layout.item_tz, null);
-                mViewHolder = new ViewHolder();
-                mViewHolder.tv_name = (TextView) convertView.findViewById(R.id.tv_name);
-                mViewHolder.tv_time = (TextView) convertView.findViewById(R.id.tv_time);
-                mViewHolder.tv_monery = (TextView) convertView.findViewById(R.id.tv_monery);
-                convertView.setTag(mViewHolder);
-            }
-            if (mList != null) {
-                Project_Investment_Details_Bean.Plar bean = mList.get(position);
-                //				mViewHolder.tv_name.setText("第" + bean.Period + "期\n" + new SimpleDateFormat("yyyy-MM-dd").format
-                // (bean.PayDate));
-                mViewHolder.tv_name.setText(bean.Description.replaceFirst("期", "期\n"));
-                mViewHolder.tv_time.setText(String.format("%.2f", bean.Principal));
-                mViewHolder.tv_monery.setText(String.format("%.2f", bean.Interest));
-            }
-            return convertView;
+    /**
+     * 设置适配器
+     */
+    private void setZYBBackPaymentAdapter() {
+        if (mBackPaymentAdapter == null) {
+            mBackPaymentAdapter = new BackPaymentAdapter(mZYBBackPaymentBean.getRepaymentPlan());
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
+            mZybBackpaymentRecyclerview.setLayoutManager(linearLayoutManager);
+            mZybBackpaymentRecyclerview.setAdapter(mBackPaymentAdapter);
+        } else {
+            mBackPaymentAdapter.notifyDataSetChanged();
         }
     }
 
-    class MyBaseAdapter2 extends BaseAdapter {
-        private ViewHolder mViewHolder;
+    /**
+     * 初始化数据
+     */
+    private void initData() {
+        mRepaymentAllPeriod.setText(bean.RepaymentAllPeriod);
+        mRepaymentHadPeriod.setText(bean.RepaymentHadPeriod);
+    }
 
-        @Override
-        public int getCount() {
-            return mList == null ? 0 : mList.size();
-        }
 
-        @Override
-        public Object getItem(int position) {
-            return mList == null ? null : mList.get(position);
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
-
-        @Override
-        public View getView(final int position, View convertView, ViewGroup parent) {
-            if (convertView != null) mViewHolder = (ViewHolder) convertView.getTag();
-            else {
-                convertView = LayoutInflater.from(BackPaymentActivity.this).inflate(R.layout.item_tz2, null);
-                mViewHolder = new ViewHolder();
-                mViewHolder.tv_name = (TextView) convertView.findViewById(R.id.tv_name);
-                mViewHolder.tv_time = (TextView) convertView.findViewById(R.id.tv_time);
-                mViewHolder.tv_monery = (TextView) convertView.findViewById(R.id.tv_monery);
-                mViewHolder.iv_s = (ImageView) convertView.findViewById(R.id.iv_s);
-                convertView.setTag(mViewHolder);
-            }
-            if (mList != null) {
-                Project_Investment_Details_Bean.Plar bean = mList.get(position);
-                //				mViewHolder.tv_name.setText("第" + bean.Period + "期\n" + new SimpleDateFormat("yyyy-MM-dd").format
-                // (bean.PayDate));
-                mViewHolder.tv_name.setText(bean.Description.replaceFirst("期", "期\n"));
-                mViewHolder.tv_time.setText(String.format("%.2f", bean.Principal));
-                mViewHolder.tv_monery.setText(String.format("%.2f", bean.Interest));
-                if (bean.Repayed == 1) mViewHolder.iv_s.setImageResource(R.drawable.hk_ok);
-                else mViewHolder.iv_s.setImageResource(R.drawable.hk_no);
-            }
-            return convertView;
+    /**
+     * 从Intent中获取数据
+     */
+    private void getIntentData() {
+        Intent intent = getIntent();
+        if (intent != null) {
+            bean = (Project_Investment_Details_Bean) intent.getSerializableExtra(EXTRA_DATA);
+            mOrderNo = intent.getStringExtra(EXTRA_ORDERNO);
+            projectType = intent.getStringExtra(EXTRA_PROJECTTYPE);
         }
     }
 
-    class ViewHolder {
-        public TextView tv_name;
-        public TextView tv_time;
-        public TextView tv_monery;
-        public ImageView iv_s;
+    /**
+     * 初始化标题栏
+     */
+    private void initToolBar() {
+        Toolbar toolBar = mToolbarView.getToolBar();
+        toolBar.setTitle("");
+        setSupportActionBar(toolBar);
+
+        //获取actionBar
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeAsUpIndicator(R.drawable.return_delault);
+            toolBar.setBackground(ContextCompat.getDrawable(mContext, R.color.red));
+        }
+        mToolbarView.setToolBarTitle("回款记录");
+        mToolbarView.setToolBarTitleColor(mContext, R.color.white);
+    }
+
+    /**
+     * ToolBar的点击事件
+     *
+     * @param item
+     * @return
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return true;
     }
 }

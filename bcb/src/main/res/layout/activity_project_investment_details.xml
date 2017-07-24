@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -31,7 +30,7 @@
                     android:layout_height="wrap_content"
                     android:text="订单金额(元)"
                     android:textColor="@color/white"
-                    android:textSize="13sp"/>
+                    android:textSize="13sp" />
 
                 <TextView
                     android:id="@+id/top_amount"
@@ -42,13 +41,12 @@
                     android:singleLine="true"
                     android:text="0.00"
                     android:textColor="@color/white"
-                    android:textSize="20sp"/>
+                    android:textSize="20sp" />
             </LinearLayout>
 
             <View
                 android:layout_width="1px"
-                android:layout_height="match_parent"
-                />
+                android:layout_height="match_parent" />
 
             <!-- 累计收益 -->
             <LinearLayout
@@ -63,7 +61,7 @@
                     android:layout_height="wrap_content"
                     android:text="应计收益(元)"
                     android:textColor="@color/white"
-                    android:textSize="13sp"/>
+                    android:textSize="13sp" />
 
                 <TextView
                     android:id="@+id/earning_expected"
@@ -73,7 +71,7 @@
                     android:singleLine="true"
                     android:text="0.00"
                     android:textColor="@color/white"
-                    android:textSize="20sp"/>
+                    android:textSize="20sp" />
             </LinearLayout>
 
         </LinearLayout>
@@ -106,7 +104,7 @@
                         android:layout_height="wrap_content"
                         android:text="订单号"
                         android:textColor="#666"
-                        android:textSize="@dimen/main_text_default"/>
+                        android:textSize="@dimen/main_text_default" />
 
                     <TextView
                         android:id="@+id/tv_id_number"
@@ -115,13 +113,13 @@
                         android:layout_marginLeft="20dp"
                         android:gravity="right"
                         android:textColor="#666"
-                        android:textSize="@dimen/main_text_default"/>
+                        android:textSize="@dimen/main_text_default" />
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1px"
-                    android:background="@color/linegray"/>
+                    android:background="@color/linegray" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -134,7 +132,7 @@
                         android:layout_height="wrap_content"
                         android:text="年化收益"
                         android:textColor="#666"
-                        android:textSize="@dimen/main_text_default"/>
+                        android:textSize="@dimen/main_text_default" />
 
                     <TextView
                         android:id="@+id/annual_yield"
@@ -143,7 +141,7 @@
                         android:layout_marginLeft="20dp"
                         android:gravity="right"
                         android:textColor="#666"
-                        android:textSize="@dimen/main_text_default"/>
+                        android:textSize="@dimen/main_text_default" />
 
 
                 </LinearLayout>
@@ -151,7 +149,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1px"
-                    android:background="@color/linegray"/>
+                    android:background="@color/linegray" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -164,7 +162,7 @@
                         android:layout_height="wrap_content"
                         android:text="起息时间"
                         android:textColor="#666"
-                        android:textSize="@dimen/main_text_default"/>
+                        android:textSize="@dimen/main_text_default" />
 
                     <TextView
                         android:id="@+id/earningtime"
@@ -173,13 +171,13 @@
                         android:layout_marginLeft="20dp"
                         android:gravity="right"
                         android:textColor="#666"
-                        android:textSize="@dimen/main_text_default"/>
+                        android:textSize="@dimen/main_text_default" />
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1px"
-                    android:background="@color/linegray"/>
+                    android:background="@color/linegray" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -192,7 +190,7 @@
                         android:layout_height="wrap_content"
                         android:text="锁定期限"
                         android:textColor="#666"
-                        android:textSize="@dimen/main_text_default"/>
+                        android:textSize="@dimen/main_text_default" />
 
                     <TextView
                         android:id="@+id/earnings_end"
@@ -201,13 +199,13 @@
                         android:layout_marginLeft="20dp"
                         android:gravity="right"
                         android:textColor="#666"
-                        android:textSize="@dimen/main_text_default"/>
+                        android:textSize="@dimen/main_text_default" />
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1px"
-                    android:background="@color/linegray"/>
+                    android:background="@color/linegray" />
 
                 <RelativeLayout
                     android:id="@+id/tourl"
@@ -220,20 +218,20 @@
                         android:layout_height="wrap_content"
                         android:text="项目详情"
                         android:textColor="#666"
-                        android:textSize="@dimen/main_text_default"/>
+                        android:textSize="@dimen/main_text_default" />
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
-                        android:src="@drawable/forward_default"/>
+                        android:src="@drawable/forward_default" />
                 </RelativeLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1px"
-                    android:background="@color/linegray"/>
+                    android:background="@color/linegray" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -247,7 +245,7 @@
                         android:layout_height="wrap_content"
                         android:text="剩余本息"
                         android:textColor="#666"
-                        android:textSize="@dimen/main_text_default"/>
+                        android:textSize="@dimen/main_text_default" />
 
                     <TextView
                         android:id="@+id/left"
@@ -256,7 +254,7 @@
                         android:layout_marginLeft="20dp"
                         android:gravity="right"
                         android:textColor="#666"
-                        android:textSize="@dimen/main_text_default"/>
+                        android:textSize="@dimen/main_text_default" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -264,15 +262,16 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
-                android:background="@color/background"/>
+                android:background="@color/background" />
 
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:layout_marginLeft="5dp"
-                android:background="@color/linegray"/>
+                android:background="@color/linegray" />
 
+            <!--回款计划-->
             <RelativeLayout
                 android:id="@+id/rl_hk"
                 android:layout_width="match_parent"
@@ -286,7 +285,7 @@
                     android:layout_marginLeft="5dp"
                     android:text="回款计划"
                     android:textColor="#666"
-                    android:textSize="@dimen/main_text_default"/>
+                    android:textSize="@dimen/main_text_default" />
 
                 <ImageView
                     android:id="@+id/iv_right_hk"
@@ -295,45 +294,13 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="5dp"
-                    android:src="@drawable/forward_default"/>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@+id/iv_right_hk"
-                    android:orientation="horizontal"
-                    android:visibility="gone">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="已还本息  "
-                        android:textColor="#666"
-                        android:textSize="@dimen/main_text_default"/>
-
-                    <TextView
-                        android:id="@+id/have"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="right"
-                        android:text="0.00"
-                        android:textColor="#666"
-                        android:textSize="@dimen/main_text_default"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=" 元  "
-                        android:textColor="#666"
-                        android:textSize="@dimen/main_text_default"/>
-                </LinearLayout>
+                    android:src="@drawable/forward_default" />
             </RelativeLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
-                android:background="@color/background"/>
+                android:background="@color/background" />
 
             <RelativeLayout
                 android:id="@+id/rl_zr"
@@ -348,14 +315,14 @@
                     android:layout_marginLeft="5dp"
                     android:text="转让记录"
                     android:textColor="#666"
-                    android:textSize="@dimen/main_text_default"/>
+                    android:textSize="@dimen/main_text_default" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/forward_default"/>
+                    android:src="@drawable/forward_default" />
 
             </RelativeLayout>
 
@@ -376,7 +343,7 @@
                 android:layout_marginTop="10dp"
                 android:text=""
                 android:textColor="@color/red"
-                android:textSize="16sp"/>
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/state_below"
@@ -388,7 +355,7 @@
                 android:layout_marginTop="5dp"
                 android:text=""
                 android:textColor="#666"
-                android:textSize="13sp"/>
+                android:textSize="13sp" />
 
             <Button
                 android:id="@+id/button"
@@ -403,7 +370,7 @@
                 android:text="申请退出"
                 android:textColor="#999"
                 android:textSize="16sp"
-                android:visibility="invisible"/>
+                android:visibility="invisible" />
         </RelativeLayout>
 
 

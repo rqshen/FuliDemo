@@ -54,7 +54,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="人人买房福利"
-                            android:textColor="@color/txt_black"
+                            android:textColor="@color/text_black"
                             android:textSize="@dimen/main_text_large"/>
                         <TextView
                             android:layout_width="wrap_content"
@@ -248,7 +248,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="乐享生活福利"
-                            android:textColor="@color/txt_black"
+                            android:textColor="@color/text_black"
                             android:textSize="@dimen/main_text_large"/>
                         <TextView
                             android:layout_width="wrap_content"
@@ -443,7 +443,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="及时雨福利"
-                            android:textColor="@color/txt_black"
+                            android:textColor="@color/text_black"
                             android:textSize="@dimen/main_text_large"/>
                         <TextView
                             android:layout_width="wrap_content"

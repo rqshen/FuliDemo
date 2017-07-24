@@ -267,7 +267,7 @@ public class Activity_Recharge_Second extends Activity_Base implements View.OnCl
 				if (!TextUtils.isEmpty(tip)){
 					recharge_button.setClickable(true);
 					recharge_button.setBackgroundResource(R.drawable.button_red_selector);
-					recharge_tips.setTextColor(getResources().getColor(R.color.txt_black));
+					recharge_tips.setTextColor(getResources().getColor(R.color.text_black));
 				} else {
 					recharge_button.setClickable(false);
 					recharge_button.setBackgroundResource(R.drawable.button_gray_change);

@@ -34,7 +34,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/recharge_margin_left"
                         android:text="@string/recharge_text1"
-                        android:textColor="@color/txt_black"
+                        android:textColor="@color/text_black"
                         android:textSize="@dimen/main_text_default" />
                 </LinearLayout>
 
@@ -71,7 +71,7 @@
                         android:hint="@string/recharge_text3"
                         android:paddingLeft="10dip"
                         android:text=""
-                        android:textColor="@color/txt_black"
+                        android:textColor="@color/text_black"
                         android:textSize="@dimen/main_text_default" />
                 </LinearLayout>
 
@@ -102,7 +102,7 @@
                         android:hint="@string/recharge_text5"
                         android:paddingLeft="10dip"
                         android:text=""
-                        android:textColor="@color/txt_black"
+                        android:textColor="@color/text_black"
                         android:textSize="@dimen/main_text_default" />
                 </LinearLayout>
             </LinearLayout>
@@ -126,7 +126,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/recharge_margin_left"
                         android:text="@string/recharge_text6"
-                        android:textColor="@color/txt_black"
+                        android:textColor="@color/text_black"
                         android:textSize="@dimen/main_text_default" />
                 </LinearLayout>
 
@@ -187,7 +187,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="2dip"
                                 android:layout_toRightOf="@+id/bank_icon"
-                                android:textColor="@color/txt_black"
+                                android:textColor="@color/text_black"
                                 android:textSize="14sp" />
 
                             <TextView
@@ -237,7 +237,7 @@
                         android:hint="@string/recharge_text10"
                         android:paddingLeft="10dip"
                         android:text=""
-                        android:textColor="@color/txt_black"
+                        android:textColor="@color/text_black"
                         android:textSize="@dimen/main_text_default" />
                 </LinearLayout>
 
@@ -268,7 +268,7 @@
                         android:inputType="phone"
                         android:paddingLeft="10dip"
                         android:text=""
-                        android:textColor="@color/txt_black"
+                        android:textColor="@color/text_black"
                         android:textSize="@dimen/main_text_default" />
                 </LinearLayout>
 
@@ -321,7 +321,7 @@
                             android:paddingLeft="10dip"
                             android:singleLine="true"
                             android:text=""
-                            android:textColor="@color/txt_black"
+                            android:textColor="@color/text_black"
                             android:textSize="@dimen/main_text_default" />
 
                     </RelativeLayout>

@@ -31,12 +31,9 @@ public class MyFinancialActivity extends FragmentActivity {
     FrameLayout container;
     @BindView(R.id.wyb)
     TextView wyb;
-    @BindView(R.id.zxb)
-    TextView zxb;
     @BindView(R.id.tv_zyb)
     TextView tvZyb;
     MyFinancialStateFragment wyb_f;//稳盈宝
-    MyFinancialStateFragment zxb_f;//涨薪宝
     MyFinancialStateFragment zyb_f;//周盈宝
 
     @Override
@@ -48,7 +45,7 @@ public class MyFinancialActivity extends FragmentActivity {
         changeColorAndShowPage(0);
     }
 
-    @OnClick({R.id.iv_left, R.id.wyb, R.id.zxb, R.id.tv_zyb})
+    @OnClick({R.id.iv_left, R.id.wyb, R.id.tv_zyb})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_left:
@@ -57,11 +54,8 @@ public class MyFinancialActivity extends FragmentActivity {
             case R.id.wyb://稳赢宝
                 changeColorAndShowPage(0);
                 break;
-            case R.id.zxb://涨薪宝
-                changeColorAndShowPage(1);
-                break;
             case R.id.tv_zyb://周盈宝
-                changeColorAndShowPage(2);
+                changeColorAndShowPage(1);
                 break;
         }
     }
@@ -89,13 +83,6 @@ public class MyFinancialActivity extends FragmentActivity {
                 }
                 break;
             case 1:
-                zxb.setTextColor(ContextCompat.getColor(this, R.color.white));
-                zxb.setBackground(null);
-                if (zxb_f != null && !zxb_f.isHidden()) {
-                    getSupportFragmentManager().beginTransaction().hide(zxb_f).commit();
-                }
-                break;
-            case 2:
                 tvZyb.setTextColor(ContextCompat.getColor(this, R.color.white));
                 tvZyb.setBackground(null);
                 if (zyb_f != null && !zyb_f.isHidden()) {
@@ -120,7 +107,7 @@ public class MyFinancialActivity extends FragmentActivity {
                     getSupportFragmentManager().beginTransaction().show(wyb_f).commit();
                 }
                 break;
-            case 2://周盈宝选中
+            case 1://周盈宝选中
                 tvZyb.setTextColor(ContextCompat.getColor(this, R.color.red));
                 tvZyb.setBackground(ContextCompat.getDrawable(this, R.drawable.stroke_r));
                 if (zyb_f == null) {

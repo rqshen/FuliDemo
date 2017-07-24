@@ -15,7 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dip"
-            android:textColor="@color/txt_black"
+            android:textColor="@color/text_black"
             android:textSize="@dimen/main_text_default"
             android:text="原密码:"/>
         <LinearLayout
@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dip"
             android:layout_marginLeft="15dip"
-            android:textColor="@color/txt_black"
+            android:textColor="@color/text_black"
             android:textSize="@dimen/main_text_default"
             android:text="新密码:"/>
         <LinearLayout

@@ -495,7 +495,6 @@
 
         <activity android:name=".presentation.view.activity.A_AboutSlb" />
         <activity android:name=".presentation.view.activity.A_Slb_List" />
-        <activity android:name=".module.myinfo.myfinancial.myfinancialstate.myfinanciallist.myfinancialdetail.backpayment.BackPaymentActivity" />
         <activity android:name=".presentation.view.activity.Activity_Charge_Tips" />
         <activity android:name=".presentation.view.activity.Activity_Trading_Cancle" />
         <activity android:name=".presentation.view.activity._Trading_change" />
@@ -508,7 +507,7 @@
         <activity android:name=".module.discover.financialproduct.buy.ProjectBuySuccessActivity"></activity>
         <activity android:name=".module.discover.financialproduct.buy.ProjectBuyFailActivity"></activity>
         <activity android:name=".module.myinfo.balance.withdraw.WithdrawSuccessActivity"></activity>
-        <activity android:name=".module.myinfo.myfinancial.myfinancialstate.myfinanciallist.myfinancialdetail.backpayment.zyb.ZYBBackPaymentActivity"></activity>
+        <activity android:name=".module.myinfo.myfinancial.myfinancialstate.myfinanciallist.myfinancialdetail.backpayment.BackPaymentActivity"></activity>
         <activity android:name=".module.myinfo.balance.withdraw.WithdrawDescriptionActivity"></activity>
         <activity android:name=".module.discover.financialproduct.monthproject.MonthProgramIntroductionActivity"></activity>
     </application>

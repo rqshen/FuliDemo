@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -24,8 +23,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="18dip"
                 android:text="可投金额 ￥"
-                android:textColor="@color/txt_black"
-                android:textSize="14sp"/>
+                android:textColor="@color/text_black"
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/more_value"
@@ -34,8 +33,8 @@
                 android:layout_toRightOf="@+id/tv_1"
                 android:minWidth="20dp"
                 android:text="0.00"
-                android:textColor="@color/txt_black"
-                android:textSize="14sp"/>
+                android:textColor="@color/text_black"
+                android:textSize="14sp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -45,7 +44,7 @@
                 android:text="(不能申购本人持有债权，可投金额变小)"
                 android:textColor="@color/txt_gray"
                 android:textSize="12sp"
-                android:visibility="gone"/>
+                android:visibility="gone" />
 
             <ImageView
                 android:id="@+id/iv_tips"
@@ -54,7 +53,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="18dp"
                 android:src="@drawable/tips_about"
-                android:visibility="gone"/>
+                android:visibility="gone" />
 
         </RelativeLayout>
         <!-- 账户余额 -->
@@ -79,7 +78,7 @@
                     android:layout_height="wrap_content"
                     android:text="去充值"
                     android:textColor="@color/txt_gray"
-                    android:textSize="14sp"/>
+                    android:textSize="14sp" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -88,7 +87,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="18dp"
-                    android:src="@drawable/forward_default"/>
+                    android:src="@drawable/forward_default" />
             </LinearLayout>
 
 
@@ -97,7 +96,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="1px"
                 android:layout_alignParentBottom="true"
-                android:background="@color/linegray"/>
+                android:background="@color/linegray" />
 
             <LinearLayout
                 android:id="@+id/layout_recharge"
@@ -113,8 +112,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="18dip"
                     android:text="账户余额 ￥"
-                    android:textColor="@color/txt_black"
-                    android:textSize="14sp"/>
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/wallet_money"
@@ -122,15 +121,15 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="85dip"
                     android:text="0.00"
-                    android:textColor="@color/txt_black"
-                    android:textSize="14sp"/>
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
             </LinearLayout>
         </RelativeLayout>
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="1dip"
-            android:background="@color/linegray"/>
+            android:background="@color/linegray" />
         <!-- 投资金额 -->
         <RelativeLayout
             android:id="@+id/ll_investment_amount"
@@ -150,7 +149,7 @@
                 android:gravity="center"
                 android:text="余额全投"
                 android:textColor="@drawable/all_selector"
-                android:textSize="12sp"/>
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/tv_tz"
@@ -160,8 +159,8 @@
                 android:gravity="center_vertical"
                 android:singleLine="true"
                 android:text="投资金额"
-                android:textColor="@color/txt_black"
-                android:textSize="@dimen/main_text_default"/>
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/main_text_default" />
 
             <TextView
                 android:id="@+id/tv_yuan"
@@ -172,8 +171,8 @@
                 android:layout_marginTop="20dp"
                 android:singleLine="true"
                 android:text="￥ "
-                android:textColor="@color/txt_black"
-                android:textSize="20sp"/>
+                android:textColor="@color/text_black"
+                android:textSize="20sp" />
 
             <EditText
                 android:id="@+id/invest_money"
@@ -184,13 +183,13 @@
                 android:layout_toRightOf="@+id/tv_yuan"
                 android:background="@null"
                 android:digits="0123456789."
-                android:hint="100元起投"
+                android:hint="0.0元起投"
                 android:inputType="numberDecimal"
                 android:maxLength="9"
                 android:singleLine="true"
-                android:textColor="@color/txt_black"
+                android:textColor="@color/text_black"
                 android:textColorHint="@color/txt_gray"
-                android:textSize="20sp"/>
+                android:textSize="20sp" />
         </RelativeLayout>
 
 
@@ -201,8 +200,7 @@
             android:layout_height="50dp"
             android:layout_gravity="center_vertical"
             android:gravity="center_vertical"
-            android:visibility="gone"
-            >
+            android:visibility="gone">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -215,8 +213,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="18dip"
                     android:text="优惠券金额"
-                    android:textColor="@color/txt_black"
-                    android:textSize="@dimen/main_text_default"/>
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/main_text_default" />
 
                 <TextView
                     android:id="@+id/coupon_momey"
@@ -226,7 +224,7 @@
                     android:layout_weight="1"
                     android:text="￥0"
                     android:textColor="@color/txt_gray"
-                    android:textSize="@dimen/main_text_default"/>
+                    android:textSize="@dimen/main_text_default" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -235,8 +233,8 @@
                     android:layout_centerVertical="true"
                     android:layout_marginRight="18sp"
                     android:text="元"
-                    android:textColor="@color/txt_black"
-                    android:textSize="@dimen/main_text_default"/>
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/main_text_default" />
             </LinearLayout>
         </RelativeLayout>
 
@@ -247,15 +245,14 @@
         android:layout_width="match_parent"
         android:layout_height="35dp"
         android:background="@color/background_gray2"
-        android:paddingLeft="18dip"
-        >
+        android:paddingLeft="18dip">
 
         <ImageView
             android:id="@+id/iv_left"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:src="@drawable/icon_income"/>
+            android:src="@drawable/icon_income" />
 
         <TextView
             android:id="@+id/earnings_description"
@@ -266,7 +263,7 @@
             android:layout_toRightOf="@+id/iv_left"
             android:text="预期收益"
             android:textColor="@color/txt_gray"
-            android:textSize="13sp"/>
+            android:textSize="13sp" />
 
         <TextView
             android:id="@+id/prospective_earning"
@@ -279,7 +276,7 @@
             android:singleLine="true"
             android:text="0.00"
             android:textColor="@color/red"
-            android:textSize="13sp"/>
+            android:textSize="13sp" />
 
         <TextView
             android:id="@+id/prospective_earning_yuan"
@@ -291,14 +288,14 @@
             android:singleLine="true"
             android:text=" 元"
             android:textColor="@color/txt_gray"
-            android:textSize="13sp"/>
+            android:textSize="13sp" />
 
     </RelativeLayout>
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="@color/linegray"/>
+        android:background="@color/linegray" />
     <!-- 优惠券 -->
     <RelativeLayout
         android:id="@+id/layout_coupon"
@@ -320,8 +317,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="18dip"
                 android:text="使用奖励"
-                android:textColor="@color/txt_black"
-                android:textSize="@dimen/main_text_default"/>
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/main_text_default" />
 
             <TextView
                 android:id="@+id/coupon_description"
@@ -330,8 +327,8 @@
                 android:layout_marginRight="31dip"
                 android:gravity="right"
                 android:text="暂无可用券"
-                android:textColor="@color/txt_black"
-                android:textSize="@dimen/main_text_default"/>
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/main_text_default" />
         </LinearLayout>
 
 
@@ -342,7 +339,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="18dp"
-            android:src="@drawable/forward_default"/>
+            android:src="@drawable/forward_default" />
     </RelativeLayout>
 
     <!--立即申购、文字提示-->
@@ -366,18 +363,18 @@
             android:paddingTop="0dip"
             android:text="立即申购"
             android:textColor="#999"
-            android:textSize="@dimen/main_text_default"/>
+            android:textSize="@dimen/main_text_default" />
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="10dp"/>
+            android:layout_height="10dp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="福利金融将从您的每笔投资收益里扣除10%的平台服务费"
-            android:textSize="12sp"/>
+            android:textSize="12sp" />
 
         <!-- 出错提示 -->
         <TextView
@@ -391,16 +388,15 @@
             android:gravity="center_horizontal"
             android:text=""
             android:textColor="@color/red"
-            android:textSize="16sp"/>
+            android:textSize="16sp" />
     </LinearLayout>
 
 
     <View
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1" />
 
-    <include
-        layout="@layout/com_funds_trusteeship_tip"/>
+    <include layout="@layout/com_funds_trusteeship_tip" />
 </LinearLayout>
 

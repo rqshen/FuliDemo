@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:orientation="vertical">
 
     <View
         android:layout_width="match_parent"
@@ -13,7 +14,6 @@
         android:id="@+id/ll_viewpager"
         android:layout_width="match_parent"
         android:layout_height="36dp"
-        android:layout_alignParentTop="true"
         android:orientation="horizontal">
 
         <TextView
@@ -40,12 +40,10 @@
 
     </LinearLayout>
     <!-- 标签底部指示图片 -->
-
     <LinearLayout
         android:id="@+id/ll_cursor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/ll_viewpager"
         android:orientation="vertical">
 
         <LinearLayout
@@ -73,6 +71,30 @@
             android:background="@color/linegray" />
     </LinearLayout>
 
+    <!--文字描述-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:background="@color/linegray"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_financelist_desc" />
+
+        <Space
+            android:layout_width="9dp"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="资产类型：信用优良用户中长期借款 权威保障 稳定收入"
+            android:textColor="@color/text_black5"
+            android:textSize="11dp" />
+    </LinearLayout>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/vp"
@@ -80,4 +102,5 @@
         android:layout_height="match_parent"
         android:layout_below="@id/ll_cursor" />
 
-</RelativeLayout>
+
+</LinearLayout>

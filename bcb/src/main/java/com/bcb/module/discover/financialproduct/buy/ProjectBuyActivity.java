@@ -159,6 +159,8 @@ public class ProjectBuyActivity extends Activity_Base implements View.OnClickLis
         //投资金额
         invest_money = (EditText) findViewById(R.id.invest_money);
 
+        invest_money.setHint(mSimpleProjectDetail.StartingAmount + "元起投");
+
         //设置光标的位置，添加输入监听器
         invest_money.addTextChangedListener(this);
         invest_money.setSelection(invest_money.getText().length());
@@ -370,13 +372,10 @@ public class ProjectBuyActivity extends Activity_Base implements View.OnClickLis
             @Override
             public void onErrorResponse(Exception error) {
                 LogUtil.d("bqt", "【获取打包项目可投余额】" + error.toString());
-                Toast.makeText(ProjectBuyActivity.this, error.toString(), Toast.LENGTH_SHORT)
-                        .show();
+                Toast.makeText(ProjectBuyActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
             }
         });
-        MyApplication.getInstance()
-                .getRequestQueue()
-                .add(jsonRequest);
+        MyApplication.getInstance().getRequestQueue().add(jsonRequest);
     }
 
     //*********************************************************** 点击购买按钮 ******************************************
@@ -454,8 +453,8 @@ public class ProjectBuyActivity extends Activity_Base implements View.OnClickLis
             //不做处理，即可以正常购买
         }
 
-        //打包标时，超出自己可投的金额
-        if (type.equals(ProjectListType.MONTH) && inputMoney > (float) amount) {
+        //超出自己可投的金额
+        if (inputMoney > (float) amount) {
             Toast.makeText(this, "购买金额不能大于可投金额", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -543,9 +542,7 @@ public class ProjectBuyActivity extends Activity_Base implements View.OnClickLis
                         .show();
             }
         });
-        MyApplication.getInstance()
-                .getRequestQueue()
-                .add(jsonRequest);
+        MyApplication.getInstance().getRequestQueue().add(jsonRequest);
     }
 
     //***********************************************转圈提示**************************************

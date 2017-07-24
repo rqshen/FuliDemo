@@ -46,7 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="活动奖励"
-            android:textColor="@color/txt_black"
+            android:textColor="@color/text_black"
             android:textSize="15sp"/>
 
         <Space

@@ -83,7 +83,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dip"
                             android:text="申请福利借款"
-                            android:textColor="@color/txt_black"
+                            android:textColor="@color/text_black"
                             android:textSize="@dimen/main_text_default"/>
                     </LinearLayout>
 
@@ -110,7 +110,7 @@
                             android:layout_marginTop="10dip"
                             android:gravity="center"
                             android:text="领取公司红包"
-                            android:textColor="@color/txt_black"
+                            android:textColor="@color/text_black"
                             android:textSize="@dimen/main_text_default"/>
                     </LinearLayout>
 
@@ -135,7 +135,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dip"
                             android:text="点亮加V"
-                            android:textColor="@color/txt_black"
+                            android:textColor="@color/text_black"
                             android:textSize="@dimen/main_text_default"/>
                     </LinearLayout>
                 </RelativeLayout>
@@ -149,7 +149,7 @@
                 android:layout_marginRight="10dip"
                 android:gravity="center_vertical"
                 android:text="公司信息"
-                android:textColor="@color/txt_black"
+                android:textColor="@color/text_black"
                 android:textSize="@dimen/main_text_default"/>
             <!-- 公司全称 -->
             <LinearLayout
@@ -164,7 +164,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dip"
                     android:text="公司全称"
-                    android:textColor="@color/txt_black"
+                    android:textColor="@color/text_black"
                     android:textSize="@dimen/main_text_default"/>
 
                 <EditText
@@ -175,7 +175,7 @@
                     android:background="@null"
                     android:hint="请填写公司全称"
                     android:singleLine="true"
-                    android:textColor="@color/txt_black"
+                    android:textColor="@color/text_black"
                     android:textSize="@dimen/main_text_default"/>
 
             </LinearLayout>
@@ -198,7 +198,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dip"
                     android:text="公司简称"
-                    android:textColor="@color/txt_black"
+                    android:textColor="@color/text_black"
                     android:textSize="@dimen/main_text_default"/>
 
                 <EditText
@@ -209,7 +209,7 @@
                     android:background="@null"
                     android:hint="请填写公司简称"
                     android:singleLine="true"
-                    android:textColor="@color/txt_black"
+                    android:textColor="@color/text_black"
                     android:textSize="@dimen/main_text_default"/>
             </LinearLayout>
 
@@ -231,7 +231,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="10dip"
                     android:text="公司官网"
-                    android:textColor="@color/txt_black"
+                    android:textColor="@color/text_black"
                     android:textSize="@dimen/main_text_default"/>
 
                 <EditText
@@ -242,7 +242,7 @@
                     android:background="@null"
                     android:hint="请填写公司官网地址"
                     android:singleLine="true"
-                    android:textColor="@color/txt_black"
+                    android:textColor="@color/text_black"
                     android:textSize="@dimen/main_text_default"/>
             </LinearLayout>
 
@@ -332,7 +332,7 @@
                     android:layout_marginBottom="20dip"
                     android:layout_marginTop="10dip"
                     android:text="上传材料图片"
-                    android:textColor="@color/txt_black"
+                    android:textColor="@color/text_black"
                     android:textSize="@dimen/main_text_small"/>
             </LinearLayout>
         </LinearLayout>

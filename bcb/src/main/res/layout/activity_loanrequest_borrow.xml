@@ -124,7 +124,7 @@
                             android:layout_centerVertical="true"
                             android:layout_marginRight="40dp"
                             android:text="元"
-                            android:textColor="@color/txt_black"
+                            android:textColor="@color/text_black"
                             android:textSize="@dimen/main_text_default"/>
 
                         <EditText
@@ -141,7 +141,7 @@
                             android:inputType="number"
                             android:padding="0dip"
                             android:singleLine="true"
-                            android:textColor="@color/txt_black"
+                            android:textColor="@color/text_black"
                             android:textSize="@dimen/main_text_default"/>
 
                     </RelativeLayout>
@@ -190,7 +190,7 @@
                             android:gravity="center_vertical|right"
                             android:padding="0dip"
                             android:singleLine="true"
-                            android:textColor="@color/txt_black"
+                            android:textColor="@color/text_black"
                             android:textSize="@dimen/main_text_default"/>
                     </RelativeLayout>
 
@@ -238,7 +238,7 @@
                             android:gravity="center_vertical|right"
                             android:padding="0dip"
                             android:singleLine="true"
-                            android:textColor="@color/txt_black"
+                            android:textColor="@color/text_black"
                             android:textSize="@dimen/main_text_default"/>
                     </RelativeLayout>
 
@@ -277,21 +277,21 @@
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentRight="true"
                                 android:text="/年"
-                                android:textColor="@color/txt_black"
+                                android:textColor="@color/text_black"
                                 android:textSize="@dimen/main_text_default"/>
                             <TextView
                                 android:id="@+id/loan_rate"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_toLeftOf="@+id/loan_rate_r"
-                                android:textColor="@color/txt_black"
+                                android:textColor="@color/text_black"
                                 android:textSize="@dimen/main_text_default"/>
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_toLeftOf="@+id/loan_rate"
                                 android:text="低至"
-                                android:textColor="@color/txt_black"
+                                android:textColor="@color/text_black"
                                 android:textSize="@dimen/main_text_default"/>
 
                         </RelativeLayout>
@@ -344,7 +344,7 @@
                             android:gravity="center_vertical|right"
                             android:padding="0dip"
                             android:singleLine="true"
-                            android:textColor="@color/txt_black"
+                            android:textColor="@color/text_black"
                             android:textSize="@dimen/main_text_default"/>
 
                     </RelativeLayout>
@@ -389,7 +389,7 @@
                                 android:layout_alignParentRight="true"
                                 android:gravity="right"
                                 android:text="每月还款"
-                                android:textColor="@color/txt_black"
+                                android:textColor="@color/text_black"
                                 android:textSize="@dimen/main_text_default"/>
                             <TextView
                                 android:id="@+id/loan_programme2"
@@ -400,7 +400,7 @@
                                 android:layout_below="@+id/loan_programme"
                                 android:gravity="right"
                                 android:text="每月还款"
-                                android:textColor="@color/txt_black"
+                                android:textColor="@color/text_black"
                                 android:visibility="gone"
                                 android:textSize="@dimen/main_text_default"/>
                         </RelativeLayout>
@@ -460,7 +460,7 @@
                             android:layout_marginLeft="18dp"
                             android:layout_marginRight="40dp"
                             android:text="你有0张利息抵扣券"
-                            android:textColor="@color/txt_black"
+                            android:textColor="@color/text_black"
                             android:textSize="@dimen/main_text_default"/>
 
                         <ImageView
@@ -510,7 +510,7 @@
                                 android:layout_marginLeft="18dp"
                                 android:padding="0dip"
                                 android:text="补贴后低至0.5%/月"
-                                android:textColor="@color/txt_black"
+                                android:textColor="@color/text_black"
                                 android:textSize="@dimen/main_text_default"/>
 
                             <ImageView

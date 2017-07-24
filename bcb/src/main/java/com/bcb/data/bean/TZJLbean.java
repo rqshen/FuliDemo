@@ -10,28 +10,33 @@ import java.util.List;
 public class TZJLbean {
 
     /**
-     * OriginalInterest : 63
-     * OriginalPrincipal : 53
-     * PackInterest : 666
-     * PackPrincipal : 695
-     * InvetDetail : {"pageNow":1,"pageSize":10,"totalCount":3,"records":[{"OrderAmount":100,"OrderNo":"22965151021174824210","StatusTips":"将于xxxx日回款收益","PackageName":"投资测试","PayTime":"2015-10-21
-     * 12:17:49","Rate":6.8,"TotalDays":6,"Duration":"天"}]}
+     * ChickenInterest : 0
+     * ChickenPrincipal : 0
+     * InvetDetail : {"PageNow":1,"PageSize":10,"Records":[{"CreateDate":"2017-02-28","Duration":"天","OrderAmount":10000,"OrderNo":"a0bce6261f6e0b3c0000030c","PackageName":"福鸡宝201704036148","Rate":7,"StatusTips":"将于2017-04-03开始计息","TotalDays":0}],"TotalCount":1}
+     * MonkeyInterest : 0
+     * MonkeyPrincipal : 10000
+     * OriginalInterest : 0
+     * OriginalPrincipal : 0
+     * PackInterest : 0
+     * PackPrincipal : 10000
      */
 
-    public float OriginalInterest;//散标的应收利息
-    public float OriginalPrincipal;//散标的在投本金
-    public float PackInterest;//打包标的应收利息
-    public float PackPrincipal;//打包标的在投本金
-    public float ChickenInterest;//周盈宝应收利息
-    public float ChickenPrincipal;//周盈宝在投本金
-    public InvetDetailBean InvetDetail;//投资记录
+    public int ChickenInterest;
+    public int ChickenPrincipal;
+    public InvetDetailBean InvetDetail;
+    public int MonkeyInterest;
+    public int MonkeyPrincipal;
+    public int OriginalInterest;
+    public int OriginalPrincipal;
+    public int PackInterest;
+    public int PackPrincipal;
 
     public static class InvetDetailBean {
         /**
-         * pageNow : 1
-         * pageSize : 10
-         * totalCount : 3
-         * records : [{"OrderAmount":100,"OrderNo":"22965151021174824210","StatusTips":"将于xxxx日回款收益","PackageName":"投资测试","PayTime":"2015-10-21 12:17:49","Rate":6.8,"TotalDays":6,"Duration":"天"}]
+         * PageNow : 1
+         * PageSize : 10
+         * Records : [{"CreateDate":"2017-02-28","Duration":"天","OrderAmount":10000,"OrderNo":"a0bce6261f6e0b3c0000030c","PackageName":"福鸡宝201704036148","Rate":7,"StatusTips":"将于2017-04-03开始计息","TotalDays":0}]
+         * TotalCount : 1
          */
 
         public int PageNow;
@@ -41,25 +46,25 @@ public class TZJLbean {
 
         public static class RecordsBean {
             /**
-             * OrderAmount : 100
-             * OrderNo : 22965151021174824210
-             * StatusTips : 将于xxxx日回款收益
-             * PackageName : 投资测试
-             * PayTime : 2015-10-21 12:17:49
-             * Rate : 6.8
-             * TotalDays : 6
+             * CreateDate : 2017-02-28
              * Duration : 天
+             * OrderAmount : 10000
+             * OrderNo : a0bce6261f6e0b3c0000030c
+             * PackageName : 福鸡宝201704036148
+             * Rate : 7
+             * StatusTips : 将于2017-04-03开始计息
+             * TotalDays : 0
              */
 
-            public float OrderAmount;//投资金额
-            public String OrderNo;//订单号
-            public String StatusTips;//将于xxx回款
-            public String PackageName;
-            public String PayTime;
             public String CreateDate;
-            public float Rate;
+            public String Duration;
+            public float OrderAmount;
+            public String OrderNo;
+            public String PackageName;
+            public int Rate;
+            public String StatusTips;
             public int TotalDays;
-            public String Duration;//天或月
+            public float AuditingAmount;
 
         }
     }

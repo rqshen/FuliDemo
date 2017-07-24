@@ -23,7 +23,10 @@
     <!--半透明背景-->
     <color name="transparent_background">#B0000000</color>
     <!-- 文本黑色 -->
-    <color name="txt_black">#333333</color>
+    <color name="text_black">#333333</color>
+
+    <color name="text_black5">#555555</color>
+
     <!--文本中灰色-->
     <color name="txt_middle_gray">#666666</color>
     <!-- 文本浅灰色 -->

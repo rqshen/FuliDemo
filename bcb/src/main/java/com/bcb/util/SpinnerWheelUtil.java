@@ -47,7 +47,7 @@ public class SpinnerWheelUtil {
         final AbstractWheel wheel = (AbstractWheel) view.findViewById(R.id.wheel);
         ArrayWheelAdapter<String> adapter = new ArrayWheelAdapter<>(context, types);
         adapter.setTextSize(20);
-        adapter.setTextColor(context.getResources().getColor(R.color.txt_black));
+        adapter.setTextColor(context.getResources().getColor(R.color.text_black));
         wheel.setViewAdapter(adapter);
         wheel.setCurrentItem(currItem);
         wheel.setVisibleItems(3);

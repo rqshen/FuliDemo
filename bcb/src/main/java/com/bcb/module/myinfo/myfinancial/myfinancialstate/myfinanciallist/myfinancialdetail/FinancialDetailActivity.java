@@ -19,7 +19,6 @@ import com.bcb.constant.ProjectListType;
 import com.bcb.data.bean.ClaimConveyBean;
 import com.bcb.data.bean.Project_Investment_Details_Bean;
 import com.bcb.module.myinfo.myfinancial.myfinancialstate.myfinanciallist.myfinancialdetail.backpayment.BackPaymentActivity;
-import com.bcb.module.myinfo.myfinancial.myfinancialstate.myfinanciallist.myfinancialdetail.backpayment.zyb.ZYBBackPaymentActivity;
 import com.bcb.module.myinfo.myfinancial.myfinancialstate.myfinanciallist.myfinancialdetail.projectdetail.ProjectDetailActivity;
 import com.bcb.network.BcbJsonRequest;
 import com.bcb.network.BcbRequest;
@@ -55,10 +54,8 @@ public class FinancialDetailActivity extends Activity_Base implements View.OnCli
     LinearLayout ll_id_number;
     private RelativeLayout rl_hk, rl_zr, tourl;
     private Button button;
-    String Status = ProjectListType.MONTH;//0稳盈宝  1涨薪宝  2周盈宝
+    String projectType = ProjectListType.MONTH;//产品类型
     private Project_Investment_Details_Bean bean;
-
-    private TextView tv_backpayment;//回款计划说明
 
     /**
      * 启动自身
@@ -71,7 +68,7 @@ public class FinancialDetailActivity extends Activity_Base implements View.OnCli
         Intent intent = new Intent();
         intent.setClass(context, FinancialDetailActivity.class);
         intent.putExtra("OrderNo", OrderNo);
-        intent.putExtra("Status", Status);
+        intent.putExtra("projectType", Status);
         context.startActivity(intent);
     }
 
@@ -93,23 +90,11 @@ public class FinancialDetailActivity extends Activity_Base implements View.OnCli
         });
         (findViewById(back_img)).setVisibility(View.GONE);
         OrderNo = getIntent().getStringExtra("OrderNo");
-        Status = getIntent().getStringExtra("Status");
+        projectType = getIntent().getStringExtra("projectType");
         initView();
-        initData();
         loadData();
 
         ActivityCollector.addActivity(this);
-    }
-
-    /**
-     * 初始化数据
-     */
-    private void initData() {
-        if (Status.equals(ProjectListType.DAY)) {//周盈宝回款计划
-            tv_backpayment.setText("回款记录");
-        } else {
-            tv_backpayment.setText("回款计划");
-        }
     }
 
     private void initView() {
@@ -117,7 +102,6 @@ public class FinancialDetailActivity extends Activity_Base implements View.OnCli
         earning_expected = (TextView) findViewById(R.id.earning_expected);
         tv_id_number = (TextView) findViewById(R.id.tv_id_number);
         ll_id_number = (LinearLayout) findViewById(R.id.ll_id_number);
-        tv_backpayment = (TextView) findViewById(R.id.tv_backpayment);
         ll_id_number.setOnClickListener(this);
         earningtime = (TextView) findViewById(R.id.earningtime);
         annual_yield = (TextView) findViewById(R.id.annual_yield);
@@ -136,6 +120,9 @@ public class FinancialDetailActivity extends Activity_Base implements View.OnCli
 
     String endTime;
 
+    /**
+     * 请求购买的产品列表详情
+     */
     private void loadData() {
         JSONObject obj = new JSONObject();
         try {
@@ -146,9 +133,9 @@ public class FinancialDetailActivity extends Activity_Base implements View.OnCli
 
         String url = UrlsOne.Month_MyFinancial_XQ;
 
-        if (Status.equals(ProjectListType.MONTH)) {
+        if (projectType.equals(ProjectListType.MONTH)) {
             url = UrlsOne.Month_MyFinancial_XQ;
-        } else if (Status.equals(ProjectListType.DAY)) {
+        } else if (projectType.equals(ProjectListType.DAY)) {
             url = UrlsOne.Day_MyFinancial_XQ;
         }
 
@@ -183,44 +170,36 @@ public class FinancialDetailActivity extends Activity_Base implements View.OnCli
                                         endTime = bean.EndDate.substring(0, bean.EndDate.indexOf(" "));//结束时间
                                     }
 
-                                    //判断是稳盈宝还是涨薪宝，涨薪宝1没有退出选项
-                                    // TODO: 2017/7/21
-                                    if (Status.equals(ProjectListType.DAY)) {//涨薪宝
-                                        button.setVisibility(View.INVISIBLE);
-                                        button.setClickable(false);
-                                        button.setEnabled(false);
-                                    } else {//稳盈宝和周盈宝，有退出选项
-                                        switch (bean.StatusCode) {// 0：不能申请转让 1：已完成 2：可以申请退出 3：退出中
-                                            case 0:
-                                                button.setVisibility(View.INVISIBLE);
-                                                button.setClickable(false);
-                                                button.setText("不能申请转让");
-                                                button.setEnabled(false);
-                                                break;
-                                            case 1:
-                                                button.setVisibility(View.INVISIBLE);
-                                                button.setClickable(false);
-                                                button.setText("已完成");
-                                                button.setEnabled(false);
-                                                break;
-                                            case 2://可申请退出
-                                                button.setVisibility(View.VISIBLE);
-                                                button.setEnabled(true);
-                                                button.setClickable(true);
-                                                button.setText("申请退出");
-                                                break;
-                                            case 3://退出中
-                                                button.setVisibility(View.VISIBLE);
-                                                button.setEnabled(false);
-                                                button.setClickable(false);
-                                                button.setText("退出中");
-                                                button.setCompoundDrawables(null, null, null, null);
-                                                break;
-                                            default:
-                                                break;
-                                        }
+                                    //月盈宝和日盈宝都有退出选项
+                                    switch (bean.StatusCode) {// 0：不能申请转让 1：已完成 2：可以申请退出 3：退出中
+                                        case 0:
+                                            button.setVisibility(View.INVISIBLE);
+                                            button.setClickable(false);
+                                            button.setText("不能申请转让");
+                                            button.setEnabled(false);
+                                            break;
+                                        case 1:
+                                            button.setVisibility(View.INVISIBLE);
+                                            button.setClickable(false);
+                                            button.setText("已完成");
+                                            button.setEnabled(false);
+                                            break;
+                                        case 2://可申请退出
+                                            button.setVisibility(View.VISIBLE);
+                                            button.setEnabled(true);
+                                            button.setClickable(true);
+                                            button.setText("申请退出");
+                                            break;
+                                        case 3://退出中
+                                            button.setVisibility(View.VISIBLE);
+                                            button.setEnabled(false);
+                                            button.setClickable(false);
+                                            button.setText("退出中");
+                                            button.setCompoundDrawables(null, null, null, null);
+                                            break;
+                                        default:
+                                            break;
                                     }
-
 
                                     state_below.setText(bean.StatusTips);
                                     //年化利率，锁定期限，已收本息，剩余本息
@@ -258,24 +237,13 @@ public class FinancialDetailActivity extends Activity_Base implements View.OnCli
                 Toast.makeText(this, "订单号已经复制到剪贴板", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.rl_hk://回款计划
-                if (Status.equals(ProjectListType.DAY)) {//周盈宝无回款计划，跳转到特殊的页面
-                    startActivity(ZYBBackPaymentActivity.newIntent(FinancialDetailActivity.this, bean, OrderNo));
-                } else {//稳盈宝和涨薪宝
-                    Intent intent = new Intent(FinancialDetailActivity.this, BackPaymentActivity.class);
-                    intent.putExtra("data", bean);
-                    intent.putExtra("Status", Status);
-                    startActivity(intent);
-                }
-
+                startActivity(BackPaymentActivity.newIntent(FinancialDetailActivity.this, bean, OrderNo, projectType));
                 break;
             case R.id.rl_zr:
                 Activity_Rading_Record.launche(this, OrderNo);
                 break;
             case R.id.button://申请退出
-                // TODO: 2017/7/21
-//                if (Status == ProjectListStatus.MONTH || Status == ProjectListStatus.DAY) {//稳盈宝
-//                    showDialog();
-//                }
+                showDialog();
                 break;
         }
     }
@@ -287,10 +255,10 @@ public class FinancialDetailActivity extends Activity_Base implements View.OnCli
                     @Override
                     public void onSureClick(View v) {
                         super.onSureClick(v);
-                        if (Status.equals(ProjectListType.MONTH)) {
-                            requestZR(UrlsOne.WYB_MyFinancial_Exit);
+                        if (projectType.equals(ProjectListType.MONTH)) {
+                            requestZR(UrlsOne.Month_MyFinancial_Exit);
                         } else {
-                            requestZR(UrlsOne.ZYB_MyFinancial_Exit);
+                            requestZR(UrlsOne.Day_MyFinancial_Exit);
                         }
                         dismiss();
                     }
@@ -301,8 +269,11 @@ public class FinancialDetailActivity extends Activity_Base implements View.OnCli
         }
     }
 
+
     /**
-     * 申请或取消转让=====================打开打包标后点击退出续约的接口和之前的不一样！
+     * 请求退出标
+     *
+     * @param url
      */
     private void requestZR(String url) {
         LogUtil.i("bqt", "【Activity_Trading_Cancle】【onResponse】路径" + url);
@@ -312,14 +283,12 @@ public class FinancialDetailActivity extends Activity_Base implements View.OnCli
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        BcbJsonRequest jsonRequest = new BcbJsonRequest(url, obj, TokenUtil.getEncodeToken(this), new BcbRequest
-                .BcbCallBack<JSONObject>() {
+        BcbJsonRequest jsonRequest = new BcbJsonRequest(url, obj, TokenUtil.getEncodeToken(this), new BcbRequest.BcbCallBack<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 LogUtil.i("bqt", "申请债权转让" + response.toString());
                 if (response.optBoolean("result", true)) {
-                    Activity_Tips_FaileOrSuccess.launche(FinancialDetailActivity.this, Activity_Tips_FaileOrSuccess.ZR_SUCCESS,
-                            "预计 " + endTime + " 回款本息");
+                    Activity_Tips_FaileOrSuccess.launche(FinancialDetailActivity.this, Activity_Tips_FaileOrSuccess.ZR_SUCCESS, "预计 " + endTime + " 回款本息");
                     loadData();
                 }
             }

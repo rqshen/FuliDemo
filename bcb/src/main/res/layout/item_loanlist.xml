@@ -18,7 +18,7 @@
             android:layout_marginLeft="@dimen/margin_size_large"
             android:text="人人买房计划"
             android:textSize="@dimen/main_text_default"
-            android:textColor="@color/txt_black"/>
+            android:textColor="@color/text_black"/>
     </LinearLayout>
     <!-- 横线 -->
     <ImageView
@@ -58,7 +58,7 @@
                     android:layout_marginBottom="@dimen/margin_size_small"
                     android:text="300000元"
                     android:textSize="@dimen/main_text_default"
-                    android:textColor="@color/txt_black"/>
+                    android:textColor="@color/text_black"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -92,7 +92,7 @@
                     android:layout_marginBottom="@dimen/margin_size_small"
                     android:text="2016-1-20"
                     android:textSize="@dimen/main_text_default"
-                    android:textColor="@color/txt_black"/>
+                    android:textColor="@color/text_black"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -126,7 +126,7 @@
                     android:layout_marginBottom="@dimen/margin_size_small"
                     android:text="还款中"
                     android:textSize="@dimen/main_text_default"
-                    android:textColor="@color/txt_black"/>
+                    android:textColor="@color/text_black"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

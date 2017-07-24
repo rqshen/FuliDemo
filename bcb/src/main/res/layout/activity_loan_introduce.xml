@@ -41,7 +41,7 @@
                     android:layout_marginLeft="15dip"
                     android:text="描述"
                     android:textSize="20sp"
-                    android:textColor="@color/txt_black" />
+                    android:textColor="@color/text_black" />
                 <TextView
                     android:id="@+id/text_description"
                     android:layout_width="match_parent"
@@ -52,7 +52,7 @@
                     android:layout_marginBottom="10dip"
                     android:text="@string/loan_introduction"
                     android:textSize="@dimen/main_text_default"
-                    android:textColor="@color/txt_black"/>
+                    android:textColor="@color/text_black"/>
             </LinearLayout>
 
             <!-- 二级菜单介绍 -->

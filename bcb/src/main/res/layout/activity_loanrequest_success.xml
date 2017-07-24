@@ -36,7 +36,7 @@
                     android:layout_marginTop="20dp"
                     android:gravity="center"
                     android:text="借款申请提交成功"
-                    android:textColor="@color/txt_black"
+                    android:textColor="@color/text_black"
                     android:textSize="20sp" />
 
                 <TextView

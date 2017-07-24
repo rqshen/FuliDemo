@@ -39,7 +39,7 @@
                 android:singleLine="true"
                 android:padding="0dip"
                 android:text=""
-                android:textColor="@color/txt_black"
+                android:textColor="@color/text_black"
                 android:textSize="@dimen/main_text_large" />
             <TextView
                 android:id="@+id/company_fullname"

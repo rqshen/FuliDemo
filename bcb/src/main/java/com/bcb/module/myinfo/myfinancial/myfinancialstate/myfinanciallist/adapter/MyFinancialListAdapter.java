@@ -73,6 +73,7 @@ public class MyFinancialListAdapter extends BaseAdapter {
             viewHolder.day.setText(formatD.format(qxr_));//天
             viewHolder.month.setText(formatM.format(qxr_));//月
             viewHolder.tv_top.setText(formatY.format(qxr_));//年
+            viewHolder.ztbj.setText(bean.AuditingAmount + "");//在投金额
 
             if (pos > 0 && format.format(qxr_).equals(format.format(format.parse(data.get(pos - 1).CreateDate)))) {
                 viewHolder.left.setVisibility(View.INVISIBLE);
@@ -90,8 +91,7 @@ public class MyFinancialListAdapter extends BaseAdapter {
         }
 
         viewHolder.je.setText(String.format("%.2f", bean.OrderAmount));
-        viewHolder.tzts.setText("" + bean.TotalDays);//
-        viewHolder.ts.setText("持有天数(" + bean.Duration + ")");
+        viewHolder.tzts.setText("持有天数 " + bean.TotalDays);//
         viewHolder.tvBottom.setText(bean.StatusTips);
     }
 
@@ -112,10 +112,10 @@ public class MyFinancialListAdapter extends BaseAdapter {
         TextView tvBottom;
         @BindView(R.id.tv_top)
         TextView tv_top;
-        @BindView(R.id.ts)
-        TextView ts;
         @BindView(R.id.v_top)
         View v_top;
+        @BindView(R.id.ztbj)
+        TextView ztbj;
 
         ViewHolder(View view) {
             ButterKnife.bind(this, view);

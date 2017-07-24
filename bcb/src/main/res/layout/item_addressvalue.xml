@@ -7,7 +7,7 @@
          android:id="@+id/value"
          android:layout_width="wrap_content"
          android:layout_height="54dip"
-         android:textColor="@color/txt_black"
+         android:textColor="@color/text_black"
          android:textSize="@dimen/main_text_default"
          android:layout_centerVertical="true"
          android:layout_alignParentLeft="true"

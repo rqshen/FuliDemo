@@ -43,7 +43,7 @@
                     android:layout_marginTop="10dip"
                     android:text="处理中，请等待"
                     android:textSize="20sp"
-                    android:textColor="@color/txt_black"/>
+                    android:textColor="@color/text_black"/>
                 <!-- 秒数 -->
                 <TextView
                     android:id="@+id/second_text"
@@ -88,7 +88,7 @@
                     android:layout_gravity="center_horizontal"
                     android:background="@drawable/recharge_success"
                     android:gravity="center"
-                    android:textColor="@color/txt_black"
+                    android:textColor="@color/text_black"
                     android:textSize="20sp" />
                 <!-- 标题 -->
                 <TextView
@@ -100,7 +100,7 @@
                     android:layout_marginTop="10dp"
                     android:gravity="center"
                     android:text="@string/recharge_success_text1"
-                    android:textColor="@color/txt_black"
+                    android:textColor="@color/text_black"
                     android:textSize="20sp" />
                 <!-- 副标题 -->
                 <TextView android:id="@+id/balance"
@@ -130,7 +130,7 @@
                     android:layout_marginRight="28dip"
                     android:background="@drawable/button_red_selector"
                     android:text="@string/recharge_success_text2"
-                    android:textColor="@color/txt_black"
+                    android:textColor="@color/text_black"
                     android:textSize="@dimen/button_titlesize" />
             </LinearLayout>
             <ImageView
@@ -168,7 +168,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="50dip"
                     android:text="充值失败"
-                    android:textColor="@color/txt_black"
+                    android:textColor="@color/text_black"
                     android:textSize="20sp"/>
 
                 <TextView
@@ -179,7 +179,7 @@
                     android:layout_gravity="center_horizontal"
                     android:gravity="center_horizontal"
                     android:textSize="16sp"
-                    android:textColor="@color/txt_black"
+                    android:textColor="@color/text_black"
                     android:text=""/>
             </LinearLayout>
             <LinearLayout
@@ -246,7 +246,7 @@
                     android:layout_marginRight="10dip"
                     android:layout_marginTop="50dip"
                     android:text="受网络和支付平台的影响,处理过程可能需要花费几分钟哦，请您耐心等候~"
-                    android:textColor="@color/txt_black"
+                    android:textColor="@color/text_black"
                     android:textSize="@dimen/main_text_default"/>
             </LinearLayout>
             <LinearLayout

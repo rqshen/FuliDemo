@@ -26,7 +26,7 @@
             android:gravity="center_horizontal"
 
             android:text="QQ好友"
-            android:textColor="@color/txt_black"
+            android:textColor="@color/text_black"
             android:textSize="12sp"/>
 
         <TextView
@@ -38,7 +38,7 @@
             android:drawableTop="@drawable/icon_share_wx_chat"
             android:gravity="center_horizontal"
             android:text="微信好友"
-            android:textColor="@color/txt_black"
+            android:textColor="@color/text_black"
             android:textSize="12sp"/>
 
         <TextView
@@ -50,7 +50,7 @@
             android:drawableTop="@drawable/icon_share_wx_circle"
             android:gravity="center_horizontal"
             android:text="朋友圈"
-            android:textColor="@color/txt_black"
+            android:textColor="@color/text_black"
             android:textSize="12sp"/>
 
         <TextView
@@ -62,7 +62,7 @@
             android:drawableTop="@drawable/icon_share_sms"
             android:gravity="center_horizontal"
             android:text="短信"
-            android:textColor="@color/txt_black"
+            android:textColor="@color/text_black"
             android:textSize="12sp"/>
     </LinearLayout>
 

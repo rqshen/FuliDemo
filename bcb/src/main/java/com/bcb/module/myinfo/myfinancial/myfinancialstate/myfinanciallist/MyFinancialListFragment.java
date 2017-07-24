@@ -173,6 +173,7 @@ public class MyFinancialListFragment extends BaseFragment1 implements AdapterVie
                 try {
                     if (PackageUtil.getRequestStatus(response, ctx)) {
                         JSONObject obj = PackageUtil.getResultObject(response);
+                        LogUtil.e("myfinal", obj.toString());
                         tzjLbean = null;
                         if (obj != null) {
                             float tempYjsy = 0;//应计收益

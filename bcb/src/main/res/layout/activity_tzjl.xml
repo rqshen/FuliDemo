@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
@@ -25,7 +24,7 @@
                 android:layout_centerVertical="true"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
-                android:src="@drawable/return_delault"/>
+                android:src="@drawable/return_delault" />
 
             <LinearLayout
                 android:id="@+id/ll_top"
@@ -38,50 +37,36 @@
                 <!--稳盈宝-->
                 <TextView
                     android:id="@+id/wyb"
-                    android:layout_width="75dp"
+                    android:layout_width="97dp"
                     android:layout_height="match_parent"
                     android:background="@drawable/stroke_l"
                     android:gravity="center"
-                    android:text="稳盈宝"
+                    android:text="稳赢安心赚"
                     android:textColor="@color/red"
-                    android:textSize="14sp"/>
-                <!--分割线-->
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/linegray"/>
-                <!--涨薪宝-->
-                <TextView
-                    android:id="@+id/zxb"
-                    android:layout_width="75dp"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="涨薪宝"
-                    android:textColor="@color/linegray"
-                    android:textSize="14sp"/>
+                    android:textSize="14sp" />
                 <!--分割线-->
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
                     android:background="@color/white"
-                    android:visibility="visible"/>
+                    android:visibility="visible" />
                 <!--周盈宝-->
                 <TextView
                     android:id="@+id/tv_zyb"
-                    android:layout_width="75dp"
+                    android:layout_width="97dp"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="周盈宝"
+                    android:text="稳赢灵活投"
                     android:textColor="@color/white"
                     android:textSize="14sp"
-                    android:visibility="visible"/>
+                    android:visibility="visible" />
             </LinearLayout>
         </RelativeLayout>
         <!-- 填充Fragment的容器 -->
         <FrameLayout
             android:id="@+id/container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
 
     </LinearLayout>
 
