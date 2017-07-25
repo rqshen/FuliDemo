@@ -180,7 +180,7 @@ public class MonthProgramIntroductionActivity extends Activity_Base implements V
      * @return
      */
     private SpannableString getSpanBuyDesc(int money, int time, String string2) {
-        String desc = "购买" + money + "元," + time + "天可收益" + string2 + "元";
+        String desc = "购买" + money + "元," + time + "个月可收益" + string2 + "元";
         return SpanUtils.updateFontColor(desc, new String[]{String.valueOf(money), string2});
     }
 

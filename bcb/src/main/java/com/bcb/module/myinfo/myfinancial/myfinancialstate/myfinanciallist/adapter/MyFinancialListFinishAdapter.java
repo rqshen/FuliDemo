@@ -22,13 +22,13 @@ import butterknife.ButterKnife;
 /**
  * 投资理财列表的适配器
  */
-public class MyFinancialListAdapter extends BaseAdapter {
+public class MyFinancialListFinishAdapter extends BaseAdapter {
 
     private Context ctx;
     private List<TZJLbean.InvetDetailBean.RecordsBean> data;
 
     //默认标的构造方法
-    public MyFinancialListAdapter(Context ctx, List<TZJLbean.InvetDetailBean.RecordsBean> data) {
+    public MyFinancialListFinishAdapter(Context ctx, List<TZJLbean.InvetDetailBean.RecordsBean> data) {
         this.ctx = ctx;
         this.data = data;
     }
@@ -52,7 +52,7 @@ public class MyFinancialListAdapter extends BaseAdapter {
     public View getView(final int pos, View view, ViewGroup arg2) {
         ViewHolder viewHolder;
         if (null == view) {
-            view = LayoutInflater.from(ctx).inflate(R.layout.item_tzjl, arg2, false);
+            view = LayoutInflater.from(ctx).inflate(R.layout.item_tzjl_finish, arg2, false);
             viewHolder = new ViewHolder(view);
             view.setTag(viewHolder);
         } else viewHolder = (ViewHolder) view.getTag();
@@ -73,7 +73,6 @@ public class MyFinancialListAdapter extends BaseAdapter {
             viewHolder.day.setText(formatD.format(qxr_));//天
             viewHolder.month.setText(formatM.format(qxr_));//月
             viewHolder.tv_top.setText(formatY.format(qxr_));//年
-            viewHolder.ztbj.setText(bean.AuditingAmount + "");//在投金额
 
             if (pos > 0 && format.format(qxr_).equals(format.format(format.parse(data.get(pos - 1).CreateDate)))) {
                 viewHolder.left.setVisibility(View.INVISIBLE);
@@ -89,8 +88,8 @@ public class MyFinancialListAdapter extends BaseAdapter {
             e.printStackTrace();
         }
 
-        viewHolder.je.setText("原订单金额: " + String.format("%.0f", bean.OrderAmount) + "元");
-        viewHolder.tzts.setText("持有天数 " + bean.TotalDays);//
+        viewHolder.je.setText(String.format("%.0f", bean.OrderAmount));
+        viewHolder.tzts.setText(bean.TotalDays);//
         viewHolder.tvBottom.setText(bean.StatusTips);
     }
 
@@ -105,14 +104,14 @@ public class MyFinancialListAdapter extends BaseAdapter {
         TextView je;
         @BindView(R.id.tzts)
         TextView tzts;
+        @BindView(R.id.right)
+        RelativeLayout right;
         @BindView(R.id.tv_bottom)
         TextView tvBottom;
         @BindView(R.id.tv_top)
         TextView tv_top;
         @BindView(R.id.v_top)
         View v_top;
-        @BindView(R.id.ztbj)
-        TextView ztbj;
 
         ViewHolder(View view) {
             ButterKnife.bind(this, view);

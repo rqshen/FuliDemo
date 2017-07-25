@@ -100,10 +100,10 @@ public class UrlsOne {
     public static final String Day_Finance_LIST = host + "/api/v2.5/a78000f4e1d9";
 
     //购买稳盈宝
-    public static String Month_Buying = host + "/api/v2.0/a78000f6d15e";
+    public static String Month_Buying = host + "/api/v2.0/a6de0115f478";
 
     //购买周盈宝
-    public static String Day_Buying = host + "/api/v2.0/a6de0115f478";
+    public static String Day_Buying = host + "/api/v2.0/a78000f6d15e";
 
     //稳赢宝详情，打包的标【月】
     public static final String Month_Buy_DETAIL = host + "/api/v2.5/a6de0105e5df";
@@ -120,16 +120,17 @@ public class UrlsOne {
     // 周赢宝【周】，购买的标的列表详情
     public static final String Day_MyFinancial_XQ = host + "/api/v2.5/a78500f9885e";
 
-    // 稳赢宝【月】，购买的标退出
-    public static final String Month_MyFinancial_Exit = host + "/api/v2.5/a71c00f5bd72";
-
-    // 周赢宝【周】，购买的标退出
-    public static final String Day_MyFinancial_Exit = host + "/api/v2.5/a78000f74fdf";
-
+    //稳盈宝【月】，回款记录列表
     public static final String Month_BackPayment_List = host + "/api/v2.5/a7b300f898b2";
 
-    //周盈宝回款记录列表
+    //周盈宝【日】回款记录列表
     public static final String Day_BackPayment_List = host + "/api/v2.5/a780010e681e";
+
+    // 稳赢宝【月】，购买的标退出
+    public static final String Month_MyFinancial_Exit = host + "/api/v2.5/a71d01130432";
+
+    // 周赢宝【周】，购买的标退出
+    public static final String Day_MyFinancial_Exit = host + "/api/v2.5/a78500f9a281";
 
     // 兑换优惠劵
     public static final String Convert_Coupon = host + "/api/v1.0/95aabaaae186";

@@ -105,7 +105,6 @@ public class ProjectBuyActivity extends Activity_Base implements View.OnClickLis
     private Receiver buySuccessReceiver;
     private AlertView alertView;
     private String type;
-    private double amount;
 
     //默认构造函数，用来传递普通标的数据
     public static void launche(Context context, String pid, String title, CPXQbean simpleProjectDetail, String type) {
@@ -196,11 +195,7 @@ public class ProjectBuyActivity extends Activity_Base implements View.OnClickLis
             getUserBanlance();
         }
 
-        if (type.equals(ProjectListType.MONTH)) {//稳盈从接口请求余额
-            requestAmount();
-        } else {
-            moreValue.setText(String.format("%.2f", mSimpleProjectDetail.Balance));
-        }
+        moreValue.setText(String.format("%.2f", mSimpleProjectDetail.Balance));
     }
 
     int number = 0;
@@ -346,37 +341,6 @@ public class ProjectBuyActivity extends Activity_Base implements View.OnClickLis
                 .add(jsonRequest);
     }
 
-    //*********************************************************获取打包项目可投余额*******************************************
-    private void requestAmount() {
-        String encodeToken = TokenUtil.getEncodeToken(ProjectBuyActivity.this);
-        JSONObject requestObj = new JSONObject();
-        try {
-            requestObj.put("PackageToken", PackageToken);
-            requestObj.put("PackageId", packageId);
-            LogUtil.i("bqt", "【打包项目可投余额参数】" + PackageToken + "--" + packageId);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        BcbJsonRequest jsonRequest = new BcbJsonRequest(UrlsTwo.MONKEYPACKAGEBALANCE, requestObj, encodeToken, true, new BcbRequest
-                .BcbCallBack<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                LogUtil.i("bqt", "【获取打包项目可投余额】" + response.toString());
-                amount = response.optDouble("result");
-                moreValue.setText(String.format("%.2f", amount));
-                if ((float) amount < mSimpleProjectDetail.Balance) {
-                    iv_tips.setVisibility(View.VISIBLE);
-                }
-            }
-
-            @Override
-            public void onErrorResponse(Exception error) {
-                LogUtil.d("bqt", "【获取打包项目可投余额】" + error.toString());
-                Toast.makeText(ProjectBuyActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
-            }
-        });
-        MyApplication.getInstance().getRequestQueue().add(jsonRequest);
-    }
 
     //*********************************************************** 点击购买按钮 ******************************************
     float inputMoney;
@@ -454,7 +418,7 @@ public class ProjectBuyActivity extends Activity_Base implements View.OnClickLis
         }
 
         //超出自己可投的金额
-        if (inputMoney > (float) amount) {
+        if (inputMoney > Math.min(mSimpleProjectDetail.Balance, MyApplication.mUserWallet.BalanceAmount)) {
             Toast.makeText(this, "购买金额不能大于可投金额", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -569,9 +533,6 @@ public class ProjectBuyActivity extends Activity_Base implements View.OnClickLis
         switch (view.getId()) {
             case R.id.buy_all:
                 double all = Math.min(mSimpleProjectDetail.Balance, MyApplication.mUserWallet.BalanceAmount);
-                if (type.equals(ProjectListType.DAY)) {
-                    all = Math.min(all, amount);
-                }
                 invest_money.setText(String.format("%.2f", all));
                 break;
             case R.id.iv_tips:

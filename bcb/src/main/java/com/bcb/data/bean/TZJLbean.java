@@ -61,7 +61,6 @@ public class TZJLbean {
             public float OrderAmount;
             public String OrderNo;
             public String PackageName;
-            public int Rate;
             public String StatusTips;
             public int TotalDays;
             public float AuditingAmount;

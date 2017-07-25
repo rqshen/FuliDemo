@@ -13,12 +13,12 @@ import android.widget.RelativeLayout;
 import com.bcb.MyApplication;
 import com.bcb.R;
 import com.bcb.base.old.BaseFragment1;
-import com.bcb.constant.ProjectListStatus;
 import com.bcb.constant.ProjectListType;
 import com.bcb.data.bean.TZJLbean;
 import com.bcb.module.discover.financialproduct.InvestmentFinanceActivity;
 import com.bcb.module.myinfo.myfinancial.myfinancialstate.MyFinancialStateFragment;
 import com.bcb.module.myinfo.myfinancial.myfinancialstate.myfinanciallist.adapter.MyFinancialListAdapter;
+import com.bcb.module.myinfo.myfinancial.myfinancialstate.myfinanciallist.adapter.MyFinancialListFinishAdapter;
 import com.bcb.module.myinfo.myfinancial.myfinancialstate.myfinanciallist.myfinancialdetail.FinancialDetailActivity;
 import com.bcb.network.BcbJsonRequest;
 import com.bcb.network.BcbRequest;
@@ -56,6 +56,7 @@ public class MyFinancialListFragment extends BaseFragment1 implements AdapterVie
     TZJLbean tzjLbean;
     private List<TZJLbean.InvetDetailBean.RecordsBean> recordsBeans;
     private MyFinancialListAdapter mCouponListAdapter;
+    private MyFinancialListFinishAdapter mCouponListFinishAdapter;
 
     private LinearLayout null_data_layout;
     private boolean canLoadmore = true;
@@ -99,7 +100,6 @@ public class MyFinancialListFragment extends BaseFragment1 implements AdapterVie
         this.ctx = view.getContext();
         null_data_layout = (LinearLayout) view.findViewById(R.id.null_data_layout);
         recordsBeans = new ArrayList<>();
-        mCouponListAdapter = new MyFinancialListAdapter(ctx, recordsBeans);
         lv = (MyListView) view.findViewById(R.id.listview_data_layout);
         view.findViewById(R.id.button_confirm).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,7 +108,15 @@ public class MyFinancialListFragment extends BaseFragment1 implements AdapterVie
             }
         });
         lv.setOnItemClickListener(this);
-        lv.setAdapter(mCouponListAdapter);
+
+        if (Tab == 1) {//持有中
+            mCouponListAdapter = new MyFinancialListAdapter(ctx, recordsBeans);
+            lv.setAdapter(mCouponListAdapter);
+        } else {
+            mCouponListFinishAdapter = new MyFinancialListFinishAdapter(ctx, recordsBeans);
+            lv.setAdapter(mCouponListFinishAdapter);
+        }
+
         //刷新
         loadmore_view = (RelativeLayout) view.findViewById(R.id.loadmore_view);
         refreshLayout = (PullToRefreshLayout) view.findViewById(R.id.refresh_view);
@@ -182,7 +190,7 @@ public class MyFinancialListFragment extends BaseFragment1 implements AdapterVie
                             if (Status.equals(ProjectListType.MONTH)) {
                                 tempYjsy = tzjLbean.PackInterest;
                                 tempZtbj = tzjLbean.PackPrincipal;
-                            } else if (Status.equals(ProjectListStatus.ZYB)) {
+                            } else if (Status.equals(ProjectListType.DAY)) {
                                 tempYjsy = tzjLbean.ChickenInterest;
                                 tempZtbj = tzjLbean.ChickenPrincipal;
                             }
@@ -198,13 +206,26 @@ public class MyFinancialListFragment extends BaseFragment1 implements AdapterVie
                             synchronized (this) {
                                 recordsBeans.addAll(tzjLbean.InvetDetail.Records);
                             }
-                            if (null != mCouponListAdapter) {
-                                mCouponListAdapter.notifyDataSetChanged();
+                            if (Tab == 1) {//持有中
+                                if (null != mCouponListAdapter) {
+                                    mCouponListAdapter.notifyDataSetChanged();
+                                }
+                            } else {
+                                if (null != mCouponListFinishAdapter) {
+                                    mCouponListFinishAdapter.notifyDataSetChanged();
+                                }
                             }
+
                         } else {
                             canLoadmore = false;
-                            if (null != mCouponListAdapter) {
-                                mCouponListAdapter.notifyDataSetChanged();
+                            if (Tab == 1) {//持有中
+                                if (null != mCouponListAdapter) {
+                                    mCouponListAdapter.notifyDataSetChanged();
+                                }
+                            } else {
+                                if (null != mCouponListFinishAdapter) {
+                                    mCouponListFinishAdapter.notifyDataSetChanged();
+                                }
                             }
                             if (PageNow <= 1) {
                                 setupListViewVisible(false);

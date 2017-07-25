@@ -29,7 +29,6 @@ public class PackageUtil {
             if (status != 1) {
                 if (status == -5) {
                     // token过期或者用户已经被踢出，要删除本地数据库，并跳转到登录界面
-                    // TODO: 2017/7/21
                     onUserKickOut(ctx);
                 }
                 return false;
@@ -55,11 +54,7 @@ public class PackageUtil {
             }
             if (data.getInt("status") != 1) {
                 if (data.getInt("status") == -5) {
-                    //token过期或者用户已经被踢出，要删除本地数据库，并跳转到登录界面
-//                    if (!(ctx instanceof NormalProjectIntroductionActivity)) {
-                    // TODO: 2017/7/21
                     onUserKickOut(ctx);
-//                    }
                 }
                 return false;
             }

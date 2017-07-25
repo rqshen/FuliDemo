@@ -8,6 +8,6 @@ public final class BuildConfig {
   public static final String APPLICATION_ID = "com.bcb";
   public static final String BUILD_TYPE = "debug";
   public static final String FLAVOR = "";
-  public static final int VERSION_CODE = 70;
-  public static final String VERSION_NAME = "2.6.1";
+  public static final int VERSION_CODE = 71;
+  public static final String VERSION_NAME = "2.7.0";
 }
