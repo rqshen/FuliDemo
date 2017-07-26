@@ -24,12 +24,12 @@ import butterknife.ButterKnife;
  */
 public class FinanceListAdapter extends BaseAdapter {
 
-    private Context ctx;
+    private Context context;
     private List<MainListBean2.JpxmBean> data;
 
     //默认标的构造方法
-    public FinanceListAdapter(Context ctx, List<MainListBean2.JpxmBean> data) {
-        this.ctx = ctx;
+    public FinanceListAdapter(Context context, List<MainListBean2.JpxmBean> data) {
+        this.context = context;
         this.data = data;
     }
 
@@ -49,16 +49,16 @@ public class FinanceListAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(final int pos, View view, ViewGroup arg2) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder;
-        if (null == view) {
-            view = LayoutInflater.from(ctx).inflate(R.layout.item_main, arg2, false);
-            viewHolder = new ViewHolder(view);
-            view.setTag(viewHolder);
-        } else viewHolder = (ViewHolder) view.getTag();
+        if (null == convertView) {
+            convertView = LayoutInflater.from(context).inflate(R.layout.item_main, parent, false);
+            viewHolder = new ViewHolder(convertView);
+            convertView.setTag(viewHolder);
+        } else viewHolder = (ViewHolder) convertView.getTag();
         //设置ViewHolder的数据
-        setDataWithViewHolder(viewHolder, pos);
-        return view;
+        setDataWithViewHolder(viewHolder, position);
+        return convertView;
     }
 
     //设置ViewHolder数据

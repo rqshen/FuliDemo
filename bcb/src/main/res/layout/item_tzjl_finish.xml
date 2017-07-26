@@ -68,10 +68,11 @@
 
         <android.support.v7.widget.CardView
             android:layout_width="294dp"
-            android:layout_height="104dp"
+            android:layout_height="wrap_content"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="5dp"
-            app:cardElevation="0dp">
+            app:cardElevation="0dp"
+            app:cardPreventCornerOverlap="false">
 
             <!--金额等-->
             <LinearLayout
@@ -114,14 +115,13 @@
 
                 <Space
                     android:layout_width="match_parent"
-                    android:layout_height="15dp" />
+                    android:layout_height="2dp" />
 
                 <!--在投金额文字描述，原订单金额-->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
-
 
                     <!--在投金额文字描述-->
                     <TextView
