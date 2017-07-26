@@ -27,7 +27,7 @@ import com.bcb.data.bean.BannerInfo;
 import com.bcb.data.bean.MainListBean2;
 import com.bcb.data.bean.UserDetailInfo;
 import com.bcb.event.BroadcastEvent;
-import com.bcb.module.discover.adapter.FinanceListAdapter;
+import com.bcb.module.discover.financialproduct.adapter.FinanceListAdapter;
 import com.bcb.module.discover.carinsurance.CarInsuranceActivity;
 import com.bcb.module.discover.financialproduct.InvestmentFinanceActivity;
 import com.bcb.module.discover.financialproduct.dayprogram.DayProgramIntroductionActivity;

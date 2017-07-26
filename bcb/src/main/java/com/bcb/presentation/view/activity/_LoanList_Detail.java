@@ -16,7 +16,7 @@ import android.widget.TextView;
 import com.bcb.R;
 import com.bcb.base.old.BaseActivity1;
 import com.bcb.util.MyActivityManager;
-import com.bcb.module.discover.financialproduct.adapter.MyFragmentPagerAdapter;
+import com.bcb.module.myinfo.myfinancial.myfinancialstate.adapter.MyFinancialStateAdapter;
 import com.bcb.presentation.view.fragment._LoanDetailFragment1;
 import com.bcb.presentation.view.fragment._RepaymentFragment1;
 
@@ -107,7 +107,7 @@ public class _LoanList_Detail extends BaseActivity1 {
         fragmentsList.add(repaymentFragment);
 
         //ViewPager
-        mPager.setAdapter(new MyFragmentPagerAdapter(getSupportFragmentManager(), fragmentsList));
+        mPager.setAdapter(new MyFinancialStateAdapter(getSupportFragmentManager(), fragmentsList));
         mPager.setCurrentItem(0);
         mPager.setOffscreenPageLimit(2);
         mPager.setOnPageChangeListener(new MyOnPageChangeListener());

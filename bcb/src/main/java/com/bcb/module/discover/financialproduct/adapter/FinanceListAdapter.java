@@ -1,4 +1,4 @@
-package com.bcb.module.discover.adapter;
+package com.bcb.module.discover.financialproduct.adapter;
 
 import android.content.Context;
 import android.text.TextUtils;

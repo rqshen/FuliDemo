@@ -16,7 +16,7 @@ import com.bcb.base.old.BaseFragment1;
 import com.bcb.constant.ProjectListType;
 import com.bcb.data.bean.MainListBean2;
 import com.bcb.data.bean.WYBbean;
-import com.bcb.module.discover.adapter.FinanceListAdapter;
+import com.bcb.module.discover.financialproduct.adapter.FinanceListAdapter;
 import com.bcb.module.discover.financialproduct.dayprogram.DayProgramIntroductionActivity;
 import com.bcb.module.discover.financialproduct.monthproject.MonthProgramIntroductionActivity;
 import com.bcb.network.BcbJsonRequest;

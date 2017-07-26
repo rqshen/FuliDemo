@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.bcb.R;
 import com.bcb.base.old.BaseActivity1;
 import com.bcb.util.MyActivityManager;
-import com.bcb.module.discover.financialproduct.adapter.MyFragmentPagerAdapter;
+import com.bcb.module.myinfo.myfinancial.myfinancialstate.adapter.MyFinancialStateAdapter;
 
 import java.util.ArrayList;
 
@@ -44,7 +44,7 @@ public class _Trading_change extends BaseActivity1 implements View.OnClickListen
 		fragmentsList.add(_Change_InFragment1.newInstance(1));
 		fragmentsList.add(_Change_InFragment1.newInstance(0));
 
-		vp.setAdapter(new MyFragmentPagerAdapter(getSupportFragmentManager(), fragmentsList));
+		vp.setAdapter(new MyFinancialStateAdapter(getSupportFragmentManager(), fragmentsList));
 		vp.setCurrentItem(0);
 		vp.setOffscreenPageLimit(2);
 		vp.setOnPageChangeListener(new MyOnPageChangeListener());

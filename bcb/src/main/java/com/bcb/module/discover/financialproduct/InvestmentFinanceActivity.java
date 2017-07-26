@@ -17,7 +17,7 @@ import android.widget.TextView;
 import com.bcb.R;
 import com.bcb.base.old.BaseActivity1;
 import com.bcb.constant.ProjectListType;
-import com.bcb.module.discover.financialproduct.adapter.MyFragmentPagerAdapter;
+import com.bcb.module.myinfo.myfinancial.myfinancialstate.adapter.MyFinancialStateAdapter;
 import com.bcb.util.MyActivityManager;
 
 import java.util.ArrayList;
@@ -51,7 +51,7 @@ public class InvestmentFinanceActivity extends BaseActivity1 implements View.OnC
         fragmentsList.add(FinanceListFragment.newInstance(ProjectListType.MONTH));
         fragmentsList.add(FinanceListFragment.newInstance(ProjectListType.DAY));
 
-        vp.setAdapter(new MyFragmentPagerAdapter(getSupportFragmentManager(), fragmentsList));
+        vp.setAdapter(new MyFinancialStateAdapter(getSupportFragmentManager(), fragmentsList));
         vp.setCurrentItem(0);
         vp.setOffscreenPageLimit(2);
         vp.addOnPageChangeListener(new MyOnPageChangeListener());

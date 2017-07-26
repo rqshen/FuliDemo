@@ -1,4 +1,4 @@
-package com.bcb.module.discover.financialproduct.adapter;
+package com.bcb.module.myinfo.myfinancial.myfinancialstate.adapter;
 
 import java.util.ArrayList;
 
@@ -6,15 +6,15 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-public class MyFragmentPagerAdapter extends FragmentPagerAdapter {
+public class MyFinancialStateAdapter extends FragmentPagerAdapter {
 
 	private ArrayList<Fragment> fragmentsList;
 
-	public MyFragmentPagerAdapter(FragmentManager fm) {
+	public MyFinancialStateAdapter(FragmentManager fm) {
 		super(fm);
 	}
 
-	public MyFragmentPagerAdapter(FragmentManager fm, ArrayList<Fragment> fragments) {
+	public MyFinancialStateAdapter(FragmentManager fm, ArrayList<Fragment> fragments) {
 		super(fm);
 		this.fragmentsList = fragments;
 	}

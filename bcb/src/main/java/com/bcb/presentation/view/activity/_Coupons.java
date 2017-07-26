@@ -38,7 +38,7 @@ import com.bcb.presentation.view.fragment._Coupon2Fragment1;
 import com.bcb.util.LogUtil;
 import com.bcb.util.MyActivityManager;
 import com.bcb.util.TokenUtil;
-import com.bcb.module.discover.financialproduct.adapter.MyFragmentPagerAdapter;
+import com.bcb.module.myinfo.myfinancial.myfinancialstate.adapter.MyFinancialStateAdapter;
 import com.bcb.presentation.view.fragment._TQBJFragment1;
 
 import org.json.JSONException;
@@ -104,7 +104,7 @@ public class _Coupons extends BaseActivity1 {
 		fragmentsList.add(fragment01);
 		fragmentsList.add(fragment02);
 
-		mPager.setAdapter(new MyFragmentPagerAdapter(getSupportFragmentManager(), fragmentsList));
+		mPager.setAdapter(new MyFinancialStateAdapter(getSupportFragmentManager(), fragmentsList));
 		mPager.setCurrentItem(0);
 		mPager.setOffscreenPageLimit(2);
 		mPager.setOnPageChangeListener(new MyOnPageChangeListener());

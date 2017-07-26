@@ -104,8 +104,6 @@ public class MyFinancialListFinishAdapter extends BaseAdapter {
         TextView je;
         @BindView(R.id.tzts)
         TextView tzts;
-        @BindView(R.id.right)
-        RelativeLayout right;
         @BindView(R.id.tv_bottom)
         TextView tvBottom;
         @BindView(R.id.tv_top)
