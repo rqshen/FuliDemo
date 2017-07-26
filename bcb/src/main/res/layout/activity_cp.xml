@@ -76,8 +76,12 @@
         android:layout_width="match_parent"
         android:layout_height="35dp"
         android:background="@color/linegray"
-        android:gravity="center"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
+
+        <Space
+            android:layout_width="20dip"
+            android:layout_height="match_parent" />
 
         <ImageView
             android:layout_width="wrap_content"
