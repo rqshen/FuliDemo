@@ -121,7 +121,7 @@ public class GestureLockActivity extends Activity_Base {
                 public void settingPasswdSuccess(StringBuilder stringBuilder, boolean settingPasswdStatus) {
                     if (settingPasswdStatus) {
                         isSettingPasswd = settingPasswdStatus;
-                        phone_description.setTextColor(getResources().getColor(R.color.txt_gray));
+                        phone_description.setTextColor(getResources().getColor(R.color.text_gray));
                         phone_description.setText("再次绘制解锁图案");
                         password = stringBuilder.toString();
                     } else {

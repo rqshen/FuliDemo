@@ -82,7 +82,7 @@
                         android:layout_toRightOf="@+id/loan_amount_image"
                         android:layout_marginLeft="10dip"
                         android:text="我能贷多少？"
-                        android:textColor="@color/txt_gray"
+                        android:textColor="@color/text_gray"
                         android:textSize="@dimen/main_text_default" />
                     <ImageView
                         style="@style/img_ind"
@@ -117,7 +117,7 @@
                         android:layout_toRightOf="@+id/loan_interest_image"
                         android:layout_marginLeft="10dip"
                         android:text="利息怎么算？"
-                        android:textColor="@color/txt_gray"
+                        android:textColor="@color/text_gray"
                         android:textSize="@dimen/main_text_default" />
 
                     <ImageView
@@ -153,7 +153,7 @@
                         android:layout_toRightOf="@+id/loan_repayment_image"
                         android:layout_marginLeft="10dip"
                         android:text="如何还款？"
-                        android:textColor="@color/txt_gray"
+                        android:textColor="@color/text_gray"
                         android:textSize="@dimen/main_text_default" />
 
                     <ImageView
@@ -189,7 +189,7 @@
                         android:layout_toRightOf="@id/loan_material_image"
                         android:layout_marginLeft="10dip"
                         android:text="准备哪些材料？"
-                        android:textColor="@color/txt_gray"
+                        android:textColor="@color/text_gray"
                         android:textSize="@dimen/main_text_default" />
 
                     <ImageView
@@ -223,7 +223,7 @@
                         android:layout_toRightOf="@id/loan_customer_service_image"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="10dp"
-                        android:textColor="@color/txt_gray"
+                        android:textColor="@color/text_gray"
                         android:textSize="@dimen/main_text_default"
                         android:text="专属客服"/>
                     <ImageView
@@ -238,7 +238,7 @@
                         android:layout_toLeftOf="@id/loan_customer_arrow"
                         android:layout_marginRight="5dp"
                         android:textSize="@dimen/main_text_default"
-                        android:textColor="@color/txt_gray"
+                        android:textColor="@color/text_gray"
                         android:text="闪电回复"/>
 
                 </RelativeLayout>
@@ -269,7 +269,7 @@
                         android:layout_marginLeft="10dip"
                         android:layout_centerVertical="true"
                         android:text="客服电话"
-                        android:textColor="@color/txt_gray"
+                        android:textColor="@color/text_gray"
                         android:textSize="@dimen/main_text_default"/>
                     <ImageView
                         android:id="@+id/loan_phone_arrow"
@@ -284,7 +284,7 @@
                         android:layout_marginRight="5dip"
                         android:text="020-38476886"
                         android:textSize="@dimen/main_text_default"
-                        android:textColor="@color/txt_gray"/>
+                        android:textColor="@color/text_gray"/>
                 </RelativeLayout>
             </LinearLayout>
             <!-- 借款按钮 -->

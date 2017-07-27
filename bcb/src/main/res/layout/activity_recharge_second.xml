@@ -44,7 +44,7 @@
                         android:layout_marginLeft="11dip"
                         android:gravity="center"
                         android:text="@string/recharge_next_text1"
-                        android:textColor="@color/txt_gray"
+                        android:textColor="@color/text_gray"
                         android:textSize="@dimen/main_text_default" />
 
                     <TextView
@@ -80,7 +80,7 @@
                         android:layout_marginLeft="11dip"
                         android:gravity="center"
                         android:text="@string/recharge_next_text2"
-                        android:textColor="@color/txt_gray"
+                        android:textColor="@color/text_gray"
                         android:textSize="@dimen/main_text_default" />
 
                     <TextView
@@ -182,7 +182,7 @@
                         android:digits=".0123456789"
                         android:hint="@string/recharge_next_text7"
                         android:paddingLeft="10dip"
-                        android:textColorHint="@color/txt_gray"
+                        android:textColorHint="@color/text_gray"
                         android:textSize="@dimen/main_text_small"/>
 
                     <Button
@@ -295,7 +295,7 @@
                         android:layout_marginLeft="33dp"
                         android:layout_marginTop="10dp"
                         android:text="1."
-                        android:textColor="@color/txt_gray"
+                        android:textColor="@color/text_gray"
                         android:textSize="@dimen/main_text_small" />
                     <TextView
                         android:layout_width="wrap_content"
@@ -304,7 +304,7 @@
                         android:layout_marginRight="20dp"
                         android:layout_marginTop="10dp"
                         android:text="充值金额将在15分钟内到账，请耐心等待"
-                        android:textColor="@color/txt_gray"
+                        android:textColor="@color/text_gray"
                         android:textSize="@dimen/main_text_small" />
                 </LinearLayout>
                 <LinearLayout
@@ -317,7 +317,7 @@
                         android:layout_marginLeft="33dp"
                         android:layout_marginTop="10dp"
                         android:text="2."
-                        android:textColor="@color/txt_gray"
+                        android:textColor="@color/text_gray"
                         android:textSize="@dimen/main_text_small" />
                     <TextView
                         android:layout_width="wrap_content"
@@ -326,7 +326,7 @@
                         android:layout_marginRight="20dp"
                         android:layout_marginTop="10dp"
                         android:text="如果充值金额没有及时到账，请联系客服:\n020-38476886。"
-                        android:textColor="@color/txt_gray"
+                        android:textColor="@color/text_gray"
                         android:textSize="@dimen/main_text_small" />
                 </LinearLayout>
 
@@ -340,7 +340,7 @@
                         android:layout_marginLeft="33dp"
                         android:layout_marginTop="10dp"
                         android:text="3."
-                        android:textColor="@color/txt_gray"
+                        android:textColor="@color/text_gray"
                         android:textSize="@dimen/main_text_small" />
                     <TextView
                         android:layout_width="wrap_content"
@@ -349,7 +349,7 @@
                         android:layout_marginRight="20dp"
                         android:layout_marginTop="10dp"
                         android:text="首次充值成功后默认完成帐户认证，您的身份证信息和银行卡信息将绑定到福利金融帐号。"
-                        android:textColor="@color/txt_gray"
+                        android:textColor="@color/text_gray"
                         android:textSize="@dimen/main_text_small" />
                 </LinearLayout>
 
@@ -363,7 +363,7 @@
                         android:layout_marginLeft="33dp"
                         android:layout_marginTop="10dp"
                         android:text="4."
-                        android:textColor="@color/txt_gray"
+                        android:textColor="@color/text_gray"
                         android:textSize="@dimen/main_text_small" />
                     <TextView
                         android:layout_width="wrap_content"
@@ -372,7 +372,7 @@
                         android:layout_marginRight="20dp"
                         android:layout_marginTop="10dp"
                         android:text="请注意您的银行卡充值金额限制，以免造成不便。"
-                        android:textColor="@color/txt_gray"
+                        android:textColor="@color/text_gray"
                         android:textSize="@dimen/main_text_small" />
                 </LinearLayout>
 
@@ -386,7 +386,7 @@
                         android:layout_marginLeft="33dp"
                         android:layout_marginTop="10dp"
                         android:text="5."
-                        android:textColor="@color/txt_gray"
+                        android:textColor="@color/text_gray"
                         android:textSize="@dimen/main_text_small" />
                     <TextView
                         android:layout_width="wrap_content"
@@ -395,7 +395,7 @@
                         android:layout_marginRight="20dp"
                         android:layout_marginTop="10dp"
                         android:text="福利金融禁止使用信用卡充值。"
-                        android:textColor="@color/txt_gray"
+                        android:textColor="@color/text_gray"
                         android:textSize="@dimen/main_text_small" />
                 </LinearLayout>
 
@@ -409,7 +409,7 @@
                         android:layout_marginLeft="33dp"
                         android:layout_marginTop="10dp"
                         android:text="6."
-                        android:textColor="@color/txt_gray"
+                        android:textColor="@color/text_gray"
                         android:textSize="@dimen/main_text_small" />
                     <TextView
                         android:layout_width="wrap_content"
@@ -418,7 +418,7 @@
                         android:layout_marginRight="20dp"
                         android:layout_marginTop="10dp"
                         android:text="禁止洗钱、信用卡套现、虚假交易等行为，一经发现并确认，将终止该账户的使用。"
-                        android:textColor="@color/txt_gray"
+                        android:textColor="@color/text_gray"
                         android:textSize="@dimen/main_text_small" />
                 </LinearLayout>
             </LinearLayout>

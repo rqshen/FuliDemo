@@ -36,7 +36,7 @@
             android:singleLine="true"
             android:hint="请输入兑换码"
 
-            android:textColorHint="@color/txt_gray"
+            android:textColorHint="@color/text_gray"
             android:padding="10dip"
             android:textColor="@color/text_black"
             android:textSize="@dimen/main_text_default" />
@@ -72,7 +72,7 @@
             android:layout_weight="1"
             android:background="@drawable/dialog_gray"
             android:text="取消"
-            android:textColor="@color/txt_gray"
+            android:textColor="@color/text_gray"
             android:textSize="@dimen/main_text_default" />
         
         <Button

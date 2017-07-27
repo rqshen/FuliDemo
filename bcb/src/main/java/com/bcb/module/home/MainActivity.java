@@ -401,9 +401,9 @@ public class MainActivity extends BaseActivity1 {
         img_mainpage.setImageResource(R.drawable.main_home_page_default);
         img_product.setImageResource(R.drawable.main_product_default);
         img_user.setImageResource(R.drawable.main_my_default);
-        txt_mainpage.setTextColor(getResources().getColor(R.color.txt_gray));
-        txt_product.setTextColor(getResources().getColor(R.color.txt_gray));
-        txt_user.setTextColor(getResources().getColor(R.color.txt_gray));
+        txt_mainpage.setTextColor(getResources().getColor(R.color.text_gray));
+        txt_product.setTextColor(getResources().getColor(R.color.text_gray));
+        txt_user.setTextColor(getResources().getColor(R.color.text_gray));
         select.setTextColor(getResources().getColor(R.color.red));
     }
 

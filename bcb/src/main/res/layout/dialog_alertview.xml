@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dip"
             android:text="朋友圈"
-            android:textColor="@color/txt_gray"
+            android:textColor="@color/text_gray"
             android:textSize="@dimen/main_text_small"/>
     </LinearLayout>
     <LinearLayout
@@ -66,7 +66,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dip"
             android:text="微信群"
-            android:textColor="@color/txt_gray"
+            android:textColor="@color/text_gray"
             android:textSize="@dimen/main_text_small"/>
     </LinearLayout>
 
@@ -85,7 +85,7 @@
             android:layout_marginRight="10dip"
             android:background="@drawable/dialog_gray"
             android:text="取消"
-            android:textColor="@color/txt_gray"
+            android:textColor="@color/text_gray"
             android:textSize="@dimen/main_text_default" />
     </LinearLayout>
 

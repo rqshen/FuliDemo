@@ -165,7 +165,7 @@
             android:gravity="center"
             android:singleLine="true"
             android:text="查看托管接入证明"
-            android:textColor="@color/txt_gray"
+            android:textColor="@color/text_gray"
             android:textSize="13sp"/>
 
         <ImageView
@@ -199,7 +199,7 @@
             android:gravity="center"
             android:singleLine="true"
             android:text="登录资金托管账户"
-            android:textColor="@color/txt_gray"
+            android:textColor="@color/text_gray"
             android:textSize="13sp"/>
 
         <ImageView
@@ -233,7 +233,7 @@
             android:gravity="center"
             android:singleLine="true"
             android:text="找回汇付交易密码"
-            android:textColor="@color/txt_gray"
+            android:textColor="@color/text_gray"
             android:textSize="13sp"/>
 
         <ImageView
@@ -267,7 +267,7 @@
             android:gravity="center"
             android:singleLine="true"
             android:text="找回汇付登录密码"
-            android:textColor="@color/txt_gray"
+            android:textColor="@color/text_gray"
             android:textSize="13sp"/>
 
         <ImageView
@@ -301,7 +301,7 @@
             android:gravity="center"
             android:singleLine="true"
             android:text="修改汇付交易密码"
-            android:textColor="@color/txt_gray"
+            android:textColor="@color/text_gray"
             android:textSize="13sp"/>
 
         <ImageView
@@ -335,7 +335,7 @@
             android:gravity="center"
             android:singleLine="true"
             android:text="解绑银行卡"
-            android:textColor="@color/txt_gray"
+            android:textColor="@color/text_gray"
             android:textSize="13sp"/>
 
         <ImageView

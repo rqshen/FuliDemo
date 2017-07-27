@@ -60,7 +60,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="仅限购房借款"
-                            android:textColor="@color/txt_gray"
+                            android:textColor="@color/text_gray"
                             android:textSize="@dimen/main_text_small"/>
                     </LinearLayout>
                 </LinearLayout>
@@ -102,7 +102,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="借款期限"
-                                android:textColor="@color/txt_gray"
+                                android:textColor="@color/text_gray"
                                 android:textSize="@dimen/main_text_small"/>
                         </LinearLayout>
                         <!-- 文字 -->
@@ -122,7 +122,7 @@
                                 android:layout_marginLeft="10dip"
                                 android:text="个月"
                                 android:textSize="@dimen/main_text_default"
-                                android:textColor="@color/txt_gray"/>
+                                android:textColor="@color/text_gray"/>
                         </LinearLayout>
                     </LinearLayout>
 
@@ -150,7 +150,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="年利率"
-                                android:textColor="@color/txt_gray"
+                                android:textColor="@color/text_gray"
                                 android:textSize="@dimen/main_text_small"/>
                         </LinearLayout>
                         <!-- 文字 -->
@@ -189,7 +189,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="最高可借款"
-                                android:textColor="@color/txt_gray"
+                                android:textColor="@color/text_gray"
                                 android:textSize="@dimen/main_text_small"/>
                         </LinearLayout>
                         <!-- 文字 -->
@@ -254,7 +254,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="日常消费、装修、教育支出等"
-                            android:textColor="@color/txt_gray"
+                            android:textColor="@color/text_gray"
                             android:textSize="@dimen/main_text_small"/>
                     </LinearLayout>
                 </LinearLayout>
@@ -295,7 +295,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="借款期限"
-                                android:textColor="@color/txt_gray"
+                                android:textColor="@color/text_gray"
                                 android:textSize="@dimen/main_text_small"/>
                         </LinearLayout>
                         <!-- 文字 -->
@@ -315,7 +315,7 @@
                                 android:layout_marginLeft="10dip"
                                 android:text="个月"
                                 android:textSize="@dimen/main_text_default"
-                                android:textColor="@color/txt_gray"/>
+                                android:textColor="@color/text_gray"/>
                         </LinearLayout>
                     </LinearLayout>
 
@@ -343,7 +343,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="年利率"
-                                android:textColor="@color/txt_gray"
+                                android:textColor="@color/text_gray"
                                 android:textSize="@dimen/main_text_small"/>
                         </LinearLayout>
                         <!-- 文字 -->
@@ -383,7 +383,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="最高可借款"
-                                android:textColor="@color/txt_gray"
+                                android:textColor="@color/text_gray"
                                 android:textSize="@dimen/main_text_small"/>
                         </LinearLayout>
                         <!-- 文字 -->
@@ -449,7 +449,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="还信用卡、临时缴费等短期资金周转"
-                            android:textColor="@color/txt_gray"
+                            android:textColor="@color/text_gray"
                             android:textSize="@dimen/main_text_small"/>
                     </LinearLayout>
                 </LinearLayout>
@@ -491,7 +491,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="借款期限"
-                                android:textColor="@color/txt_gray"
+                                android:textColor="@color/text_gray"
                                 android:textSize="@dimen/main_text_small"/>
                         </LinearLayout>
                         <!-- 文字 -->
@@ -511,7 +511,7 @@
                                 android:layout_marginLeft="10dip"
                                 android:text="个月"
                                 android:textSize="@dimen/main_text_default"
-                                android:textColor="@color/txt_gray"/>
+                                android:textColor="@color/text_gray"/>
                         </LinearLayout>
                     </LinearLayout>
 
@@ -539,7 +539,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="年利率"
-                                android:textColor="@color/txt_gray"
+                                android:textColor="@color/text_gray"
                                 android:textSize="@dimen/main_text_small"/>
                         </LinearLayout>
                         <!-- 文字 -->
@@ -579,7 +579,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="最高可借款"
-                                android:textColor="@color/txt_gray"
+                                android:textColor="@color/text_gray"
                                 android:textSize="@dimen/main_text_small"/>
                         </LinearLayout>
                         <!-- 文字 -->

@@ -53,7 +53,7 @@
             android:layout_toLeftOf="@id/user_image_car"
             android:gravity="center"
             android:text=""
-            android:textColor="@color/txt_gray"
+            android:textColor="@color/text_gray"
             android:textSize="@dimen/main_text_small"/>
     </RelativeLayout>
 
@@ -104,7 +104,7 @@
             android:layout_toLeftOf="@id/user_image_security"
             android:gravity="center"
             android:text=""
-            android:textColor="@color/txt_gray"
+            android:textColor="@color/text_gray"
             android:textSize="@dimen/main_text_small"/>
     </RelativeLayout>
 </LinearLayout>

@@ -51,7 +51,7 @@
                 android:layout_marginTop="8dip"
                 android:text=""
                 android:textSize="@dimen/main_text_default"
-                android:textColor="@color/txt_gray" />
+                android:textColor="@color/text_gray" />
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="1dip"

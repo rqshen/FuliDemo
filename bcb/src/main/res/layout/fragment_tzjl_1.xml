@@ -95,7 +95,7 @@
             android:layout_weight="1.0"
             android:gravity="center"
             android:text="已结束"
-            android:textColor="@color/txt_gray"
+            android:textColor="@color/text_gray"
             android:textSize="15sp"/>
 
     </LinearLayout>

@@ -69,7 +69,6 @@ public class MyApplication extends Application implements AMapLocationListener {
     {
         PlatformConfig.setWeixin("wx2a098a76630fc98f", "564c1cd6e0f55ab6e6001ce4");
         PlatformConfig.setQQZone("100424468", "c7394704798a158208a74ab60104f0ba");
-        PlatformConfig.setSinaWeibo("3921700954", "04b48b094faeb16683c32669824ebdad", "http://sns.whalecloud.com");
     }
 
     @Override

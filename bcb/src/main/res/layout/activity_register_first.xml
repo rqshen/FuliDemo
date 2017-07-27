@@ -55,7 +55,7 @@
                     android:maxLength="11"
                     android:singleLine="true"
                     android:textColor="#424954"
-                    android:textColorHint="@color/txt_gray"
+                    android:textColorHint="@color/text_gray"
                     android:textSize="17sp"/>
 
 

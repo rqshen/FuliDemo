@@ -39,7 +39,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=""
-                        android:textColor="@color/txt_gray"
+                        android:textColor="@color/text_gray"
                         android:textSize="@dimen/main_text_default"/>
                 </LinearLayout>
 
@@ -70,7 +70,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=""
-                        android:textColor="@color/txt_gray"
+                        android:textColor="@color/text_gray"
                         android:textSize="@dimen/main_text_default"/>
                 </LinearLayout>
 
@@ -101,7 +101,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=""
-                        android:textColor="@color/txt_gray"
+                        android:textColor="@color/text_gray"
                         android:textSize="@dimen/main_text_default"/>
                 </LinearLayout>
 
@@ -132,7 +132,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=""
-                        android:textColor="@color/txt_gray"
+                        android:textColor="@color/text_gray"
                         android:textSize="@dimen/main_text_default"/>
                 </LinearLayout>
 
@@ -163,7 +163,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=""
-                        android:textColor="@color/txt_gray"
+                        android:textColor="@color/text_gray"
                         android:textSize="@dimen/main_text_default"/>
                 </LinearLayout>
 
@@ -194,7 +194,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=""
-                        android:textColor="@color/txt_gray"
+                        android:textColor="@color/text_gray"
                         android:textSize="@dimen/main_text_default"/>
                 </LinearLayout>
                 <View
@@ -500,7 +500,7 @@
                         android:layout_marginTop="16dip"
                         android:layout_marginLeft="30dip"
                         android:text="下一个还款日"
-                        android:textColor="@color/txt_gray"
+                        android:textColor="@color/text_gray"
                         android:textSize="@dimen/main_text_default"/>
                     <TextView
                         android:id="@+id/loan_next_date"
@@ -509,7 +509,7 @@
                         android:layout_marginTop="16dip"
                         android:layout_marginLeft="5dip"
                         android:text=""
-                        android:textColor="@color/txt_gray"
+                        android:textColor="@color/text_gray"
                         android:textSize="@dimen/main_text_default"/>
                 </LinearLayout>
                 <LinearLayout
@@ -522,7 +522,7 @@
                         android:layout_marginBottom="15dip"
                         android:layout_marginLeft="30dip"
                         android:text="还款金额"
-                        android:textColor="@color/txt_gray"
+                        android:textColor="@color/text_gray"
                         android:textSize="@dimen/main_text_default"/>
                     <TextView
                         android:id="@+id/loan_next_payment"
@@ -532,7 +532,7 @@
                         android:layout_marginBottom="15dip"
                         android:layout_marginLeft="5dip"
                         android:text=""
-                        android:textColor="@color/txt_gray"
+                        android:textColor="@color/text_gray"
                         android:textSize="@dimen/main_text_default"/>
                 </LinearLayout>
 

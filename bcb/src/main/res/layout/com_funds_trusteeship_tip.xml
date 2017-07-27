@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="福利金融由央行监管的"
-        android:textColor="@color/txt_gray"
+        android:textColor="@color/text_gray"
         android:textSize="@dimen/main_text_small"/>
 
     <ImageView
@@ -26,6 +26,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="进行资金托管"
-        android:textColor="@color/txt_gray"
+        android:textColor="@color/text_gray"
         android:textSize="@dimen/main_text_small"/>
 </LinearLayout>

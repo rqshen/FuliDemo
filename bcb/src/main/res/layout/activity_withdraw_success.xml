@@ -64,7 +64,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="提现"
-                    android:textColor="@color/txt_gray"
+                    android:textColor="@color/text_gray"
                     android:textSize="16sp"/>
 
                 <TextView
@@ -72,14 +72,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="1000.00"
-                    android:textColor="@color/txt_gray"
+                    android:textColor="@color/text_gray"
                     android:textSize="16sp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="元到"
-                    android:textColor="@color/txt_gray"
+                    android:textColor="@color/text_gray"
                     android:textSize="16sp"/>
 
                 <TextView
@@ -87,14 +87,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="平安银行"
-                    android:textColor="@color/txt_gray"
+                    android:textColor="@color/text_gray"
                     android:textSize="16sp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="卡（尾号"
-                    android:textColor="@color/txt_gray"
+                    android:textColor="@color/text_gray"
                     android:textSize="16sp"/>
 
                 <TextView
@@ -102,14 +102,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="8976"
-                    android:textColor="@color/txt_gray"
+                    android:textColor="@color/text_gray"
                     android:textSize="16sp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="）"
-                    android:textColor="@color/txt_gray"
+                    android:textColor="@color/text_gray"
                     android:textSize="16sp"/>
 
             </LinearLayout>

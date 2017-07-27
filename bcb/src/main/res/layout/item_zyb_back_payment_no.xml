@@ -27,7 +27,7 @@
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
         android:text="暂无回款记录"
-        android:textColor="@color/txt_gray" />
+        android:textColor="@color/text_gray" />
 
     <Space
         android:layout_width="wrap_content"

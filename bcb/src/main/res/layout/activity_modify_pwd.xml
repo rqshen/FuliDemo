@@ -33,7 +33,7 @@
                 android:paddingLeft="15dip"
                 android:paddingRight="15dip"
                 android:singleLine="true"
-                android:textColorHint="@color/txt_gray"
+                android:textColorHint="@color/text_gray"
                 android:textSize="@dimen/main_text_small" />
         </LinearLayout>
 
@@ -62,7 +62,7 @@
                 android:paddingLeft="15dip"
                 android:paddingRight="15dip"
                 android:singleLine="true"
-                android:textColorHint="@color/txt_gray"
+                android:textColorHint="@color/text_gray"
                 android:textSize="@dimen/main_text_small" />
         </LinearLayout>
 
@@ -87,7 +87,7 @@
                 android:inputType="textPassword"
                 android:paddingLeft="15dip"
                 android:singleLine="true"
-                android:textColorHint="@color/txt_gray"
+                android:textColorHint="@color/text_gray"
                 android:textSize="@dimen/main_text_small" />
         </LinearLayout>
 

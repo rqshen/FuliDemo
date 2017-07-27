@@ -52,7 +52,7 @@
                         android:layout_marginTop="20dip"
                         android:text="暂无优惠劵，请先兑换"
                         android:textSize="@dimen/main_text_default"
-                        android:textColor="@color/txt_gray"/>
+                        android:textColor="@color/text_gray"/>
                 </LinearLayout>
             </LinearLayout>
         </com.bcb.presentation.view.custom.PullableView.PullableScrollView>

@@ -108,7 +108,7 @@
             android:hint="请输入提现金额"
             android:inputType="number"
             android:digits="012345678."
-            android:textColorHint="@color/txt_gray"
+            android:textColorHint="@color/text_gray"
             android:textSize="22sp"/>
 
         <ImageView
@@ -143,7 +143,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="可提现余额"
-            android:textColor="@color/txt_gray"
+            android:textColor="@color/text_gray"
             android:textSize="12sp"/>
 
         <TextView
@@ -151,14 +151,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0.00"
-            android:textColor="@color/txt_gray"
+            android:textColor="@color/text_gray"
             android:textSize="12sp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="元，最低不能少于3元"
-            android:textColor="@color/txt_gray"
+            android:textColor="@color/text_gray"
             android:textSize="12sp"/>
 
 
@@ -193,7 +193,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="使用提现券"
-            android:textColor="@color/txt_gray"
+            android:textColor="@color/text_gray"
             android:textSize="12sp"/>
 
         <TextView
@@ -201,14 +201,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0"
-            android:textColor="@color/txt_gray"
+            android:textColor="@color/text_gray"
             android:textSize="12sp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="张"
-            android:textColor="@color/txt_gray"
+            android:textColor="@color/text_gray"
             android:textSize="12sp"/>
 
         <Space

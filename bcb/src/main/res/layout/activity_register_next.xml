@@ -46,7 +46,7 @@
                 android:hint="请输入验证码"
                 android:singleLine="true"
                 android:textColor="#424954"
-                android:textColorHint="@color/txt_gray"
+                android:textColorHint="@color/text_gray"
                 android:textSize="17sp"/>
 
             <View
@@ -92,7 +92,7 @@
                 android:inputType="textPassword"
                 android:singleLine="true"
                 android:textColor="#424954"
-                android:textColorHint="@color/txt_gray"
+                android:textColorHint="@color/text_gray"
                 android:textSize="17sp"/>
 
             <View
@@ -176,7 +176,7 @@
                 android:inputType="textPassword"
                 android:singleLine="true"
                 android:textColor="#424954"
-                android:textColorHint="@color/txt_gray"
+                android:textColorHint="@color/text_gray"
                 android:textSize="17sp"/>
 
             <View

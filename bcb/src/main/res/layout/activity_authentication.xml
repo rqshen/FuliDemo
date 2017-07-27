@@ -51,7 +51,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/margin_size_large"
                         android:text="@string/recharge_text2"
-                        android:textColor="@color/txt_gray"
+                        android:textColor="@color/text_gray"
                         android:textSize="@dimen/main_text_default" />
 
                     <EditText
@@ -83,7 +83,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/margin_size_large"
                         android:text="@string/recharge_text4"
-                        android:textColor="@color/txt_gray"
+                        android:textColor="@color/text_gray"
                         android:textSize="@dimen/main_text_default" />
 
                     <EditText
@@ -141,7 +141,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/recharge_margin_left"
                         android:text="@string/recharge_text7"
-                        android:textColor="@color/txt_gray"
+                        android:textColor="@color/text_gray"
                         android:textSize="@dimen/main_text_default" />
 
                     <LinearLayout
@@ -209,7 +209,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/recharge_margin_left"
                         android:text="@string/recharge_text9"
-                        android:textColor="@color/txt_gray"
+                        android:textColor="@color/text_gray"
                         android:textSize="@dimen/main_text_default" />
 
                     <EditText
@@ -240,7 +240,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/recharge_margin_left"
                         android:text="预留手机号"
-                        android:textColor="@color/txt_gray"
+                        android:textColor="@color/text_gray"
                         android:textSize="@dimen/main_text_default" />
                     <EditText
                         android:id="@+id/bankcard_phone"

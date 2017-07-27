@@ -252,7 +252,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
             android:text="联系客服：020-38476886"
-            android:textColor="@color/txt_gray"
+            android:textColor="@color/text_gray"
             android:textSize="@dimen/main_text_small"/>
     </LinearLayout>
 </LinearLayout>

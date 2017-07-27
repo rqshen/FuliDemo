@@ -27,7 +27,7 @@
         <item name="android:layout_alignParentBottom">true</item>
         <item name="android:layout_centerHorizontal">true</item>
         <item name="android:textSize">12sp</item>
-        <item name="android:textColor">@color/txt_gray</item>
+        <item name="android:textColor">@color/text_gray</item>
         <item name="android:gravity">center</item>
     </style>
 
@@ -90,7 +90,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/main_text_default</item>
         <item name="android:gravity">left|center_vertical</item>
-        <item name="android:textColor">@color/txt_gray</item>
+        <item name="android:textColor">@color/text_gray</item>
     </style>
 
     <style name="txt_buy_value">

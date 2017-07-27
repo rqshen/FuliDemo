@@ -91,7 +91,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/txt_gray"
+                        android:textColor="@color/text_gray"
                         android:textSize="@dimen/item_text_small"
                         android:text="年化收益率(%)"/>
                 </LinearLayout>
@@ -139,7 +139,7 @@
                             android:layout_marginTop="8dp"
                             android:singleLine="true"
                             android:text="已有21人预约"
-                            android:textColor="@color/txt_gray"
+                            android:textColor="@color/text_gray"
                             android:textSize="@dimen/item_text_xsmall" />
                     </LinearLayout>
                 </LinearLayout>

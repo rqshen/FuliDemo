@@ -43,7 +43,7 @@
                 android:maxLength="11"
                 android:singleLine="true"
                 android:textColor="#424954"
-                android:textColorHint="@color/txt_gray"
+                android:textColorHint="@color/text_gray"
                 android:textSize="17sp"/>
 
             <View
@@ -76,7 +76,7 @@
                 android:inputType="textPassword"
                 android:singleLine="true"
                 android:textColor="#424954"
-                android:textColorHint="@color/txt_gray"
+                android:textColorHint="@color/text_gray"
                 android:textSize="17sp"/>
 
             <View
@@ -124,7 +124,7 @@
                 android:inputType="number"
                 android:paddingLeft="35dip"
                 android:singleLine="true"
-                android:textColorHint="@color/txt_gray"
+                android:textColorHint="@color/text_gray"
                 android:textSize="14sp"/>
 
             <ImageView

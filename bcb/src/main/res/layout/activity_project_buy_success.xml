@@ -51,7 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="本次购买"
-            android:textColor="@color/txt_gray"
+            android:textColor="@color/text_gray"
             android:textSize="15sp"/>
 
         <TextView
@@ -59,14 +59,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0.00"
-            android:textColor="@color/txt_gray"
+            android:textColor="@color/text_gray"
             android:textSize="15sp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="元，继续理财获得更多收益"
-            android:textColor="@color/txt_gray"
+            android:textColor="@color/text_gray"
             android:textSize="15sp"/>
 
     </LinearLayout>

@@ -37,7 +37,7 @@
                     android:paddingBottom="@dimen/margin_size_large"
                     android:paddingTop="@dimen/margin_size_large"
                     android:text="@string/setting_name"
-                    android:textColor="@color/txt_gray"
+                    android:textColor="@color/text_gray"
                     android:textSize="@dimen/main_text_default"/>
 
                 <TextView
@@ -95,7 +95,7 @@
                     android:paddingBottom="@dimen/margin_size_large"
                     android:paddingTop="@dimen/margin_size_large"
                     android:text="@string/setting_idcard"
-                    android:textColor="@color/txt_gray"
+                    android:textColor="@color/text_gray"
                     android:textSize="@dimen/main_text_default"/>
 
                 <TextView
@@ -154,7 +154,7 @@
                     android:paddingBottom="@dimen/margin_size_large"
                     android:paddingTop="@dimen/margin_size_large"
                     android:text="@string/setting_bankcard"
-                    android:textColor="@color/txt_gray"
+                    android:textColor="@color/text_gray"
                     android:textSize="@dimen/main_text_default"/>
 
                 <TextView
@@ -166,7 +166,7 @@
                     android:layout_toRightOf="@id/textView3"
                     android:gravity="center"
                     android:text=""
-                    android:textColor="@color/txt_gray"
+                    android:textColor="@color/text_gray"
                     android:textSize="@dimen/main_text_default"/>
 
                 <LinearLayout
@@ -206,7 +206,7 @@
                     android:paddingBottom="@dimen/margin_size_large"
                     android:paddingTop="@dimen/margin_size_large"
                     android:text="@string/setting_phonenum"
-                    android:textColor="@color/txt_gray"
+                    android:textColor="@color/text_gray"
                     android:textSize="@dimen/main_text_default"/>
 
                 <ImageView
@@ -268,7 +268,7 @@
                     android:paddingBottom="@dimen/margin_size_large"
                     android:paddingTop="@dimen/margin_size_large"
                     android:text="资金托管"
-                    android:textColor="@color/txt_gray"
+                    android:textColor="@color/text_gray"
                     android:textSize="@dimen/main_text_default"/>
 
                 <ImageView
@@ -310,7 +310,7 @@
                     android:paddingBottom="@dimen/margin_size_large"
                     android:paddingTop="@dimen/margin_size_large"
                     android:text="公司认证"
-                    android:textColor="@color/txt_gray"
+                    android:textColor="@color/text_gray"
                     android:textSize="@dimen/main_text_default"/>
 
                 <ImageView
@@ -358,7 +358,7 @@
                     android:paddingBottom="@dimen/margin_size_large"
                     android:paddingTop="@dimen/margin_size_large"
                     android:text="@string/setting_login_passwd"
-                    android:textColor="@color/txt_gray"
+                    android:textColor="@color/text_gray"
                     android:textSize="@dimen/main_text_default"/>
 
                 <ImageView
@@ -399,7 +399,7 @@
                     android:paddingBottom="@dimen/margin_size_large"
                     android:paddingTop="@dimen/margin_size_large"
                     android:text="手势密码"
-                    android:textColor="@color/txt_gray"
+                    android:textColor="@color/text_gray"
                     android:textSize="@dimen/main_text_default"/>
 
                 <Switch
@@ -535,7 +535,7 @@
                     android:paddingBottom="@dimen/margin_size_large"
                     android:paddingTop="@dimen/margin_size_large"
                     android:text="@string/setting_aboutus"
-                    android:textColor="@color/txt_gray"
+                    android:textColor="@color/text_gray"
                     android:textSize="@dimen/main_text_default"/>
 
                 <ImageView
@@ -595,7 +595,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:text="版本"
-                    android:textColor="@color/txt_gray"
+                    android:textColor="@color/text_gray"
                     android:textSize="13sp"/>
             </RelativeLayout>
         </LinearLayout>

@@ -42,7 +42,7 @@
                 android:layout_marginTop="5dip"
                 android:layout_toRightOf="@+id/layout_icon"
                 android:text=""
-                android:textColor="@color/txt_gray"
+                android:textColor="@color/text_gray"
                 android:textSize="@dimen/main_text_small"/>
         </LinearLayout>
     </RelativeLayout>

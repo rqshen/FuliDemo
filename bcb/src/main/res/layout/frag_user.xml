@@ -157,7 +157,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_centerHorizontal="true"
                                 android:text="@string/value_earn"
-                                android:textColor="@color/txt_gray"
+                                android:textColor="@color/text_gray"
                                 android:textSize="15sp"/>
 
                             <ImageView

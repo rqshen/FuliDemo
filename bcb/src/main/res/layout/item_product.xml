@@ -93,7 +93,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/txt_gray"
+                        android:textColor="@color/text_gray"
                         android:textSize="@dimen/item_text_small"
                         android:text="年化收益率(%)"/>
                 </LinearLayout>
@@ -121,7 +121,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/txt_gray"
+                            android:textColor="@color/text_gray"
                             android:textSize="@dimen/item_text_small"
                             android:textStyle="normal"
                             android:text="期限"/>
@@ -156,7 +156,7 @@
                             android:singleLine="true"
                             android:textStyle="normal"
                             android:text="可投"
-                            android:textColor="@color/txt_gray"
+                            android:textColor="@color/text_gray"
                             android:textSize="@dimen/item_text_small" />
                         <TextView
                             android:id="@+id/amountBalance"
@@ -182,7 +182,7 @@
                             android:singleLine="true"
                             android:textStyle="normal"
                             android:text="进度"
-                            android:textColor="@color/txt_gray"
+                            android:textColor="@color/text_gray"
                             android:textSize="@dimen/item_text_small" />
                         <ProgressBar
                             android:id="@+id/progress_percent"

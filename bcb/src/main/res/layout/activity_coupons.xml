@@ -63,7 +63,7 @@
             android:layout_weight="1.0"
             android:gravity="center"
             android:text="特权本金"
-            android:textColor="@color/txt_gray"
+            android:textColor="@color/text_gray"
             android:textSize="14sp"/>
 
     </LinearLayout>

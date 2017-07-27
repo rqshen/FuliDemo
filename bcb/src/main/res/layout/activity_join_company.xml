@@ -264,7 +264,7 @@
                     android:layout_gravity="center_horizontal"
                     android:gravity="center_horizontal"
                     android:text="为保证信息展示一致，工作人员可能对您的信息进行校正"
-                    android:textColor="@color/txt_gray"
+                    android:textColor="@color/text_gray"
                     android:textSize="13sp"/>
             </LinearLayout>
 

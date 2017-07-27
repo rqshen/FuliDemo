@@ -33,7 +33,7 @@
             android:layout_weight="1.0"
             android:gravity="center"
             android:text="稳盈灵活投"
-            android:textColor="@color/txt_gray"
+            android:textColor="@color/text_gray"
             android:textSize="14sp"
             android:visibility="visible" />
 

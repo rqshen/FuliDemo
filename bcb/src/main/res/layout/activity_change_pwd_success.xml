@@ -40,7 +40,7 @@
             android:gravity="center"
             android:padding="15dip"
             android:text="温馨提示：为了保证账户安全，建议您定期修改账户密码涉及资金安全，切勿外泄"
-            android:textColor="@color/txt_gray"
+            android:textColor="@color/text_gray"
             android:textSize="@dimen/main_text_default" />
 =
         <Button

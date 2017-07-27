@@ -80,7 +80,7 @@
         android:background="@color/white"
         android:gravity="center"
         android:text="取消"
-        android:textColor="@color/txt_gray"
+        android:textColor="@color/text_gray"
         android:textSize="16sp"/>
 
 </LinearLayout>

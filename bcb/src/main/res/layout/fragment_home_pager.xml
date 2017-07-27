@@ -135,7 +135,7 @@
                             android:layout_width="0dp"
                             android:layout_height="0dp"
                             android:text="1111"
-                            android:textColor="@color/txt_gray"
+                            android:textColor="@color/text_gray"
                             android:textSize="@dimen/main_text_small"/>
                     </LinearLayout>
 

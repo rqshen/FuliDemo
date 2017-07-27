@@ -213,7 +213,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_below="@id/layout_recharge_failed"
                 android:layout_gravity="center_horizontal"
-                android:textColor="@color/txt_gray"
+                android:textColor="@color/text_gray"
                 android:textSize="@dimen/main_text_default"
                 android:text="30秒内闪电回复"/>
         </RelativeLayout>

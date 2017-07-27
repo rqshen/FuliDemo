@@ -113,7 +113,7 @@
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="18dp"
                             android:text="借款金额"
-                            android:textColor="@color/txt_gray"
+                            android:textColor="@color/text_gray"
                             android:textSize="@dimen/main_text_default"/>
 
                         <TextView
@@ -166,7 +166,7 @@
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="18dp"
                             android:text="借款时间"
-                            android:textColor="@color/txt_gray"
+                            android:textColor="@color/text_gray"
                             android:textSize="@dimen/main_text_default"/>
 
                         <ImageView
@@ -214,7 +214,7 @@
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="18dp"
                             android:text="还款期数"
-                            android:textColor="@color/txt_gray"
+                            android:textColor="@color/text_gray"
                             android:textSize="@dimen/main_text_default"/>
 
                         <ImageView
@@ -260,7 +260,7 @@
                             android:layout_marginLeft="18dp"
                             android:layout_marginTop="16dp"
                             android:text="执行利率"
-                            android:textColor="@color/txt_gray"
+                            android:textColor="@color/text_gray"
                             android:textSize="@dimen/main_text_default"/>
 
                         <RelativeLayout
@@ -319,7 +319,7 @@
                             android:layout_marginLeft="18dp"
                             android:gravity="center_vertical"
                             android:text="借款用途"
-                            android:textColor="@color/txt_gray"
+                            android:textColor="@color/text_gray"
                             android:textSize="@dimen/main_text_default"/>
 
                         <ImageView
@@ -369,7 +369,7 @@
                             android:layout_marginLeft="18dp"
                             android:layout_marginTop="16dp"
                             android:text="还款方案"
-                            android:textColor="@color/txt_gray"
+                            android:textColor="@color/text_gray"
                             android:textSize="@dimen/main_text_default"/>
 
                         <RelativeLayout
@@ -448,7 +448,7 @@
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="18dp"
                             android:text="利息抵扣券"
-                            android:textColor="@color/txt_gray"
+                            android:textColor="@color/text_gray"
                             android:textSize="@dimen/main_text_default"/>
 
                         <TextView
@@ -491,7 +491,7 @@
                             android:layout_centerVertical="true"
                             android:layout_marginLeft="18dp"
                             android:text="申请福利补贴"
-                            android:textColor="@color/txt_gray"
+                            android:textColor="@color/text_gray"
                             android:textSize="@dimen/main_text_default"/>
 
                         <LinearLayout
@@ -568,7 +568,7 @@
                     android:paddingRight="10dp"
                     android:paddingTop="10dp"
                     android:text="产品介绍"
-                    android:textColor="@color/txt_gray"
+                    android:textColor="@color/text_gray"
                     android:textSize="14sp"/>
             </LinearLayout>
         </com.bcb.presentation.view.custom.PullableView.PullableScrollView>
