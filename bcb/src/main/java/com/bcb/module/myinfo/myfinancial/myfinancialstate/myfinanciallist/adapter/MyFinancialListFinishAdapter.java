@@ -89,7 +89,7 @@ public class MyFinancialListFinishAdapter extends BaseAdapter {
         }
 
         viewHolder.je.setText(String.format("%.0f", bean.OrderAmount));
-        viewHolder.tzts.setText(bean.TotalDays);//
+        viewHolder.tzts.setText(bean.TotalDays + "");//
         viewHolder.tvBottom.setText(bean.StatusTips);
     }
 
