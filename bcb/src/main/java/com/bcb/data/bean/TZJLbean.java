@@ -21,15 +21,11 @@ public class TZJLbean {
      * PackPrincipal : 10000
      */
 
-    public int ChickenInterest;
-    public int ChickenPrincipal;
+    public float ChickenInterest;
+    public float ChickenPrincipal;
     public InvetDetailBean InvetDetail;
-    public int MonkeyInterest;
-    public int MonkeyPrincipal;
-    public int OriginalInterest;
-    public int OriginalPrincipal;
-    public int PackInterest;
-    public int PackPrincipal;
+    public float PackInterest;
+    public float PackPrincipal;
 
     public static class InvetDetailBean {
         /**
