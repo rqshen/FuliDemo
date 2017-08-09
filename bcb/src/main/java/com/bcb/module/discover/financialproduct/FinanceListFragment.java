@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bcb.MyApplication;
@@ -36,6 +37,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+
 /**
  * 描述：产品列表
  * 作者：baicaibang
@@ -43,6 +46,7 @@ import java.util.List;
  */
 public class FinanceListFragment extends BaseFragment1 implements AdapterView.OnItemClickListener {
     private Context context;
+    TextView mPackageTips;
 
     private MyListView lv;
     private String Status;//	【 0稳赢 散标】【1涨薪宝 原始标】 【3周盈宝 散标】
@@ -94,6 +98,7 @@ public class FinanceListFragment extends BaseFragment1 implements AdapterView.On
         lv = (MyListView) view.findViewById(R.id.listview_data_layout);
         lv.setOnItemClickListener(this);
         lv.setAdapter(mCouponListAdapter);
+        mPackageTips = (TextView) view.findViewById(R.id.packageTips);
         //刷新
         loadmore_view = (RelativeLayout) view.findViewById(R.id.loadmore_view);
         refreshLayout = (PullToRefreshLayout) view.findViewById(R.id.refresh_view);
@@ -163,6 +168,9 @@ public class FinanceListFragment extends BaseFragment1 implements AdapterView.On
                         }
                         //存在数据时
                         if (null != mCouponList && null != mCouponList.Records && mCouponList.Records.size() > 0) {
+
+                            mPackageTips.setText(mCouponList.PackageTips);
+
                             canLoadmore = true;
                             PageNow++;
                             setupListViewVisible(true);

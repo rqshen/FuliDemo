@@ -1,16 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/background"
-    android:orientation="vertical">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/background"
+              android:orientation="vertical">
+    <!--文字描述-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:background="@color/background"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <Space
+            android:layout_width="20dip"
+            android:layout_height="match_parent"/>
+
+        <View
+            android:layout_width="58dp"
+            android:layout_height="1dp"
+            android:background="@color/red"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_financelist_desc"/>
+
+        <TextView
+            android:id="@+id/packageTips"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="已接入灵鹰大数据风控系统"
+            android:textColor="@color/text_red"
+            android:textSize="12dp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_financelist_desc"/>
+
+        <View
+            android:layout_width="58dp"
+            android:layout_height="1dp"
+            android:background="@color/red"/>
+
+        <Space
+            android:layout_width="20dip"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
 
     <com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout
         android:id="@+id/refresh_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <!-- 下拉刷新控件-->
-        <include layout="@layout/refresh_head" />
+        <include layout="@layout/refresh_head"/>
 
         <com.bcb.presentation.view.custom.PullableView.PullableScrollView
             android:id="@+id/layout_scrollview"
@@ -33,7 +79,7 @@
                     android:fastScrollEnabled="false"
                     android:listSelector="@drawable/list_selector"
                     android:scrollbars="none"
-                    android:visibility="gone" />
+                    android:visibility="gone"/>
 
                 <LinearLayout
                     android:id="@+id/null_data_layout"
@@ -46,7 +92,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="84dip"
-                        android:src="@drawable/no_coupons" />
+                        android:src="@drawable/no_coupons"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -54,11 +100,11 @@
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="20dip"
                         android:text="暂无记录"
-                        android:textSize="@dimen/main_text_default" />
+                        android:textSize="@dimen/main_text_default"/>
                 </LinearLayout>
             </LinearLayout>
         </com.bcb.presentation.view.custom.PullableView.PullableScrollView>
         <!-- 上拉加载更多 -->
-        <include layout="@layout/load_more" />
+        <include layout="@layout/load_more"/>
     </com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout>
 </LinearLayout>

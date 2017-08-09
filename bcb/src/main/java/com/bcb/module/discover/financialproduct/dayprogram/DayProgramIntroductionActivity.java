@@ -131,7 +131,7 @@ public class DayProgramIntroductionActivity extends Activity_Base implements Vie
         tvRateAdd.setText(welfareRate);
         sdq.setText(bean.MixDuration + "天");//锁定期
         ktje.setText(String.format("%.2f", bean.Balance));//可投金额
-        tvLimite.setText(getSpanDayDesc(bean.MixDuration + "", bean.MaxDuration + ""));//最少多天，最长多少天
+        tvLimite.setText(getSpanDayDesc(bean.MixDuration + ""));//最少多天
         tvU2.setText("持续收益，每" + bean.MixDuration + "天退出一次");//多少天退出
         cy.setText(bean.MaxDuration + "天");//最长多少天
         buy1.setText(getSpanBuyDesc(10000, bean.MixDuration, String.format("%.2f", bean.MinPreInterest)));//
@@ -168,14 +168,12 @@ public class DayProgramIntroductionActivity extends Activity_Base implements Vie
      * 持有天数的描述
      *
      * @param string1
-     * @param string2
      * @return
      */
-    private SpannableString getSpanDayDesc(String string1, String string2) {
-        String desc = "最少持有" + string1 + "天                          最长" + string2 + "天";
-        return SpanUtils.updateFontColor(desc, new String[]{string1, string2});
+    private SpannableString getSpanDayDesc(String string1) {
+        String desc = "最少持有" + string1 + "天，不退出自动续期";
+        return SpanUtils.updateFontColor(desc, new String[]{string1});
     }
-
 
     /**
      * 购买描述

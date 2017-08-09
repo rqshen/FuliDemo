@@ -123,12 +123,12 @@
             </LinearLayout>
 
             <TextView
-                android:text="最少持有30天                                   最长90天"
                 android:id="@+id/tv_limite"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:gravity="center"
                 android:singleLine="true"
+                android:text="最少持有30天，不退出自动续期"
                 android:textColor="#424954"
                 android:textSize="15sp"/>
 

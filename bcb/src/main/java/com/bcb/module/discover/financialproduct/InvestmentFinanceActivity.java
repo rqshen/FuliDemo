@@ -17,10 +17,17 @@ import android.widget.TextView;
 import com.bcb.R;
 import com.bcb.base.old.BaseActivity1;
 import com.bcb.constant.ProjectListType;
+import com.bcb.event.RefreshTip;
 import com.bcb.module.myinfo.myfinancial.myfinancialstate.adapter.MyFinancialStateAdapter;
 import com.bcb.util.MyActivityManager;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.ArrayList;
+
+import butterknife.BindView;
 
 /**
  * 投资理财 列表
