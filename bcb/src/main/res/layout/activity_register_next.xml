@@ -42,8 +42,11 @@
                 android:layout_width="fill_parent"
                 android:layout_height="50dip"
                 android:background="@null"
+                android:digits="1234567890"
                 android:gravity="center"
                 android:hint="请输入验证码"
+                android:inputType="phone"
+                android:maxLength="6"
                 android:singleLine="true"
                 android:textColor="#424954"
                 android:textColorHint="@color/text_gray"
@@ -199,8 +202,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:visibility="invisible"
-                android:src="@drawable/r_error_3x"/>
+                android:src="@drawable/r_error_3x"
+                android:visibility="invisible"/>
         </RelativeLayout>
 
         <RelativeLayout
@@ -213,8 +216,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dip"
                 android:layout_marginRight="28dip"
-                android:singleLine="true"
                 android:layout_marginTop="15dip"
+                android:singleLine="true"
                 android:text="请输入8-15位登录密码"
                 android:textColor="@color/red"
                 android:textSize="@dimen/main_text_rather_small"
@@ -228,9 +231,9 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="28dip"
             android:layout_marginRight="28dip"
+            android:layout_marginTop="15dip"
             android:background="@drawable/error_tips"
             android:gravity="center"
-            android:layout_marginTop="15dip"
             android:text="请输入验证码"
             android:textColor="@color/red"
             android:textSize="@dimen/main_text_default"

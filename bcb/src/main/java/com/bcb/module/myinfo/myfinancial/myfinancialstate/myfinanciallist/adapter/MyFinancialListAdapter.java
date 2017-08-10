@@ -89,7 +89,7 @@ public class MyFinancialListAdapter extends BaseAdapter {
             e.printStackTrace();
         }
 
-        viewHolder.je.setText("原订单金额: " + String.format("%.0f", bean.OrderAmount) + "元");
+        viewHolder.je.setText("原订单金额: " + String.format("%.2f", bean.OrderAmount) + "元");
         viewHolder.tzts.setText("持有天数 " + bean.TotalDays);//
         viewHolder.tvBottom.setText(bean.StatusTips);
     }

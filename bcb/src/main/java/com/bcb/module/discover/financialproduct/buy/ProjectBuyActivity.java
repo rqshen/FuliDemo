@@ -136,6 +136,27 @@ public class ProjectBuyActivity extends Activity_Base implements View.OnClickLis
         setTitleValue(title);
         setupView();//初始化页面
         setupRegister();//注册广播
+
+        invest_money.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable edt) {
+//                String temp = edt.toString();
+//                if (temp.contains(".")) {
+//                    int posDot = temp.indexOf(".");
+//                    edt.delete(posDot, posDot + 1);
+//                }
+            }
+        });
     }
 
     //****************************************************************注册广播********************************************
@@ -158,7 +179,7 @@ public class ProjectBuyActivity extends Activity_Base implements View.OnClickLis
         //投资金额
         invest_money = (EditText) findViewById(R.id.invest_money);
 
-        invest_money.setHint(mSimpleProjectDetail.StartingAmount + "元起投");
+        invest_money.setHint((int) mSimpleProjectDetail.StartingAmount + "元起投");
 
         //设置光标的位置，添加输入监听器
         invest_money.addTextChangedListener(this);

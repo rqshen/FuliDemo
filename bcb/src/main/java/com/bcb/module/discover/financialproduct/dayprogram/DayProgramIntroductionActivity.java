@@ -137,7 +137,7 @@ public class DayProgramIntroductionActivity extends Activity_Base implements Vie
         buy1.setText(getSpanBuyDesc(10000, bean.MixDuration, String.format("%.2f", bean.MinPreInterest)));//
         buy2.setText(getSpanBuyDesc(10000, bean.MaxDuration, String.format("%.2f", bean.MaxPreInterest)));
         setTitleValue(bean.Name);
-        if (bean.Balance <= 0) {
+        if (bean.Balance <= 0 || bean.Status == 25) {
             buy.setText("已售罄");
             buy.setTextColor(0xff999999);
             buy.setEnabled(false);
