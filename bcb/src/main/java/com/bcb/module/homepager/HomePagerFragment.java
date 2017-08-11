@@ -27,9 +27,9 @@ import com.bcb.data.bean.BannerInfo;
 import com.bcb.data.bean.MainListBean2;
 import com.bcb.data.bean.UserDetailInfo;
 import com.bcb.event.BroadcastEvent;
-import com.bcb.module.discover.financialproduct.adapter.FinanceListAdapter;
 import com.bcb.module.discover.carinsurance.CarInsuranceActivity;
 import com.bcb.module.discover.financialproduct.InvestmentFinanceActivity;
+import com.bcb.module.discover.financialproduct.adapter.FinanceListAdapter;
 import com.bcb.module.discover.financialproduct.dayprogram.DayProgramIntroductionActivity;
 import com.bcb.module.discover.financialproduct.monthproject.MonthProgramIntroductionActivity;
 import com.bcb.module.homepager.adapter.AnnounceListAdapter;
@@ -45,11 +45,9 @@ import com.bcb.network.BcbRequestQueue;
 import com.bcb.network.BcbRequestTag;
 import com.bcb.network.UrlsOne;
 import com.bcb.network.UrlsTwo;
-import com.bcb.presentation.view.activity.Activity_Privilege_Money;
 import com.bcb.presentation.view.custom.AlertView.AlertView;
 import com.bcb.presentation.view.custom.CustomDialog.BasicDialog;
 import com.bcb.presentation.view.custom.CustomDialog.DialogWidget;
-import com.bcb.presentation.view.custom.CustomDialog.RegisterSuccessDialogView;
 import com.bcb.presentation.view.custom.PagerIndicator.AutoLoopViewPager;
 import com.bcb.presentation.view.custom.PagerIndicator.CirclePageIndicator;
 import com.bcb.presentation.view.custom.PullableView.PullToRefreshLayout;
@@ -202,7 +200,6 @@ public class HomePagerFragment extends BaseFragment1 implements View.OnClickList
         mReceiver = new Receiver();
         ctx.registerReceiver(mReceiver, new IntentFilter("com.bcb.project.buy.success"));
         ctx.registerReceiver(mReceiver, new IntentFilter("com.bcb.login.success"));
-        ctx.registerReceiver(mReceiver, new IntentFilter("com.bcb.register.success"));
 
         //监听是否滑动到底部
         layout_scrollview = (PullableScrollView) view.findViewById(R.id.layout_scrollview);
@@ -610,8 +607,6 @@ public class HomePagerFragment extends BaseFragment1 implements View.OnClickList
                 }
                 showItemVisible();
                 requestUserDetailInfo();
-            } else if (intent.getAction().equals("com.bcb.register.success")) {
-                showRegisterSuccessTips();
             }
         }
     }
@@ -676,30 +671,6 @@ public class HomePagerFragment extends BaseFragment1 implements View.OnClickList
         super.onDestroy();
         ctx.unregisterReceiver(mReceiver);
         EventBus.getDefault().unregister(this);
-    }
-
-    //显示送体验金对话框
-    private void showRegisterSuccessTips() {
-        synchronized (this) {
-            dialogWidget = new DialogWidget(ctx, RegisterSuccessDialogView.getInstance(ctx, new RegisterSuccessDialogView
-                    .OnClikListener() {
-                @Override
-                public void onCancelClick() {
-                    dialogWidget.dismiss();
-                    dialogWidget = null;
-                }
-
-                @Override
-                public void onSureClick() {
-                    //跳到特权本金页面！
-                    dialogWidget.dismiss();
-                    dialogWidget = null;
-                    ToastUtil.alert(ctx, "特权本金已存入账户中心，请查看");
-                    startActivity(new Intent(ctx, Activity_Privilege_Money.class));
-                }
-            }).getView());
-        }
-        dialogWidget.show();
     }
 
     //接收事件

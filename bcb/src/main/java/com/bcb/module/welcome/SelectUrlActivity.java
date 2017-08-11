@@ -34,13 +34,13 @@ public class SelectUrlActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.Location:
-                MyConstants.TESTMODE = 0;
+                MyConstants.ENVIRONMENT = 0;
                 break;
             case R.id.TT:
-                MyConstants.TESTMODE = 1;
+                MyConstants.ENVIRONMENT = 1;
                 break;
             case R.id.Release:
-                MyConstants.TESTMODE = 2;
+                MyConstants.ENVIRONMENT = 2;
                 break;
         }
         startActivity(new Intent(mContext, WelcomeActivity.class));

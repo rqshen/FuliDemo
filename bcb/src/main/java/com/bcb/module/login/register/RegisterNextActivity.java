@@ -438,13 +438,6 @@ public class RegisterNextActivity extends Activity_Base implements Interface_Ver
         finish();
     }
 
-    //将登陆成功的信息发送出去
-    private void sendBroardCast() {
-        Intent intent = new Intent();
-        intent.setAction("com.bcb.register.success");
-        sendBroadcast(intent);
-    }
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -552,7 +545,6 @@ public class RegisterNextActivity extends Activity_Base implements Interface_Ver
             //注册成功
             UmengUtil.eventById(RegisterNextActivity.this, R.string.reg_success);
             // 销毁所有页面，回到首页
-            sendBroardCast();
 //            MyActivityManager.getInstance().finishAllActivity();
             startActivity(new Intent(RegisterNextActivity.this, MainActivity.class));
         }
