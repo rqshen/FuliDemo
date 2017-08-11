@@ -5,23 +5,23 @@ public class MyConstants {
 
     public static final String IDCARDTYPE = "01";
 
-    public static final String HOST_DEV_LOCAL = "http://192.168.20.12";//本地，内网
-    public static final String HOST_TEMP_LOCAL = "http://192.168.20.232";//临时测试
-    public static final String HOST_DEV = "http://112.74.107.186:9003";//测试外网。线下"http://ttgateway.100cb.cn";
+    public static final String HOST_LOCAL_DEVELOP = "http://192.168.20.12";//本地，内网
+    public static final String HOST_LOCAL_TEMP = "http://192.168.20.232";//临时测试
+    public static final String HOST_DEVELOP = "http://112.74.107.186:9003";//测试外网。线下"http://ttgateway.100cb.cn";
     public static final String HOST_RELEASE = "https://app.fulijr.com";//正式"http://app.fulijr.com";
-    public static final String HOST_DEV_Static = "http://ttwap.100cb.cn";//测试
-    public static final String HOST_RELEASE_Static = "http://wap.fulijr.com";//正式
+    public static final String H5URL_HOST_DEVELOP = "http://ttwap.100cb.cn";//测试
+    public static final String H5URL_HOST_RELEASE = "http://wap.fulijr.com";//正式
 
-    public static int ENVIRONMENT = NetWorkEnvironment.LOCAL_TEMP;// LOCAL_DEVELOP本地,LOCAL_TEMP临时,DEVELOP线下,RELEASE正式
+    public static int ENVIRONMENT = NetWorkEnvironment.LOCAL_DEVELOP;// LOCAL_DEVELOP本地,LOCAL_TEMP临时,DEVELOP线下,RELEASE正式
 
     public static String getHost() {
         switch (ENVIRONMENT) {
             case NetWorkEnvironment.LOCAL_DEVELOP:
-                return HOST_DEV_LOCAL;
+                return HOST_LOCAL_DEVELOP;
             case NetWorkEnvironment.LOCAL_TEMP:
-                return HOST_TEMP_LOCAL;
+                return HOST_LOCAL_TEMP;
             case NetWorkEnvironment.DEVELOP:
-                return HOST_DEV;
+                return HOST_DEVELOP;
             case NetWorkEnvironment.RELEASE:
                 return HOST_RELEASE;
             default:
@@ -34,9 +34,9 @@ public class MyConstants {
             case NetWorkEnvironment.LOCAL_DEVELOP:
             case NetWorkEnvironment.LOCAL_TEMP:
             case NetWorkEnvironment.DEVELOP:
-                return HOST_DEV_Static;
+                return H5URL_HOST_DEVELOP;
             default:
-                return HOST_RELEASE_Static;
+                return H5URL_HOST_RELEASE;
         }
     }
 
